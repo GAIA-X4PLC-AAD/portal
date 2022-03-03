@@ -12,11 +12,11 @@ class LeftMenu extends React.Component {
     render () {
         return (
             <div className="left-menu">
-                <img src="images/sublogo.jpeg" />
-                <a onClick={() => this.onClickWIP(this.props.t('left-menu.home'))}> {this.props.t('left-menu.home')}</a>
-                <a onClick={() => this.onClickWIP(this.props.t('left-menu.services'))}> {this.props.t('left-menu.services')}</a>
-                <a onClick={() => this.onClickWIP(this.props.t('left-menu.data'))}> {this.props.t('left-menu.data')}</a>
-                <a onClick={() => this.onClickWIP(this.props.t('left-menu.provider'))}> {this.props.t('left-menu.provider')}</a>
+                <img src="images/sublogo.jpeg" alt={this.props.t('left-menu.logo-alt-text')}/>
+                <button onClick={() => this.onClickWIP(this.props.t('left-menu.home'))}> {this.props.t('left-menu.home')}</button>
+                <button onClick={() => this.onClickWIP(this.props.t('left-menu.services'))}> {this.props.t('left-menu.services')}</button>
+                <button onClick={() => this.onClickWIP(this.props.t('left-menu.data'))}> {this.props.t('left-menu.data')}</button>
+                <button onClick={() => this.onClickWIP(this.props.t('left-menu.provider'))}> {this.props.t('left-menu.provider')}</button>
             </div>
         );
 
