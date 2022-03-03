@@ -1,0 +1,19 @@
+{
+    "app": {
+        "main-title": "main title"
+    },
+    "left-menu": {
+        "home": "Home",
+        "services": "Services",
+        "data": "Data",
+        "provider": "Provider"
+        
+    },
+    "top-menu": {
+        "help": "Help",
+        "signin": "Sign in",
+        "register": "Register"
+    },
+    "work-in-progress.message" : "Work in progress...."
+
+}
