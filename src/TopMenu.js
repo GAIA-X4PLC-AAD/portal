@@ -13,9 +13,9 @@ class TopMenu extends React.Component {
     render () {
         return (
             <div className="top-menu">
-                <a onClick={() => this.onClickWIP(this.props.t('top-menu.register'))}> {this.props.t('top-menu.register')}</a>
-                <a onClick={() => this.onClickWIP(this.props.t('top-menu.signin'))}> {this.props.t('top-menu.signin')}</a>
-                <a onClick={() => this.onClickWIP(this.props.t('top-menu.help'))}> {this.props.t('top-menu.help')}</a>
+                <button onClick={() => this.onClickWIP(this.props.t('top-menu.register'))} href="#"> {this.props.t('top-menu.register')}</button>
+                <button onClick={() => this.onClickWIP(this.props.t('top-menu.signin'))} href="#"> {this.props.t('top-menu.signin')}</button>
+                <button onClick={() => this.onClickWIP(this.props.t('top-menu.help'))} href="#"> {this.props.t('top-menu.help')}</button>
             </div>
         );
 

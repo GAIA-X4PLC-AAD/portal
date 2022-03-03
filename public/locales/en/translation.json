@@ -6,7 +6,8 @@
         "home": "Home",
         "services": "Services",
         "data": "Data",
-        "provider": "Provider"
+        "provider": "Provider",
+        "logo-alt-text": "Gaia-x logo image"
         
     },
     "top-menu": {

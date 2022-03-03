@@ -4,7 +4,6 @@ import './index.css';
 import WrappedApp from './App';
 import reportWebVitals from './reportWebVitals';
 import './i18n';
-import Suspense from 'react';
 
 ReactDOM.render(
       <React.StrictMode>

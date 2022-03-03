@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { Suspense } from 'react';
 import LeftMenu from './LeftMenu';

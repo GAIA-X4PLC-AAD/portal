@@ -28,8 +28,11 @@
   object-fit: cover;
 }
 
-.left-menu a {
+.left-menu button {
   padding: 8px 8px 8px 32px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
   text-decoration: none;
   font-size: 25px;
   color: #818181;
@@ -60,8 +63,11 @@
   
 }
 
-.top-menu a {
+.top-menu button {
   padding: 8px 8px 8px 32px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
   text-decoration: none;
   font-size: 25px;
   color: #818181;
