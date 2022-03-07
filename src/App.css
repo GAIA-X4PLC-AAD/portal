@@ -28,7 +28,7 @@
   object-fit: cover;
 }
 
-.left-menu button {
+.left-menu a {
   padding: 8px 8px 8px 32px;
   background-color: transparent;
   border: none;
@@ -63,7 +63,7 @@
   
 }
 
-.top-menu button {
+.top-menu a {
   padding: 8px 8px 8px 32px;
   background-color: transparent;
   border: none;
