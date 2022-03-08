@@ -15,6 +15,10 @@
         "signin": "Sign in",
         "register": "Register"
     },
+    "home": {
+        "welcome.title": "Welcome to GAIA-X",
+        "welcome.subtitle": "A federated Data Infrastructure for Europe"
+    },
     "work-in-progress.message" : "Work in progress...."
 
 }
