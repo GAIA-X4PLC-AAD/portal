@@ -1,0 +1,20 @@
+{
+    "app": {
+        "main-title": "main title"
+    },
+    "left-menu": {
+        "home": "Home",
+        "services": "Services",
+        "data": "Data",
+        "provider": "Provider",
+        "logo-alt-text": "Gaia-x logo image"
+        
+    },
+    "top-menu": {
+        "help": "Help",
+        "signin": "Sign in",
+        "register": "Register"
+    },
+    "work-in-progress.message" : "Work in progress...."
+
+}
