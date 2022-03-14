@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import { 
-    MDBCol
-} from "mdbreact";
 import './Search.css';
 
 class Home extends Component {
@@ -39,9 +36,7 @@ class Home extends Component {
         return(
             <div>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-                <center><h3>Search Service</h3></center>
-                <div className='example'>
-                    <MDBCol md="6">
+                <div className='searchBarComponent'>
                         <input type="text" 
                             id="searchElement"
                             placeholder="Search..." 
@@ -54,11 +49,9 @@ class Home extends Component {
                             onClick={() => this.searchProcessing()}>
                                 Advanced
                         </button>
-                    </MDBCol>
                 </div>
                         
-                <div className='example'>
-                    <MDBCol md="6">
+                <div className='searchBarComponent'>
                         <button 
                             type="submit" 
                             onClick={() => this.updateText(" NOT=")}>
@@ -84,7 +77,6 @@ class Home extends Component {
                             onClick={() => this.updateText(" Compute=")}>
                                 Compute
                         </button>
-                    </MDBCol>
                 </div>
             </div>
         );

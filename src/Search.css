@@ -1,23 +1,22 @@
   * {
-    box-sizing: border-box;
-    margin-bottom: 0.25rem;
-    
+    margin-bottom: 0.2rem;
+    --width-search-bar: 80%; 
   }
   
   /* Style the search field */
-  div.example input[type=text] {
+  div.searchBarComponent input[type=text] {
     padding: 10px;
     font-size: 17px;
     border: 1px solid grey;
     float: left;
-    width: 75%;
+    width: calc(100% * 3 / 4);
     background: #f1f1f1;
   }
   
   /* Style the submit button */
-  div.example button {
+  div.searchBarComponent button {
     float: left;
-    width: 25%;
+    width: calc (100% - calc(100% * 3 / 4 )) ;
     padding: 10px;
     background: rgb(121, 46, 192);
     color: white;
@@ -27,12 +26,12 @@
     cursor: pointer;
   }
   
-  div.example button:hover {
+  div.searchBarComponent button:hover {
     background: rgb(158, 90, 221);
   }
   
   /* Clear floats */
-  div.example::after {
+  div.searchBarComponent::after {
     content: "";
     clear: both;
     display: table;
