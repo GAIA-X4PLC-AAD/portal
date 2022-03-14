@@ -1,0 +1,159 @@
+/* What's new */
+
+
+/* Auto layout */
+.articles-layout{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 80px 240px 0px;
+    
+    position: relative;
+    width: 1440px;
+    min-height: 764.67px;
+    left: 0px;
+    top: 20px;
+    
+    /* Background/White */
+    
+    background: #FFFFFF;
+}
+
+.articles-inside{
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 0px;    
+}
+
+
+/* panels */
+
+
+/* Auto layout */
+.articles-panel-layout{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    padding: 0px;
+
+    position: relative;
+    width: 960px;
+    min-height: 556.67px;
+    left: 60px;
+    top: 20px;
+
+    /* Inside auto layout */
+    flex: none;
+    align-self: auto;
+    order: 1;
+    flex-grow: 0;
+    margin: 0px 0px;
+}
+
+.article-panel-inside{
+
+}
+
+/* Javier */
+/* home - what's new panel */
+
+
+/* Auto layout */
+.article-item-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px;
+    
+    position:relative;
+    width: 304px;
+    min-height: 516.67px;
+    left: 0px;
+    top: 40px;
+    
+    /* Background/White */
+    
+    background: #FFFFFF;
+    /* Background/Lightest Grey */
+    
+    border: 1px solid #E9E9E9;
+    box-sizing: border-box;
+    
+}
+
+/* Inside auto layout */
+.article-item-inside {
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 24px;
+}
+
+
+/* title, description */
+
+
+/* Auto layout */
+.article-header-message{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    
+    position: relative;
+    width: 960px;
+    height: 128px;
+    left: 240px;
+    top: 80px;    
+    /* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 2;
+margin: 0px 0px;
+}
+
+/* H2 */
+.article-header-message h2{
+    font-family: Titillium Web;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    line-height: 48px;
+    /* identical to box height, or 133% */
+
+
+    color: #000000;
+}
+
+.article-detail-button {
+    /* Auto layout */
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 20px;
+
+    position: static;
+    width: 133px;
+    height: 41px;
+    left: 0px;
+    top: 0px;
+
+    /* Background/Primary */
+
+    border: 2px solid #000094;
+    box-sizing: border-box;
+    border-radius: 4px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    margin: 0px 0px;
+}
