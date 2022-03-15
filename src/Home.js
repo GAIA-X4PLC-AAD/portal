@@ -1,6 +1,7 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import Search from "./Search";
+import Article from "./components/Article";
 
 const Home = ({t}) => {
     return (
@@ -10,8 +11,12 @@ const Home = ({t}) => {
                 <h2>{t('home.welcome.subtitle')}</h2>
             </div>
             <div className="home-search"> <Search/></div>
-            <div className="home-article">TODO: put here what's new</div>
-            <div className="home-article">TODO: put here what is Gaia-X</div>
+            <div className="home-article">
+                <Article headerMessage="article.what-is-new" category="NEWS"/>
+            </div>
+            <div className="home-article">
+                <Article headerMessage="article.what-is-gaiax" category="ARTICLE"/>
+            </div>
         </div>
     );
 }
