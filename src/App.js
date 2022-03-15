@@ -5,6 +5,7 @@ import LeftMenu from './LeftMenu';
 import TopMenu from './TopMenu';
 import WorkInProgress from './WorkInProgress';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './Home';
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
         <TopMenu />
         <div id="content" className="content">
           <Routes>
-            <Route path="/" element={<WorkInProgress component="Home"/>} />
+            <Route path="/" element={<Home />} />
             <Route path="/services" element={<WorkInProgress component="Services"/>} />
             <Route path="/data" element={<WorkInProgress component="Data"/>} />
             <Route path="/provider" element={<WorkInProgress component="Provider"/>} />
