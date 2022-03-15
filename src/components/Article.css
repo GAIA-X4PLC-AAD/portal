@@ -57,6 +57,21 @@
 
 }
 
+.article-headline {
+    text-align: left;
+}
+
+.article-headline img {
+  float: left;
+  height: 40px;
+  width: 40px;
+  padding-right: 5px;
+}
+
+.article-text {
+    clear: both;
+}
+
 /* Javier */
 /* home - what's new panel */
 

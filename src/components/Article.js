@@ -39,21 +39,22 @@ const Article = ({category, headerMessage,t}) => {
             <div className="article-item-layout" key={article.title} >
                 <div className="article-item-inside">
                     <div className="article-preview-image"> 
-                        <i src={article.previewImagePath} alt={`image for ${article.title}`}/>
+                        <img src={article.previewImagePath} alt={`image for ${article.title}`}/>
                     </div>
-                    <div className="article-logo"> 
-                        <i src={article.logoPath} alt={`image for ${article.title}`}/>
-                    </div>
-                    
-                    <div className="article-title">
-                        <h1>{article.title}</h1>
+                    <div className="article-headline"> 
+                        <img src={article.logoPath} alt={`image for ${article.title}`}/>
+                        <h3>{article.title}</h3>
+                        {article.url}
                     </div>
                     <div className="article-text">
                             {article.teaserText}
                     </div>
-                    <div className="article-detail-button" onClick={()=>{openLink(article.url)}}>
+                    <button 
+                        className="article-detail-button"
+                        type="button" 
+                        onClick={()=>{openLink(article.url)}}>
                         {t("article.details-button")}
-                    </div>
+                    </button>
                 </div>
             </div>
         );
