@@ -81,6 +81,7 @@
 .content {
   display: block;
   position: fixed;
+  width: calc(90% - var(--width-menu));
   top: var(--height-menu);
   left: var(--width-menu);
   height: 100%;

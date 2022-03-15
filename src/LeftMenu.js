@@ -12,6 +12,7 @@ class LeftMenu extends React.Component {
                 <Link to="services"> {this.props.t('left-menu.services')}</Link>
                 <Link to="data"> {this.props.t('left-menu.data')}</Link>
                 <Link to="provider"> {this.props.t('left-menu.provider')}</Link>
+                <Link to="search"> {this.props.t('left-menu.search')}</Link>
             </div>
         );
 

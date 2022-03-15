@@ -7,6 +7,7 @@
         "services": "Services",
         "data": "Data",
         "provider": "Provider",
+        "search": "Search",
         "logo-alt-text": "Gaia-x logo image"
         
     },
@@ -21,6 +22,10 @@
         "details-button": "Details"
     },
        
+    "home": {
+        "welcome.title": "Welcome to GAIA-X",
+        "welcome.subtitle": "A federated Data Infrastructure for Europe"
+    },
     "work-in-progress.message" : "Work in progress...."
 
 }
