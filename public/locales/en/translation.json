@@ -16,6 +16,12 @@
         "signin": "Sign in",
         "register": "Register"
     },
+    "article": {
+        "what-is-new": "What's new",
+        "what-is-gaiax": "What is Gaia-X?",
+        "details-button": "Details"
+    },
+       
     "home": {
         "welcome.title": "Welcome to GAIA-X",
         "welcome.subtitle": "A federated Data Infrastructure for Europe"

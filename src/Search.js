@@ -46,7 +46,7 @@ class Search extends Component {
                             value={this.state.searchText}
                             onChange={(e) => this.onChange(e)}
                         />
-                        <i class='fa fa-search'></i>
+                        <i className='fa fa-search'></i>
                     </div>
                         <button 
                             className='button-16'
