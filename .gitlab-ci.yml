@@ -8,6 +8,9 @@ services:
 
 docker_build:
   stage: build
+  only:
+    refs:
+      - main  
   script:
     - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD https://gaiaxregistry.azurecr.io 
     - docker build -t gaiaxregistry.azurecr.io/frontend:latest .
