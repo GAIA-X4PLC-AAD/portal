@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import MessageBar from './MessageBar';
 import './Search.css';
 
 class Search extends Component {
@@ -7,6 +8,7 @@ class Search extends Component {
         super();
         this.state = {
             searchText: '',
+            searchResults: [],
         };
     }
 
@@ -88,6 +90,7 @@ class Search extends Component {
                                 Compute
                         </button>
                 </div>
+                <div className="home-messageBar" ><MessageBar /></div>
             </div>
         );
     }
