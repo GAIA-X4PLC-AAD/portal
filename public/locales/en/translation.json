@@ -26,6 +26,26 @@
         "welcome.title": "Welcome to GAIA-X",
         "welcome.subtitle": "A federated Data Infrastructure for Europe"
     },
+    "form": {
+        "continue": "Continue",
+        "prev": "Previous",
+        "send": "Send",
+        "user": "User",
+        "organization": "Organization",
+        "lStreet": "Street",
+        "lFirstName": "First Name",
+        "lLastName": "Last Name",
+        "lEmail": "Email address",
+        "lPhone": "Phone number",
+        "lStreetnNumber": "Street and number",
+        "lZIPnCity": "ZIP and city",
+        "lCountry": "Country",
+        "regViaDID": "Register via DID",
+        "almostDone": "...almost done: please check your email inbox now. We have sent you a message with a confirmation link.",
+        "formUserHeadline": "Welcome to GAIA-X",
+        "formUserOne": "Create your account in a few steps and benefit of our secure and transparent Federated Catalogue.",
+        "formUserTwo": "Cool, so you want to become a customer! To issue you Verified Credentials, we need your account details.",
+        "formUserThree": "Thanks for sending us your account details."
+    },
     "work-in-progress.message" : "Work in progress...."
-
 }

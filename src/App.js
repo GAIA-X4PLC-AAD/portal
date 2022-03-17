@@ -5,6 +5,7 @@ import TopMenu from './TopMenu';
 import WorkInProgress from './WorkInProgress';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './Home';
+import RegisterUser from './RegisterUser';
 
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
             <Route path="/data" element={<WorkInProgress component="Data"/>} />
             <Route path="/provider" element={<WorkInProgress component="Provider"/>} />
             <Route path="/help" element={<WorkInProgress component="Help"/>} />
-            <Route path="/register" element={<WorkInProgress component="Register"/>} />
+            <Route path="/register" element={<RegisterUser />} />
             <Route path="/signin" element={<WorkInProgress component="Sign in"/>} />
           </Routes>
         </div>
