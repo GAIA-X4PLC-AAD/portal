@@ -1,0 +1,20 @@
+.dimmer {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(128,128,128,0.35);
+    left: 0;
+    top: 0;
+    z-index: 20;
+}
+
+.modal {
+    background-color: white;
+    margin-top: 10%;
+    margin-left:30%;
+    top: 50%;
+    left: 50%;
+    width: 30%;
+    height: 50%;
+
+}

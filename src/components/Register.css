@@ -1,0 +1,13 @@
+.RegisterUser {
+    width: 100%;
+}
+
+.registerInputs {
+    text-align: left;
+}
+
+.registerHelpText {
+    float: left;
+    width: 20%;
+    text-align: left;
+}
