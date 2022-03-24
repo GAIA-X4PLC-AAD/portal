@@ -18,10 +18,6 @@ const Register = (props) => {
         setInput(values => ({...values, [key]: value}))
     }
 
-    const onFormSubmit = (e) => {
-        e.preventDefault();
-        alert(Object.entries(input).map(entry => `${entry[0]}: ${entry[1]}\n` ));
-    }
 
     const cancelButton = () => {
         navigate("/");
@@ -49,7 +45,7 @@ const Register = (props) => {
             <VerticalSteps current="1" numSteps="3"/>
             <div className="registerInputs">
                 <p> {props.t("form.formUserOrganization")}</p>
-            <form onSubmit={onFormSubmit}>
+            <form>
                 <input id="regUser" type="radio" name="registerType" value="User" onChange={onFormChanged} />
                 <label htmlFor="regUser">{props.t("form.user")}</label>
                 <br />

@@ -14,8 +14,8 @@
     height: 100%;
     min-height: inherit;
     vertical-align: top;
+    padding: 10px;
 }
-
 
 .registerHelpText {
     display: table-cell!important;
@@ -24,6 +24,7 @@
     height:100%;
     text-align: left;
     vertical-align: top;
+    padding: 10px;
 }
 .registerHelpText p {
     width: 100%;
@@ -43,4 +44,29 @@
   .formButtons button {
       float: right!important;
   }
-  
+
+.registerFormUser {
+  display: grid;
+  grid-area: "labelsA" "inputsA" "labelsB" "inputsB";
+  grid-template-columns: repeat(4, 22%);
+  grid-auto-flow: row;
+  column-gap: 5px;
+}
+
+.registerFormUser > label:nth-of-type(odd){
+  grid-column: "labelsA";
+}
+
+.registerFormUser > label:nth-of-type(even) {
+    grid-column: "labelsB";
+}
+
+.registerFormUser > input:nth-of-type(even) {
+  grid-column: "inputsA";
+  height: 1em;
+}
+
+.registerFormUser > input:nth-of-type(odd) {
+  grid-column: "inputsB";
+  height: 1em;
+}
