@@ -25,6 +25,10 @@ const RegisterOrganization = (props) => {
         navigate("/");
     }
 
+    const onRegisterDID = () => {
+        alert("Register DID is still not done. This is a placeholder alert message.");
+    }
+
     const onSubmit = async () => {
         const output = await axios.post(configData.ONBOARDING_API_URI+'/register/organization', input);
         
@@ -92,7 +96,7 @@ const RegisterOrganization = (props) => {
                 <div className="formButtons">
                      <button onClick={cancelButton}>{props.t("form.cancel")}</button>
                      <button  onClick={onSubmit} disabled={eMessage.length!==0 || Object.keys(input).length===0}>{props.t("form.continue")}</button>
-                     <button  onClick={console.log(input)}>{props.t("form.registerDid")}</button>
+                     <button  onClick={onRegisterDID}>{props.t("form.registerDid")}</button>
                 </div>
 
             </div>
