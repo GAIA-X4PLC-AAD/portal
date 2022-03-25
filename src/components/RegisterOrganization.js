@@ -90,7 +90,7 @@ const RegisterOrganization = (props) => {
                 <br/>
                 <div className="validationError" hidden={!eMessage.includes("aisbl")}>{props.t("form.formOrganizationAISBLValidationError")}</div>
                 <label>{props.t("form.lAisbl")}:
-                    <input type="checkbox" name="aisbl" value={input.aislb || ""}/>
+                    <input type="checkbox" name="aisbl" value={input.aisbl || ""}/>
                 </label>
                 <br/>
                 <div className="formButtons">
