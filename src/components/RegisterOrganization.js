@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import Modal from "../Modal";
@@ -11,14 +11,13 @@ const RegisterOrganization = (props) => {
 
     const navigate = useNavigate();
 
-    const [input, setInput] = useState({});
+    const [input, setInput] = useState({aisbl:false});
     const [eMessage,setEMessage] = useState([]);
   
     const onFormChanged = (e) => {
         const key = e.target.name;
         const value = e.target.value;
         setInput(values => ({...values, [key]: value}));
-        validate(input);
     }
 
     const cancelButton = () => {
@@ -28,6 +27,18 @@ const RegisterOrganization = (props) => {
     const onRegisterDID = () => {
         alert("Register DID is still not done. This is a placeholder alert message.");
     }
+
+    // Validates when all the mandatory fields have been populated and 500 seconds without any new key input during that time.
+    useEffect(()=>{
+        if (mandatoryFieldsExists ()) {
+            const timeoutId = setTimeout(()=> {  
+                validate();
+            },500);
+            return ()=>{
+                clearTimeout(timeoutId);
+            };
+        }
+    },[input]);
 
     const onSubmit = async () => {
         const output = await axios.post(configData.ONBOARDING_API_URI+'/register/organization', input);
@@ -42,25 +53,27 @@ const RegisterOrganization = (props) => {
         console.log(output) ;
     }
 
-    const validate = (organization) => {
+    const validate = () => {
         let errMessage = [];
-        if (typeof organization.aisbl !== 'boolean' ) {
+        if (typeof input.aisbl !== 'boolean' ) {
             errMessage.push("aisbl");
         }
-        if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(organization.email)) {
+        if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(input.email)) {
             errMessage.push("email");
         }
-        if (!/^(?!\s*$).+/.test(organization.name)) {
+        if (!/[\S\s]+[\S]+/.test(input.name)) {
             errMessage.push("name");
         }
         setEMessage(errMessage);
+    }
+    const mandatoryFieldsExists = () => {
+       return 'aisbl' in input && 'email' in input && 'name' in input;
     }
 
     const onFileChange = (event) => {
         const reader = new FileReader();
         reader.onload = (e) => {
             let organization = JSON.parse(e.target.result);
-            validate(organization);
             setInput(values=> ({...values, ...organization}));
         };
         reader.readAsText(event.target.files[0]);
@@ -95,7 +108,7 @@ const RegisterOrganization = (props) => {
                 <br/>
                 <div className="formButtons">
                      <button onClick={cancelButton}>{props.t("form.cancel")}</button>
-                     <button  onClick={onSubmit} disabled={eMessage.length!==0 || Object.keys(input).length===0}>{props.t("form.continue")}</button>
+                     <button  onClick={onSubmit} disabled={eMessage.length!==0 || !mandatoryFieldsExists}>{props.t("form.continue")}</button>
                      <button  onClick={onRegisterDID}>{props.t("form.registerDid")}</button>
                 </div>
 
