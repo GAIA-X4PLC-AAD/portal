@@ -70,6 +70,11 @@ const RegisterOrganization = (props) => {
        return 'aisbl' in input && 'email' in input && 'name' in input;
     }
 
+    const disableContinueButton= () => {
+   //     debugger;
+        return eMessage.length!== 0 || !mandatoryFieldsExists();
+    }
+
     const onFileChange = (event) => {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -108,7 +113,7 @@ const RegisterOrganization = (props) => {
                 <br/>
                 <div className="formButtons">
                      <button onClick={cancelButton}>{props.t("form.cancel")}</button>
-                     <button  onClick={onSubmit} disabled={eMessage.length!==0 || !mandatoryFieldsExists}>{props.t("form.continue")}</button>
+                     <button  onClick={onSubmit} disabled={eMessage.length!== 0 || !('aisbl' in input && 'email' in input && 'name' in input)}>{props.t("form.continue")}</button>
                      <button  onClick={onRegisterDID}>{props.t("form.registerDid")}</button>
                 </div>
 
