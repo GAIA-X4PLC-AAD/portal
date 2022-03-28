@@ -27,6 +27,7 @@
         "welcome.subtitle": "A federated Data Infrastructure for Europe"
     },
     "form": {
+        "registerDid":"Registration via DID",
         "continue": "Continue",
         "cancel": "Cancel",
         "prev": "Previous",
@@ -41,13 +42,19 @@
         "lStreetnNumber": "Street and number",
         "lZIPnCity": "ZIP and city",
         "lCountry": "Country",
+        "lAisbl": "Apply for AISBL Membership",
         "regViaDID": "Register via DID",
         "almostDone": "...almost done: please check your email inbox now. We have sent you a message with a confirmation link.",
         "formUserHeadline": "Welcome to GAIA-X",
         "formUserOrganization": "Do you want to register a user or a provider?",
         "formUserOne": "Create your account in a few steps and benefit of our secure and transparent Federated Catalogue.",
         "formUserTwo": "Cool, so you want to become a customer! To issue you Verified Credentials, we need your account details.",
-        "formUserThree": "Thanks for sending us your account details."
+        "formUserThree": "Thanks for sending us your account details.",
+        "formOrganizationOne": "Cool, so you want to become a provider! To issue you Verified credentials, we need your organization's details.",
+        "formOrganizationOneInformation": "Please upload your organization details or select express registration via DID.",
+        "formEmailValidationError": "Invalid email format, please check.",
+        "formOrganizationNameValidationError": "Not valid empty string or blank for organization.",
+        "formOrganizationAISBLValidationError":"Uploaded AISBL is not boolean."
     },
 
     "work-in-progress.message" : "Work in progress...."

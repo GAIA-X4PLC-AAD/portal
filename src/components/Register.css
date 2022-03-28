@@ -43,4 +43,7 @@
   .formButtons button {
       float: right!important;
   }
+  .validationError{
+    color: red;
+  }
   
