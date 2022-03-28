@@ -16,7 +16,7 @@ const RegisterOrganization = (props) => {
   
     const onFormChanged = (e) => {
         const key = e.target.name;
-        const value = e.target.value;
+        const value = e.target.type==="checkbox"?e.target.checked:e.target.value;
         setInput(values => ({...values, [key]: value}));
     }
 
@@ -28,7 +28,7 @@ const RegisterOrganization = (props) => {
         alert("Register DID is still not done. This is a placeholder alert message.");
     }
 
-    // Validates when all the mandatory fields have been populated and 500 seconds without any new key input during that time.
+    // Validates when all the mandatory fields have been populated and 500 seconds without any new key input during that ti
     useEffect(()=>{
         if (mandatoryFieldsExists ()) {
             const timeoutId = setTimeout(()=> {  
@@ -103,7 +103,7 @@ const RegisterOrganization = (props) => {
                 <br/>
                 <div className="validationError" hidden={!eMessage.includes("aisbl")}>{props.t("form.formOrganizationAISBLValidationError")}</div>
                 <label>{props.t("form.lAisbl")}:
-                    <input type="checkbox" name="aisbl" value={input.aisbl || ""} checked={input.aisbl}/>
+                    <input type="checkbox" name="aisbl" value={input.aisbl} defaultChecked={input.aisbl} onChange={onFormChanged} />
                 </label>
                 <br/>
                 <div className="formButtons">
