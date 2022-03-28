@@ -45,6 +45,10 @@
       float: right!important;
   }
 
+.validationError{
+  color: red;
+}
+
 .registerFormUser {
   display: grid;
   grid-area: "labelsA" "inputsA" "labelsB" "inputsB";
