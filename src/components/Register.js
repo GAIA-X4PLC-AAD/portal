@@ -62,7 +62,7 @@ const Register = (props) => {
             <VerticalSteps current="1" numSteps="3"/>
             <div className="registerInputs">
                 <p> {props.t("form.formUserOrganization")}</p>
-            <form onSubmit={onFormSubmit}>
+            <form>
                 <input id="regUser" type="radio" name="registerType" value="User" onChange={onFormChanged} checked={isUserRegisterType}/>
                 <label htmlFor="regUser">{props.t("form.user")}</label>
                 <br />

@@ -51,18 +51,10 @@
 
 .registerFormUser {
   display: grid;
-  grid-area: "labelsA" "inputsA" "labelsB" "inputsB";
-  grid-template-columns: repeat(4, 22%);
+  grid-area: "inputsA" "inputsB";
+  grid-template-columns: repeat(2, 45%);
   grid-auto-flow: row;
   column-gap: 5px;
-}
-
-.registerFormUser > label:nth-of-type(odd){
-  grid-column: "labelsA";
-}
-
-.registerFormUser > label:nth-of-type(even) {
-    grid-column: "labelsB";
 }
 
 .registerFormUser > input:nth-of-type(even) {
@@ -74,3 +66,12 @@
   grid-column: "inputsB";
   height: 1em;
 }
+
+.registerFormUserError {
+  color: red;
+}
+
+input:invalid:not(:focus):not(:placeholder-shown) {
+  border: 1px solid red;
+}
+
