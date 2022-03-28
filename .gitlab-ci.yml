@@ -1,5 +1,7 @@
 stages:
   - build
+  - deployment
+  - test
 
 image: docker:latest
 
@@ -10,8 +12,34 @@ docker_build:
   stage: build
   only:
     refs:
-      - main  
+      - main
   script:
     - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD https://gaiaxregistry.azurecr.io 
     - docker build -t gaiaxregistry.azurecr.io/frontend:latest .
     - docker push gaiaxregistry.azurecr.io/frontend:latest
+
+development_ns_recreate:
+  stage: deployment
+  only:
+    refs:
+      - main
+  image: mcr.microsoft.com/azure-cli
+  script:
+    - az login --service-principal --username $AZ_APP_ID --password $AZ_PASSWORD --tenant $AZ_TENANT_ID
+    - az account set --subscription $AZ_SUBSCRIPTION_ID
+    - az aks install-cli
+    - az aks get-credentials --resource-group t-systems-gaia-x-development --name gaiax-k8s-001
+    - kubectl rollout restart deployment.apps/frontend -n portal-development
+
+test_ns_recreate:
+  stage: test
+  only:
+    refs:
+      - main
+  image: mcr.microsoft.com/azure-cli
+  script:
+    - az login --service-principal --username $AZ_APP_ID --password $AZ_PASSWORD --tenant $AZ_TENANT_ID
+    - az account set --subscription $AZ_SUBSCRIPTION_ID
+    - az aks install-cli
+    - az aks get-credentials --resource-group t-systems-gaia-x-development --name gaiax-k8s-001
+    - kubectl rollout restart deployment.apps/frontend -n portal-test    
