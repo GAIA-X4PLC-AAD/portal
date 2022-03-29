@@ -1,0 +1,43 @@
+.number-wrapper {
+    float: left;
+    display: table-cell;
+    width: auto;
+    height: 100%;
+  }
+  
+  .circle {
+    width: 15px;
+    height: 15px;
+    background: #000000;
+    border-radius: 15px;
+    border-color:#000000;
+    border: 1px solid;
+    position: relative;
+    margin: 0px auto 0 auto;
+  }
+  .nexts-steps {
+      background-color: #fff!important;
+
+  }
+  .nexts-steps h5 {
+      color: #000!important;;
+  }
+ .circle h5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    color: #fff;
+  }
+  
+  .vertical-line {
+    width: 2px;
+   min-height: 20px;
+    background: #000000;
+    margin: 0px auto 0 auto;
+  }
+  .bottom {
+      height: 150px;
+      min-height:unset;
+  }

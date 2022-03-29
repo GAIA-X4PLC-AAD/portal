@@ -1,3 +1,4 @@
 {
-    "ARTICLE_API_URI": "http://localhost:8181"
+    "ARTICLE_API_URI": "http://localhost:8181",
+    "ONBOARDING_API_URI": "http://localhost:8180"
 }
