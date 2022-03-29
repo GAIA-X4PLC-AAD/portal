@@ -8,6 +8,7 @@ import Home from './Home';
 import Register from './components/Register';
 import RegisterUser from './components/RegisterUser';
 import RegisterOrganization from './components/RegisterOrganization';
+import RegisterMailSent from './components/RegisterMailSent';
 
 
 function App() {
@@ -26,7 +27,8 @@ function App() {
             <Route path="/register" element={<Register/>} />
             <Route path="/register/user" element={<RegisterUser/>}/>
             <Route path="/register/organization" element={<RegisterOrganization/>}/>
-            <Route path="/signin" element={<WorkInProgress component="Sign in"/>} />
+            <Route path="/register/email" element={<RegisterMailSent/>}/>
+              <Route path="/signin" element={<WorkInProgress component="Sign in"/>} />
           </Routes>
         </div>
         </BrowserRouter>

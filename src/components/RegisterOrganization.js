@@ -44,7 +44,7 @@ const RegisterOrganization = (props) => {
         const output = await axios.post(configData.ONBOARDING_API_URI+'/register/organization', input);
         
         switch (output.status) {
-            case 200:  alert("Request successfully done, now next step should be shown. ");
+            case 200: navigate("/register/email?formType=organization");
             break;
             default:
                 alert(`Error with status ${output.status} and message: ${output.statusText}`);
@@ -70,10 +70,6 @@ const RegisterOrganization = (props) => {
        return 'aisbl' in input && 'email' in input && 'name' in input;
     }
 
-    const disableContinueButton= () => {
-   //     debugger;
-        return eMessage.length!== 0 || !mandatoryFieldsExists();
-    }
 
     const onFileChange = (event) => {
         const reader = new FileReader();
