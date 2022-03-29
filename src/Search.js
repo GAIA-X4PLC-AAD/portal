@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import MessageBar from './MessageBar';
 import './Search.css';
 
 class Search extends Component {
@@ -7,6 +8,7 @@ class Search extends Component {
         super();
         this.state = {
             searchText: '',
+            searchResults: null,
         };
     }
 
@@ -25,10 +27,12 @@ class Search extends Component {
     onKeyPressed(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if (code !== 13) return;
+        this.setState({searchResults: []});
         alert("Starting search");
     }
 
     searchProcessing() {
+        this.setState({searchResults: []});
         alert("Under construction");
     }
 
@@ -88,6 +92,7 @@ class Search extends Component {
                                 Compute
                         </button>
                 </div>
+               <div className="home-messageBar" >{ this.state.searchResults != null && <MessageBar itemCount={this.state.searchResults.length} />}</div>
             </div>
         );
     }

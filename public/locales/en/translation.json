@@ -26,6 +26,11 @@
         "welcome.title": "Welcome to GAIA-X",
         "welcome.subtitle": "A federated Data Infrastructure for Europe"
     },
+
+    "message-bar": {
+        "not-found": "Oh no! We couldn't find any results."
+    },
+
     "form": {
         "registerDid":"Registration via DID",
         "continue": "Continue",
@@ -58,5 +63,4 @@
     },
 
     "work-in-progress.message" : "Work in progress...."
-
 }
