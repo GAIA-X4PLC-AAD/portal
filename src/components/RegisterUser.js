@@ -61,6 +61,10 @@ const RegisterUser = (props) => {
         navigate("/");
     }
 
+    const onRegisterDID = () => {
+        alert("Register DID is still not done. This is a placeholder alert message.");
+    }
+
     const formUserOne = () => {
         return (
         <div className="RegisterUser">
@@ -80,6 +84,7 @@ const RegisterUser = (props) => {
                     <input type="text" name="city" value={input.city || ""} onChange={onFormChanged} placeholder={props.t("form.lCity")} required />
                     <input type="text" name="country" value={input.country || ""} onChange={onFormChanged} placeholder={props.t("form.lCountry")} required />
                 <div className="formButtons">
+                <button  onClick={onRegisterDID}>{props.t("form.registerDid")}</button>
                 <button type="submit" onClick={onFormSubmit}>{props.t("form.continue")}</button>
                 <button onClick={cancelButton}>{props.t("form.cancel")}</button>
                 </div>
