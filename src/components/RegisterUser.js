@@ -37,7 +37,7 @@ const RegisterUser = (props) => {
 
     const onFormChanged = (e) => {
         const key = e.target.name;
-        const value = e.target.value;
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
         setInput(values => ({...values, [key]: value}))
     }
 
