@@ -14,7 +14,8 @@ const RegisterMailSent = (props) => {
         navigate("/");
     }
 
-    const formOrganizationOne = () => {
+    
+    const formEmailSend = () => {
         return (
         <div className="RegisterUser">
             <div className="registerHelpText">
@@ -34,7 +35,7 @@ const RegisterMailSent = (props) => {
 
     return (
         <Modal>
-                {formOrganizationOne()}
+            {formEmailSend()}
         </Modal>
     
     );

@@ -11,12 +11,9 @@
 .modal {
     display: flex!important;
     background-color: white;
+    margin: auto;
     margin-top: 10%;
-    margin-left:30%;
-    top: 50%;
-    left: 50%;
-    width: 720px;
-    transform-origin: 50% 25%;
+    width: 50%;
     -webkit-box-flex: 0;
     box-shadow: 1px 3px 3px 0 rgb(0 0 0 / 20%), 1px 3px 15px 2px rgb(0 0 0 / 20%);
     border-radius: 0.3rem;

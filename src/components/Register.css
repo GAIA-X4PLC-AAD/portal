@@ -14,8 +14,8 @@
     height: 100%;
     min-height: inherit;
     vertical-align: top;
+    padding: 10px;
 }
-
 
 .registerHelpText {
     display: table-cell!important;
@@ -24,6 +24,7 @@
     height:100%;
     text-align: left;
     vertical-align: top;
+    padding: 10px;
 }
 .registerHelpText p {
     width: 100%;
@@ -43,7 +44,34 @@
   .formButtons button {
       float: right!important;
   }
-  .validationError{
-    color: red;
-  }
-  
+
+.validationError{
+  color: red;
+}
+
+.registerFormUser {
+  display: grid;
+  grid-area: "inputsA" "inputsB";
+  grid-template-columns: repeat(2, 45%);
+  grid-auto-flow: row;
+  column-gap: 5px;
+}
+
+.registerFormUser > input:nth-of-type(even) {
+  grid-column: "inputsA";
+  height: 1em;
+}
+
+.registerFormUser > input:nth-of-type(odd) {
+  grid-column: "inputsB";
+  height: 1em;
+}
+
+.registerFormUserError {
+  color: red;
+}
+
+input:invalid:not(:focus):not(:placeholder-shown) {
+  border: 1px solid red;
+}
+
