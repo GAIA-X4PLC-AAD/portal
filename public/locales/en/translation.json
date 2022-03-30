@@ -26,6 +26,11 @@
         "welcome.title": "Welcome to GAIA-X",
         "welcome.subtitle": "A federated Data Infrastructure for Europe"
     },
+
+    "message-bar": {
+        "not-found": "Oh no! We couldn't find any results."
+    },
+
     "form": {
         "registerDid":"Registration via DID",
         "continue": "Continue",
@@ -56,7 +61,10 @@
         "formOrganizationOneInformation": "Please upload your organization details or select express registration via DID.",
         "formEmailValidationError": "Invalid email format, please check.",
         "formOrganizationNameValidationError": "Not valid empty string or blank for organization.",
-        "formOrganizationAISBLValidationError":"Uploaded AISBL is not boolean."
+        "formOrganizationAISBLValidationError":"Uploaded AISBL is not boolean.",
+        "organizationFormEmailSentHelp": "Thanks for sending us your organization's details.",
+        "userFormEmailSentHelp": "Thanks for sending us your account details.",
+        "formEmailSentMessage":"...almost done: please check your email inbox now. We have sent you a message with a confirmation link."
     },
 
     "work-in-progress.message" : "Work in progress...."
