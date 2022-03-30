@@ -1,13 +1,18 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "../Modal";
 import VerticalSteps from "./VerticalSteps";
 
 const RegisterMailSent = (props) => {
 
+    const navigate = useNavigate();
     const location = useLocation();
     const formType = new URLSearchParams(location.search).get("formType");
+
+    const goHome = () => {
+        navigate("/");
+    }
 
     const formOrganizationOne = () => {
         return (
@@ -19,6 +24,9 @@ const RegisterMailSent = (props) => {
             <VerticalSteps current="3" numSteps="3"/>
             <div className="registerInputs">
                 <p> {props.t("form.formEmailSentMessage")}</p>
+                <div className="formButtons">
+                     <button onClick={goHome}>{props.t("form.ok")}</button>
+                 </div>
             </div>
         </div>
         )

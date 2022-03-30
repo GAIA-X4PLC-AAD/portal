@@ -1,16 +1,21 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import {  useParams } from "react-router-dom";
+import {  useParams, useNavigate } from "react-router-dom";
 import Modal from "../Modal";
 import VerticalSteps from "./VerticalSteps";
 import configData from "../config/config.json";
 
 const RegisterConfirmation = (props) => {
 
+    const navigate = useNavigate();
     const {type,key} = useParams();
 
     const [message, setMessage] = useState("form.confirmationLoading");
+
+    const goHome = () => {
+        navigate("/");
+    }
 
     useEffect(()=>{
         axios.get(configData.ONBOARDING_API_URI+`/register/${type}/confirm_email`, { params: {uniqueId: key}}).
@@ -32,6 +37,10 @@ const RegisterConfirmation = (props) => {
             <VerticalSteps current="3" numSteps="3"/>
             <div className="registerInputs">
                 <p> {props.t(message)}</p>
+                <div className="formButtons">
+                     <button onClick={goHome}>{props.t("form.ok")}</button>
+                 </div>
+
             </div>
         </div>
         )
