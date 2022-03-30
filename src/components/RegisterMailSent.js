@@ -9,7 +9,7 @@ const RegisterMailSent = (props) => {
     const location = useLocation();
     const formType = new URLSearchParams(location.search).get("formType");
 
-    const formOrganizationOne = () => {
+    const formEmailSend = () => {
         return (
         <div className="RegisterUser">
             <div className="registerHelpText">
@@ -26,7 +26,7 @@ const RegisterMailSent = (props) => {
 
     return (
         <Modal>
-                {formOrganizationOne()}
+            {formEmailSend()}
         </Modal>
     
     );

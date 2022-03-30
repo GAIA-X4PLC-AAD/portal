@@ -47,8 +47,8 @@ const RegisterUser = (props) => {
             /* place custom validation on submit */
             const output = await axios.post(configData.ONBOARDING_API_URI+'/register/user', input);
             switch (output.status) {
-		case 204:
-                case 200:  alert("Request successfully done, now next step should be shown. ");
+		        case 204:
+                case 200: navigate("/register/email?formType=user");
                 break;
                 default:
                     alert(`Error with status ${output.status} and message: ${output.statusText}`);
