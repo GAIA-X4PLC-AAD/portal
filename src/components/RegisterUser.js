@@ -75,8 +75,8 @@ const RegisterUser = (props) => {
             <VerticalSteps current="2" numSteps="3"/>
             <div className="registerInputs">
                 <form className="registerFormUser" noValidate>
-                    <input type="text" name="firstName" value={input.firstName || ""} onChange={onFormChanged} placeholder={props.t("form.lFirstName")} required />
-                    <input type="text" name="lastName" value={input.lastName || ""} onChange={onFormChanged} placeholder={props.t("form.lLastName")} required />
+                    <input type="text" name="firstname" value={input.firstname || ""} onChange={onFormChanged} placeholder={props.t("form.lFirstName")} required />
+                    <input type="text" name="lastname" value={input.lastname || ""} onChange={onFormChanged} placeholder={props.t("form.lLastName")} required />
                     <input type="text" name="email" value={input.email || ""} onChange={onFormChanged} placeholder={props.t("form.lEmail")} title={props.t("form.formUserTitleEmail")} type="email" required />
                     <input type="text" name="phone_number" value={input.phone_number || ""} onChange={onFormChanged} placeholder={props.t("form.lPhone")} required />
                     <input type="text" name="street_number" value={input.street_number || ""} onChange={onFormChanged} placeholder={props.t("form.lStreetnNumber")} required />
