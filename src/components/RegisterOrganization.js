@@ -40,17 +40,13 @@ const RegisterOrganization = (props) => {
         }
     },[input]);
 
-    const onSubmit = async () => {
-        const output = await axios.post(configData.ONBOARDING_API_URI+'/register/organization', input);
-        
-        switch (output.status) {
-            case 200: navigate("/register/email?formType=organization");
-            break;
-            default:
-                alert(`Error with status ${output.status} and message: ${output.statusText}`);
-        }
-
-        console.log(output) ;
+    const onSubmit =  async () => {
+        axios.post(configData.ONBOARDING_API_URI+'/register/organization', input).
+        then(
+            (reason)=> {navigate("/register/email?formType=organization");
+        },(error)=> {
+                alert(`Error with status ${error.response.status} and message:\n ${error.response.data}`);
+        });
     }
 
     const validate = () => {
