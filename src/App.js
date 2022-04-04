@@ -10,6 +10,7 @@ import RegisterUser from './components/RegisterUser';
 import RegisterOrganization from './components/RegisterOrganization';
 import RegisterMailSent from './components/RegisterMailSent';
 import RegisterConfirmation from './components/RegisterConfirmation';
+import LoginFail from './components/login/LoginFail';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
             <Route path="/confirmation/:type/:key" element={<RegisterConfirmation/>}/>
             <Route path="/register/email" element={<RegisterMailSent/>}/>
             <Route path="/signin" element={<WorkInProgress component="Sign in"/>} />
+            <Route path="/loginfail" element={<LoginFail />} />
           </Routes>
         </div>
         </BrowserRouter>
