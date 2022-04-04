@@ -49,7 +49,7 @@
         "lCity": "City",
         "lCountry": "Country",
         "lAisbl": "Apply for AISBL Membership",
-	"formUserTitleEmail": "Please enter valid email address.",
+	    "formUserTitleEmail": "Please enter valid email address.",
         "regViaDID": "Register via DID",
         "almostDone": "...almost done: please check your email inbox now. We have sent you a message with a confirmation link.",
         "formUserHeadline": "Welcome to GAIA-X",
@@ -72,6 +72,12 @@
         "userConfirmationMessageError": "The confirmation code is not longer valid.",
         "confirmationHelp": "Confirmation link clicked!",
         "ok": "Ok"
+    },
+    "login": {
+        "fail.header": "Login failed",
+        "fail.message": "You need to install a wallet browser extension to login with your credentials.",
+        "close": "Close"
+
     },
 
     "work-in-progress.message" : "Work in progress...."

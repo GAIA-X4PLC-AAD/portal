@@ -77,7 +77,7 @@ const RegisterUser = (props) => {
                 <form className="registerFormUser" noValidate>
                     <input type="text" name="firstname" value={input.firstname || ""} onChange={onFormChanged} placeholder={props.t("form.lFirstName")} required />
                     <input type="text" name="lastname" value={input.lastname || ""} onChange={onFormChanged} placeholder={props.t("form.lLastName")} required />
-                    <input type="text" name="email" value={input.email || ""} onChange={onFormChanged} placeholder={props.t("form.lEmail")} title={props.t("form.formUserTitleEmail")} type="email" required />
+                    <input type="email" name="email" value={input.email || ""} onChange={onFormChanged} placeholder={props.t("form.lEmail")} title={props.t("form.formUserTitleEmail")}required />
                     <input type="text" name="phone_number" value={input.phone_number || ""} onChange={onFormChanged} placeholder={props.t("form.lPhone")} required />
                     <input type="text" name="street_number" value={input.street_number || ""} onChange={onFormChanged} placeholder={props.t("form.lStreetnNumber")} required />
                     <input type="text" name="zip" value={input.zip || ""} onChange={onFormChanged} placeholder={props.t("form.lZIP")} required />

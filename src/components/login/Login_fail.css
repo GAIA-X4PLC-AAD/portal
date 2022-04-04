@@ -1,0 +1,129 @@
+/* This source code is exported from pxCode, you can get more document from https://www.pxcode.io */
+.login-fail-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0px 5px 10px 0px rgba(29, 36, 48, 0.14902); }
+
+.login-fail-block.layout {
+  position: relative;
+  min-height: 233px;
+  flex-shrink: 0; }
+
+.login-fail-block1 {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 4px 4px 0px 0px; }
+
+.login-fail-block1.layout {
+  position: relative;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content; }
+
+.login-fail-flex {
+  display: flex;
+  flex-direction: column; }
+
+.login-fail-flex.layout {
+  position: relative;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  margin: 0px 15px; }
+
+.login-fail-medium-title {
+  font: 24px/1.5 "Titillium Web", Helvetica, Arial, serif;
+  color: #1c0e15;
+  letter-spacing: 0.25px; }
+
+.login-fail-medium-title.layout {
+  position: relative;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  margin: 16px 9px 0px; }
+
+.login-fail-line {
+  background-color: #e8e8e8; }
+
+.login-fail-line.layout {
+  position: relative;
+  height: 1px;
+  margin: 11px 0px 0px; }
+
+.login-fail-block2 {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 0px 0px 4px 4px; }
+
+.login-fail-block2.layout {
+  position: relative;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content; }
+
+.login-fail-block3 {
+  display: flex;
+  flex-direction: column; }
+
+.login-fail-block3.layout {
+  position: relative;
+  height: 48px;
+  width: 56.48%;
+  margin: 36px 39.81% 85px 3.7%; }
+
+.login-fail-block4 {
+  display: flex;
+  flex-direction: column; }
+
+.login-fail-block4.layout {
+  position: absolute;
+  height: 97px;
+  bottom: -49px;
+  width: 366px;
+  right: 0px; }
+
+.login-fail-highlights {
+  font: 18px/1.33 "Titillium Web", Helvetica, Arial, serif;
+  color: #4b4b4b;
+  letter-spacing: 0.25px; }
+
+.login-fail-highlights.layout {
+  position: relative;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content; }
+
+.login-fail-block5 {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #000094;
+  border-radius: 4px 4px 4px 4px; }
+
+.login-fail-block5.layout {
+  position: relative;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  width: 34.15%;
+  margin: 16px 65.85% 0px 0%; }
+
+.login-fail-highlights1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
+  color: #000094;
+  text-align: center;
+  letter-spacing: 0.25px; }
+
+.login-fail-highlights1.layout {
+  position: relative;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+  margin: 6.5px 35px; }
