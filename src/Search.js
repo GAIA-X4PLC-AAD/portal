@@ -38,10 +38,11 @@ class Search extends Component {
 
     render() {
         return(
-            <div>
+        <div className='search-flex-col'>
+            <div className='search'>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
                 <div className='searchBarComponent'>
-                    <div className='searchInputField'>     
+                    <div className='searchInputField'>
                         <input 
                             type="text" 
                             id="searchElement"
@@ -52,15 +53,18 @@ class Search extends Component {
                         />
                         <i className='fa fa-search'></i>
                     </div>
-                        <button 
-                            className='button-16'
-                            type="submit" 
-                            onClick={() => this.searchProcessing()}>
-                                Advanced
-                        </button>
+
                 </div>
-                        
-                <div className='additionalSearchOptions'>
+            </div>
+            <div className='advancedSearch'>
+                <button
+                    className='button-16'
+                    type="submit"
+                    onClick={() => this.searchProcessing()}>
+                        Advanced
+                </button>
+            </div>
+            <div className='additionalSearchOptions'>
                         <button 
                             className='button-17'
                             type="submit" 
@@ -91,9 +95,9 @@ class Search extends Component {
                             onClick={() => this.updateText(" Compute=")}>
                                 Compute
                         </button>
-                </div>
-               <div className="home-messageBar" >{ this.state.searchResults != null && <MessageBar itemCount={this.state.searchResults.length} />}</div>
             </div>
+            <div className="home-messageBar" >{ this.state.searchResults != null && <MessageBar itemCount={this.state.searchResults.length} />}</div>
+        </div>
         );
     }
 

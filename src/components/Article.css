@@ -6,16 +6,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 80px 240px 0px;
-    
-    position: relative;
-    width: 1440px;
-    min-height: 764.67px;
-    left: 0px;
-    top: 20px;
+    margin: auto;
     
     /* Background/White */
-    
     background: #FFFFFF;
 }
 
@@ -39,12 +32,6 @@
     align-items: flex-start;
     padding: 0px;
 
-    position: relative;
-    width: 960px;
-    min-height: 556.67px;
-    left: 60px;
-    top: 20px;
-
     /* Inside auto layout */
     flex: none;
     align-self: auto;
@@ -62,7 +49,6 @@
   float: left;
   height: 40px;
   width: 40px;
-  padding-right: 5px;
 }
 
 .article-text {
@@ -82,9 +68,7 @@
     
     position:relative;
     width: 304px;
-    min-height: 516.67px;
     left: 0px;
-    top: 40px;
     
     /* Background/White */
     
@@ -114,12 +98,6 @@
     flex-direction: column;
     align-items: flex-start;
     padding: 0px;
-    
-    position: relative;
-    width: 960px;
-    height: 128px;
-    left: 240px;
-    top: 80px;    
     /* Inside auto layout */
 
 flex: none;
