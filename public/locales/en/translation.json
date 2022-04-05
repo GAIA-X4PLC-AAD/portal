@@ -68,7 +68,7 @@
         "confirmationLoading": "Loading....",
         "organizationConfirmationMessageSuccess": "Thank's for confirming the email we've sent you. After submitting, your organization's details will be checked by the AISBL. You'll receive an email with your DID and Verified Credentials soon.",
         "organizationConfirmationMessageError": "The confirmation code is not longer valid.",
-        "userConfirmationMessageSucesss": "Thank's for confirming the email we've sent you. After submitting, your organization's details will be checked by the AISBL. You'll receive an email with your DID and Verified Credentials soon.",
+        "userConfirmationMessageSuccess": "Thank's for confirming the email we've sent you. After submitting, your organization's details will be checked by the AISBL. You'll receive an email with your DID and Verified Credentials soon.",
         "userConfirmationMessageError": "The confirmation code is not longer valid.",
         "confirmationHelp": "Confirmation link clicked!",
         "ok": "Ok"
