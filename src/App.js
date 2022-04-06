@@ -2,7 +2,7 @@ import './App.css';
 import { Suspense } from 'react';
 import TopMenu from './TopMenu';
 import WorkInProgress from './WorkInProgress';
-import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import { Link, BrowserRouter, Route, Routes} from 'react-router-dom';
 import Home from './Home';
 import Search from "./Search";
 import Register from './components/Register';
@@ -20,7 +20,6 @@ function App() {
         <TopMenu />
         <div className='home-screen'>
           <div className='banner-container'>
-            <img className='banner-img' src='images/Vector_2727 1.png'></img>
             <div className='banner-content'>
               <div className='banner-logo'>
                 <img src='images/logo_white.svg' height='80px' width='200px'></img>
@@ -58,8 +57,16 @@ function App() {
               <p>ERLEBEN, WAS VERBINDET.</p>
             </div>
             <div className='footer-content'>
-              <p>© 2020 Detusche Telekom IoT GmbH</p>
-              <h5>Imprint Privacy Policy Cookie Settings Terms & Conditions Contact Help</h5>
+               2020 Deutsche Telekom IoT GmbH
+              <div>
+                <a href='#'>Imprint</a>
+                <a href='#'>Privacy</a>
+                <a href='#'>Policy</a>
+                <a href='#'>Cookie Settings</a>
+                <a href='#'>Terms & Conditions</a>
+                <a href='#'>Contact</a>
+                <Link to="help">Help</Link>
+              </div>
             </div>
             <div className='footer-bottom'>
               <p>Gaia-X - For business customers only</p>
