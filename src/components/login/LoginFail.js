@@ -1,4 +1,3 @@
-/* This source code is exported from pxCode, you can get more document from https://www.pxcode.io */
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import Modal from '../../Modal';
@@ -9,30 +8,15 @@ const LoginFail = (props) => {
   const navigate = useNavigate();
   return (
     <Modal>
-      <div className="login-fail login-fail-block layout">
-        <div className="login-fail-block1 layout">
-          <div className="login-fail-flex layout">
-            <h2 className="login-fail-medium-title layout">
-              {props.t("login.fail.header")}
-            </h2>
-            <hr className="login-fail-line layout" />
-          </div>
+      <div className="login-fail-flex-col">
+        <div className='login-fail-header'>{props.t("login.fail.header")}</div>
+        <div className='login-fail-content'>
+        {props.t('login.fail.message')}
         </div>
-
-        <div className="login-fail-block2 layout">
-          <div className="login-fail-block3 layout">
-            <div className="login-fail-block4 layout">
-              <h4 className="login-fail-highlights layout">
-                {props.t('login.fail.message')}
-              </h4>
-
-              <button className="login-fail-block5 layout" onClick={()=> navigate("/")}>
-                <h4 className="login-fail-highlights1 layout">
-                  {props.t('login.close')}
-                </h4>
-              </button>
-            </div>
-          </div>
+        <div className='login-fail-footer'>
+          <button className="gaiax-button" onClick={()=> navigate("/")}>
+            {props.t('login.close')}
+          </button>
         </div>
       </div>
     </Modal>
