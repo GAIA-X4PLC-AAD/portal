@@ -1,9 +1,30 @@
 import React from "react";
 import {withTranslation} from 'react-i18next';
 import { Link } from "react-router-dom";
+import { Fragment } from 'react';
 
+const userSignedIn = false;
 class TopMenu extends React.Component {
-    
+
+
+  showUserDetails() {
+    return (
+      <React.Fragment>
+        {'User'}
+      </React.Fragment>
+    );
+  };
+
+   showRegisterSignin()  {
+
+    return (
+      <React.Fragment>
+        <Link to="register"> {this.props.t('top-menu.register')}</Link>
+        <Link to="signin"> {this.props.t('top-menu.signin')}</Link>
+      </React.Fragment>
+    );
+  };
+
 
     render () {
         return (
@@ -20,8 +41,7 @@ class TopMenu extends React.Component {
             <Link to="provider"> {this.props.t('left-menu.provider')}</Link>
           </div>
           <div className='top-menu-signin'>
-            <Link to="register"> {this.props.t('top-menu.register')}</Link>
-            <Link to="signin"> {this.props.t('top-menu.signin')}</Link>
+            {userSignedIn?this.showUserDetails():this.showRegisterSignin()}
           </div>
         </div>
     </div>
