@@ -11,8 +11,10 @@ import RegisterOrganization from './components/RegisterOrganization';
 import RegisterMailSent from './components/RegisterMailSent';
 import RegisterConfirmation from './components/RegisterConfirmation';
 import LoginFail from './components/login/LoginFail';
+import { useTranslation } from 'react-i18next';
 
 function App() {
+  const { t, i18n } = useTranslation();
   return (
     <div className="App">
       <BrowserRouter>
@@ -25,8 +27,8 @@ function App() {
               <div className='banner-logo'>
                 <img src='images/logo_white.svg' height='80px' width='200px'></img>
               </div>
-              <h1>What's new</h1>
-              <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.</h4>
+              <h1>{t('article.what-is-new')}</h1>
+              <h4>{t('filler')}</h4>
               <div className='banner-slider'>
               </div>
             </div>
@@ -56,22 +58,22 @@ function App() {
             <div className='footer-flex-col'>
             <div className='footer-banner'>
               <img src='images/logo_white.svg' height='50px' ></img>
-              <p>ERLEBEN, WAS VERBINDET.</p>
+              <p>{t('footer_slogan_cap')}</p>
             </div>
             <div className='footer-content'>
                2020 Deutsche Telekom IoT GmbH
               <div>
-                <a href='#'>Imprint</a>
-                <a href='#'>Privacy</a>
-                <a href='#'>Policy</a>
-                <a href='#'>Cookie Settings</a>
-                <a href='#'>Terms & Conditions</a>
-                <a href='#'>Contact</a>
-                <Link to="help">Help</Link>
+                <a href='#'>{t('links.imprint')}</a>
+                <a href='#'>{t('links.privacy')}</a>
+                <a href='#'>{t('links.policy')}</a>
+                <a href='#'>{t('links.cookie_settings')}</a>
+                <a href='#'>{t('links.terms_and_conditions')}</a>
+                <a href='#'>{t('links.contact')}</a>
+                <Link to="help">{t('links.help')}</Link>
               </div>
             </div>
             <div className='footer-bottom'>
-              <p>Gaia-X - For business customers only</p>
+              <p>{t('footer_business_only')}</p>
             </div>
             </div>
           </div>
