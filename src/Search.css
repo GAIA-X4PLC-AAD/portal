@@ -1,13 +1,23 @@
   * {
-    margin-bottom: 0.2rem;
     --search-bar-width: 100%; 
     
   }
 
   .additionalSearchOptions {
-    text-align: left;
+    text-align: center;
   }
   
+.search-flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1em auto;
+}
+
+.advancedSearch {
+  margin: auto;
+}
+
   /* Style the search field */
   div.searchInputField input {
     padding: 10px;
@@ -26,9 +36,10 @@
   }
 
   .searchInputField {
+    display: flex;
     width: 75%;
     border: 1px solid grey;
-    background: #f1f1f1;
+    background: #8d8dff;
     float: left;
     margin-right: 0.3rem;
     margin-bottom: 0.3rem;
@@ -39,17 +50,21 @@
     float: left;
     width: 100px;
     padding: 10px;
-    background: rgb(121, 46, 192);
+    /* background: rgb(121, 46, 192); */
+    background-color: #000094;
     color: white;
     font-size: 17px;
-    border: 1px solid grey;
-    border-left: none; /* Prevent double borders */
+    /* border: 1px solid grey; */
+    /* border-left: none; /* Prevent double borders */
+    border: none;
     cursor: pointer;
   }
   
+  /*
   .button-16:hover {
     background: rgb(158, 90, 221);
   }
+  */
   
   /* Clear floats */
   div.searchBarComponent::after {
