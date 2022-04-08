@@ -42,7 +42,7 @@ class Login extends React.Component {
                 <div className="login-highlights6">
                   <span className="login-highlights6-span0" >
                   {this.props.t("login.missingAccount")}</span>
-                    <Link className="login-highlights6-span1" to="/register">{this.props.t("login.register")}</Link>
+                    <span className="login-highlights6-span1"><Link to="/register">{this.props.t("login.register")}</Link></span>
                 </div>
               </h4>
           </div>

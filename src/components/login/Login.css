@@ -29,17 +29,6 @@
   height: -moz-min-content;
   height: min-content; }
 
-.login-flex {
-  display: flex;
-  flex-direction: column; }
-
-.login-flex.layout {
-  position: relative;
-  height: -webkit-min-content;
-  height: -moz-min-content;
-  height: min-content;
-  margin: 0px 0px; }
-
 .login-hero-title {
   display: flex;
   justify-content: center;
@@ -56,16 +45,6 @@
   height: min-content;
 
   margin: 16px 10% 0px 10%; }
-
-.login-block6 {
-  display: flex;
-  flex-direction: column; }
-
-.login-block6.layout {
-  position: relative;
-  height: 19px;
-  width: 22.9%;
-  margin: 0px 42.5% 0px 34.6%; }
 
 .login-highlights3 {
   display: flex;
@@ -108,14 +87,6 @@
   display: flex;
   flex-direction: column; }
 
-.login-flex1.layout {
-  position: relative;
-  height: -webkit-min-content;
-  height: -moz-min-content;
-  height: min-content;
-  width: 69.45%;
-  margin: 40px auto; }
-
 .login-medium-title {
   display: flex;
   align-items: center;
@@ -151,37 +122,6 @@
   position: relative;
   height: 209px;
   margin: 16px; }
-
-.login-block9 {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #000094;
-  border-radius: 4px 4px 4px 4px; }
-
-.login-block9.layout {
-  position: relative;
-  height: -webkit-min-content;
-  height: -moz-min-content;
-  height: min-content;
-  width: 54.42%;
-  margin: 32px auto 0px; }
-
-.login-highlights4 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
-  color: #000094;
-  text-align: center;
-  letter-spacing: 0.25px; }
-
-.login-highlights4.layout {
-  position: relative;
-  height: -webkit-min-content;
-  height: -moz-min-content;
-  height: min-content;
-  width: 20.42%;
-  margin: 6.5px auto; }
 
 .login-block10 {
   display: flex;
