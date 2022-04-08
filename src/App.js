@@ -11,18 +11,24 @@ import RegisterOrganization from './components/RegisterOrganization';
 import RegisterMailSent from './components/RegisterMailSent';
 import RegisterConfirmation from './components/RegisterConfirmation';
 import LoginFail from './components/login/LoginFail';
+import Login from './components/login/Login';
 import { useTranslation } from 'react-i18next';
+import {connect} from 'react-redux';
 
-function App() {
+
+const App = (props) => {
   const { t, i18n } = useTranslation();
+  
+
   return (
+ 
     <div className="App">
       <BrowserRouter>
       <div id="content" className="content">
         <div className='home-top-border'></div>
         <TopMenu />
         <div className='home-screen'>
-          <div className='banner-container'>
+          <div className='banner-container' hidden={props.isInSignInMenu}>
             <div className='banner-content'>
               <div className='banner-logo'>
                 <img src='images/logo_white.svg' height='80px' width='200px'></img>
@@ -33,7 +39,7 @@ function App() {
               </div>
             </div>
           </div>
-          <div className='search-container'>
+          <div className='search-container' hidden={props.isInSignInMenu}>
             <div>
               <Search/>
             </div>
@@ -50,7 +56,7 @@ function App() {
             <Route path="/register/organization" element={<RegisterOrganization/>}/>
             <Route path="/confirmation/:type/:key" element={<RegisterConfirmation/>}/>
             <Route path="/register/email" element={<RegisterMailSent/>}/>
-            <Route path="/signin" element={<WorkInProgress component="Sign in"/>} />
+            <Route path="/signin" element={<Login/>} />
             <Route path="/loginfail" element={<LoginFail />} />
           </Routes>
           </div>
@@ -81,14 +87,13 @@ function App() {
       </div>
       </BrowserRouter>
     </div>
+
   );
 }
 
-export default function WrappedApp() {
-  return (
-    <Suspense fallback="..... is loading">
-      <App />
-   </Suspense>
-  );
-
+const mapStateToProps = state => {
+  return {isInSignInMenu: state.signin.isInSignInMenu };
 };
+
+export default connect( mapStateToProps,{}) (App);;
+

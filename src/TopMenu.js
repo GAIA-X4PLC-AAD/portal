@@ -1,9 +1,21 @@
 import React from "react";
-import {withTranslation} from 'react-i18next';
+import { withTranslation} from 'react-i18next';
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux';
+import {compose} from 'redux';
 
 class TopMenu extends React.Component {
-    
+
+  showSignInMenu() {
+    if (this.props.isInSignInMenu) return null;
+    return (
+    <React.Fragment>
+      <Link to="register"> {this.props.t('top-menu.register')}</Link>
+      <Link to="signin"> {this.props.t('top-menu.signin')}</Link>
+    </React.Fragment>
+    );
+
+  }
 
     render () {
         return (
@@ -20,14 +32,17 @@ class TopMenu extends React.Component {
             <Link to="provider"> {this.props.t('left-menu.provider')}</Link>
           </div>
           <div className='top-menu-signin'>
-            <Link to="register"> {this.props.t('top-menu.register')}</Link>
-            <Link to="signin"> {this.props.t('top-menu.signin')}</Link>
-          </div>
+            {this.showSignInMenu()}
+        </div>
+
         </div>
     </div>
         );
     }
 
 }
+const mapStateToProps = state => {
+  return {isInSignInMenu: state.signin.isInSignInMenu };
+};
 
-export default withTranslation()(TopMenu);
+export default compose (withTranslation(),  connect( mapStateToProps,{})) (TopMenu);
