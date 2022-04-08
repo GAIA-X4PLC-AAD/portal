@@ -79,8 +79,13 @@
     "login": {
         "fail.header": "Login failed",
         "fail.message": "You need to install a wallet browser extension to login with your credentials.",
-        "close": "Close"
-
+        "close": "Close",
+        "welcome": "Welcome to Gaia-X",
+        "signinContinue":"Sign in to continue",
+        "scanMessage": "Scan the QR code with your mobile device.",
+        "faq":"FAQ & Support",
+        "missingAccount": "Don’t have any account?",
+        "register": "Register now"
     },
     "links": {
         "imprint": "Imprint",

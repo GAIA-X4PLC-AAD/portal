@@ -16,6 +16,8 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
+    useSuspense: false,
+    wait: false,
     debug: true,
     fallbackLng: 'en',
     preload: ['en', 'es'],

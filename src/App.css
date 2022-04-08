@@ -132,6 +132,7 @@
 .top-menu-signin {
   display: flex;
   column-gap: 2em;
+  width: 210px;
 }
 
 .top-menu-signin a {

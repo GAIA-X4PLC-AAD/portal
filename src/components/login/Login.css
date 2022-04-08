@@ -1,27 +1,21 @@
+.modal{
+  margin-top: 5%;
+}
+
 /* This source code is exported from pxCode, you can get more document from https://www.pxcode.io */
-.login-block {
-  display: flex;
-  flex-direction: column;
-  background-color: white; }
-
-.login-block.layout {
-  position: relative;
-  overflow: hidden;
-  min-height: 1110px;
-  flex-shrink: 0; }
-
 .login-block5 {
   display: flex;
   flex-direction: column;
-  box-shadow: 0px 5px 10px 0px rgba(29, 36, 48, 0.14902); }
+  box-shadow: 0px 5px 10px 0px rgba(29, 36, 48, 0.14902); 
+}
 
 .login-block5.layout {
   position: relative;
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  width: 44.1%;
-  margin: 80px auto 0px; }
+  width: 50.1%;
+  margin: 10px auto 0px; }
 
 .login-group {
   display: flex;
@@ -44,7 +38,7 @@
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  margin: 0px 14px; }
+  margin: 0px 0px; }
 
 .login-hero-title {
   display: flex;
@@ -52,6 +46,7 @@
   font: 700 36px/1.33 "Titillium Web", Helvetica, Arial, serif;
   color: #1c0e15;
   text-align: center;
+  width:auto;
   letter-spacing: 0px; }
 
 .login-hero-title.layout {
@@ -59,8 +54,8 @@
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  width: 50.08%;
-  margin: 16px 28.91% 0px 21%; }
+
+  margin: 16px 10% 0px 10%; }
 
 .login-block6 {
   display: flex;
@@ -74,19 +69,20 @@
 
 .login-highlights3 {
   display: flex;
-  align-items: center;
+  justify-content: center;
   font: 700 18px/1.11 "TeleNeo", Helvetica, Arial, serif;
   color: #818b99;
+  text-align: center;
   letter-spacing: 0.25px; }
 
 .login-highlights3.layout {
-  position: absolute;
+  position: relative;
   top: 0px;
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  width: 172px;
-  right: -33px; }
+  width: 100%;
+}
 
 .login-line2 {
   background-color: #e8e8e8; }

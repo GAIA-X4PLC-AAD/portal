@@ -1,37 +1,56 @@
 import React from "react";
+import { connect } from "react-redux";
+import {compose} from 'redux';
 import "./Login.css";
+import { signInMenuEnter, signInMenuQuit } from "../../actions";
+import { Link } from "react-router-dom";
+import { withTranslation } from "react-i18next";
 
-const Login = () => {
 
-  return (
-      <div classname="login-block5 layout">
-        <div classname="login-group layout">
-            <h1 classname="login-hero-title layout">Welcome to Gaia-X</h1>
-            <h4 classname="login-highlights3 layout">Sign in to continue</h4>
-            <hr classname="login-line2 layout" />
-        </div>
-        <div classname="login-block7 layout">
-            <h2 classname="login-medium-title layout">
-              Scan the QR code with your mobile device.
-            </h2>
-            <div classname="login-block8 layout">
-              <iframe width="241px" height="243px">
+class Login extends React.Component {
 
-              </iframe>            
-            </div>
-            <div classname="login-block10 layout">
-              <h4 classname="login-highlights5 layout">FAQ &amp; Support</h4>
-            </div>
-            <h4 classname="login-highlights6-box layout">
-              <div classname="login-highlights6">
-                <span classname="login-highlights6-span0">
-                  Don’t have any account?</span>
-                  <span classname="login-highlights6-span1">Register now</span>
+  componentDidMount () {
+    console.log(this.props);
+    this.props.signInMenuEnter();
+  }
+
+  componentWillUnmount () {
+    this.props.signInMenuQuit();
+  }
+
+  render(){
+    return (  
+        <div className="login-block5 layout">
+          <div className="login-group layout">
+              <h1 className="login-hero-title layout">{this.props.t("login.welcome")}</h1>
+              <h4 className="login-highlights3 layout">{this.props.t("login.signinContinue")}</h4>
+              <hr className="login-line2 layout" />
+          </div>
+          <div className="login-block7 layout">
+              <h2 className="login-medium-title layout">
+                {this.props.t("login.scanMessage")}
+              </h2>
+              <div className="login-block8 layout">
+                <iframe width="241px" height="243px">
+  
+                </iframe>            
               </div>
-            </h4>
+              <div className="login-block10 layout">
+                <Link to="/help"><h4 className="login-highlights5 layout">{this.props.t("login.faq")}</h4></Link>
+              </div>
+              <h4 className="login-highlights6-box layout">
+                <div className="login-highlights6">
+                  <span className="login-highlights6-span0" >
+                  {this.props.t("login.missingAccount")}</span>
+                    <Link className="login-highlights6-span1" to="/register">{this.props.t("login.register")}</Link>
+                </div>
+              </h4>
+          </div>
         </div>
-      </div>
-  );
+  
+    );
+  }
 
 }
-export default Login;
+
+export default compose (withTranslation(),   connect( null,{signInMenuEnter, signInMenuQuit})) (Login);
