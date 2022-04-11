@@ -1,16 +1,19 @@
 import React from "react";
-import {withTranslation} from 'react-i18next';
+import { withTranslation} from 'react-i18next';
 import { Link } from "react-router-dom";
-import { Fragment } from 'react';
+import { signOut } from "./actions";
+import {connect} from 'react-redux';
+import {compose} from 'redux';
 
 const userSignedIn = false;
 class TopMenu extends React.Component {
 
-
   showUserDetails() {
     return (
       <React.Fragment>
-        {'User'}
+        <button>{'User'}</button>
+        <button onClick={this.props.signOut}>{'Sing Out'}</button>
+
       </React.Fragment>
     );
   };
@@ -19,12 +22,17 @@ class TopMenu extends React.Component {
 
     return (
       <React.Fragment>
-        <Link to="register"> {this.props.t('top-menu.register')}</Link>
-        <Link to="signin"> {this.props.t('top-menu.signin')}</Link>
+        <Link to="/register"> {this.props.t('top-menu.register')}</Link>
+        <Link to="/signin"> {this.props.t('top-menu.signin')}</Link>
       </React.Fragment>
     );
   };
 
+  showSignInMenu() {
+    if (this.props.isUserSignedIn) return this.showUserDetails();
+    if (this.props.isInSignInMenu) return null;
+    return this.showRegisterSignin();
+  }
 
     render () {
         return (
@@ -36,18 +44,22 @@ class TopMenu extends React.Component {
             </Link>
           </div>
           <div className='top-menu-links'>
-            <Link to="services"> {this.props.t('left-menu.services')}</Link>
-            <Link to="data"> {this.props.t('left-menu.data')}</Link>
-            <Link to="provider"> {this.props.t('left-menu.provider')}</Link>
+            <Link to="/services"> {this.props.t('left-menu.services')}</Link>
+            <Link to="/data"> {this.props.t('left-menu.data')}</Link>
+            <Link to="/provider"> {this.props.t('left-menu.provider')}</Link>
           </div>
           <div className='top-menu-signin'>
-            {userSignedIn?this.showUserDetails():this.showRegisterSignin()}
-          </div>
+            {this.showSignInMenu()}
+        </div>
+
         </div>
     </div>
         );
     }
 
 }
+const mapStateToProps = state => {
+  return {isInSignInMenu: state.signin.isInSignInMenu, isUserSignedIn: state.user.isUserSignedIn };
+};
 
-export default withTranslation()(TopMenu);
+export default compose (withTranslation(),  connect( mapStateToProps,{signOut})) (TopMenu);

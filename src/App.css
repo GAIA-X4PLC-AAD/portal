@@ -132,6 +132,7 @@
 .top-menu-signin {
   display: flex;
   column-gap: 2em;
+  width: 210px;
 }
 
 .top-menu-signin a {
@@ -146,8 +147,13 @@
 }
 
 .banner-container {
+  /*
   background-image: url('../public/images/banner_gradient.png');
   min-height: var(--banner-height);
+  */
+  background-image: url('../public/images/Vector_2727\ 1_merged01.png');
+  background-size: 100% auto;
+  background-position: 50% 50%;
   position: relative;
   overflow: hidden;
 }
@@ -215,7 +221,9 @@
 .footer-banner {
   display: flex;
   justify-content: space-between;
-  margin: 0% 10%;
+  margin: 1% 10%;
+  border-bottom: 1px solid #737373;
+  padding-bottom: 1%;
 }
 
 .footer-banner img {
@@ -224,7 +232,17 @@
 .footer-content {
   display: flex;
   justify-content: space-between;
-  margin: 0% 10%;
+  margin: 2% 10%;
+}
+
+.footer-content a {
+  margin: 0.3em;
+  text-decoration: none;
+  color: #fff;
+}
+
+.footer-content a:visited {
+  color: #fff;
 }
 
 .footer-bottom {
@@ -235,7 +253,7 @@
 }
 
 .footer-bottom p {
-  width: 18.9%;
+  width: 30%;
   margin-block-end: 1.67em;
   margin-block-end: 1.67em;
   margin: auto

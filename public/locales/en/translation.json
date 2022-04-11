@@ -49,7 +49,7 @@
         "lCity": "City",
         "lCountry": "Country",
         "lAisbl": "Apply for AISBL Membership",
-	"formUserTitleEmail": "Please enter valid email address.",
+	    "formUserTitleEmail": "Please enter valid email address.",
         "regViaDID": "Register via DID",
         "almostDone": "...almost done: please check your email inbox now. We have sent you a message with a confirmation link.",
         "formUserHeadline": "Welcome to GAIA-X",
@@ -68,11 +68,33 @@
         "confirmationLoading": "Loading....",
         "organizationConfirmationMessageSuccess": "Thank's for confirming the email we've sent you. After submitting, your organization's details will be checked by the AISBL. You'll receive an email with your DID and Verified Credentials soon.",
         "organizationConfirmationMessageError": "The confirmation code is not longer valid.",
-        "userConfirmationMessageSucesss": "Thank's for confirming the email we've sent you. After submitting, your organization's details will be checked by the AISBL. You'll receive an email with your DID and Verified Credentials soon.",
+        "userConfirmationMessageSuccess": "Thank's for confirming the email we've sent you. After submitting, your organization's details will be checked by the AISBL. You'll receive an email with your DID and Verified Credentials soon.",
         "userConfirmationMessageError": "The confirmation code is not longer valid.",
         "confirmationHelp": "Confirmation link clicked!",
         "ok": "Ok"
     },
-
+    "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
+    "footer_slogan_cap": "ERLEBEN, WAS VERBINDET.",
+    "footer_business_only": "Gaia-X - For business customers only",
+    "login": {
+        "fail.header": "Login failed",
+        "fail.message": "You need to install a wallet browser extension to login with your credentials.",
+        "close": "Close",
+        "welcome": "Welcome to Gaia-X",
+        "signinContinue":"Sign in to continue",
+        "scanMessage": "Scan the QR code with your mobile device.",
+        "faq":"FAQ & Support",
+        "missingAccount": "Don’t have any account?",
+        "register": "Register now"
+    },
+    "links": {
+        "imprint": "Imprint",
+        "privacy": "Privacy",
+        "policy": "Policy",
+        "cookie_settings": "Cookie Settings",
+        "terms_and_conditions": "Terms & Conditions",
+        "contact": "Contact",
+        "help": "Help"
+    },
     "work-in-progress.message" : "Work in progress...."
 }
