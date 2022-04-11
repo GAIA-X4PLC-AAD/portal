@@ -5,15 +5,13 @@ import './Login_fail.css';
 import { useNavigate } from 'react-router-dom';
 
 const LoginFail = (props) => {
-  
   const navigate = useNavigate();
-  console.log(props);
-  if (props.showAlertMessage===false) return null;  
   return (
     <Modal>
       <div className="login-fail-flex-col">
         <div className='login-fail-header'>{props.t("login.fail.header")}</div>
-        <div className='login-fail-content'>        
+        <div className='login-fail-content'>
+        {props.t('login.fail.message')}
         </div>
         <div className='login-fail-footer'>
           <button className="gaiax-button" onClick={()=> navigate("/")}>

@@ -1,4 +1,4 @@
-import { SIGN_IN_MENU, NOT_SIGN_IN_MENU } from "./types";
+import { SIGN_IN_MENU, NOT_SIGN_IN_MENU, SIGN_IN, SIGN_OUT } from "./types";
 
 
 export const signInMenuEnter = () => {
@@ -7,4 +7,16 @@ export const signInMenuEnter = () => {
 
 export const signInMenuQuit = () => {
     return { type: NOT_SIGN_IN_MENU};
-}
+};
+
+export const signIn = () => {
+    return {
+        type: SIGN_IN
+    };
+};
+
+export const signOut = () => {
+    return {
+        type: SIGN_OUT
+    };
+};

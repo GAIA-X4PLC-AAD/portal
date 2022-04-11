@@ -1,18 +1,44 @@
-import React from "react";
+import React, {Component} from "react";
 import { connect } from "react-redux";
 import {compose} from 'redux';
 import "./Login.css";
-import { signInMenuEnter, signInMenuQuit } from "../../actions";
-import { Link } from "react-router-dom";
+import { signIn, signInMenuEnter, signInMenuQuit } from "../../actions";
+import { Link, useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
+import LoginFail from "./LoginFail";
+import AuthPolling from "../AuthPolling";
 
+export const  withNavigation = (Component) => {
+  return props => <Component {...props} navigate={useNavigate()} />;
+} 
 
-class Login extends React.Component {
+class Login extends Component  {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      showLogginFail:false
+    }
+
+  }
 
   componentDidMount () {
-    console.log(this.props);
     this.props.signInMenuEnter();
   }
+
+    onAuthZSuccess = () => {
+      this.props.signIn();
+      this.props.navigate('/');
+    }
+       
+    onAuthZFailed = () => {
+      this.setState({showLogginFail:true});
+    }
+    
+    onAuthZWait() {
+      console.log('onAuthZWait');
+    }
+
 
   componentWillUnmount () {
     this.props.signInMenuQuit();
@@ -31,6 +57,12 @@ class Login extends React.Component {
                 {this.props.t("login.scanMessage")}
               </h2>
               <div className="login-block8 layout">
+                <AuthPolling
+                  onAuthZFailed={this.onAuthZFailed}
+                  onAuthZSuccess={this.onAuthZSuccess}
+                  onAuthZWait={this.onAuthZWait}
+                />
+                <LoginFail showAlertMessage={this.state.showLogginFail}/>
                 <iframe width="241px" height="243px">
   
                 </iframe>            
@@ -53,4 +85,4 @@ class Login extends React.Component {
 
 }
 
-export default compose (withTranslation(),   connect( null,{signInMenuEnter, signInMenuQuit})) (Login);
+export default compose (withTranslation(),   connect( null,{signInMenuEnter, signInMenuQuit, signIn})) (withNavigation(Login));
