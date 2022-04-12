@@ -11,7 +11,7 @@ const LoginFail = (props) => {
       <div className="login-fail-flex-col">
         <div className='login-fail-header'>{props.t("login.fail.header")}</div>
         <div className='login-fail-content'>
-        {props.t('login.fail.message')}
+        {props.t('login.fail.widgetMessage')}
         </div>
         <div className='login-fail-footer'>
           <button className="gaiax-button" onClick={()=> navigate("/")}>

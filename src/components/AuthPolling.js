@@ -18,7 +18,7 @@ timerId: null
 
 
 async fetchData() {
-const data = 'SUCCESS';
+const data = 'WAIT';
 
 
 switch (data) {
@@ -50,6 +50,7 @@ this.setState({timerId:timerId});
 
 
 componentWillUnmount() {
+console.log(this.state.timerId);
 clearInterval(this.state.timerId);
 }
 

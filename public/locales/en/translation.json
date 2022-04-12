@@ -14,6 +14,7 @@
     "top-menu": {
         "help": "Help",
         "signin": "Sign in",
+        "signout": "Sign out",
         "register": "Register"
     },
     "article": {
@@ -78,14 +79,15 @@
     "footer_business_only": "Gaia-X - For business customers only",
     "login": {
         "fail.header": "Login failed",
-        "fail.message": "You need to install a wallet browser extension to login with your credentials.",
+        "fail.widgetMessage": "You need to install a wallet browser extension to login with your credentials.",
         "close": "Close",
         "welcome": "Welcome to Gaia-X",
         "signinContinue":"Sign in to continue",
         "scanMessage": "Scan the QR code with your mobile device.",
         "faq":"FAQ & Support",
         "missingAccount": "Don’t have any account?",
-        "register": "Register now"
+        "register": "Register now",
+        "loginButton": "Login"
     },
     "links": {
         "imprint": "Imprint",

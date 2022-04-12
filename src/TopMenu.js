@@ -12,7 +12,7 @@ class TopMenu extends React.Component {
     return (
       <React.Fragment>
         <button>{'User'}</button>
-        <button onClick={this.props.signOut}>{'Sing Out'}</button>
+        <button onClick={this.props.signOut}>{this.props.t('top-menu.signout')}</button>
 
       </React.Fragment>
     );
