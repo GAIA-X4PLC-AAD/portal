@@ -11,6 +11,7 @@ import RegisterOrganization from './components/RegisterOrganization';
 import RegisterMailSent from './components/RegisterMailSent';
 import RegisterConfirmation from './components/RegisterConfirmation';
 import LoginFail from './components/login/LoginFail';
+import RegisterUserViaDid from './components/RegisterUserViaDid';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/help" element={<WorkInProgress component="Help"/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/register/user" element={<RegisterUser/>}/>
+            <Route path="/register/user/viadid" element={<RegisterUserViaDid/>}/>
             <Route path="/register/organization" element={<RegisterOrganization/>}/>
             <Route path="/confirmation/:type/:key" element={<RegisterConfirmation/>}/>
             <Route path="/register/email" element={<RegisterMailSent/>}/>

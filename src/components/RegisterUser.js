@@ -62,7 +62,7 @@ const RegisterUser = (props) => {
     }
 
     const onRegisterDID = () => {
-        alert("Register DID is still not done. This is a placeholder alert message.");
+        navigate("/register/user/viadid");
     }
 
     const formUserOne = () => {
