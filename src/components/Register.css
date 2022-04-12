@@ -71,6 +71,31 @@
   color: red;
 }
 
+.identityProviderList {
+  width: 90%;
+  margin: auto;
+  padding-bottom: 3em;
+}
+
+.registerIdP-list {
+  display: block;
+  border: 1px solid silver;
+}
+
+.registerIdP-col {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  border: 1px solid silver;
+  height: 2em;
+}
+
+.registerIdP-col a {
+  text-decoration: underline;
+  color: black;
+  margin: 0.4em;
+}
+
 input:invalid:not(:focus):not(:placeholder-shown) {
   border: 1px solid red;
 }

@@ -25,7 +25,13 @@ const RegisterOrganization = (props) => {
     }
 
     const onRegisterDID = () => {
-        alert("Register DID is still not done. This is a placeholder alert message.");
+        axios.post(configData.WIREMOCK_API_URI + '/auth/identity/login', input).
+        then(
+            (response) => {
+                navigate("/register/did");
+        },(error)=> {
+                alert(`Error with status ${error.response.status} and message:\n ${error.response.data}`);
+        });
     }
 
     // Validates when all the mandatory fields have been populated and 500 seconds without any new key input during that ti
@@ -83,7 +89,7 @@ const RegisterOrganization = (props) => {
                 <h3>{props.t("form.formUserHeadline")}</h3>
                 <p>{props.t("form.formOrganizationOne")}</p>
             </div>
-            <VerticalSteps current="2" numSteps="3"/>
+            <VerticalSteps current="2" numSteps="4"/>
             <div className="registerInputs">
                 <p> {props.t("form.formOrganizationOneInformation")}</p>
                 <input type="file" onChange={onFileChange}/>
@@ -106,7 +112,7 @@ const RegisterOrganization = (props) => {
                 <div className="formButtons">
                      <button onClick={cancelButton}>{props.t("form.cancel")}</button>
                      <button  onClick={onSubmit} disabled={eMessage.length!== 0 || !('aisbl' in input && 'email' in input && 'name' in input)}>{props.t("form.continue")}</button>
-                     <button  onClick={onRegisterDID}>{props.t("form.registerDid")}</button>
+                     <button  onClick={onRegisterDID} disabled={eMessage.length!== 0 || !('aisbl' in input && 'email' in input && 'name' in input)}>{props.t("form.registerDid")}</button>
                 </div>
 
             </div>

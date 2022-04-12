@@ -22,7 +22,7 @@ const RegisterMailSent = (props) => {
                 <h3>{props.t("form.formUserHeadline")}</h3>
                 <p>{props.t(`form.${formType}FormEmailSentHelp`)}</p>
             </div>
-            <VerticalSteps current="3" numSteps="3"/>
+            <VerticalSteps current="3" numSteps="4"/>
             <div className="registerInputs">
                 <p> {props.t("form.formEmailSentMessage")}</p>
                 <div className="formButtons">
