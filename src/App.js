@@ -16,6 +16,8 @@ import LoginFail from './components/login/LoginFail';
 import Login from './components/login/Login';
 import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
+import RegisterDisplayVC from './components/RegisterDisplayVC';
+import RegisterComplianceCheck from './components/RegisterComplianceCheck';
 
 
 const App = (props) => {
@@ -60,6 +62,8 @@ const App = (props) => {
             <Route path="/register/email" element={<RegisterMailSent/>}/>
             <Route path="/register/did" element={<RegisterViaDID/>}/>
             <Route path="/register/IdP" element={<RegisterViaDIDIdP/>}/>
+            <Route path="/register/displayVC" element={<RegisterDisplayVC/>}/>
+            <Route path="/register/compliance" element={<RegisterComplianceCheck/>}/>
             <Route path="/signin" element={<Login/>} />
             <Route path="/loginfail" element={<LoginFail />} />
           </Routes>

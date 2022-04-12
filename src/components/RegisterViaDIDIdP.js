@@ -31,7 +31,7 @@ const RegisterViaDIDIdP = (props) => {
                 {idPList.map((item) => {
                     return (
                         <div className="registerIdP-col">
-                            <div>{item.name}</div><a href={item.link}>Link</a>
+                            <div><span className="mock-logo">logo</span>{item.name}</div><a href={item.link}>Link</a>
                         </div>
                     );
                 })}

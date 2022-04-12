@@ -112,9 +112,8 @@ const RegisterOrganization = (props) => {
                 <div className="formButtons">
                      <button onClick={cancelButton}>{props.t("form.cancel")}</button>
                      <button  onClick={onSubmit} disabled={eMessage.length!== 0 || !('aisbl' in input && 'email' in input && 'name' in input)}>{props.t("form.continue")}</button>
-                     <button  onClick={onRegisterDID} disabled={eMessage.length!== 0 || !('aisbl' in input && 'email' in input && 'name' in input)}>{props.t("form.registerDid")}</button>
+                     <button  onClick={onRegisterDID}>{props.t("form.registerDid")}</button>
                 </div>
-
             </div>
         </div>
         )
