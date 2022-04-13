@@ -10,6 +10,7 @@ class AuthPolling extends Component {
             onAuthZSuccess: props.onAuthZSuccess,
             onAuthZFailed: props.onAuthZFailed,
             onAuthZWait: props.onAuthZWait,
+            timerId: null
         }
     }
 
@@ -17,7 +18,7 @@ class AuthPolling extends Component {
         this.setState({ isLoading: true });
         const response = await fetch('http://localhost:8180/api/authstatus');
         const data = await response.json();
-        console.log("json::"+JSON.stringify(data));
+
         switch (data) {
             case 'WAIT':
                 this.state.onAuthZWait();
@@ -39,12 +40,13 @@ class AuthPolling extends Component {
     }
 
     doCleanup() {
-        clearInterval(this.timerId);
+        clearInterval(this.state.timerId);
     }
 
     async componentDidMount() {
         await this.fetchData();
-        this.timerId = setInterval(() => this.fetchData(), 3000);
+        let timerId = setInterval(() => this.fetchData(), 2000);
+        this.setState({timerId:timerId});
     }
 
 

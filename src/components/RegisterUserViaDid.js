@@ -5,7 +5,7 @@ import Modal from "../Modal";
 import "./Register.css";
 import VerticalSteps from "./VerticalSteps";
 import configData from "../config/config.json";
-import AuthPolling from "../AuthPolling2";
+import AuthPolling from "./AuthPolling";
 
 const RegisterUserViaDid = (props) => {
 
