@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate} from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import VerticalSteps from "./VerticalSteps";
 import Modal from "../Modal";
@@ -10,9 +10,13 @@ const RegisterDisplayVC = (props) => {
 
     const navigate = useNavigate();
     const [vrVC,setVRVC] = useState([]);
+    const queryParams = useLocation().search;
+    const mock = new URLSearchParams(queryParams).get("mock")
+    console.log(queryParams)
+    console.log(mock)
 
     const getVRVC = () => {
-        axios.get(configData.WIREMOCK_API_URI + '/auth/identity/mock_did').
+        axios.get(configData.WIREMOCK_API_URI + '/auth/identity/mock_did' + mock).
             then(
                 (response) => {
                     setVRVC(response.data.DID);

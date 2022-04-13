@@ -59,7 +59,7 @@ const RegisterUserViaDid = (props) => {
                         <img src={img} width="150px" height="150px" alt="Loading..."/>
                     </div>
                     <div className="formButtons">
-                        <button disabled type="submit" onClick={onContinue}>{props.t("form.continue")}</button>
+                        <button disabled type="submit"><a href="http://localhost:3000/register/displayVC?mock=user">{props.t("form.continue")}</a></button>
                         <button disabled onClick={noDid}>{props.t("form.noDid")}</button>
                     </div>
                 </form>
