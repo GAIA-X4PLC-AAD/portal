@@ -59,7 +59,7 @@ const Register = (props) => {
                 <h3>{props.t("form.formUserHeadline")}</h3>
                 <p>{props.t("form.formUserOne")}</p>
             </div>
-            <VerticalSteps current="1" numSteps="3"/>
+            <VerticalSteps current="1" numSteps="4"/>
             <div className="registerInputs">
                 <p> {props.t("form.formUserOrganization")}</p>
             <form>

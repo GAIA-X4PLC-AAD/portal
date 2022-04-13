@@ -25,8 +25,7 @@ class Login extends Component  {
       imgLink: null,
       walletLink: null
     }
-    this.loginLinkRef = React.createRef();
-  
+ 
   }
 
   
