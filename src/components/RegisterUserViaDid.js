@@ -5,7 +5,7 @@ import Modal from "../Modal";
 import "./Register.css";
 import VerticalSteps from "./VerticalSteps";
 import configData from "../config/config.json";
-import AuthPolling from "../AuthPolling";
+import AuthPolling from "../AuthPolling2";
 
 const RegisterUserViaDid = (props) => {
 
@@ -32,7 +32,7 @@ const RegisterUserViaDid = (props) => {
     }
          
     const onAuthZFailed = () => {
-        console.log('onAuthZFailed');
+        alert('onAuthZFailed');
     }
       
     const onAuthZWait = () => {
