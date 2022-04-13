@@ -19,7 +19,7 @@ const LoginFail = (props) => {
           {message}       
         </div>
         <div className='login-fail-footer'>
-          <button className="gaiax-button" onClick={()=> navigate("/")}>
+          <button className="gaiax-button layout" onClick={()=> navigate("/")}>
             {props.t('login.close')}
           </button>
         </div>
