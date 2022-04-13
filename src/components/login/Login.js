@@ -57,7 +57,7 @@ class Login extends Component  {
       });
         
         // url to be redirected
-        window.location.href = "whats://oeuoweruowre";
+        window.location.href = "wallet://oeuoweruowre";
     }
 
   componentWillUnmount () {
