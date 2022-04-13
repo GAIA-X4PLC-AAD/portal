@@ -8,14 +8,16 @@ import Register from './components/Register';
 import RegisterUser from './components/RegisterUser';
 import RegisterOrganization from './components/RegisterOrganization';
 import RegisterMailSent from './components/RegisterMailSent';
+import RegisterViaDID from './components/RegisterViaDID';
+import RegisterViaDIDIdP from './components/RegisterViaDIDIdP';
 import RegisterConfirmation from './components/RegisterConfirmation';
 import LoginFail from './components/login/LoginFail';
 import Login from './components/login/Login';
 import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
+import RegisterDisplayVC from './components/RegisterDisplayVC';
+import RegisterComplianceCheck from './components/RegisterComplianceCheck';
 import { createBrowserHistory } from "history";
-
-
 
 
 const App = (props) => {
@@ -58,6 +60,10 @@ const App = (props) => {
             <Route path="/register/organization" element={<RegisterOrganization/>}/>
             <Route path="/confirmation/:type/:key" element={<RegisterConfirmation/>}/>
             <Route path="/register/email" element={<RegisterMailSent/>}/>
+            <Route path="/register/did" element={<RegisterViaDID/>}/>
+            <Route path="/register/IdP" element={<RegisterViaDIDIdP/>}/>
+            <Route path="/register/displayVC" element={<RegisterDisplayVC/>}/>
+            <Route path="/register/compliance" element={<RegisterComplianceCheck/>}/>
             <Route path="/signin" element={<Login/>} />
             <Route path="/loginfail" element={<LoginFail />} />
           </Routes>
