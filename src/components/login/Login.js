@@ -20,8 +20,7 @@ class Login extends Component  {
       showLoginFail:false,
       loginFailMessage: null
     }
-    this.loginLinkRef = React.createRef();
-  
+ 
   }
 
   componentDidMount () {
@@ -86,9 +85,9 @@ class Login extends Component  {
                 <iframe width="241px" height="243px">
   
                 </iframe>
-                <div className="login-button layout">
-                  <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t("login.loginButton")}</a>
-                  </div>            
+                <button className="login-button layout" onClick={this.onWidgetInstalledCheck}>
+                  <h4 className="login-text layout">{this.props.t("login.loginButton")}</h4>
+                </button>            
               </div>
               <div className="login-block10 layout">
                 <Link to="/help"><h4 className="login-highlights5 layout">{this.props.t("login.faq")}</h4></Link>
