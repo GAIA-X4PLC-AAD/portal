@@ -47,6 +47,7 @@ const RegisterOrganization = (props) => {
     },[input]);
 
     const onSubmit =  async () => {
+        console.log("request: " + JSON.stringify(input));
         axios.post(configData.ONBOARDING_API_URI+'/register/organization', input).
         then(
             (reason)=> {navigate("/register/email?formType=organization");

@@ -57,7 +57,7 @@ const RegisterViaDID = (props) => {
                             onAuthZSuccess={onAuthZSuccess}
                             onAuthZWait={onAuthZWait}
                         />
-                        <LoginFail showAlertMessage={showLoginFail} message="msgtest"/>
+                        <LoginFail showAlertMessage={showLoginFail} message={props.t("form.formOrganizationNoProcuraError")}/>
                         <img src={img} width="150px" height="150px" alt="Loading..."/>
                     </div>
                 <div className="formButtons">

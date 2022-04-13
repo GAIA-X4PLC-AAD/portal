@@ -45,6 +45,7 @@ const RegisterUser = (props) => {
         var form = document.querySelector(".registerFormUser")
         if (form.reportValidity()) {
             /* place custom validation on submit */
+            console.log("request: " + JSON.stringify(input));
             const output = await axios.post(configData.ONBOARDING_API_URI+'/register/user', input);
             switch (output.status) {
 		        case 204:
