@@ -182,3 +182,38 @@
   color: #000000ff;
   text-decoration: underline;
   letter-spacing: 0.25px; }
+
+.login-button {
+  position: relative;
+  height: min-content;
+  width: 54.42%;
+  margin: 32px auto 0px;
+}
+
+.login-button.layout {
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(0, 0, 148);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.login-text{
+  position: relative;
+  height: min-content;
+  width: 20.42%;
+  margin: 6.5px auto;
+}
+.login-text.layout{
+  -webkit-box-pack: center;
+    -webkit-box-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font: 700 18px / 1.11 "Titillium Web", Helvetica, Arial, serif;
+    color: rgb(0, 0, 148);
+    text-align: center;
+    letter-spacing: 0.25px;
+}

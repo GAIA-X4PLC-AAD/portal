@@ -1,8 +1,7 @@
 import './App.css';
-import { Suspense } from 'react';
 import TopMenu from './TopMenu';
 import WorkInProgress from './WorkInProgress';
-import { Link, BrowserRouter, Route, Routes} from 'react-router-dom';
+import { Link, BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './Home';
 import Search from "./Search";
 import Register from './components/Register';
@@ -18,16 +17,17 @@ import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 import RegisterDisplayVC from './components/RegisterDisplayVC';
 import RegisterComplianceCheck from './components/RegisterComplianceCheck';
+import { createBrowserHistory } from "history";
 
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
-  
+  const history = createBrowserHistory();  
 
   return (
  
     <div className="App">
-      <BrowserRouter>
+      <Router history={history}>
       <div id="content" className="content">
         <div className='home-top-border'></div>
         <TopMenu />
@@ -83,7 +83,7 @@ const App = (props) => {
                 <a href='#'>{t('links.cookie_settings')}</a>
                 <a href='#'>{t('links.terms_and_conditions')}</a>
                 <a href='#'>{t('links.contact')}</a>
-                <Link to="help">{t('links.help')}</Link>
+                <Link to="/help">{t('links.help')}</Link>
               </div>
             </div>
             <div className='footer-bottom'>
@@ -93,7 +93,7 @@ const App = (props) => {
           </div>
         </div>
       </div>
-      </BrowserRouter>
+      </Router>
     </div>
 
   );

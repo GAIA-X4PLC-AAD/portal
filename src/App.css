@@ -129,6 +129,9 @@
   text-decoration: none;
 }
 
+.top-menu-links button {
+  text-decoration: none;
+}
 .top-menu-signin {
   display: flex;
   column-gap: 2em;
@@ -145,6 +148,20 @@
   padding: 1.33em;
   text-decoration: none;
 }
+
+.top-menu-signin button {
+  border: 2px solid #000094;
+  border-radius: 4px 4px 4px 4px;
+  background-color: #fff;
+  color: #000094;
+  letter-spacing: 0.25px;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  padding: 1.33em;
+  text-decoration: none;
+  font-weight: 700;
+}
+
 
 .banner-container {
   /*
