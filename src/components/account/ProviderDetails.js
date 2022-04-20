@@ -1,7 +1,8 @@
 import React from "react";
+import { withTranslation } from "react-i18next";
 import "./ProviderAccount.css"
 
-const ProviderDetails = () => {
+const ProviderDetails = (props) => {
 
     return (
                 <div className="provider-account-details_info layout">
@@ -13,7 +14,7 @@ const ProviderDetails = () => {
                             <div className="provider-account-section1__block7 layout">
                                 <div className="provider-account-section1__block8 layout">
                                     <div className="provider-account-section1__text-body layout">
-                                        Edit account
+                                    {props.t("account.details.editAccount")}
                                     </div>
                                 </div>
                             </div>
@@ -23,11 +24,11 @@ const ProviderDetails = () => {
                     <div className="provider-account-details_info-item1">
                         <div className="provider-account-section1__flex4 layout">
                             <h2 className="provider-account-details-title1 layout">
-                                Basic data
+                                {props.t("account.details.basicData")}
                             </h2>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                    Email Address
+                                    {props.t("account.details.email")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                         <h5 className="provider-account-section1__highlights71 layout">
@@ -37,7 +38,7 @@ const ProviderDetails = () => {
                             </div>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                    Company name
+                                     {props.t("account.details.companyName")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
@@ -47,7 +48,7 @@ const ProviderDetails = () => {
                             </div>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                    Commercial register
+                                {props.t("account.details.comercialRegister")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
@@ -57,7 +58,7 @@ const ProviderDetails = () => {
                             </div>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                    Registered address
+                                     {props.t("account.details.registeredAddress")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                         <h5 className="provider-account-section1__highlights71 layout">
@@ -68,7 +69,7 @@ const ProviderDetails = () => {
                             </div>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                    Website
+                                    {props.t("account.details.website")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
@@ -78,7 +79,7 @@ const ProviderDetails = () => {
                             </div>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                        Individual  contact
+                                       {props.t("account.details.individualContact")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
@@ -92,11 +93,11 @@ const ProviderDetails = () => {
                     <div className="provider-account-details_info-item2">
                         <div className="provider-account-section1__flex5 layout">
                             <h2 className="provider-account-details-title1 layout">
-                                Details
+                                {props.t("account.details.details")}
                             </h2>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                    Certifications
+                                    {props.t("account.details.certifications")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
@@ -106,7 +107,7 @@ const ProviderDetails = () => {
                             </div>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                    Alias
+                                    {props.t("account.details.alias")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
@@ -116,7 +117,7 @@ const ProviderDetails = () => {
                             </div>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                    Local Attestation
+                                    {props.t("account.details.localAttestation")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
@@ -126,7 +127,7 @@ const ProviderDetails = () => {
                             </div>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                    Transparency register
+                                    {props.t("account.details.transparencyRegister")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
@@ -136,7 +137,7 @@ const ProviderDetails = () => {
                             </div>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                    D-U-N-S Number
+                                    {props.t("account.details.dunsNumber")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
@@ -146,7 +147,7 @@ const ProviderDetails = () => {
                             </div>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                        Legal  Entity Identifier
+                                    {props.t("account.details.legalEntityIdentifier")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
@@ -156,7 +157,7 @@ const ProviderDetails = () => {
                             </div>
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
-                                    Data Provider Officer
+                                    {props.t("account.details.dataProviderOfficer")}
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
@@ -170,4 +171,4 @@ const ProviderDetails = () => {
     );
 }
 
-export default ProviderDetails;
+export default withTranslation() (ProviderDetails);

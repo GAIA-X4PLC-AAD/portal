@@ -110,5 +110,30 @@
         "contact": "Contact",
         "help": "Help"
     },
-    "work-in-progress.message" : "Work in progress...."
+    "work-in-progress.message" : "Work in progress....",
+    "account": {
+        "myAccount": "My Account",
+        "myAccountDescription": "Here you can manage all your information",
+        "detailsTab" : "Details",
+        "logHistoryTab" : "Log History",
+        "credentialsTab" : "Credentials",
+        "details": {
+            "basicData": "Basic data",
+            "details":"Details",
+            "editAccount": "Edit account",
+            "email": "Email Address",
+            "companyName": "Company name",
+            "comercialRegister": "Comercial Regisger",
+            "registeredAddress": "Registered address",
+            "website": "Website",
+            "individualContact": "Individual contact",
+            "certifications": "Certifications",
+            "alias": "Alias",
+            "localAttestation": "Local Attestation",
+            "transparencyRegister": "Transparency register",
+            "dunsNumber": "D-U-N-S Number",
+            "legalEntityIdentifier": "Legal Entity Identifier",
+            "dataProviderOfficer": "Data Provider Officer"
+        }
+    }
 }
