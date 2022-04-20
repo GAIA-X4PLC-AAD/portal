@@ -1,5 +1,5 @@
 {
     "ARTICLE_API_URI": "http://localhost:8181",
     "ONBOARDING_API_URI": "http://localhost:8180",
-    "WIREMOCK_API_URI": "http://localhost:8082"
+    "WIREMOCK_API_URI": "http://localhost:8080"
 }
