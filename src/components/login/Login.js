@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import {useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {compose} from 'redux';
 import "./Login.css";
@@ -7,6 +8,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import LoginFail from "./LoginFail";
 import AuthPolling from "../AuthPolling";
+import axios from "axios";
+import configData from "../../config/config.json";
 
 export const  withNavigation = (Component) => {
   return props => <Component {...props} navigate={useNavigate()} />;
@@ -18,13 +21,21 @@ class Login extends Component  {
     super(props);
     this.state = {
       showLoginFail:false,
-      loginFailMessage: null
+      loginFailMessage: null,
+      imgLink: null,
+      walletLink: null
     }
  
   }
 
+  
   componentDidMount () {
     this.props.signInMenuEnter();
+    axios.get(configData.ONBOARDING_API_URI+`/register/user/did_register`)
+    .then((body) => {
+        let qrCodePath = body.data.qrCodePath;
+        this.setState({imgLink: qrCodePath, walletLink: body.data.walletLink});
+    })
   }
 
     onAuthZSuccess = () => {
@@ -56,12 +67,14 @@ class Login extends Component  {
       });
         
         // url to be redirected
-        window.location.href = "wallet://oeuoweruowre";
+        window.location.href = this.state.walletLink;;
     }
 
+  
   componentWillUnmount () {
     this.props.signInMenuQuit();
   }
+
 
   render(){
     return (  
@@ -82,12 +95,12 @@ class Login extends Component  {
                 {this.props.t("login.scanMessage")}
               </h2>
               <div className="login-block8 layout">
-                <iframe width="241px" height="243px">
-  
-                </iframe>
-                <button className="login-button layout" onClick={this.onWidgetInstalledCheck}>
-                  <h4 className="login-text layout">{this.props.t("login.loginButton")}</h4>
-                </button>            
+                <div width="241px" height="243px">
+                  <img src={this.state.imgLink} width="150px" height="150px" alt="Loading..."/>
+                </div>
+                <div className="login-button layout">
+                  <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t("login.loginButton")}</a>
+                  </div>            
               </div>
               <div className="login-block10 layout">
                 <Link to="/help"><h4 className="login-highlights5 layout">{this.props.t("login.faq")}</h4></Link>

@@ -12,6 +12,7 @@ import RegisterViaDID from './components/RegisterViaDID';
 import RegisterViaDIDIdP from './components/RegisterViaDIDIdP';
 import RegisterConfirmation from './components/RegisterConfirmation';
 import LoginFail from './components/login/LoginFail';
+import RegisterUserViaDid from './components/RegisterUserViaDid';
 import Login from './components/login/Login';
 import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
@@ -19,7 +20,6 @@ import RegisterDisplayVC from './components/RegisterDisplayVC';
 import RegisterComplianceCheck from './components/RegisterComplianceCheck';
 import { createBrowserHistory } from "history";
 import Provider from './components/account/Provider';
-
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
@@ -58,6 +58,7 @@ const App = (props) => {
             <Route path="/help" element={<WorkInProgress component="Help"/>} />
             <Route path="/register" element={<Register/>} />
             <Route path="/register/user" element={<RegisterUser/>}/>
+            <Route path="/register/user/viadid" element={<RegisterUserViaDid/>}/>
             <Route path="/register/organization" element={<RegisterOrganization/>}/>
             <Route path="/confirmation/:type/:key" element={<RegisterConfirmation/>}/>
             <Route path="/register/email" element={<RegisterMailSent/>}/>

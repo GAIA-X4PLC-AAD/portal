@@ -1,22 +1,16 @@
 import React, {useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import Modal from "../Modal";
-import VerticalSteps from "./VerticalSteps";
-import AuthPolling from "./AuthPolling";
 import axios from "axios";
+import Modal from "../Modal";
+import "./Register.css";
+import VerticalSteps from "./VerticalSteps";
 import configData from "../config/config.json";
-import LoginFail from "./login/LoginFail";
+import AuthPolling from "./AuthPolling";
 
-const RegisterViaDID = (props) => {
-
-    const navigate = useNavigate();
+const RegisterUserViaDid = (props) => {
 
     const [img, setImg] = useState({});
 
-    const [showLoginFail, setShowLoginFail] = useState(false);
-
-    
     useEffect(  () => {
         axios.get(configData.ONBOARDING_API_URI+`/register/user/did_register`)
         .then((body) => {
@@ -25,44 +19,50 @@ const RegisterViaDID = (props) => {
         })
     },[img]);
 
+    const onContinue = () => {
+        alert("Under construction.");
+    }
+
+    const noDid = () => {
+        alert("Under construction.");
+    }
 
     const onAuthZSuccess = () => {
-        // alert('onAuthZSuccess');
-        navigate("/register/displayVC");
+        alert('onAuthZSuccess');
     }
          
     const onAuthZFailed = () => {
-        // alert('onAuthZFailed');
-        // navigate("/loginfail");
-        setShowLoginFail(true);
+        alert('onAuthZFailed');
     }
       
     const onAuthZWait = () => {
         console.log('onAuthZWait');
     }
-    
-    const registerViaDID = () => {
+
+    const formUserViaDid = () => {
         return (
         <div className="RegisterUser">
             <div className="registerHelpText">
                 <h3>{props.t("form.formUserHeadline")}</h3>
-                <p>{props.t(`form.formOrganizationProofOfOnboarding`)}</p>
+                <p>{props.t("form.formUserDidRegHelp")}</p>
             </div>
-            <VerticalSteps current="2" numSteps="4"/>
+            <VerticalSteps current="2" numSteps="3"/>
             <div className="registerInputs">
-                <p> {props.t("form.formOrganizationPleaseVerifyYourself")}</p>
-                <div className="registerViaQrCode">
+                <p> {props.t("form.formUserDidReg")}</p>
+                <form className="registerFormUser" noValidate>
+                    <div className="registerViaQrCode">
                         <AuthPolling
                             onAuthZFailed={onAuthZFailed}
                             onAuthZSuccess={onAuthZSuccess}
                             onAuthZWait={onAuthZWait}
                         />
-                        <LoginFail showAlertMessage={showLoginFail} message={props.t("form.formOrganizationNoProcuraError")}/>
                         <img src={img} width="150px" height="150px" alt="Loading..."/>
                     </div>
-                <div className="formButtons">
-                    <button onClick={() => navigate("/register/IdP")}>{props.t("form.regViaDIDNoDID")}</button>
-                 </div>
+                    <div className="formButtons">
+                        <button disabled type="submit"><a href="http://localhost:3000/register/displayVC?mock=user">{props.t("form.continue")}</a></button>
+                        <button disabled onClick={noDid}>{props.t("form.noDid")}</button>
+                    </div>
+                </form>
             </div>
         </div>
         )
@@ -70,11 +70,9 @@ const RegisterViaDID = (props) => {
 
     return (
         <Modal>
-            {registerViaDID()}
+            {formUserViaDid()}
         </Modal>
-    
     );
-
 }
 
-export default withTranslation()(RegisterViaDID);
+export default withTranslation()(RegisterUserViaDid);
