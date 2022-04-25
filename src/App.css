@@ -275,3 +275,17 @@
   margin-block-end: 1.67em;
   margin: auto
 }
+
+.tab-menu {
+  display: flex;
+  justify-content: space-between;
+  margin: 5% 5%;
+  width: 100%;
+}
+
+.tab-menu-active {
+  color: red;
+}
+
+.tab-pane {
+}

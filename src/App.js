@@ -14,6 +14,7 @@ import RegisterConfirmation from './components/RegisterConfirmation';
 import LoginFail from './components/login/LoginFail';
 import RegisterUserViaDid from './components/RegisterUserViaDid';
 import Login from './components/login/Login';
+import AccountHome from './components/account/AccountHome';
 import { useTranslation } from 'react-i18next';
 import {connect} from 'react-redux';
 import RegisterDisplayVC from './components/RegisterDisplayVC';
@@ -67,6 +68,7 @@ const App = (props) => {
             <Route path="/register/compliance" element={<RegisterComplianceCheck/>}/>
             <Route path="/signin" element={<Login/>} />
             <Route path="/loginfail" element={<LoginFail />} />
+            <Route path="/account/home" element={<AccountHome />}/>
           </Routes>
           </div>
           <div className='footer-container'>
