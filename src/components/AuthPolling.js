@@ -16,7 +16,7 @@ class AuthPolling extends Component {
 
     async fetchData() {
         this.setState({ isLoading: true });
-        const response = await fetch('http://localhost:8180/api/authstatus');
+        const response = await fetch('http://localhost:8080/api/authstatus');
         const data = await response.json();
 
         switch (data) {
