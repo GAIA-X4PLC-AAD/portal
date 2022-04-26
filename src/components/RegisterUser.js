@@ -46,10 +46,11 @@ const RegisterUser = (props) => {
         if (form.reportValidity()) {
             /* place custom validation on submit */
             console.log("request: " + JSON.stringify(input));
-            const output = await axios.post(configData.ONBOARDING_API_URI+'/register/user', input);
+            const output = await axios.post(configData.EDGE_API_URI + '/register/user', input);
             switch (output.status) {
 		        case 204:
-                case 200: navigate("/register/email?formType=user");
+                case 200: 
+                    navigate("/register/email?formType=user");
                 break;
                 default:
                     alert(`Error with status ${output.status} and message: ${output.statusText}`);
