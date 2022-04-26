@@ -3,6 +3,7 @@ import { withTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import "./ProviderAccount.css"
 import ProviderDetails from "./ProviderDetails";
+import ProviderEdit from "./ProviderEdit";
 
 const Provider = (props) => {
     const {tab} = useParams();
@@ -14,8 +15,6 @@ const Provider = (props) => {
         );
     }
     const showComponent = () => {
-        console.log(props);
-        console.log(tab);
         switch (tab) {
             case "details": 
                 return (<ProviderDetails/>);
@@ -23,6 +22,8 @@ const Provider = (props) => {
                 return null;
             case "history":
                 return null;
+            case "edit":
+                return (<ProviderEdit/>);
             default:
                 return (<ProviderDetails/>);
         }
@@ -44,6 +45,7 @@ const Provider = (props) => {
                         {props.t("account.detailsTab")}
                     </Link>
                     {showDetailsSelected("details")}
+                    {showDetailsSelected("edit")}
                     </h4>
                     <div className="provider-account-details_tab-spacer"></div>
 

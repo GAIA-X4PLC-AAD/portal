@@ -137,6 +137,14 @@
             "dunsNumber": "D-U-N-S Number",
             "legalEntityIdentifier": "Legal Entity Identifier",
             "dataProviderOfficer": "Data Provider Officer"
+        },
+        "edit": {
+            "uploadMessage": "Please upload your new self description.",
+            "upload": "Upload",
+            "removeAccount": "Remove account",
+            "cancel": "Cancel",
+            "save": "Save"
+            
         }
     }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import "./ProviderAccount.css"
 
 const ProviderDetails = (props) => {
@@ -14,7 +15,9 @@ const ProviderDetails = (props) => {
                             <div className="provider-account-section1__block7 layout">
                                 <div className="provider-account-section1__block8 layout">
                                     <div className="provider-account-section1__text-body layout">
-                                    {props.t("account.details.editAccount")}
+                                    <Link to="/account/provider/edit">
+                                        {props.t("account.details.editAccount")}
+                                    </Link>
                                     </div>
                                 </div>
                             </div>
