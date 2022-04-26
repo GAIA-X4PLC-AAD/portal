@@ -18,7 +18,7 @@ const RegisterViaDID = (props) => {
 
     
     useEffect(  () => {
-        axios.get(configData.ONBOARDING_API_URI+`/register/user/did_register`)
+        axios.get("http://gaia-x.portal.local:3000"+`/register/user/did_register`) // RFCT: portal uri is at gaia-x.portal.local:8085 but frontend differs
         .then((body) => {
             let qrCodePath = body.data.qrCodePath;
             setImg(qrCodePath);
