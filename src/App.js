@@ -20,6 +20,7 @@ import {connect} from 'react-redux';
 import RegisterDisplayVC from './components/RegisterDisplayVC';
 import RegisterComplianceCheck from './components/RegisterComplianceCheck';
 import { createBrowserHistory } from "history";
+import Provider from './components/account/Provider';
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
@@ -69,6 +70,7 @@ const App = (props) => {
             <Route path="/signin" element={<Login/>} />
             <Route path="/loginfail" element={<LoginFail />} />
             <Route path="/account/:tab" element={<AccountHome />}/>
+            <Route path="/account/provider/:tab" element={<Provider/>}/>
           </Routes>
           </div>
           <div className='footer-container'>

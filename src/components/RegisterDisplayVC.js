@@ -12,14 +12,12 @@ const RegisterDisplayVC = (props) => {
     const [vrVC,setVRVC] = useState([]);
     const queryParams = useLocation().search;
     const mock = new URLSearchParams(queryParams).get("mock")
-    console.log(queryParams)
-    console.log(mock)
 
     const getVRVC = () => {
-        axios.get(configData.WIREMOCK_API_URI + '/auth/identity/mock_did' + mock).
+        axios.get("http://gaia-x.portal.local:8081" + configData.uri_path.mock_vc_user). // RFCT: use edge-service
             then(
                 (response) => {
-                    setVRVC(response.data.DID);
+                    setVRVC(response.data);
             },(error)=> {
                 alert(`Error with status ${error.response.status} and message:\n ${error.response.data}`);
         });

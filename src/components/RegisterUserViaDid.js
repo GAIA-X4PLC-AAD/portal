@@ -39,7 +39,7 @@ const RegisterUserViaDid = (props) => {
         console.log('onAuthZWait');
     }
 
-    const formUserViaDid = () => {
+    const formUserViaDid = () => { // RFCT submit button to use navigate and new uri
         return (
         <div className="RegisterUser">
             <div className="registerHelpText">
@@ -59,7 +59,7 @@ const RegisterUserViaDid = (props) => {
                         <img src={img} width="150px" height="150px" alt="Loading..."/>
                     </div>
                     <div className="formButtons">
-                        <button disabled type="submit"><a href="http://localhost:3000/register/displayVC?mock=user">{props.t("form.continue")}</a></button>
+                        <button disabled type="submit"><a href={"http://gaia-x.portal.local:3000/register/displayVC?mock=user"}>{props.t("form.continue")}</a></button>
                         <button disabled onClick={noDid}>{props.t("form.noDid")}</button>
                     </div>
                 </form>

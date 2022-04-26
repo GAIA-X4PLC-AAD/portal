@@ -1,0 +1,40 @@
+.upload-completed-flex-col {
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  width: 100%;
+}
+
+.upload-completed-header {
+  border-bottom: 1px solid #737373;
+  width: 100%;
+  padding-bottom: 1em;
+  font: 24px/1.5 "Titillium Web", Helvetica, Arial, serif;
+  color: #1c0e15;
+  letter-spacing: 0.25px;
+  /*
+  box-shadow: 0px 5px 10px 0px rgba(29, 36, 48, 0.15);
+  */
+}
+
+.upload-completed-content {
+  font: 18px/1.33 "Titillium Web", Helvetica, Arial, serif;
+  color: #4b4b4b;
+  letter-spacing: 0.25px;
+  margin: 2em 0
+}
+
+.gaiax-button {
+  border: 2px solid #000094;
+  border-radius: 4px 4px 4px 4px;
+  font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
+  letter-spacing: 0.25px;
+  color: #000094;
+  background-color: #fff;
+  padding: 0.3em 2em;
+  cursor: pointer;
+}
+
+.gaiax-button.layout {
+  cursor: pointer;
+}
