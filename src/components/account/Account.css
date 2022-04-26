@@ -1,0 +1,48 @@
+.provider-account-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.provider-account-details_tab {
+    display: flex;
+}
+
+.provider-account-section1__image13 {
+    width: 100%;
+    height: 100%;
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0.25px;
+    color: #1C0E15;
+}
+
+.provider-account-section1__highlights4 {
+    font: 18px/1.33 "Titillium Web", Helvetica, Arial, serif;
+    color: #4b4b4b;
+    letter-spacing: 0.25px;
+}
+
+.provider-account-section1__highlights5 {
+    font: 18px/1.33 "Titillium Web", Helvetica, Arial, serif;
+    color: #2a2a2a;
+    letter-spacing: 0.25px;
+    padding: 0 0.2em;
+}
+
+.provider-account-details_tab_hr {
+    border: 3px solid #000094;
+    margin: 0 0 0 0;
+}  
+
+.provider-account-section1__highlights5  a{
+    text-decoration: none;
+    color: #2a2a2a;
+}
+
+.provider-account-section1__line2 {
+    background-color: #e9e9e9;
+}  
+/* line 114 */

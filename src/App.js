@@ -1,7 +1,7 @@
 import './App.css';
 import TopMenu from './TopMenu';
 import WorkInProgress from './WorkInProgress';
-import { Link, BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import { Link, BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom';
 import Home from './Home';
 import Search from "./Search";
 import Register from './components/Register';
@@ -68,7 +68,7 @@ const App = (props) => {
             <Route path="/register/compliance" element={<RegisterComplianceCheck/>}/>
             <Route path="/signin" element={<Login/>} />
             <Route path="/loginfail" element={<LoginFail />} />
-            <Route path="/account/home" element={<AccountHome />}/>
+            <Route path="/account/:tab" element={<AccountHome />}/>
           </Routes>
           </div>
           <div className='footer-container'>
