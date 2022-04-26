@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import "./ProviderAccount.css"
+import axios from "axios";
+import "./ProviderAccount.css";
+import configData from "../../config/config.json";
 
 const ProviderDetails = (props) => {
+
+    const [provider, setProvider] = useState(null);
+    
+    useEffect (()=>{
+        axios.get(configData.EDGE_API_URI + '/account/provider').then(   (response) => {
+            //axios.get("ttp://localhost:8080/")
+            console.log(response.data);
+            setProvider(response.data);
+    },(error)=> {
+          alert('ko');
+    });
+    
+
+    },[]);
+
+    const showPersonalInformation = (person) => {
+        return `${person?.name} ${person?.surname}`;
+    }
+
+    const showAddress = (address) => {
+        return `${address?.street} ${address?.no} , (${address?.postalCode}) ${address?.city}  ${address?.country}  `;
+    }
 
     return (
                 <div className="provider-account-details_info layout">
                     <div className="provider-account-details_info-item">
                         <div className="provider-account-section1__flex3 layout">
                             <div className="provider-account-section1__image14 layout">
-                                Image goes here
+                                <img src={provider?.avatarImageLink} alt="User avatar image."/>
                             </div>
                             <div className="provider-account-section1__block7 layout">
                                 <div className="provider-account-section1__block8 layout">
@@ -35,7 +59,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                         <h5 className="provider-account-section1__highlights71 layout">
-                                            Email Address
+                                            {provider?.email}
                                         </h5>
                                 </div>
                             </div>
@@ -45,7 +69,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        Company name
+                                        {provider?.companyName}
                                     </h5>
                                 </div>
                             </div>
@@ -55,7 +79,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        Commercial register
+                                        {provider?.comercialRegister}
                                     </h5>
                                 </div>
                             </div>
@@ -65,8 +89,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                         <h5 className="provider-account-section1__highlights71 layout">
-
-                                            Registered address
+                                            {showAddress(provider?.registeredAddress)}
                                         </h5>
                                     </div>
                             </div>
@@ -76,7 +99,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        Website
+                                        {provider?.webAddress}
                                     </h5>
                                 </div>
                             </div>
@@ -86,7 +109,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        Individual contact
+                                        {showPersonalInformation(provider?.individualContact)}
                                     </h5>
                                 </div>
                             </div>
@@ -104,7 +127,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        Certifications
+                                        {provider?.certification}
                                     </h5>
                                 </div>
                             </div>
@@ -114,7 +137,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        Alias
+                                        {provider?.alias}
                                     </h5>
                                 </div>
                             </div>
@@ -124,7 +147,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        Local Attestation
+                                      {provider?.localAttestation}
                                     </h5>
                                 </div>
                             </div>
@@ -134,7 +157,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        Transparency register
+                                        {provider?.transparencyRegister}
                                     </h5>
                                 </div>
                             </div>
@@ -144,7 +167,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        D-U-N-S Number
+                                    {provider?.dunsNumber}
                                     </h5>
                                 </div>
                             </div>
@@ -154,7 +177,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        Legal Entoty Identifier
+                                        {provider?.legalEntityIdentifier}
                                     </h5>
                                 </div>
                             </div>
@@ -164,7 +187,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        Data Provider Officer
+                                        {showPersonalInformation(provider?.dataProviderOfficer)}
                                     </h5>
                                 </div>
                             </div>

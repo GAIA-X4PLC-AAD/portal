@@ -4,11 +4,13 @@ import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import configData from "../../config/config.json";
 import "./ProviderAccount.css";
+import UploadCompleted from "./uploadCompleted";
 
 
 const ProviderEdit = (props) => {
 
   const [file,setFile] = useState(null);
+  const [showLoadCompleted, setShowLoadCompleted] = useState(false);
 
     const fileRef = useRef();
 
@@ -28,7 +30,7 @@ const ProviderEdit = (props) => {
           'Content-Type': 'multipart/form-data'
         }
     }).then(   (response) => {
-      alert('ok');
+      setShowLoadCompleted(true);
 },(error)=> {
       alert('ko');
 });
@@ -49,6 +51,7 @@ const ProviderEdit = (props) => {
               </div>
             </div>
           </div>
+          <UploadCompleted showAlertMessage={showLoadCompleted} message={props.t("account.edit.uploadCompletedMessage")}/>
           <div className="provider-account-edit__flex2 layout">
             <h4 className="provider-account-edit__highlights9 layout">
               {props.t("account.edit.removeAccount")}          
