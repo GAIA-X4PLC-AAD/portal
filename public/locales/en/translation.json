@@ -125,6 +125,8 @@
             "details":"Details",
             "editAccount": "Edit account",
             "email": "Email Address",
+            "firstName": "First Name",
+            "lastName": "Last Name",
             "companyName": "Company name",
             "comercialRegister": "Comercial Regisger",
             "registeredAddress": "Registered address",
@@ -136,7 +138,8 @@
             "transparencyRegister": "Transparency register",
             "dunsNumber": "D-U-N-S Number",
             "legalEntityIdentifier": "Legal Entity Identifier",
-            "dataProviderOfficer": "Data Provider Officer"
+            "dataProviderOfficer": "Data Provider Officer",
+            "attributeOfVC": "Attribute of VC"
         },
         "edit": {
             "uploadMessage": "Please upload your new self description.",
