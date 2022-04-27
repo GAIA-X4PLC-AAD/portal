@@ -150,6 +150,11 @@
             "uploadCompleted": "Upload completed",
             "uploadCompletedMessage": "Your self.description file will be verified by the AISLB. You will get a notification when it is approved."
             
+        },
+        "loginHistory": {
+            "date": "Date",
+            "time": "Time",
+            "name": "Name"
         }
     }
 }

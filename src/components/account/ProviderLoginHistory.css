@@ -1,0 +1,48 @@
+.provider-history-container {
+    margin-top: 64px;        
+    width: 400px;
+    align-content: center;
+    align-self: center;
+}
+
+.provider-history-table {
+        border-collapse: collapse;
+        width: 100%;    
+}
+      
+.provider-history-row {
+        border-bottom: 1px solid black;
+}
+
+.provider-history-head {
+    font-family: 'TeleNeo';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    /* identical to box height, or 133% */
+    
+    letter-spacing: 0.4px;
+    
+    /* greyscale/dark */
+    
+    color: #4B4B4B;
+
+}
+
+.provider-history-cell {
+    /* Body Small */
+
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+/* identical to box height, or 133% */
+
+    letter-spacing: 0.25px;
+
+/* greyscale/darker */
+
+    color: #1C0E15;
+}

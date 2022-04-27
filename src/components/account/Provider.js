@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import "./ProviderAccount.css"
 import ProviderDetails from "./ProviderDetails";
 import ProviderEdit from "./ProviderEdit";
+import ProviderLoginHistory from "./ProviderLoginHistory";
 
 const Provider = (props) => {
     const {tab} = useParams();
@@ -21,7 +22,7 @@ const Provider = (props) => {
             case "credentials": 
                 return null;
             case "history":
-                return null;
+                return <ProviderLoginHistory/>;
             case "edit":
                 return (<ProviderEdit/>);
             default:

@@ -11,8 +11,6 @@ const ProviderDetails = (props) => {
     
     useEffect (()=>{
         axios.get(configData.EDGE_API_URI + '/account/provider').then(   (response) => {
-            //axios.get("ttp://localhost:8080/")
-            console.log(response.data);
             setProvider(response.data);
     },(error)=> {
           alert('ko');
