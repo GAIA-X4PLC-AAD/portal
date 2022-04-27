@@ -39,9 +39,9 @@ const ProviderLoginHistory = (props) => {
             <table className="provider-history-table">
                 <thead >
                     <tr className="provider-history-row">
-                        <th className="provider-history-head">Date</th>
-                        <th className="provider-history-head">Time</th>
-                        <th className="provider-history-head">Name</th>
+                        <th className="provider-history-head">{props.t("account.loginHistory.date")}</th>
+                        <th className="provider-history-head">{props.t("account.loginHistory.time")}</th>
+                        <th className="provider-history-head">{props.t("account.loginHistory.name")}</th>
                     </tr>
                 </thead>
                 <tbody>
