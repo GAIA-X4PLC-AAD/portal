@@ -10,13 +10,14 @@ class AuthPolling extends Component {
             onAuthZSuccess: props.onAuthZSuccess,
             onAuthZFailed: props.onAuthZFailed,
             onAuthZWait: props.onAuthZWait,
-            timerId: null
+            timerId: null,
         }
+        this.statusURL = props.statusURL
     }
 
     async fetchData() {
         this.setState({ isLoading: true });
-        const response = await fetch('http://localhost:8080/api/authstatus');
+        const response = await fetch(this.statusURL);
         const data = await response.json();
 
         switch (data) {

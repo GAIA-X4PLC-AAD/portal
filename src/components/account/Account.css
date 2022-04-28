@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+.account-pane-loginhistory {
+    margin: auto;
+}
+
 .provider-account-details_tab {
     display: flex;
 }
@@ -84,7 +88,7 @@
     color: #1c0e15;
     letter-spacing: 0.25px;
     text-align: left;
-    padding: 0 1em 0 1em;
+    padding: 0.4em 1em 0.4em 1em;
 
     background-color: white;
     border: 1px solid #e8e8e8;
@@ -94,4 +98,28 @@
 .account-pane-flex {
     display: flex;
     justify-content: space-between;
+}
+      
+.account-pane-history-row {
+    border-bottom: 1px solid black;
+}
+
+.account-pane-history-head {
+  font-family: 'TeleNeo';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+  color: #4B4B4B;
+}
+
+.account-pane-history-cell {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: #1C0E15;
 }
