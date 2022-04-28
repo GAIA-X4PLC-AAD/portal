@@ -25,7 +25,7 @@ const RegisterOrganization = (props) => {
     }
 
     const onRegisterDID = () => {
-        axios.post(configData.WIREMOCK_API_URI + '/auth/identity/login', input).
+        axios.get(configData.EDGE_API_URI + configData.uri_path.auth_status_path).
         then(
             (response) => {
                 navigate("/register/did");
