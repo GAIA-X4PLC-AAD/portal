@@ -1,24 +1,31 @@
 import React from "react";
-import { withTranslation} from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import { signOut } from "./actions";
-import {connect} from 'react-redux';
-import {compose} from 'redux';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 const userSignedIn = false;
+
+function UserInfoButton(name) {
+  return <div>
+    <button>{name}</button>
+  </div>;
+}
+
 class TopMenu extends React.Component {
 
   showUserDetails() {
     return (
       <React.Fragment>
-        <button>{'User'}</button>
+        { UserInfoButton('AB') }
         <button onClick={this.props.signOut}>{this.props.t('top-menu.signout')}</button>
 
       </React.Fragment>
     );
   };
 
-   showRegisterSignin()  {
+  showRegisterSignin() {
 
     return (
       <React.Fragment>
@@ -34,13 +41,13 @@ class TopMenu extends React.Component {
     return this.showRegisterSignin();
   }
 
-    render () {
-        return (
-    <div className='top-menu-container'>
+  render() {
+    return (
+      <div className='top-menu-container'>
         <div className='top-menu'>
           <div className='top-menu-logo'>
             <Link to="/">
-              <img src="images/logo.svg" alt={this.props.t('left-menu.logo-alt-text')} height='60px'/>
+              <img src="images/logo.svg" alt={this.props.t('left-menu.logo-alt-text')} height='60px' />
             </Link>
           </div>
           <div className='top-menu-links'>
@@ -50,16 +57,16 @@ class TopMenu extends React.Component {
           </div>
           <div className='top-menu-signin'>
             {this.showSignInMenu()}
-        </div>
+          </div>
 
         </div>
-    </div>
-        );
-    }
+      </div>
+    );
+  }
 
 }
 const mapStateToProps = state => {
-  return {isInSignInMenu: state.signin.isInSignInMenu, isUserSignedIn: state.user.isUserSignedIn };
+  return { isInSignInMenu: state.signin.isInSignInMenu, isUserSignedIn: state.user.isUserSignedIn };
 };
 
-export default compose (withTranslation(),  connect( mapStateToProps,{signOut})) (TopMenu);
+export default compose(withTranslation(), connect(mapStateToProps, { signOut }))(TopMenu);
