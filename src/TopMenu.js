@@ -5,20 +5,69 @@ import { signOut } from "./actions";
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-const userSignedIn = false;
+import { useSelector, useDispatch } from 'react-redux'
+import { useTranslation } from 'react-i18next';
 
-function UserInfoButton(name) {
-  return <div>
-    <button>{name}</button>
-  </div>;
+
+const UserInfoButton = ({ name }) => <button>{name}</button>;
+function SignOutButton() {
+  const { t, i18n } = useTranslation();
+  const dispatch = useDispatch()
+  // const _signOut = useSelector((signOut) => signOut)
+
+  // console.log(`_signOut: ${_signOut}`)
+
+  return <button onClick={ () => {
+    console.log(`signOut, ${signOut}`)
+    let _signOut = {
+      type: 'SIGN_OUT'
+  };
+
+    // dispatch(_signOut)
+  } }>{t('top-menu.signout')}</button>
 }
+
+function LoggedInUserButtons() {
+  return <>
+    <UserInfoButton name='AB' />
+    <SignOutButton />
+  </>
+}
+
+function SignInButton() {
+  const { t, i18n } = useTranslation();
+  return <Link to="/signin">{t('top-menu.signin')}</Link>;
+}
+
+function RegisterButton() {
+  const { t, i18n } = useTranslation();
+  return <Link to="/register">{t('top-menu.register')}</Link>;
+}
+
+function LoggedOutUserButtons() {
+  return <>
+    <RegisterButton />
+    <SignInButton />
+  </>
+}
+
+
+function TopBarButtons() {
+  const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
+  const isInSignInMenu = useSelector((state) => state.user.isInSignInMenu)
+
+  return (<>
+    {isUserSignedIn ? LoggedInUserButtons() : LoggedOutUserButtons()}
+  </>)
+}
+
 
 class TopMenu extends React.Component {
 
   showUserDetails() {
     return (
       <React.Fragment>
-        { UserInfoButton('AB') }
+        {/* { SignInButton('AB') } */}
         <button onClick={this.props.signOut}>{this.props.t('top-menu.signout')}</button>
 
       </React.Fragment>
@@ -56,7 +105,8 @@ class TopMenu extends React.Component {
             <Link to="/provider"> {this.props.t('left-menu.provider')}</Link>
           </div>
           <div className='top-menu-signin'>
-            {this.showSignInMenu()}
+            {/* {this.showSignInMenu()} */}
+            <TopBarButtons />
           </div>
 
         </div>
