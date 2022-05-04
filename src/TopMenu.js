@@ -1,47 +1,66 @@
 import React from "react";
-import { withTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
-import { signOut } from "./actions";
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { signOut, signIn } from "./actions";
+
+import { useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next';
 
+//
+// each function component is independent, isolated and testable.
+// state is managed inside the component itself
+//
 
-const UserInfoButton = ({ name }) => <button>{name}</button>;
+// USER INFO
+function UserInfoButton() {
+  const _userName = useSelector((state) => state.user.name)
+
+  return <button onClick={() => {}}>{_userName ?? 'AB'}</button>
+};
+
+// SIGNOUT
 function SignOutButton() {
-  const { t, i18n } = useTranslation();
+  const { t, } = useTranslation();
   const dispatch = useDispatch()
-  // const _signOut = useSelector((signOut) => signOut)
+  const navigate = useNavigate();
 
-  // console.log(`_signOut: ${_signOut}`)
-
-  return <button onClick={ () => {
-    console.log(`signOut, ${signOut}`)
-    let _signOut = {
-      type: 'SIGN_OUT'
-  };
-
-    // dispatch(_signOut)
-  } }>{t('top-menu.signout')}</button>
+  return <button onClick={() => {
+    dispatch(signOut())
+    navigate('/')
+  }}>{t('top-menu.signout')}</button>
 }
 
 function LoggedInUserButtons() {
+
   return <>
-    <UserInfoButton name='AB' />
+    <UserInfoButton />
     <SignOutButton />
   </>
 }
 
+// SIGNIN
 function SignInButton() {
-  const { t, i18n } = useTranslation();
-  return <Link to="/signin">{t('top-menu.signin')}</Link>;
+  const navigate = useNavigate();
+  const { t, } = useTranslation();
+  const dispatch = useDispatch()
+
+  return <button onClick={() => {
+    dispatch(signIn())
+    navigate('/signin')
+  }}>{t('top-menu.signin')}</button>
 }
 
+// REGISTER
 function RegisterButton() {
-  const { t, i18n } = useTranslation();
-  return <Link to="/register">{t('top-menu.register')}</Link>;
+  const navigate = useNavigate();
+  const { t, } = useTranslation();
+  const dispatch = useDispatch()
+
+  return <button onClick={() => {
+    dispatch(signIn())
+    navigate('/register')
+  }}>{t('top-menu.register')}</button>
 }
 
 function LoggedOutUserButtons() {
@@ -54,7 +73,6 @@ function LoggedOutUserButtons() {
 
 function TopBarButtons() {
   const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
-  const isInSignInMenu = useSelector((state) => state.user.isInSignInMenu)
 
   return (<>
     {isUserSignedIn ? LoggedInUserButtons() : LoggedOutUserButtons()}
@@ -62,61 +80,29 @@ function TopBarButtons() {
 }
 
 
-class TopMenu extends React.Component {
+function TopMenu() {
+  const { t, } = useTranslation();
 
-  showUserDetails() {
-    return (
-      <React.Fragment>
-        {/* { SignInButton('AB') } */}
-        <button onClick={this.props.signOut}>{this.props.t('top-menu.signout')}</button>
-
-      </React.Fragment>
-    );
-  };
-
-  showRegisterSignin() {
-
-    return (
-      <React.Fragment>
-        <Link to="/register"> {this.props.t('top-menu.register')}</Link>
-        <Link to="/signin"> {this.props.t('top-menu.signin')}</Link>
-      </React.Fragment>
-    );
-  };
-
-  showSignInMenu() {
-    if (this.props.isUserSignedIn) return this.showUserDetails();
-    if (this.props.isInSignInMenu) return null;
-    return this.showRegisterSignin();
-  }
-
-  render() {
-    return (
-      <div className='top-menu-container'>
-        <div className='top-menu'>
-          <div className='top-menu-logo'>
-            <Link to="/">
-              <img src="images/logo.svg" alt={this.props.t('left-menu.logo-alt-text')} height='60px' />
-            </Link>
-          </div>
-          <div className='top-menu-links'>
-            <Link to="/services"> {this.props.t('left-menu.services')}</Link>
-            <Link to="/data"> {this.props.t('left-menu.data')}</Link>
-            <Link to="/provider"> {this.props.t('left-menu.provider')}</Link>
-          </div>
-          <div className='top-menu-signin'>
-            {/* {this.showSignInMenu()} */}
-            <TopBarButtons />
-          </div>
-
+  return (
+    <div className='top-menu-container'>
+      <div className='top-menu'>
+        <div className='top-menu-logo'>
+          <Link to="/">
+            <img src="images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />
+          </Link>
+        </div>
+        <div className='top-menu-links'>
+          <Link to="/services"> {t('left-menu.services')}</Link>
+          <Link to="/data"> {t('left-menu.data')}</Link>
+          <Link to="/provider"> {t('left-menu.provider')}</Link>
+        </div>
+        <div className='top-menu-signin'>
+          <TopBarButtons />
         </div>
       </div>
-    );
-  }
+    </div>
+  )
 
 }
-const mapStateToProps = state => {
-  return { isInSignInMenu: state.signin.isInSignInMenu, isUserSignedIn: state.user.isUserSignedIn };
-};
 
-export default compose(withTranslation(), connect(mapStateToProps, { signOut }))(TopMenu);
+export default TopMenu
