@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { withTranslation } from 'react-i18next';
 import Modal from '../../Modal';
 import './ActionCancelModal.css';

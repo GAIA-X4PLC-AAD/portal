@@ -3,6 +3,7 @@ import "./ProviderCredentials.css";
 import axios from "axios";
 import ActionCancelModal from "./ActionCancelModal";
 import { withTranslation } from "react-i18next";
+import config from "../../config/config.json";
 
 const ProviderCredentialsEditor = (props) => {
 
@@ -13,10 +14,11 @@ const ProviderCredentialsEditor = (props) => {
             return false;
         }
         return true;
-    }
+    };
 
     // Hard code
-    const roles = [{name:"PPR_USER"}, {name:"PPR_EDITOR"}]
+    const roles = [{name:"PPR_USER"}, {name:"PPR_EDITOR"}];
+    const providerId = 1;
 
     // used to store the intial status of the user
     const [loadUser, setLoadUser] = useState(props.loadUser);
@@ -47,7 +49,7 @@ const ProviderCredentialsEditor = (props) => {
     // Updates existing user
     const updateUser= () => {
         setReadOnly(true);
-        axios.put('http://localhost:8086/account/ppr/1/users/'+user.id, user).then(   (response) => {
+        axios.put(config.EDGE_API_URI+`/account/ppr/${providerId}/users/${user.id}`, user).then(   (response) => {
             setLoadUser(response.data);
             setUser(response.data);
             setSaving(false);
@@ -63,7 +65,7 @@ const ProviderCredentialsEditor = (props) => {
     // add new user
     const addNewUser= () => {
         setReadOnly(true);
-        axios.post('http://localhost:8086/account/ppr/1/users', user).then(   (response) => {
+        axios.post(config.EDGE_API_URI+`/account/ppr/${providerId}/users`, user).then(   (response) => {
             props.updateUser(response.data);           
         },(error)=> {
           console.log(error);
@@ -73,7 +75,7 @@ const ProviderCredentialsEditor = (props) => {
     }
     const deleteUser = () => {
         axios.delete()
-        axios.delete('http://localhost:8086/account/ppr/1/users/' + loadUser.id, {data: loadUser}).then(   (response) => {
+        axios.delete(config.EDGE_API_URI+`/account/ppr/${providerId}/users/${loadUser.id}`, {data: loadUser}).then(   (response) => {
             props.deleteUser(loadUser);
         },(error)=> {
           console.log(error);

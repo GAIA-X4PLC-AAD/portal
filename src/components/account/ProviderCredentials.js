@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./ProviderCredentials.css";
 import axios from "axios";
 import ProviderCredentialsEditor from "./ProviderCredentialsEditor";
-import { getInitialProps, withTranslation } from "react-i18next";
+import { withTranslation } from "react-i18next";
+import config from '../../config/config.json';
 
 const ProviderCredentials = (props) => {
 
@@ -10,9 +11,10 @@ const ProviderCredentials = (props) => {
     const [selectedUser, setSelectedUser] = useState (null);
     const [onAddUser, setOnAddUser] = useState(false);
 
+    const providerId=1
 
     useEffect(()=>{
-        axios.get('http://localhost:8086/account/ppr/1/users').then(   (response) => {
+        axios.get(config.EDGE_API_URI+`/account/ppr/${providerId}/users`).then(   (response) => {
             console.log(response.data);
             setUsers(response.data);
     },(error)=> {
