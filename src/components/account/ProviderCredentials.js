@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./ProviderCredentials.css";
 import axios from "axios";
 import ProviderCredentialsEditor from "./ProviderCredentialsEditor";
+import { getInitialProps, withTranslation } from "react-i18next";
 
-const ProviderCredentials = () => {
+const ProviderCredentials = (props) => {
 
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState (null);
@@ -21,6 +22,10 @@ const ProviderCredentials = () => {
     },[]);
 
 
+    const deleteUser = (user) => {
+        setUsers (users.filter(u => !(u.id === user.id)));
+        setSelectedUser(null);
+    }
     const updateUser = (user) => {
         setUsers (users.map((u) => u.id === user.id? user:u));
     }
@@ -33,7 +38,7 @@ const ProviderCredentials = () => {
     const showEdit = (user) => {
         if (selectedUser === null || user.id !== selectedUser.id) return null;
         return(
-            <ProviderCredentialsEditor loadUser={user} updateUser={updateUser}/>
+            <ProviderCredentialsEditor loadUser={user} updateUser={updateUser} deleteUser={deleteUser}/>
         );
     }
 
@@ -45,7 +50,7 @@ const ProviderCredentials = () => {
     const showAddUser = () => {
         if (onAddUser === false) {
             return (
-                <div className="credential-add-user-button" onClick={onAddUserClick}>Add user</div>   
+                <div className="credential-add-user-button" onClick={onAddUserClick}>{props.t('account.credentials.addUser')}</div>   
             );
         }
         return (
@@ -57,7 +62,7 @@ const ProviderCredentials = () => {
     const showArrow = (user) => {
         if (selectedUser === null || user.id !== selectedUser.id) {
             return (
-                <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={()=> setSelectedUser(user)}>
+                <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={()=> {setSelectedUser(user); setOnAddUser(false);}}>
                     <path fillRule="evenodd" clipRule="evenodd" d="M0.454512 0.907251C0.816397 0.53695 1.40995 0.530128 1.78025 0.892012L8 6.9704L14.2197 0.892012C14.59 0.530128 15.1836 0.53695 15.5455 0.907251C15.9074 1.27755 15.9005 1.8711 15.5302 2.23299L8.87367 8.73829C8.38794 9.21297 7.61206 9.21297 7.12633 8.73829L0.469751 2.23299C0.0994505 1.8711 0.092628 1.27755 0.454512 0.907251Z" fill="#000094"/>
                 </svg>
             );
@@ -90,8 +95,8 @@ const ProviderCredentials = () => {
     return(
         <div className="credentials-wrapping"> 
             <div className="credentials-flex-table credentials-header">
-                <div className="credentials-flex-row">Name</div>
-                <div className="credentials-flex-row">Role</div>
+                <div className="credentials-flex-row">{props.t('account.credentials.name')}</div>
+                <div className="credentials-flex-row">{props.t('account.credentials.role')}</div>
                 <div className="credentials-flex-row credential-dropdown"></div>
             </div>
 
@@ -104,4 +109,4 @@ const ProviderCredentials = () => {
     );
 }
 
-export default ProviderCredentials;
+export default withTranslation () (ProviderCredentials);

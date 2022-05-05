@@ -155,6 +155,18 @@
             "date": "Date",
             "time": "Time",
             "name": "Name"
+        },
+        "credentials": {
+            "name": "Name",
+            "role": "Role",
+            "addUser": "Add user",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "email": "Email",
+            "edit": "Edit",
+            "remove": "Remove",
+            "cancel": "Cancel",
+            "save": "Save"
         }
     }
 }
