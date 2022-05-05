@@ -14,7 +14,7 @@ const ProviderCredentials = (props) => {
     const providerId=1
 
     useEffect(()=>{
-        axios.get(config.EDGE_API_URI+`/account/ppr/${providerId}/users`).then(   (response) => {
+        axios.get(config.EDGE_API_URI+`/user-account/ppr/${providerId}/users`).then(   (response) => {
             console.log(response.data);
             setUsers(response.data);
     },(error)=> {
