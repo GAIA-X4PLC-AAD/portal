@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { signOut, signIn } from '../../actions';
 
-import { useNavigate } from 'react-router-dom';
-
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next';
+
+import * as S from './style';
 
 //
 // each function component is independent, isolated and testable.
@@ -16,55 +14,29 @@ import { useTranslation } from 'react-i18next';
 function UserInfoButton() {
   const _userName = useSelector((state) => state.user.name)
 
-  return <button onClick={() => { }}>{_userName ?? 'AB'}</button>
+  return <S.HeaderButton onClick={() => { }}>{_userName ?? 'AB'}</S.HeaderButton>
 };
 
 // SIGNOUT
 const SignOutButton = ({ onClicked }) => {
   const { t, } = useTranslation();
-
-  console.log(`onClicked, ${onClicked}`)
-  console.log(`JSON.stringify(onClicked), ${JSON.stringify(onClicked)}`)
-
-  return <button onClick={onClicked}>{t('top-menu.signout')}</button>
+  return <S.HeaderButton onClick={onClicked}>{t('top-menu.signout')}</S.HeaderButton>
 };
 
 // SIGNIN
-function SignInButton() {
-  const navigate = useNavigate();
+const SignInButton = ({ onClicked }) => {
   const { t, } = useTranslation();
-  const dispatch = useDispatch()
-
-  return <button onClick={() => {
-    dispatch(signIn())
-    navigate('/signin')
-  }}>{t('top-menu.signin')}</button>
+  return <S.HeaderButton onClick={onClicked}>{t('top-menu.signin')}</S.HeaderButton>
 }
 
 // REGISTER
-function RegisterButton() {
-  const navigate = useNavigate();
+const RegisterButton = ({ onClicked }) => {
   const { t, } = useTranslation();
-  const dispatch = useDispatch()
-
-  return <button onClick={() => {
-    dispatch(signIn())
-    navigate('/register')
-  }}>{t('top-menu.register')}</button>
+  return <S.HeaderButton onClick={onClicked}>{t('top-menu.register')}</S.HeaderButton>
 }
 
-
-
-function SignInBar() {
+const SignInBar = ({ handleSignIn,  handleSignOut, handleRegister}) => {
   const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
-  const navigate = useNavigate();
-  const { t, } = useTranslation();
-  const dispatch = useDispatch()
-
-  const handleSignOut = () => {
-    dispatch(signOut())
-    navigate('/')
-  }; 
 
   const signedInButtons =
     <>
@@ -74,16 +46,15 @@ function SignInBar() {
 
   const signedOutButtons =
     <>
-      <RegisterButton />
-      <SignInButton />
-    </>
+      <RegisterButton onClicked={handleRegister} />
+      <SignInButton onClicked={handleSignIn} />
+    </>;
 
-  return (<>
-    {isUserSignedIn ?
-      signedInButtons :
-      signedOutButtons
-    }
-  </>)
+  return (
+    <>
+      {isUserSignedIn ? signedInButtons : signedOutButtons}
+    </>
+  )
 }
 
 export default SignInBar
