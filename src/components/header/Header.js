@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import SignInBar from './SignInBar'
 
 import * as S from './style';
+import CenterBar from "./CenterBar";
 
 function Header() {
     const { t, } = useTranslation();
@@ -38,11 +39,7 @@ function Header() {
                     <img src="images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />
                 </Link>
             </S.TopMenuLogo>
-            <S.TopMenuLinks>
-                <Link to="/services"> {t('left-menu.services')}</Link>
-                <Link to="/data"> {t('left-menu.data')}</Link>
-                <Link to="/provider"> {t('left-menu.provider')}</Link>
-            </S.TopMenuLinks>
+            <CenterBar />
             <S.TopMenuSignIn>
                 <SignInBar handleSignOut={handleSignOut} handleSignIn={handleSignIn} handleRegister={handleRegister} />
             </S.TopMenuSignIn>

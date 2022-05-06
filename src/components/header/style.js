@@ -25,7 +25,7 @@ export const TopMenuLinkButton = styled.a`
 export const TopMenuSignIn= styled.a`
   display: flex;
   column-gap: 2em;
-  width: 210px;
+  width: 230px;
 `;
 
 export const HeaderButton = styled.button`

@@ -12,7 +12,7 @@ import * as S from './style';
 
 // USER INFO
 function UserInfoButton() {
-  const _userName = useSelector((state) => state.user.name)
+  const _userName = useSelector((state) => state.user.user.first_name)
 
   return <S.HeaderButton onClick={() => { }}>{_userName ?? 'AB'}</S.HeaderButton>
 };

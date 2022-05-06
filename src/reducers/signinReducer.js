@@ -12,7 +12,7 @@ export default (state=INITIAL_STATE, action) => {
         case NOT_SIGN_IN_MENU:
             return {...state, isInSignInMenu: false};
         default:
-            return {...state , isInSignInMenu: false};
+            return {...state};
     }
 
 };
