@@ -14,7 +14,7 @@ import * as S from './style';
 function UserInfoButton() {
   const _userName = useSelector((state) => state.user.user.first_name)
 
-  return <S.HeaderButton onClick={() => { }}>{_userName ?? 'AB'}</S.HeaderButton>
+  return <S.HeaderButton onClick={() => { }}>{_userName}</S.HeaderButton>
 };
 
 // SIGNOUT
@@ -35,8 +35,9 @@ const RegisterButton = ({ onClicked }) => {
   return <S.HeaderButton onClick={onClicked}>{t('top-menu.register')}</S.HeaderButton>
 }
 
-const SignInBar = ({ handleSignIn,  handleSignOut, handleRegister}) => {
+const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
   const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
+  const isInSignInMenu = useSelector((state) => state.signin.isInSignInMenu)
 
   const signedInButtons =
     <>
@@ -50,11 +51,15 @@ const SignInBar = ({ handleSignIn,  handleSignOut, handleRegister}) => {
       <SignInButton onClicked={handleSignIn} />
     </>;
 
-  return (
-    <>
-      {isUserSignedIn ? signedInButtons : signedOutButtons}
-    </>
-  )
+  if (isInSignInMenu) { return (<></>); }
+  else {
+    return (
+      <>
+        {isUserSignedIn ? signedInButtons : signedOutButtons}
+      </>
+    )
+  }
+
 }
 
 export default SignInBar
