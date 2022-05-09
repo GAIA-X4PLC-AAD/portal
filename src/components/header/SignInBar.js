@@ -20,19 +20,19 @@ function UserInfoButton() {
 // SIGNOUT
 const SignOutButton = ({ onClicked }) => {
   const { t, } = useTranslation();
-  return <S.HeaderButton onClick={onClicked}>{t('top-menu.signout')}</S.HeaderButton>
+  return <S.HeaderButton onClick={onClicked} id="top-menu-signout">{t('top-menu.signout')}</S.HeaderButton>
 };
 
 // SIGNIN
 const SignInButton = ({ onClicked }) => {
   const { t, } = useTranslation();
-  return <S.HeaderButton onClick={onClicked}>{t('top-menu.signin')}</S.HeaderButton>
+  return <S.HeaderButton onClick={onClicked} id="top-menu-signin">{t('top-menu.signin')}</S.HeaderButton>
 }
 
 // REGISTER
 const RegisterButton = ({ onClicked }) => {
   const { t, } = useTranslation();
-  return <S.HeaderButton onClick={onClicked}>{t('top-menu.register')}</S.HeaderButton>
+  return <S.HeaderButton onClick={onClicked} id="top-menu-register">{t('top-menu.register')}</S.HeaderButton>
 }
 
 const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
