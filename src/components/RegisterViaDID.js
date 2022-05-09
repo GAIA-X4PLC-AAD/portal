@@ -18,7 +18,7 @@ const RegisterViaDID = (props) => {
 
     
     useEffect(  () => {
-        axios.get("http://gaia-x.portal.local:3000"+`/register/user/did_register`) // RFCT: portal uri is at gaia-x.portal.local:8085 but frontend differs
+        axios.get(configData.EDGE_API_URI+`/register/user/did_register`) // RFCT: portal uri is at gaia-x.portal.local:8085 but frontend differs
         .then((body) => {
             let qrCodePath = body.data.qrCodePath;
             setImg(qrCodePath);
@@ -56,6 +56,7 @@ const RegisterViaDID = (props) => {
                             onAuthZFailed={onAuthZFailed}
                             onAuthZSuccess={onAuthZSuccess}
                             onAuthZWait={onAuthZWait}
+                            statusURL={configData.EDGE_API_URI + configData.uri_path.auth_status_path}
                         />
                         <LoginFail showAlertMessage={showLoginFail} message={props.t("form.formOrganizationNoProcuraError")}/>
                         <img src={img} width="150px" height="150px" alt="Loading..."/>

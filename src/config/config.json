@@ -1,8 +1,11 @@
 {
+    "PORTAL_URI": "http://gaia-x.portal.ext:8085",
     "ARTICLE_API_URI": "http://gaia-x.article.local:8084",
     "ONBOARDING_API_URI": "http://gaia-x.onboarding.local:8083",
     "EDGE_API_URI": "http://gaia-x.edge.ext:8082",
     "uri_path": {
-        "mock_vc_user": "/auth/identity/mock_user"
+        "mock_vc_user": "/auth/identity/mock_user",
+        "auth_status_path": "/api/authstatus",
+        "user_did_register": "/register/user/did_register"
     }
 }

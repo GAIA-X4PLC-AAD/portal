@@ -64,7 +64,7 @@
         "formUserOne": "Create your account in a few steps and benefit of our secure and transparent Federated Catalogue.",
         "formUserTwo": "Cool, so you want to become a customer! To issue you Verified Credentials, we need your account details.",
         "formUserThree": "Thanks for sending us your account details.",
-        "formUserDidReg": "Please scan the QR code with you wallt app.",
+        "formUserDidReg": "Please scan the QR code with you wallet app.",
         "formUserDidRegHelp": "So you have already a DID? Please scan the code.",
         "formOrganizationOne": "Cool, so you want to become a provider! To issue you Verified credentials, we need your organization's details.",
         "formOrganizationOneInformation": "Please upload your organization details or select express registration via DID.",
