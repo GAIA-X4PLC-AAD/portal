@@ -41,6 +41,10 @@
   flex-direction: row;
 }
 
+.div_hidden {
+  display: none;
+}
+
 .service-tile_body {
   padding: 2em 2em;
 }

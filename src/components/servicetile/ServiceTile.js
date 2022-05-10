@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import "./ServiceTile.css";
@@ -11,6 +11,7 @@ const ServiceTile = (props) => {
     const {serviceId} = useParams();
     const [queryParams, setQueryParams] = useSearchParams();
     const view = queryParams.get("view");
+    const [showDetails, setShowDetails] = useState(true);
 
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
         "services":{
@@ -29,6 +30,13 @@ const ServiceTile = (props) => {
     const styleTabActive = (key) => {
         if (view === key) {
             return "service-tile_active_tab";
+        }
+        return ""
+    }
+
+    const styleDivHidden = (bool) => {
+        if (bool) {
+            return "div_hidden";
         }
         return ""
     }
@@ -77,10 +85,11 @@ const ServiceTile = (props) => {
                     <div className="service-tile_header_st_row">{props.t("service-tile.header.location")}</div>
                     <div className="service-tile_header_nd_row">{input.services.location}</div>
                 </div>
-                <div className="service-tile_header_details">
+                <div className="service-tile_header_details" onClick={() => setShowDetails(!showDetails)}>
                 {props.t("service-tile.details")}
                 </div>
             </div>
+            <div className={`${styleDivHidden(showDetails)}`}>
             <div className="service-tile_content">
                 <div className="service-tile_nav">
                     {addTab(props.t("service-tile.details"), "Details")}
@@ -91,6 +100,7 @@ const ServiceTile = (props) => {
                 <div className="service-tile_body">
                     {showComponent()}
                 </div>
+            </div>
             </div>
         </div>
     );
