@@ -1,9 +1,10 @@
 import React, {  useState } from "react";
 import "./ProviderCredentials.css";
 import axios from "axios";
-import ActionCancelModal from "./ActionCancelModal";
+import ActionCancelModal from "../../common/ActionCancelModal";
 import { withTranslation } from "react-i18next";
 import config from "../../config/config.json";
+import * as S from './ProviderCredentialStyle';
 
 const ProviderCredentialsEditor = (props) => {
 
@@ -75,7 +76,7 @@ const ProviderCredentialsEditor = (props) => {
     }
     const deleteUser = () => {
         axios.delete()
-        axios.delete(config.EDGE_API_URI+`/user-account/ppr/${providerId}/users/${loadUser.id}`, {data: loadUser}).then(   (response) => {
+        axios.delete(config.EDGE_API_URI+`/user-account/ppr/${providerId}/users/${loadUser.id}`).then(   (response) => {
             props.deleteUser(loadUser);
         },(error)=> {
           console.log(error);
@@ -117,11 +118,11 @@ const ProviderCredentialsEditor = (props) => {
 
     // Check if fields are properly informed or not.
     const onDisabledSaveButton = (u) => {
-        if (user === loadUser) return true;
-        if (user?.firstName === undefined || user?.firstName ==='') return true;
-        if (user?.lastName === undefined || user?.lastName ==='') return true;
-        if (user?.email === undefined || user?.email ==='') return true;
-        if (user?.role === undefined || user?.role ==='') return true;
+        if (user?.firstName ===loadUser.firstName && user?.lastName ===loadUser.lastName && user?.email ===loadUser.email && user?.role ===loadUser.role) return true;
+        if (user?.firstName === undefined || user?.firstName ==='' ) return true;
+        if (user?.lastName === undefined || user?.lastName ==='' ) return true;
+        if (user?.email === undefined || user?.email ===''  ) return true;
+        if (user?.role === undefined || user?.role ==='' ) return true;
         return false;
     }
 
@@ -130,23 +131,16 @@ const ProviderCredentialsEditor = (props) => {
         if (saving === true) return null;
         if (readOnly && !isNewCredential) {
             return (
-                <React.Fragment>
-                <div className="credentials-edit-blue">
-                    <button onClick={()=>setReadOnly(false)}>{props.t('account.credentials.edit')}</button>
-                </div>
-                </React.Fragment>
+                <S.CredentialEditButton onClick={()=>setReadOnly(false)}>{props.t('account.credentials.edit')}</S.CredentialEditButton>
             );
         }
         if (!readOnly) {
             return (
                 <React.Fragment>
-                 <div className="credentials-edit-blue">
-                    <button onClick={onCancel}>{props.t('account.credentials.cancel')}</button>
-                 </div>
+                 
+                    <S.CredentialCancelButton onClick={onCancel}>{props.t('account.credentials.cancel')}</S.CredentialCancelButton>
     
-                <div className="credentials-edit-blue">
-                    <button onClick={onSave} disabled={onDisabledSaveButton(u)}>{props.t('account.credentials.save')}</button>
-                </div>
+                    <S.CredentialEditButton onClick={onSave} disabled={onDisabledSaveButton(user)}>{props.t('account.credentials.save')}</S.CredentialEditButton>
                 </React.Fragment>
     
             );
@@ -167,41 +161,36 @@ const ProviderCredentialsEditor = (props) => {
             return (<option value={role.name} key={role.name}>{role.name}</option>);
         } );
     }
-    //selected={role.name===user.role}
 
     return(
-        <div className="credentials-edit-wrap">
-            <div className="credentials-edit-column">
+        <S.CredentialEditWrap>
+            <S.CredentialEditColumn>
                 <div >{props.t('account.credentials.firstName')}</div>
-                <div >
-                    <input type="text" name="firstName" value={user?.firstName} onChange={onFormChanged} disabled={readOnly}/>
-                </div>
-            </div>
-            <div className="credentials-edit-column">
+                <S.CredentialEditColumnInput type="text" name="firstName" value={user?.firstName} onChange={onFormChanged} disabled={readOnly}/>
+            </S.CredentialEditColumn>
+            <S.CredentialEditColumn>
                 <div >{props.t('account.credentials.lastName')}</div>
-                <div>
-                    <input type="text" name="lastName" value={user?.lastName} onChange={onFormChanged} disabled={readOnly}/>
-                </div>
-            </div>
-            <div className="credentials-edit-row">
+                <S.CredentialEditColumnInput type="text" name="lastName" value={user?.lastName} onChange={onFormChanged} disabled={readOnly}/>
+            </S.CredentialEditColumn>
+            <S.CredentialEditRow>
                 {props.t('account.credentials.email')}
-            </div>
-            <div className="credentials-edit-row">
-                <input type="text" name="email" value={user?.email} onChange={onFormChanged} disabled={readOnly}/>
-            </div>
-            <div className="credentials-edit-row">
+            </S.CredentialEditRow>
+            <S.CredentialEditRow>
+                <S.CredentialEditRowInput type="text" name="email" value={user?.email} onChange={onFormChanged} disabled={readOnly}/>
+            </S.CredentialEditRow>
+            <S.CredentialEditRow>
                 {props.t('account.credentials.role')}
-            </div>
-            <div className="credentials-edit-row">
-            <select name="role" onChange={onFormChanged} disabled={readOnly} value={selectValue(user?.role)}>
+            </S.CredentialEditRow>
+            <S.CredentialEditRow>
+            <S.CredentialEditRowSelect name="role" onChange={onFormChanged} disabled={readOnly} value={selectValue(user?.role)}>
                 <option value="" disabled></option>
                 {showRolesOptions()}
-            </select>
+            </S.CredentialEditRowSelect>
                 
-            </div>
+            </S.CredentialEditRow>
             {showRemove()}
             {showEditSave(user)}
-    </div>
+    </S.CredentialEditWrap>
     );
 }
 

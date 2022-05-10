@@ -4,6 +4,7 @@ import axios from "axios";
 import ProviderCredentialsEditor from "./ProviderCredentialsEditor";
 import { withTranslation } from "react-i18next";
 import config from '../../config/config.json';
+import * as S from './ProviderCredentialStyle';
 
 const ProviderCredentials = (props) => {
 
@@ -64,30 +65,29 @@ const ProviderCredentials = (props) => {
     const showArrow = (user) => {
         if (selectedUser === null || user.id !== selectedUser.id) {
             return (
-                <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={()=> {setSelectedUser(user); setOnAddUser(false);}}>
-                    <path fillRule="evenodd" clipRule="evenodd" d="M0.454512 0.907251C0.816397 0.53695 1.40995 0.530128 1.78025 0.892012L8 6.9704L14.2197 0.892012C14.59 0.530128 15.1836 0.53695 15.5455 0.907251C15.9074 1.27755 15.9005 1.8711 15.5302 2.23299L8.87367 8.73829C8.38794 9.21297 7.61206 9.21297 7.12633 8.73829L0.469751 2.23299C0.0994505 1.8711 0.092628 1.27755 0.454512 0.907251Z" fill="#000094"/>
-                </svg>
+                <img src="/images/DropDownArrowDown.svg" alt="Clickable arrow to fold down details" onClick={()=> {setSelectedUser(user); setOnAddUser(false);}}/>
             );
         }
         return (
-            <svg viewBox="0.188 0.625 15.625 8.469" width="15.625" height="8.469" onClick={()=> setSelectedUser(null)}>
-                <path fillRule="evenodd" clipRule="evenodd" d="M 0.455 0.907 C 0.816 0.537 1.41 0.53 1.78 0.892 L 8 6.97 L 14.22 0.892 C 14.59 0.53 15.184 0.537 15.546 0.907 C 15.907 1.278 15.901 1.871 15.53 2.233 L 8.874 8.738 C 8.388 9.213 7.612 9.213 7.126 8.738 L 0.47 2.233 C 0.099 1.871 0.093 1.278 0.455 0.907 Z" fill="#000094" transform="matrix(-1, 0, 0, -1, 16.000132, 9.719188)"></path>
-            </svg>
-        );
+            <img src="/images/DropDownArrowUp.svg" alt="Clickable arrow to fold up details" onClick={()=> {setSelectedUser(null)}}/>            
+            
+            );
+            //<S.CredentialDropDownUp />
     }
-
+    //<img src={'/images/DropDownArrowUp.svg'} alt="Clickable arrow to fold up details" onClick={()=> {setSelectedUser(null)}}/>            
+//<img src="/images/DropDownArrowUp.svg" alt="Clickable arrow to fold up details" onClick={()=> {setSelectedUser(null)}}/>
     const showUsers = (users) => {
         return (
             users.map((user) => {
                 return (
-                    <div className="credentials-flex-table credentials-cell" key={user.id}>
-                        <div className="credentials-flex-row">{user.userName}</div>
-                        <div className="credentials-flex-row">{user.role}</div>
-                        <div className="credentials-flex-row credential-dropdown">
+                    <S.FlexCell key={user.id}>
+                        <S.FlexRow>{user.userName}</S.FlexRow>
+                        <S.FlexRow>{user.role}</S.FlexRow>
+                        <S.CredentialDropDown>
                             {showArrow(user)}
-                        </div>
+                        </S.CredentialDropDown>
                         {showEdit(user)}
-                    </div>
+                    </S.FlexCell>
                 );
             }));
     };
@@ -95,19 +95,15 @@ const ProviderCredentials = (props) => {
 
     
     return(
-        <div className="credentials-wrapping"> 
-            <div className="credentials-flex-table credentials-header">
-                <div className="credentials-flex-row">{props.t('account.credentials.name')}</div>
-                <div className="credentials-flex-row">{props.t('account.credentials.role')}</div>
-                <div className="credentials-flex-row credential-dropdown"></div>
-            </div>
-
+        <S.CredentialWrapper>
+            <S.FlexHeader>
+                <S.FlexRow>{props.t('account.credentials.name')}</S.FlexRow>
+                <S.FlexRow>{props.t('account.credentials.role')}</S.FlexRow>
+                <S.CredentialDropDown></S.CredentialDropDown>
+            </S.FlexHeader>
             {showUsers(users)}
-
             {showAddUser()}
-        </div>
-         
-
+        </S.CredentialWrapper>
     );
 }
 
