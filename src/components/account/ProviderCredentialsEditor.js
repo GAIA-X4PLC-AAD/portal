@@ -103,10 +103,10 @@ const ProviderCredentialsEditor = (props) => {
             <S.CredentialRemove onClick={() =>setOnRemove(true)}>
                 {props.t('account.credentials.remove')}
                 <ActionCancelModal
-                    header="Remove user" 
-                    message={`are you sure do you want to remove user ${loadUser.userName}?`} 
+                    header={props.t('account.credentials.removeUserHeader')}
+                    message={props.t('account.credentials.removeUserMessage', { userName: loadUser.userName})} 
                     showAlertMessage={onRemove} 
-                    actionMessage="Remove"
+                    actionMessage={props.t('account.credentials.remove')}
                     actionCallback={()=>deleteUser()} 
                     cancelCallback={()=>setOnRemove(false)}/>
             </S.CredentialRemove>
