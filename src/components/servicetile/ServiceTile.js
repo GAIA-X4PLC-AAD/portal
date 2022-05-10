@@ -58,7 +58,7 @@ const ServiceTile = (props) => {
     return (
         <div className="service-tile">
             <div className="service-tile_header">
-                <a href={input.services.ppr_url}>
+                <a href={"#" || input.services.ppr_url}>
                     <img src={input.services.logo} alt="Provider Logo"></img>
                 </a>
                 <div>
