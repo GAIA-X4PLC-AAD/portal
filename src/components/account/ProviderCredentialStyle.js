@@ -106,5 +106,19 @@ export const CredentialCancelButton = styled(S.CancelButton)`
     margin: 8px 16px;
 `;
     
-export const CredentialDropDownUp = styled(CredentialDropDown)`
-content: url('/images/DropDownArrowUp.svg');`;
+export const CredentialRemove = styled(S.RedTextClickable)`
+    text-align: left;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+`;
+
+export const AddUserButton = styled(S.BlueTextClickable)`
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+    margin: 15px 8px;
+`;
+
+export const DropDownArrowDown = S.DropDownArrowDown;
+export const DropDownArrowUp = S.DropDownArrowUp;

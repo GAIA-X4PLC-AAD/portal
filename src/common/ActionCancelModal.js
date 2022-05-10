@@ -1,8 +1,7 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import Modal from '../Modal';
-import * as S from './styles.js';
-import * as S2 from './ActionCancelModalStyle.js';
+import * as S from './ActionCancelModalStyle.js';
 
 const ActionCancelModal = (props) => {
   
@@ -13,20 +12,20 @@ const ActionCancelModal = (props) => {
   if (props.showAlertMessage===false) return null;  
   return (
     <Modal>
-      <S2.FlexColumn>
-        <S2.ActionCancelModalHeader>{header}</S2.ActionCancelModalHeader>
-        <S2.ModalMessage> 
+      <S.FlexColumn>
+        <S.ActionCancelModalHeader>{header}</S.ActionCancelModalHeader>
+        <S.ModalMessage> 
           {message}       
-        </S2.ModalMessage>
-        <S2.ModalButtonsBar>
+        </S.ModalMessage>
+        <S.ModalButtonsBar>
           <S.CancelButton onClick={()=> props.cancelCallback()}>
             {props.t('form.cancel')}
           </S.CancelButton>
           <S.BlueButton onClick={()=> props.actionCallback()}>
             {actionMessage}
           </S.BlueButton>
-        </S2.ModalButtonsBar>
-      </S2.FlexColumn>
+        </S.ModalButtonsBar>
+      </S.FlexColumn>
     </Modal>
   );
 }

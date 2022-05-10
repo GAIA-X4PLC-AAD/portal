@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as S from './styles';
 
 export const ActionCancelModalHeader = styled.div`
 border-bottom: 1px solid #737373;
@@ -29,3 +30,6 @@ export const ModalButtonsBar = styled.div`
     align-items: center;
     text-align: center;    
 `;
+
+export const CancelButton = S.CancelButton;
+export const BlueButton = S.BlueButton;

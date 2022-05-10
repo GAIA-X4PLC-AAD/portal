@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import "./ProviderCredentials.css";
 import axios from "axios";
 import ProviderCredentialsEditor from "./ProviderCredentialsEditor";
 import { withTranslation } from "react-i18next";
@@ -53,7 +52,7 @@ const ProviderCredentials = (props) => {
     const showAddUser = () => {
         if (onAddUser === false) {
             return (
-                <div className="credential-add-user-button" onClick={onAddUserClick}>{props.t('account.credentials.addUser')}</div>   
+                <S.AddUserButton onClick={onAddUserClick}>{props.t('account.credentials.addUser')}</S.AddUserButton>
             );
         }
         return (
@@ -65,17 +64,13 @@ const ProviderCredentials = (props) => {
     const showArrow = (user) => {
         if (selectedUser === null || user.id !== selectedUser.id) {
             return (
-                <img src="/images/DropDownArrowDown.svg" alt="Clickable arrow to fold down details" onClick={()=> {setSelectedUser(user); setOnAddUser(false);}}/>
+                <S.DropDownArrowDown onClick={()=> {setSelectedUser(user); setOnAddUser(false);}}/>
             );
         }
         return (
-            <img src="/images/DropDownArrowUp.svg" alt="Clickable arrow to fold up details" onClick={()=> {setSelectedUser(null)}}/>            
-            
+            <S.DropDownArrowUp onClick={()=> {setSelectedUser(null)}}/>           
             );
-            //<S.CredentialDropDownUp />
     }
-    //<img src={'/images/DropDownArrowUp.svg'} alt="Clickable arrow to fold up details" onClick={()=> {setSelectedUser(null)}}/>            
-//<img src="/images/DropDownArrowUp.svg" alt="Clickable arrow to fold up details" onClick={()=> {setSelectedUser(null)}}/>
     const showUsers = (users) => {
         return (
             users.map((user) => {

@@ -1,5 +1,4 @@
 import React, {  useState } from "react";
-import "./ProviderCredentials.css";
 import axios from "axios";
 import ActionCancelModal from "../../common/ActionCancelModal";
 import { withTranslation } from "react-i18next";
@@ -99,9 +98,9 @@ const ProviderCredentialsEditor = (props) => {
 
     // logic to decide if remove user should be displayed or not
     const showRemove = () => {
-        if (isNewCredential || saving) return (<div className="credentials-edit-remove"> </div>);
+        if (isNewCredential || saving) return (<S.CredentialRemove/>);
         else return (
-            <div className="credentials-edit-remove" onClick={() =>setOnRemove(true)}>
+            <S.CredentialRemove onClick={() =>setOnRemove(true)}>
                 {props.t('account.credentials.remove')}
                 <ActionCancelModal
                     header="Remove user" 
@@ -110,7 +109,7 @@ const ProviderCredentialsEditor = (props) => {
                     actionMessage="Remove"
                     actionCallback={()=>deleteUser()} 
                     cancelCallback={()=>setOnRemove(false)}/>
-            </div>
+            </S.CredentialRemove>
 
         );
 
@@ -118,7 +117,7 @@ const ProviderCredentialsEditor = (props) => {
 
     // Check if fields are properly informed or not.
     const onDisabledSaveButton = (u) => {
-        if (user?.firstName ===loadUser.firstName && user?.lastName ===loadUser.lastName && user?.email ===loadUser.email && user?.role ===loadUser.role) return true;
+        if (user?.firstName ===loadUser?.firstName && user?.lastName ===loadUser?.lastName && user?.email ===loadUser?.email && user?.role ===loadUser?.role) return true;
         if (user?.firstName === undefined || user?.firstName ==='' ) return true;
         if (user?.lastName === undefined || user?.lastName ==='' ) return true;
         if (user?.email === undefined || user?.email ===''  ) return true;

@@ -29,3 +29,41 @@ margin-left:1em;
     opacity: 0.3; 
 }
 `;
+export const DropDownArrowUp = styled.div`
+    content: url('/images/DropDownArrowUp.svg');
+    margin: auto;
+    object-fit:none;
+    height:100%;
+`;
+
+export const DropDownArrowDown = styled.div`
+    content: url('/images/DropDownArrowDown.svg');
+    margin: auto;
+    object-fit:none;
+    height:100%;
+`;
+
+export const RedTextClickable = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 1px;
+    color: #EE1D23;
+    cursor: pointer;
+`;
+
+export const BlueTextClickable = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.25px;
+    color: #000094;
+    cursor: pointer;
+`;
