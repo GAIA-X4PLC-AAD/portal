@@ -36,8 +36,18 @@
   color: #000094;
 }
 
+.service-tile_content {
+  display: flex;
+  flex-direction: row;
+}
+
+.service-tile_body {
+  padding: 2em 2em;
+}
+
 .service-tile_nav {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
 }
 

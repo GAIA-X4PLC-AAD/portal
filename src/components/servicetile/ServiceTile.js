@@ -81,14 +81,16 @@ const ServiceTile = (props) => {
                 {props.t("service-tile.details")}
                 </div>
             </div>
-            <div className="service-tile_nav">
-                {addTab(props.t("service-tile.details"), "Details")}
-                {addTab(props.t("service-tile.price"), "Price")}
-                {addTab(props.t("service-tile.screenshots"), "Screenshots")}
-                {addTab(props.t("service-tile.contact"), "Contact")}
-            </div>
-            <div className="service-tile_body">
-                {showComponent("Details")}
+            <div className="service-tile_content">
+                <div className="service-tile_nav">
+                    {addTab(props.t("service-tile.details"), "Details")}
+                    {addTab(props.t("service-tile.price"), "Price")}
+                    {addTab(props.t("service-tile.screenshots"), "Screenshots")}
+                    {addTab(props.t("service-tile.contact"), "Contact")}
+                </div>
+                <div className="service-tile_body">
+                    {showComponent()}
+                </div>
             </div>
         </div>
     );
