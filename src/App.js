@@ -21,6 +21,7 @@ import RegisterComplianceCheck from './components/RegisterComplianceCheck';
 import { createBrowserHistory } from "history";
 import Provider from './components/account/Provider';
 import ContactDetails from './components/discovery/ContactDetails';
+import ServiceTile from './components/servicetile/ServiceTile';
 
 import Header from './components/header';
 
@@ -73,6 +74,7 @@ const App = (props) => {
                 <Route path="/loginfail" element={<LoginFail />} />
                 <Route path="/account/:tab" element={<AccountHome />} />
                 <Route path="/account/provider/:tab" element={<Provider />} />
+            	<Route path="/servicetile/:serviceId" element={<ServiceTile/>}/>
               </Routes>
             </div>
             <div className='footer-container'>
