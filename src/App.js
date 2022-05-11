@@ -1,5 +1,4 @@
 import './App.css';
-import SignInBar from './components/header/SignInBar';
 import WorkInProgress from './WorkInProgress';
 import { Link, BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './Home';
@@ -21,6 +20,7 @@ import RegisterDisplayVC from './components/RegisterDisplayVC';
 import RegisterComplianceCheck from './components/RegisterComplianceCheck';
 import { createBrowserHistory } from "history";
 import Provider from './components/account/Provider';
+import ContactDetails from './components/discovery/ContactDetails';
 
 import Header from './components/header';
 
@@ -55,7 +55,7 @@ const App = (props) => {
             <div className='body-container'>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/services" element={<WorkInProgress component="Services" />} />
+                <Route path="/services" element={<ContactDetails/>} />
                 <Route path="/data" element={<WorkInProgress component="Data" />} />
                 <Route path="/provider" element={<WorkInProgress component="Provider" />} />
                 <Route path="/help" element={<WorkInProgress component="Help" />} />
