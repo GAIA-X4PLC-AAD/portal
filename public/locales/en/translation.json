@@ -114,6 +114,17 @@
         "help": "Help"
     },
     "work-in-progress.message" : "Work in progress....",
+    "service-tile": {
+        "details": "Details",
+        "price": "Price",
+        "screenshots": "Screenshots",
+        "contact": "Contact",
+        "header": {
+            "stack": "Stack",
+            "security": "Security",
+            "location": "Location"
+        }
+    },
     "account": {
         "myAccount": "My Account",
         "myAccountDescription": "Here you can manage all your information",
