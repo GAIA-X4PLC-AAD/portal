@@ -2,6 +2,7 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import "./ProviderAccount.css"
+import ProviderCredentials from "./ProviderCredentials";
 import ProviderDetails from "./ProviderDetails";
 import ProviderEdit from "./ProviderEdit";
 import ProviderLoginHistory from "./ProviderLoginHistory";
@@ -20,7 +21,7 @@ const Provider = (props) => {
             case "details": 
                 return (<ProviderDetails/>);
             case "credentials": 
-                return null;
+                return <ProviderCredentials/>;
             case "history":
                 return <ProviderLoginHistory/>;
             case "edit":

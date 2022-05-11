@@ -48,7 +48,7 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
   const signedOutButtons =
     <>
       <RegisterButton onClicked={handleRegister} />
-      <SignInButton onClicked={handleSignIn} />
+      <SignInButton onClicked={handleSignIn} data-cy='dateInput'/>
     </>;
 
   if (isInSignInMenu) { return (<></>); }

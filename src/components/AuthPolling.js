@@ -19,7 +19,6 @@ class AuthPolling extends Component {
         this.setState({ isLoading: true });
         const response = await fetch(this.statusURL);
         const data = await response.json();
-
         switch (data) {
             case 'WAIT':
                 this.state.onAuthZWait();

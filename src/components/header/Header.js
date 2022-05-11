@@ -36,7 +36,7 @@ function Header() {
         <S.TopMenu >
             <S.TopMenuLogo>
                 <Link to="/">
-                    <img src="images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />
+                    <img src="/images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />
                 </Link>
             </S.TopMenuLogo>
             <CenterBar />
