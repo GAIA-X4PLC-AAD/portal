@@ -20,7 +20,6 @@ import RegisterDisplayVC from './components/RegisterDisplayVC';
 import RegisterComplianceCheck from './components/RegisterComplianceCheck';
 import { createBrowserHistory } from "history";
 import Provider from './components/account/Provider';
-import ContactDetails from './components/discovery/ContactDetails';
 import ServiceTile from './components/servicetile/ServiceTile';
 
 import Header from './components/header';
@@ -56,7 +55,6 @@ const App = (props) => {
             <div className='body-container'>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/services" element={<ContactDetails/>} />
                 <Route path="/data" element={<WorkInProgress component="Data" />} />
                 <Route path="/provider" element={<WorkInProgress component="Provider" />} />
                 <Route path="/help" element={<WorkInProgress component="Help" />} />
