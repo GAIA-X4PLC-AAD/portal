@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import "./ServiceTile.css";
-import ServiceTileDetails from "./ServiceTileDetails";
 import ServiceTilePrice from "./ServiceTilePrice";
 import ServiceTileScreenshots from "./ServiceTileScreenshots";
 import ServiceTileContact from "./ServiceTileContact";
+import ProviderDetailsExpanded from "./expandables/ProviderDetailsExpanded";
+import BasicServiceDetailsExpanded from "./expandables/BasicServiceDetaillsExpanded";
 
 const ServiceTile = (props) => {
     const {serviceId} = useParams();
@@ -44,7 +45,7 @@ const ServiceTile = (props) => {
     const showComponent = () => {
         switch (view) {
             case "Details":
-                return (<ServiceTileDetails serviceId={serviceId} />);
+                return (<BasicServiceDetailsExpanded serviceId={props.serviceId}/>);
             case "Price":
                 return (<ServiceTilePrice serviceId={serviceId} />);
             case "Screenshots":

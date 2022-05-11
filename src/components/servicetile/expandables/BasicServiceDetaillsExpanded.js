@@ -13,12 +13,13 @@ const ColumnItem = ({ title, subtitle }) => {
   </>
 }
 
-const DescriptionTab = ( { serviceId } ) => {
+const BasicServiceDetailsExpanded = ( { serviceId, showImage = true } ) => {
 
   return (
     <>
       <S.ExpandedContainer>
-        <S.Image src="https://images.pexels.com/photos/2458118/pexels-photo-2458118.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
+        { showImage ? <S.Image src="https://images.pexels.com/photos/2458118/pexels-photo-2458118.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" /> : <></>}
+        
         <S.VerticalContainer horizontal='8px'>
           <S.SmallPadding>
             <S.Title>Description</S.Title>
@@ -50,6 +51,6 @@ const DescriptionTab = ( { serviceId } ) => {
   )
 }
 
-export default DescriptionTab
+export default BasicServiceDetailsExpanded
 
 
