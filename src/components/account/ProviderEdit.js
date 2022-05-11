@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import ActionCancelModal from "../../common/ActionCancelModal";
 import configData from "../../config/config.json";
 import "./ProviderAccount.css";
 import UploadCompleted from "./uploadCompleted";
@@ -11,6 +12,7 @@ const ProviderEdit = (props) => {
 
   const [file,setFile] = useState(null);
   const [showLoadCompleted, setShowLoadCompleted] = useState(false);
+  const [onRemove, setOnRemove] = useState(false);
 
     const fileRef = useRef();
 
@@ -32,9 +34,21 @@ const ProviderEdit = (props) => {
     }).then(   (response) => {
       setShowLoadCompleted(true);
 },(error)=> {
+      console.log(error);
       alert('ko');
 });
-    }
+    };
+
+    const deleteAccount = () => {
+      axios.delete(configData.EDGE_API_URI + '/account/provider').then(   
+        (response) => {
+          navigate("/");
+        },(error)=> {
+          console.log(error);
+          alert('ko');
+      });
+
+    };
 
     return(
         <div className="provider-account-edit__flex layout">
@@ -52,7 +66,14 @@ const ProviderEdit = (props) => {
             </div>
           </div>
           <UploadCompleted showAlertMessage={showLoadCompleted} message={props.t("account.edit.uploadCompletedMessage")}/>
-          <div className="provider-account-edit__flex2 layout">
+          <div className="provider-account-edit__flex2 layout" onClick={()=>setOnRemove(true)}>
+          <ActionCancelModal
+                    header={props.t("account.edit.removeAccountHeader")} 
+                    message={props.t("account.edit.removeAccountMessage")} 
+                    showAlertMessage={onRemove} 
+                    actionMessage={props.t("account.edit.remove")}
+                    actionCallback={()=>deleteAccount()} 
+                    cancelCallback={()=>setOnRemove(false)}/>
             <h4 className="provider-account-edit__highlights9 layout">
               {props.t("account.edit.removeAccount")}          
             </h4>
