@@ -47,6 +47,7 @@
 
 .service-tile_body {
   padding: 2em 2em;
+  width:100%;
 }
 
 .service-tile_nav {
