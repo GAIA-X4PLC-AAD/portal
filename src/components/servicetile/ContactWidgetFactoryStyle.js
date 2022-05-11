@@ -29,10 +29,11 @@ export const ContactValue = styled.div`
 `;
 
 export const Contact = styled.div`
-
+    margin: 20px;
 `;
 
 export const ContactsContainer = styled.div`
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 `;

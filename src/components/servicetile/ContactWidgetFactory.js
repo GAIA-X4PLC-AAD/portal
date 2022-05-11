@@ -4,7 +4,7 @@ import React from "react";
 
 const ContactWidgetFactory = ({contacts}) => {
 
-    const DefaultContact = ({contact }) =>  {
+    const DefaultContactWidget = ({contact }) =>  {
         return (
             <S.Contact>
                 <S.ContactCategory>{contact.type}</S.ContactCategory>
@@ -16,7 +16,7 @@ const ContactWidgetFactory = ({contacts}) => {
     return (contacts.map((contact, index)=> {
             switch (contact.type) {    
                 default: 
-                    return <DefaultContact contact={contact} key={index}/>;
+                    return <DefaultContactWidget contact={contact} key={index}/>;
             }
         }
     ));
