@@ -5,7 +5,10 @@ import {ContactsContainer} from "./ContactWidgetFactoryStyle";
 
 const ServiceTileContact = (props) => {
 
-    const data = [{type:'tech_phone', value:'123455667'}, {type:'tech_phone', value:'123455667'}, {type:'tech_phone', value:'123455667'} ,{type:'tech_phone', value:'123455667'}];
+    const data = [{type:'tech_phone', value:'123455667'}, 
+        {type:'tech_phone', value:'123455667'},
+        {type:'tech_phone', value:'123455667'},
+        {type:'tech_phone', value:'123455667'}];
 
     return (
             <ContactsContainer>

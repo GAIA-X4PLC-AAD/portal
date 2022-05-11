@@ -1,10 +1,10 @@
 import * as S from "./ContactWidgetFactoryStyle";
 import React from "react";
 
+
 const ContactWidgetFactory = ({contacts}) => {
 
-
-    function defaultCategory( contact ) {
+    const DefaultContact = ({contact }) =>  {
         return (
             <S.Contact>
                 <S.ContactCategory>{contact.type}</S.ContactCategory>
@@ -12,12 +12,11 @@ const ContactWidgetFactory = ({contacts}) => {
             </S.Contact>
         );
     }
-
-
-    return (contacts.map((contact)=> {
+   
+    return (contacts.map((contact, index)=> {
             switch (contact.type) {    
                 default: 
-                    return ( defaultCategory(contact));
+                    return <DefaultContact contact={contact} key={index}/>;
             }
         }
     ));
