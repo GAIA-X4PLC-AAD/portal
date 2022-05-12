@@ -1,10 +1,11 @@
 import { withTranslation } from "react-i18next";
+import PriceTab from "./priceTab/PriceTab";
 
 const ServiceTilePrice = (props) => {
 
     return (
         <div className="service-tile-price">
-            Placeholder - price  {props.serviceId}
+            <PriceTab serviceId={props.serviceId}/>
         </div>
     );
 
