@@ -119,10 +119,14 @@
         "price": "Price",
         "screenshots": "Screenshots",
         "contact": "Contact",
+        "datasets": "Data sets",
+        "services": "Services",
         "header": {
             "stack": "Stack",
             "security": "Security",
-            "location": "Location"
+            "location": "Location",
+            "sustainability": "Sustainability",
+            "availability": "Availability"
         }
     },
     "account": {

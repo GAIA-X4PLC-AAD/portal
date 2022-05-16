@@ -24,6 +24,7 @@ import Provider from './components/account/Provider';
 import ServiceTile from './components/servicetile/ServiceTile';
 
 import Header from './components/header';
+import PprTile from './components/discovery/pprTile/PprTile';
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
@@ -74,7 +75,8 @@ const App = (props) => {
                 <Route path="/loginfail" element={<LoginFail />} />
                 <Route path="/account/:tab" element={<AccountHome />} />
                 <Route path="/account/provider/:tab" element={<Provider />} />
-            	<Route path="/servicetile/:serviceId" element={<ServiceTile/>}/>
+            	  <Route path="/servicetile/:serviceId" element={<ServiceTile/>}/>
+                <Route path="/pprtile/:serviceId" element={<PprTile/>}/>
               </Routes>
             </div>
             <div className='footer-container'>
