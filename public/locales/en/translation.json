@@ -126,6 +126,14 @@
         },
         "bookButton": "Book"
     },
+    "discovery": {
+        "contactTypes": {
+            "tech_phone": "Technical phone number",
+            "tech_email": "Technical email address",
+            "supp_phone": "Support phone number",
+            "supp_email": "Support email address"
+        }
+    },
     "account": {
         "myAccount": "My Account",
         "myAccountDescription": "Here you can manage all your information",

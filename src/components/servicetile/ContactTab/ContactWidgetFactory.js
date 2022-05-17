@@ -1,13 +1,14 @@
 import * as S from "./ContactWidgetFactoryStyle";
 import React from "react";
+import { withTranslation } from "react-i18next";
 
 
-const ContactWidgetFactory = ({contacts}) => {
+const ContactWidgetFactory = ({contacts, t}) => {
 
     const DefaultContactWidget = ({contact }) =>  {
         return (
             <S.Contact>
-                <S.ContactCategory>{contact.type}</S.ContactCategory>
+                <S.ContactCategory>{t(`discovery.contactTypes.${contact.type}`)}</S.ContactCategory>
                 <S.ContactValue>{contact.value}</S.ContactValue>
             </S.Contact>
         );
@@ -22,4 +23,4 @@ const ContactWidgetFactory = ({contacts}) => {
     ));
 }
 
-export default ContactWidgetFactory;
+export default withTranslation() (ContactWidgetFactory);
