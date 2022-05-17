@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import configData from "../../config/config.json";
 import "./ProviderAccount.css";
 import UploadCompleted from "./uploadCompleted";
-
+import PropTypes from 'prop-types';
 
 const ProviderEdit = (props) => {
 
@@ -76,6 +76,10 @@ const ProviderEdit = (props) => {
         </div>
 
     );
+}
+
+ProviderEdit.propTypes = {
+  t: PropTypes.func,
 }
 
 export default withTranslation () (ProviderEdit);

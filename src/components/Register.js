@@ -5,6 +5,8 @@ import Modal from "../Modal";
 import "./Register.css";
 import VerticalSteps from "./VerticalSteps";
 
+import PropTypes from 'prop-types';
+
 const Register = (props) => {
 
     const navigate = useNavigate();
@@ -87,6 +89,10 @@ return (
 
 );
 
+}
+
+Register.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation()(Register);

@@ -1,4 +1,5 @@
 import './App.css';
+import React from 'react';
 import SignInBar from './components/header/SignInBar';
 import WorkInProgress from './WorkInProgress';
 import { Link, BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
@@ -22,6 +23,8 @@ import RegisterComplianceCheck from './components/RegisterComplianceCheck';
 import { createBrowserHistory } from "history";
 import Provider from './components/account/Provider';
 import ServiceTile from './components/servicetile/ServiceTile';
+import PropTypes from 'prop-types';
+
 
 import Header from './components/header';
 
@@ -74,7 +77,7 @@ const App = (props) => {
                 <Route path="/loginfail" element={<LoginFail />} />
                 <Route path="/account/:tab" element={<AccountHome />} />
                 <Route path="/account/provider/:tab" element={<Provider />} />
-            	<Route path="/servicetile/:serviceId" element={<ServiceTile/>}/>
+                <Route path="/servicetile/:serviceId" element={<ServiceTile />} />
               </Routes>
             </div>
             <div className='footer-container'>
@@ -112,5 +115,9 @@ const mapStateToProps = state => {
   return { isInSignInMenu: state.signin.isInSignInMenu };
 };
 
-export default connect(mapStateToProps, {})(App);;
+App.propTypes = {
+  isInSignInMenu: PropTypes.bool,
+}
+
+export default connect(mapStateToProps, {})(App);
 

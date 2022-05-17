@@ -1,6 +1,7 @@
 import React from 'react';
 
 import * as S from './style';
+import PropTypes from 'prop-types';
 
 const ColumnItem = ({ title, subtitle }) => {
   return <>
@@ -11,6 +12,11 @@ const ColumnItem = ({ title, subtitle }) => {
       </S.VerticalContainer>
     </S.Padding>
   </>
+}
+
+ColumnItem.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
 }
 
 const BasicServiceDetailsExpanded = ( { serviceId, showImage = true } ) => {
@@ -49,6 +55,11 @@ const BasicServiceDetailsExpanded = ( { serviceId, showImage = true } ) => {
       </S.ExpandedContainer>
     </>
   )
+}
+
+BasicServiceDetailsExpanded.propTypes = {
+  serviceId: PropTypes.string,
+  showImage: PropTypes.bool,
 }
 
 export default BasicServiceDetailsExpanded

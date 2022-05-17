@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 class AuthPolling extends Component {
 
     constructor(props) {
@@ -58,6 +60,14 @@ class AuthPolling extends Component {
     render() {
         return null;
     }
+}
+
+AuthPolling.propTypes = {
+    onAuthZSuccess: PropTypes.func,
+    onAuthZFailed: PropTypes.func,
+    onAuthZWait: PropTypes.func,
+    statusURL: PropTypes.string,
+    t: PropTypes.func,
 }
 
 export default AuthPolling;

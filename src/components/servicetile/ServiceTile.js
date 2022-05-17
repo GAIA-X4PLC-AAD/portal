@@ -8,14 +8,16 @@ import ServiceTileContact from "./ServiceTileContact";
 import ProviderDetailsExpanded from "./expandables/ProviderDetailsExpanded";
 import BasicServiceDetailsExpanded from "./expandables/BasicServiceDetaillsExpanded";
 
+import PropTypes from 'prop-types';
+
 const ServiceTile = (props) => {
-    const {serviceId} = useParams();
+    const { serviceId } = useParams();
     const [queryParams, setQueryParams] = useSearchParams();
     const view = queryParams.get("view");
     const [showDetails, setShowDetails] = useState(true);
 
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
-        "services":{
+        "services": {
             "type": "basic-service/composite-service",
             "logo": "URL to image of PPR logo",
             "name": "Service name",
@@ -25,7 +27,7 @@ const ServiceTile = (props) => {
             "stack": "String",
             "security": "String",
             "location": "String"
-          }
+        }
     }
 
     const styleTabActive = (key) => {
@@ -45,7 +47,7 @@ const ServiceTile = (props) => {
     const showComponent = () => {
         switch (view) {
             case "Details":
-                return (<BasicServiceDetailsExpanded serviceId={props.serviceId}/>);
+                return (<BasicServiceDetailsExpanded serviceId={props.serviceId} />);
             case "Price":
                 return (<ServiceTilePrice serviceId={serviceId} />);
             case "Screenshots":
@@ -62,7 +64,8 @@ const ServiceTile = (props) => {
             <h4 className={"service-tile_nav_item " + `${styleTabActive(view)}`}>
                 <Link to={`/servicetile/${serviceId}?view=${view}`}>{linkName}</Link>
             </h4>
-    );}
+        );
+    }
 
     return (
         <div className="service-tile">
@@ -87,24 +90,29 @@ const ServiceTile = (props) => {
                     <div className="service-tile_header_nd_row">{input.services.location}</div>
                 </div>
                 <div className="service-tile_header_details" onClick={() => setShowDetails(!showDetails)}>
-                {props.t("service-tile.details")}
+                    {props.t("service-tile.details")}
                 </div>
             </div>
             <div className={`${styleDivHidden(showDetails)}`}>
-            <div className="service-tile_content">
-                <div className="service-tile_nav">
-                    {addTab(props.t("service-tile.details"), "Details")}
-                    {addTab(props.t("service-tile.price"), "Price")}
-                    {addTab(props.t("service-tile.screenshots"), "Screenshots")}
-                    {addTab(props.t("service-tile.contact"), "Contact")}
+                <div className="service-tile_content">
+                    <div className="service-tile_nav">
+                        {addTab(props.t("service-tile.details"), "Details")}
+                        {addTab(props.t("service-tile.price"), "Price")}
+                        {addTab(props.t("service-tile.screenshots"), "Screenshots")}
+                        {addTab(props.t("service-tile.contact"), "Contact")}
+                    </div>
+                    <div className="service-tile_body">
+                        {showComponent()}
+                    </div>
                 </div>
-                <div className="service-tile_body">
-                    {showComponent()}
-                </div>
-            </div>
             </div>
         </div>
     );
 }
 
-export default withTranslation () (ServiceTile);
+ServiceTile.propTypes = {
+    serviceId: PropTypes.int,
+    t: PropTypes.func,
+}
+
+export default withTranslation()(ServiceTile);

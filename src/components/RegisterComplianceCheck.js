@@ -6,6 +6,8 @@ import VerticalSteps from "./VerticalSteps";
 import Modal from "../Modal";
 import configData from "../config/config.json";
 
+import PropTypes from 'prop-types';
+
 const RegisterComplicanceCheck = (props) => {
 
     const navigate = useNavigate();
@@ -55,6 +57,10 @@ const RegisterComplicanceCheck = (props) => {
             {formComplianceCheck()}
         </Modal>
     );
+}
+
+RegisterComplicanceCheck.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation()(RegisterComplicanceCheck);
