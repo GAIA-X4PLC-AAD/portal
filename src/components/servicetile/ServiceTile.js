@@ -5,10 +5,11 @@ import "./ServiceTile.css";
 import ServiceTilePrice from "./ServiceTilePrice";
 import ServiceTileScreenshots from "./ServiceTileScreenshots";
 import ServiceTileContact from "./ServiceTileContact";
-import ProviderDetailsExpanded from "./expandables/ProviderDetailsExpanded";
-import BasicServiceDetailsExpanded from "./expandables/BasicServiceDetaillsExpanded";
 
 import PropTypes from 'prop-types';
+import LoadingView from "../loading_view/LoadingView";
+import DescriptionTabView from "../tabs/DescriptionTabView";
+import ExpandableView from "../expandable/ExpandableView";
 
 const ServiceTile = (props) => {
     const { serviceId } = useParams();
@@ -44,19 +45,23 @@ const ServiceTile = (props) => {
         return ""
     }
 
+    const DescriptionTab = ({ serviceId }) => {
+        return (
+            <LoadingView
+                url={`https://reqres.in/api/users/${serviceId}?delay=1`}
+                successView={DescriptionTabView}
+            />
+        )
+    }
+
     const showComponent = () => {
-        switch (view) {
-            case "Details":
-                return (<BasicServiceDetailsExpanded serviceId={props.serviceId} />);
-            case "Price":
-                return (<ServiceTilePrice serviceId={serviceId} />);
-            case "Screenshots":
-                return (<ServiceTileScreenshots serviceId={serviceId} />);
-            case "Contact":
-                return (<ServiceTileContact serviceId={serviceId} />);
-            default:
-                return null;
-        }
+        return (
+            <>
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ serviceId: 1 })} title='Details' />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ serviceId: 2 })} title='Price' />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ serviceId: 3 })} title='Screenshot' />
+            </>
+        )
     }
 
     const addTab = (linkName, view) => {
@@ -95,12 +100,6 @@ const ServiceTile = (props) => {
             </div>
             <div className={`${styleDivHidden(showDetails)}`}>
                 <div className="service-tile_content">
-                    <div className="service-tile_nav">
-                        {addTab(props.t("service-tile.details"), "Details")}
-                        {addTab(props.t("service-tile.price"), "Price")}
-                        {addTab(props.t("service-tile.screenshots"), "Screenshots")}
-                        {addTab(props.t("service-tile.contact"), "Contact")}
-                    </div>
                     <div className="service-tile_body">
                         {showComponent()}
                     </div>
