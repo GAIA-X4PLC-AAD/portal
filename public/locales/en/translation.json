@@ -72,6 +72,8 @@
         "formOrganizationPleaseVerifyYourself": "Please verify yourself as employee of your organization.",
         "formDisplayVC": "We found the following details of your organization.",
         "formDisplayVCHeading": "Organization details",
+        "formDisplayVCUser": "We found the following account details.",
+        "formDisplayVCHeadingUser": "Account details",
         "formComplianceCheck": "But first, we have to do the compliance check.",
         "formComplianceCheckHeading": "Your onboarding request will be checked by the AISBL. This may take some time. Please enter your email address to receive status updates of your onboarding.",
         "formEmailValidationError": "Invalid email format, please check.",

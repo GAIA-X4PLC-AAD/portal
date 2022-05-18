@@ -6,17 +6,16 @@ import VerticalSteps from "./VerticalSteps";
 import Modal from "../Modal";
 import configData from "../config/config.json";
 
-import PropTypes from 'prop-types';
-
 const RegisterDisplayVC = (props) => {
 
     const navigate = useNavigate();
     const [vrVC,setVRVC] = useState([]);
     const queryParams = useLocation().search;
     const mock = new URLSearchParams(queryParams).get("mock")
+    const mockPath = mock === "user" ? configData.uri_path.mock_vc_user : configData.uri_path.mock_vc_organization
 
     const getVRVC = () => {
-        axios.get("http://gaia-x.portal.local:8081" + configData.uri_path.mock_vc_user). // RFCT: use edge-service
+        axios.get(configData.EDGE_API_URI + mockPath).
             then(
                 (response) => {
                     setVRVC(response.data);
@@ -34,11 +33,11 @@ const RegisterDisplayVC = (props) => {
         <div className="RegisterUser">
             <div className="registerHelpText">
                 <h3>{props.t("form.formUserHeadline")}</h3>
-                <p>{props.t("form.formDisplayVC")}</p>
+                <p>{mock === "user" ? props.t("form.formDisplayVCUser") : props.t("form.formDisplayVC")}</p>
             </div>
             <VerticalSteps current="3" numSteps="4"/>
             <div className="registerInputs">
-            <p> {props.t("form.formDisplayVCHeading")}</p>
+            <p> {mock === "user" ? props.t("form.formDisplayVCHeadingUser") : props.t("form.formDisplayVCHeading")}</p>
             <form className="registerFormUser" noValidate>
                 <input placeholder={vrVC.name} disabled="" />
                 <input placeholder={vrVC.phone_number} disabled="" />
@@ -61,10 +60,6 @@ const RegisterDisplayVC = (props) => {
             {formDisplayVC()}
         </Modal>
     );
-}
-
-RegisterDisplayVC.propTypes = {
-    t: PropTypes.func,
 }
 
 export default withTranslation()(RegisterDisplayVC);

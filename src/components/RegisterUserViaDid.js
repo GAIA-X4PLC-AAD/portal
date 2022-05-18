@@ -1,5 +1,6 @@
 import React, {useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import Modal from "../Modal";
 import "./Register.css";
@@ -7,10 +8,9 @@ import VerticalSteps from "./VerticalSteps";
 import configData from "../config/config.json";
 import AuthPolling from "./AuthPolling";
 
-import PropTypes from 'prop-types';
-
 const RegisterUserViaDid = (props) => {
 
+    const navigate = useNavigate();
     const [img, setImg] = useState({});
 
     useEffect(  () => {
@@ -26,7 +26,7 @@ const RegisterUserViaDid = (props) => {
     }
 
     const noDid = () => {
-        alert("Under construction.");
+        navigate("/register/IdP?mock=user")
     }
 
     const onAuthZSuccess = () => {
@@ -62,8 +62,8 @@ const RegisterUserViaDid = (props) => {
                         <img src={img} width="150px" height="150px" alt="Loading..."/>
                     </div>
                     <div className="formButtons">
-                        <button disabled type="submit"><a href={configData.PORTAL_URI + "/register/displayVC?mock=user"}>{props.t("form.continue")}</a></button>
-                        <button disabled onClick={noDid}>{props.t("form.noDid")}</button>
+                        <button type="submit" onClick={() => navigate("/register/displayVC?mock=user")}>{props.t("form.continue")}</button>
+                        <button onClick={noDid}>{props.t("form.noDid")}</button>
                     </div>
                 </form>
             </div>
@@ -76,10 +76,6 @@ const RegisterUserViaDid = (props) => {
             {formUserViaDid()}
         </Modal>
     );
-}
-
-RegisterUserViaDid.propTypes = {
-    t: PropTypes.func,
 }
 
 export default withTranslation()(RegisterUserViaDid);
