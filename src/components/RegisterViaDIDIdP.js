@@ -5,6 +5,8 @@ import axios from "axios";
 import Modal from "../Modal";
 import configData from "../config/config.json";
 
+import PropTypes from 'prop-types';
+
 const RegisterViaDIDIdP = (props) => {
 
     const navigate = useNavigate();
@@ -51,6 +53,10 @@ const RegisterViaDIDIdP = (props) => {
         </Modal>
     );
 
+}
+
+RegisterViaDIDIdP.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation()(RegisterViaDIDIdP);

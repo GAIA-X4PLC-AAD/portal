@@ -8,6 +8,8 @@ import axios from "axios";
 import configData from "../config/config.json";
 import LoginFail from "./login/LoginFail";
 
+import PropTypes from 'prop-types';
+
 const RegisterViaDID = (props) => {
 
     const navigate = useNavigate();
@@ -76,6 +78,10 @@ const RegisterViaDID = (props) => {
     
     );
 
+}
+
+RegisterViaDID.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation()(RegisterViaDID);
