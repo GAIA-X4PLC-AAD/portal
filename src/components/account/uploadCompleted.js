@@ -4,6 +4,8 @@ import Modal from '../../Modal';
 import './upload_completed.css';
 import { useNavigate } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+
 const UploadCompleted = (props) => {
   
   const navigate = useNavigate();
@@ -27,5 +29,12 @@ const UploadCompleted = (props) => {
     </Modal>
   );
 }
+
+UploadCompleted.propTypes = {
+  t: PropTypes.func,
+  showAlertMessage: PropTypes.string,
+  message: PropTypes.string,
+}
+
 
 export default withTranslation() (UploadCompleted);

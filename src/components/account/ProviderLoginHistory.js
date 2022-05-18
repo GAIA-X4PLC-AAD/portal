@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import configData from "../../config/config.json";
 import "./ProviderLoginHistory.css";
+import PropTypes from 'prop-types';
 
 const ProviderLoginHistory = (props) => {
 
@@ -10,27 +11,27 @@ const ProviderLoginHistory = (props) => {
     const [history, setHistory] = useState([]);
 
 
-    useEffect (()=>{
-        axios.get(configData.EDGE_API_URI + '/account/provider/history').then(   (response) => {
+    useEffect(() => {
+        axios.get(configData.EDGE_API_URI + '/account/provider/history').then((response) => {
             console.log(response.data);
             setHistory(response.data.history);
-    },(error)=> {
-          alert('ko');
-    });
+        }, (error) => {
+            alert('ko');
+        });
     }, []);
 
 
     const printTableRows = (rows) => {
         console.log(rows);
-       return ( rows.map((row, i) => {
+        return (rows.map((row, i) => {
             return (
-              <tr key={row.id} className="provider-history-row">
-                 <td className="provider-history-cell"> {row.date}</td>
-                 <td className="provider-history-cell"> {row.time}</td>
-                 <td className="provider-history-cell"> {row.name}</td>
-              </tr>
+                <tr key={row.id} className="provider-history-row">
+                    <td className="provider-history-cell"> {row.date}</td>
+                    <td className="provider-history-cell"> {row.time}</td>
+                    <td className="provider-history-cell"> {row.name}</td>
+                </tr>
             )
-          }));
+        }));
 
     }
 
@@ -47,11 +48,15 @@ const ProviderLoginHistory = (props) => {
                 <tbody>
                     {printTableRows(history)}
                 </tbody>
-    
+
             </table>
-        </div>    
+        </div>
     );
 
 }
 
-export default withTranslation() (ProviderLoginHistory);
+ProviderLoginHistory.propTypes = {
+    t: PropTypes.func,
+}
+
+export default withTranslation()(ProviderLoginHistory);

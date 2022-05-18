@@ -5,6 +5,8 @@ import axios from "axios";
 import Modal from "../Modal";
 import configData from "../config/config.json";
 
+import PropTypes from 'prop-types';
+
 const RegisterViaDIDIdP = (props) => {
 
     const navigate = useNavigate();
@@ -30,7 +32,7 @@ const RegisterViaDIDIdP = (props) => {
             <div className="registerIdP-list">
                 {idPList.map((item) => {
                     return (
-                        <div className="registerIdP-col">
+                        <div key={item['id']} className="registerIdP-col">
                             <div><span className="mock-logo">logo</span>{item.name}</div><a href={item.link}>Link</a>
                         </div>
                     );
@@ -49,6 +51,10 @@ const RegisterViaDIDIdP = (props) => {
         </Modal>
     );
 
+}
+
+RegisterViaDIDIdP.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation()(RegisterViaDIDIdP);

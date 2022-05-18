@@ -3,6 +3,7 @@ import { withTranslation } from 'react-i18next';
 import Modal from '../../Modal';
 import './Login_fail.css';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const LoginFail = (props) => {
   
@@ -26,6 +27,12 @@ const LoginFail = (props) => {
       </div>
     </Modal>
   );
+}
+
+LoginFail.propTypes = {
+  t: PropTypes.func,
+  showAlertMessage: PropTypes.string,
+  message: PropTypes.string,
 }
 
 export default withTranslation() (LoginFail);

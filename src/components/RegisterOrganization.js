@@ -7,6 +7,8 @@ import VerticalSteps from "./VerticalSteps";
 import axios from "axios";
 import configData from "../config/config.json";
 
+import PropTypes from 'prop-types';
+
 const RegisterOrganization = (props) => {
 
     const navigate = useNavigate();
@@ -128,6 +130,10 @@ return (
 
 );
 
+}
+
+RegisterOrganization.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation()(RegisterOrganization);

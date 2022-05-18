@@ -1,4 +1,6 @@
 import { withTranslation } from "react-i18next";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const ServiceTilePrice = (props) => {
 
@@ -8,6 +10,10 @@ const ServiceTilePrice = (props) => {
         </div>
     );
 
+}
+
+ServiceTilePrice.propTypes = {
+    serviceId: PropTypes.string,
 }
 
 export default withTranslation() (ServiceTilePrice);

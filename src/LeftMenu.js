@@ -2,6 +2,8 @@ import React from "react";
 import {withTranslation} from 'react-i18next';
 import { Link } from "react-router-dom";
 
+import PropTypes from 'prop-types';
+
 class LeftMenu extends React.Component {
 
     render () {
@@ -17,6 +19,10 @@ class LeftMenu extends React.Component {
 
     }
 
+}
+
+LeftMenu.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation()(LeftMenu);
