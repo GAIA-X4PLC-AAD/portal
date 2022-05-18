@@ -121,6 +121,7 @@
         "contact": "Contact",
         "datasets": "Data sets",
         "services": "Services",
+        "sample": "Sample record",
         "header": {
             "stack": "Stack",
             "security": "Security",
