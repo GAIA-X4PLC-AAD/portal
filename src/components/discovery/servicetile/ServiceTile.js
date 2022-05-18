@@ -67,39 +67,55 @@ const ServiceTile = (props) => {
         )
     }
 
+
+    const showTileHeader = () => {
+
+
+        return (
+            <S.DiscoveryTile>
+                <S.DiscoveryTileHeader>
+                    <a href={"#" || input.services.ppr_url}>
+                        <img src={input.services.logo} alt="Provider Logo"></img>
+                    </a>
+                    <div>
+                        <S.DiscoveryTileFirstRow>{input.services.name}</S.DiscoveryTileFirstRow>
+                        <S.DiscoveryTileSecondRow>{input.services.ppr_name}</S.DiscoveryTileSecondRow>
+                    </div>
+                    <div>
+                        <S.DiscoveryTileFirstRow>{props.t("service-tile.header.stack")}</S.DiscoveryTileFirstRow>
+                        <S.DiscoveryTileSecondRow>{input.services.stack}</S.DiscoveryTileSecondRow>
+                    </div>
+                    <div>
+                        <S.DiscoveryTileFirstRow>{props.t("service-tile.header.security")}</S.DiscoveryTileFirstRow>
+                        <S.DiscoveryTileSecondRow>{input.services.security}</S.DiscoveryTileSecondRow>
+                    </div>
+                    <div>
+                        <S.DiscoveryTileFirstRow>{props.t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
+                        <S.DiscoveryTileSecondRow>{input.services.location}</S.DiscoveryTileSecondRow>
+                    </div>
+                    <S.DiscoveryDetailsButton onClick={() => styleDivHidden(showDetails)}>
+                        {props.t("service-tile.details")}
+                    </S.DiscoveryDetailsButton>
+                </S.DiscoveryTileHeader>
+            </S.DiscoveryTile>
+        );
+    }
+
+    const showTileContent = () => {
+        return (
+        <S.DiscoveryDetailsContent ref={contentRef}>
+            <S.DiscoveryDetailsBody>
+                {showComponent()}
+            </S.DiscoveryDetailsBody>
+        </S.DiscoveryDetailsContent>
+
+        );
+    }
+
     return (
-        <S.DiscoveryTile>
-            <S.DiscoveryTileHeader>
-                <a href={"#" || input.services.ppr_url}>
-                    <img src={input.services.logo} alt="Provider Logo"></img>
-                </a>
-                <div>
-                    <S.DiscoveryTileFirstRow>{input.services.name}</S.DiscoveryTileFirstRow>
-                    <S.DiscoveryTileSecondRow>{input.services.ppr_name}</S.DiscoveryTileSecondRow>
-                </div>
-                <div>
-                    <S.DiscoveryTileFirstRow>{props.t("service-tile.header.stack")}</S.DiscoveryTileFirstRow>
-                    <S.DiscoveryTileSecondRow>{input.services.stack}</S.DiscoveryTileSecondRow>
-                </div>
-                <div>
-                    <S.DiscoveryTileFirstRow>{props.t("service-tile.header.security")}</S.DiscoveryTileFirstRow>
-                    <S.DiscoveryTileSecondRow>{input.services.security}</S.DiscoveryTileSecondRow>
-                </div>
-                <div>
-                    <S.DiscoveryTileFirstRow>{props.t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
-                    <S.DiscoveryTileSecondRow>{input.services.location}</S.DiscoveryTileSecondRow>
-                </div>
-                <S.DiscoveryDetailsButton onClick={() => styleDivHidden(showDetails)}>
-                    {props.t("service-tile.details")}
-                </S.DiscoveryDetailsButton>
-            </S.DiscoveryTileHeader>
-            <S.DiscoveryHiddenContent ref={contentRef}>
-                <S.DiscoveryDetailsBody>
-                    {showComponent()}
-                </S.DiscoveryDetailsBody>
-            </S.DiscoveryHiddenContent>
-        </S.DiscoveryTile>
+        <ExpandableView initiallyExpanded={true} view={showTileContent()} title={showTileHeader()} />
     );
+
 }
 
 ServiceTile.propTypes = {

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const DiscoveryTile = styled.div`
     display: flex;
     flex-direction: column;
+    width: 95%;
 `;
   
 export const DiscoveryTileHeader = styled.div`
@@ -38,8 +39,8 @@ export const DiscoveryDetailsButton = styled.div`
     color: #000094;
 `;
 
-export const DiscoveryHiddenContent = styled.div`
-    display: none;
+export const DiscoveryDetailsContent = styled.div`
+    display: block;
 `;
 
 export const DiscoveryTileContent = styled.div`
@@ -48,7 +49,7 @@ export const DiscoveryTileContent = styled.div`
 `;
 
 export const DiscoveryDetailsBody = styled.div`
-    padding: 2em 2em;
+    padding: 0.5em 0.5em;
 `;
 
   export const DiscoveryDetailsNav = styled.div`

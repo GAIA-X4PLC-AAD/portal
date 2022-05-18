@@ -44,18 +44,18 @@ export const Center = styled.div`
 
 export const Block = styled.div`
   border: 1px solid #ccc;
-  margin: 0.1% 10%;
+  margin: 0.1%;
   min-width: 90%;
   /* min-height: 40%; */
 `
 
-export const ToggleButton = styled.button`
+export const ToggleButton = styled.div`
   font-size: 1em;
   border: 1px solid #ccc;
   background: transparent;
   box-shadow: none;
-  width: 100%;
-  margin: 0;
+  width: 96%;
+  margin: 5px;
   padding: 10px;
   text-align: left;
   cursor: pointer;

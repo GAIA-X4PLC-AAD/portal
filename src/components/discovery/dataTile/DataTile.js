@@ -63,37 +63,49 @@ const DataTile = (props) => {
         )
     }
 
-    return (
-        <S.DiscoveryTile>
-            <S.DiscoveryTileHeader>
-                <a href={"#" || input.ppr_url}>
-                    <img src={input.logo} alt="Provider Logo"></img>
-                </a>
-                <div>
-                    <S.DiscoveryTileFirstRow>{input.name}</S.DiscoveryTileFirstRow>
-                    <S.DiscoveryTileSecondRow>{input.ppr_name}</S.DiscoveryTileSecondRow>
-                </div>
-                <div>
-                    <S.DiscoveryTileFirstRow>{props.t("service-tile.header.sustainability")}</S.DiscoveryTileFirstRow>
-                    <S.DiscoveryTileSecondRow>{input.short_description}</S.DiscoveryTileSecondRow>
-                </div>
-                <div>
-                    <S.DiscoveryTileFirstRow>{props.t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
-                    <S.DiscoveryTileSecondRow>{input.location}</S.DiscoveryTileSecondRow>
-                </div>
-                <S.DiscoveryDetailsButton onClick={() => styleDivHidden(showDetails)}>
-                {props.t("service-tile.details")}
-                </S.DiscoveryDetailsButton>
-            </S.DiscoveryTileHeader>
-            <S.DiscoveryHiddenContent ref={contentRef}>
+    const showTileHeader = () => {
+        return (
+            <S.DiscoveryTile>
+                <S.DiscoveryTileHeader>
+                    <a href={"#" || input.ppr_url}>
+                        <img src={input.logo} alt="Provider Logo"></img>
+                    </a>
+                    <div>
+                        <S.DiscoveryTileFirstRow>{input.name}</S.DiscoveryTileFirstRow>
+                        <S.DiscoveryTileSecondRow>{input.ppr_name}</S.DiscoveryTileSecondRow>
+                    </div>
+                    <div>
+                        <S.DiscoveryTileFirstRow>{props.t("service-tile.header.sustainability")}</S.DiscoveryTileFirstRow>
+                        <S.DiscoveryTileSecondRow>{input.short_description}</S.DiscoveryTileSecondRow>
+                    </div>
+                    <div>
+                        <S.DiscoveryTileFirstRow>{props.t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
+                        <S.DiscoveryTileSecondRow>{input.location}</S.DiscoveryTileSecondRow>
+                    </div>
+                    <S.DiscoveryDetailsButton onClick={() => styleDivHidden(showDetails)}>
+                    {props.t("service-tile.details")}
+                    </S.DiscoveryDetailsButton>
+                </S.DiscoveryTileHeader>
+            </S.DiscoveryTile>
+        );
+    }
+
+    const showTileContent = () => {
+        return (
+            <S.DiscoveryDetailsContent ref={contentRef}>
             <S.DiscoveryTileContent>
                 <S.DiscoveryDetailsBody>
                     {showComponent()}
                 </S.DiscoveryDetailsBody>
             </S.DiscoveryTileContent>
-            </S.DiscoveryHiddenContent>
-        </S.DiscoveryTile>
+            </S.DiscoveryDetailsContent>
+        );
+    }
+
+    return (
+        <ExpandableView initiallyExpanded={true} view={showTileContent()} title={showTileHeader()} />
     );
+
 }
 
 DataTile.propTypes = {

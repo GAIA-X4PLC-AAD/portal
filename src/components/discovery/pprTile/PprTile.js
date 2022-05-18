@@ -62,8 +62,8 @@ const PprTile = (props) => {
             </>
         )
     }
-
-    return (
+    const showTileHeader = () => {
+        return (
         <S.DiscoveryTile>
             <S.DiscoveryTileHeader>
                 <a href={"#" || input.ppr_url}>
@@ -88,15 +88,25 @@ const PprTile = (props) => {
                 {props.t("service-tile.details")}
                 </S.DiscoveryDetailsButton>
             </S.DiscoveryTileHeader>
-            <S.DiscoveryHiddenContent ref={contentRef}>
+        </S.DiscoveryTile>
+    );
+    }
+    const showTileContent = () => {
+        return (
+            <S.DiscoveryDetailsContent ref={contentRef}>
             <S.DiscoveryTileContent>
                 <S.DiscoveryDetailsBody>
                     {showComponent()}
                 </S.DiscoveryDetailsBody>
             </S.DiscoveryTileContent>
-            </S.DiscoveryHiddenContent>
-        </S.DiscoveryTile>
+            </S.DiscoveryDetailsContent>
+        );
+    }
+
+    return (
+        <ExpandableView initiallyExpanded={true} view={showTileContent()} title={showTileHeader()} />
     );
+
 
 }
 
