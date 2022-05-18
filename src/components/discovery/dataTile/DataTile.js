@@ -1,4 +1,4 @@
-import React,{ useState, createRef } from "react";
+import React from "react";
 import { withTranslation } from "react-i18next";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import LoadingView from "../../loading_view/LoadingView";
@@ -12,9 +12,7 @@ const DataTile = (props) => {
     const {dataId} = useParams();
     const [queryParams, setQueryParams] = useSearchParams();
     const view = queryParams.get("view");
-    const [showDetails, setShowDetails] = useState(true);
-    const contentRef = createRef();
-
+    
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
             "type": "data",
             "logo": "URL to image of PPR logo",
@@ -31,16 +29,6 @@ const DataTile = (props) => {
             return "service-tile_active_tab";
         }
         return ""
-    }
-
-    const styleDivHidden = (bool) => {
-        if (bool) {
-            contentRef.current.style.display = 'block';
-        } 
-        else {
-            contentRef.current.style.display = 'none';
-        }
-        setShowDetails(!showDetails);
     }
 
     const DescriptionTab = ({ dataId }) => {
@@ -82,7 +70,7 @@ const DataTile = (props) => {
                         <S.DiscoveryTileFirstRow>{props.t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
                         <S.DiscoveryTileSecondRow>{input.location}</S.DiscoveryTileSecondRow>
                     </div>
-                    <S.DiscoveryDetailsButton onClick={() => styleDivHidden(showDetails)}>
+                    <S.DiscoveryDetailsButton>
                     {props.t("service-tile.details")}
                     </S.DiscoveryDetailsButton>
                 </S.DiscoveryTileHeader>
@@ -92,7 +80,7 @@ const DataTile = (props) => {
 
     const showTileContent = () => {
         return (
-            <S.DiscoveryDetailsContent ref={contentRef}>
+            <S.DiscoveryDetailsContent>
             <S.DiscoveryTileContent>
                 <S.DiscoveryDetailsBody>
                     {showComponent()}

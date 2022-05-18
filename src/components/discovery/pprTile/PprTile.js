@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { withTranslation } from "react-i18next";
-import { Link, useParams, useSearchParams } from "react-router-dom";
+import {  useParams, useSearchParams } from "react-router-dom";
 import "../servicetile/ServiceTile.css";
 import DescriptionTabView from "../tabs/DescriptionTabView";
 import * as S from '../style';
@@ -12,8 +12,6 @@ const PprTile = (props) => {
     const {pprId} = useParams();
     const [queryParams, setQueryParams] = useSearchParams();
     const view = queryParams.get("view");
-    const [showDetails, setShowDetails] = useState(true);
-    const contentRef = React.createRef();
 
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
             "type": "ppr",
@@ -31,16 +29,6 @@ const PprTile = (props) => {
             return "service-tile_active_tab";
         }
         return ""
-    }
-
-    const styleDivHidden = (bool) => {
-        if (bool) {
-            contentRef.current.style.display = 'block';
-        } 
-        else {
-            contentRef.current.style.display = 'none';
-        }
-        setShowDetails(!showDetails);
     }
 
     const DescriptionTab = ({ pprId }) => {
@@ -84,7 +72,7 @@ const PprTile = (props) => {
                     <S.DiscoveryTileFirstRow>{props.t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
                     <S.DiscoveryTileSecondRow>{input.location}</S.DiscoveryTileSecondRow>
                 </div>
-                <S.DiscoveryDetailsButton onClick={() => styleDivHidden(showDetails)}>
+                <S.DiscoveryDetailsButton>
                 {props.t("service-tile.details")}
                 </S.DiscoveryDetailsButton>
             </S.DiscoveryTileHeader>
@@ -93,7 +81,7 @@ const PprTile = (props) => {
     }
     const showTileContent = () => {
         return (
-            <S.DiscoveryDetailsContent ref={contentRef}>
+            <S.DiscoveryDetailsContent>
             <S.DiscoveryTileContent>
                 <S.DiscoveryDetailsBody>
                     {showComponent()}

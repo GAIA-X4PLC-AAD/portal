@@ -1,4 +1,4 @@
-import React, { useState, createRef } from "react";
+import React from "react";
 import { withTranslation } from "react-i18next";
 import { useParams, useSearchParams } from "react-router-dom";
 import * as S from '../style';
@@ -11,8 +11,6 @@ const ServiceTile = (props) => {
     const { serviceId } = useParams();
     const [queryParams, setQueryParams] = useSearchParams();
     const view = queryParams.get("view");
-    const [showDetails, setShowDetails] = useState(true);
-    const contentRef = createRef();
 
 
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
@@ -93,7 +91,7 @@ const ServiceTile = (props) => {
                         <S.DiscoveryTileFirstRow>{props.t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
                         <S.DiscoveryTileSecondRow>{input.services.location}</S.DiscoveryTileSecondRow>
                     </div>
-                    <S.DiscoveryDetailsButton onClick={() => styleDivHidden(showDetails)}>
+                    <S.DiscoveryDetailsButton>
                         {props.t("service-tile.details")}
                     </S.DiscoveryDetailsButton>
                 </S.DiscoveryTileHeader>
@@ -103,7 +101,7 @@ const ServiceTile = (props) => {
 
     const showTileContent = () => {
         return (
-        <S.DiscoveryDetailsContent ref={contentRef}>
+        <S.DiscoveryDetailsContent>
             <S.DiscoveryDetailsBody>
                 {showComponent()}
             </S.DiscoveryDetailsBody>
