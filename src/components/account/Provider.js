@@ -6,6 +6,7 @@ import ProviderCredentials from "./ProviderCredentials";
 import ProviderDetails from "./ProviderDetails";
 import ProviderEdit from "./ProviderEdit";
 import ProviderLoginHistory from "./ProviderLoginHistory";
+import PropTypes from 'prop-types';
 
 const Provider = (props) => {
     const {tab} = useParams();
@@ -70,6 +71,10 @@ const Provider = (props) => {
                 {showComponent()}
         </div>
     );
+}
+
+Provider.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation () (Provider);

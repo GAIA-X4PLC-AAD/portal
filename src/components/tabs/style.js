@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
 
 export const TopMenu = styled.div`
   display: flex;
@@ -40,12 +41,9 @@ export const HeaderButton = styled.button`
   font-weight: 700;
 `
 
-export const SmallPadding = styled.div`
-  padding: 8px;
-`
 
 export const Padding = styled.div`
-  padding: ${props => props.vertical} ${props => props.horizontal};
+  padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
 `
 
 export const ExpandedContainer = styled.section`
@@ -54,6 +52,54 @@ export const ExpandedContainer = styled.section`
   width: 100%;
   text-align: start;
 `;
+
+export const AnimatedVisibility = styled.div`
+${(props) => {
+  if (props.visible) {
+    return css`
+    opacity:1;
+    width:100%;
+    height:100%;
+    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+  `;
+  } else {
+    return css`
+    opacity:0;
+    width:0;
+    height:0;
+    transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+  `;
+  }
+
+}}
+`
+
+export const Center = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+export const ContainerX = styled.div`
+  max-height: 600px;
+  min-height: 400px;
+
+  max-width: 600px;
+  min-width: 400px;
+`
+
+export const CircularLoader = styled.div`
+  border: 6px solid #f3f3f3; /* Light grey */
+  border-top: 6px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 2s linear infinite;
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`
 
 export const VerticalContainer = styled.div`
   display: flex;
@@ -73,8 +119,10 @@ export const HorizontalContainer = styled.div`
 export const Image = styled.img`
   display: inline-block;
   vertical-align: middle;
-  width: 50%;
-  height: auto;
+
+  height: fit-content;
+  max-width: 256px;
+  min-width: 128px;
 
 `;
 
@@ -124,7 +172,6 @@ export const Tag = styled.div`
   /* Tag */
   padding: 2px 12px;
   gap: 10px;
-  color: white;
   margin: 0px 8px;
   /* Background/Primary */
   background: #000094;
@@ -134,6 +181,7 @@ export const Tag = styled.div`
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
+  color: white;
   line-height: 16px;
 `
 

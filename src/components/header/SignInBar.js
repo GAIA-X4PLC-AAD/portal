@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 
 import * as S from './style';
 
+import PropTypes from 'prop-types';
+
 //
 // each function component is independent, isolated and testable.
 // state is managed inside the component itself
@@ -15,7 +17,7 @@ function UserInfoButton() {
   const _userName = useSelector((state) => state.user.user.first_name)
 
   return <S.HeaderButton onClick={() => { }}>{_userName}</S.HeaderButton>
-};
+}
 
 // SIGNOUT
 const SignOutButton = ({ onClicked }) => {
@@ -23,16 +25,28 @@ const SignOutButton = ({ onClicked }) => {
   return <S.HeaderButton onClick={onClicked} id="top-menu-signout">{t('top-menu.signout')}</S.HeaderButton>
 };
 
+SignOutButton.propTypes = {
+  onClicked: PropTypes.func,
+}
+
 // SIGNIN
 const SignInButton = ({ onClicked }) => {
   const { t, } = useTranslation();
   return <S.HeaderButton onClick={onClicked} id="top-menu-signin">{t('top-menu.signin')}</S.HeaderButton>
 }
 
+SignInButton.propTypes = {
+  onClicked: PropTypes.func,
+}
+
 // REGISTER
 const RegisterButton = ({ onClicked }) => {
   const { t, } = useTranslation();
   return <S.HeaderButton onClick={onClicked} id="top-menu-register">{t('top-menu.register')}</S.HeaderButton>
+}
+
+RegisterButton.propTypes = {
+  onClicked: PropTypes.func,
 }
 
 const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
@@ -60,6 +74,12 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
     )
   }
 
+}
+
+SignInBar.propTypes = {
+  handleSignIn: PropTypes.func,
+  handleSignOut: PropTypes.func,
+  handleRegister: PropTypes.func,
 }
 
 export default SignInBar

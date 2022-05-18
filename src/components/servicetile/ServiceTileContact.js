@@ -1,4 +1,7 @@
 import { withTranslation } from "react-i18next";
+import React from 'react';
+
+import PropTypes from 'prop-types';
 
 const ServiceTileContact = (props) => {
 
@@ -8,6 +11,10 @@ const ServiceTileContact = (props) => {
         </div>
     );
 
+}
+
+ServiceTileContact.propTypes = {
+    serviceId: PropTypes.string,
 }
 
 export default withTranslation() (ServiceTileContact);

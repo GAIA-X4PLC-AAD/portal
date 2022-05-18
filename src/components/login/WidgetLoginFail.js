@@ -4,6 +4,8 @@ import Modal from '../../Modal';
 import './Login_fail.css';
 import { useNavigate } from 'react-router-dom';
 
+import PropTypes from 'prop-types';
+
 const LoginFail = (props) => {
   const navigate = useNavigate();
   return (
@@ -21,6 +23,10 @@ const LoginFail = (props) => {
       </div>
     </Modal>
   );
+}
+
+LoginFail.propTypes = {
+  t: PropTypes.func,
 }
 
 export default withTranslation() (LoginFail);

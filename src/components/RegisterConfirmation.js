@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Modal from "../Modal";
 import VerticalSteps from "./VerticalSteps";
 import configData from "../config/config.json";
+import PropTypes from 'prop-types';
 
 const RegisterConfirmation = (props) => {
 
@@ -58,6 +59,10 @@ const RegisterConfirmation = (props) => {
 
     );
 
+}
+
+RegisterConfirmation.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation()(RegisterConfirmation);

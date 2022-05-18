@@ -6,6 +6,8 @@ import VerticalSteps from "./VerticalSteps";
 import Modal from "../Modal";
 import configData from "../config/config.json";
 
+import PropTypes from 'prop-types';
+
 const RegisterDisplayVC = (props) => {
 
     const navigate = useNavigate();
@@ -59,6 +61,10 @@ const RegisterDisplayVC = (props) => {
             {formDisplayVC()}
         </Modal>
     );
+}
+
+RegisterDisplayVC.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation()(RegisterDisplayVC);

@@ -4,9 +4,7 @@ import configData from "../config/config.json";
 import axios from "axios";
 import './Article.css';
 import { withTranslation } from "react-i18next";
-
-
-
+import PropTypes from 'prop-types';
 
 const Article = ({category, headerMessage,t}) => {
     const [callFlag, setCallFlag] = useState(false); 
@@ -71,4 +69,12 @@ const Article = ({category, headerMessage,t}) => {
         </div>
         );
 }
+
+
+Article.propTypes = {
+    category: PropTypes.string,
+    headerMessage: PropTypes.string,
+    t: PropTypes.func,
+}
+
 export default withTranslation()(Article);

@@ -7,6 +7,8 @@ import VerticalSteps from "./VerticalSteps";
 import configData from "../config/config.json";
 import AuthPolling from "./AuthPolling";
 
+import PropTypes from 'prop-types';
+
 const RegisterUserViaDid = (props) => {
 
     const [img, setImg] = useState({});
@@ -74,6 +76,10 @@ const RegisterUserViaDid = (props) => {
             {formUserViaDid()}
         </Modal>
     );
+}
+
+RegisterUserViaDid.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation()(RegisterUserViaDid);
