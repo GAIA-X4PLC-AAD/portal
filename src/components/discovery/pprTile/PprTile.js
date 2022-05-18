@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
 import { Link, useParams, useSearchParams } from "react-router-dom";
-import "../../servicetile/ServiceTile.css";
-import ServiceTileDetails from "../../servicetile/ServiceTileDetails";
-import ServiceTileContact from "../../servicetile/ServiceTileContact";
-import * as S from './style';
+import "../servicetile/ServiceTile.css";
+import DescriptionTabView from "../tabs/DescriptionTabView";
+import * as S from '../style';
+import PropTypes from 'prop-types';
+import LoadingView from "../../loading_view/LoadingView";
+import ExpandableView from "../../expandable/ExpandableView";
 
 const PprTile = (props) => {
     const {pprId} = useParams();
@@ -41,27 +43,25 @@ const PprTile = (props) => {
         setShowDetails(!showDetails);
     }
 
-    const showComponent = () => {
-        switch (view) {
-            case "Details":
-                return (<ServiceTileDetails serviceId={pprId} />);
-            case "Services":
-                return null;
-            case "Datasets":
-                return null;
-            case "Contact":
-                return (<ServiceTileContact serviceId={pprId} />);
-            default:
-                return null;
-        }
+    const DescriptionTab = ({ pprId }) => {
+        return (
+            <LoadingView
+                url={`https://reqres.in/api/users/${pprId}?delay=1`}
+                successView={DescriptionTabView}
+            />
+        )
     }
 
-    const addTab = (linkName, view) => {
+    const showComponent = () => {
         return (
-            <h4 className={"service-tile_nav_item " + `${styleTabActive(view)}`}>
-                <Link to={`/pprtile/${pprId}?view=${view}`}>{linkName}</Link>
-            </h4>
-    );}
+            <>
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.details")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.services")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.datasets")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.contact")} />
+            </>
+        )
+    }
 
     return (
         <S.DiscoveryTile>
@@ -90,12 +90,6 @@ const PprTile = (props) => {
             </S.DiscoveryTileHeader>
             <S.DiscoveryHiddenContent ref={contentRef}>
             <S.DiscoveryTileContent>
-                <S.DiscoveryDetailsNav>
-                    {addTab(props.t("service-tile.details"), "Details")}
-                    {addTab(props.t("service-tile.services"), "Service")}
-                    {addTab(props.t("service-tile.datasets"), "Datasets")}
-                    {addTab(props.t("service-tile.contact"), "Contact")}
-                </S.DiscoveryDetailsNav>
                 <S.DiscoveryDetailsBody>
                     {showComponent()}
                 </S.DiscoveryDetailsBody>
@@ -103,6 +97,13 @@ const PprTile = (props) => {
             </S.DiscoveryHiddenContent>
         </S.DiscoveryTile>
     );
+
 }
+
+PprTile.propTypes = {
+    pprId: PropTypes.int,
+    t: PropTypes.func
+}
+
 
 export default withTranslation () (PprTile);

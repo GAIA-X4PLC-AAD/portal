@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React,{ useState, createRef } from "react";
 import { withTranslation } from "react-i18next";
 import { Link, useParams, useSearchParams } from "react-router-dom";
-import "../../servicetile/ServiceTile.css";
-import ServiceTileDetails from "../../servicetile/ServiceTileDetails";
-import ServiceTileContact from "../../servicetile/ServiceTileContact";
-import * as S from '../pprTile/style';
+import LoadingView from "../../loading_view/LoadingView";
+import ExpandableView from "../../expandable/ExpandableView";
+import "../servicetile/ServiceTile.css";
+import * as S from '../style';
+import PropTypes from 'prop-types';
+import DescriptionTabView from "../tabs/DescriptionTabView";
 
 const DataTile = (props) => {
     const {dataId} = useParams();
     const [queryParams, setQueryParams] = useSearchParams();
     const view = queryParams.get("view");
     const [showDetails, setShowDetails] = useState(true);
-    const contentRef = React.createRef();
+    const contentRef = createRef();
 
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
             "type": "data",
@@ -41,27 +43,25 @@ const DataTile = (props) => {
         setShowDetails(!showDetails);
     }
 
-    const showComponent = () => {
-        switch (view) {
-            case "Details":
-                return (<ServiceTileDetails serviceId={dataId} />);
-            case "Price":
-                return null;
-            case "Sample":
-                return null;
-            case "Contact":
-                return (<ServiceTileContact serviceId={dataId} />);
-            default:
-                return null;
-        }
+    const DescriptionTab = ({ dataId }) => {
+        return (
+            <LoadingView
+                url={`https://reqres.in/api/users/${dataId}?delay=1`}
+                successView={DescriptionTabView}
+            />
+        )
     }
 
-    const addTab = (linkName, view) => {
+    const showComponent = () => {
         return (
-            <h4 className={"service-tile_nav_item " + `${styleTabActive(view)}`}>
-                <Link to={`/datatile/${dataId}?view=${view}`}>{linkName}</Link>
-            </h4>
-    );}
+            <>
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ dataId: 1 })} title={props.t("service-tile.details")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ dataId: 1 })} title={props.t("service-tile.price")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ dataId: 1 })} title={props.t("service-tile.sample")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ dataId: 1 })} title={props.t("service-tile.contact")} />
+            </>
+        )
+    }
 
     return (
         <S.DiscoveryTile>
@@ -87,12 +87,6 @@ const DataTile = (props) => {
             </S.DiscoveryTileHeader>
             <S.DiscoveryHiddenContent ref={contentRef}>
             <S.DiscoveryTileContent>
-                <S.DiscoveryDetailsNav>
-                    {addTab(props.t("service-tile.details"), "Details")}
-                    {addTab(props.t("service-tile.price"), "Price")}
-                    {addTab(props.t("service-tile.sample"), "Sample")}
-                    {addTab(props.t("service-tile.contact"), "Contact")}
-                </S.DiscoveryDetailsNav>
                 <S.DiscoveryDetailsBody>
                     {showComponent()}
                 </S.DiscoveryDetailsBody>
@@ -100,6 +94,11 @@ const DataTile = (props) => {
             </S.DiscoveryHiddenContent>
         </S.DiscoveryTile>
     );
+}
+
+DataTile.propTypes = {
+    dataId: PropTypes.int,
+    t: PropTypes.func,
 }
 
 export default withTranslation () (DataTile);
