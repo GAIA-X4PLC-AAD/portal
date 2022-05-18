@@ -103,7 +103,7 @@ const ServiceTile = (props) => {
 }
 
 ServiceTile.propTypes = {
-    serviceId: PropTypes.int,
+    serviceId: PropTypes.func,
     t: PropTypes.func,
 }
 
