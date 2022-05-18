@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Modal from "../Modal";
 import VerticalSteps from "./VerticalSteps";
 
+import PropTypes from 'prop-types';
+
 const RegisterMailSent = (props) => {
 
     const navigate = useNavigate();
@@ -40,6 +42,10 @@ const RegisterMailSent = (props) => {
     
     );
 
+}
+
+RegisterMailSent.propTypes = {
+    t: PropTypes.func,
 }
 
 export default withTranslation()(RegisterMailSent);

@@ -1,6 +1,8 @@
 import React from "react";
 import {withTranslation} from 'react-i18next';
 
+import PropTypes from 'prop-types';
+
 const MessageBar = (props) => {
     if (props.itemCount === 0) {
       return (
@@ -12,5 +14,11 @@ const MessageBar = (props) => {
       */
     }
 }
+
+MessageBar.propTypes = {
+  itemCount: PropTypes.int,
+  t: PropTypes.func,
+}
+
 
 export default withTranslation() (MessageBar);

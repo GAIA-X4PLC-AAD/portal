@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { compose } from 'redux';
 import "./Login.css";
@@ -10,6 +9,8 @@ import LoginFail from "./LoginFail";
 import AuthPolling from "../AuthPolling";
 import axios from "axios";
 import configData from "../../config/config.json";
+
+import PropTypes from 'prop-types';
 
 export const withNavigation = (Component) => {
   return props => <Component {...props} navigate={useNavigate()} />;
@@ -67,7 +68,7 @@ class Login extends Component {
     });
 
     // url to be redirected
-    window.location.href = this.state.walletLink;;
+    window.location.href = this.state.walletLink;
   }
 
 
@@ -121,6 +122,14 @@ class Login extends Component {
     );
   }
 
+}
+
+Login.propTypes = {
+  t: PropTypes.func,
+  signInMenuEnter: PropTypes.func,
+  signIn: PropTypes.func,
+  navigate: PropTypes.func,
+  signInMenuQuit: PropTypes.func,
 }
 
 export default compose(withTranslation(), connect(null, { signInMenuEnter, signInMenuQuit, signIn }))(withNavigation(Login));

@@ -119,10 +119,15 @@
         "price": "Price",
         "screenshots": "Screenshots",
         "contact": "Contact",
+        "datasets": "Data sets",
+        "services": "Services",
+        "sample": "Sample record",
         "header": {
             "stack": "Stack",
             "security": "Security",
-            "location": "Location"
+            "location": "Location",
+            "sustainability": "Sustainability",
+            "availability": "Availability"
         },
         "bookButton": "Book"
     },

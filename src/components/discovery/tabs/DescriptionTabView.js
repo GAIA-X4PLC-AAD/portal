@@ -1,6 +1,9 @@
-import React from 'react';
+
+import React, { useState, useRef, useEffect } from "react";
 
 import * as S from './style';
+import PropTypes from 'prop-types';
+
 
 const ColumnItem = ({ title, subtitle }) => {
   return <>
@@ -13,14 +16,24 @@ const ColumnItem = ({ title, subtitle }) => {
   </>
 }
 
-const DescriptionTab = ( { serviceId } ) => {
+ColumnItem.propTypes = {
+  title: PropTypes.string.isRequired,
+  subtitle: PropTypes.string.isRequired,
+}
+
+const DescriptionTabView = (props,) => {
+
+  useEffect(() => {
+    console.log(`DescriptionTab, props.data: ${props.data}`)
+  }, [props.data]);
 
   return (
     <>
+
       <S.ExpandedContainer>
         <S.Image src="https://images.pexels.com/photos/2458118/pexels-photo-2458118.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
         <S.VerticalContainer horizontal='8px'>
-          <S.SmallPadding>
+          <S.Padding horizontal='8px'>
             <S.Title>Description</S.Title>
             <S.Body>The data (“Data”) is provided for your personal, internal use only and not for resale.  It is protected by copyright, and is subject to the following terms and conditions which are agreed to by you, on the one hand, and [OWNER] and its licensors (including their licensors and suppliers) on the other hand.</S.Body>
 
@@ -39,10 +52,10 @@ const DescriptionTab = ( { serviceId } ) => {
               <ColumnItem title='STACK' subtitle='Stack' />
               <ColumnItem title='DATE' subtitle='01.05.2022' />
               <ColumnItem title='TERMS OF USE' subtitle='Terms of Use' />
-              <ColumnItem title='LOCATION' subtitle='Germany'/>
-              <ColumnItem title='CATEGORY' subtitle='Category'/>
+              <ColumnItem title='LOCATION' subtitle='Germany' />
+              <ColumnItem title='CATEGORY' subtitle='Category' />
             </S.HorizontalContainer>
-          </S.SmallPadding>
+          </S.Padding>
         </S.VerticalContainer>
 
       </S.ExpandedContainer>
@@ -50,6 +63,9 @@ const DescriptionTab = ( { serviceId } ) => {
   )
 }
 
-export default DescriptionTab
+DescriptionTabView.propTypes = {
+  // serviceId: PropTypes.number.isRequired,
+  data: PropTypes.object.isRequired,
+}
 
-
+export default DescriptionTabView
