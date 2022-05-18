@@ -101,7 +101,7 @@ const PprTile = (props) => {
 }
 
 PprTile.propTypes = {
-    pprId: PropTypes.int,
+    pprId: PropTypes.func,
     t: PropTypes.func
 }
 

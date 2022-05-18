@@ -97,7 +97,7 @@ const DataTile = (props) => {
 }
 
 DataTile.propTypes = {
-    dataId: PropTypes.int,
+    dataId: PropTypes.func,
     t: PropTypes.func,
 }
 
