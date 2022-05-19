@@ -39,7 +39,7 @@ class Login extends Component {
       })
   }
 
-  onAuthZSuccess = () => {
+   onAuthZSuccess = () => {
     this.props.signIn();
     this.props.navigate('/');
   }

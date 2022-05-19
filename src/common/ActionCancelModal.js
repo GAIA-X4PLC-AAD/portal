@@ -2,6 +2,7 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import Modal from '../Modal';
 import * as S from './ActionCancelModalStyle.js';
+import PropTypes from 'prop-types';
 
 const ActionCancelModal = (props) => {
   
@@ -28,6 +29,16 @@ const ActionCancelModal = (props) => {
       </S.FlexColumn>
     </Modal>
   );
+}
+
+ActionCancelModal.propTypes = {
+  t: PropTypes.func,
+  actionCallback: PropTypes.func,
+  cancelCallback: PropTypes.func,
+  showAlertMessage: PropTypes.bool,
+  actionMessage: PropTypes.string,
+  message: PropTypes.string,
+  header: PropTypes.string,
 }
 
 export default withTranslation() (ActionCancelModal);

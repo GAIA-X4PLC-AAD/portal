@@ -2,20 +2,24 @@ import React, { useState } from "react";
 import { withTranslation } from "react-i18next";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import "./ServiceTile.css";
-import ServiceTilePrice from "./ServiceTilePrice";
-import ServiceTileScreenshots from "./ServiceTileScreenshots";
-import ServiceTileContact from "./ServiceTileContact";
+import { useTranslation } from 'react-i18next';
+
 
 import PropTypes from 'prop-types';
-import LoadingView from "../loading_view/LoadingView";
-import DescriptionTabView from "../tabs/DescriptionTabView";
-import ExpandableView from "../expandable/ExpandableView";
 
-const ServiceTile = (props) => {
+import DescriptionTabView from "../tabs/Description/DescriptionTabView";
+import ExpandableView from "../expandable/ExpandableView";
+import LoadingView from "../loading_view/LoadingView";
+import ScreenshotsTabView from "../tabs/Screenshots/ScreenshotsTabView";
+
+const ServiceTile = () => {
     const { serviceId } = useParams();
-    const [queryParams, setQueryParams] = useSearchParams();
+    const [queryParams, ] = useSearchParams();
     const view = queryParams.get("view");
     const [showDetails, setShowDetails] = useState(true);
+
+    const { t, } = useTranslation();
+
 
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
         "services": {
@@ -54,12 +58,22 @@ const ServiceTile = (props) => {
         )
     }
 
+    const ScreenshotsTab = ({ serviceId }) => {
+        return (
+            <LoadingView
+                url={`https://reqres.in/api/users/${serviceId}?delay=1`}
+                successView={ScreenshotsTabView}
+            />
+        )
+    }
+
     const showComponent = () => {
         return (
             <>
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ serviceId: 1 })} title='Details' />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ serviceId: 1 })} title='Details' />
                 <ExpandableView initiallyExpanded={false} view={DescriptionTab({ serviceId: 2 })} title='Price' />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ serviceId: 3 })} title='Screenshot' />
+                <ExpandableView initiallyExpanded={true} view={ScreenshotsTab({ serviceId: 3 })} title='Screenshots' />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ serviceId: 3 })} title='Contact' />
             </>
         )
     }
@@ -83,19 +97,19 @@ const ServiceTile = (props) => {
                     <div className="service-tile_header_nd_row">{input.services.ppr_name}</div>
                 </div>
                 <div>
-                    <div className="service-tile_header_st_row">{props.t("service-tile.header.stack")}</div>
+                    <div className="service-tile_header_st_row">{t("service-tile.header.stack")}</div>
                     <div className="service-tile_header_nd_row">{input.services.stack}</div>
                 </div>
                 <div>
-                    <div className="service-tile_header_st_row">{props.t("service-tile.header.security")}</div>
+                    <div className="service-tile_header_st_row">{t("service-tile.header.security")}</div>
                     <div className="service-tile_header_nd_row">{input.services.security}</div>
                 </div>
                 <div>
-                    <div className="service-tile_header_st_row">{props.t("service-tile.header.location")}</div>
+                    <div className="service-tile_header_st_row">{t("service-tile.header.location")}</div>
                     <div className="service-tile_header_nd_row">{input.services.location}</div>
                 </div>
                 <div className="service-tile_header_details" onClick={() => setShowDetails(!showDetails)}>
-                    {props.t("service-tile.details")}
+                    {t("service-tile.details")}
                 </div>
             </div>
             <div className={`${styleDivHidden(showDetails)}`}>
@@ -114,4 +128,4 @@ ServiceTile.propTypes = {
     t: PropTypes.func,
 }
 
-export default withTranslation()(ServiceTile);
+export default ServiceTile;
