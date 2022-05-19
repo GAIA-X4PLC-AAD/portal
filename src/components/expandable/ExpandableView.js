@@ -15,7 +15,7 @@ const ExpandableView = ({ initiallyExpanded, view, title }) => {
         <>
             <S.Block>
                 <S.ToggleButton onClick={() => { setIsExpanded(!isExpanded) }}>
-                    <span>{title}</span>
+                    {title}
                     <Down isOpen={isExpanded} />
                 </S.ToggleButton>
                 <Collapse isOpened={isExpanded}>
