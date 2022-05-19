@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect } from "react";
 import * as S from './style';
 import PropTypes from 'prop-types';
 
-import LoadingView from "../loading_view/LoadingView";
 
 const ColumnItem = ({ title, subtitle }) => {
   return <>
