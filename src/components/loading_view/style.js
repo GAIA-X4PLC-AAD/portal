@@ -6,8 +6,8 @@ ${(props) => {
   if (props.visible) {
     return css`
     opacity:1;
-    /* width:100%; */
-    /* height:100%; */
+     width:100%;
+     height:100%; 
     transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
   `;
   } else {

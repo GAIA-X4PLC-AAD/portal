@@ -7,11 +7,15 @@ import "../servicetile/ServiceTile.css";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import DescriptionTabView from "../tabs/DescriptionTabView";
+import ContactWidgetFactory from "../tabs/ContactTab/ContactWidgetFactory";
+import ContactTab from "../tabs/ContactTab/ContactTab";
+import PriceTab from "../tabs/priceTab/PriceTab";
 
 const DataTile = (props) => {
     const {dataId} = useParams();
     const [queryParams, setQueryParams] = useSearchParams();
     const view = queryParams.get("view");
+    const type = "data";
     
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
             "type": "data",
@@ -44,9 +48,9 @@ const DataTile = (props) => {
         return (
             <>
                 <ExpandableView initiallyExpanded={true} view={DescriptionTab({ dataId: 1 })} title={props.t("service-tile.details")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ dataId: 1 })} title={props.t("service-tile.price")} />
+                <ExpandableView initiallyExpanded={false} view={PriceTab({ id: dataId })} title={props.t("service-tile.price")} />
                 <ExpandableView initiallyExpanded={false} view={DescriptionTab({ dataId: 1 })} title={props.t("service-tile.sample")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ dataId: 1 })} title={props.t("service-tile.contact")} />
+                <ExpandableView initiallyExpanded={false} view={ContactTab({ id: dataId, type: type })} title={props.t("service-tile.contact")} />
             </>
         )
     }

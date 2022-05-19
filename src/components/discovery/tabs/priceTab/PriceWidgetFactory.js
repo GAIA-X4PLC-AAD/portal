@@ -1,6 +1,6 @@
 import * as S from "./style";
 import React from "react";
-
+import PropTypes from 'prop-types';
 
 const PriceWidgetFactory = ({prices}) => {
 
@@ -12,6 +12,9 @@ const PriceWidgetFactory = ({prices}) => {
             </S.Price>
         );
     }
+    DefaultPriceWidget.propTypes = {
+        price: PropTypes.object
+    }
    
     return (prices.map((price, index)=> {
                     return <DefaultPriceWidget price={price} key={price.id}/>;
@@ -19,4 +22,7 @@ const PriceWidgetFactory = ({prices}) => {
     ));
 }
 
+PriceWidgetFactory.propTypes = {
+    prices: PropTypes.array,
+};
 export default PriceWidgetFactory;

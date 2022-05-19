@@ -44,22 +44,25 @@ export const Center = styled.div`
 
 export const Block = styled.div`
   border: 1px solid #ccc;
-  margin: 0.1%;
-  min-width: 90%;
+  margin: 0%;
+  width: 100%;
   /* min-height: 40%; */
 `
 
 export const ToggleButton = styled.div`
   font-size: 1em;
-  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   background: transparent;
   box-shadow: none;
-  width: 96%;
-  margin: 5px;
-  padding: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
   text-align: left;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   color: black;
 `
+export const Arrow = styled.div`
+  padding-right: 5px;
+`;

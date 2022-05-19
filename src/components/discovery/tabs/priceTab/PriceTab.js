@@ -1,9 +1,10 @@
 import { withTranslation } from "react-i18next";
+import React from "react";
 import PriceWidgetFactory from "./PriceWidgetFactory";
-import { PricesContainer, BookButton} from "./style";
+import { PricesContainer, BookButton, Prices} from "./style";
+import PropTypes from 'prop-types';
 
-
-const PriceTab = ( { serviceId, t} ) => {
+const PriceTab = ( { id, t} ) => {
 
     const data = [{id: 1, name:'Price for service 1', price:'100€ / month'}, 
                   {id: 2, name:'Price for service 2', price:'200€ / month'}, 
@@ -13,14 +14,19 @@ const PriceTab = ( { serviceId, t} ) => {
 
 
     return (
-        <div>
+        <Prices>
             <PricesContainer>
                 <PriceWidgetFactory prices={data}/>
             </PricesContainer>
                 <BookButton>{t('service-tile.bookButton')}</BookButton>
-        </div>
+        </Prices>
 
     );
+};
+
+PriceTab.propTypes = {
+    id: PropTypes.string,
+    t: PropTypes.func,
 };
 
 export default withTranslation() (PriceTab);

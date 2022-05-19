@@ -12,6 +12,7 @@ const PprTile = (props) => {
     const {pprId} = useParams();
     const [queryParams, setQueryParams] = useSearchParams();
     const view = queryParams.get("view");
+    const type = "ppr";
 
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
             "type": "ppr",
@@ -46,7 +47,7 @@ const PprTile = (props) => {
                 <ExpandableView initiallyExpanded={true} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.details")} />
                 <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.services")} />
                 <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.datasets")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.contact")} />
+                <ExpandableView initiallyExpanded={false} view={ContactTab({ id: pprId, type: type })} title={props.t("service-tile.contact")} />
             </>
         )
     }

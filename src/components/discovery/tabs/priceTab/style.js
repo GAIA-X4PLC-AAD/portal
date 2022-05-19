@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as S from '../../../common/styles';
+import * as S from '../../../../common/styles';
 
 export const PriceName = styled.div`
     font-family: 'Titillium Web';
@@ -48,6 +48,10 @@ export const PricesContainer = styled.div`
     grid-gap: var(--grid-layout-gap);
 `;
 
+export const Prices = styled.div`
+    display: flex;
+    flex-flow: column;
+`;
 
 export const ContactsContainer2 = styled.div`
     display: flex;
@@ -56,5 +60,7 @@ export const ContactsContainer2 = styled.div`
 `;
 
 export const BookButton = styled(S.BlueButton)`
-    float: right;
+    max-width: 200px;
+    align-self: end;
+    margin: 10px;
 `;
