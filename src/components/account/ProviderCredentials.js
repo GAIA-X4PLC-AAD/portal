@@ -5,8 +5,6 @@ import { withTranslation } from "react-i18next";
 import config from '../../config/config.json';
 import * as S from './ProviderCredentialStyle';
 
-import PropTypes from 'prop-types';
-
 const ProviderCredentials = (props) => {
 
     const [users, setUsers] = useState([]);
@@ -102,10 +100,6 @@ const ProviderCredentials = (props) => {
             {showAddUser()}
         </S.CredentialWrapper>
     );
-}
-
-ProviderCredentials.propTypes = {
-    t: PropTypes.func,
 }
 
 export default withTranslation () (ProviderCredentials);
