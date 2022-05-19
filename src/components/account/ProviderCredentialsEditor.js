@@ -5,8 +5,6 @@ import { withTranslation } from "react-i18next";
 import config from "../../config/config.json";
 import * as S from './ProviderCredentialStyle';
 
-import PropTypes from 'prop-types';
-
 const ProviderCredentialsEditor = (props) => {
 
     // used for knowing if we are in a new user, or editting existing one.
@@ -193,15 +191,6 @@ const ProviderCredentialsEditor = (props) => {
             {showEditSave(user)}
     </S.CredentialEditWrap>
     );
-}
-
-ProviderCredentialsEditor.propTypes = {
-    t: PropTypes.func,
-    cancelCallback: PropTypes.func,
-    updateUser: PropTypes.func,
-    deleteUser: PropTypes.func,
-    isNewCredential: PropTypes.bool,
-    loadUser: PropTypes.bool,
 }
 
 export default withTranslation() (ProviderCredentialsEditor);
