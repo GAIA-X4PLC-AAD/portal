@@ -1,14 +1,13 @@
 import { withTranslation } from "react-i18next";
+import ContactTab from "./ContactTab/ContactTab";
 import React from 'react';
-
 import PropTypes from 'prop-types';
 
 const ServiceTileContact = (props) => {
 
+
     return (
-        <div className="service-tile-contact">
-            Placeholder - Contact  {props.serviceId}
-        </div>
+            <ContactTab serviceId={props.serviceId}/>
     );
 
 }

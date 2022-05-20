@@ -11,13 +11,23 @@ function LoadingView({ url, successView }) {
     const [{ data, error, isLoading }] = useResource(() => ({ url: url }), []);
 
     useEffect(() => {
-        console.log(`LoadingView.useEffect, error: ${error}`)
+        console.log(`LoadingView.useEffect, isLoading: ${isLoading}`)
       }, [isLoading]);
+
+      useEffect(() => {
+        console.log(`LoadingView.useEffect, error: ${error}`)
+      }, [error]);
+
+      useEffect(() => {
+        console.log(`LoadingView.useEffect, data: ${data}`)
+      }, [data]);
+
+      
 
     return (
         <>
             <S.Center>
-                <S.AnimatedVisibility visible={isLoading}>
+                <S.AnimatedVisibility visible={isLoading }>
                     <S.CircularLoader />
                 </S.AnimatedVisibility>
 
@@ -25,7 +35,7 @@ function LoadingView({ url, successView }) {
                     <p>Error Loading Content!</p>
                 </S.AnimatedVisibility>
 
-                <S.AnimatedVisibility visible={!isLoading && error == undefined}>
+                <S.AnimatedVisibility visible={!isLoading && error == undefined && !(data === undefined)}>
                     {successView({ data: data })}
                 </S.AnimatedVisibility>
             </S.Center>

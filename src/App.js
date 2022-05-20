@@ -59,7 +59,6 @@ const App = (props) => {
             <div className='body-container'>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/services" element={<WorkInProgress component="Services" />} />
                 <Route path="/data" element={<WorkInProgress component="Data" />} />
                 <Route path="/provider" element={<WorkInProgress component="Provider" />} />
                 <Route path="/help" element={<WorkInProgress component="Help" />} />

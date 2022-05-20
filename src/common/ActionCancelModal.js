@@ -3,6 +3,8 @@ import { withTranslation } from 'react-i18next';
 import Modal from '../Modal';
 import * as S from './ActionCancelModalStyle.js';
 
+
+
 const ActionCancelModal = (props) => {
   
   const header = props.header?props.t(props.header):null;
@@ -29,5 +31,15 @@ const ActionCancelModal = (props) => {
     </Modal>
   );
 }
+
+ActionCancelModal.propTypes = {
+  t: PropTypes.func,
+  actionCallback: PropTypes.func,
+  cancelCallback: PropTypes.func,
+  showAlertMessage: PropTypes.bool,
+  actionMessage: PropTypes.string,
+  message: PropTypes.string,
+  header: PropTypes.string,
+  }
 
 export default withTranslation() (ActionCancelModal);
