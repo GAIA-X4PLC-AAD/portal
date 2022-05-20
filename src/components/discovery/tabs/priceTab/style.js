@@ -33,6 +33,7 @@ export const PricePrice = styled.div`
 export const Price = styled.div`
     margin: 20px;
     flex: 2;
+    text-align: left;
 `;
 export const PricesContainer = styled.div`
     display: grid;

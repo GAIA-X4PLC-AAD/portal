@@ -1,8 +1,11 @@
 import * as S from "./style";
 import React from "react";
 import PropTypes from 'prop-types';
+import { withTranslation } from "react-i18next";
 
-const PriceWidgetFactory = ({prices}) => {
+const PriceWidgetFactory = ({data, t}) => {
+
+    const prices = data || [];
 
     const DefaultPriceWidget = ({price }) =>  {
         return (
@@ -16,13 +19,25 @@ const PriceWidgetFactory = ({prices}) => {
         price: PropTypes.object
     }
    
-    return (prices.map((price, index)=> {
-                    return <DefaultPriceWidget price={price} key={price.id}/>;
-        }
-    ));
+    const showPrices = () => {
+        return (prices.map((price, index)=> {
+                        return <DefaultPriceWidget price={price} key={price.id}/>;
+            }
+        ));
+    }
+
+    return (
+        <S.Prices>
+            <S.PricesContainer>
+                {showPrices()}
+            </S.PricesContainer>
+                <S.BookButton>{t('service-tile.bookButton')}</S.BookButton>
+        </S.Prices>
+    );
+};
+PriceWidgetFactory.propTypes = {
+    data: PropTypes.array,
+    t: PropTypes.func
 }
 
-PriceWidgetFactory.propTypes = {
-    prices: PropTypes.array,
-};
-export default PriceWidgetFactory;
+export default withTranslation()  (PriceWidgetFactory);
