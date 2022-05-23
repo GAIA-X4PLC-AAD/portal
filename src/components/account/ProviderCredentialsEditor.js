@@ -1,12 +1,16 @@
 import React, {  useState } from "react";
 import axios from "axios";
 import ActionCancelModal from "../../common/ActionCancelModal";
-import { withTranslation } from "react-i18next";
+import { useTranslation, withTranslation } from "react-i18next";
 import config from "../../config/config.json";
 import * as S from './ProviderCredentialStyle';
 
+import PropTypes from 'prop-types';
+
+
 const ProviderCredentialsEditor = (props) => {
 
+    const t = useTranslation()
     // used for knowing if we are in a new user, or editting existing one.
     const isNewCredential = props.isNewCredential===undefined?false:props.isNewCredential;
     const isReadOnly = () => {
@@ -101,12 +105,12 @@ const ProviderCredentialsEditor = (props) => {
         if (isNewCredential || saving) return (<S.CredentialRemove/>);
         else return (
             <S.CredentialRemove onClick={() =>setOnRemove(true)}>
-                {props.t('account.credentials.remove')}
+                {t('account.credentials.remove')}
                 <ActionCancelModal
-                    header={props.t('account.credentials.removeUserHeader')}
-                    message={props.t('account.credentials.removeUserMessage', { userName: loadUser.userName})} 
+                    header={t('account.credentials.removeUserHeader')}
+                    message={t('account.credentials.removeUserMessage', { userName: loadUser.userName})} 
                     showAlertMessage={onRemove} 
-                    actionMessage={props.t('account.credentials.remove')}
+                    actionMessage={t('account.credentials.remove')}
                     actionCallback={()=>deleteUser()} 
                     cancelCallback={()=>setOnRemove(false)}/>
             </S.CredentialRemove>
@@ -130,16 +134,16 @@ const ProviderCredentialsEditor = (props) => {
         if (saving === true) return null;
         if (readOnly && !isNewCredential) {
             return (
-                <S.CredentialEditButton onClick={()=>setReadOnly(false)}>{props.t('account.credentials.edit')}</S.CredentialEditButton>
+                <S.CredentialEditButton onClick={()=>setReadOnly(false)}>{t('account.credentials.edit')}</S.CredentialEditButton>
             );
         }
         if (!readOnly) {
             return (
                 <React.Fragment>
                  
-                    <S.CredentialCancelButton onClick={onCancel}>{props.t('account.credentials.cancel')}</S.CredentialCancelButton>
+                    <S.CredentialCancelButton onClick={onCancel}>{t('account.credentials.cancel')}</S.CredentialCancelButton>
     
-                    <S.CredentialEditButton onClick={onSave} disabled={onDisabledSaveButton(user)}>{props.t('account.credentials.save')}</S.CredentialEditButton>
+                    <S.CredentialEditButton onClick={onSave} disabled={onDisabledSaveButton(user)}>{t('account.credentials.save')}</S.CredentialEditButton>
                 </React.Fragment>
     
             );
@@ -164,21 +168,21 @@ const ProviderCredentialsEditor = (props) => {
     return(
         <S.CredentialEditWrap>
             <S.CredentialEditColumn>
-                <div >{props.t('account.credentials.firstName')}</div>
+                <div >{t('account.credentials.firstName')}</div>
                 <S.CredentialEditColumnInput type="text" name="firstName" value={user?.firstName} onChange={onFormChanged} disabled={readOnly}/>
             </S.CredentialEditColumn>
             <S.CredentialEditColumn>
-                <div >{props.t('account.credentials.lastName')}</div>
+                <div >{t('account.credentials.lastName')}</div>
                 <S.CredentialEditColumnInput type="text" name="lastName" value={user?.lastName} onChange={onFormChanged} disabled={readOnly}/>
             </S.CredentialEditColumn>
             <S.CredentialEditRow>
-                {props.t('account.credentials.email')}
+                {t('account.credentials.email')}
             </S.CredentialEditRow>
             <S.CredentialEditRow>
                 <S.CredentialEditRowInput type="text" name="email" value={user?.email} onChange={onFormChanged} disabled={readOnly}/>
             </S.CredentialEditRow>
             <S.CredentialEditRow>
-                {props.t('account.credentials.role')}
+                {t('account.credentials.role')}
             </S.CredentialEditRow>
             <S.CredentialEditRow>
             <S.CredentialEditRowSelect name="role" onChange={onFormChanged} disabled={readOnly} value={selectValue(user?.role)}>
@@ -193,4 +197,14 @@ const ProviderCredentialsEditor = (props) => {
     );
 }
 
-export default withTranslation() (ProviderCredentialsEditor);
+ProviderCredentialsEditor.propTypes = {
+
+    loadUser: PropTypes.func,
+    isNewCredential: PropTypes.bool,
+    t: PropTypes.func,
+    updateUser: PropTypes.func,
+    deleteUser: PropTypes.func,
+    cancelCallback: PropTypes.func,
+}
+
+export default ProviderCredentialsEditor;
