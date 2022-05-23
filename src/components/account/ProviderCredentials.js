@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProviderCredentialsEditor from "./ProviderCredentialsEditor";
-import { withTranslation } from "react-i18next";
+import { useTranslation, withTranslation } from "react-i18next";
 import config from '../../config/config.json';
 import * as S from './ProviderCredentialStyle';
 
@@ -10,6 +10,8 @@ const ProviderCredentials = (props) => {
     const [users, setUsers] = useState([]);
     const [selectedUser, setSelectedUser] = useState (null);
     const [onAddUser, setOnAddUser] = useState(false);
+
+    const t = useTranslation();
 
     const providerId=1
 
@@ -52,7 +54,7 @@ const ProviderCredentials = (props) => {
     const showAddUser = () => {
         if (onAddUser === false) {
             return (
-                <S.AddUserButton onClick={onAddUserClick}>{props.t('account.credentials.addUser')}</S.AddUserButton>
+                <S.AddUserButton onClick={onAddUserClick}>{t('account.credentials.addUser')}</S.AddUserButton>
             );
         }
         return (
@@ -92,8 +94,8 @@ const ProviderCredentials = (props) => {
     return(
         <S.CredentialWrapper>
             <S.FlexHeader>
-                <S.FlexRow>{props.t('account.credentials.name')}</S.FlexRow>
-                <S.FlexRow>{props.t('account.credentials.role')}</S.FlexRow>
+                <S.FlexRow>{t('account.credentials.name')}</S.FlexRow>
+                <S.FlexRow>{t('account.credentials.role')}</S.FlexRow>
                 <S.CredentialDropDown></S.CredentialDropDown>
             </S.FlexHeader>
             {showUsers(users)}
@@ -102,4 +104,4 @@ const ProviderCredentials = (props) => {
     );
 }
 
-export default withTranslation () (ProviderCredentials);
+export default ProviderCredentials;

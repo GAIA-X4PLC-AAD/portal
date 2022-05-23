@@ -2,7 +2,7 @@ import React from 'react';
 import { withTranslation } from 'react-i18next';
 import Modal from '../Modal';
 import * as S from './ActionCancelModalStyle.js';
-
+import PropTypes from 'prop-types';
 
 
 const ActionCancelModal = (props) => {
