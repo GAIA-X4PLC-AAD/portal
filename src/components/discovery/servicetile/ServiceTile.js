@@ -8,6 +8,7 @@ import DescriptionTabView from "../tabs/DescriptionTabView";
 import ExpandableView from "../../expandable/ExpandableView";
 import ContactTab from "../tabs/ContactTab/ContactTab";
 import PriceTab from "../tabs/priceTab/PriceTab";
+import ScreenshotsTabView from "../tabs/ScreenshotsTabView";
 
 const ServiceTile = (props) => {
     const { serviceId } = useParams();
@@ -61,7 +62,7 @@ const ServiceTile = (props) => {
             <>
                 <ExpandableView initiallyExpanded={true} view={DescriptionTab({ serviceId: 1 })} title={props.t("service-tile.details")} />
                 <ExpandableView initiallyExpanded={false} view={PriceTab({ id: serviceId , type: type})} title={props.t("service-tile.price")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ serviceId: 1 })} title={props.t("service-tile.screenshots")} />
+                <ExpandableView initiallyExpanded={false} view={ScreenshotsTabView({ serviceId: 1 })} title={props.t("service-tile.screenshots")} />
                 <ExpandableView initiallyExpanded={false} view={ContactTab({ id: serviceId, type: type })} title={props.t("service-tile.contact")} />
             </>
         )

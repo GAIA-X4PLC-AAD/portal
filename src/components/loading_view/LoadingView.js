@@ -6,28 +6,30 @@ import PropTypes from 'prop-types';
 
 import { useResource } from "@axios-use/react";
 
+import { Center } from '../../common/styles';
+
 
 function LoadingView({ url, successView }) {
     const [{ data, error, isLoading }] = useResource(() => ({ url: url }), []);
 
     useEffect(() => {
         console.log(`LoadingView.useEffect, isLoading: ${isLoading}`)
-      }, [isLoading]);
+    }, [isLoading]);
 
-      useEffect(() => {
+    useEffect(() => {
         console.log(`LoadingView.useEffect, error: ${error}`)
-      }, [error]);
+    }, [error]);
 
-      useEffect(() => {
+    useEffect(() => {
         console.log(`LoadingView.useEffect, data: ${data}`)
-      }, [data]);
+    }, [data]);
 
-      
+
 
     return (
         <>
-            <S.Center>
-                <S.AnimatedVisibility visible={isLoading }>
+            <Center>
+                <S.AnimatedVisibility visible={isLoading}>
                     <S.CircularLoader />
                 </S.AnimatedVisibility>
 
@@ -38,7 +40,7 @@ function LoadingView({ url, successView }) {
                 <S.AnimatedVisibility visible={!isLoading && error == undefined && !(data === undefined)}>
                     {successView({ data: data })}
                 </S.AnimatedVisibility>
-            </S.Center>
+            </Center>
         </>
     );
 

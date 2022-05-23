@@ -67,3 +67,9 @@ export const BlueTextClickable = styled.div`
     color: #000094;
     cursor: pointer;
 `;
+
+export const Center = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
