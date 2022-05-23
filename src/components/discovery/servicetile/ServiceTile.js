@@ -30,23 +30,6 @@ const ServiceTile = (props) => {
         }
     }
 
-    const styleTabActive = (key) => {
-        if (view === key) {
-            return "service-tile_active_tab";
-        }
-        return ""
-    }
-
-    const styleDivHidden = (bool) => {
-        if (bool) {
-            contentRef.current.style.display = 'block';
-        } 
-        else {
-            contentRef.current.style.display = 'none';
-        }
-        setShowDetails(!showDetails);
-    }
-
 
     const DescriptionTab = ({ serviceId }) => {
         return (
