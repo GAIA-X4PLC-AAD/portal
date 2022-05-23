@@ -7,6 +7,7 @@ import * as S from '../style';
 import PropTypes from 'prop-types';
 import LoadingView from "../../loading_view/LoadingView";
 import ExpandableView from "../../expandable/ExpandableView";
+import ContactTab from "../tabs/ContactTab/ContactTab";
 
 const PprTile = (props) => {
     const {pprId} = useParams();
