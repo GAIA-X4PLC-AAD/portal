@@ -31,7 +31,7 @@ const LoginFail = (props) => {
 
 LoginFail.propTypes = {
   t: PropTypes.func,
-  showAlertMessage: PropTypes.string,
+  showAlertMessage: PropTypes.bool,
   message: PropTypes.string,
 }
 

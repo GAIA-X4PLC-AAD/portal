@@ -8,6 +8,7 @@ import DescriptionTabView from "../tabs/DescriptionTabView";
 import ExpandableView from "../../expandable/ExpandableView";
 import ContactTab from "../tabs/ContactTab/ContactTab";
 import PriceTab from "../tabs/priceTab/PriceTab";
+import ScreenshotsTabView from "../tabs/ScreenshotsTabView";
 
 const ServiceTile = (props) => {
     const { serviceId } = useParams();
@@ -29,23 +30,6 @@ const ServiceTile = (props) => {
         }
     }
 
-    const styleTabActive = (key) => {
-        if (view === key) {
-            return "service-tile_active_tab";
-        }
-        return ""
-    }
-
-    const styleDivHidden = (bool) => {
-        if (bool) {
-            contentRef.current.style.display = 'block';
-        } 
-        else {
-            contentRef.current.style.display = 'none';
-        }
-        setShowDetails(!showDetails);
-    }
-
 
     const DescriptionTab = ({ serviceId }) => {
         return (
@@ -61,7 +45,7 @@ const ServiceTile = (props) => {
             <>
                 <ExpandableView initiallyExpanded={true} view={DescriptionTab({ serviceId: 1 })} title={props.t("service-tile.details")} />
                 <ExpandableView initiallyExpanded={false} view={PriceTab({ id: serviceId , type: type})} title={props.t("service-tile.price")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ serviceId: 1 })} title={props.t("service-tile.screenshots")} />
+                <ExpandableView initiallyExpanded={false} view={ScreenshotsTabView({ serviceId: 1 })} title={props.t("service-tile.screenshots")} />
                 <ExpandableView initiallyExpanded={false} view={ContactTab({ id: serviceId, type: type })} title={props.t("service-tile.contact")} />
             </>
         )

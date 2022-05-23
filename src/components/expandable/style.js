@@ -36,11 +36,7 @@ export const CircularLoader = styled.div`
     100% { transform: rotate(360deg); }
   }
 `
-export const Center = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
+
 
 export const Block = styled.div`
   border: 1px solid #ccc;
