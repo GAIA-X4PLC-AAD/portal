@@ -9,8 +9,6 @@ const DataSetTab = ({id}) => {
     
     const URL = configData.EDGE_API_URI + `/discovery/ppr/${id}/data/`;
 
-   const dataMock = [{id:"1",name:"name 1",description:"description 1",source:"source 1",location:"location 1",tags:"tags 1",category:"category 1",img_preview_url:"https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",ppr_name:"ppr name 1",ppr_url:"http://localhost",cloud_service:"http://localhost",location_flag:"http://localhost",frequency_of_update:"frequency update 1",last_updated:"2022-05-25"},
-                     {id:"1",name:"name 1",description:"description 1",source:"source 1",location:"location 1",tags:"tags 1",category:"category 1",img_preview_url:"https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",ppr_name:"ppr name 1",ppr_url:"http://localhost",cloud_service:"http://localhost",location_flag:"http://localhost",frequency_of_update:"frequency update 1",last_updated:"2022-05-25"}]
     const providerLink = (data) => {
         return (<a href={data.ppr_url} target="_blank" rel="noreferrer">{data.ppr_name}</a>);
     }
