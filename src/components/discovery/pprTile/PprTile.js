@@ -17,7 +17,7 @@ const PprTile = (props) => {
 
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
             "type": "ppr",
-            "logo": "URL to image of PPR logo",
+            "logo": "/images/logo-placeholder.svg",
             "ppr_url": "URL to PPR",
             "name": "PPR name",
             "id": "PPR id",
@@ -48,7 +48,7 @@ const PprTile = (props) => {
         <S.DiscoveryTile>
             <S.DiscoveryTileHeader>
                 <a href={"#" || input.ppr_url}>
-                    <img src={input.logo} alt="Provider Logo"></img>
+                <img src={input.logo} alt="Provider Logo" width={48}></img>
                 </a>
                 <div>
                     <S.DiscoveryTileFirstRow>{input.name}</S.DiscoveryTileFirstRow>

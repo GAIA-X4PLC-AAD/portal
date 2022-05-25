@@ -73,3 +73,9 @@ export const Center = styled.div`
   align-items: center;
   justify-content: center;
 `
+
+export const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
+`
