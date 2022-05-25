@@ -6,9 +6,10 @@ import ExpandableView from "../../expandable/ExpandableView";
 import "../servicetile/ServiceTile.css";
 import * as S from '../style';
 import PropTypes from 'prop-types';
-import DescriptionTabView from "../tabs/DescriptionTabView";
+
 import ContactTab from "../tabs/ContactTab/ContactTab";
 import PriceTab from "../tabs/priceTab/PriceTab";
+import DescriptionTab from "../tabs/description/DescriptionTab";
 
 const DataTile = (props) => {
     const {dataId} = useParams();
@@ -34,21 +35,12 @@ const DataTile = (props) => {
         return ""
     }
 
-    const DescriptionTab = ({ dataId }) => {
-        return (
-            <LoadingView
-                url={`https://reqres.in/api/users/${dataId}?delay=1`}
-                successView={DescriptionTabView}
-            />
-        )
-    }
-
     const showComponent = () => {
         return (
             <>
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ dataId: 1 })} title={props.t("service-tile.details")} />
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ dataId: dataId })} title={props.t("service-tile.details")} />
                 <ExpandableView initiallyExpanded={false} view={PriceTab({ id: dataId , type: type})} title={props.t("service-tile.price")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ dataId: 1 })} title={props.t("service-tile.sample")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ dataId: dataId })} title={props.t("service-tile.sample")} />
                 <ExpandableView initiallyExpanded={false} view={ContactTab({ id: dataId, type: type })} title={props.t("service-tile.contact")} />
             </>
         )
