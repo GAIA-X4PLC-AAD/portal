@@ -64,7 +64,7 @@ const RegisterViaDID = (props) => {
                         <img src={img} width="150px" height="150px" alt="Loading..."/>
                     </div>
                 <div className="formButtons">
-                    <button onClick={() => navigate("/register/IdP")}>{props.t("form.regViaDIDNoDID")}</button>
+                    <button onClick={() => navigate("/register/IdP?mock=organization")}>{props.t("form.regViaDIDNoDID")}</button>
                  </div>
             </div>
         </div>
