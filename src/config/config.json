@@ -5,7 +5,9 @@
     "EDGE_API_URI": "http://gaia-x.edge.ext:8082",
     "uri_path": {
         "mock_vc_user": "/auth/identity/mock_user",
+        "mock_vc_organization": "/auth/identity/mock_organization",
         "auth_status_path": "/api/authstatus",
-        "user_did_register": "/register/user/did_register"
+        "user_did_register": "/register/user/did_register",
+        "idp_list": "/ext/idplist"
     }
 }

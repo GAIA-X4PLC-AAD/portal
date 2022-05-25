@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 
-import * as S from './style';
+import * as S from '../style';
 import PropTypes from 'prop-types';
 
 
@@ -21,17 +21,43 @@ ColumnItem.propTypes = {
   subtitle: PropTypes.string.isRequired,
 }
 
+// {
+// 	"id": "1",
+// 	"name": "name",
+// 	"img_preview_url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg",
+// 	"logo": "https://cdn.logo.com/hotlink-ok/logo-social.png",
+// 	"ppr_name": "ppr name",
+// 	"ppr_url": "http://localhost",
+// 	"description": "description",
+// 	"features": "features",
+// 	"stack": "stack",
+// 	"security": "security",
+// 	"location": "location",
+// 	"location_flag": "http://localhost",
+// 	"last_updated": "2022-05-25",
+// 	"category": "category",
+// 	"tags": "tags",
+// 	"terms_of_use": "terms of user",
+// 	"dependent_services": []
+// }
+
 const DescriptionTabView = (props,) => {
+  const [details, setDetails] = useState({});
 
   useEffect(() => {
     console.log(`DescriptionTab, props.data: ${props.data}`)
+
+    if (props.data !== undefined) {
+      setDetails(props.data)
+    }
+
   }, [props.data]);
 
   return (
     <>
 
       <S.ExpandedContainer>
-        <S.Image src="https://images.pexels.com/photos/2458118/pexels-photo-2458118.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" />
+        <S.Image src={`${details['img_preview_url']}`} />
         <S.VerticalContainer horizontal='8px'>
           <S.Padding horizontal='8px'>
             <S.Title>Description</S.Title>

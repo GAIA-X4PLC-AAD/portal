@@ -39,7 +39,7 @@ export const CircularLoader = styled.div`
 
 
 export const Block = styled.div`
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   margin: 0%;
   width: 100%;
   /* min-height: 40%; */
@@ -51,7 +51,7 @@ export const ToggleButton = styled.div`
   background: transparent;
   box-shadow: none;
   width: 100%;
-  margin: 0;
+  margin: 16px 0px;
   padding: 0;
   text-align: left;
   cursor: pointer;
@@ -61,4 +61,5 @@ export const ToggleButton = styled.div`
 `
 export const Arrow = styled.div`
   padding-right: 5px;
+  align-self: center;
 `;

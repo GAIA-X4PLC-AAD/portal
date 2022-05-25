@@ -2,15 +2,12 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import {  useParams, useSearchParams } from "react-router-dom";
 import "../servicetile/ServiceTile.css";
-import DescriptionTabView from "../tabs/DescriptionTabView";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import LoadingView from "../../loading_view/LoadingView";
 import ExpandableView from "../../expandable/ExpandableView";
 import ContactTab from "../tabs/ContactTab/ContactTab";
-import DataSetTab from "../tabs/dataSetsTab/DataSetTab"
-import ServicesTab from "../tabs/servicesTab/ServicesTab";
-
+import DescriptionTab from "../tabs/description/DescriptionTab";
 
 const PprTile = (props) => {
     const {pprId} = useParams();
@@ -20,7 +17,7 @@ const PprTile = (props) => {
 
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
             "type": "ppr",
-            "logo": "URL to image of PPR logo",
+            "logo": "/images/logo-placeholder.svg",
             "ppr_url": "URL to PPR",
             "name": "PPR name",
             "id": "PPR id",
@@ -36,20 +33,12 @@ const PprTile = (props) => {
         return ""
     }
 
-    const DescriptionTab = ({ pprId }) => {
-        return (
-            <LoadingView
-                url={`https://reqres.in/api/users/${pprId}?delay=1`}
-                successView={DescriptionTabView}
-            />
-        )
-    }
-
     const showComponent = () => {
         return (
             <>
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.details")} />
-                <ExpandableView initiallyExpanded={false} view={ServicesTab({ id: 1 })} title={props.t("service-tile.services")} />
+
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ pprId: pprId })} title={props.t("service-tile.details")} />
+                <ExpandableView initiallyExpanded={false} view={ServicesTab({ id: pprId })} title={props.t("service-tile.services")} />
                 <ExpandableView initiallyExpanded={false} view={DataSetTab({ id: pprId })} title={props.t("service-tile.datasets")} />
                 <ExpandableView initiallyExpanded={false} view={ContactTab({ id: pprId, type: type })} title={props.t("service-tile.contact")} />
             </>
@@ -60,7 +49,7 @@ const PprTile = (props) => {
         <S.DiscoveryTile>
             <S.DiscoveryTileHeader>
                 <a href={"#" || input.ppr_url}>
-                    <img src={input.logo} alt="Provider Logo"></img>
+                <img src={input.logo} alt="Provider Logo" width={48}></img>
                 </a>
                 <div>
                     <S.DiscoveryTileFirstRow>{input.name}</S.DiscoveryTileFirstRow>
