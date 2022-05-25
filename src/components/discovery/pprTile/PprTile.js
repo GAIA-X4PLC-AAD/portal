@@ -8,6 +8,7 @@ import LoadingView from "../../loading_view/LoadingView";
 import ExpandableView from "../../expandable/ExpandableView";
 import ContactTab from "../tabs/ContactTab/ContactTab";
 import DescriptionTab from "../tabs/description/DescriptionTab";
+import ServicesTab from "../tabs/servicesTab/ServicesTab";
 
 const PprTile = (props) => {
     const {pprId} = useParams();
