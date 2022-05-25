@@ -2,12 +2,12 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import {  useParams, useSearchParams } from "react-router-dom";
 import "../servicetile/ServiceTile.css";
-import DescriptionTabView from "../tabs/DescriptionTabView";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import LoadingView from "../../loading_view/LoadingView";
 import ExpandableView from "../../expandable/ExpandableView";
 import ContactTab from "../tabs/ContactTab/ContactTab";
+import DescriptionTab from "../tabs/description/DescriptionTab";
 
 const PprTile = (props) => {
     const {pprId} = useParams();
@@ -33,21 +33,12 @@ const PprTile = (props) => {
         return ""
     }
 
-    const DescriptionTab = ({ pprId }) => {
-        return (
-            <LoadingView
-                url={`https://reqres.in/api/users/${pprId}?delay=1`}
-                successView={DescriptionTabView}
-            />
-        )
-    }
-
     const showComponent = () => {
         return (
             <>
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.details")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.services")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: 1 })} title={props.t("service-tile.datasets")} />
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ pprId: pprId })} title={props.t("service-tile.details")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: pprId })} title={props.t("service-tile.services")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: pprId })} title={props.t("service-tile.datasets")} />
                 <ExpandableView initiallyExpanded={false} view={ContactTab({ id: pprId, type: type })} title={props.t("service-tile.contact")} />
             </>
         )
