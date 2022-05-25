@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 
 import SimpleImageSlider from "react-simple-image-slider";
 
-import { Center, } from "../../../../common/styles";
+import { Center, Row } from "../../../../common/styles";
 import PropTypes from 'prop-types';
 
 
@@ -30,6 +30,13 @@ const ScreenshotsTabView = (props,) => {
           showNavs={true}
         />
       </Center>
+      {/* <Center>
+        <Row vertical='10px'>
+          {slideImages?.map((p) => (
+            <img src={p['url']} key={p['url']} width={200} />
+          ))}
+        </Row>
+      </Center> */}
 
     </>
   )

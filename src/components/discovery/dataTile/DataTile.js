@@ -51,7 +51,7 @@ const DataTile = (props) => {
             <S.DiscoveryTile>
                 <S.DiscoveryTileHeader>
                     <a href={"#" || input.ppr_url}>
-                        <img src={input.logo} alt="Provider Logo"></img>
+                        <img src={input.logo} alt="Provider Logo" width={48}></img>
                     </a>
                     <div>
                         <S.DiscoveryTileFirstRow>{input.name}</S.DiscoveryTileFirstRow>
