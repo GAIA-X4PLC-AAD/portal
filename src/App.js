@@ -43,7 +43,7 @@ const App = (props) => {
             <div className='banner-container' hidden={props.isInSignInMenu}>
               <div className='banner-content'>
                 <div className='banner-logo'>
-                  <img src='images/logo_white.svg' height='80px' width='200px'></img>
+                  <img src='/images/logo_white.svg' height='80px' width='200px'></img>
                 </div>
                 <h1>{t('article.what-is-new')}</h1>
                 <h4>{t('filler')}</h4>
@@ -84,7 +84,7 @@ const App = (props) => {
             <div className='footer-container'>
               <div className='footer-flex-col'>
                 <div className='footer-banner'>
-                  <img src='images/logo_white.svg' height='50px' ></img>
+                  <img src='/images/logo_white.svg' height='50px' ></img>
                   <p>{t('footer_slogan_cap')}</p>
                 </div>
                 <div className='footer-content'>
