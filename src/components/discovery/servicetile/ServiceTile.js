@@ -3,8 +3,6 @@ import { withTranslation } from "react-i18next";
 import { useParams, useSearchParams } from "react-router-dom";
 import * as S from '../style';
 import PropTypes from 'prop-types';
-import LoadingView from "../../loading_view/LoadingView";
-import DescriptionTabView from "../tabs/description/DescriptionTabView";
 import ExpandableView from "../../expandable/ExpandableView";
 import ContactTab from "../tabs/ContactTab/ContactTab";
 import PriceTab from "../tabs/priceTab/PriceTab";
@@ -21,7 +19,7 @@ const ServiceTile = (props) => {
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
         "services": {
             "type": "basic-service/composite-service",
-            "logo": "URL to image of PPR logo",
+            "logo": "/images/logo-placeholder.svg",
             "name": "Service name",
             "id": "service id",
             "ppr_name": "Provider name",
@@ -51,7 +49,7 @@ const ServiceTile = (props) => {
             <S.DiscoveryTile>
                 <S.DiscoveryTileHeader>
                     <a href={"#" || input.services.ppr_url}>
-                        <img src={input.services.logo} alt="Provider Logo"></img>
+                        <img src={input.services.logo} alt="Provider Logo" width={48}></img>
                     </a>
                     <div>
                         <S.DiscoveryTileFirstRow>{input.services.name}</S.DiscoveryTileFirstRow>

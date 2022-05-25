@@ -19,7 +19,7 @@ const DataTile = (props) => {
     
     const input = { // mocked input for component. One element from input list. Parent components retrieves input via API
             "type": "data",
-            "logo": "URL to image of PPR logo",
+            "logo": "/images/logo-placeholder.svg",
             "ppr_url": "URL to PPR",
             "name": "data name",
             "ppr_name": "PPR name",
