@@ -18,17 +18,20 @@ const ScreenshotsTabView = (props,) => {
 
   }, [props.data]);
 
+
   return (
     <>
       <Center>
-        <SimpleImageSlider
+        {slideImages.length != 0 ? <SimpleImageSlider
           style={{ position: 'relative' }}
           width={600}
           height={400}
           images={slideImages}
           showBullets={true}
           showNavs={true}
-        />
+          useGPURender={false}
+        /> : <></>}
+
       </Center>
       {/* <Center>
         <Row vertical='10px'>
