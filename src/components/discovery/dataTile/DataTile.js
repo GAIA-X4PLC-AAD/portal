@@ -66,7 +66,7 @@ const DataTile = (props) => {
                         <S.DiscoveryTileSecondRow>{input.ppr_name}</S.DiscoveryTileSecondRow>
                     </div>
                     <div>
-                        <S.DiscoveryTileFirstRow>{props.t("service-tile.header.sustainability")}</S.DiscoveryTileFirstRow>
+                        <S.DiscoveryTileFirstRow>{props.t("service-tile.header.sortDescription")}</S.DiscoveryTileFirstRow>
                         <S.DiscoveryTileSecondRow>{input.short_description}</S.DiscoveryTileSecondRow>
                     </div>
                     <div>
