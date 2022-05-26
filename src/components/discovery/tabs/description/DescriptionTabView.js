@@ -3,23 +3,8 @@ import React, { useState,  useEffect } from "react";
 
 import * as S from '../style';
 import PropTypes from 'prop-types';
+import { ColumnItem } from "./Common";
 
-
-export const ColumnItem = ({ title, subtitle }) => {
-  return <>
-    <S.Padding vertical='20px' horizontal='4px'>
-      <S.VerticalContainer>
-        <S.Subtitle>{title}</S.Subtitle>
-        <S.Body>{subtitle}</S.Body>
-      </S.VerticalContainer>
-    </S.Padding>
-  </>
-}
-
-ColumnItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.any.isRequired,
-}
 
 // {
 // 	"id": "1",
