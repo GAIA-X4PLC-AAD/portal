@@ -6,6 +6,7 @@ import LoadingView from "../../../loading_view/LoadingView";
 import DescriptionTabView from "./DescriptionTabView";
 import configData from "../../../../config/config.json";
 import DescriptionPprView from "./DescriptionPprView";
+import DescriptionDataView from "./DescriptionDataView";
 
 
 const DescriptionTab = ({ id, type }) => {
@@ -16,6 +17,7 @@ const DescriptionTab = ({ id, type }) => {
       switch (type ) {
         case 'services': return DescriptionTabView;
         case 'ppr':  return DescriptionPprView;
+        case 'data': return DescriptionDataView;
         default: return DescriptionTabView;
       }
   }
