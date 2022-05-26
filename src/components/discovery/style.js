@@ -50,6 +50,7 @@ export const DiscoveryTileContent = styled.div`
 
 export const DiscoveryDetailsBody = styled.div`
     padding: 0.5em 0.5em;
+    width:100%;
 `;
 
   export const DiscoveryDetailsNav = styled.div`

@@ -8,7 +8,7 @@ export const PriceName = styled.div`
     font-size: 18px;
     line-height: 24px;
     letter-spacing: 0.25px;
-
+    
     color: #262626;
     flex: none;
     order: 0;
@@ -65,3 +65,4 @@ export const BookButton = styled(S.BlueButton)`
     align-self: end;
     margin: 10px;
 `;
+
