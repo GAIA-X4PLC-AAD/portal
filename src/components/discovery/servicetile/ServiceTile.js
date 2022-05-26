@@ -33,7 +33,7 @@ const ServiceTile = (props) => {
     const showComponent = () => {
         return (
             <>
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ serviceId: serviceId })} title={props.t("service-tile.details")} />
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id: serviceId, type: type })} title={props.t("service-tile.details")} />
                 <ExpandableView initiallyExpanded={false} view={PriceTab({ id: serviceId , type: type})} title={props.t("service-tile.price")} />
                 <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: serviceId })} title={props.t("service-tile.screenshots")} />
                 <ExpandableView initiallyExpanded={false} view={ContactTab({ id: serviceId, type: type })} title={props.t("service-tile.contact")} />

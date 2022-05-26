@@ -8,7 +8,7 @@ export const PriceName = styled.div`
     font-size: 18px;
     line-height: 24px;
     letter-spacing: 0.25px;
-
+    
     color: #262626;
     flex: none;
     order: 0;

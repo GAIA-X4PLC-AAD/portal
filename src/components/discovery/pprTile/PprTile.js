@@ -36,9 +36,9 @@ const PprTile = (props) => {
     const showComponent = () => {
         return (
             <>
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ pprId: pprId })} title={props.t("service-tile.details")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: pprId })} title={props.t("service-tile.services")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: pprId })} title={props.t("service-tile.datasets")} />
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id: pprId, type: type })} title={props.t("service-tile.details")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ id: pprId, type: type })} title={props.t("service-tile.services")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ id: pprId, type: type })} title={props.t("service-tile.datasets")} />
                 <ExpandableView initiallyExpanded={false} view={ContactTab({ id: pprId, type: type })} title={props.t("service-tile.contact")} />
             </>
         )

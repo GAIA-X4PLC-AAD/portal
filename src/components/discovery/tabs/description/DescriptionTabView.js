@@ -1,11 +1,11 @@
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState,  useEffect } from "react";
 
 import * as S from '../style';
 import PropTypes from 'prop-types';
 
 
-const ColumnItem = ({ title, subtitle }) => {
+export const ColumnItem = ({ title, subtitle }) => {
   return <>
     <S.Padding vertical='20px' horizontal='4px'>
       <S.VerticalContainer>
