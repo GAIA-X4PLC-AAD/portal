@@ -65,3 +65,4 @@ export const BookButton = styled(S.BlueButton)`
     align-self: end;
     margin: 10px;
 `;
+
