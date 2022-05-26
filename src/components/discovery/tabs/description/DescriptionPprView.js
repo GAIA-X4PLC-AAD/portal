@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import {ColumnItem} from './DescriptionTabView';
 
 const DescriptionPprView = ({data}) => {
-    const data2 = {  description: "String",  certificates: ["String", "String"], location: "String", location_flag: "URL to flag image", member_since: "date/String", last_updated: "date/String"  }
-    const description = data || data2;
+    const description = data ;
 
 
     const showCertificates = (certificates) => {
@@ -14,6 +13,15 @@ const DescriptionPprView = ({data}) => {
             certificates.map((cert, i) => {return (<S.Tag key={i}>{cert}</S.Tag>)})
         );
 
+    }
+
+
+    const showLocation= (location, location_flag) => {
+
+      return (<>
+                <S.FlagImg src={location_flag} alt={`${location} flag`}/>
+                {location}
+              </>);
     }
 
     if (data === undefined) return null;
@@ -36,7 +44,7 @@ const DescriptionPprView = ({data}) => {
               <S.HorizontalContainer>
                 <ColumnItem title='MEMBER SINCE' subtitle={description.member_since} />
                 <ColumnItem title='LAST UPDATE' subtitle={description.last_updated} />
-                <ColumnItem title='LOCATION' subtitle={description.location} />
+                <ColumnItem title='LOCATION' subtitle={showLocation(description.location, description.location_flag)} />
               </S.HorizontalContainer>
             </S.Padding>
           </S.VerticalContainer>

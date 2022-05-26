@@ -18,7 +18,7 @@ export const ColumnItem = ({ title, subtitle }) => {
 
 ColumnItem.propTypes = {
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
+  subtitle: PropTypes.any.isRequired,
 }
 
 // {
