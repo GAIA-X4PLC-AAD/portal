@@ -40,7 +40,7 @@ const DataTile = (props) => {
             <>
                 <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id: dataId, type: type })} title={props.t("service-tile.details")} />
                 <ExpandableView initiallyExpanded={false} view={PriceTab({ id: dataId , type: type})} title={props.t("service-tile.price")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ dataId: dataId })} title={props.t("service-tile.sample")} />
+                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ id: dataId, type: type })} title={props.t("service-tile.sample")} />
                 <ExpandableView initiallyExpanded={false} view={ContactTab({ id: dataId, type: type })} title={props.t("service-tile.contact")} />
             </>
         )
