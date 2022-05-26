@@ -2,8 +2,9 @@ import React from "react";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import {ColumnItem} from './DescriptionTabView';
+import { withTranslation } from "react-i18next";
 
-const DescriptionPprView = ({data}) => {
+const DescriptionPprView = ({t, data}) => {
     const description = data ;
 
 
@@ -30,11 +31,11 @@ const DescriptionPprView = ({data}) => {
         <S.ExpandedContainer>
           <S.VerticalContainer horizontal='8px'>
             <S.Padding horizontal='8px'>
-              <S.Title>Description</S.Title>
+              <S.Title>{t('service-tile.description')}</S.Title>
               <S.Body>{description.description}</S.Body>
   
               <S.Padding vertical='8px' horizontal='0px'>
-                <S.Subtitle>Certificates</S.Subtitle>
+                <S.Subtitle>{t('service-tile.certificates')}</S.Subtitle>
               </S.Padding>
   
               <S.HorizontalContainer>
@@ -42,9 +43,9 @@ const DescriptionPprView = ({data}) => {
               </S.HorizontalContainer>
   
               <S.HorizontalContainer>
-                <ColumnItem title='MEMBER SINCE' subtitle={description.member_since} />
-                <ColumnItem title='LAST UPDATE' subtitle={description.last_updated} />
-                <ColumnItem title='LOCATION' subtitle={showLocation(description.location, description.location_flag)} />
+                <ColumnItem title={t('service-tile.member_since_UP')} subtitle={description.member_since} />
+                <ColumnItem title={t('service-tile.last_update_UP')} subtitle={description.last_updated} />
+                <ColumnItem title={t('service-tile.location_UP')} subtitle={showLocation(description.location, description.location_flag)} />
               </S.HorizontalContainer>
             </S.Padding>
           </S.VerticalContainer>
@@ -58,7 +59,8 @@ const DescriptionPprView = ({data}) => {
 
 DescriptionPprView.propTypes = {
   // serviceId: PropTypes.number.isRequired,
-  data: PropTypes.object
+  data: PropTypes.object,
+  t: PropTypes.func
 }
 
-export default DescriptionPprView;
+export default withTranslation () (DescriptionPprView);

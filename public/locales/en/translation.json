@@ -131,7 +131,12 @@
             "sustainability": "Sustainability",
             "availability": "Availability"
         },
-        "bookButton": "Book"
+        "bookButton": "Book",
+        "description": "Description",
+        "certificates": "Certificates",
+        "member_since_UP": "MEMBER SINCE",
+        "last_update_UP": "LAST UPDATE",
+        "location_UP": "LOCATION"
     },
     "discovery": {
         "contactTypes": {
