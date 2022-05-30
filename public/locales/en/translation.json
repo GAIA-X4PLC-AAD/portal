@@ -132,7 +132,16 @@
             "sortDescription": "Short Description",
             "availability": "Availability"
         },
-        "bookButton": "Book"
+        "bookButton": "Book",
+        "description": "Description",
+        "certificates": "Certificates",
+        "member_since_UP": "MEMBER SINCE",
+        "last_update_UP": "LAST UPDATE",
+        "location_UP": "LOCATION",
+        "source_UP": "SOURCE",
+        "category_UP": "CATEGORY",
+        "cloud_service_UP": "CLOUD SERVICE",
+        "frequency_of_update_UP": "FREQUENCY OF UPDATE"
     },
     "discovery": {
         "contactTypes": {

@@ -184,5 +184,8 @@ export const Tag = styled.div`
   color: white;
   line-height: 16px;
 `
-
+export const FlagImg = styled.img`
+  width: 19px;
+  height: 19px;
+`;
 

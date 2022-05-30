@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 
 import * as S from '../style';
@@ -6,21 +5,34 @@ import PropTypes from 'prop-types';
 import LoadingView from "../../../loading_view/LoadingView";
 import DescriptionTabView from "./DescriptionTabView";
 import configData from "../../../../config/config.json";
+import DescriptionPprView from "./DescriptionPprView";
+import DescriptionDataView from "./DescriptionDataView";
 
 
-const DescriptionTab = ({ serviceId },) => {
-  const URL = configData.EDGE_API_URI + `/discovery/services/${serviceId}/details/`;
+const DescriptionTab = ({ id, type }) => {
+  const URL = configData.EDGE_API_URI + `/discovery/${type}/${id}/details/`;
+
+
+  const getSuccessView = (type) => {
+      switch (type ) {
+        case 'services': return DescriptionTabView;
+        case 'ppr':  return DescriptionPprView;
+        case 'data': return DescriptionDataView;
+        default: return DescriptionTabView;
+      }
+  }
 
   return (
     <LoadingView
       url={URL}
-      successView={DescriptionTabView}
+      successView={getSuccessView(type)}
     />
   )
 }
 
 DescriptionTab.propTypes = {
-  serviceId: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
 }
 
