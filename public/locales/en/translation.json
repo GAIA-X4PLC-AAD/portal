@@ -129,6 +129,7 @@
             "security": "Security",
             "location": "Location",
             "sustainability": "Sustainability",
+            "sortDescription": "Short Description",
             "availability": "Availability"
         },
         "bookButton": "Book"

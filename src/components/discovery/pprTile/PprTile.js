@@ -8,6 +8,8 @@ import LoadingView from "../../loading_view/LoadingView";
 import ExpandableView from "../../expandable/ExpandableView";
 import ContactTab from "../tabs/ContactTab/ContactTab";
 import DescriptionTab from "../tabs/description/DescriptionTab";
+import ServicesTab from "../tabs/servicesTab/ServicesTab";
+import DataSetTab from "../tabs/dataSetsTab/DataSetTab";
 
 const PprTile = (props) => {
     const {pprId} = useParams();
@@ -36,9 +38,10 @@ const PprTile = (props) => {
     const showComponent = () => {
         return (
             <>
+
                 <ExpandableView initiallyExpanded={true} view={DescriptionTab({ pprId: pprId })} title={props.t("service-tile.details")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: pprId })} title={props.t("service-tile.services")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ pprId: pprId })} title={props.t("service-tile.datasets")} />
+                <ExpandableView initiallyExpanded={false} view={ServicesTab({ id: pprId })} title={props.t("service-tile.services")} />
+                <ExpandableView initiallyExpanded={false} view={DataSetTab({ id: pprId })} title={props.t("service-tile.datasets")} />
                 <ExpandableView initiallyExpanded={false} view={ContactTab({ id: pprId, type: type })} title={props.t("service-tile.contact")} />
             </>
         )
