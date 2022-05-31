@@ -21,13 +21,9 @@ import RegisterDisplayVC from './components/RegisterDisplayVC';
 import RegisterComplianceCheck from './components/RegisterComplianceCheck';
 import { createBrowserHistory } from "history";
 import Provider from './components/account/Provider';
-import ServiceTile from './components/discovery/servicetile/ServiceTile';
-import PprTile from './components/discovery/pprTile/PprTile';
-import DataTile from './components/discovery/dataTile/DataTile';
 
 import PropTypes from 'prop-types';
 import Header from './components/header';
-import TileFactory from './components/discovery/TileFactory';
 import DiscoveryItem from './components/discovery/DiscoveryItem';
 
 const App = (props) => {
@@ -61,7 +57,7 @@ const App = (props) => {
             <div className='body-container'>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/data" element={<TileFactory/>} />
+                <Route path="/data" element={<WorkInProgress component="Data" />} />
                 <Route path="/provider" element={<WorkInProgress component="Provider" />} />
                 <Route path="/help" element={<WorkInProgress component="Help" />} />
                 <Route path="/register" element={<Register />} />
