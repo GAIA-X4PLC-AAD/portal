@@ -27,6 +27,8 @@ import DataTile from './components/discovery/dataTile/DataTile';
 
 import PropTypes from 'prop-types';
 import Header from './components/header';
+import TileFactory from './components/discovery/TileFactory';
+import DiscoveryItem from './components/discovery/DiscoveryItem';
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
@@ -59,7 +61,7 @@ const App = (props) => {
             <div className='body-container'>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/data" element={<WorkInProgress component="Data" />} />
+                <Route path="/data" element={<TileFactory/>} />
                 <Route path="/provider" element={<WorkInProgress component="Provider" />} />
                 <Route path="/help" element={<WorkInProgress component="Help" />} />
                 <Route path="/register" element={<Register />} />
@@ -76,9 +78,9 @@ const App = (props) => {
                 <Route path="/loginfail" element={<LoginFail />} />
                 <Route path="/account/:tab" element={<AccountHome />} />
                 <Route path="/account/provider/:tab" element={<Provider />} />
-                <Route path="/servicetile/:serviceId" element={<ServiceTile />} />
-                <Route path="/pprtile/:pprId" element={<PprTile />} />
-                <Route path="/datatile/:dataId" element={<DataTile />} />
+                <Route path="/servicetile/:id" element={<DiscoveryItem type="service"/>} />
+                <Route path="/pprtile/:idd" element={<DiscoveryItem type="ppr"/>} />
+                <Route path="/datatile/:id" element={<DiscoveryItem type="data"/>} />
               </Routes>
             </div>
             <div className='footer-container'>
