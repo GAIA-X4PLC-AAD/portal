@@ -1,19 +1,20 @@
 stages:
   - build
-  - deploy
 
 image: docker:latest
+
 
 services:
   - docker:dind
 
 docker_build:
   stage: build
+  variables:
+      DOCKER_HOST: "tcp://docker:2375"  
   only:
     refs:
       - main
   script:
-    - systemctl start docker   
     - docker login -u $DREGISTRY_USER -p $DREGISTRY_PASSWORD $CI_REGISTRY
     - docker build -t registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/portal-frontend:latest .
     - docker push registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/portal-frontend:latest
