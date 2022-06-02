@@ -1,7 +1,5 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import { Link, useParams, useSearchParams } from "react-router-dom";
-import LoadingView from "../../loading_view/LoadingView";
 import ExpandableView from "../../expandable/ExpandableView";
 import "../servicetile/ServiceTile.css";
 import * as S from '../style';
