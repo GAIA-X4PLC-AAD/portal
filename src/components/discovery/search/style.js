@@ -63,3 +63,14 @@ export const Rounded=styled.div`
     margin: 0;
     margin-left:auto;
 `;
+
+export const FilterHeader=styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0.25px;
+    color: #1C0E15;
+    text-align: left;
+`;

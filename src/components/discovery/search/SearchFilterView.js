@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import ExpandableView from "../../expandable/ExpandableView";
 import * as S from './style';
+import { withTranslation } from "react-i18next";
 
-const SearchFilterView = ({data}) => {
+const SearchFilterView = ({data,t}) => {
 
     const [filters, setFilters] = useState([]);
         
@@ -42,15 +43,19 @@ const SearchFilterView = ({data}) => {
     if (data === undefined) return null;
      
     return (
-        <S.Filters>
-            {showCategories(data)}
-        </S.Filters>
+        <>
+            <S.FilterHeader>{t("discovery.search.filter")}</S.FilterHeader>
+            <S.Filters>
+                {showCategories(data)}
+            </S.Filters>
+        </>
         
     )
 }
 
 SearchFilterView.propTypes = {
-    data: PropTypes.object
+    data: PropTypes.object,
+    t: PropTypes.func
 };
 
-export default SearchFilterView;
+export default withTranslation() (SearchFilterView);
