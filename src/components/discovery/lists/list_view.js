@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import PropTypes from 'prop-types';
+import DiscoveryItem from "../DiscoveryItem";
 
 
 const ListView = (props,) => {
@@ -19,7 +20,7 @@ const ListView = (props,) => {
         items.map((item, index) => {
             switch (item.type) {
                 default:
-                    return <h1>{index}</h1>;
+                    return <DiscoveryItem type="service" />;
             }
         }
         )

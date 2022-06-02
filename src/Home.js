@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from 'react-redux'
 import { useTranslation, withTranslation } from "react-i18next";
 import Search from "./Search";
-import Article from "./components/Article";
+import Article from "./components/article/Article";
 
 import PropTypes from 'prop-types';
 

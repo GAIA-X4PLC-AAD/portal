@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import Modal from "../Modal";
+import Modal from "../../Modal";
 import "./Register.css";
-import VerticalSteps from "./VerticalSteps";
+import VerticalSteps from "../../common/vertical_steps/VerticalSteps";
 import axios from "axios";
-import configData from "../config/config.json";
+import configData from "../../config/config.json";
 
 import PropTypes from 'prop-types';
 

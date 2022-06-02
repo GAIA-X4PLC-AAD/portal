@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate} from "react-router-dom";
 import axios from "axios";
-import VerticalSteps from "./VerticalSteps";
-import Modal from "../Modal";
-import configData from "../config/config.json";
+import VerticalSteps from "../../common/vertical_steps/VerticalSteps";
+import Modal from "../../Modal";
+import configData from "../../config/config.json";
 
 import PropTypes from 'prop-types';
 

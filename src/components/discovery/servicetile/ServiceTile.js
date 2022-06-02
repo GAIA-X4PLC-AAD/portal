@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import * as S from '../style';
 import PropTypes from 'prop-types';
@@ -70,7 +70,7 @@ const ServiceTile = ({input, id, t}) => {
     }
 
     return (
-        <ExpandableView initiallyExpanded={true} view={showTileContent()} title={showTileHeader()} />
+        <ExpandableView initiallyExpanded={false} view={showTileContent()} title={showTileHeader()} />
     );
 
 }

@@ -4,28 +4,28 @@ import WorkInProgress from './WorkInProgress';
 import { Link, BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './Home';
 import Search from "./Search";
-import Register from './components/Register';
-import RegisterUser from './components/RegisterUser';
-import RegisterOrganization from './components/RegisterOrganization';
-import RegisterMailSent from './components/RegisterMailSent';
-import RegisterViaDID from './components/RegisterViaDID';
-import RegisterViaDIDIdP from './components/RegisterViaDIDIdP';
-import RegisterConfirmation from './components/RegisterConfirmation';
+import Register from './components/registration/Register';
+import RegisterUser from './components/registration/RegisterUser';
+import RegisterOrganization from './components/registration/RegisterOrganization';
+import RegisterMailSent from './components/registration/RegisterMailSent';
+import RegisterViaDID from './components/registration/RegisterViaDID';
+import RegisterViaDIDIdP from './components/registration/RegisterViaDIDIdP';
+import RegisterConfirmation from './components/registration/RegisterConfirmation';
 import LoginFail from './components/login/LoginFail';
-import RegisterUserViaDid from './components/RegisterUserViaDid';
+import RegisterUserViaDid from './components/registration/RegisterUserViaDid';
 import Login from './components/login/Login';
 import AccountHome from './components/account/AccountHome';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import RegisterDisplayVC from './components/RegisterDisplayVC';
-import RegisterComplianceCheck from './components/RegisterComplianceCheck';
+import RegisterDisplayVC from './components/registration/RegisterDisplayVC';
+import RegisterComplianceCheck from './components/registration/RegisterComplianceCheck';
 import { createBrowserHistory } from "history";
 import Provider from './components/account/Provider';
 
 import PropTypes from 'prop-types';
 import Header from './components/header';
 import DiscoveryItem from './components/discovery/DiscoveryItem';
-import ServicesList from './components/discovery/lists/services_list';
+import ServicesPage from './components/discovery/lists/services_page';
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
@@ -42,7 +42,7 @@ const App = (props) => {
           <div className='body-container'>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/services" element={<ServicesList />} />
+              <Route path="/services" element={<ServicesPage />} />
               <Route path="/data" element={<WorkInProgress component="Data" />} />
               <Route path="/provider" element={<WorkInProgress component="Provider" />} />
               <Route path="/help" element={<WorkInProgress component="Help" />} />

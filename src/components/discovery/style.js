@@ -37,6 +37,8 @@ export const DiscoveryDetailsButton = styled.div`
     letter-spacing: 0.25px;
     text-align: center;
     color: #000094;
+    margin-top: auto;
+    margin-bottom: auto;
 `;
 
 export const DiscoveryDetailsContent = styled.div`
