@@ -4,7 +4,7 @@ stages:
 image: docker:20.10.15
 
 services:
-  - docker:20.10.15-dind
+  - docker:dind
 
 docker_build:
   stage: build
@@ -12,6 +12,7 @@ docker_build:
     refs:
       - main
   script:
+    - docker info
     - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD https://gaiaxregistry.azurecr.io 
     - docker build -t gaiaxregistry.azurecr.io/frontend:latest .
     - docker push gaiaxregistry.azurecr.io/frontend:latest
