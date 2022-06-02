@@ -13,6 +13,6 @@ docker_build:
     refs:
       - main
   script:
+    - docker build -t registry.gitlab.com/frontend:latest .    
     - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD registry.gitlab.com
-    - docker build -t registry.gitlab.com/frontend:latest .
     - docker push registry.gitlab.com/frontend:latest
