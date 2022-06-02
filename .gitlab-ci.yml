@@ -2,15 +2,14 @@ stages:
   - build
 
 image: docker:latest
-
+variables:
+  DOCKER_HOST: "tcp://docker:2375"  
 
 services:
   - docker:dind
 
 docker_build:
   stage: build
-  variables:
-      DOCKER_HOST: "tcp://docker:2375"  
   only:
     refs:
       - main
