@@ -3,6 +3,9 @@ stages:
 
 image: docker:latest
 
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+
 services:
   - docker:19-dind
 
