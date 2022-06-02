@@ -3,9 +3,6 @@ stages:
 
 image: docker:latest
 
-variables:
-  DOCKER_HOST: tcp://docker:2375/
-
 services:
   - docker:19-dind
 
@@ -16,5 +13,5 @@ docker_build:
       - main
   script:
     - docker login -u $DREGISTRY_USER -p $DREGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/portal-frontend:latest .
+    - export DOCKER_HOST=tcp://localhost:2375 && docker build -t registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/portal-frontend:latest .
     - docker push registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/portal-frontend:latest
