@@ -18,5 +18,5 @@ docker_build:
   before_script:
     - docker login -u $DREGISTRY_USER -p $DREGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - export DOCKER_HOST=tcp://127.0.0.1:2375 && docker build -t registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/portal-frontend:latest .
+    - docker build -t registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/portal-frontend:latest .
     - docker push registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/portal-frontend:latest
