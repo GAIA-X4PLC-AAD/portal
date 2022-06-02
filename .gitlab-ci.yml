@@ -2,11 +2,9 @@ stages:
   - build
 
 image: docker:latest
-variables:
-  DOCKER_HOST: "tcp://docker:2375"  
 
 services:
-  - docker:dind
+  - docker:docker:19-dind
 
 docker_build:
   stage: build
