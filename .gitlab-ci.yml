@@ -2,10 +2,10 @@ stages:
   - build
   - deploy
 
-image: docker:latest
+image: docker:dind
 
 services:
-  - docker:latest
+  - docker:dind
 
 docker_build:
   stage: build
