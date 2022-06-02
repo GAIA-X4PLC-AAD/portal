@@ -10,18 +10,33 @@ export const Column = styled.div`
     letter-spacing: 0.25px;
     color: #2A2A2A;
     text-align: left;
-    padding-left: 13px;
+    padding: 13px 13px 12px 12px;
+    display: flex;
+    flex-direction: row;
+    background: #F8F8F8;
+    border-radius: 4px;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-top: 4px;
+    margin-bottom: 4px;
 `;
 
 export const CheckBox = styled.input`
+    width: 16px;
+    height: 16px;
     box-sizing: border-box;
     background: #FFFFFF;
-    border: 1px solid #E9E9E9;
+    border: 1px solid #E9E9E9 !important;
     border-radius: 3px;
-    margin-right: 8px;
-    margin-top: 12px;
-    margin-bottom: 12px;
+    align-self: center;
+    margin: 0;
 `;
+
+export const CheckBoxText = styled.div`
+align-self: center;
+margin:0;
+margin-left: 8px;
+`
 
 export const Filters = styled.div`
     display: flex;
@@ -40,4 +55,11 @@ export const Category=styled.div`
     line-height: 24px;
     letter-spacing: 0.25px;
     color: #000000;
+    margin:6px 12px;
+`;
+
+export const Rounded=styled.div`
+    color:  #B3B3B3;
+    margin: 0;
+    margin-left:auto;
 `;
