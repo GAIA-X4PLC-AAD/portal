@@ -40,20 +40,22 @@ export const CircularLoader = styled.div`
 
 export const Block = styled.div`
   /* border: 1px solid #ccc; */
-  margin: 0%;
+  margin: 12px 0px;
   width: 100%;
+  border: ${props => props.border ? '1px solid #E9E9E9' : ''};
+  border-radius: 4px;
   /* min-height: 40%; */
 `
 
 export const ToggleButton = styled.div`
   font-size: 1em;
-  border: 1px solid #E9E9E9;
+  border-bottom: ${props => props.noBorder ? '' : '1px solid #E9E9E9'};
+  /* border-bottom: ${props => props.border ? '1px solid #E9E9E9' : ''}; */
   border-radius: 4px;
-  background: transparent;
   box-shadow: none;
-  width: 100%;
-  margin: 16px 0px;
-  padding: 0;
+  padding: 8px 0px;
+  /* padding: ${props => props.horizontalPadding || '20px'}; */
+  /* margin: 0px ${props => props.horizontalPadding || '0px'}; */
   text-align: left;
   cursor: pointer;
   display: flex;

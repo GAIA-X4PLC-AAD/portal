@@ -70,7 +70,7 @@ const ServiceTile = ({input, id, t}) => {
     }
 
     return (
-        <ExpandableView initiallyExpanded={false} view={showTileContent()} title={showTileHeader()} />
+        <ExpandableView initiallyExpanded={false} view={showTileContent()} title={showTileHeader()} border={true} />
     );
 
 }

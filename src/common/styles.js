@@ -79,3 +79,8 @@ export const Row = styled.div`
     flex-direction: row;
     padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
 `
+
+export const Style = styled.div`
+    border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
+    /* border-radius: 4px; */
+`
