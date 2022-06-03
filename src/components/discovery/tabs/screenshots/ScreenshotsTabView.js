@@ -33,13 +33,13 @@ const ScreenshotsTabView = (props,) => {
         /> : <></>}
 
       </Center>
-      {/* <Center>
+      <Center>
         <Row vertical='10px'>
           {slideImages?.map((p) => (
             <img src={p['url']} key={p['url']} width={200} />
           ))}
         </Row>
-      </Center> */}
+      </Center>
 
     </>
   )

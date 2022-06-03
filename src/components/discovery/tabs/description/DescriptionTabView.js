@@ -1,5 +1,5 @@
 
-import React, { useState,  useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import * as S from '../style';
 import PropTypes from 'prop-types';
@@ -45,26 +45,23 @@ const DescriptionTabView = (props,) => {
         <S.Image src={`${details['img_preview_url']}`} />
         <S.VerticalContainer horizontal='8px'>
           <S.Padding horizontal='8px'>
-            <S.Title>Description</S.Title>
-            <S.Body>The data (“Data”) is provided for your personal, internal use only and not for resale.  It is protected by copyright, and is subject to the following terms and conditions which are agreed to by you, on the one hand, and [OWNER] and its licensors (including their licensors and suppliers) on the other hand.</S.Body>
+            <S.Title>{`${details['name']}`}</S.Title>
+            <S.Body>{`${details['description']}`}</S.Body>
 
             <S.Padding vertical='8px' horizontal='0px'>
               <S.Subtitle>TAGS</S.Subtitle>
             </S.Padding>
 
             <S.HorizontalContainer>
-              <S.Tag>Tag Name 1</S.Tag>
-              <S.Tag>Tag Name 2</S.Tag>
-              <S.Tag>Tag Name 3</S.Tag>
-              <S.Tag>Tag Name 4</S.Tag>
+              {details['tags'] && details['tags'].map((elem, i) => { return (<S.Tag key={i}>{elem}</S.Tag>) })}
             </S.HorizontalContainer>
 
             <S.HorizontalContainer>
-              <ColumnItem title='STACK' subtitle='Stack' />
-              <ColumnItem title='DATE' subtitle='01.05.2022' />
-              <ColumnItem title='TERMS OF USE' subtitle='Terms of Use' />
-              <ColumnItem title='LOCATION' subtitle='Germany' />
-              <ColumnItem title='CATEGORY' subtitle='Category' />
+              <ColumnItem title='STACK' subtitle={`${details['stack']}`}  />
+              <ColumnItem title='DATE' subtitle={`${details['last_updated']}`}  />
+              <ColumnItem title='TERMS OF USE' subtitle={`${details['terms_of_use']}`} />
+              <ColumnItem title='LOCATION' subtitle={`${details['location']}`}  />
+              <ColumnItem title='CATEGORY' subtitle={`${details['category']}`}  />
             </S.HorizontalContainer>
           </S.Padding>
         </S.VerticalContainer>
