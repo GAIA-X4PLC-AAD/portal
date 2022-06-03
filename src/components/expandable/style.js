@@ -48,7 +48,7 @@ export const Block = styled.div`
 export const ToggleButton = styled.div`
   font-size: 1em;
   border-bottom: 1px solid #ccc;
-  background: transparent;
+  background: ${props => props.background || "transparent"};
   box-shadow: none;
   width: 100%;
   margin: 16px 0px;

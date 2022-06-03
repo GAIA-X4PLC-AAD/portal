@@ -56,6 +56,7 @@ export const Category=styled.div`
     letter-spacing: 0.25px;
     color: #000000;
     margin:6px 12px;
+    background: transparent;
 `;
 
 export const Rounded=styled.div`

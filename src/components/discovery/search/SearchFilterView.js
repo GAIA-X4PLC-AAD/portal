@@ -3,17 +3,24 @@ import PropTypes from 'prop-types';
 import ExpandableView from "../../expandable/ExpandableView";
 import * as S from './style';
 import { withTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { updateFilterCriteria } from "../../../actions";
 
 const SearchFilterView = ({data,t}) => {
 
     const [filters, setFilters] = useState([]);
-        
+    const dispatch = useDispatch();
+
+    // updates redux filterCriteria
     useEffect (()=> {
-        console.log(filters);
+        dispatch(updateFilterCriteria(filters));
     }, [filters]);
-     const onFormChanged = (a) => {
+
+    // update state of current filters
+    const onFormChanged = (a) => {
         if (a.target.checked === true) {
             setFilters([...filters,{key: a.target.name, value: a.target.value}]);
+            
         } else {
             setFilters(filters.filter(({key, value}) => {return !( key=== a.target.name && value === a.target.value)}));
         }
@@ -36,12 +43,12 @@ const SearchFilterView = ({data,t}) => {
 
     const showCategories = (data) => {
         return (data.categories.map((cat, i) =>{
-            return (<ExpandableView initiallyExpanded={true} view={showItemsList(cat.name, cat.items)} title={showCategoryHeader(cat.name)} key={cat.name}/>)
+            return (<ExpandableView initiallyExpanded={true} view={showItemsList(cat.name, cat.items)} title={showCategoryHeader(cat.name)} key={cat.name} background="#F9F9F9"/>)
         }))
      }
 
+     // check when data is null
     if (data === undefined) return null;
-     
     return (
         <>
             <S.FilterHeader>{t("discovery.search.filter")}</S.FilterHeader>
@@ -49,7 +56,6 @@ const SearchFilterView = ({data,t}) => {
                 {showCategories(data)}
             </S.Filters>
         </>
-        
     )
 }
 

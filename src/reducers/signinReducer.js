@@ -5,7 +5,6 @@ const INITIAL_STATE = {
 
 
 export default (state=INITIAL_STATE, action) => {
-    console.log(`signin reducer, action: ${action.type}`)
     switch(action.type) {
         case SIGN_IN_MENU:
             return {...state, isInSignInMenu: true};
