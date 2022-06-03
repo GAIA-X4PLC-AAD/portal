@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 
 const parameterBuilder = (state) => {
     let criterias = state.filterCriteria.map((criteria) => {return (`&${encodeURIComponent(criteria.key)}=${encodeURIComponent(criteria.value)}`)});
-    let searchTerm = state.searchTerm?`&search_term=${state.searchTerm}`:'';
+    let searchTerm = state.searchTerm?`&search_term=${encodeURIComponent(state.searchTerm)}`:'';
     let parameter = `size=${state.size}&page=${state.page}${searchTerm}${criterias}`;        
     return parameter;
 }
