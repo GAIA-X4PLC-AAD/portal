@@ -78,7 +78,7 @@ const ServiceTile = ({input, id, t}) => {
 ServiceTile.propTypes = {
     input: PropTypes.object,
     id: PropTypes.string,
-   t: PropTypes.func,
+   t: PropTypes.func
 }
 
 export default withTranslation()(ServiceTile);
