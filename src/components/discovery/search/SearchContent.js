@@ -1,15 +1,18 @@
 import React  from "react";
-import PropTypes from 'prop-types';
-import { connect, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 const SearchContent = () => {
 
     const criteria = useSelector(state => state.searchCriteriaStore);
 
+
+    console.log(criteria.parameters);
+
     return (criteria.filterCriteria.map((criteria, i)=> {
-        return(<div key={i}>
-            {`${criteria.key}: ${criteria.value}`}
-        </div>
+        return(
+            <div key={i}>
+                {`${criteria.key}: ${criteria.value}`}
+            </div>
         )}));
 }
 
