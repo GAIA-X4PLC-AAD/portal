@@ -44,11 +44,13 @@ export const Block = styled.div`
   width: 100%;
   border: ${props => props.border ? '1px solid #E9E9E9' : ''};
   border-radius: 4px;
+  /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
   /* min-height: 40%; */
 `
 
 export const ToggleButton = styled.div`
   font-size: 1em;
+  background: ${props => props.background ? '#F9F9F9' : ''};
   border-bottom: ${props => props.noBorder ? '' : '1px solid #E9E9E9'};
   /* border-bottom: ${props => props.border ? '1px solid #E9E9E9' : ''}; */
   border-radius: 4px;
@@ -56,13 +58,11 @@ export const ToggleButton = styled.div`
   padding: 8px 0px;
   /* padding: ${props => props.horizontalPadding || '20px'}; */
   /* margin: 0px ${props => props.horizontalPadding || '0px'}; */
-  text-align: left;
   cursor: pointer;
   display: flex;
-  justify-content: space-between;
-  color: black;
+  /* justify-content: space-between; */
 `
 export const Arrow = styled.div`
-  padding-right: 5px;
+  padding-right: ${props => props.paddingRight || '5px'};
   align-self: center;
 `;

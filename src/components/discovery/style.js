@@ -3,12 +3,13 @@ import styled from 'styled-components';
 export const DiscoveryTile = styled.div`
     display: flex;
     flex-direction: column;
-    width: 95%;
+    /* width: 95%; */
 `;
   
 export const DiscoveryTileHeader = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
 `;
   
 export const DiscoveryTileFirstRow = styled.div`

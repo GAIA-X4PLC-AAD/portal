@@ -4,13 +4,16 @@ import PropTypes from 'prop-types';
 import PageListView from "./page_list_view";
 import * as S from './style';
 import { Row } from "../../../common/styles";
+import SearchView from "../search/SearchView";
+import { Padding } from "../tabs/style";
 
 const ServicesPage = ({ pageNumber }) => {
 
     return (
         <>
             <Row>
-                <S.SideBar/>
+                <SearchView type="services" />
+                <Padding horizontal='12px'/>
                 <PageListView
                     type={'services'}
                     pageNumber={1} />

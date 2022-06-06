@@ -8,18 +8,20 @@ import PriceTab from "../tabs/priceTab/PriceTab";
 
 import DescriptionTab from "../tabs/description/DescriptionTab";
 import ScreenshotsTab from "../tabs/screenshots/ScreenshotsTab";
+import { CheckBox } from "../search/style";
 
-const ServiceTile = ({input, id, t}) => {
+const ServiceTile = ({ input, id, t }) => {
     const type = "services";
 
 
     const showComponent = () => {
         return (
             <>
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id:id, type: type })} title={t("service-tile.details")} />
-                <ExpandableView initiallyExpanded={false} view={PriceTab({ id:id, type: type})} title={t("service-tile.price")} />
-                <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={t("service-tile.screenshots")} />
-                <ExpandableView initiallyExpanded={false} view={ContactTab({ id:id, type: type })} title={t("service-tile.contact")} />
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id: id, type: type })} title={t("service-tile.details")}
+                     trailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3"/>
+                <ExpandableView initiallyExpanded={false} view={PriceTab({ id: id, type: type })} title={t("service-tile.price")} trailerPadding="12px" arrowColor="#B3B3B3"/>
+                <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={t("service-tile.screenshots")}  trailerPadding="12px" arrowColor="#B3B3B3"/>
+                <ExpandableView initiallyExpanded={false} view={ContactTab({ id: id, type: type })} title={t("service-tile.contact")} trailerPadding="12px" arrowColor="#B3B3B3"/>
             </>
         )
     }
@@ -31,6 +33,7 @@ const ServiceTile = ({input, id, t}) => {
         return (
             <S.DiscoveryTile>
                 <S.DiscoveryTileHeader>
+                    <CheckBox type="checkbox" />
                     <a href={"#" || input.services.ppr_url}>
                         <img src={input.logo} alt="Provider Logo" width={48}></img>
                     </a>
@@ -60,11 +63,11 @@ const ServiceTile = ({input, id, t}) => {
 
     const showTileContent = () => {
         return (
-        <S.DiscoveryDetailsContent>
-            <S.DiscoveryDetailsBody>
-                {showComponent()}
-            </S.DiscoveryDetailsBody>
-        </S.DiscoveryDetailsContent>
+            <S.DiscoveryDetailsContent>
+                <S.DiscoveryDetailsBody>
+                    {showComponent()}
+                </S.DiscoveryDetailsBody>
+            </S.DiscoveryDetailsContent>
 
         );
     }
@@ -78,7 +81,7 @@ const ServiceTile = ({input, id, t}) => {
 ServiceTile.propTypes = {
     input: PropTypes.object,
     id: PropTypes.string,
-   t: PropTypes.func
+    t: PropTypes.func
 }
 
 export default withTranslation()(ServiceTile);

@@ -25,7 +25,10 @@ const ListView = (props,) => {
 
     return (
         <>
-            {items.map((item, index) => {
+
+            {
+            
+            items.map((item, index) => {
                 switch (item.type) {
                     default:
                         return <DiscoveryItem type="service" />;
