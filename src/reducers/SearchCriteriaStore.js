@@ -5,11 +5,12 @@ const INITIAL_STATE = {
     searchTerms : null,
     filterCriteria : [],
     size : 15,
-    page : 0,
+    page : 1,
 };
 
 const parameterBuilder = (state) => {
-    let criterias = state.filterCriteria.map((criteria) => {return (`&${encodeURIComponent(criteria.key)}=${encodeURIComponent(criteria.value)}`)});
+    let criterias = state.filterCriteria.map((criteria) => {return (`&${encodeURIComponent(criteria.key)}=${encodeURIComponent(criteria.value)}`)}).
+    reduce((previous, current) => previous+current, '');
     let searchTerm = state.searchTerm?`&search_term=${encodeURIComponent(state.searchTerm)}`:'';
     let parameter = `size=${state.size}&page=${state.page}${searchTerm}${criterias}`;        
     return parameter;

@@ -8,7 +8,7 @@ const SearchView = ({type}) => {
     return (
         <>
         <SearchFilterFactory type={type}/>
-        <SearchContent/>
+        <SearchContent type={type}/>
         </>
     )
 }

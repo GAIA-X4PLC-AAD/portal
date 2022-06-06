@@ -11,9 +11,14 @@ const SearchFilterView = ({data,t}) => {
     const [filters, setFilters] = useState([]);
     const dispatch = useDispatch();
 
-    // updates redux filterCriteria
+    // updates redux filterCriteria every 1s if something has been changed. When there is a change in between, will wait 1s again
     useEffect (()=> {
-        dispatch(updateFilterCriteria(filters));
+        const timerId = setTimeout(()=> {
+            dispatch(updateFilterCriteria(filters));
+        },1000);
+        return () => {
+            clearTimeout(timerId);
+        }
     }, [filters]);
 
     // update state of current filters
