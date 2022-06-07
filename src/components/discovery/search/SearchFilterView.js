@@ -36,7 +36,8 @@ const SearchFilterView = ({ data, t }) => {
 
     const showCategories = (data) => {
         return (data.categories.map((cat, i) => {
-            return (<ExpandableView initiallyExpanded={true}
+            return (<ExpandableView 
+                initiallyExpanded={true}
                 border={true}
                 elevation = {true}
                 boxShadow = {'0px 2px 4px 0px rgb(29 36 48 / 12%)'}
