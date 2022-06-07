@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import * as S from '../../../common/styles';
 
 export const Column = styled.div`
     with: 100%;
@@ -75,3 +76,5 @@ export const FilterHeader=styled.div`
     color: #1C0E15;
     text-align: left;
 `;
+
+export const Button = S.BlueButton;

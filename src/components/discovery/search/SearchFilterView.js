@@ -14,7 +14,7 @@ const SearchFilterView = ({data,t}) => {
     // updates redux filterCriteria every 1s if something has been changed. When there is a change in between, will wait 1s again
     useEffect (()=> {
         const timerId = setTimeout(()=> {
-            dispatch(updateFilterCriteria(filters));
+            dispatch(updateFilterCriteria({filterCriteria: filters}));
         },1000);
         return () => {
             clearTimeout(timerId);

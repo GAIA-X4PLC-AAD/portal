@@ -1,4 +1,4 @@
-import {  UPDATE_SEARCH_FILTER_CRITERIA } from "../actions/types";
+import {  UPDATE_SEARCH_FILTER_CRITERIA , UPDATE_PAGE_NUMBER} from "../actions/types";
 
 const INITIAL_STATE = {
     type : null,
@@ -17,15 +17,23 @@ const parameterBuilder = (state) => {
 }
 
 const updateState = (currentState, newState) => {
-    const state = {...currentState, ...newState}
+    const state = {...currentState, ...newState, page: 1}
     return {...state, parameters: parameterBuilder(state)}
 }
+
+const updatePage = (currentState, pageNumber) => {
+    const state = {...currentState, page: pageNumber}
+    return {...state, parameters: parameterBuilder(state)}
+}
+
 
 export default (state=INITIAL_STATE, action) => {
         switch(action.type) {
         case UPDATE_SEARCH_FILTER_CRITERIA:
-            return updateState(state, {filterCriteria: action.filterCriteria});
-        default:
+            return updateState(state, action.filterCriteria);
+         case UPDATE_PAGE_NUMBER:
+                return updatePage(state, action.pageNumber);
+            default:
             return updateState(state);
     }
 
