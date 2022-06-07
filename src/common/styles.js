@@ -90,3 +90,14 @@ export const Style = styled.div`
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     /* border-radius: 4px; */
 `
+
+export const HeaderTitle=styled.div`
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0.25px;
+    color: #1C0E15;
+    text-align: left;
+`;
+

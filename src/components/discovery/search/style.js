@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Column = styled.div`
-    with: 100%;
     font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 400;
@@ -65,7 +64,6 @@ export const Rounded=styled.div`
 `;
 
 export const FilterHeader=styled.div`
-    font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;

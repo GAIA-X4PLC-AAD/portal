@@ -15,15 +15,16 @@ const ExpandableView = ({
     title,
     border = false,
     elevation = false,
-    trailerPadding = '40px',
+    trailerPadding = '30px',
     titleLeadingPadding = '0px',
     viewLeadingPadding = '0px',
     arrowColor = '#000094',
+    boxShadow,
 }) => {
     const [isExpanded, setIsExpanded] = useState(initiallyExpanded);
     return (
         <>
-            <S.Block border={border} elevation={elevation}>
+            <S.Block border={border} elevation={elevation} boxShadow={boxShadow}>
                 {/* TITLE */}
                 <S.ToggleButton
                     onClick={() => { setIsExpanded(!isExpanded) }}
@@ -56,6 +57,7 @@ ExpandableView.propTypes = {
     titleLeadingPadding: PropTypes.string,
     viewLeadingPadding: PropTypes.string,
     arrowColor: PropTypes.string,
+    boxShadow: PropTypes.string,
 }
 
 export default ExpandableView

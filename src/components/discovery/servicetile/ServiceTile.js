@@ -19,9 +19,9 @@ const ServiceTile = ({ input, id, t }) => {
             <>
                 <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id: id, type: type })} title={t("service-tile.details")}
                      trailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3"/>
-                <ExpandableView initiallyExpanded={false} view={PriceTab({ id: id, type: type })} title={t("service-tile.price")} trailerPadding="12px" arrowColor="#B3B3B3"/>
-                <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={t("service-tile.screenshots")}  trailerPadding="12px" arrowColor="#B3B3B3"/>
-                <ExpandableView initiallyExpanded={false} view={ContactTab({ id: id, type: type })} title={t("service-tile.contact")} trailerPadding="12px" arrowColor="#B3B3B3"/>
+                <ExpandableView initiallyExpanded={false} view={PriceTab({ id: id, type: type })} title={t("service-tile.price")} trailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3"/>
+                <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={t("service-tile.screenshots")}  trailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3"/>
+                <ExpandableView initiallyExpanded={false} view={ContactTab({ id: id, type: type })} title={t("service-tile.contact")} trailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3"/>
             </>
         )
     }

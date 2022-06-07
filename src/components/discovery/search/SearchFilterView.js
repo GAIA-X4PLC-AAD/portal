@@ -39,6 +39,7 @@ const SearchFilterView = ({ data, t }) => {
             return (<ExpandableView initiallyExpanded={true}
                 border={true}
                 elevation = {true}
+                boxShadow = {'0px 2px 4px 0px rgb(29 36 48 / 12%)'}
                 view={showItemsList(cat.name, cat.items)}
                 title={showCategoryHeader(cat.name)} key={cat.name} />)
         }))
