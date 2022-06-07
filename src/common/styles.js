@@ -83,9 +83,11 @@ export const Row = styled.div`
 export const Style = styled.div`
     border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
     flex-grow: ${props => props.flexGrow || 0};
+    display: ${props => props.display || ''};
     text-align: start;
     padding-left: ${props => props.paddingLeft || '0px'};
     padding-right: ${props => props.paddingRight || '0px'};
+    vertical-align: ${props => props.verticalAlign || 'unset'};
     
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     /* border-radius: 4px; */

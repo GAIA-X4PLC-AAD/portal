@@ -15,7 +15,7 @@ const ExpandableView = ({
     title,
     border = false,
     elevation = false,
-    trailerPadding = '30px',
+    titleTrailerPadding = '30px',
     titleLeadingPadding = '0px',
     viewLeadingPadding = '0px',
     arrowColor = '#000094',
@@ -33,7 +33,7 @@ const ExpandableView = ({
                     horizontalPadding='40px'
                 >
                     <Style flexGrow={1} paddingLeft={titleLeadingPadding}>{title}</Style>
-                    <Down isOpen={isExpanded} paddingRight={trailerPadding} arrowColor={arrowColor} />
+                    <Down isOpen={isExpanded} paddingRight={titleTrailerPadding} arrowColor={arrowColor} />
                 </S.ToggleButton>
                 {/* BODY */}
                 <Collapse isOpened={isExpanded}>
@@ -53,7 +53,7 @@ ExpandableView.propTypes = {
     view: PropTypes.object.isRequired,
     border: PropTypes.bool,
     elevation: PropTypes.bool,
-    trailerPadding: PropTypes.string,
+    titleTrailerPadding: PropTypes.string,
     titleLeadingPadding: PropTypes.string,
     viewLeadingPadding: PropTypes.string,
     arrowColor: PropTypes.string,

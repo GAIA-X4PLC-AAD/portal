@@ -40,6 +40,7 @@ const SearchFilterView = ({ data, t }) => {
                 border={true}
                 elevation = {true}
                 boxShadow = {'0px 2px 4px 0px rgb(29 36 48 / 12%)'}
+                titleTrailerPadding={'12px'}
                 view={showItemsList(cat.name, cat.items)}
                 title={showCategoryHeader(cat.name)} key={cat.name} />)
         }))

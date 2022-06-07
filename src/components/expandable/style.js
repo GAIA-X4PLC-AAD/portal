@@ -50,7 +50,7 @@ export const Block = styled.div`
 `
 
 export const ToggleButton = styled.div`
-  font-size: 1em;
+  font-size: 15px;
   background: ${props => props.background ? '#F9F9F9' : ''};
   border-bottom: ${props => props.noBorder ? '' : '1px solid #E9E9E9'};
   /* border-bottom: ${props => props.border ? '1px solid #E9E9E9' : ''}; */
@@ -66,4 +66,5 @@ export const ToggleButton = styled.div`
 export const Arrow = styled.div`
   padding-right: ${props => props.paddingRight || '5px'};
   align-self: center;
+  display: flex;
 `;
