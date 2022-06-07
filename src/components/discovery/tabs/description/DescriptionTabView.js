@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import { ColumnItem } from "./Common";
+import { Image } from "../../../../common/styles";
 
 
 // {
@@ -42,7 +43,7 @@ const DescriptionTabView = (props,) => {
     <>
 
       <S.ExpandedContainer>
-        <S.Image src={`${details['img_preview_url']}`} />
+        <Image src={`${details['img_preview_url']}`} minWidth='128px' maxWidth='256px'/>
         <S.VerticalContainer horizontal='8px'>
           <S.Padding horizontal='8px'>
             <S.Title>{`${details['name']}`}</S.Title>

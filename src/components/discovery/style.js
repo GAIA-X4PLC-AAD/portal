@@ -19,6 +19,10 @@ export const DiscoveryTileFirstRow = styled.div`
     line-height: 20px;
     letter-spacing: 0.25px;
     text-align: left;
+    width: 120px;
+    /* text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; */
 `;
 
 export const DiscoveryTileSecondRow = styled.div`

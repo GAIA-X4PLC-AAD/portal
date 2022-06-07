@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import * as S from '../../../common/styles';
 
 export const Column = styled.div`
     font-family: 'Titillium Web';
@@ -55,6 +56,7 @@ export const Category=styled.div`
     letter-spacing: 0.25px;
     color: #000000;
     margin:6px 12px;
+    background: transparent;
 `;
 
 export const Rounded=styled.div`
@@ -72,3 +74,5 @@ export const FilterHeader=styled.div`
     color: #1C0E15;
     text-align: left;
 `;
+
+export const Button = S.BlueButton;

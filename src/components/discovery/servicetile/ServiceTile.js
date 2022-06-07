@@ -9,7 +9,8 @@ import PriceTab from "../tabs/priceTab/PriceTab";
 import DescriptionTab from "../tabs/description/DescriptionTab";
 import ScreenshotsTab from "../tabs/screenshots/ScreenshotsTab";
 import { CheckBox } from "../search/style";
-import { Style } from "../../../common/styles";
+import { Image, Style } from "../../../common/styles";
+
 
 const ServiceTile = ({ input, id, t }) => {
     const type = "services";
@@ -41,9 +42,9 @@ const ServiceTile = ({ input, id, t }) => {
                 <S.DiscoveryTileHeader>
                     <CheckBox type="checkbox" />
                     <a href={"#" || input.services.ppr_url}>
-                        <Style display={'flex'}>
-                            <img src={input.logo} alt="Provider Logo" width={48} />
-                        </Style>
+                        {/* <Image */}
+                        <Image src={input.logo} alt="Provider Logo" width='48px' height='48px'/>
+
                     </a>
                     <div>
                         <S.DiscoveryTileFirstRow>{input.name}</S.DiscoveryTileFirstRow>

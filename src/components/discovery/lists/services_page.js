@@ -6,6 +6,7 @@ import * as S from './style';
 import { Row } from "../../../common/styles";
 import SearchView from "../search/SearchView";
 import { Padding } from "../tabs/style";
+import SearchContent from "../search/SearchContent";
 
 const ServicesPage = ({ pageNumber }) => {
 
@@ -14,9 +15,10 @@ const ServicesPage = ({ pageNumber }) => {
             <Row>
                 <SearchView type="services" />
                 <Padding horizontal='12px'/>
-                <PageListView
+                <SearchContent type="services"/>
+                {/* <PageListView
                     type={'services'}
-                    pageNumber={1} />
+                    pageNumber={1} /> */}
             </Row>
         </>
 

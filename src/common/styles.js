@@ -88,7 +88,7 @@ export const Style = styled.div`
     padding-left: ${props => props.paddingLeft || '0px'};
     padding-right: ${props => props.paddingRight || '0px'};
     vertical-align: ${props => props.verticalAlign || 'unset'};
-    
+    object-fit: ${props => props.objectFit || ''};;
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     /* border-radius: 4px; */
 `
@@ -103,3 +103,13 @@ export const HeaderTitle=styled.div`
     text-align: left;
 `;
 
+export const Image = styled.img`
+  display: inline-block;
+  vertical-align: middle;
+  width: ${props => props.width || ''};
+  height: ${props => props.height || ''};
+  object-fit: cover;
+  /* height: fit-content; */
+  max-width: ${props => props.maxWidth || ''};
+  min-width: ${props => props.minWidth || ''};
+`;

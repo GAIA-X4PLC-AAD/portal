@@ -3,17 +3,29 @@ import PropTypes from 'prop-types';
 import ExpandableView from "../../expandable/ExpandableView";
 import * as S from './style';
 import { withTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { updateFilterCriteria } from "../../../actions";
 
 const SearchFilterView = ({ data, t }) => {
 
     const [filters, setFilters] = useState([]);
+    const dispatch = useDispatch();
 
-    useEffect(() => {
-        console.log(filters);
+    // updates redux filterCriteria every 1s if something has been changed. When there is a change in between, will wait 1s again
+    useEffect (()=> {
+        const timerId = setTimeout(()=> {
+            dispatch(updateFilterCriteria({filterCriteria: filters}));
+        },1000);
+        return () => {
+            clearTimeout(timerId);
+        }
     }, [filters]);
+
+    // update state of current filters
     const onFormChanged = (a) => {
         if (a.target.checked === true) {
-            setFilters([...filters, { key: a.target.name, value: a.target.value }]);
+            setFilters([...filters,{key: a.target.name, value: a.target.value}]);
+            
         } else {
             setFilters(filters.filter(({ key, value }) => { return !(key === a.target.name && value === a.target.value) }));
         }
@@ -47,8 +59,8 @@ const SearchFilterView = ({ data, t }) => {
         }))
     }
 
+     // check when data is null
     if (data === undefined) return null;
-
     return (
         <>
             <S.FilterHeader>{t("discovery.search.filter")}</S.FilterHeader>
@@ -56,7 +68,6 @@ const SearchFilterView = ({ data, t }) => {
                 {showCategories(data)}
             </S.Filters>
         </>
-
     )
 }
 
