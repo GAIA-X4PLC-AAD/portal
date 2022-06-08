@@ -2,5 +2,5 @@
     "workbench.editor.enablePreview": false,
     "editor.mouseWheelScrollSensitivity": 0.1,
     "workbench.list.mouseWheelScrollSensitivity": 0.025,
-    "editor.minimap.enabled": false
+    "editor.minimap.enabled": false,
 }
