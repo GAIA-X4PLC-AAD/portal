@@ -112,11 +112,17 @@ justify-content: center;`;
 
 export const Button = S.BlueButton;
 
-export const Row = styled.div`
-display: flex;
-flex-direction: row;
-`;
-
 export const AdvancedSearch = styled.div`
+    padding-top: 8px;
     margin-left:auto;
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.25px;
+    color: #000094;
 `;

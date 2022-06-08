@@ -1,5 +1,5 @@
 import React from "react";
-import {  useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import configData from "../../../config/config.json";  
 import LoadingView from "../../loading_view/LoadingView";
 import PropTypes from 'prop-types';
@@ -12,7 +12,6 @@ const SearchContent = ({type}) => {
 
     const criteria = useSelector(state => state.searchCriteriaStore);
     const URL = configData.EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
-    const dispatch = useDispatch();
 
     const {t, i18n} = useTranslation();
 
@@ -23,7 +22,7 @@ const SearchContent = ({type}) => {
 
     const loadData = ({data}) => {
         return (<>
-                <HeaderTitle>{t('discovery.lists.data')}</HeaderTitle>
+                <HeaderTitle>{t(`discovery.lists.${type}`)}</HeaderTitle>
             {showData(data)}
             <NextPrevButtons data={data}/>
         </>

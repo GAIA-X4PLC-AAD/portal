@@ -19,7 +19,7 @@ const SearchView = ({type}) => {
 
     return (
         <>
-            <Row>
+            <Row margin="0 0 0 auto" width="fit-content">
                 <SearchTerm key={type}/>
             </Row>
             <Row>

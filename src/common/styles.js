@@ -78,6 +78,15 @@ export const Row = styled.div`
     display: flex;
     flex-direction: row;
     padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
+    margin: ${props => props.margin || '0'};
+    width: ${props => props.width || 'auto'};
+`
+export const Column = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
+    margin: ${props => props.margin || '0'};
+    width: ${props => props.width || 'auto'};
 `
 
 export const Style = styled.div`
