@@ -3,8 +3,6 @@ import React from 'react';
 import WorkInProgress from './WorkInProgress';
 import { Link, BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './Home';
-import Search from "./Search";
-import ServicesPage from './components/discovery/lists/services_page';
 
 import Register from './components/registration/Register';
 import RegisterUser from './components/registration/RegisterUser';
@@ -44,11 +42,9 @@ const App = (props) => {
             <div className='body-container'>
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/services/" element={<ServicesPage />} />
-                <Route path="/services/:id" element={<ServicesPage />} />
-                {/* <Route path="/data" element={<SearchView type="data" />} /> */}
-                {/* <Route path="/provider" element={<SearchView type="ppr" />} /> */}
-                {/* <Route path="/services" element={<SearchView type="services" />} /> */}
+                <Route path="/data" element={<SearchView type="data" />} />
+                <Route path="/provider" element={<SearchView type="ppr" />} />
+                <Route path="/services" element={<SearchView type="services" />} />
                 <Route path="/help" element={<WorkInProgress component="Help" />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/register/user" element={<RegisterUser />} />
