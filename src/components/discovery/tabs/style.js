@@ -116,15 +116,6 @@ export const HorizontalContainer = styled.div`
   width: 100%;
 `;
 
-export const Image = styled.img`
-  display: inline-block;
-  vertical-align: middle;
-
-  height: fit-content;
-  max-width: 256px;
-  min-width: 128px;
-
-`;
 
 export const Title = styled.p`
   /* Body Bold */

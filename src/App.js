@@ -3,22 +3,22 @@ import React from 'react';
 import WorkInProgress from './WorkInProgress';
 import { Link, BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './Home';
-import Search from "./Search";
-import Register from './components/Register';
-import RegisterUser from './components/RegisterUser';
-import RegisterOrganization from './components/RegisterOrganization';
-import RegisterMailSent from './components/RegisterMailSent';
-import RegisterViaDID from './components/RegisterViaDID';
-import RegisterViaDIDIdP from './components/RegisterViaDIDIdP';
-import RegisterConfirmation from './components/RegisterConfirmation';
+
+import Register from './components/registration/Register';
+import RegisterUser from './components/registration/RegisterUser';
+import RegisterOrganization from './components/registration/RegisterOrganization';
+import RegisterMailSent from './components/registration/RegisterMailSent';
+import RegisterViaDID from './components/registration/RegisterViaDID';
+import RegisterViaDIDIdP from './components/registration/RegisterViaDIDIdP';
+import RegisterConfirmation from './components/registration/RegisterConfirmation';
 import LoginFail from './components/login/LoginFail';
-import RegisterUserViaDid from './components/RegisterUserViaDid';
+import RegisterUserViaDid from './components/registration/RegisterUserViaDid';
 import Login from './components/login/Login';
 import AccountHome from './components/account/AccountHome';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import RegisterDisplayVC from './components/RegisterDisplayVC';
-import RegisterComplianceCheck from './components/RegisterComplianceCheck';
+import RegisterDisplayVC from './components/registration/RegisterDisplayVC';
+import RegisterComplianceCheck from './components/registration/RegisterComplianceCheck';
 import { createBrowserHistory } from "history";
 import Provider from './components/account/Provider';
 
@@ -87,8 +87,13 @@ const App = (props) => {
                   <p>{t('footer_business_only')}</p>
                 </div>
               </div>
+              <div className='footer-bottom'>
+                <p>{t('footer_business_only')}</p>
+              </div>
             </div>
           </div>
+
+
         </div>
       </Router>
     </div>

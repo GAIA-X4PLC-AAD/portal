@@ -1,12 +1,12 @@
 import React, {useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import Modal from "../Modal";
-import VerticalSteps from "./VerticalSteps";
-import AuthPolling from "./AuthPolling";
+import Modal from "../../Modal";
+import VerticalSteps from "../../common/vertical_steps/VerticalSteps";
+import AuthPolling from "../AuthPolling";
 import axios from "axios";
-import configData from "../config/config.json";
-import LoginFail from "./login/LoginFail";
+import configData from "../../config/config.json";
+import LoginFail from "../login/LoginFail";
 
 import PropTypes from 'prop-types';
 

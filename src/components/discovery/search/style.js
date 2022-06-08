@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import * as S from '../../../common/styles';
 
 export const Column = styled.div`
-    with: 100%;
     font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 400;
@@ -56,6 +56,7 @@ export const Category=styled.div`
     letter-spacing: 0.25px;
     color: #000000;
     margin:6px 12px;
+    background: transparent;
 `;
 
 export const Rounded=styled.div`
@@ -65,7 +66,6 @@ export const Rounded=styled.div`
 `;
 
 export const FilterHeader=styled.div`
-    font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -74,3 +74,5 @@ export const FilterHeader=styled.div`
     color: #1C0E15;
     text-align: left;
 `;
+
+export const Button = S.BlueButton;

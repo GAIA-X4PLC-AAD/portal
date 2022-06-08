@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate, useLocation} from "react-router-dom";
 import axios from "axios";
-import Modal from "../Modal";
-import configData from "../config/config.json";
+import Modal from "../../Modal";
+import configData from "../../config/config.json";
 
 import PropTypes from 'prop-types';
 
