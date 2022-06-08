@@ -51,6 +51,7 @@ const SearchFilterView = ({ data, t }) => {
             return (<ExpandableView 
                 initiallyExpanded={true}
                 border={true}
+                arrowColor = {'#737373'}
                 elevation = {true}
                 boxShadow = {'0px 2px 4px 0px rgb(29 36 48 / 12%)'}
                 titleTrailerPadding={'12px'}

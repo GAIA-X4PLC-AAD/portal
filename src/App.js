@@ -72,7 +72,7 @@ const App = (props) => {
                   <p>{t('footer_slogan_cap')}</p>
                 </div>
                 <div className='footer-content'>
-                  2020 Deutsche Telekom IoT GmbH
+                  2022 Deutsche Telekom IoT GmbH
                   <div>
                     <a href='#'>{t('links.imprint')}</a>
                     <a href='#'>{t('links.privacy')}</a>

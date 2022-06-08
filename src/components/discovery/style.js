@@ -19,7 +19,8 @@ export const DiscoveryTileFirstRow = styled.div`
     line-height: 20px;
     letter-spacing: 0.25px;
     text-align: left;
-    width: 140px;
+    width: ${props => props.width || ''};
+    /* width: 140px; */
     /* text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap; */

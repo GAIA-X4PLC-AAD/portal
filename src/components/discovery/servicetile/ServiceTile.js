@@ -10,21 +10,23 @@ import DescriptionTab from "../tabs/description/DescriptionTab";
 import ScreenshotsTab from "../tabs/screenshots/ScreenshotsTab";
 import { CheckBox } from "../search/style";
 import { Image, Style } from "../../../common/styles";
+import Tabs from "./tabs";
+import DataPreview from "../tabs/dataPreview/DataPreview";
+import { Columns } from "../tabs/dataPreview/style";
 
 
 const ServiceTile = ({ input, id, t }) => {
     const type = "services";
 
-
     const showComponent = () => {
         return (
             <>
-                <ExpandableView 
+                <ExpandableView
                     initiallyExpanded={true} view={DescriptionTab({ id: id, type: type })}
                     title={t("service-tile.details")}
-                    titleTrailerPadding="12px" 
-                    viewLeadingPadding="40px" 
-                    titleLeadingPadding="40px" 
+                    titleTrailerPadding="12px"
+                    viewLeadingPadding="40px"
+                    titleLeadingPadding="40px"
                     arrowColor="#B3B3B3" />
                 <ExpandableView initiallyExpanded={false} view={PriceTab({ id: id, type: type })} title={t("service-tile.price")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
                 <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={t("service-tile.screenshots")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
@@ -43,12 +45,12 @@ const ServiceTile = ({ input, id, t }) => {
                     <CheckBox type="checkbox" />
                     <a href={"#" || input.services.ppr_url}>
                         {/* <Image */}
-                        <Image src={input.logo} alt="Provider Logo" width='48px' height='48px'/>
+                        <Image src={input.logo} alt="Provider Logo" width='48px' height='48px' />
                     </a>
-                    <div>
-                        <S.DiscoveryTileFirstRow>{input.name}</S.DiscoveryTileFirstRow>
+                    <Style flexGrow='0'>
+                        <S.DiscoveryTileFirstRow width={'140px'}>{input.name}</S.DiscoveryTileFirstRow>
                         <S.DiscoveryTileSecondRow>{input.ppr_name}</S.DiscoveryTileSecondRow>
-                    </div>
+                    </Style>
                     <div>
                         <S.DiscoveryTileFirstRow>{t("service-tile.header.stack")}</S.DiscoveryTileFirstRow>
                         <S.DiscoveryTileSecondRow>{input.stack}</S.DiscoveryTileSecondRow>
@@ -70,13 +72,13 @@ const ServiceTile = ({ input, id, t }) => {
     }
 
     const showTileContent = () => {
+        console.log(`id: ${id}`)
         return (
             <S.DiscoveryDetailsContent>
                 <S.DiscoveryDetailsBody>
                     {showComponent()}
                 </S.DiscoveryDetailsBody>
             </S.DiscoveryDetailsContent>
-
         );
     }
 

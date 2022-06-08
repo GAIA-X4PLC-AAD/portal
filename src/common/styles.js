@@ -82,13 +82,17 @@ export const Row = styled.div`
 
 export const Style = styled.div`
     border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
+    border-bottom: ${props => props.borderBottom ? '1px solid #E9E9E9' : ''};
     flex-grow: ${props => props.flexGrow || 0};
     display: ${props => props.display || ''};
     text-align: start;
     padding-left: ${props => props.paddingLeft || '0px'};
     padding-right: ${props => props.paddingRight || '0px'};
     vertical-align: ${props => props.verticalAlign || 'unset'};
-    object-fit: ${props => props.objectFit || ''};;
+    object-fit: ${props => props.objectFit || ''};
+    max-width: ${props => props.maxWidth || ''};
+    min-width: ${props => props.minWidth || ''};
+    min-height: ${props => props.minHeight || ''};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     /* border-radius: 4px; */
 `
@@ -101,6 +105,11 @@ export const HeaderTitle=styled.div`
     letter-spacing: 0.25px;
     color: #1C0E15;
     text-align: left;
+`;
+
+export const Column=styled.div`
+    display: flex;
+    flex-direction: column;
 `;
 
 export const Image = styled.img`

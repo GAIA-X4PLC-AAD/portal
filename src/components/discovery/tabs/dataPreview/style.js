@@ -13,7 +13,7 @@ export const Preview = styled.div`
     flex: none;
     order: 1;
     flex-grow: 0;
-    margin: 5px;
+    /* margin: 5px; */
 `;
 
 export const PreviewImage = styled.img`
@@ -62,7 +62,7 @@ export const Description = styled.div`
 export const Logo = styled.img`
 width: 60px;
 height: 60px;
-margin: 5px;
+/* margin: 5px; */
 
 order: 0;
 flex-grow: 0;
