@@ -23,7 +23,6 @@ const ContactWidgetFactory = ({data, t}) => {
    
 
     const showContacts = () => {
-        console.log(contacts);
         return (
             contacts.map((contact, index)=> {
                 switch (contact.type) {    

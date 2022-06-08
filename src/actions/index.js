@@ -1,4 +1,4 @@
-import { SIGN_IN_MENU, NOT_SIGN_IN_MENU, SIGN_IN, SIGN_OUT, UPDATE_SEARCH_FILTER_CRITERIA, UPDATE_PAGE_NUMBER } from "./types";
+import { SIGN_IN_MENU, NOT_SIGN_IN_MENU, SIGN_IN, SIGN_OUT, UPDATE_SEARCH_FILTER_CRITERIA, UPDATE_SEARCH_PAGE_NUMBER, UPDATE_SEARCH_TYPE } from "./types";
 
 
 export const signInMenuEnter = () => {
@@ -26,5 +26,9 @@ export const updateFilterCriteria = (filterCriteria) => {
 };
 
 export const updatePageNumber = (pageNumber) => {
-    return {type: UPDATE_PAGE_NUMBER, pageNumber};
+    return {type: UPDATE_SEARCH_PAGE_NUMBER, pageNumber};
+};
+
+export const updateSearchType = (type) => {
+    return {type: UPDATE_SEARCH_TYPE, searchType: type};
 };
