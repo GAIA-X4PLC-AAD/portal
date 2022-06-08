@@ -6,7 +6,7 @@ import { withTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { updateFilterCriteria } from "../../../actions";
 
-const SearchFilterView = ({data,t}) => {
+const SearchFilterView = ({ data, t }) => {
 
     const [filters, setFilters] = useState([]);
     const dispatch = useDispatch();
@@ -27,30 +27,37 @@ const SearchFilterView = ({data,t}) => {
             setFilters([...filters,{key: a.target.name, value: a.target.value}]);
             
         } else {
-            setFilters(filters.filter(({key, value}) => {return !( key=== a.target.name && value === a.target.value)}));
+            setFilters(filters.filter(({ key, value }) => { return !(key === a.target.name && value === a.target.value) }));
         }
-     }
+    }
 
-     const showItemsList = (name, items) => {
-        return (items.map ((item)=> {
-            return(
-                <S.Column key={item.name} > 
-                    <S.CheckBox type="checkbox" name={name} value={item.name} defaultChecked={false} onChange={onFormChanged} key={name}/>
+    const showItemsList = (name, items) => {
+        return (items.map((item) => {
+            return (
+                <S.Column key={item.name} >
+                    <S.CheckBox type="checkbox" name={name} value={item.name} defaultChecked={false} onChange={onFormChanged} key={name} />
                     <S.CheckBoxText>{item.name}</S.CheckBoxText>
                     <S.Rounded>{item.qty}</S.Rounded>
                 </S.Column>
             );
         }))
-     };
-     const showCategoryHeader =(name) => {
-         return (<S.Category>{name}</S.Category>);
-     }
+    };
+    const showCategoryHeader = (name) => {
+        return (<S.Category>{name}</S.Category>);
+    }
 
     const showCategories = (data) => {
-        return (data.categories.map((cat, i) =>{
-            return (<ExpandableView initiallyExpanded={true} view={showItemsList(cat.name, cat.items)} title={showCategoryHeader(cat.name)} key={cat.name} background="#F9F9F9"/>)
+        return (data.categories.map((cat, i) => {
+            return (<ExpandableView 
+                initiallyExpanded={true}
+                border={true}
+                elevation = {true}
+                boxShadow = {'0px 2px 4px 0px rgb(29 36 48 / 12%)'}
+                titleTrailerPadding={'12px'}
+                view={showItemsList(cat.name, cat.items)}
+                title={showCategoryHeader(cat.name)} key={cat.name} />)
         }))
-     }
+    }
 
      // check when data is null
     if (data === undefined) return null;
@@ -69,4 +76,4 @@ SearchFilterView.propTypes = {
     t: PropTypes.func
 };
 
-export default withTranslation() (SearchFilterView);
+export default withTranslation()(SearchFilterView);

@@ -67,7 +67,7 @@ const PprTile = ({id, input, t}) => {
     }
 
     return (
-        <ExpandableView initiallyExpanded={true} view={showTileContent()} title={showTileHeader()} />
+        <ExpandableView initiallyExpanded={true} view={showTileContent()} title={showTileHeader()} border={true} />
     );
 
 

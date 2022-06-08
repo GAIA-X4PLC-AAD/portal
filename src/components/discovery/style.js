@@ -3,12 +3,13 @@ import styled from 'styled-components';
 export const DiscoveryTile = styled.div`
     display: flex;
     flex-direction: column;
-    width: 95%;
+    /* width: 95%; */
 `;
   
 export const DiscoveryTileHeader = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    align-items: center;
 `;
   
 export const DiscoveryTileFirstRow = styled.div`
@@ -18,6 +19,10 @@ export const DiscoveryTileFirstRow = styled.div`
     line-height: 20px;
     letter-spacing: 0.25px;
     text-align: left;
+    width: 140px;
+    /* text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; */
 `;
 
 export const DiscoveryTileSecondRow = styled.div`
@@ -37,6 +42,8 @@ export const DiscoveryDetailsButton = styled.div`
     letter-spacing: 0.25px;
     text-align: center;
     color: #000094;
+    margin-top: auto;
+    margin-bottom: auto;
 `;
 
 export const DiscoveryDetailsContent = styled.div`
@@ -50,7 +57,7 @@ export const DiscoveryTileContent = styled.div`
 
 export const DiscoveryDetailsBody = styled.div`
     padding: 0.5em 0.5em;
-    width:100%;
+    /* width:100%; */
 `;
 
   export const DiscoveryDetailsNav = styled.div`

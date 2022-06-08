@@ -79,3 +79,37 @@ export const Row = styled.div`
     flex-direction: row;
     padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
 `
+
+export const Style = styled.div`
+    border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
+    flex-grow: ${props => props.flexGrow || 0};
+    display: ${props => props.display || ''};
+    text-align: start;
+    padding-left: ${props => props.paddingLeft || '0px'};
+    padding-right: ${props => props.paddingRight || '0px'};
+    vertical-align: ${props => props.verticalAlign || 'unset'};
+    object-fit: ${props => props.objectFit || ''};;
+    /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
+    /* border-radius: 4px; */
+`
+
+export const HeaderTitle=styled.div`
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: 0.25px;
+    color: #1C0E15;
+    text-align: left;
+`;
+
+export const Image = styled.img`
+  display: inline-block;
+  vertical-align: middle;
+  width: ${props => props.width || ''};
+  height: ${props => props.height || ''};
+  object-fit: cover;
+  /* height: fit-content; */
+  max-width: ${props => props.maxWidth || ''};
+  min-width: ${props => props.minWidth || ''};
+`;

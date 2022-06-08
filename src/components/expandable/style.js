@@ -40,26 +40,31 @@ export const CircularLoader = styled.div`
 
 export const Block = styled.div`
   /* border: 1px solid #ccc; */
-  margin: 0%;
+  margin: 12px 0px;
   width: 100%;
+  border: ${props => props.border ? '1px solid #E9E9E9' : ''};
+  box-shadow: ${props => props.boxShadow};
+  border-radius: 4px;
+  /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
   /* min-height: 40%; */
 `
 
 export const ToggleButton = styled.div`
-  font-size: 1em;
-  border-bottom: 1px solid #ccc;
-  background: ${props => props.background || "transparent"};
+  font-size: 15px;
+  background: ${props => props.background ? '#F9F9F9' : ''};
+  border-bottom: ${props => props.noBorder ? '' : '1px solid #E9E9E9'};
+  /* border-bottom: ${props => props.border ? '1px solid #E9E9E9' : ''}; */
+  border-radius: 4px;
   box-shadow: none;
-  width: 100%;
-  margin: 16px 0px;
-  padding: 0;
-  text-align: left;
+  padding: 8px 0px;
+  /* padding: ${props => props.horizontalPadding || '20px'}; */
+  /* margin: 0px ${props => props.horizontalPadding || '0px'}; */
   cursor: pointer;
   display: flex;
-  justify-content: space-between;
-  color: black;
+  /* justify-content: space-between; */
 `
 export const Arrow = styled.div`
-  padding-right: 5px;
+  padding-right: ${props => props.paddingRight || '5px'};
   align-self: center;
+  display: flex;
 `;

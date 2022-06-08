@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import Modal from "../Modal";
+import Modal from "../../Modal";
 import "./Register.css";
-import VerticalSteps from "./VerticalSteps";
+import VerticalSteps from "../../common/vertical_steps/VerticalSteps";
 
 import PropTypes from 'prop-types';
 

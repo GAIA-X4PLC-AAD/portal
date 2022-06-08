@@ -1,11 +1,15 @@
-import React from "react";
-import { withTranslation } from "react-i18next";
+import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from 'react-redux'
+import { useTranslation, withTranslation } from "react-i18next";
 import Search from "./Search";
-import Article from "./components/Article";
+import Article from "./components/article/Article";
 
 import PropTypes from 'prop-types';
 
-const Home = ({t}) => {
+const Home = ({ t }) => {
+
+    const isInSignInMenu = useSelector((state) => state.signin.isInSignInMenu)
+
     return (
         <div className="home">
             <div className='banner-container'>
@@ -25,10 +29,10 @@ const Home = ({t}) => {
               </div>
             </div>
             <div className="home-article">
-                <Article headerMessage="article.what-is-new" category="NEWS"/>
+                <Article headerMessage="article.what-is-new" category="NEWS" />
             </div>
             <div className="home-article">
-                <Article headerMessage="article.what-is-gaiax" category="ARTICLE"/>
+                <Article headerMessage="article.what-is-gaiax" category="ARTICLE" />
             </div>
         </div>
     );
@@ -37,6 +41,5 @@ const Home = ({t}) => {
 Home.propTypes = {
     t: PropTypes.func,
 }
-
   
 export default withTranslation () (Home);

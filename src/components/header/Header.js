@@ -12,7 +12,9 @@ import SignInBar from './SignInBar'
 import * as S from './style';
 import CenterBar from "./CenterBar";
 
-function Header() {
+import PropTypes from 'prop-types';
+
+function Header(props) {
     const { t, } = useTranslation();
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -33,18 +35,26 @@ function Header() {
     };
 
     return (
-        <S.TopMenu >
-            <S.TopMenuLogo>
-                <Link to="/">
-                    <img src="/images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />
-                </Link>
-            </S.TopMenuLogo>
-            <CenterBar />
-            <S.TopMenuSignIn>
-                <SignInBar handleSignOut={handleSignOut} handleSignIn={handleSignIn} handleRegister={handleRegister} />
-            </S.TopMenuSignIn>
-        </S.TopMenu>
+        <>
+            <S.TopMenu >
+                <S.TopMenuLogo>
+                    <Link to="/">
+                        <img src="/images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />
+                    </Link>
+                </S.TopMenuLogo>
+                <CenterBar />
+                <S.TopMenuSignIn>
+                    <SignInBar handleSignOut={handleSignOut} handleSignIn={handleSignIn} handleRegister={handleRegister} />
+                </S.TopMenuSignIn>
+
+            </S.TopMenu>
+        </>
     )
+}
+
+Header.propTypes = {
+    type: PropTypes.string,
+    isInSignInMenu: PropTypes.bool,
 }
 
 export default Header;

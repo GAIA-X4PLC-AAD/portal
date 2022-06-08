@@ -150,9 +150,11 @@
             "supp_phone": "Support phone number",
             "supp_email": "Support email address"
         },
+        "lists": {
+            "data": "Data"
+        },
         "search": {
             "filter": "Filter"
-
         }
     },
     "account": {

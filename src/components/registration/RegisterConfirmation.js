@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
-import Modal from "../Modal";
-import VerticalSteps from "./VerticalSteps";
-import configData from "../config/config.json";
+import Modal from "../../Modal";
+import VerticalSteps from "../../common/vertical_steps/VerticalSteps";
+import configData from "../../config/config.json";
 import PropTypes from 'prop-types';
 
 const RegisterConfirmation = (props) => {
