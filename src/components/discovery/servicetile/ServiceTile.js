@@ -44,7 +44,6 @@ const ServiceTile = ({ input, id, t }) => {
                     <a href={"#" || input.services.ppr_url}>
                         {/* <Image */}
                         <Image src={input.logo} alt="Provider Logo" width='48px' height='48px'/>
-
                     </a>
                     <div>
                         <S.DiscoveryTileFirstRow>{input.name}</S.DiscoveryTileFirstRow>

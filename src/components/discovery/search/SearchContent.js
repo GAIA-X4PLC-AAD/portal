@@ -6,11 +6,14 @@ import PropTypes from 'prop-types';
 import NextPrevButtons from "./NexPrevButtons";
 import TileFactory from "../TileFactory";
 import { HeaderTitle } from "../../../common/styles";
+import { useTranslation } from "react-i18next";
 
 const SearchContent = ({type}) => {
 
     const criteria = useSelector(state => state.searchCriteriaStore);
     const URL = configData.EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
+
+    const {t, i18n} = useTranslation();
 
     const showData = (data) => {
         if (!data) return;
@@ -19,7 +22,7 @@ const SearchContent = ({type}) => {
 
     const loadData = ({data}) => {
         return (<>
-                <HeaderTitle>Data</HeaderTitle>
+                <HeaderTitle>{t('discovery.lists.data')}</HeaderTitle>
             {showData(data)}
             <NextPrevButtons data={data}/>
         </>
