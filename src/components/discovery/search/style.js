@@ -126,3 +126,34 @@ export const AdvancedSearch = styled.div`
     letter-spacing: 0.25px;
     color: #000094;
 `;
+
+export const AlertIcon=styled.img`
+display:block;
+margin:auto;
+content: url('/images/alertIcon.svg');
+width: 24px;
+height: 24px;
+background: transparent;
+object-fit:fill;`;
+
+export const ErrorHeader=styled.div`
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 24px;
+letter-spacing: 0.25px;
+color: #262626;
+margin-left: 10.25px;
+`;
+
+export const ErrorMessage=styled.div`
+text-align: left;
+margin-top: 12px;
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 24px;
+letter-spacing: 0.25px;
+color: #262626;`;

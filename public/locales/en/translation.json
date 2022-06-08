@@ -141,7 +141,8 @@
         "source_UP": "SOURCE",
         "category_UP": "CATEGORY",
         "cloud_service_UP": "CLOUD SERVICE",
-        "frequency_of_update_UP": "FREQUENCY OF UPDATE"
+        "frequency_of_update_UP": "FREQUENCY OF UPDATE",
+        "sample_header_text": "Try this simple queries below in the BigQuery UI"
     },
     "discovery": {
         "contactTypes": {
@@ -167,7 +168,6 @@
             "chip.filter.service": "SERVICE=",
             "chip.text.compute": "Compute",
             "chip.filter.compute": "COMPUTE="
-
         }
     },
     "account": {

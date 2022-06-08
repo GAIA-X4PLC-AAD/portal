@@ -5,8 +5,9 @@ import LoadingView from "../../loading_view/LoadingView";
 import PropTypes from 'prop-types';
 import NextPrevButtons from "./NexPrevButtons";
 import TileFactory from "../TileFactory";
-import { HeaderTitle } from "../../../common/styles";
+import { HeaderTitle, Row, Column } from "../../../common/styles";
 import { useTranslation } from "react-i18next";
+import * as S from "./style";
 
 const SearchContent = ({type}) => {
 
@@ -16,12 +17,23 @@ const SearchContent = ({type}) => {
     const {t, i18n} = useTranslation();
 
     const showData = (data) => {
-        if (!data) return;
+        if (!data || !data.data || data.data.length=== 0) return NoResults();
+        else 
         return(data.data.map((item, i)=>{return (<TileFactory data={item} id={`${item.id}`} key={item.i}/>)}))
     }
 
+    const NoResults = () => {
+            return (<>
+                <Row margin="24px 0 0 0">
+                    <Column><S.AlertIcon/></Column>
+                    <Column><S.ErrorHeader>No results found</S.ErrorHeader></Column>
+                </Row>
+                <Row><S.ErrorMessage>Sorry, we couldn’t find any matching results. Try broadening your filters</S.ErrorMessage></Row>
+            </>);
+    }
+
     const loadData = ({data}) => {
-        return (<>
+         return (<>
                 <HeaderTitle>{t(`discovery.lists.${type}`)}</HeaderTitle>
             {showData(data)}
             <NextPrevButtons data={data}/>
