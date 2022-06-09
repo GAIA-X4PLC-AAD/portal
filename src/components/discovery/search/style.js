@@ -75,4 +75,85 @@ export const FilterHeader=styled.div`
     text-align: left;
 `;
 
+export const SearchTerm=styled.input`
+width: 751px;
+height: 48px;
+right: 0%;
+background: #F8F8F8;
+border: 1px solid #E9E9E9;
+border-radius: 4px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 400;
+font-size: 24px;
+line-height: 36px;
+letter-spacing: 0.25px;
+margin-left: auto;
+margin-right: 8px;
+`;
+
+export const SearchPlusImage=styled.img`
+display:block;
+margin:auto;
+content: url('/images/plus-button.svg');
+width: 20px;
+height: 20px;
+background: #000094;
+object-fit:fill;`;
+
+export const SearchPlusButton=styled.div`
+width: 48px;
+height: 48px;
+background: #000094;
+border-radius: 5px;
+display: flex;
+justify-content: center;`;
+
 export const Button = S.BlueButton;
+
+export const AdvancedSearch = styled.div`
+    padding-top: 8px;
+    margin-left:auto;
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.25px;
+    color: #000094;
+`;
+
+export const AlertIcon=styled.img`
+display:block;
+margin:auto;
+content: url('/images/alertIcon.svg');
+width: 24px;
+height: 24px;
+background: transparent;
+object-fit:fill;`;
+
+export const ErrorHeader=styled.div`
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 18px;
+line-height: 24px;
+letter-spacing: 0.25px;
+color: #262626;
+margin-left: 10.25px;
+`;
+
+export const ErrorMessage=styled.div`
+text-align: left;
+margin-top: 12px;
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 24px;
+letter-spacing: 0.25px;
+color: #262626;`;

@@ -141,7 +141,8 @@
         "source_UP": "SOURCE",
         "category_UP": "CATEGORY",
         "cloud_service_UP": "CLOUD SERVICE",
-        "frequency_of_update_UP": "FREQUENCY OF UPDATE"
+        "frequency_of_update_UP": "FREQUENCY OF UPDATE",
+        "sample_header_text": "Try this simple queries below in the BigQuery UI"
     },
     "discovery": {
         "contactTypes": {
@@ -151,10 +152,22 @@
             "supp_email": "Support email address"
         },
         "lists": {
-            "data": "Data"
+            "data": "Data",
+            "services": "Services",
+            "ppr": "Provider"
         },
         "search": {
-            "filter": "Filter"
+            "filter": "Filter",
+            "chip.text.not": "Not",
+            "chip.filter.not": "NOT=",
+            "chip.text.provider": "Provider",
+            "chip.filter.provider": "PROVIDER=",
+            "chip.text.storage": "Storage",
+            "chip.filter.storage": "STORAGE=",
+            "chip.text.service": "Service",
+            "chip.filter.service": "SERVICE=",
+            "chip.text.compute": "Compute",
+            "chip.filter.compute": "COMPUTE="
         }
     },
     "account": {

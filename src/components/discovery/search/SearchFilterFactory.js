@@ -8,12 +8,6 @@ const SearchFilterFactory = ({type}) => {
     
     const URL = configData.EDGE_API_URI + `/discovery/${type}/filter-criterias`;
 
-
-    const showFilter = ({data})=> {
-        
-        console.log(data);
-    }
-
     return (
         <LoadingView
         url={URL}
