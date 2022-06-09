@@ -10,10 +10,13 @@ import DescriptionTab from "../tabs/description/DescriptionTab";
 import ScreenshotsTab from "../tabs/screenshots/ScreenshotsTab";
 import { CheckBox } from "../search/style";
 import { Image, Style } from "../../../common/styles";
+import Tabs from "./tabs";
+import DataPreview from "../tabs/dataPreview/DataPreview";
+import { Columns } from "../tabs/dataPreview/style";
 
 
-const ServiceTile = ({ input, id, t }) => {
-    const type = "services";
+const CompositeServiceTile = ({ input, id, t }) => {
+    const type = "composite-service";
 
     const showComponent = () => {
         return (
@@ -37,8 +40,10 @@ const ServiceTile = ({ input, id, t }) => {
 
 
         return (
-            <S.DiscoveryTile>
+            <S.DiscoveryTile isComposite={true}>
+
                 <S.DiscoveryTileHeader>
+
                     <CheckBox type="checkbox" />
                     <a href={"#" || input.services.ppr_url}>
                         {/* <Image */}
@@ -85,10 +90,10 @@ const ServiceTile = ({ input, id, t }) => {
 
 }
 
-ServiceTile.propTypes = {
+CompositeServiceTile.propTypes = {
     input: PropTypes.object,
     id: PropTypes.string,
     t: PropTypes.func
 }
 
-export default withTranslation()(ServiceTile);
+export default withTranslation()(CompositeServiceTile);

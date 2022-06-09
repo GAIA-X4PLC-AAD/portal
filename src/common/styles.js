@@ -93,6 +93,7 @@ export const Style = styled.div`
     border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
     border-bottom: ${props => props.borderBottom ? '1px solid #E9E9E9' : ''};
     flex-grow: ${props => props.flexGrow || 0};
+    justify-content: ${props => props.justifyContent || ''};
     display: ${props => props.display || ''};
     text-align: start;
     padding-top: ${props => props.paddingTop || '0px'};

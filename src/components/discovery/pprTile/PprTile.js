@@ -16,9 +16,7 @@ const PprTile = ({id, input, t}) => {
     const showComponent = () => {
         return (
             <>
-
-
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id,  type: type })} title={t("service-tile.details")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id,  type: type })} title={t("service-tile.details")} titleTrailerPadding="12px" viewLeadingPadding="24px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
                 <ExpandableView initiallyExpanded={false} view={ServicesTab({ id })} title={t("service-tile.services")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
                 <ExpandableView initiallyExpanded={false} view={DataSetTab({ id })} title={t("service-tile.datasets")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
                 <ExpandableView initiallyExpanded={false} view={ContactTab({ id, type: type })} title={t("service-tile.contact")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
@@ -33,7 +31,7 @@ const PprTile = ({id, input, t}) => {
                 <img src={input.logo} alt="Provider Logo" width={48}></img>
                 </a>
                 <div>
-                    <S.DiscoveryTileFirstRow>{input.name}</S.DiscoveryTileFirstRow>
+                    <S.DiscoveryTileFirstRow width={'140px'}>{input.name}</S.DiscoveryTileFirstRow>
                 </div>
                 <div>
                     <S.DiscoveryTileFirstRow>{t("service-tile.header.sustainability")}</S.DiscoveryTileFirstRow>

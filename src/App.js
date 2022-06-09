@@ -83,9 +83,6 @@ const App = (props) => {
                     <Link to="/help">{t('links.help')}</Link>
                   </div>
                 </div>
-                <div className='footer-bottom'>
-                  <p>{t('footer_business_only')}</p>
-                </div>
               </div>
               <div className='footer-bottom'>
                 <p>{t('footer_business_only')}</p>

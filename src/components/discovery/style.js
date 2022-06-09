@@ -3,15 +3,17 @@ import styled from 'styled-components';
 export const DiscoveryTile = styled.div`
     display: flex;
     flex-direction: column;
+    background: ${ props => props.isComposite ? 'url(/images/vertical_lines.png)' : ''};
+    background-repeat: no-repeat;
     /* width: 95%; */
 `;
-  
+
 export const DiscoveryTileHeader = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
 `;
-  
+
 export const DiscoveryTileFirstRow = styled.div`
     font-family: Titillium Web;
     font-size: 15px;
@@ -61,9 +63,16 @@ export const DiscoveryDetailsBody = styled.div`
     /* width:100%; */
 `;
 
-  export const DiscoveryDetailsNav = styled.div`
+export const DiscoveryDetailsNav = styled.div`
      display: flex;
     flex-direction: column;
     justify-content: space-around;
   `;
-  
+
+export const VerticalBar = styled.div`
+    border-left: 4px solid green;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+    width: 1px;
+`;

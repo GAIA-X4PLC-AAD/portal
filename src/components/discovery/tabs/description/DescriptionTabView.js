@@ -19,28 +19,34 @@ const DescriptionTabView = (props,) => {
 
 
   const buildCompositeServices = () => {
-    if (details == undefined) { return }
+    if (details == undefined || props.params['type'] != 'composite-service') { return }
 
     const data2 = details['dependent_services'] || [];
+
+    console.log(`details['id']: ${details['id']}`)
+    console.log(`data2.length: ${data2.length}`)
+
+    if (data2.length == 0) return;
+
     return (
       <>
         <Columns>
-            {data2.map((record, index) => {
-              let parsed = {
-                headline: record.name,
-                img_preview_url: record.img_preview_url,
-                subline: providerLink(record),
-                description: record.description,
-                onDetailsClick: () => { return; }
-              }
-              return (<>
-                <Style marginLeft={index %2 == 0 ? '0px' : '10px'} marginTop={'36px'}>
-                  <DataPreview data={parsed} key={record.id} width='304px' minHeight=''/>
-                </Style>
-              </>)
-            })
+          {data2.map((record, index) => {
+            let parsed = {
+              headline: record.name,
+              img_preview_url: record.img_preview_url,
+              subline: providerLink(record),
+              description: record.description,
+              onDetailsClick: () => { return; }
             }
-          </Columns>
+            return (<>
+              <Style marginLeft={index % 2 == 0 ? '0px' : '10px'} marginTop={'36px'}>
+                <DataPreview data={parsed} key={record.id} width='304px' minHeight='' />
+              </Style>
+            </>)
+          })
+          }
+        </Columns>
 
       </>
 
@@ -55,7 +61,6 @@ const DescriptionTabView = (props,) => {
 
     if (props.data !== undefined) {
       console.log(`DescriptionTab, props.data['dependent_services']: ${props.data['dependent_services']}`)
-
       setDetails(props.data)
     }
 
@@ -63,10 +68,9 @@ const DescriptionTabView = (props,) => {
 
   return (
     <>
-
       <Column>
         <S.ExpandedContainer>
-          <Image src={`${details['img_preview_url']}`}  width='279px' height='328px' />
+          <Image src={`${details['img_preview_url']}`} width='279px' height='328px' />
           <S.VerticalContainer horizontal='8px'>
             <S.Padding horizontal='8px'>
               <S.Title>{`${details['name']}`}</S.Title>
@@ -101,6 +105,7 @@ const DescriptionTabView = (props,) => {
 DescriptionTabView.propTypes = {
   // serviceId: PropTypes.number.isRequired,
   data: PropTypes.object.isRequired,
+  params: PropTypes.object,
 }
 
 export default DescriptionTabView

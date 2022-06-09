@@ -42,7 +42,9 @@ export const Block = styled.div`
   /* border: 1px solid #ccc; */
   margin: 12px 0px;
   width: 100%;
-  border: ${props => props.border ? '1px solid #E9E9E9' : ''};
+  border-top: ${props => props.border ? '1px solid #E9E9E9' : ''};
+  border-left: ${props => props.border ? '1px solid #E9E9E9' : ''};
+  border-right: ${props => props.border ? '1px solid #E9E9E9' : ''};
   box-shadow: ${props => props.boxShadow};
   border-radius: 4px;
   /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
@@ -52,7 +54,7 @@ export const Block = styled.div`
 export const ToggleButton = styled.div`
   font-size: 15px;
   background: ${props => props.background ? '#F9F9F9' : ''};
-  border-bottom: ${props => props.noBorder ? '' : '1px solid #E9E9E9'};
+  /* border-bottom: ${props => props.noBorder ? '' : '1px solid #E9E9E9'}; */
   /* border-bottom: ${props => props.border ? '1px solid #E9E9E9' : ''}; */
   border-radius: 4px;
   box-shadow: none;
