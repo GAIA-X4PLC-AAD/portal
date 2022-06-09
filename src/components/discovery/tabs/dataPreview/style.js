@@ -6,8 +6,8 @@ export const Preview = styled.div`
     flex-direction: column;
     align-items: flex-start;
     padding: 12px;
-    width: 304px;
-    min-height: 480px;
+    width: ${props => props.width || '304px'};
+    min-height: ${props => props.minHeight || '480px'};
     background: #FFFFFF;
     border: 1px solid #E9E9E9;
     flex: none;
@@ -26,7 +26,6 @@ flex-grow: 0;
 `;
 
 export const Headline = styled.div`
-    font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -37,7 +36,6 @@ export const Headline = styled.div`
 `;
 
 export const Subline = styled.div`
-    font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 400;
     font-size: 20px;

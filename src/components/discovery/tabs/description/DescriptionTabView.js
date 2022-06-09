@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import { ColumnItem } from "./Common";
-import { Image, Column } from "../../../../common/styles";
+import { Image, Column, Style } from "../../../../common/styles";
 import { Columns } from "../dataPreview/style";
 import DataPreview from "../dataPreview/DataPreview";
 
@@ -13,7 +13,8 @@ const DescriptionTabView = (props,) => {
   const [details, setDetails] = useState({});
 
   const providerLink = (data) => {
-    return (<a href={data.ppr_url} target="_blank" rel="noreferrer">{data.ppr_name}</a>);
+    // return (<a href={data.ppr_url} target="_blank" rel="noreferrer">{data.ppr_name}</a>);
+    return data.ppr_name;
   }
 
 
@@ -22,19 +23,27 @@ const DescriptionTabView = (props,) => {
 
     const data2 = details['dependent_services'] || [];
     return (
-      <Columns>
-        {data2.map(record => {
-          let parsed = {
-            headline: record.name,
-            img_preview_url: record.img_preview_url,
-            subline: providerLink(record),
-            description: record.description,
-            onDetailsClick: () => { return; }
-          }
-          return <DataPreview data={parsed} key={record.id} />
-        })
-        }
-      </Columns>
+      <>
+        <Columns>
+            {data2.map((record, index) => {
+              let parsed = {
+                headline: record.name,
+                img_preview_url: record.img_preview_url,
+                subline: providerLink(record),
+                description: record.description,
+                onDetailsClick: () => { return; }
+              }
+              return (<>
+                <Style marginLeft={index %2 == 0 ? '0px' : '10px'} marginTop={'36px'}>
+                  <DataPreview data={parsed} key={record.id} width='304px' minHeight=''/>
+                </Style>
+              </>)
+            })
+            }
+          </Columns>
+
+      </>
+
     );
   }
 
@@ -57,7 +66,7 @@ const DescriptionTabView = (props,) => {
 
       <Column>
         <S.ExpandedContainer>
-          <Image src={`${details['img_preview_url']}`} minWidth='128px' maxWidth='256px' />
+          <Image src={`${details['img_preview_url']}`}  width='279px' height='328px' />
           <S.VerticalContainer horizontal='8px'>
             <S.Padding horizontal='8px'>
               <S.Title>{`${details['name']}`}</S.Title>
@@ -81,7 +90,7 @@ const DescriptionTabView = (props,) => {
             </S.Padding>
           </S.VerticalContainer>
         </S.ExpandedContainer>
-        {console.log(`details['dependent_services']: ${details['dependent_services']}`)}
+
         {buildCompositeServices()}
 
       </Column>

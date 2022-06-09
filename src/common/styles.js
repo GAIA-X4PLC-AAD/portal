@@ -86,6 +86,7 @@ export const Style = styled.div`
     flex-grow: ${props => props.flexGrow || 0};
     display: ${props => props.display || ''};
     text-align: start;
+    padding-top: ${props => props.paddingTop || '0px'};
     padding-left: ${props => props.paddingLeft || '0px'};
     padding-right: ${props => props.paddingRight || '0px'};
     vertical-align: ${props => props.verticalAlign || 'unset'};
@@ -93,6 +94,10 @@ export const Style = styled.div`
     max-width: ${props => props.maxWidth || ''};
     min-width: ${props => props.minWidth || ''};
     min-height: ${props => props.minHeight || ''};
+    margin-left: ${props => props.marginLeft || '0px'};
+    margin-right: ${props => props.marginRight || '0px'};
+    margin-right: ${props => props.marginRight || '0px'};
+    margin-top: ${props => props.marginTop || '0px'};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     /* border-radius: 4px; */
 `
