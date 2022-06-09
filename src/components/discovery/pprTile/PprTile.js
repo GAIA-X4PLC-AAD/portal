@@ -18,10 +18,10 @@ const PprTile = ({id, input, t}) => {
             <>
 
 
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id,  type: type })} title={t("service-tile.details")} />
-                <ExpandableView initiallyExpanded={false} view={ServicesTab({ id })} title={t("service-tile.services")} />
-                <ExpandableView initiallyExpanded={false} view={DataSetTab({ id })} title={t("service-tile.datasets")} />
-                <ExpandableView initiallyExpanded={false} view={ContactTab({ id, type: type })} title={t("service-tile.contact")} />
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id,  type: type })} title={t("service-tile.details")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
+                <ExpandableView initiallyExpanded={false} view={ServicesTab({ id })} title={t("service-tile.services")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
+                <ExpandableView initiallyExpanded={false} view={DataSetTab({ id })} title={t("service-tile.datasets")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
+                <ExpandableView initiallyExpanded={false} view={ContactTab({ id, type: type })} title={t("service-tile.contact")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
             </>
         )
     }
@@ -67,7 +67,7 @@ const PprTile = ({id, input, t}) => {
     }
 
     return (
-        <ExpandableView initiallyExpanded={true} view={showTileContent()} title={showTileHeader()} border={true} />
+        <ExpandableView initiallyExpanded={false} view={showTileContent()} title={showTileHeader()} border={true} />
     );
 
 

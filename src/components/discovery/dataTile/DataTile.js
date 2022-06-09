@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 import ContactTab from "../tabs/ContactTab/ContactTab";
 import PriceTab from "../tabs/priceTab/PriceTab";
 import DescriptionTab from "../tabs/description/DescriptionTab";
+import SampleRecordTab from "../tabs/SampleRecordTab/SampleRecordTab";
 
 const DataTile = ({input,id,t}) => {
     
@@ -16,10 +17,10 @@ const DataTile = ({input,id,t}) => {
     const showComponent = () => {
         return (
             <>
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id, type: type })} title={t("service-tile.details")} />
-                <ExpandableView initiallyExpanded={false} view={PriceTab({ id , type: type})} title={t("service-tile.price")} />
-                <ExpandableView initiallyExpanded={false} view={DescriptionTab({ id, type: type })} title={t("service-tile.sample")} />
-                <ExpandableView initiallyExpanded={false} view={ContactTab({ id, type: type })} title={t("service-tile.contact")} />
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id, type: type })} title={t("service-tile.details")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
+                <ExpandableView initiallyExpanded={false} view={PriceTab({ id , type: type})} title={t("service-tile.price")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
+                <ExpandableView initiallyExpanded={false} view={SampleRecordTab({ id })} title={t("service-tile.sample")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
+                <ExpandableView initiallyExpanded={false} view={ContactTab({ id, type: type })} title={t("service-tile.contact")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" />
             </>
         )
     }
@@ -64,7 +65,7 @@ const DataTile = ({input,id,t}) => {
     }
 
     return (
-        <ExpandableView initiallyExpanded={true} view={showTileContent()} title={showTileHeader()} border={true} />
+        <ExpandableView initiallyExpanded={false} view={showTileContent()} title={showTileHeader()} border={true} />
     );
 
 }
