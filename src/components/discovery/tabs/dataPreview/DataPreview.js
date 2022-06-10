@@ -2,7 +2,7 @@ import React from "react";
 import * as S from './style';
 import PropTypes from 'prop-types';
 
-const DataPreview = ({data, width, minHeight}) => {
+const DataPreview = ({data, width, minHeight, shouldShowDetailsButton = true}) => {
 
     const showDetailsButton = ()=> {
         if (!data.onDetailsClick) return null;
@@ -13,7 +13,6 @@ const DataPreview = ({data, width, minHeight}) => {
         if (!data.img_logo_url) return null;
         return (<S.Logo src={data.img_logo_url} alt='Logo image'/>)
     }
-
 
     return (
         <S.Preview width={width} minHeight={minHeight}>
@@ -26,7 +25,7 @@ const DataPreview = ({data, width, minHeight}) => {
                 </S.Rows>
             </S.Columns>
             <S.Description>{data.description}</S.Description>
-            {showDetailsButton()}
+            {shouldShowDetailsButton ? showDetailsButton() : <></>}
         </S.Preview>
 
     );
@@ -37,6 +36,7 @@ DataPreview.propTypes = {
     data: PropTypes.object,
     width: PropTypes.string,
     minHeight: PropTypes.string,
+    shouldShowDetailsButton: PropTypes.bool,
 }
 
 export default DataPreview;
