@@ -91,13 +91,23 @@ export const Column = styled.div`
 
 export const Style = styled.div`
     border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
+    border-bottom: ${props => props.borderBottom ? '1px solid #E9E9E9' : ''};
     flex-grow: ${props => props.flexGrow || 0};
+    justify-content: ${props => props.justifyContent || ''};
     display: ${props => props.display || ''};
     text-align: start;
+    padding-top: ${props => props.paddingTop || '0px'};
     padding-left: ${props => props.paddingLeft || '0px'};
     padding-right: ${props => props.paddingRight || '0px'};
     vertical-align: ${props => props.verticalAlign || 'unset'};
-    object-fit: ${props => props.objectFit || ''};;
+    object-fit: ${props => props.objectFit || ''};
+    max-width: ${props => props.maxWidth || ''};
+    min-width: ${props => props.minWidth || ''};
+    min-height: ${props => props.minHeight || ''};
+    margin-left: ${props => props.marginLeft || '0px'};
+    margin-right: ${props => props.marginRight || '0px'};
+    margin-right: ${props => props.marginRight || '0px'};
+    margin-top: ${props => props.marginTop || '0px'};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     /* border-radius: 4px; */
 `
@@ -111,6 +121,7 @@ export const HeaderTitle=styled.div`
     color: #1C0E15;
     text-align: left;
 `;
+
 
 export const Image = styled.img`
   display: inline-block;

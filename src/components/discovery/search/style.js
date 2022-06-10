@@ -76,7 +76,7 @@ export const FilterHeader=styled.div`
 `;
 
 export const SearchTerm=styled.input`
-width: 751px;
+width: 800px;
 height: 48px;
 right: 0%;
 background: #F8F8F8;

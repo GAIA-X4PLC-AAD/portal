@@ -4,36 +4,63 @@ import React, { useState, useEffect } from "react";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import { ColumnItem } from "./Common";
-import { Image } from "../../../../common/styles";
+import { Image, Column, Style } from "../../../../common/styles";
+import { Columns } from "../dataPreview/style";
+import DataPreview from "../dataPreview/DataPreview";
 
-
-// {
-// 	"id": "1",
-// 	"name": "name",
-// 	"img_preview_url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg",
-// 	"logo": "https://cdn.logo.com/hotlink-ok/logo-social.png",
-// 	"ppr_name": "ppr name",
-// 	"ppr_url": "http://localhost",
-// 	"description": "description",
-// 	"features": "features",
-// 	"stack": "stack",
-// 	"security": "security",
-// 	"location": "location",
-// 	"location_flag": "http://localhost",
-// 	"last_updated": "2022-05-25",
-// 	"category": "category",
-// 	"tags": "tags",
-// 	"terms_of_use": "terms of user",
-// 	"dependent_services": []
-// }
 
 const DescriptionTabView = (props,) => {
   const [details, setDetails] = useState({});
 
+  const providerLink = (data) => {
+    // return (<a href={data.ppr_url} target="_blank" rel="noreferrer">{data.ppr_name}</a>);
+    return data.ppr_name;
+  }
+
+
+  const buildCompositeServices = () => {
+    if (details == undefined || props.params['type'] != 'composite-service') { return }
+
+    const data2 = details['dependent_services'] || [];
+
+    console.log(`details['id']: ${details['id']}`)
+    console.log(`data2.length: ${data2.length}`)
+
+    if (data2.length == 0) return;
+
+    return (
+      <>
+        <Columns>
+          {data2.map((record, index) => {
+            let parsed = {
+              headline: record.name,
+              img_preview_url: record.img_preview_url,
+              subline: providerLink(record),
+              description: record.description,
+              onDetailsClick: () => { return; }
+            }
+            return (<>
+              <Style marginLeft={index % 2 == 0 ? '0px' : '10px'} marginTop={'36px'}>
+                <DataPreview data={parsed} key={record.id} width='304px' minHeight='' />
+              </Style>
+            </>)
+          })
+          }
+        </Columns>
+
+      </>
+
+    );
+  }
+
+  buildCompositeServices.propTypes = {
+    data: PropTypes.array
+  };
+
   useEffect(() => {
-    console.log(`DescriptionTab, props.data: ${props.data}`)
 
     if (props.data !== undefined) {
+      console.log(`DescriptionTab, props.data['dependent_services']: ${props.data['dependent_services']}`)
       setDetails(props.data)
     }
 
@@ -41,33 +68,36 @@ const DescriptionTabView = (props,) => {
 
   return (
     <>
+      <Column>
+        <S.ExpandedContainer>
+          <Image src={`${details['img_preview_url']}`} width='279px' height='328px' />
+          <S.VerticalContainer horizontal='8px'>
+            <S.Padding horizontal='8px'>
+              <S.Title>{`${details['name']}`}</S.Title>
+              <S.Body>{`${details['description']}`}</S.Body>
 
-      <S.ExpandedContainer>
-        <Image src={`${details['img_preview_url']}`} minWidth='128px' maxWidth='256px'/>
-        <S.VerticalContainer horizontal='8px'>
-          <S.Padding horizontal='8px'>
-            <S.Title>{`${details['name']}`}</S.Title>
-            <S.Body>{`${details['description']}`}</S.Body>
+              <S.Padding vertical='8px' horizontal='0px'>
+                <S.Subtitle>TAGS</S.Subtitle>
+              </S.Padding>
 
-            <S.Padding vertical='8px' horizontal='0px'>
-              <S.Subtitle>TAGS</S.Subtitle>
+              <S.HorizontalContainer>
+                {details['tags'] && details['tags'].map((elem, i) => { return (<S.Tag key={i}>{elem}</S.Tag>) })}
+              </S.HorizontalContainer>
+
+              <S.HorizontalContainer>
+                <ColumnItem title='STACK' subtitle={`${details['stack']}`} />
+                <ColumnItem title='DATE' subtitle={`${details['last_updated']}`} />
+                <ColumnItem title='TERMS OF USE' subtitle={`${details['terms_of_use']}`} />
+                <ColumnItem title='LOCATION' subtitle={`${details['location']}`} />
+                <ColumnItem title='CATEGORY' subtitle={`${details['category']}`} />
+              </S.HorizontalContainer>
             </S.Padding>
+          </S.VerticalContainer>
+        </S.ExpandedContainer>
 
-            <S.HorizontalContainer>
-              {details['tags'] && details['tags'].map((elem, i) => { return (<S.Tag key={i}>{elem}</S.Tag>) })}
-            </S.HorizontalContainer>
+        {buildCompositeServices()}
 
-            <S.HorizontalContainer>
-              <ColumnItem title='STACK' subtitle={`${details['stack']}`}  />
-              <ColumnItem title='DATE' subtitle={`${details['last_updated']}`}  />
-              <ColumnItem title='TERMS OF USE' subtitle={`${details['terms_of_use']}`} />
-              <ColumnItem title='LOCATION' subtitle={`${details['location']}`}  />
-              <ColumnItem title='CATEGORY' subtitle={`${details['category']}`}  />
-            </S.HorizontalContainer>
-          </S.Padding>
-        </S.VerticalContainer>
-
-      </S.ExpandedContainer>
+      </Column>
     </>
   )
 }
@@ -75,6 +105,7 @@ const DescriptionTabView = (props,) => {
 DescriptionTabView.propTypes = {
   // serviceId: PropTypes.number.isRequired,
   data: PropTypes.object.isRequired,
+  params: PropTypes.object,
 }
 
 export default DescriptionTabView

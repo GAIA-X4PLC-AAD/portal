@@ -300,3 +300,48 @@
   -webkit-transform: rotate(-180deg);
   transform: rotate(-180deg);
 }
+
+
+
+
+.tab {
+  width: 100%;
+  padding: 25px;
+  color: #444;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+ul.inline {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 0px;
+}
+
+ul.inline,
+li {
+  display: inline-block;
+  margin-left: 0;
+  padding: 10px;
+  width: 80px;
+  text-align: center;
+  border-bottom: 2px solid #eee;
+  transition: all 0.5s;
+  cursor: pointer;
+  color: #545B65;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+ul.inline,
+li.selected {
+  border-bottom: 4px solid #000094;
+  color: #2A2A2A;
+}
