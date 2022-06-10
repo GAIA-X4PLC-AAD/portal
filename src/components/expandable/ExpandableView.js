@@ -19,7 +19,7 @@ const ExpandableView = ({
     titleLeadingPadding = '0px',
     viewLeadingPadding = '0px',
     arrowColor = '#000094',
-    width = 'auto',
+    width = 'fit-content',
     boxShadow,
 }) => {
     const [isExpanded, setIsExpanded] = useState(initiallyExpanded);
