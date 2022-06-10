@@ -10,12 +10,16 @@ import DescriptionDataView from "./DescriptionDataView";
 
 
 const DescriptionTab = ({ id, type }) => {
-  const URL = configData.EDGE_API_URI + `/discovery/${type}/${id}/details/`;
+
+  let _type = type;
+  if (_type == 'composite-service' || _type == 'service') _type = 'services'
+  const URL = configData.EDGE_API_URI + `/discovery/${_type}/${id}/details/`;
 
 
   const getSuccessView = (type) => {
       switch (type ) {
-        case 'services': return DescriptionTabView;
+        case 'service': return DescriptionTabView;
+        case 'composite-service': return DescriptionTabView;
         case 'ppr':  return DescriptionPprView;
         case 'data': return DescriptionDataView;
         default: return DescriptionTabView;
@@ -25,6 +29,7 @@ const DescriptionTab = ({ id, type }) => {
   return (
     <LoadingView
       url={URL}
+      params={{'type': type}}
       successView={getSuccessView(type)}
     />
   )

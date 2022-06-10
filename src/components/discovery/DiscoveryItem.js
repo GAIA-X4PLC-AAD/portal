@@ -15,7 +15,6 @@ const DiscoveryItem = ({type}) => {
         case 'service': return TileFactory({data:serviceItem, id});
         default: return null;
     }
-
 }
 
 DiscoveryItem.propTypes = {

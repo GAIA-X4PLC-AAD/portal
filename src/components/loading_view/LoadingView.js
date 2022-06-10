@@ -9,7 +9,7 @@ import { useResource } from "@axios-use/react";
 import { Center } from '../../common/styles';
 
 
-function LoadingView({ url, successView }) {
+function LoadingView({ url, successView, params }) {
     const [{ data, error, isLoading }] = useResource(() => ({ url: url }), []);
 
     useEffect(() => {
@@ -38,7 +38,7 @@ function LoadingView({ url, successView }) {
                 </S.AnimatedVisibility>
 
                 <S.AnimatedVisibility visible={!isLoading && error == undefined && !(data === undefined)}>
-                    {successView({ data: data })}
+                    {successView({ data: data, params: params })}
                 </S.AnimatedVisibility>
             </Center>
         </>
@@ -49,6 +49,7 @@ function LoadingView({ url, successView }) {
 LoadingView.propTypes = {
     url: PropTypes.string.isRequired,
     successView: PropTypes.func.isRequired,
+    params: PropTypes.object,
 }
 
 export default LoadingView

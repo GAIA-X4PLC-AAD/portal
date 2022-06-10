@@ -42,12 +42,14 @@ const ExpandableView = ({
                     <Down isOpen={isExpanded} paddingRight={titleTrailerPadding} arrowColor={arrowColor} />
                 </S.ToggleButton>
                 {/* BODY */}
-                <Collapse isOpened={isExpanded}>
-                    <Style
-                        borderTop={border}
-                        paddingLeft={viewLeadingPadding}
-                        elevation={elevation}>{exapandableContent()}</Style>
-                </Collapse>
+                <Style borderBottom={true}>
+                    <Collapse isOpened={isExpanded}>
+                        <Style
+                            // borderTop={border}
+                            paddingLeft={viewLeadingPadding}
+                            elevation={elevation}>{exapandableContent()}</Style>
+                    </Collapse>
+                </Style>
             </S.Block>
         </>
     );

@@ -137,6 +137,7 @@ export const Body = styled.p`
   line-height: 24px;
   margin-top: 0px;
   margin-bottom: 0px;
+  max-width: ${props => props.maxWidth || ''};
   /* or 133% */
   color: #262626;
 `;
@@ -149,6 +150,7 @@ font-weight: 400;
 font-size: 12px;
 line-height: 16px;
 margin-top: 0px;
+max-width: ${props => props.maxWidth || ''};
 margin-bottom: 0px;
 /* identical to box height, or 133% */
 display: flex;
@@ -178,5 +180,6 @@ export const Tag = styled.div`
 export const FlagImg = styled.img`
   width: 19px;
   height: 19px;
+  padding: 0px 2px;
 `;
 
