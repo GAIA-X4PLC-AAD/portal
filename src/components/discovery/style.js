@@ -5,6 +5,7 @@ export const DiscoveryTile = styled.div`
     flex-direction: column;
     background: ${ props => props.isComposite ? 'url(/images/vertical_lines.png)' : ''};
     background-repeat: no-repeat;
+    width: 864px;
     /* width: 95%; */
 `;
 

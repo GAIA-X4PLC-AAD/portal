@@ -41,7 +41,7 @@ export const CircularLoader = styled.div`
 export const Block = styled.div`
   /* border: 1px solid #ccc; */
   margin: 12px 0px;
-  width: 100%;
+  width: ${props => props.width ? props.width: '100%'};
   border-top: ${props => props.border ? '1px solid #E9E9E9' : ''};
   border-left: ${props => props.border ? '1px solid #E9E9E9' : ''};
   border-right: ${props => props.border ? '1px solid #E9E9E9' : ''};
