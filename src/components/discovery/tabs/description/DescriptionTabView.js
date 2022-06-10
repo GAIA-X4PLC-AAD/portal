@@ -23,9 +23,6 @@ const DescriptionTabView = (props,) => {
 
     const data2 = details['dependent_services'] || [];
 
-    console.log(`details['id']: ${details['id']}`)
-    console.log(`data2.length: ${data2.length}`)
-
     if (data2.length == 0) return;
 
     return (
@@ -41,7 +38,7 @@ const DescriptionTabView = (props,) => {
             }
             return (<>
               <Style marginLeft={index % 2 == 0 ? '0px' : '10px'} marginTop={'36px'}>
-                <DataPreview data={parsed} key={record.id} width='304px' minHeight='' />
+                <DataPreview data={parsed} key={record.id} width='240px' minHeight='' shouldShowDetailsButton={false}/>
               </Style>
             </>)
           })

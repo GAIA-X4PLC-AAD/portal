@@ -25,12 +25,12 @@ function Header(props) {
     };
 
     const handleSignIn = () => {
-        dispatch(signIn())
+        // dispatch(signIn())
         navigate('/signin')
     };
 
     const handleRegister = () => {
-        dispatch(signIn())
+        // dispatch(signIn())
         navigate('/register')
     };
 
