@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 const ProviderCredentialsEditor = (props) => {
 
-    const t = useTranslation()
+    const {t} = useTranslation()
     // used for knowing if we are in a new user, or editting existing one.
     const isNewCredential = props.isNewCredential===undefined?false:props.isNewCredential;
     const isReadOnly = () => {
