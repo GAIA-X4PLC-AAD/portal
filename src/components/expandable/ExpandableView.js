@@ -22,6 +22,12 @@ const ExpandableView = ({
     boxShadow,
 }) => {
     const [isExpanded, setIsExpanded] = useState(initiallyExpanded);
+
+
+    const exapandableContent=() => {
+        if (isExpanded) return view;
+    }
+
     return (
         <>
             <S.Block border={border} elevation={elevation} boxShadow={boxShadow}>
@@ -41,10 +47,9 @@ const ExpandableView = ({
                         <Style
                             // borderTop={border}
                             paddingLeft={viewLeadingPadding}
-                            elevation={elevation}>{view}</Style>
+                            elevation={elevation}>{exapandableContent()}</Style>
                     </Collapse>
                 </Style>
-
             </S.Block>
         </>
     );
