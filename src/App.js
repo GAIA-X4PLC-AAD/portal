@@ -58,7 +58,7 @@ const App = (props) => {
                 <Route path="/register/compliance" element={<RegisterComplianceCheck />} />
                 <Route path="/signin" element={<Login />} />
                 <Route path="/loginfail" element={<LoginFail />} />
-                <Route path="/account/:tab" element={<AccountHome />} />
+                <Route path="/account/user/:tab" element={<AccountHome />} />
                 <Route path="/account/provider/:tab" element={<Provider />} />
                 <Route path="/servicetile/:id" element={<DiscoveryItem type="service"/>} />
                 <Route path="/pprtile/:idd" element={<DiscoveryItem type="ppr"/>} />

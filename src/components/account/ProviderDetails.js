@@ -15,9 +15,8 @@ const ProviderDetails = (props) => {
             setProvider(response.data);
     },(error)=> {
           alert('ko');
+          console.log(error);
     });
-    
-
     },[]);
 
     const showPersonalInformation = (person) => {
