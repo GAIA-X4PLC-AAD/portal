@@ -46,7 +46,6 @@ const ExpandableView = ({
                 <Style
                     borderTop={border}
                     paddingLeft={viewLeadingPadding}
-                    elevation={elevation}
                 >{exapandableContent()}</Style>
             </Collapse>
         </Style>
