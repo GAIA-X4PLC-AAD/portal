@@ -20,6 +20,7 @@ application-build:
       - testPipeLineHelm
   script:
     - rm -rf output
+    - npm install
     - npm run build
     - mv build output
 
