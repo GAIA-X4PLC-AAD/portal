@@ -25,20 +25,18 @@ const ExpandableView = ({
     const [isExpanded, setIsExpanded] = useState(initiallyExpanded);
 
 
-    const exapandableContent=() => {
+    const exapandableContent = () => {
         if (isExpanded) return view;
     }
 
     return (
         <>
-            <S.Block border={border} elevation={elevation} boxShadow={boxShadow} width={width}>
+            <S.Block border={border} boxShadow={boxShadow} width={width}>
                 {/* TITLE */}
                 <S.ToggleButton
                     onClick={() => { setIsExpanded(!isExpanded) }}
                     noBorder={border}
-                    background={elevation}
-                    horizontalPadding='40px'
-                >
+                    horizontalPadding='40px'>
                     <Style flexGrow={1} paddingLeft={titleLeadingPadding}>{title}</Style>
                     <Down isOpen={isExpanded} paddingRight={titleTrailerPadding} arrowColor={arrowColor} />
                 </S.ToggleButton>
@@ -48,7 +46,8 @@ const ExpandableView = ({
                         <Style
                             // borderTop={border}
                             paddingLeft={viewLeadingPadding}
-                            elevation={elevation}>{exapandableContent()}</Style>
+                        // elevation={elevation}
+                        >{exapandableContent()}</Style>
                     </Collapse>
                 </Style>
             </S.Block>
@@ -58,8 +57,8 @@ const ExpandableView = ({
 
 ExpandableView.propTypes = {
     initiallyExpanded: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired,
-    view: PropTypes.object.isRequired,
+    title: PropTypes.element.isRequired,
+    view: PropTypes.element.isRequired,
     border: PropTypes.bool,
     elevation: PropTypes.bool,
     titleTrailerPadding: PropTypes.string,

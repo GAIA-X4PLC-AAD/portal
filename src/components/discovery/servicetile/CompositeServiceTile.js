@@ -23,14 +23,14 @@ const CompositeServiceTile = ({ input, id, t }) => {
             <>
                 <ExpandableView
                     initiallyExpanded={true} view={DescriptionTab({ id: id, type: type })}
-                    title={t("service-tile.details")}
+                    title={<>{t("service-tile.details")}</>}
                     titleTrailerPadding="12px"
                     viewLeadingPadding="40px"
                     titleLeadingPadding="40px"
                     arrowColor="#B3B3B3" width="848px"/>
-                <ExpandableView initiallyExpanded={false} view={PriceTab({ id: id, type: "services" })} title={t("service-tile.price")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px;"/>
-                <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={t("service-tile.screenshots")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px"/>
-                <ExpandableView initiallyExpanded={false} view={ContactTab({ id: id, type: "services" })} title={t("service-tile.contact")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px"/>
+                <ExpandableView initiallyExpanded={false} view={PriceTab({ id: id, type: "services" })} title={<>{t("service-tile.price")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px;"/>
+                <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={<>{t("service-tile.screenshots")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px"/>
+                <ExpandableView initiallyExpanded={false} view={ContactTab({ id: id, type: "services" })} title={<>{t("service-tile.contact")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px"/>
             </>
         )
     }
@@ -69,12 +69,12 @@ const CompositeServiceTile = ({ input, id, t }) => {
                         {t("service-tile.details")}
                     </S.DiscoveryDetailsButton>
                 </S.DiscoveryTileHeader>
+                
             </S.DiscoveryTile>
         );
     }
 
     const showTileContent = () => {
-        console.log(`id: ${id}`)
         return (
             <S.DiscoveryDetailsContent>
                 <S.DiscoveryDetailsBody>

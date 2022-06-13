@@ -32,15 +32,22 @@ const SearchFilterView = ({ data, t }) => {
     }
 
     const showItemsList = (name, items) => {
-        return (items.map((item) => {
-            return (
-                <S.Column key={item.name} >
-                    <S.CheckBox type="checkbox" name={name} value={item.name} defaultChecked={false} onChange={onFormChanged} key={name} />
-                    <S.CheckBoxText>{item.name}</S.CheckBoxText>
-                    <S.Rounded>{item.qty}</S.Rounded>
-                </S.Column>
-            );
-        }))
+        return (
+            // returning as a single component, instead as an array (otherwise, will cause ExpandableView to its `view` to issue a console warning)
+            <>
+            {
+                (items.map((item) => {
+                    return (
+                        <S.Column key={item.name} >
+                            <S.CheckBox type="checkbox" name={name} value={item.name} defaultChecked={false} onChange={onFormChanged} key={name} />
+                            <S.CheckBoxText>{item.name}</S.CheckBoxText>
+                            <S.Rounded>{item.qty}</S.Rounded>
+                        </S.Column>
+                    );
+                }))
+            }
+            </>
+        )
     };
     const showCategoryHeader = (name) => {
         return (<S.Category>{name}</S.Category>);
@@ -52,7 +59,7 @@ const SearchFilterView = ({ data, t }) => {
                 initiallyExpanded={true}
                 border={true}
                 arrowColor = {'#737373'}
-                elevation = {true}
+                elevation = {false}
                 boxShadow = {'0px 2px 4px 0px rgb(29 36 48 / 12%)'}
                 titleTrailerPadding={'12px'}
                 view={showItemsList(cat.name, cat.items)}
