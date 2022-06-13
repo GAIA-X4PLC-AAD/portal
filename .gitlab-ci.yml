@@ -25,26 +25,26 @@ application-build:
     - mv build output
 
 
-#docker-build:
-#  stage: docker
-#  dependencies:
-#    - application-build
-#  image:
-#    name: gcr.io/kaniko-project/executor:debug
-#    entrypoint: [ "" ]
-#  only:
-#    refs:
-#      - testPipeLineHelm
-#  script:
-#    - mkdir -p /kaniko/.docker
-#    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
-#    - >-
-#      /kaniko/executor
-#      --context "${CI_PROJECT_DIR}"
-#      --dockerfile "${CI_PROJECT_DIR}/deploy/docker/Dockerfile"
-#      --destination "${REGISTRY_PATH}/${IMAGE_NAME}:${TAG}"
-#
-#
+docker-build:
+  stage: docker
+  dependencies:
+    - application-build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [ "" ]
+  only:
+    refs:
+      - testPipeLineHelm
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}"
+      --dockerfile "${CI_PROJECT_DIR}/deploy/docker/Dockerfile"
+      --destination "${REGISTRY_PATH}/${IMAGE_NAME}:${TAG}"
+
+
 #.base_deploy: &base_deploy
 #  stage: deploy
 #  only:
