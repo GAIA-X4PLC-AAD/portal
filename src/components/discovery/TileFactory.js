@@ -19,7 +19,8 @@ const TileFactory = ({data, id}) => {
 }
 TileFactory.propTypes = {
     input: PropTypes.object,
-    id: PropTypes.string
+    id: PropTypes.string,
+    data: PropTypes.object
 }
 
 
