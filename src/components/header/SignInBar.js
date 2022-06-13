@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import * as S from './style';
 
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 //
 // each function component is independent, isolated and testable.
@@ -15,8 +16,13 @@ import PropTypes from 'prop-types';
 // USER INFO
 function UserInfoButton() {
   const _userName = useSelector((state) => state.user.user.first_name)
+  const navigate = useNavigate();
 
-  return <S.HeaderButton onClick={() => { }}>{_userName}</S.HeaderButton>
+  return <S.HeaderButton onClick={()=> navigate("/account/user/details")}>{_userName}</S.HeaderButton>
+}
+function PprInfoButton() {
+  const navigate = useNavigate();
+  return <S.HeaderButton onClick={()=> navigate("/account/provider/details")}>Provider</S.HeaderButton>
 }
 
 // SIGNOUT
@@ -56,6 +62,7 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
   const signedInButtons =
     <>
       <UserInfoButton />
+      <PprInfoButton />
       <SignOutButton onClicked={handleSignOut} />
     </>;
 

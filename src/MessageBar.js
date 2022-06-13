@@ -16,7 +16,7 @@ const MessageBar = (props) => {
 }
 
 MessageBar.propTypes = {
-  itemCount: PropTypes.int,
+  itemCount: PropTypes.number,
   t: PropTypes.func,
 }
 
