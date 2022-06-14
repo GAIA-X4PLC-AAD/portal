@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import SimpleImageSlider from "react-simple-image-slider";
 
-import { Center, Row } from "../../../../common/styles";
+import ImageGallery from 'react-image-gallery';
+
+import { Center, Image, Row, Style } from "../../../../common/styles";
+
 import PropTypes from 'prop-types';
 
 
@@ -19,27 +21,24 @@ const ScreenshotsTabView = (props,) => {
   }, [props.data]);
 
 
+  var _images = slideImages?.map((p, index) => {
+    return {
+      'original': p['url'],
+      'originalHeight': '500px',
+      'originalWidth': '100%',
+      'thumbnail': p['url'],
+      // 'thumbnailHeight': '128px',
+      'thumbnailWidth': '128px'
+    }
+  })
+
   return (
-    <>
-      <Center>
-        {slideImages.length != 0 ? <SimpleImageSlider
-          style={{ position: 'relative' }}
-          width={600}
-          height={400}
-          images={slideImages}
-          showBullets={true}
-          showNavs={true}
-          useGPURender={false}
-        /> : <></>}
-
-      </Center>
-      <Center>
-        <Row vertical='10px'>
-          {slideImages?.map((p, index) => <img src={`${p['url']}`} key={`${index}:${p['url']}`} width={200} />)}
-        </Row>
-      </Center>
-
-    </>
+    <Style minWidth='100%'>
+      <ImageGallery items={_images}
+        showFullscreenButton={false}
+        showBullets={true}
+        showPlayButton={false} />
+    </Style>
   )
 }
 
