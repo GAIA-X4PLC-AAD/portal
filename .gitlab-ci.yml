@@ -22,10 +22,12 @@ application-build:
     refs:
       - testPipeLineHelm
   script:
+    - pwd
+    - ls -l
     - rm -rf output/*
     - npm install
     - npm run build
-    - mv build output/build
+    - cp build output/build -rf
 
 
 docker-build:
