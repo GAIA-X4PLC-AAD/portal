@@ -21,7 +21,7 @@ application-build:
       - testPipeLineHelm
   variables:
     CI: false
-    REACT_APP_EDGE_API_URI: https://ybgaiax.me
+    REACT_APP_EDGE_API_URI: "https://ybgaiax.me"
   script:
     - rm -rf output
     - npm install
