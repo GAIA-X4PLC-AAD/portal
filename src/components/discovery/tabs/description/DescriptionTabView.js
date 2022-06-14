@@ -36,11 +36,9 @@ const DescriptionTabView = (props,) => {
               description: record.description,
               onDetailsClick: () => { return; }
             }
-            return (<>
-              <Style marginLeft={index % 2 == 0 ? '0px' : '10px'} marginTop={'36px'}>
-                <DataPreview data={parsed} key={record.id} width='240px' minHeight='' shouldShowDetailsButton={false}/>
-              </Style>
-            </>)
+            return <Style marginLeft={index == 0 ? '0px' : '10px'} marginTop={'36px'} key={record.id}>
+              <DataPreview data={parsed} width='240px' minHeight='' shouldShowDetailsButton={false} />
+            </Style>
           })
           }
         </Columns>
@@ -78,7 +76,7 @@ const DescriptionTabView = (props,) => {
               </S.Padding>
 
               <S.HorizontalContainer>
-                {details['tags'] && details['tags'].map((elem, i) => { return (<S.Tag key={i}>{elem}</S.Tag>) })}
+                {details['tags'] && details['tags'].map((elem, i) => { return (<S.Tag key={`${elem}:${i}`}>{elem}</S.Tag>) })}
               </S.HorizontalContainer>
 
               <S.HorizontalContainer>

@@ -27,7 +27,7 @@ const ProviderEdit = (props) => {
       var formData = new FormData();
       formData.append("providerFile", file);
 
-      axios.post(configData.EDGE_API_URI + '/api/upload_provider_sd', formData, {
+      axios.post(configData.EDGE_API_URI + '/account/provider/upload_provider_sd', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

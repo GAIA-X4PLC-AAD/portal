@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import SimpleImageSlider from "react-simple-image-slider";
 
 import '../../../../common/styles';
 

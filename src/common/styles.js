@@ -109,6 +109,7 @@ export const Style = styled.div`
     margin-right: ${props => props.marginRight || '0px'};
     margin-right: ${props => props.marginRight || '0px'};
     margin-top: ${props => props.marginTop || '0px'};
+    z-index: ${props => props.zIndex || 'auto'};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     /* border-radius: 4px; */
 `
