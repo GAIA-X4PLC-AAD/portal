@@ -8,6 +8,7 @@ variables:
     IMAGE_NAME: ${CI_PROJECT_NAME}/portal-${CI_PROJECT_NAME}
     TAG: ${CI_PIPELINE_ID}
 
+
 application-build:
   stage: build
   image:
@@ -18,6 +19,9 @@ application-build:
   only:
     refs:
       - testPipeLineHelm
+  variables:
+    CI: false
+    REACT_APP_EDGE_API_URI: https://ybgaiax.me
   script:
     - rm -rf output
     - npm install

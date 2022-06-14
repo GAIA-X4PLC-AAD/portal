@@ -4,7 +4,7 @@
         "commonjs": true,
         "es2021": true,
         "mocha": true,
-        "node": false
+        "node": true
     },
     "parserOptions": {
         "ecmaFeatures": {
