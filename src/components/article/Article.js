@@ -14,6 +14,9 @@ const Article = ({category, headerMessage,t}) => {
     function openLink  (url)  {
         window.open(url, '_blank').focus();
     }
+    const getUrl= (url) => {
+        return (<a href={url} target="_blank" rel="noreferrer">{url}</a>);
+    }
 
     useEffect(()=> {
         const callGetArticleAPI = async () => {
@@ -33,12 +36,12 @@ const Article = ({category, headerMessage,t}) => {
     },[articles,callFlag]);
     
     // get first 3 rows
-    const renderArticles = articles.filter((v,i)=> {return i<=3}).map((article)=> { 
+    const renderArticles = articles.filter((v,i)=> {return i<3}).map((article)=> { 
         let parsed = {
             headline: article.title,
             img_preview_url: article.previewImagePath,
             img_logo_url: article.logoPath,
-            subline: article.url,
+            subline: getUrl(article.url),
             description: article.teaserText,
             onDetailsClick: () => { openLink(article.url) }
           }
@@ -51,8 +54,13 @@ const Article = ({category, headerMessage,t}) => {
     return (
         <div className="articles-layout">
             <div className="article-header-message">
+                
                 <h2>{t(headerMessage)}</h2>
             </div>
+            <div className="article-header-message">
+                <p>{t(`${headerMessage}-message`)}</p>
+            </div>
+
                 <div className="articles-panel-layout"> 
                         {renderArticles}
                 </div>        

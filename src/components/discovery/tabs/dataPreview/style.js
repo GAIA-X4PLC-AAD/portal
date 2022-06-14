@@ -34,6 +34,7 @@ export const Headline = styled.div`
     letter-spacing: 0.25px;
     color: #000000;
     text-align: left;
+    overflow-wrap: anywhere;
 `;
 
 export const Subline = styled.div`
@@ -44,6 +45,7 @@ export const Subline = styled.div`
     letter-spacing: 0.15px;
     color: #000000;
     text-align: left;
+    overflow-wrap: anywhere;
 `;
 
 export const Description = styled.div`
@@ -61,6 +63,7 @@ export const Description = styled.div`
 export const Logo = styled.img`
 width: 60px;
 height: 60px;
+margin-top: 12px;
 /* margin: 5px; */
 
 order: 0;
@@ -78,6 +81,8 @@ export const Rows = styled.div`
     flex-flow: column wrap;
     order: 0;
     flex-grow: 0;
+    margin-top:12px;
+    width: ${props => props.width || 'auto'}
 `;
 
 export const Button = styled(S.BlueButton)`

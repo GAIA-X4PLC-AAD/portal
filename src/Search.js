@@ -31,14 +31,13 @@ class Search extends Component {
     onKeyPressed(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if (code !== 13) return;
-        this.setState({searchResults: []});
-        this.props.updateSearchFromHome(this.state.searchText);
-        this.props.navigate("/services");
+        this.searchProcessing ();
     }
 
     searchProcessing() {
         this.setState({searchResults: []});
-        alert("Under construction");
+        this.props.updateSearchFromHome(this.state.searchText);
+        this.props.navigate("/services");
     }
 
     render() {
@@ -56,7 +55,7 @@ class Search extends Component {
                             value={this.state.searchText}
                             onChange={(e) => this.onChange(e)}
                         />
-                        <i className='fa fa-search'></i>
+                        <i className='fa fa-search' onClick={()=> this.searchProcessing()}></i>
                     </div>
 
                 </div>

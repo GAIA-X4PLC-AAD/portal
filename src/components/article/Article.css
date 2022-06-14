@@ -28,6 +28,7 @@
     order: 1;
     flex-grow: 0;
     margin: 0px 0px;
+    margin-top: 40px;
 }
 
 
@@ -40,10 +41,10 @@
     padding: 0px;
     /* Inside auto layout */
 
-flex: none;
-order: 0;
-flex-grow: 2;
-margin: 0px 0px;
+    flex: none;
+    order: 0;
+    flex-grow: 2;
+    margin: 0px 0px;
 }
 
 /* H2 */
@@ -59,3 +60,13 @@ margin: 0px 0px;
     color: #000000;
 }
 
+.article-header-message p{
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 400;
+font-size: 18px;
+line-height: 24px;
+letter-spacing: 0.25px;
+color: #2A2A2A;
+text-align: left;
+}
