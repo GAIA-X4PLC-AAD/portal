@@ -7,6 +7,8 @@ variables:
     REGISTRY_PATH: ${CI_REGISTRY}/gaia-x/data-infrastructure-federation-services/por
     IMAGE_NAME: ${CI_PROJECT_NAME}/portal-${CI_PROJECT_NAME}
     TAG: ${CI_PIPELINE_ID}
+    CI: false
+    REACT_APP_EDGE_API_URI: "https://ybgaiax.me"
 
 
 application-build:
@@ -19,13 +21,10 @@ application-build:
   only:
     refs:
       - testPipeLineHelm
-  variables:
-    CI: false
-    REACT_APP_EDGE_API_URI: "https://ybgaiax.me"
   script:
     - rm -rf output
     - npm install
-    - npm run build
+    - CI=false npm run build
     - mv build output
 
 
