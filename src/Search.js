@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
+import { Navigate, useNavigate } from 'react-router-dom';
 import MessageBar from './MessageBar';
 import './Search.css';
+import { updateSearchFromHome } from './actions';
+import PropTypes from 'prop-types';
 
 class Search extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             searchText: '',
             searchResults: null,
@@ -27,13 +31,13 @@ class Search extends Component {
     onKeyPressed(e) {
         var code = (e.keyCode ? e.keyCode : e.which);
         if (code !== 13) return;
-        this.setState({searchResults: []});
-        alert("Starting search");
+        this.searchProcessing ();
     }
 
     searchProcessing() {
         this.setState({searchResults: []});
-        alert("Under construction");
+        this.props.updateSearchFromHome(this.state.searchText);
+        this.props.navigate("/services");
     }
 
     render() {
@@ -51,7 +55,7 @@ class Search extends Component {
                             value={this.state.searchText}
                             onChange={(e) => this.onChange(e)}
                         />
-                        <i className='fa fa-search'></i>
+                        <i className='fa fa-search' onClick={()=> this.searchProcessing()}></i>
                     </div>
 
                 </div>
@@ -102,5 +106,13 @@ class Search extends Component {
     }
 
 }
+Search.propTypes = {
+    updateSearchFromHome: PropTypes.func,
+    navigate: PropTypes.func
+}
 
-export default Search;
+const Wrap = (props) => {
+    const navigate = useNavigate();
+    return <Search {...props} navigate={navigate}/>
+}
+export default connect (null, {updateSearchFromHome}) (Wrap);
