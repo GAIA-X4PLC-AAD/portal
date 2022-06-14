@@ -24,7 +24,7 @@ application-build:
   script:
     - rm -rf output
     - npm install
-    - CI=false npm run build
+    - npm run build
     - mv build output
 
 
