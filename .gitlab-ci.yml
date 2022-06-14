@@ -17,15 +17,15 @@ application-build:
     name: node:17-alpine3.14
   artifacts:
     paths:
-      - output
+      - /deploy/docker/output/
   only:
     refs:
       - testPipeLineHelm
   script:
-    - mkdir output
+    - rm -rf /deploy/docker/output/*
     - npm install
     - npm run build
-    - mv build output/
+    - mv build /deploy/docker/output/
 
 
 docker-build:
