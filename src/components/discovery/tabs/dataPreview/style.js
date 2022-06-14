@@ -8,6 +8,7 @@ export const Preview = styled.div`
     padding: 12px;
     width: ${props => props.width || '304px'};
     min-height: ${props => props.minHeight || '480px'};
+    margin: ${props => props.margin || '0'}
     background: #FFFFFF;
     border: 1px solid #E9E9E9;
     flex: none;

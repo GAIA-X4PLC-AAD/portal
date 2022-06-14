@@ -5,6 +5,7 @@ import axios from "axios";
 import './Article.css';
 import { withTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
+import DataPreview from "../discovery/tabs/dataPreview/DataPreview";
 
 const Article = ({category, headerMessage,t}) => {
     const [callFlag, setCallFlag] = useState(false); 
@@ -32,29 +33,18 @@ const Article = ({category, headerMessage,t}) => {
     },[articles,callFlag]);
     
     // get first 3 rows
-    const renderArticles = articles.filter((v,i)=> {return i<3}).map((article)=> {       
+    const renderArticles = articles.filter((v,i)=> {return i<=3}).map((article)=> { 
+        let parsed = {
+            headline: article.title,
+            img_preview_url: article.previewImagePath,
+            img_logo_url: article.logoPath,
+            subline: article.url,
+            description: article.teaserText,
+            onDetailsClick: () => { openLink(article.url) }
+          }
+        
         return ( 
-            <div className="article-item-layout" key={article.title} >
-                <div className="article-item-inside">
-                    <div className="article-preview-image"> 
-                        <img src={article.previewImagePath} alt={`image for ${article.title}`}/>
-                    </div>
-                    <div className="article-headline"> 
-                        <img src={article.logoPath} alt={`image for ${article.title}`}/>
-                        <h3>{article.title}</h3>
-                        {article.url}
-                    </div>
-                    <div className="article-text">
-                            {article.teaserText}
-                    </div>
-                    <button 
-                        className="article-detail-button"
-                        type="button" 
-                        onClick={()=>{openLink(article.url)}}>
-                        {t("article.details-button")}
-                    </button>
-                </div>
-            </div>
+            <DataPreview data={parsed} key={`article_${article.title}`} margin="12px;"/>
         );
     });
 

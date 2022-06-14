@@ -1,16 +1,25 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { updateFilterCriteria } from "../../../actions";
 import * as S from "./style";
 import {Column, Row} from "../../../common/styles";
 import { withTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
 
-const SearchTerm = ({t}) => {
+const SearchTerm = ({t, type}) => {
+    
+    const criteria = useSelector(state => state.searchCriteriaStore);
     const [searchTerm, setSearchTerm] = useState('');
     const [advance, setAdvance] = useState(false);
 
     const dispatch = useDispatch();
+
+    useEffect(()=>{
+        console.log(`type of criteria.type = ${criteria.type} , type= ${type}, searchSterm = ${criteria.searchTerms}`);
+        if (criteria.type === 'home') {
+            setSearchTerm(criteria.searchTerms);
+        }
+    },[]);
 
     const doSearch = () => {
         dispatch(updateFilterCriteria({searchTerms: searchTerm}))
@@ -22,7 +31,6 @@ const SearchTerm = ({t}) => {
 
     const showAdvanceSearchChip = (advance) => {
         const chips = ['not','provider','storage','service','compute'];
-        console.log(advance);
         if(advance === false) {
             return (<S.AdvancedSearch onClick={()=>setAdvance(true)}>Advanced Search</S.AdvancedSearch>);
         } else {
@@ -36,7 +44,7 @@ const SearchTerm = ({t}) => {
     }
 
     return (
-            <Column>
+            <Column key={type}>
                 <Row>
                     <S.SearchTerm type="text" onKeyPress={onKeyPress} value={searchTerm} onChange={(e)=> {setSearchTerm(e.target.value)}}/>
                     <S.SearchPlusButton onClick={doSearch}><S.SearchPlusImage/></S.SearchPlusButton>     
@@ -49,7 +57,8 @@ const SearchTerm = ({t}) => {
 
 }
 SearchTerm.propTypes = {
-    t: PropTypes.func
+    t: PropTypes.func,
+    type: PropTypes.string
 }
 
 
