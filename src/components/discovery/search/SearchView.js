@@ -28,7 +28,7 @@ const SearchView = ({type}) => {
                 </Style>
 
                 <Padding horizontal='12px' />
-                <Style maxWidth='864px'>
+                <Style maxWidth='900px'>
                     <SearchContent type={type} />
                 </Style>
 

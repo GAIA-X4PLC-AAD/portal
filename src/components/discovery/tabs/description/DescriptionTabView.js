@@ -36,7 +36,7 @@ const DescriptionTabView = (props,) => {
               description: record.description,
               onDetailsClick: () => { return; }
             }
-            return <Style marginLeft={index % 2 == 0 ? '0px' : '10px'} marginTop={'36px'} key={record.id}>
+            return <Style marginLeft={index == 0 ? '0px' : '10px'} marginTop={'36px'} key={record.id}>
               <DataPreview data={parsed} width='240px' minHeight='' shouldShowDetailsButton={false} />
             </Style>
           })

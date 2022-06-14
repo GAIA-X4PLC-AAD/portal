@@ -17,12 +17,13 @@ export const Preview = styled.div`
 `;
 
 export const PreviewImage = styled.img`
-width: 280px;
-height: 187px;
-
-flex: none;
-order: 0;
-flex-grow: 0;
+    width: 280px;
+    height: 187px;
+    max-width: 100%;
+    flex: none;
+    order: 0;
+    object-fit: cover;
+    flex-grow: 0;
 `;
 
 export const Headline = styled.div`
