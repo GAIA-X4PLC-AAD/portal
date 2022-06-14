@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link, useParams } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
