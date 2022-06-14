@@ -11,7 +11,7 @@ import LoadingView from "../../../loading_view/LoadingView";
 
 const ScreenshotsTab = ({ serviceId },) => {
 
-  const URL = configData.EDGE_API_URI + `/discovery/services/${serviceId}/screenshots/`;
+  const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/${serviceId}/screenshots/`;
 
   return (
     <LoadingView

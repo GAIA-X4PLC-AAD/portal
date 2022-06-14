@@ -16,7 +16,7 @@ const RegisterUserViaDid = (props) => {
     const [img, setImg] = useState({});
 
     useEffect(() => {
-        axios.get(configData.EDGE_API_URI + `/onboarding/register/user/did_register`)
+        axios.get(process.env.REACT_APP_EDGE_API_URI + `/onboarding/register/user/did_register`)
             .then((body) => {
                 let qrCodePath = body.data.qrCodePath;
                 setImg(qrCodePath);
@@ -59,7 +59,7 @@ const RegisterUserViaDid = (props) => {
                                 onAuthZFailed={onAuthZFailed}
                                 onAuthZSuccess={onAuthZSuccess}
                                 onAuthZWait={onAuthZWait}
-                                statusURL={configData.EDGE_API_URI + configData.uri_path.auth_status_path}
+                                statusURL={process.env.REACT_APP_EDGE_API_URI + configData.uri_path.auth_status_path}
                             />
                             <img src={img} width="150px" height="150px" alt="Loading..." />
                         </div>

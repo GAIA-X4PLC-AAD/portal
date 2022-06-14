@@ -7,7 +7,7 @@ import LoadingView from "../../../loading_view/LoadingView";
 
 const DataSetTab = ({id}) => {
     
-    const URL = configData.EDGE_API_URI + `/discovery/ppr/${id}/data/`;
+    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/ppr/${id}/data/`;
 
     const providerLink = (data) => {
         return (<a href={data.ppr_url} target="_blank" rel="noreferrer">{data.ppr_name}</a>);

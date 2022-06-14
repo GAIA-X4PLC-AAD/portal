@@ -6,7 +6,7 @@ import configData from "../../../../config/config.json";
 import LoadingView from "../../../loading_view/LoadingView";
 
 const ServicesTab = ({id}) => {
-    const URL = configData.EDGE_API_URI + `/discovery/ppr/${id}/services/`;
+    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/ppr/${id}/services/`;
 
     const providerLink = (data) => {
         return (<a href={data.ppr_url} target="_blank" rel="noreferrer">{data.ppr_name}</a>);

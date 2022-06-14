@@ -6,7 +6,7 @@ const validateUser = (user) => {
 }
 
 const postUser = async (inputs, func) => {
-    const result = await axios.get(configData.ONBOARDING_API_URI + "/userRegisterEntities")   
+    const result = await axios.get(process.env.REACT_APP_EDGE_API_URI + "/userRegisterEntities")   
     console.log(result);
 }
 

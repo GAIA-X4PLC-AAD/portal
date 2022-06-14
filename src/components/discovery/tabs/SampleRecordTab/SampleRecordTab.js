@@ -7,7 +7,7 @@ import SampleRecordFactory from "./SampleRecordFactory";
 const SampleRecordTab = ( { id} ) => {
 
 
-        const URL = configData.EDGE_API_URI + `/discovery/data/${id}/sample-records/`;
+        const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/data/${id}/sample-records/`;
         
         return (
             <LoadingView

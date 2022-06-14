@@ -17,7 +17,7 @@ const Article = ({category, headerMessage,t}) => {
     useEffect(()=> {
         const callGetArticleAPI = async () => {
             
-            const {data} = await axios.get(configData.ARTICLE_API_URI+'/articles/filter',{
+            const {data} = await axios.get(process.env.REACT_APP_EDGE_API_URI+'/articles/filter',{
                 params: {category: category}
             });        
 

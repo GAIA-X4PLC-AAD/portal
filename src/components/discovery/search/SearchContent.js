@@ -12,7 +12,7 @@ import * as S from "./style";
 const SearchContent = ({ type }) => {
 
     const criteria = useSelector(state => state.searchCriteriaStore);
-    const URL = configData.EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
+    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
 
     const { t, i18n } = useTranslation();
 

@@ -11,7 +11,7 @@ const AccountPaneDetails = (props) => {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        axios.get(configData.EDGE_API_URI + '/account/user').then((response) => {
+        axios.get(process.env.REACT_APP_EDGE_API_URI + '/account/user').then((response) => {
             console.log(response.data);
             setUser(response.data);
         }, (error) => {

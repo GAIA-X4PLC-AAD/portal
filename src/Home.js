@@ -9,6 +9,8 @@ import PropTypes from 'prop-types';
 const Home = ({ t }) => {
 
     const isInSignInMenu = useSelector((state) => state.signin.isInSignInMenu)
+    console.log("process.env.REACT_APP_EDGE_API_URI: ", process.env.REACT_APP_EDGE_API_URI)
+    console.log("process.env.NODE_ENV: ", process.env.NODE_ENV)
 
     return (
         <div className="home">

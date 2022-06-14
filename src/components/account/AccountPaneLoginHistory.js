@@ -9,7 +9,7 @@ const AccountPaneLoginHistory = (props) => {
     const [history, setHistory] = useState([]);
 
     useEffect(() => {
-        axios.get(configData.EDGE_API_URI + '/account/provider/history').then((response) => {
+        axios.get(process.env.REACT_APP_EDGE_API_URI + '/account/provider/history').then((response) => {
             console.log(response.data);
             setHistory(response.data.history);
         }, (error) => {

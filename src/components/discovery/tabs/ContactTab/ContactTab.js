@@ -6,7 +6,7 @@ import ContactWidgetFactory from "./ContactWidgetFactory";
 
 const ContactTab = ( { id, type } ) => {
 
-    const URL = configData.EDGE_API_URI + `/discovery/${type}/${id}/contacts/`;
+    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/${id}/contacts/`;
     
     return (
         <LoadingView

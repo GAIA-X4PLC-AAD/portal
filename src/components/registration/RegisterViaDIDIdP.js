@@ -15,7 +15,7 @@ const RegisterViaDIDIdP = (props) => {
     const mock = new URLSearchParams(queryParams).get("mock")
 
     const getIdPList = () => {
-        axios.get(configData.EDGE_API_URI + configData.uri_path.idp_list + "?requestID=" + mock).
+        axios.get(process.env.REACT_APP_EDGE_API_URI + configData.uri_path.idp_list + "?requestID=" + mock).
             then(
                 (response) => {setidPList(response.data);
             },(error)=> {

@@ -11,7 +11,7 @@ const ProviderDetails = (props) => {
     const [provider, setProvider] = useState(null);
     
     useEffect (()=>{
-        axios.get(configData.EDGE_API_URI + '/account/provider').then(   (response) => {
+        axios.get(process.env.REACT_APP_EDGE_API_URI + '/account/provider').then(   (response) => {
             setProvider(response.data);
     },(error)=> {
           alert('ko');

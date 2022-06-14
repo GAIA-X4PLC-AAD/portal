@@ -7,7 +7,7 @@ import configData from "../../../../config/config.json";
 const PriceTab = ( { id, type} ) => {
 
 
-        const URL = configData.EDGE_API_URI + `/discovery/${type}/${id}/price/`;
+        const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/${id}/price/`;
         
         return (
             <LoadingView
