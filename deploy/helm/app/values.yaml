@@ -13,28 +13,28 @@ ports:
     protocol: TCP
 
 livenessProbe_enabled: false
-livenessProbe:
-  httpGet:
-    scheme: HTTP
-    path: /actuator/health/liveness
-    port: 4004
-  initialDelaySeconds: 10
-  periodSeconds: 10
-  timeoutSeconds: 2
-  failureThreshold: 20
-  successThreshold: 1
+#livenessProbe:
+#  httpGet:
+#    scheme: HTTP
+#    path: /actuator/health/liveness
+#    port: 4004
+#  initialDelaySeconds: 10
+#  periodSeconds: 10
+#  timeoutSeconds: 2
+#  failureThreshold: 20
+#  successThreshold: 1
 
 readinessProbe_enabled: false
-readinessProbe:
-  httpGet:
-    scheme: HTTP
-    path: /actuator/health/readiness
-    port: 4004
-  initialDelaySeconds: 10
-  periodSeconds: 10
-  timeoutSeconds: 2
-  failureThreshold: 3
-  successThreshold: 1
+#readinessProbe:
+#  httpGet:
+#    scheme: HTTP
+#    path: /actuator/health/readiness
+#    port: 4004
+#  initialDelaySeconds: 10
+#  periodSeconds: 10
+#  timeoutSeconds: 2
+#  failureThreshold: 3
+#  successThreshold: 1
 
 resources:
   limits:
@@ -51,11 +51,11 @@ service:
 
 fullnameOverride: demo
 
-env:
-  SPRING_PROFILES_ACTIVE: "mesh"
-  SPRING_CONFIG_LOCATION: file:/config-repo/application.yml
+#env:
+#  SPRING_PROFILES_ACTIVE: "mesh"
+#  SPRING_CONFIG_LOCATION: file:/config-repo/application.yml
 
 configmap:
-  enabled: true
+  enabled: false
   volumeMounts:
     mountPath: /config-repo
