@@ -35,9 +35,7 @@ const ScreenshotsTabView = (props,) => {
       </Center>
       <Center>
         <Row vertical='10px'>
-          {slideImages?.map((p) => (
-            <img src={p['url']} key={p['url']} width={200} />
-          ))}
+          {slideImages?.map((p, index) => <img src={`${p['url']}`} key={`${index}:${p['url']}`} width={200} />)}
         </Row>
       </Center>
 

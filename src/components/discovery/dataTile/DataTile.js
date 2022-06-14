@@ -17,10 +17,10 @@ const DataTile = ({input,id,t}) => {
     const showComponent = () => {
         return (
             <>
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id, type: type })} title={t("service-tile.details")} titleTrailerPadding="12px" viewLeadingPadding="24px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px;"/>
-                <ExpandableView initiallyExpanded={false} view={PriceTab({ id , type: type})} title={t("service-tile.price")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px;"/>
-                <ExpandableView initiallyExpanded={false} view={SampleRecordTab({ id })} title={t("service-tile.sample")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px;"/>
-                <ExpandableView initiallyExpanded={false} view={ContactTab({ id, type: type })} title={t("service-tile.contact")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px;"/>
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id, type: type })} title={<>{t("service-tile.details")}</>} titleTrailerPadding="12px" viewLeadingPadding="24px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px;"/>
+                <ExpandableView initiallyExpanded={false} view={PriceTab({ id , type: type})} title={<>{t("service-tile.price")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px;"/>
+                <ExpandableView initiallyExpanded={false} view={SampleRecordTab({ id })} title={<>{t("service-tile.sample")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px;"/>
+                <ExpandableView initiallyExpanded={false} view={ContactTab({ id, type: type })} title={<>{t("service-tile.contact")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px;"/>
             </>
         )
     }

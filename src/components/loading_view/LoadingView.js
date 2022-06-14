@@ -14,16 +14,7 @@ function LoadingView({ url, successView, params }) {
 
     useEffect(() => {
         console.log(`LoadingView.useEffect, isLoading: ${isLoading}`)
-    }, [isLoading]);
-
-    useEffect(() => {
-        console.log(`LoadingView.useEffect, error: ${error}`)
-    }, [error]);
-
-    useEffect(() => {
-        console.log(`LoadingView.useEffect, data: ${data}`)
-    }, [data]);
-
+    }, [isLoading, error, data]);
 
 
     return (
