@@ -17,18 +17,14 @@ application-build:
     name: node:17-alpine3.14
   artifacts:
     paths:
-      - deploy/docker/output/build
+      - build
   only:
     refs:
       - testPipeLineHelm
   script:
-    - ls -l
-    - rm -rf /deploy/docker/output/*
     - npm install
     - npm run build
-    - pwd
     - ls -l
-    - mv build deploy/docker/output/
 
 
 docker-build:
@@ -43,6 +39,8 @@ docker-build:
       - testPipeLineHelm
   script:
     - ls -l
+    - mv build ${CI_PROJECT_DIR}/deploy/docker/output/build
+    - ls -l  ${CI_PROJECT_DIR}/deploy/docker/output/
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
     - >-
