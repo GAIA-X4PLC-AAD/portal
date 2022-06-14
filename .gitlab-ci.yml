@@ -28,7 +28,7 @@ application-build:
     - npm run build
     - pwd
     - ls -l
-    - cp build /deploy/docker/output/ -r
+    - mv build deploy/docker/output/
 
 
 docker-build:
