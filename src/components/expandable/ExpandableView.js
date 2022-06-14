@@ -30,9 +30,9 @@ const ExpandableView = ({
     }
 
     return <S.Block border={border} boxShadow={boxShadow} width={width}>
+        
         {/* TITLE */}
         <S.ToggleButton
-
             onClick={() => { setIsExpanded(!isExpanded) }}
             noBorder={border}
             background={elevation}
@@ -40,13 +40,13 @@ const ExpandableView = ({
             <Style flexGrow={1} paddingLeft={titleLeadingPadding}>{title}</Style>
             <Down isOpen={isExpanded} paddingRight={titleTrailerPadding} arrowColor={arrowColor} />
         </S.ToggleButton>
+
         {/* BODY */}
         <Style borderBottom={true}>
             <Collapse isOpened={isExpanded}>
                 <Style
                     borderTop={border}
                     paddingLeft={viewLeadingPadding}
-                    elevation={elevation}
                 >{exapandableContent()}</Style>
             </Collapse>
         </Style>

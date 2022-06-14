@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import { useResource } from "@axios-use/react";
 
-import { Center } from '../../common/styles';
+import { Center, Style } from '../../common/styles';
 
 
 function LoadingView({ url, successView, params }) {
@@ -16,17 +16,22 @@ function LoadingView({ url, successView, params }) {
         console.log(`LoadingView.useEffect, isLoading: ${isLoading}`)
     }, [isLoading, error, data]);
 
+    let isError = error != undefined;
 
     return (
         <>
             <Center>
-                <S.AnimatedVisibility visible={isLoading}>
-                    <S.CircularLoader />
-                </S.AnimatedVisibility>
+                <Style zIndex={-1}>
+                    <S.AnimatedVisibility visible={isLoading}>
+                        <S.CircularLoader />
+                    </S.AnimatedVisibility>
+                </Style>
 
-                <S.AnimatedVisibility visible={error != undefined}>
-                    <p>Error Loading Content!</p>
-                </S.AnimatedVisibility>
+                <Style zIndex={-1}>
+                    <S.AnimatedVisibility visible={isError}>
+                        <p>Error Loading Content!</p>
+                    </S.AnimatedVisibility>
+                </Style>
 
                 <S.AnimatedVisibility visible={!isLoading && error == undefined && !(data === undefined)}>
                     {successView({ data: data, params: params })}
