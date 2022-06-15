@@ -18,7 +18,7 @@ export const Preview = styled.div`
 `;
 
 export const PreviewImage = styled.img`
-    width: 280px;
+    width: 100%;
     height: 187px;
     max-width: 100%;
     flex: none;

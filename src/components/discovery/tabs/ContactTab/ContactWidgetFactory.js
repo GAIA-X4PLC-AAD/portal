@@ -35,7 +35,7 @@ const ContactWidgetFactory = ({data, t}) => {
 
     return (
         <S.ContactsContainer>
-            {/* {showContacts()} */}
+            {showContacts()}
         </S.ContactsContainer>
         
     );
