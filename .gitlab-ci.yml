@@ -38,12 +38,8 @@ docker-build:
     refs:
       - testPipeLineHelm
   script:
-    - ls -l
-    - ls -l deploy/
-    - ls -l deploy/docker
-    - ls -l deploy/docker/output
-    - cp -r build deploy/docker/output/build
-    - ls -l  ${CI_PROJECT_DIR}/deploy/docker/output/
+    - mkdir -p deploy/docker/output
+    - mv build deploy/docker/output/build
     - mkdir -p /kaniko/.docker
     - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
     - >-
