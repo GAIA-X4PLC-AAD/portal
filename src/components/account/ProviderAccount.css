@@ -1,4 +1,7 @@
 /* This source code is exported from pxCode, you can get more document from https://www.pxcode.io */
+.provider-account-section1__highlights71.layout {
+  min-height: 20px;
+}
 .provider-account-main {
   display: flex;
   flex-direction: column;
@@ -108,7 +111,8 @@
 
 .provider-account-section1__line2.layout {
   position: relative;
-  height: 1px;
+  height: 0;
+  border-top: 0;
   margin: 0px 33px 0px 25px; }
 
 .provider-account-details_info {
