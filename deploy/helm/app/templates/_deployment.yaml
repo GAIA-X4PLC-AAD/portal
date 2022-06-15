@@ -32,8 +32,6 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
-          imagePullSecrets:
-            - name: regcred
           image: "{{ .Values.image.repository }}/{{ .Values.image.name }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- with .Values.image.args }}
@@ -66,10 +64,12 @@ spec:
 {{ toYaml .Values.ports | indent 12 }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
+      imagePullSecrets:
+        - name: regcred
       {{- if .Values.configmap.enabled }}
-          volumeMounts:
-          - name: {{ include "common.fullname" . }}
-            mountPath: {{ .Values.configmap.volumeMounts.mountPath }}
+      volumeMounts:
+            - name: {{ include "common.fullname" . }}
+      mountPath: {{ .Values.configmap.volumeMounts.mountPath }}
       volumes:
         - name: {{ include "common.fullname" . }}
           configMap:
