@@ -19,43 +19,41 @@ const AccountPaneDetails = (props) => {
         });
     }, []);
 
-    return (
-        <div className="account-pane-details">
-            <div className="account-pane-details-image">
-                <img src={user?.avatarImageLink} alt="User avatar image." />
-            </div>
-            <div className="account-pane-details-body">
-                <div className="account-pane-details-body-flex-col">
+    return <div className="account-pane-details">
+        <div className="account-pane-details-image">
+            <img src={user?.avatarImageLink} alt="User avatar image." width='143px' height='143px'/>
+        </div>
+        <div className="account-pane-details-body">
+            <div className="account-pane-details-body-flex-col">
+                <div className="account-pane-details-attribute">
+                    <div className="account-pane-details-attribute-label">{props.t("account.details.email")}</div>
+                    <div className="account-pane-details-attribute-box">{user?.email}</div>
+                </div>
+                <div className="account-pane-flex">
                     <div className="account-pane-details-attribute">
-                        <div className="account-pane-details-attribute-label">{props.t("account.details.email")}</div>
-                        <div className="account-pane-details-attribute-box">{user?.email}</div>
-                    </div>
-                    <div className="account-pane-flex">
-                        <div className="account-pane-details-attribute">
-                            <div className="account-pane-details-attribute-label">{props.t("account.details.firstName")}</div>
-                            <div className="account-pane-details-attribute-box">{user?.name}</div>
-                        </div>
-                        <div className="account-pane-details-attribute">
-                            <div className="account-pane-details-attribute-label">{props.t("account.details.lastName")}</div>
-                            <div className="account-pane-details-attribute-box">{user?.surname}</div>
-                        </div>
+                        <div className="account-pane-details-attribute-label">{props.t("account.details.firstName")}</div>
+                        <div className="account-pane-details-attribute-box">{user?.name}</div>
                     </div>
                     <div className="account-pane-details-attribute">
-                        <div className="account-pane-details-attribute-label">{props.t("account.details.attributeOfVC")}</div>
-                        <div className="account-pane-details-attribute-box">{user?.attributeA}</div>
+                        <div className="account-pane-details-attribute-label">{props.t("account.details.lastName")}</div>
+                        <div className="account-pane-details-attribute-box">{user?.surname}</div>
                     </div>
-                    <div className="account-pane-details-attribute">
-                        <div className="account-pane-details-attribute-label">{props.t("account.details.attributeOfVC")}</div>
-                        <div className="account-pane-details-attribute-box">{user?.attributeB}</div>
-                    </div>
-                    <div className="account-pane-details-attribute">
-                        <div className="account-pane-details-attribute-label">{props.t("account.details.attributeOfVC")}</div>
-                        <div className="account-pane-details-attribute-box">{user?.attributeC}</div>
-                    </div>
+                </div>
+                <div className="account-pane-details-attribute">
+                    <div className="account-pane-details-attribute-label">{props.t("account.details.attributeOfVC")}</div>
+                    <div className="account-pane-details-attribute-box">{user?.attributeA}</div>
+                </div>
+                <div className="account-pane-details-attribute">
+                    <div className="account-pane-details-attribute-label">{props.t("account.details.attributeOfVC")}</div>
+                    <div className="account-pane-details-attribute-box">{user?.attributeB}</div>
+                </div>
+                <div className="account-pane-details-attribute">
+                    <div className="account-pane-details-attribute-label">{props.t("account.details.attributeOfVC")}</div>
+                    <div className="account-pane-details-attribute-box">{user?.attributeC}</div>
                 </div>
             </div>
         </div>
-    )
+    </div>
 }
 
 AccountPaneDetails.propTypes = {
