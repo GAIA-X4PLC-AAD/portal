@@ -135,3 +135,43 @@ export const Image = styled.img`
   max-width: ${props => props.maxWidth || ''};
   min-width: ${props => props.minWidth || ''};
 `;
+
+
+export const BodySmallBoldText = styled.div`
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 20px;
+/* identical to box height, or 133% */
+letter-spacing: 0.25px;
+color: #000000;
+`;
+export const CaptionText = styled.div`
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+letter-spacing: 0.4px;
+color: #000000;
+`;
+
+export const BodySmallText = styled.div`
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 20px;
+letter-spacing: 0.25px;
+color: #1C0E15;`;
+
+export const BodyText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.25px;
+    color: #2A2A2A;
+`;

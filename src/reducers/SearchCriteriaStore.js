@@ -6,6 +6,7 @@ const INITIAL_STATE = {
     filterCriteria : [],
     size : 15,
     page : 1,
+    order:'ASC'
 };
 
 const parameterBuilder = (state) => {
