@@ -80,6 +80,7 @@ export const Row = styled.div`
     padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
     margin: ${props => props.margin || '0'};
     width: ${props => props.width || 'auto'};
+    justify-content: ${props => props.justifyContent || ''};
 `
 
 export const Column = styled.div`
@@ -135,3 +136,39 @@ export const Image = styled.img`
   max-width: ${props => props.maxWidth || ''};
   min-width: ${props => props.minWidth || ''};
 `;
+
+
+export const BodySmallBoldText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 20px;
+    /* identical to box height, or 133% */
+
+    letter-spacing: 0.25px;
+
+    color: #000000;
+`
+
+export const CaptionText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+
+    letter-spacing: 0.4px;
+    color: #000000;
+`
+
+export const Card = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+
+    letter-spacing: 0.4px;
+    color: #000000;
+`

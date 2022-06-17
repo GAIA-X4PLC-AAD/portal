@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import ExpandableView from "../../expandable/ExpandableView";
 import * as S from './style';
-import { withTranslation } from "react-i18next";
+import { useTranslation, withTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { updateFilterCriteria } from "../../../actions";
 
-const SearchFilterView = ({ data, t }) => {
+const SearchFilterView = ({ data, }) => {
 
     const [filters, setFilters] = useState([]);
     const dispatch = useDispatch();
+    const {t, i18n} = useTranslation()
 
     // updates redux filterCriteria every 1s if something has been changed. When there is a change in between, will wait 1s again
     useEffect(() => {
@@ -79,7 +80,6 @@ const SearchFilterView = ({ data, t }) => {
 
 SearchFilterView.propTypes = {
     data: PropTypes.object,
-    t: PropTypes.func
 };
 
 export default withTranslation()(SearchFilterView);

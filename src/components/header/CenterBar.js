@@ -12,6 +12,7 @@ const CenterBar = () => {
   return (
     <>
       <S.TopMenuLinks>
+        <Link to="/dashboard"> {t('left-menu.dashboard')}</Link>
         <Link to="/services"> {t('left-menu.services')}</Link>
         <Link to="/data"> {t('left-menu.data')}</Link>
         <Link to="/provider"> {t('left-menu.provider')}</Link>

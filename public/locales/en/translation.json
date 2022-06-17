@@ -8,8 +8,12 @@
         "data": "Data",
         "provider": "Provider",
         "search": "Search",
-        "logo-alt-text": "Gaia-x logo image"
+        "logo-alt-text": "Gaia-x logo image",
+        "dashboard": "Dashboard"
         
+    },
+    "dashboard": {
+        "reporting": "Reporting"
     },
     "top-menu": {
         "help": "Help",
