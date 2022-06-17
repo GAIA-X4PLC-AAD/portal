@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from 'prop-types';
 
 
-import { BodySmallBoldText, Column, Row, Style, CaptionText } from "../../common/styles";
+import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
 import DashboardView from "./dashboard_view";
 import { Block } from "../expandable/style";
@@ -15,22 +15,26 @@ const DashboardPage = () => {
     const type = 'dashboard';
     const _leftPanelWidth = '225px'
 
+    const colItem = ({ title, caption, subtitle, }) => {
+        return <Column>
+            <Row justifyContent='space-between' alignItems='center'>
+                <BodySmallBoldText>{title}</BodySmallBoldText>
+                <CaptionText>{caption}</CaptionText>
+            </Row>
+            <CaptionText>{subtitle}</CaptionText>
+        </Column>
+    }
+
     const buildCategoryView = ({ category }) => {
 
-        const colItem = ({ title, subtitle }) => {
-            return <Padding vertical='8px' horizontal='8px'>
-                <Column>
-                    <Row justifyContent='space-between'>
-                        <BodySmallBoldText>{title}</BodySmallBoldText>
-                        <CaptionText>12.02</CaptionText>
-                    </Row>
-                    <CaptionText>{subtitle}</CaptionText>
-                </Column>
-            </Padding>
-        }
-
         const categoryItems = category['items'].map((element, _index) => {
-            return <Style key={`${element['name']}${_index}`}>{colItem({ title: element['name'], subtitle: 'Subline' })}</Style>;
+            return (
+                <Style key={`${element['name']}${_index}`}>
+                    <Padding vertical='8px' horizontal='8px'>
+                        {colItem({ title: element['name'], subtitle: 'Subline', caption: '12.02' })}
+                    </Padding>
+                </Style>
+            );
         })
 
         return <>
@@ -46,11 +50,33 @@ const DashboardPage = () => {
 
     const sideBar = () => {
 
-        const _views = _data['categories'].map((category, index) => {
+        const _categoriesView = _data['categories'].map((category, index) => {
             return <Padding key={`${category['name']}${index}`}>{buildCategoryView({ category: category })}</Padding>
         })
 
-        return _views
+        const _welcomeView = <>
+            <Row justifyContent='space-between' alignItems='center'>
+                <Circle>JD</Circle>
+                <Padding horizontal='8px'>
+                {colItem({
+                    title: 'Welcome to Gaia-x, Jane Doe',
+                    subtitle: 'Registered as part of <Company GmbH>',
+                })}
+                </Padding>
+            </Row>
+        </>
+
+        const _cardView = <Padding vertical='24px'>
+            <Card>
+                <Padding vertical='16px' horizontal='24px'>{colItem({ title: '2pm', subtitle: 'Tuesday, 9th March 2021', caption: '' })}</Padding>
+            </Card>
+        </Padding>
+
+        return <>
+            {_welcomeView}
+            {_cardView}
+            {_categoriesView}
+        </>
     }
 
     return <Row>

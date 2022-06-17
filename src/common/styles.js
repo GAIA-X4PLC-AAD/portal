@@ -81,6 +81,7 @@ export const Row = styled.div`
     margin: ${props => props.margin || '0'};
     width: ${props => props.width || 'auto'};
     justify-content: ${props => props.justifyContent || ''};
+    align-items: ${props => props.alignItems || ''};
 `
 
 export const Column = styled.div`
@@ -163,12 +164,46 @@ export const CaptionText = styled.div`
 `
 
 export const Card = styled.div`
+    box-sizing: border-box;
+
+    background: #E9E9E9;
+    /* Background/Lighter Grey */
+
+    border: 1px solid #818C99;
+    border-radius: 4px;
+`
+
+export const Circle = styled.div`
+    /* BG */
+    text-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    width: ${props => props.width || '41px'};
+    height: ${props => props.width || '32px'};
+
+
+    justify-content: center;
+
+    background: #F9F9F9;
+
+    border: 1.36667px solid #E9E9E9;
+    border-radius: 50%;
+`
+
+export const ButtonText = styled.div`
     font-family: 'Titillium Web';
     font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
 
-    letter-spacing: 0.4px;
-    color: #000000;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.25px;
+
+    /* Background/Primary */
+
+    color: #000094;
 `

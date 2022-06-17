@@ -5,6 +5,7 @@ import { HeaderTitle } from "../../common/styles";
 import PropTypes from 'prop-types';
 
 import Plot from 'react-plotly.js';
+import MyServiceViewCard from "./my_service_view";
 
 
 const DashboardView = () => {
@@ -56,6 +57,7 @@ const DashboardView = () => {
             <>
                 <HeaderTitle>{t(`dashboard.reporting`)}</HeaderTitle>
                 {buildPlot1()}
+                <MyServiceViewCard>MyServices</MyServiceViewCard>
 
             </>
         );
