@@ -180,8 +180,7 @@ export const Circle = styled.div`
     align-content: center;
     align-items: center;
     width: ${props => props.width || '41px'};
-    height: ${props => props.width || '32px'};
-
+    height: ${props => props.height || '32px'};
 
     justify-content: center;
 
@@ -197,13 +196,22 @@ export const ButtonText = styled.div`
     font-weight: 700;
     font-size: 14px;
     line-height: 20px;
-    /* identical to box height, or 143% */
 
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
-
-    /* Background/Primary */
-
+    cursor: pointer;
     color: #000094;
+`
+
+export const H4Text = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+
+    letter-spacing: 0.25px;
+
+    color: #1C0E15;
 `

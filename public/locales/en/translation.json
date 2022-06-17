@@ -13,7 +13,9 @@
         
     },
     "dashboard": {
-        "reporting": "Reporting"
+        "reporting": "Reporting",
+        "my_services": "My Services",
+        "my_data_sets": "My Data sets"
     },
     "top-menu": {
         "help": "Help",
