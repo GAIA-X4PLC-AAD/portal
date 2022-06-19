@@ -10,31 +10,9 @@ import { Padding } from "../discovery/tabs/style";
 import ImageGallery from 'react-image-gallery';
 
 
-const MyServiceViewCard = ({ index }) => {
+const MyServiceViewCard = ({ index, isEditable }) => {
 
     const { t, i18n } = useTranslation();
-
-    const _images = [
-        {
-            'original': 'https://structureform.com/wp-content/uploads/2017/02/1.-6902-light-grey.jpg',
-            'originalHeight': '144px',
-            'originalWidth': '100%',
-            'thumbnailWidth': '128px'
-        },
-        {
-            'original': 'https://www.solidbackgrounds.com/images/3840x2160/3840x2160-dark-gray-solid-color-background.jpg',
-            'originalHeight': '144px',
-            'originalWidth': '100%',
-            'thumbnailWidth': '128px'
-        },
-        {
-            'original': 'https://wallpaperaccess.com/full/4990824.png',
-            'originalHeight': '144px',
-            'originalWidth': '100%',
-            'thumbnailWidth': '128px'
-        },
-
-    ];
 
     const colItem = ({ title, caption, subtitle, }) => {
         return <Column>
@@ -55,11 +33,7 @@ const MyServiceViewCard = ({ index }) => {
                             <Column>
                                 <Style minWidth='100%'>
                                     <Padding vertical='18px'>
-                                        <ImageGallery items={_images}
-                                            showFullscreenButton={false}
-                                            showBullets={true}
-                                            showNav={false}
-                                            showPlayButton={false} />
+                                        <Style height='160px' backgroundColor='#fafafa'/>
                                     </Padding>
                                 </Style>
                                 <Row justifyContent='start' alignItems='center'>
@@ -77,7 +51,7 @@ const MyServiceViewCard = ({ index }) => {
                                     </Padding>
                                 </Style>
 
-                                <Padding vertical><ButtonText>Activate</ButtonText></Padding>
+                                <Padding vertical><ButtonText>{isEditable ? t('dashboard.edit') : t('dashboard.activate')}</ButtonText></Padding>
                             </Column>
                         </Padding>
                     </Block>
@@ -91,7 +65,8 @@ const MyServiceViewCard = ({ index }) => {
 
 MyServiceViewCard.propTypes = {
     type: PropTypes.string,
-    index: PropTypes.number
+    index: PropTypes.number,
+    isEditable: PropTypes.bool,
 };
 
 

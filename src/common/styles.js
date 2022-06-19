@@ -107,11 +107,14 @@ export const Style = styled.div`
     max-width: ${props => props.maxWidth || ''};
     min-width: ${props => props.minWidth || ''};
     min-height: ${props => props.minHeight || ''};
+    height: ${props => props.height || ''};
+    width: ${props => props.width || ''};
     margin-left: ${props => props.marginLeft || '0px'};
     margin-right: ${props => props.marginRight || '0px'};
     margin-right: ${props => props.marginRight || '0px'};
     margin-top: ${props => props.marginTop || '0px'};
     z-index: ${props => props.zIndex || 'auto'};
+    background-color: ${props => props.backgroundColor || ''};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     /* border-radius: 4px; */
 `

@@ -57,7 +57,7 @@ const DashboardView = () => {
         return (<>
             <H4Text>{t('dashboard.my_services')}</H4Text>
             <Row>
-                <MyServiceViewCard index={0}/>
+                <MyServiceViewCard index={0} isEditable={true}/>
                 <MyServiceViewCard />
             </Row>
         </>);
@@ -68,7 +68,7 @@ const DashboardView = () => {
         return (<>
             <H4Text>{t('dashboard.my_data_sets')}</H4Text>
             <Row>
-                <MyServiceViewCard index={0}/>
+                <MyServiceViewCard index={0} isEditable={true}/>
                 <MyServiceViewCard />
             </Row>
         </>);
