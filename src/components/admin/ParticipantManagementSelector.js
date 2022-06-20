@@ -14,7 +14,7 @@ const ParticipantManagementSelector = ({type}) => {
                         name="radio"
                         value="neverAutoAccept" 
                         onClick={()=>navigate('/admin/participant')}
-                        checked={type==='participant'}
+                        defaultChecked={type==='participant'}
                         /> <BodyText>Participant</BodyText>
                 </Row>
                 <Row>
@@ -23,7 +23,7 @@ const ParticipantManagementSelector = ({type}) => {
                         name="radio"
                         value="neverAutoAccept"
                         onClick={()=>navigate('/admin/management')}
-                        checked={type==='management'}/><BodyText>Management</BodyText>
+                        defaultChecked={type==='management'}/><BodyText>Management</BodyText>
                 </Row>
     
         </Column>

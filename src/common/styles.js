@@ -81,6 +81,8 @@ export const Row = styled.div`
     margin: ${props => props.margin || '0'};
     width: ${props => props.width || 'auto'};
 `
+export const WrapRow = styled(Row)`
+    flex-wrap: wrap`;
 
 export const Column = styled.div`
     display: flex;
@@ -89,6 +91,8 @@ export const Column = styled.div`
     margin: ${props => props.margin || '0'};
     width: ${props => props.width || 'auto'};
 `
+export const WrapColumn = styled(Column)`
+    flex-wrap: wrap`;
 
 export const Style = styled.div`
     border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
@@ -157,6 +161,16 @@ letter-spacing: 0.4px;
 color: #000000;
 `;
 
+export const CaptionTeleNeoText = styled.div`
+font-family: 'TeleNeo';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+letter-spacing: 0.4px;
+color: #4B4B4B;
+`;
+
 export const BodySmallText = styled.div`
 font-family: 'Titillium Web';
 font-style: normal;
@@ -174,4 +188,21 @@ export const BodyText = styled.div`
     line-height: 24px;
     letter-spacing: 0.25px;
     color: #2A2A2A;
+`;
+
+export const Tag = styled.div`
+  /* Tag */
+  padding: 2px 12px;
+  gap: 10px;
+  margin: 0px 8px;
+  /* Background/Primary */
+  background: #000094;
+  border-radius: 12px;
+  /* Caption */
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  color: white;
+  line-height: 16px;
 `;

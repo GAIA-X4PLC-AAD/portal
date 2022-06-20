@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import { ColumnItem } from "./Common";
-import { Image, Column, Style } from "../../../../common/styles";
+import { Image, Column, Style, Tag } from "../../../../common/styles";
 import { Columns } from "../dataPreview/style";
 import DataPreview from "../dataPreview/DataPreview";
 
@@ -76,7 +76,7 @@ const DescriptionTabView = (props,) => {
               </S.Padding>
 
               <S.HorizontalContainer>
-                {details['tags'] && details['tags'].map((elem, i) => { return (<S.Tag key={`${elem}:${i}`}>{elem}</S.Tag>) })}
+                {details['tags'] && details['tags'].map((elem, i) => { return (<Tag key={`${elem}:${i}`}>{elem}</Tag>) })}
               </S.HorizontalContainer>
 
               <S.HorizontalContainer>

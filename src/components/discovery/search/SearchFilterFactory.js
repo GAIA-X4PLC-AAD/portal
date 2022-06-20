@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
-import AdminSearchFilter from './AdminSearchFilter';
+import AdminManagementSearchFilter from './AdminManagementSearchFilter';
+import AdminParticipantSearchFilter from './AdminParticipantSearchFilter';
 import DiscoverySearchFilter from './DiscoverySearchFilter';
 
 const SearchFilterFactory = ({type}) => {
@@ -10,8 +11,9 @@ const SearchFilterFactory = ({type}) => {
         case 'services': 
             return DiscoverySearchFilter({type});
         case 'participant': 
+            return AdminParticipantSearchFilter({type});
         case 'management': 
-            return AdminSearchFilter({type});
+            return AdminManagementSearchFilter({type});
         default: return null;
     }
 }

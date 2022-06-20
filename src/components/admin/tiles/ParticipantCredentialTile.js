@@ -3,6 +3,7 @@ import ExpandableView from "../../expandable/ExpandableView";
 import PropTypes from 'prop-types';
 import AdminNaturalPersonDetails from "../tabs/AdminNaturalPersonDetails";
 import ManagementHeader from "../tabs/ManagementHeader";
+import KeyValueDetails from "../tabs/KeyValueDetails";
 
 
 const ParticipantCredentialTile = ({ input }) => {
@@ -10,7 +11,7 @@ const ParticipantCredentialTile = ({ input }) => {
     const type = "admin_consumer";
     
     return (
-        <ExpandableView initiallyExpanded={false} view={<AdminNaturalPersonDetails id={input.id}/>} title={<ManagementHeader participant={input}/>} border={true} />
+        <ExpandableView initiallyExpanded={false} view={<KeyValueDetails id={input.id}/>} title={<ManagementHeader participant={input}/>} border={true} />
     );
 
 }

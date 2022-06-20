@@ -185,3 +185,7 @@ export const RadioButton = styled.input`
       border: 1px solid #000094;
     }
 `;
+
+export const CaptionText = styled(S.CaptionText)`
+    color: #B2B2B2;
+`;

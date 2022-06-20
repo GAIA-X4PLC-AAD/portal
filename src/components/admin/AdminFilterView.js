@@ -5,7 +5,7 @@ import * as S from './style';
 import { useDispatch } from "react-redux";
 import { updateFilterCriteria } from "../../actions";
 
-const AdminFilterView = ({ data }) => {
+const AdminFilterView = ({ data , header}) => {
 
     const [filters, setFilters] = useState([]);
     const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const AdminFilterView = ({ data }) => {
     // updates redux filterCriteria every 1s if something has been changed. When there is a change in between, will wait 1s again
     useEffect(() => {
         const timerId = setTimeout(() => {
-            dispatch(updateFilterCriteria(filters));
+            dispatch(updateFilterCriteria({ filterCriteria: filters }));
         }, 1000);
         return () => {
             clearTimeout(timerId);
@@ -52,31 +52,30 @@ const AdminFilterView = ({ data }) => {
         return <S.Category>{name}</S.Category>;
     }
 
-    const showCategories = (data) => {
-        return (data.categories.map((cat, i) => {
-            return <ExpandableView
+    const showCategories = (data, header) => {
+            return (<ExpandableView
                 initiallyExpanded={true}
                 border={true}
                 arrowColor={'#737373'}
                 elevation={true}
                 boxShadow={'0px 2px 4px 0px rgb(29 36 48 / 12%)'}
                 titleTrailerPadding={'12px'}
-                view={showItemsList(cat.name, cat.items)}
-                title={showCategoryHeader(cat.name)} key={cat.name} />
-        }))
+                view={showItemsList(header, data.items)}
+                title={showCategoryHeader(header)} key={header} />)
     }
 
     // check when data is null
     if (data === undefined) return null;
     return <>
         <S.Filters>
-            {showCategories(data)}
+            {showCategories(data, header)}
         </S.Filters>
     </>
 }
 
 AdminFilterView.propTypes = {
-    data: PropTypes.object
+    data: PropTypes.object,
+    header: PropTypes.string
 };
 
 export default AdminFilterView;
