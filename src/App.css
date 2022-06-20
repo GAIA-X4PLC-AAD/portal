@@ -324,7 +324,7 @@ ul.inline {
   -webkit-padding-start: 0px;
 }
 
-ul.inline,
+/* ul.inline,
 li {
   display: inline-block;
   margin-left: 0;
@@ -338,7 +338,7 @@ li {
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
-}
+} */
 
 ul.inline,
 li.selected {

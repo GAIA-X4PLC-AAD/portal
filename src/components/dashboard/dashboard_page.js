@@ -15,7 +15,8 @@ const DashboardPage = () => {
     const type = 'dashboard';
     const _leftPanelWidth = '225px'
 
-    const colItem = ({ title, caption, subtitle, }) => {
+
+    const colItemView = ({ title, caption, subtitle, }) => {
         return <Column>
             <Row justifyContent='space-between' alignItems='center'>
                 <BodySmallBoldText>{title}</BodySmallBoldText>
@@ -25,13 +26,13 @@ const DashboardPage = () => {
         </Column>
     }
 
-    const buildCategoryView = ({ category }) => {
+    const categoryView = ({ category }) => {
 
         const categoryItems = category['items'].map((element, _index) => {
             return (
                 <Style key={`${element['name']}${_index}`}>
                     <Padding vertical='8px' horizontal='8px'>
-                        {colItem({ title: element['name'], subtitle: 'Subline', caption: '12.02' })}
+                        {colItemView({ title: element['name'], subtitle: 'Subline', caption: '12.02' })}
                     </Padding>
                 </Style>
             );
@@ -48,17 +49,17 @@ const DashboardPage = () => {
     }
 
 
-    const sideBar = () => {
+    const sideBarView = () => {
 
         const _categoriesView = _data['categories'].map((category, index) => {
-            return <Padding key={`${category['name']}${index}`}>{buildCategoryView({ category: category })}</Padding>
+            return <Padding key={`${category['name']}${index}`}>{categoryView({ category: category })}</Padding>
         })
 
         const _welcomeView = <>
-            <Row justifyContent='space-between' alignItems='center'>
+            <Row justifyContent='space-between' alignItems='center'  data-tag='welcom-view'>
                 <Circle>JD</Circle>
                 <Padding horizontal='8px'>
-                {colItem({
+                {colItemView({
                     title: 'Welcome to Gaia-x, Jane Doe',
                     subtitle: 'Registered as part of <Company GmbH>',
                 })}
@@ -68,7 +69,7 @@ const DashboardPage = () => {
 
         const _cardView = <Padding vertical='24px'>
             <Card>
-                <Padding vertical='16px' horizontal='24px'>{colItem({ title: '2pm', subtitle: 'Tuesday, 9th March 2021', caption: '' })}</Padding>
+                <Padding vertical='16px' horizontal='24px'>{colItemView({ title: '2pm', subtitle: 'Tuesday, 9th March 2021', caption: '' })}</Padding>
             </Card>
         </Padding>
 
@@ -81,7 +82,7 @@ const DashboardPage = () => {
 
     return <Row>
         <Style maxWidth={_leftPanelWidth}>
-            {sideBar()}
+            {sideBarView()}
         </Style>
 
         <Padding horizontal='12px' />

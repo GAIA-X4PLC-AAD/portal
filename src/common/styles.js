@@ -98,6 +98,9 @@ export const Style = styled.div`
     flex-grow: ${props => props.flexGrow || 0};
     justify-content: ${props => props.justifyContent || ''};
     display: ${props => props.display || ''};
+    position: ${props => props.position || ''};
+    left: ${props => props.left || ''};
+    bottom: ${props => props.bottom || ''};
     text-align: start;
     padding-top: ${props => props.paddingTop || '0px'};
     padding-left: ${props => props.paddingLeft || '0px'};
@@ -199,12 +202,11 @@ export const ButtonText = styled.div`
     font-weight: 700;
     font-size: 14px;
     line-height: 20px;
-
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
     cursor: pointer;
-    color: #000094;
+    color: ${props => props.disabled? '#bababa' : '#000094'};
 `
 
 export const H4Text = styled.div`

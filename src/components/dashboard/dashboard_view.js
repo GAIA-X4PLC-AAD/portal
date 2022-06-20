@@ -1,17 +1,53 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
-import { H4Text, HeaderTitle, Row } from "../../common/styles";
+import { ButtonText, H4Text, HeaderTitle, Row, Style } from "../../common/styles";
 import PropTypes from 'prop-types';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 import Plot from 'react-plotly.js';
 import MyServiceViewCard from "./my_service_view_card";
+import { Padding } from "../discovery/tabs/style";
 
 
 const DashboardView = () => {
 
     const { t, i18n } = useTranslation();
+    const responsive = {
+        superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: { max: 4000, min: 3000 },
+            items: 5
+        },
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: 3
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: 2
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: 1
+        }
+    };
 
+    const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
+        const { carouselState: { currentSlide } } = rest;
+        return (
+            <Style display='flex' position='relative' left='88%' bottom='32.5%'>
+                <Padding horizontal='4px'><ButtonText disabled={currentSlide === 0} onClick={() => previous()} >Previous</ButtonText></Padding>
+                <Padding horizontal='4px'><ButtonText disabled={currentSlide !== 0} onClick={() => next()} >Next</ButtonText></Padding>
+            </Style>
+        );
+    };
+    ButtonGroup.propTypes = {
+        next: PropTypes.func,
+        previous: PropTypes.func,
+        goToSlide: PropTypes.func,
+    };
 
     const buildPlot1 = () => {
 
@@ -37,38 +73,39 @@ const DashboardView = () => {
         return <Plot
             data={data}
             layout={{
-                width: '50%', height: '400px', title: 'A Fancy Plot', showlegend: false,
-                // shapes:[
-                //     {
-                //         type: 'path',
-                //         path: 'M 1,4 C 2,8 6,4 8,8',
-                //         line: {
-                //           color: 'rgb(207, 114, 255)'
-                //         }
 
-                //       },
-                // ]
             }}
 
         />
     }
 
     const buildMyServicesList = () => {
-        return (<>
-            <H4Text>{t('dashboard.my_services')}</H4Text>
-            <Row>
-                <MyServiceViewCard index={0} isEditable={true}/>
-                <MyServiceViewCard />
-            </Row>
-        </>);
+
+        return (
+            <>
+                <H4Text>{t('dashboard.my_services')}</H4Text>
+                <Carousel
+                    arrows={false}
+                    swipeable={false}
+                    draggable={false}
+                    responsive={responsive}
+                    renderButtonGroupOutside={true}
+                    customButtonGroup={<ButtonGroup />}>
+                    <MyServiceViewCard isEditable={true} />
+                    <MyServiceViewCard />
+                    <MyServiceViewCard isEditable={true} />
+                    <MyServiceViewCard />
+                </Carousel>
+            </>
+        );
     }
-    
+
 
     const buildMyDatasetsList = () => {
         return (<>
             <H4Text>{t('dashboard.my_data_sets')}</H4Text>
             <Row>
-                <MyServiceViewCard index={0} isEditable={true}/>
+                <MyServiceViewCard index={0} isEditable={true} />
                 <MyServiceViewCard />
             </Row>
         </>);
