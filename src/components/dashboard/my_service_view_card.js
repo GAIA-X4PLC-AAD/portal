@@ -1,13 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+
 import { BodySmallBoldText, ButtonText, CaptionText, Circle, Column, HeaderTitle, Row, Style } from "../../common/styles";
 import PropTypes from 'prop-types';
 
-import Plot from 'react-plotly.js';
 import { Block } from "../expandable/style";
 import { Padding } from "../discovery/tabs/style";
-import ImageGallery from 'react-image-gallery';
 
 
 const MyServiceViewCard = ({ index, isEditable }) => {
@@ -27,7 +25,7 @@ const MyServiceViewCard = ({ index, isEditable }) => {
     const buildCard = () => {
         return (
             <Style maxWidth='315px'>
-                <Padding horizontal={index == 0 ? '' : '12px'}>
+                <Padding horizontal={'12px'}>
                     <Block border={true} borderBottom={true}>
                         <Padding vertical='20px' horizontal='20px'>
                             <Column>
