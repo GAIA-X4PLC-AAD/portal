@@ -8,6 +8,7 @@
   --height-menu: 50px;
   --banner-height: 400px;
   --content-width: 80%;
+  --content-height: 40%;
 }
 
 /*
@@ -222,6 +223,7 @@
 .body-container {
   width: var(--content-width);
   margin: 1em auto;
+  min-height:640px;
 }
 
 .footer-container {

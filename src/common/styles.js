@@ -90,6 +90,7 @@ export const Column = styled.div`
     padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
     margin: ${props => props.margin || '0'};
     width: ${props => props.width || 'auto'};
+    align-items: ${props => props.alignItems || ''};
 `
 
 export const Style = styled.div`
@@ -123,7 +124,7 @@ export const Style = styled.div`
     /* border-radius: 4px; */
 `
 
-export const HeaderTitle=styled.div`
+export const HeaderTitle = styled.div`
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -155,8 +156,7 @@ export const BodySmallBoldText = styled.div`
     /* identical to box height, or 133% */
 
     letter-spacing: 0.25px;
-
-    color: #000000;
+    color: ${props => props.color || '#000000'};
 `
 
 export const CaptionText = styled.div`
@@ -173,11 +173,11 @@ export const CaptionText = styled.div`
 export const Card = styled.div`
     box-sizing: border-box;
 
-    background: #E9E9E9;
+    background: ${props => props.background || '#E9E9E9'};
     /* Background/Lighter Grey */
-
-    border: 1px solid #818C99;
+    border: 1px solid  ${props => props.borderColor || '#818C99'};
     border-radius: 4px;
+    box-shadow: ${props => props.boxShadow || ''};
 `
 
 export const Circle = styled.div`
@@ -209,7 +209,7 @@ export const ButtonText = styled.div`
     align-items: center;
     letter-spacing: 0.25px;
     cursor: pointer;
-    color: ${props => props.disabled? '#bababa' : '#000094'};
+    color: ${props => props.disabled ? '#bababa' : (props.color ? '#00A2E4' : '#000094')};
 `
 
 export const H4Text = styled.div`
@@ -222,4 +222,101 @@ export const H4Text = styled.div`
     letter-spacing: 0.25px;
 
     color: #1C0E15;
+`
+
+export const H4LightText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+
+    letter-spacing: 0.25px;
+
+    color: #1C0E15;
+`
+
+export const BodyText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    /* identical to box height, or 133% */
+
+    letter-spacing: 0.25px;
+
+    /* greyscale/dark */
+
+    color: #4B4B4B;
+`
+
+export const BodyBoldText = styled.div`
+/* Body Bold */
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    /* or 133% */
+
+    letter-spacing: 0.25px;
+
+    /* Text/Dark Grey */
+
+    color: #2A2A2A;
+`
+
+export const BodySmallText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    /* identical to box height, or 133% */
+
+    letter-spacing: 0.25px;
+
+    /* Text/Dark Grey */
+
+    color: #2A2A2A;
+`
+
+export const MasterButton = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 30px;
+    gap: 8px;
+
+    width: 98px;
+
+    /* Background/Primary */
+
+    background: #000094;
+    border-radius: 4px;
+
+    /* Button */
+
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+    /* identical to box height, or 111% */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.25px;
+    color: #FFFFFF;
+`
+
+export const HorizontalLine = styled.div`
+    height: 1px;
+    border: 0;
+    border-top: 1px solid ${props => props.color || '#E8E8E8'};;
+    margin: 1em 0;
+    padding: 0;
 `
