@@ -57,7 +57,7 @@ const DashboardPage = () => {
 
         const _welcomeView = <>
             <Row justifyContent='space-between' alignItems='center'  data-tag='welcom-view'>
-                <Circle>JD</Circle>
+                <Circle radius='50px'>JD</Circle>
                 <Padding horizontal='8px'>
                 {colItemView({
                     title: 'Welcome to Gaia-x, Jane Doe',

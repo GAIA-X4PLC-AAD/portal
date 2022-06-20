@@ -31,17 +31,19 @@ const MyServiceViewCard = ({ index, isEditable }) => {
                     <Block border={true} borderBottom={true}>
                         <Padding vertical='20px' horizontal='20px'>
                             <Column>
+                            {isEditable ? <Circle radius='10px' background='#0000' borderColor='#0000'/> : <Circle radius='10px' background='#7fcdbb' borderColor='#0000'/>}
+                                
                                 <Style minWidth='100%'>
                                     <Padding vertical='18px'>
                                         <Style height='160px' backgroundColor='#fafafa'/>
                                     </Padding>
                                 </Style>
                                 <Row justifyContent='start' alignItems='center'>
-                                    <Circle width='41px' height='39px'><CaptionText>LOGO</CaptionText></Circle>
+                                    <Circle radius='50px'><CaptionText>LOGO</CaptionText></Circle>
                                     <Padding horizontal='8px'>
                                         {colItem({
-                                            title: 'Welcome to Gaia-x, Jane Doe',
-                                            subtitle: 'Registered as part of <Company GmbH>',
+                                            title: 'Data Name',
+                                            subtitle: 'Provider URL',
                                         })}
                                     </Padding>
                                 </Row>

@@ -34,7 +34,7 @@ const DashboardView = () => {
         }
     };
 
-    const ButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
+    const NextPrevButtons = ({ next, previous, goToSlide, ...rest }) => {
         const { carouselState: { currentSlide } } = rest;
         return (
             <Style display='flex' position='relative' left='88%' bottom='32.5%'>
@@ -43,7 +43,7 @@ const DashboardView = () => {
             </Style>
         );
     };
-    ButtonGroup.propTypes = {
+    NextPrevButtons.propTypes = {
         next: PropTypes.func,
         previous: PropTypes.func,
         goToSlide: PropTypes.func,
@@ -90,11 +90,12 @@ const DashboardView = () => {
                     draggable={false}
                     responsive={responsive}
                     renderButtonGroupOutside={true}
-                    customButtonGroup={<ButtonGroup />}>
-                    <MyServiceViewCard isEditable={true} />
-                    <MyServiceViewCard />
-                    <MyServiceViewCard isEditable={true} />
-                    <MyServiceViewCard />
+                    customButtonGroup={<NextPrevButtons />}>
+                    <MyServiceViewCard isEditable={true} index={0}/>
+                    <MyServiceViewCard index={1}/>
+                    <MyServiceViewCard isEditable={true} index={2}/>
+                    <MyServiceViewCard index={1}/>
+                    <MyServiceViewCard index={3}/>
                 </Carousel>
             </>
         );
@@ -102,13 +103,23 @@ const DashboardView = () => {
 
 
     const buildMyDatasetsList = () => {
-        return (<>
-            <H4Text>{t('dashboard.my_data_sets')}</H4Text>
-            <Row>
-                <MyServiceViewCard index={0} isEditable={true} />
-                <MyServiceViewCard />
-            </Row>
-        </>);
+        return (
+            <>
+                <H4Text>{t('dashboard.my_data_sets')}</H4Text>
+                <Carousel
+                    arrows={false}
+                    swipeable={false}
+                    draggable={false}
+                    responsive={responsive}
+                    renderButtonGroupOutside={true}
+                    customButtonGroup={<NextPrevButtons />}>
+                    <MyServiceViewCard />
+                    <MyServiceViewCard isEditable={true} />
+                    <MyServiceViewCard />
+                    <MyServiceViewCard isEditable={true} />
+                </Carousel>
+            </>
+        );
     }
 
     const buildList = () => {

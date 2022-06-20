@@ -118,6 +118,7 @@ export const Style = styled.div`
     margin-top: ${props => props.marginTop || '0px'};
     z-index: ${props => props.zIndex || 'auto'};
     background-color: ${props => props.backgroundColor || ''};
+    text-align: ${props => props.textAlign || ''};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     /* border-radius: 4px; */
 `
@@ -185,14 +186,16 @@ export const Circle = styled.div`
     display: flex;
     align-content: center;
     align-items: center;
-    width: ${props => props.width || '41px'};
-    height: ${props => props.height || '32px'};
+    width: ${props => props.radius || '50px'};
+    min-width: ${props => props.radius || '50px'};
+    height: ${props => props.radius || '50px'};
 
     justify-content: center;
+    background-color: #F9F9F9;
+    /* clip-path: circle(); */
+    background: ${props => props.background || '#F9F9F9'};
 
-    background: #F9F9F9;
-
-    border: 1.36667px solid #E9E9E9;
+    border: 1px solid ${props => props.borderColor || '#E9E9E9'};
     border-radius: 50%;
 `
 
