@@ -7,6 +7,7 @@ import SearchContent from "./SearchContent";
 import SearchTerm from "./SearchTerm";
 import { useDispatch, useSelector} from "react-redux";
 import { updateSearchType, updateSeartTypeWithTerm } from "../../../actions";
+import AdminHeader from "../../admin/AdminHeader";
 
 const SearchView = ({type}) => {
     
@@ -15,7 +16,6 @@ const SearchView = ({type}) => {
     const dispatch = useDispatch();
     
     useEffect(()=>{
-        console.log(`type of store.type = ${store.type} , type= ${type}, searchSterm = ${store.searchTerms}`)
         if (store.type !== "home")
             dispatch(updateSearchType(type));
         else dispatch(updateSeartTypeWithTerm(type, store.searchTerms));
@@ -23,7 +23,8 @@ const SearchView = ({type}) => {
 
     return (
         <React.Fragment key={type}>
-            <Row margin="0 0 0 auto" width="fit-content">
+            <Row width="100%">
+                <AdminHeader type={type}/>
                 <SearchTerm type={type}/>
             </Row>
             <Row>

@@ -4,9 +4,11 @@ import ExpandableView from "../expandable/ExpandableView";
 import * as S from './style';
 import { useDispatch } from "react-redux";
 import { updateFilterCriteria } from "../../actions";
+import { useTranslation } from "react-i18next";
 
-const AdminFilterView = ({ data , header}) => {
-
+const AdminTypeFilterView = ({ data , header}) => {
+    
+    const {t} = useTranslation();
     const [filters, setFilters] = useState([]);
     const dispatch = useDispatch();
 
@@ -39,7 +41,7 @@ const AdminFilterView = ({ data , header}) => {
                         return (
                             <S.Column key={item.name} >
                                 <S.CheckBox type="checkbox" name={name} value={item.name} defaultChecked={false} onChange={onFormChanged} key={name} />
-                                <S.CheckBoxText>{item.name}</S.CheckBoxText>
+                                <S.CheckBoxText>{t(`admin.${item.name}`)}</S.CheckBoxText>
                                 <S.Rounded>{item.qty}</S.Rounded>
                             </S.Column>
                         );
@@ -49,7 +51,7 @@ const AdminFilterView = ({ data , header}) => {
         )
     };
     const showCategoryHeader = (name) => {
-        return <S.Category>{name}</S.Category>;
+        return <S.Category>{t(`admin.${name}`)}</S.Category>;
     }
 
     const showCategories = (data, header) => {
@@ -73,9 +75,9 @@ const AdminFilterView = ({ data , header}) => {
     </>
 }
 
-AdminFilterView.propTypes = {
+AdminTypeFilterView.propTypes = {
     data: PropTypes.object,
     header: PropTypes.string
 };
 
-export default AdminFilterView;
+export default AdminTypeFilterView;

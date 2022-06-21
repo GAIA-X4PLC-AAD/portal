@@ -111,7 +111,7 @@ export const Style = styled.div`
     min-height: ${props => props.minHeight || ''};
     margin-left: ${props => props.marginLeft || '0px'};
     margin-right: ${props => props.marginRight || '0px'};
-    margin-right: ${props => props.marginRight || '0px'};
+    margin-bottom: ${props => props.marginBottom || '0px'};
     margin-top: ${props => props.marginTop || '0px'};
     z-index: ${props => props.zIndex || 'auto'};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
@@ -205,4 +205,17 @@ export const Tag = styled.div`
   font-size: 12px;
   color: white;
   line-height: 16px;
+`;
+
+export const BlueLinkText = styled.div`
+    font-family: Titillium Web;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    text-align: center;
+    color: #000094;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
 `;

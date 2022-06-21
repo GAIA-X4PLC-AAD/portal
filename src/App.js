@@ -64,8 +64,8 @@ const App = (props) => {
                 <Route path="/servicetile/:id" element={<DiscoveryItem type="service"/>} />
                 <Route path="/pprtile/:idd" element={<DiscoveryItem type="ppr"/>} />
                 <Route path="/datatile/:id" element={<DiscoveryItem type="data"/>} />
-                <Route path="/admin/participant" element={<AdminView type="participant"/>} />
-                <Route path="/admin/management" element={<AdminView type="management"/>} />
+                <Route path="/admin/participant" element={<SearchView type="participant"/>} />
+                <Route path="/admin/management" element={<SearchView type="management"/>} />
               </Routes>
             </div>
             <div className='footer-container'>

@@ -30,6 +30,7 @@ const SearchTerm = ({t, type}) => {
     }
 
     const showAdvanceSearchChip = (advance) => {
+        if (type === 'management' || type === 'participant') return null;
         const chips = ['not','provider','storage','service','compute'];
         if(advance === false) {
             return (<S.AdvancedSearch onClick={()=>setAdvance(true)}>Advanced Search</S.AdvancedSearch>);
@@ -44,7 +45,7 @@ const SearchTerm = ({t, type}) => {
     }
 
     return (
-            <Column key={type}>
+            <Column key={type} margin='0 0 0 auto'>
                 <Row>
                     <S.SearchTerm type="text" onKeyPress={onKeyPress} value={searchTerm} onChange={(e)=> {setSearchTerm(e.target.value)}}/>
                     <S.SearchPlusButton onClick={doSearch}><S.SearchPlusImage/></S.SearchPlusButton>     

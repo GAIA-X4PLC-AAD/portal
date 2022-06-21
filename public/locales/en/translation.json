@@ -230,5 +230,22 @@
             "removeUserHeader": "Remove user",
             "removeUserMessage": "are you sure do you want to remove user {{userName}}?"
         }
+    },
+    "admin": {
+        "participant" : "Participants",
+        "message-participant": "Lorem ipsum dolor si jet subtitle",
+        "management" : "Management",
+        "message-management": "Lorem ipsum dolor si jet subtitle",
+        "registration_type" : "Registration type",
+        "admin_ppr" : "Provider",
+        "admin_pcr" : "Consumer",
+        "admin_np" : "Natural person",
+        "request_type": "Request type",
+        "pr_cred": "Participant credentials",
+        "v_cred": "Verified credentials",
+        "sd": "Self-Description",
+        "location": "Location",
+        "sort-direction-ASC": "Sort: A-Z",
+        "sort-direction-DESC": "Sort: Z-A"
     }
 }

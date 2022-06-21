@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import configData from "../../../config/config.json";
 import LoadingView from "../../loading_view/LoadingView";
 import PropTypes from 'prop-types';
 import NextPrevButtons from "./NexPrevButtons";
@@ -8,6 +7,7 @@ import TileFactory from "../TileFactory";
 import { HeaderTitle, Row, Column, Style } from "../../../common/styles";
 import { useTranslation } from "react-i18next";
 import * as S from "./style";
+import SearchSort from "./SearchSort";
 
 const SearchContent = ({ type }) => {
 
@@ -35,9 +35,16 @@ const SearchContent = ({ type }) => {
         </>);
     }
 
+    const showHeader = (type) => {
+        if (type === 'management' || type === 'participant') return null;
+        return (<HeaderTitle>{t(`discovery.lists.${type}`)}</HeaderTitle>);
+    }
+
+
     const loadData = ({ data }) => {
         return (<>
-            <HeaderTitle>{t(`discovery.lists.${type}`)}</HeaderTitle>
+            {showHeader(type)}
+            <SearchSort type={type}/>
             {showData(data)}
             <Style display='flex' justifyContent='center'>
                 <NextPrevButtons data={data} />
