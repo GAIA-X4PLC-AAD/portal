@@ -129,7 +129,6 @@ const DashboardView = () => {
                 {buildPlot1()}
                 {buildMyServicesList()}
                 {buildMyDatasetsList()}
-
             </>
         );
     }

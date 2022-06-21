@@ -14,7 +14,7 @@ const Mark = styled.span`
   height: 14px;
   left: 0;
   border-radius: 50%;
-  margin-right: 5px;
+  margin-right: 8px;
   vertical-align: middle;
   &::after {
     content: "";
@@ -51,22 +51,23 @@ const Label = styled.label`
   cursor: pointer;
   padding: 5px 10px 5px 0;
   position: relative;
+  align-items: center;
   ${props =>
-    props.disabled &&
-    `
+        props.disabled &&
+        `
         cursor: not-allowed;
         opacity: 0.4;
     `}
 `;
 
 const RadioButton = ({ name, children }) => (
-  <RadioWrapper>
-    <Label>
-      <Input name={name} type="radio" />
-      <Mark />
-      {children}
-    </Label>
-  </RadioWrapper>
+    <RadioWrapper>
+        <Label>
+            <Input name={name} type="radio" />
+            <Mark />
+            {children}
+        </Label>
+    </RadioWrapper>
 );
 
 RadioButton.propTypes = {

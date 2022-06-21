@@ -289,7 +289,7 @@ export const MasterButton = styled.div`
     align-items: center;
     padding: 16px 30px;
     gap: 8px;
-
+    cursor: pointer;
     width: 98px;
 
     /* Background/Primary */
