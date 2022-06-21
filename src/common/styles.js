@@ -140,7 +140,7 @@ export const Image = styled.img`
   vertical-align: middle;
   width: ${props => props.width || ''};
   height: ${props => props.height || ''};
-  object-fit: cover;
+  object-fit: ${props => props.objectFit || 'cover'};
   /* height: fit-content; */
   max-width: ${props => props.maxWidth || ''};
   min-width: ${props => props.minWidth || ''};
@@ -319,4 +319,60 @@ export const HorizontalLine = styled.div`
     border-top: 1px solid ${props => props.color || '#E8E8E8'};;
     margin: 1em 0;
     padding: 0;
+`
+
+export const OutlineButton = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-self: start;
+    padding: 8px 32px;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    /* height: 33px; */
+
+    /* Background/Primary */
+
+    border: 2px solid #000094;
+    border-radius: 4px;
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+    /* or 111% */
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.25px;
+
+    /* Background/Primary */
+    cursor: pointer;
+    color: #000094;
+`
+
+export const TextInput = styled.input`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 20px;
+    /* identical to box height, or 133% */
+
+    letter-spacing: 0.25px;
+
+    /* greyscale/darker */
+
+    color: #1C0E15;
+
+    padding: 10px;
+
+    /* background: papayawhip; */
+    border: 1px solid #E8E8E8;
+    border-radius: 4px;
+
+    ::placeholder {}
 `

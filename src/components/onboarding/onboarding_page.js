@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 
 
-import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine } from "../../common/styles";
+import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
 import RadioButton from "../../common/radio";
+import Checkbox from "../../common/checkbox";
 
 
 const OnboardingPage = () => {
@@ -47,8 +48,8 @@ const OnboardingPage = () => {
     const stepsPane = () => {
         return (
             <>
-                {buildStepCardView({ stage: '1', title: 'Customer or provider', subtitle: 'Step 1', isActive: true })}
-                {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2' })}
+                {buildStepCardView({ stage: '1', title: 'Customer or provider', subtitle: 'Step 1', })}
+                {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2', isActive: true })}
                 {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3' })}
                 {buildStepCardView({ stage: '4', title: 'Email notification', subtitle: 'Step 4' })}
                 <Padding vertical='32px'><MasterButton>Next</MasterButton></Padding>
@@ -78,6 +79,57 @@ const OnboardingPage = () => {
         </>
     }
 
+
+    const organizationDetailsView = () => {
+        const [isChecked, setIsChecked] = useState(false);
+
+        return <>
+            <Style width='633px' height='246px'>
+                <Padding horizontal='20px'>
+                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Padding horizontal='24px'>
+                            <H4LightText>Do you want to register as a customer or provider?</H4LightText>
+                            <ButtonText color='#00A2E4'>Learn more</ButtonText>
+                            <HorizontalLine />
+                            <Padding vertical='24px'>
+                                <Column>
+                                    <BodyText>Please upload your organization details or select express registration via DID.</BodyText>
+                                    <Padding vertical='16px' alignSelf='start'><OutlineButton>Upload</OutlineButton></Padding>
+                                    <Padding vertical='16px' />
+                                    <TextInput type="text" placeholder="Organization Name" />
+                                    <Padding vertical='4px' />
+                                    <TextInput type="text" placeholder="Email" />
+                                    <Padding vertical='8px' />
+                                    {/* Checkbox */}
+                                    <Row alignItems='center'>
+                                        <label>
+                                            <Checkbox
+                                                checked={isChecked}
+                                                onChange={(event) => { setIsChecked(event.target.checked) }}
+                                            />
+                                        </label>
+                                        <Padding horizontal='4px' />
+                                        <BodyText>Apply for AISBL Membership</BodyText>
+                                        <Padding horizontal='7px' />
+                                        <Image objectFit='contain' src='/images/question-mark.svg' />
+                                    </Row>
+
+                                    <Padding vertical='28px'>
+                                        <Row>
+                                            <OutlineButton>Registration via DID</OutlineButton>
+                                            <Padding horizontal='10px' />
+                                            <OutlineButton>Send</OutlineButton>
+                                        </Row>
+                                    </Padding>
+                                </Column>
+                            </Padding>
+                        </Padding>
+                    </Card>
+                </Padding>
+            </Style>
+        </>
+    }
+
     return <>
         <Row>
             <Column>
@@ -85,7 +137,7 @@ const OnboardingPage = () => {
                 <Padding vertical='64px'>
                     <Row>
                         <Style width='307px'>{stepsPane()}</Style>
-                        {customerOrProviderView()}
+                        {organizationDetailsView()}
                     </Row>
                 </Padding>
             </Column>

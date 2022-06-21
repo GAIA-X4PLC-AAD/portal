@@ -45,6 +45,7 @@ export const HeaderButton = styled.button`
 export const Padding = styled.div`
   padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
   padding-top: ${props => props.paddingTop || ''};
+  align-self: ${props => props.alignSelf || ''};
 `
 
 export const ExpandedContainer = styled.section`
