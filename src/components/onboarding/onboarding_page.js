@@ -49,8 +49,8 @@ const OnboardingPage = () => {
         return (
             <>
                 {buildStepCardView({ stage: '1', title: 'Customer or provider', subtitle: 'Step 1', })}
-                {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2', isActive: true })}
-                {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3' })}
+                {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2'})}
+                {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3', isActive: true  })}
                 {buildStepCardView({ stage: '4', title: 'Email notification', subtitle: 'Step 4' })}
                 <Padding vertical='32px'><MasterButton>Next</MasterButton></Padding>
             </>
@@ -130,6 +130,23 @@ const OnboardingPage = () => {
         </>
     }
 
+    const confirmationEmailView = () => {
+        return <>
+        <Style width='633px' height='246px'>
+            <Padding horizontal='20px'>
+                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Padding horizontal='24px'>
+                        <H4LightText>Almost done</H4LightText>
+                        <BodyText>Please upload your organization details or select express registration via DID.</BodyText>
+                        <ButtonText color='#00A2E4'>Resend confirmation link</ButtonText>
+                        
+                    </Padding>
+                </Card>
+            </Padding>
+        </Style>
+    </>
+    }
+
     return <>
         <Row>
             <Column>
@@ -137,7 +154,7 @@ const OnboardingPage = () => {
                 <Padding vertical='64px'>
                     <Row>
                         <Style width='307px'>{stepsPane()}</Style>
-                        {organizationDetailsView()}
+                        {confirmationEmailView()}
                     </Row>
                 </Padding>
             </Column>

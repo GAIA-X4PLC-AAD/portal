@@ -72,7 +72,7 @@ const RadioButton = ({ name, children }) => (
 
 RadioButton.propTypes = {
     name: PropTypes.string,
-    children: PropTypes.array
+    children: PropTypes.object
 };
 
 export default RadioButton;
