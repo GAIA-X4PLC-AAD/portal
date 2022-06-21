@@ -22,7 +22,7 @@ const OnboardingPage = () => {
 
     const buildStepCardView = ({ stage, title, subtitle, isActive }) => {
         return (
-            <Padding vertical='12px'>
+            <Padding vertical='12px' paddingTop={stage == 1 ? '0px' : ''}>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px ${isActive ? '3' : '2'}px 4px 0px rgb(29 36 48 / ${isActive ? '25' : '12'}%)`}>
                     <Padding vertical='12px' horizontal='10px'>
                         <Row alignItems='center'>
@@ -50,7 +50,7 @@ const OnboardingPage = () => {
                 {buildStepCardView({ stage: '1', title: 'Customer or provider', subtitle: 'Step 1', isActive: true })}
                 {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2' })}
                 {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3' })}
-                {buildStepCardView({ stage: '3', title: 'Email notification', subtitle: 'Step 4' })}
+                {buildStepCardView({ stage: '4', title: 'Email notification', subtitle: 'Step 4' })}
                 <Padding vertical='32px'><MasterButton>Next</MasterButton></Padding>
             </>
         )
@@ -61,11 +61,17 @@ const OnboardingPage = () => {
             <Style width='633px' height='246px'>
                 <Padding horizontal='20px'>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                        <H4LightText>Do you want to register as a customer or provider?</H4LightText>
-                        <ButtonText color='#00A2E4'>Learn more</ButtonText>
-                        <HorizontalLine/>
-                        <RadioButton name='step1'>Customer</RadioButton>
-                        <RadioButton name='step1'>Provider</RadioButton>
+                        <Padding horizontal='24px'>
+                            <H4LightText>Do you want to register as a customer or provider?</H4LightText>
+                            <ButtonText color='#00A2E4'>Learn more</ButtonText>
+                            <HorizontalLine />
+                            <Padding vertical='40px'>
+                                <Column>
+                                    <RadioButton name='step1'><BodyText>Customer</BodyText></RadioButton>
+                                    <RadioButton name='step1'><BodyText>Provider</BodyText></RadioButton>
+                                </Column>
+                            </Padding>
+                        </Padding>
                     </Card>
                 </Padding>
             </Style>
