@@ -1,18 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from 'prop-types';
 
 
 import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
 import DashboardView from "./dashboard_view";
-import { Block } from "../expandable/style";
-import LoadingView from "../loading_view/LoadingView";
 import SideSectionsView from "./side_sections_view";
 
 
 const DashboardPage = () => {
-
-    const _data = { "type": "dashboard", "categories": [{ "name": "My Transactions", "items": [{ "name": "Transaction 1", "qty": 107 }, { "name": "Transaction 2", "qty": 198 }, { "name": "Transaction 3", "qty": 103 }, { "name": "Transaction 4", "qty": 93 }, { "name": "Transaction 5", "qty": 99 }, { "name": "Transaction 6", "qty": 0 }] }, { "name": "News", "items": [{ "name": "News 1", "qty": 100 }, { "name": "News 2", "qty": 200 }, { "name": "News 3", "qty": 300 }] }] }
 
     const type = 'dashboard';
     const _leftPanelWidth = '225px'
