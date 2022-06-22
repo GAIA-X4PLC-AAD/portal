@@ -12,14 +12,15 @@ import SearchSort from "./SearchSort";
 const SearchContent = ({ type }) => {
 
     const criteria = useSelector(state => state.searchCriteriaStore);
+    const PROVIDER_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/pr/registrations/search?${criteria.parameters}`;
+    const MANAGEMENT_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/management/requests/search?${criteria.parameters}`;
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
-
+    
     const { t, i18n } = useTranslation();
 
     const showData = (data) => {
         if (!data || !data.data || data.data.length === 0) return NoResults();
         else { 
-            // let _data = data.data.slice(0, 1)
             let _data = data.data
             return _data.map((item, i) => { return (<TileFactory data={item} id={`${item['id']}`} key={`${item['id']}`} />) })
         }
@@ -44,7 +45,7 @@ const SearchContent = ({ type }) => {
     const loadData = ({ data }) => {
         return (<>
             {showHeader(type)}
-            <SearchSort type={type}/>
+            <SearchSort type={type} data={data}/>
             {showData(data)}
             <Style display='flex' justifyContent='center'>
                 <NextPrevButtons data={data} />
@@ -53,8 +54,16 @@ const SearchContent = ({ type }) => {
         );
     }
 
-    console.log(URL);
-    return (<LoadingView url={URL}
+    const getURL = (type) => {
+        switch(type) {
+            case 'participant': return `${PROVIDER_URL}`;
+            case 'management': return `${MANAGEMENT_URL}`;
+            default: return `${URL}`;
+        }
+    }
+
+
+    return (<LoadingView url={`${getURL(type)}`}
         successView={loadData} key={URL} />);
 }
 
