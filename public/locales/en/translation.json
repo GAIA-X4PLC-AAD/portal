@@ -247,6 +247,7 @@
         "location": "Location",
         "details": "Details",
         "sort-direction-ASC": "Sort: A-Z",
-        "sort-direction-DESC": "Sort: Z-A"
+        "sort-direction-DESC": "Sort: Z-A",
+        "attachments": "Attachments"
     }
 }
