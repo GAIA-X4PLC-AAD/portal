@@ -6,31 +6,9 @@ import { useDispatch } from "react-redux";
 import { updateFilterCriteria } from "../../actions";
 import { useTranslation } from "react-i18next";
 
-const AdminLocationFilterView = ({ data , header}) => {
+const AdminLocationFilterView = ({ data , header, onFormChanged}) => {
     
     const {t} = useTranslation();
-    const [filters, setFilters] = useState([]);
-    const dispatch = useDispatch();
-
-    // updates redux filterCriteria every 1s if something has been changed. When there is a change in between, will wait 1s again
-    useEffect(() => {
-        const timerId = setTimeout(() => {
-            dispatch(updateFilterCriteria({ filterCriteria: filters }));
-        }, 1000);
-        return () => {
-            clearTimeout(timerId);
-        }
-    }, [filters]);
-
-    // update state of current filters
-    const onFormChanged = (a) => {
-        if (a.target.checked === true) {
-            setFilters([...filters, { key: a.target.name, value: a.target.value }]);
-
-        } else {
-            setFilters(filters.filter(({ key, value }) => { return !(key === a.target.name && value === a.target.value) }));
-        }
-    }
 
     const showItemsList = (name, items) => {
         return (
@@ -77,7 +55,8 @@ const AdminLocationFilterView = ({ data , header}) => {
 
 AdminLocationFilterView.propTypes = {
     data: PropTypes.object,
-    header: PropTypes.string
+    header: PropTypes.string,
+    onFormChanged: PropTypes.func.isRequired
 };
 
 export default AdminLocationFilterView;

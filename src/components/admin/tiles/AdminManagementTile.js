@@ -5,7 +5,7 @@ import AdminNaturalPersonDetails from "../tabs/AdminNaturalPersonDetails";
 import ManagementHeader from "../tabs/ManagementHeader";
 
 
-const SelfDescriptionTile = ({ input }) => {
+const AdminManagementTile = ({ input }) => {
 
     const type = "admin_consumer";
     
@@ -15,8 +15,8 @@ const SelfDescriptionTile = ({ input }) => {
 
 }
 
-SelfDescriptionTile.propTypes = {
+AdminManagementTile.propTypes = {
     input: PropTypes.object
 }
 
-export default SelfDescriptionTile;
+export default AdminManagementTile;

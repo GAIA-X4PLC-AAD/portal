@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { updateFilterCriteria } from "../../actions";
 import { useTranslation } from "react-i18next";
 
-const AdminTypeFilterView = ({ data , header}) => {
+const AdminTypeFilterView = ({ data , header, onFormChanged}) => {
     
     const {t} = useTranslation();
     const [filters, setFilters] = useState([]);
@@ -22,15 +22,6 @@ const AdminTypeFilterView = ({ data , header}) => {
         }
     }, [filters]);
 
-    // update state of current filters
-    const onFormChanged = (a) => {
-        if (a.target.checked === true) {
-            setFilters([...filters, { key: a.target.name, value: a.target.value }]);
-
-        } else {
-            setFilters(filters.filter(({ key, value }) => { return !(key === a.target.name && value === a.target.value) }));
-        }
-    }
 
     const showItemsList = (name, items) => {
         return (
@@ -77,7 +68,8 @@ const AdminTypeFilterView = ({ data , header}) => {
 
 AdminTypeFilterView.propTypes = {
     data: PropTypes.object,
-    header: PropTypes.string
+    header: PropTypes.string,
+    onFormChanged: PropTypes.func
 };
 
 export default AdminTypeFilterView;

@@ -8,11 +8,13 @@ import { updateFilterCriteria } from '../../../actions';
 const SearchSort = ({type}) => {
 
     const {t} = useTranslation();
-    const [direction, setDirection] = useState('ASC');
+    const criteria = useSelector(state => state.searchCriteriaStore);
+    const [direction, setDirection] = useState(criteria.sort_direction || 'ASC');
     const dispatch = useDispatch();
     
     useEffect (()=> {
-        dispatch(updateFilterCriteria({ sort_direction: direction }));
+        if (direction != criteria.sort_direction)
+            dispatch(updateFilterCriteria({ sort_direction: direction }));
     }, [direction]);
     
     const changeSortDirection = () =>{
