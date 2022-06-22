@@ -162,6 +162,7 @@ color: #262626;`;
 
 export const Row=styled(S.Row)`
     justify-content: space-around;
+    align-items: center;
 `;
 export const DetailsContainer=styled.div`
     max-width: 470px;

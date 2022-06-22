@@ -1,5 +1,5 @@
 import React from "react";
-import { Column, Center, BodySmallBoldText, CaptionText } from "../../../common/styles";
+import { Column, Center, BodySmallBoldText, CaptionText, Style } from "../../../common/styles";
 import { Row } from "../style";
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
@@ -13,8 +13,10 @@ const ParticipantHeader = ({participant}) => {
 
     return (
         <Row width="633px">
-            <Center><BodySmallBoldText>{participant.participant_name}</BodySmallBoldText></Center>
-            <Column>
+            <Style maxWidth="120px" minWidth="120px">
+                <BodySmallBoldText>{participant.participant_name}</BodySmallBoldText>
+            </Style>
+            <Column width="155px">
                 <CaptionText>{t('admin.registration_type')}</CaptionText>
                 <BodySmallBoldText>
                     {t(`admin.${participant.registration_type}`)}
