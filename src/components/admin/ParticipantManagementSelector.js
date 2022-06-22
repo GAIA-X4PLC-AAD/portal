@@ -3,9 +3,11 @@ import React from "react";
 import { BodyText, Column, Row } from "../../common/styles";
 import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
+import { useTranslation } from "react-i18next";
 
 const ParticipantManagementSelector = ({type}) => {
     const navigate = useNavigate();
+    const {t} = useTranslation();
 
     return (<Column>
                 <Row>
@@ -15,7 +17,7 @@ const ParticipantManagementSelector = ({type}) => {
                         value="neverAutoAccept" 
                         onClick={()=>navigate('/admin/participant')}
                         defaultChecked={type==='participant'}
-                        /> <BodyText>Participant</BodyText>
+                        /> <BodyText>{t('admin.participant')}</BodyText>
                 </Row>
                 <Row>
                     <RadioButton  
@@ -23,7 +25,7 @@ const ParticipantManagementSelector = ({type}) => {
                         name="radio"
                         value="neverAutoAccept"
                         onClick={()=>navigate('/admin/management')}
-                        defaultChecked={type==='management'}/><BodyText>Management</BodyText>
+                        defaultChecked={type==='management'}/><BodyText>{t('admin.management')}</BodyText>
                 </Row>
     
         </Column>

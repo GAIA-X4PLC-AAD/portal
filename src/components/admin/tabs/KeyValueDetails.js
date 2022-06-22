@@ -8,10 +8,9 @@ const KeyValueDetails = ({id, url_prefix}) => {
 
 // TODO: change to right API call
 const URL = `${url_prefix}/${id}/details`;
-console.log (url_prefix);
-console.log (URL);
-const fakeData = {items: [{name: 'First name', value: 'First Name Value'},{name: 'Last name', value: 'Last name Value'},{name: 'Email', value: 'email@domain.com'},{name: 'Phone number', value: '+49 123 456 789'}, {name: 'Address', value: 'August-Bebel-Str. 46 39326 Colbitz Germany'}],
-                  atachments: [{name: 'atachment 1', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x technical architecture'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}]};
+
+//const fakeData = {items: [{name: 'First name', value: 'First Name Value'},{name: 'Last name', value: 'Last name Value'},{name: 'Email', value: 'email@domain.com'},{name: 'Phone number', value: '+49 123 456 789'}, {name: 'Address', value: 'August-Bebel-Str. 46 39326 Colbitz Germany'}],
+//                  atachments: [{name: 'atachment 1', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x technical architecture'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}]};
 
 
     const showItemElements = (items) => {

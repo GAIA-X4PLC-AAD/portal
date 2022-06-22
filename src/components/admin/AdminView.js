@@ -2,7 +2,6 @@ import React from "react";
 import { Column, Row } from "../../common/styles";
 import SearchFilterFactory from "../discovery/search/SearchFilterFactory";
 import AdminHeader from "./AdminHeader";
-import AdminResults from "./AdminResults";
 import PropTypes from 'prop-types';
 
 const AdminView = ({type}) => {
@@ -16,7 +15,6 @@ const AdminView = ({type}) => {
             <Column> 
                 <SearchFilterFactory type={adminType} />
             </Column>
-            <AdminResults/>
             
         </Row>
     </>);

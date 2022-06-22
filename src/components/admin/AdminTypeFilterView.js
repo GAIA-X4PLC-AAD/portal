@@ -9,19 +9,6 @@ import { useTranslation } from "react-i18next";
 const AdminTypeFilterView = ({ data , header, onFormChanged}) => {
     
     const {t} = useTranslation();
-    const [filters, setFilters] = useState([]);
-    const dispatch = useDispatch();
-
-    // updates redux filterCriteria every 1s if something has been changed. When there is a change in between, will wait 1s again
-    useEffect(() => {
-        const timerId = setTimeout(() => {
-            dispatch(updateFilterCriteria({ filterCriteria: filters }));
-        }, 1000);
-        return () => {
-            clearTimeout(timerId);
-        }
-    }, [filters]);
-
 
     const showItemsList = (name, items) => {
         return (
