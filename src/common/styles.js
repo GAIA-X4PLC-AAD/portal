@@ -80,6 +80,8 @@ export const Row = styled.div`
     padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
     margin: ${props => props.margin || '0'};
     width: ${props => props.width || 'auto'};
+    justify-content: ${props => props.justifyContent || ''};
+    align-items: ${props => props.alignItems || ''};
 `
 
 export const Column = styled.div`
@@ -105,11 +107,14 @@ export const Style = styled.div`
     max-width: ${props => props.maxWidth || ''};
     min-width: ${props => props.minWidth || ''};
     min-height: ${props => props.minHeight || ''};
+    height: ${props => props.height || ''};
+    width: ${props => props.width || ''};
     margin-left: ${props => props.marginLeft || '0px'};
     margin-right: ${props => props.marginRight || '0px'};
     margin-right: ${props => props.marginRight || '0px'};
     margin-top: ${props => props.marginTop || '0px'};
     z-index: ${props => props.zIndex || 'auto'};
+    background-color: ${props => props.backgroundColor || ''};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     /* border-radius: 4px; */
 `
@@ -135,3 +140,81 @@ export const Image = styled.img`
   max-width: ${props => props.maxWidth || ''};
   min-width: ${props => props.minWidth || ''};
 `;
+
+
+export const BodySmallBoldText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 20px;
+    /* identical to box height, or 133% */
+
+    letter-spacing: 0.25px;
+
+    color: #000000;
+`
+
+export const CaptionText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+
+    letter-spacing: 0.4px;
+    color: #000000;
+`
+
+export const Card = styled.div`
+    box-sizing: border-box;
+
+    background: #E9E9E9;
+    /* Background/Lighter Grey */
+
+    border: 1px solid #818C99;
+    border-radius: 4px;
+`
+
+export const Circle = styled.div`
+    /* BG */
+    text-align: center;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    width: ${props => props.width || '41px'};
+    height: ${props => props.height || '32px'};
+
+    justify-content: center;
+
+    background: #F9F9F9;
+
+    border: 1.36667px solid #E9E9E9;
+    border-radius: 50%;
+`
+
+export const ButtonText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.25px;
+    cursor: pointer;
+    color: #000094;
+`
+
+export const H4Text = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 36px;
+
+    letter-spacing: 0.25px;
+
+    color: #1C0E15;
+`
