@@ -43,6 +43,7 @@ const DashboardView = () => {
             </Style>
         );
     };
+
     NextPrevButtons.propTypes = {
         next: PropTypes.func,
         previous: PropTypes.func,

@@ -6,6 +6,8 @@ import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle } from
 import { Padding } from "../discovery/tabs/style";
 import DashboardView from "./dashboard_view";
 import { Block } from "../expandable/style";
+import LoadingView from "../loading_view/LoadingView";
+import SideSectionsView from "./side_sections_view";
 
 
 const DashboardPage = () => {
@@ -26,43 +28,17 @@ const DashboardPage = () => {
         </Column>
     }
 
-    const categoryView = ({ category }) => {
-
-        const categoryItems = category['items'].map((element, _index) => {
-            return (
-                <Style key={`${element['name']}${_index}`}>
-                    <Padding vertical='8px' horizontal='8px'>
-                        {colItemView({ title: element['name'], subtitle: 'Subline', caption: '12.02' })}
-                    </Padding>
-                </Style>
-            );
-        })
-
-        return <>
-            <BodySmallBoldText>{category['name']}</BodySmallBoldText>
-            <Block border={true} borderBottom={true} width={_leftPanelWidth}>
-                {
-                    <Padding vertical='8px' horizontal='8px'>{categoryItems}</Padding>
-                }
-            </Block>
-        </>;
-    }
-
 
     const sideBarView = () => {
 
-        const _categoriesView = _data['categories'].map((category, index) => {
-            return <Padding key={`${category['name']}${index}`}>{categoryView({ category: category })}</Padding>
-        })
-
         const _welcomeView = <>
-            <Row justifyContent='space-between' alignItems='center'  data-tag='welcom-view'>
+            <Row justifyContent='space-between' alignItems='center' data-tag='welcom-view'>
                 <Circle radius='50px'>JD</Circle>
                 <Padding horizontal='8px'>
-                {colItemView({
-                    title: 'Welcome to Gaia-x, Jane Doe',
-                    subtitle: 'Registered as part of <Company GmbH>',
-                })}
+                    {colItemView({
+                        title: 'Welcome to Gaia-x, Jane Doe',
+                        subtitle: 'Registered as part of <Company GmbH>',
+                    })}
                 </Padding>
             </Row>
         </>
@@ -76,15 +52,18 @@ const DashboardPage = () => {
         return <>
             {_welcomeView}
             {_cardView}
-            {_categoriesView}
+            <SideSectionsView/>
         </>
     }
 
     return <Row>
+
+        {/* SIDE BAR */}
         <Style maxWidth={_leftPanelWidth}>
             {sideBarView()}
         </Style>
 
+        {/* BODY VIEW */}
         <Padding horizontal='12px' />
         <Style maxWidth='900px'>
             <DashboardView type={type} />
