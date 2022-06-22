@@ -4,11 +4,12 @@ import LoadingView from "../../loading_view/LoadingView";
 import PropTypes from 'prop-types';
 import { CaptionText, DetailsContainer, ElementGroup } from "../style";
 
-const KeyValueDetails = ({id}) => {
+const KeyValueDetails = ({id, url_prefix}) => {
 
 // TODO: change to right API call
-const URL = 'https://reqres.in/api/products/3';
-
+const URL = `${url_prefix}/${id}/details`;
+console.log (url_prefix);
+console.log (URL);
 const fakeData = {items: [{name: 'First name', value: 'First Name Value'},{name: 'Last name', value: 'Last name Value'},{name: 'Email', value: 'email@domain.com'},{name: 'Phone number', value: '+49 123 456 789'}, {name: 'Address', value: 'August-Bebel-Str. 46 39326 Colbitz Germany'}],
                   atachments: [{name: 'atachment 1', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x technical architecture'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}]};
 
@@ -22,7 +23,6 @@ const fakeData = {items: [{name: 'First name', value: 'First Name Value'},{name:
     }
 
     const showAttachments = (atachments) => {
-        if (id%2) return null;
         if (!atachments) return null;
         return (
             <ElementGroup>
@@ -36,7 +36,8 @@ const fakeData = {items: [{name: 'First name', value: 'First Name Value'},{name:
     }
 
     const successView = ({data}) => {
-        const person = fakeData;
+        const person = data;
+        if (!person) return null;
         return (
                 <DetailsContainer>
                 <Column>
@@ -54,7 +55,8 @@ const fakeData = {items: [{name: 'First name', value: 'First Name Value'},{name:
 }
 
 KeyValueDetails.propTypes = {
-    id: PropTypes.string
+    id: PropTypes.string,
+    url_prefix: PropTypes.string
 }
 
 export default KeyValueDetails;

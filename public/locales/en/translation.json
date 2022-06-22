@@ -245,6 +245,7 @@
         "v_cred": "Verified credentials",
         "sd": "Self-Description",
         "location": "Location",
+        "details": "Details",
         "sort-direction-ASC": "Sort: A-Z",
         "sort-direction-DESC": "Sort: Z-A"
     }
