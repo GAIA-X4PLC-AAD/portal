@@ -45,8 +45,10 @@ export const Block = styled.div`
   border-top: ${props => props.border ? '1px solid #E9E9E9' : ''};
   border-left: ${props => props.border ? '1px solid #E9E9E9' : ''};
   border-right: ${props => props.border ? '1px solid #E9E9E9' : ''};
+  border-bottom: ${props => props.borderBottom ? '1px solid #E9E9E9' : ''};
   box-shadow: ${props => props.boxShadow};
   border-radius: 4px;
+  @apply py-0;
 `
 
 export const ToggleButton = styled.div`

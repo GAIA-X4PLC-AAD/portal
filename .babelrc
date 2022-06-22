@@ -1,0 +1,19 @@
+{
+  "env": {
+    "development": {
+      "plugins": [
+        [
+          "babel-plugin-react-generate-property",
+          {
+            // "customProperty": "data-id",
+            // "dirLevel": 1,
+            // "slashChar": "\\"
+            // "addModuleClassNames": true,
+            // "prefix": "myPrefix",
+            // "firstChildOnly": true
+          }
+        ]
+      ]
+    }
+  }
+}

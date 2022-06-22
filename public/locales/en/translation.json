@@ -8,8 +8,16 @@
         "data": "Data",
         "provider": "Provider",
         "search": "Search",
-        "logo-alt-text": "Gaia-x logo image"
+        "logo-alt-text": "Gaia-x logo image",
+        "dashboard": "Dashboard"
         
+    },
+    "dashboard": {
+        "reporting": "Reporting",
+        "my_services": "My Services",
+        "my_data_sets": "My Data sets",
+        "activate": "Activate",
+        "edit": "Edit"
     },
     "top-menu": {
         "help": "Help",
