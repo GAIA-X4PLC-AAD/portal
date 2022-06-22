@@ -1,17 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { H4Text, HeaderTitle, Row } from "../../common/styles";
+import { ButtonText, H4Text, HeaderTitle, Row, Style } from "../../common/styles";
 import PropTypes from 'prop-types';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
 
 import Plot from 'react-plotly.js';
 import MyServiceViewCard from "./my_service_view_card";
+import { Padding } from "../discovery/tabs/style";
+import LoadingView from "../loading_view/LoadingView";
 
+const responsive = {
+    superLargeDesktop: {
+        // the naming can be any, depends on you.
+        breakpoint: { max: 4000, min: 3000 },
+        items: 5
+    },
+    desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3
+    },
+    tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2
+    },
+    mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1
+    }
+};
+
+const NextPrevButtons = ({ next, previous, goToSlide, ...rest }) => {
+    const { carouselState: { currentSlide } } = rest;
+    return (
+        <Style display='flex' position='relative' left='88%' bottom='20.5%'>
+            <Padding horizontal='4px'><ButtonText disabled={currentSlide === 0} onClick={() => previous()} >Previous</ButtonText></Padding>
+            <Padding horizontal='4px'><ButtonText disabled={currentSlide !== 0} onClick={() => next()} >Next</ButtonText></Padding>
+        </Style>
+    );
+};
+
+NextPrevButtons.propTypes = {
+    next: PropTypes.func,
+    previous: PropTypes.func,
+    goToSlide: PropTypes.func,
+};
 
 const DashboardView = () => {
 
     const { t, i18n } = useTranslation();
-
 
     const buildPlot1 = () => {
 
@@ -37,51 +74,23 @@ const DashboardView = () => {
         return <Plot
             data={data}
             layout={{
-                width: '50%', height: '400px', title: 'A Fancy Plot', showlegend: false,
-                // shapes:[
-                //     {
-                //         type: 'path',
-                //         path: 'M 1,4 C 2,8 6,4 8,8',
-                //         line: {
-                //           color: 'rgb(207, 114, 255)'
-                //         }
 
-                //       },
-                // ]
             }}
 
         />
     }
 
-    const buildMyServicesList = () => {
-        return (<>
-            <H4Text>{t('dashboard.my_services')}</H4Text>
-            <Row>
-                <MyServiceViewCard index={0} isEditable={true}/>
-                <MyServiceViewCard />
-            </Row>
-        </>);
-    }
-    
-
-    const buildMyDatasetsList = () => {
-        return (<>
-            <H4Text>{t('dashboard.my_data_sets')}</H4Text>
-            <Row>
-                <MyServiceViewCard index={0} isEditable={true}/>
-                <MyServiceViewCard />
-            </Row>
-        </>);
-    }
-
     const buildList = () => {
+
+        const _myServicesUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/services`;
+        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/datasets`;
+
         return (
             <>
                 <HeaderTitle>{t(`dashboard.reporting`)}</HeaderTitle>
                 {buildPlot1()}
-                {buildMyServicesList()}
-                {buildMyDatasetsList()}
-
+                {ServicesLoadingListView({ url: _myServicesUrl, title: t('dashboard.my_services') })}
+                {ServicesLoadingListView({ url: _myDatasetsUrl, title: t('dashboard.my_data_sets') })}
             </>
         );
     }
@@ -93,5 +102,59 @@ DashboardView.propTypes = {
     type: PropTypes.string
 };
 
+const ServicesListView = (props,) => {
+
+    const [_items, setItems] = useState([]);
+
+    useEffect(() => {
+
+        if (props.data !== undefined) {
+            const _items = props.data['data']
+            setItems(_items)
+        }
+
+    }, [props.data]);
+
+    const itemsViews = _items.map((element, _index) => {
+        return <MyServiceViewCard key={`${element['id']}`} data={element} />
+    })
+
+    return <>
+        <H4Text>{props.params['title']}</H4Text>
+        <Carousel
+            arrows={false}
+            swipeable={false}
+            draggable={false}
+            responsive={responsive}
+            renderButtonGroupOutside={true}
+            customButtonGroup={<NextPrevButtons />}>
+            {(_items !== undefined || _items != null) ? itemsViews : <></>}
+        </Carousel>
+
+    </>;
+}
+
+
+ServicesListView.propTypes = {
+    data: PropTypes.object,
+    params: PropTypes.object,
+}
+
+const ServicesLoadingListView = ({ url, title }) => {
+    return (
+        <>
+            <LoadingView
+                url={url}
+                successView={ServicesListView}
+                params={{ 'title': title }}
+            />
+        </>
+    )
+}
+
+ServicesLoadingListView.propTypes = {
+    url: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
+}
 
 export default DashboardView;

@@ -1,16 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { BodySmallBoldText, ButtonText, CaptionText, Circle, Column, HeaderTitle, Row, Style } from "../../common/styles";
+
+import { BodySmallBoldText, ButtonText, CaptionText, Circle, Column, HeaderTitle, Image, Row, Style } from "../../common/styles";
 import PropTypes from 'prop-types';
 
-import Plot from 'react-plotly.js';
 import { Block } from "../expandable/style";
 import { Padding } from "../discovery/tabs/style";
-import ImageGallery from 'react-image-gallery';
 
 
-const MyServiceViewCard = ({ index, isEditable }) => {
+const MyServiceViewCard = ({ index, data }) => {
+
+    const isActivated = data['is_activated']
 
     const { t, i18n } = useTranslation();
 
@@ -27,31 +27,33 @@ const MyServiceViewCard = ({ index, isEditable }) => {
     const buildCard = () => {
         return (
             <Style maxWidth='315px'>
-                <Padding horizontal={index == 0 ? '' : '12px'}>
+                <Padding horizontal={'12px'}>
                     <Block border={true} borderBottom={true}>
                         <Padding vertical='20px' horizontal='20px'>
                             <Column>
+                            {isActivated ? <Circle radius='10px' background='#0000' borderColor='#0000'/> : <Circle radius='10px' background='#7fcdbb' borderColor='#0000'/>}
+                                
                                 <Style minWidth='100%'>
                                     <Padding vertical='18px'>
                                         <Style height='160px' backgroundColor='#fafafa'/>
                                     </Padding>
                                 </Style>
                                 <Row justifyContent='start' alignItems='center'>
-                                    <Circle width='41px' height='39px'><CaptionText>LOGO</CaptionText></Circle>
+                                    <Image src={data['logo']} alt="Logo" width='50px' height='50px' />
                                     <Padding horizontal='8px'>
                                         {colItem({
-                                            title: 'Welcome to Gaia-x, Jane Doe',
-                                            subtitle: 'Registered as part of <Company GmbH>',
+                                            title: data['name'],
+                                            subtitle: data['url'],
                                         })}
                                     </Padding>
                                 </Row>
                                 <Style maxWidth='213px'>
                                     <Padding vertical='10px'>
-                                        <CaptionText>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna...</CaptionText>
+                                        <CaptionText>{data['description']}</CaptionText>
                                     </Padding>
                                 </Style>
 
-                                <Padding vertical><ButtonText>{isEditable ? t('dashboard.edit') : t('dashboard.activate')}</ButtonText></Padding>
+                                <Padding vertical><ButtonText>{isActivated ? t('dashboard.edit') : t('dashboard.activate')}</ButtonText></Padding>
                             </Column>
                         </Padding>
                     </Block>
@@ -67,6 +69,7 @@ MyServiceViewCard.propTypes = {
     type: PropTypes.string,
     index: PropTypes.number,
     isEditable: PropTypes.bool,
+    data: PropTypes.object,
 };
 
 
