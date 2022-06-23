@@ -257,6 +257,8 @@
         "details": "Details",
         "sort-direction-ASC": "Sort: A-Z",
         "sort-direction-DESC": "Sort: Z-A",
-        "attachments": "Attachments"
+        "attachments": "Attachments",
+        "approve": "Approve",
+        "deny": "Deny"
     }
 }
