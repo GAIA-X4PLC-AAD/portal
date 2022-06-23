@@ -49,10 +49,13 @@ const OnboardingPage = () => {
         return (
             <>
                 {buildStepCardView({ stage: '1', title: 'Customer or provider', subtitle: 'Step 1', })}
-                {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2'})}
-                {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3', isActive: true  })}
+                {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2' })}
+                {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3', isActive: true })}
                 {buildStepCardView({ stage: '4', title: 'Email notification', subtitle: 'Step 4' })}
-                <Padding vertical='32px'><MasterButton>Next</MasterButton></Padding>
+                <Row>
+                    <Padding vertical='32px'><MasterButton disabled>Previous</MasterButton></Padding>
+                    <Padding vertical='32px'><MasterButton>Next</MasterButton></Padding>
+                </Row>
             </>
         )
     }
@@ -132,19 +135,49 @@ const OnboardingPage = () => {
 
     const confirmationEmailView = () => {
         return <>
-        <Style width='633px' height='246px'>
-            <Padding horizontal='20px'>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                    <Padding horizontal='24px'>
-                        <H4LightText>Almost done</H4LightText>
-                        <BodyText>Please upload your organization details or select express registration via DID.</BodyText>
-                        <ButtonText color='#00A2E4'>Resend confirmation link</ButtonText>
-                        
-                    </Padding>
-                </Card>
-            </Padding>
-        </Style>
-    </>
+            <Style width='633px' height='246px'>
+                <Padding horizontal='20px'>
+                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Padding horizontal='24px'>
+                            <H4LightText>Almost done</H4LightText>
+                            <BodyText>Please upload your organization details or select express registration via DID.</BodyText>
+                            <ButtonText color='#00A2E4'>Resend confirmation link</ButtonText>
+
+                        </Padding>
+                    </Card>
+                </Padding>
+            </Style>
+        </>
+    }
+
+    const verifyQrView = () => {
+        return <>
+            <Style width='633px' height='246px'>
+                <Padding horizontal='20px'>
+                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Padding horizontal='24px'>
+                            <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
+                            <HorizontalLine />
+                            <Column justifyContent='center' alignItems='center'>
+                                <Padding vertical='8px'>
+                                    <Image src='/images/QRCode.png' width='200px' />
+                                </Padding>
+                                <Padding vertical='20px'>
+                                    <Row alignItems='space-between'>
+                                        <OutlineButton disabled>I don&#39;t have a DID</OutlineButton>
+                                        <Padding horizontal='8px' />
+                                        <OutlineButton>Contine</OutlineButton>
+                                    </Row>
+                                </Padding>
+                                <Padding vertical='20px'></Padding>
+                            </Column>
+
+
+                        </Padding>
+                    </Card>
+                </Padding>
+            </Style>
+        </>
     }
 
     return <>
@@ -154,7 +187,7 @@ const OnboardingPage = () => {
                 <Padding vertical='64px'>
                     <Row>
                         <Style width='307px'>{stepsPane()}</Style>
-                        {confirmationEmailView()}
+                        {verifyQrView()}
                     </Row>
                 </Padding>
             </Column>

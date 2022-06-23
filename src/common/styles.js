@@ -91,6 +91,7 @@ export const Column = styled.div`
     margin: ${props => props.margin || '0'};
     width: ${props => props.width || 'auto'};
     align-items: ${props => props.alignItems || ''};
+    justify-content: ${props => props.justifyContent || ''};
 `
 
 export const Style = styled.div`
@@ -288,14 +289,17 @@ export const MasterButton = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 16px 30px;
+    padding: 16px 8px;
+    margin-right: 10px;
     gap: 8px;
     cursor: pointer;
-    width: 98px;
+    width: 136px;
+    
 
     /* Background/Primary */
 
-    background: #000094;
+    /* background: #000094; */
+    background: ${props => props.disabled ? '#E8E8E8' : '#000094'};
     border-radius: 4px;
 
     /* Button */
@@ -307,17 +311,18 @@ export const MasterButton = styled.div`
     line-height: 20px;
     /* identical to box height, or 111% */
 
+
     display: flex;
     align-items: center;
     text-align: center;
     letter-spacing: 0.25px;
-    color: #FFFFFF;
+    color: ${props => props.disabled ? '#1C0E15' : '#FFFFFF'};
 `
 
 export const HorizontalLine = styled.div`
     height: 1px;
     border: 0;
-    border-top: 1px solid ${props => props.color || '#E8E8E8'};;
+    border-top: 1px solid ${props => props.color || '#E8E8E8'};
     margin: 1em 0;
     padding: 0;
 `
@@ -335,8 +340,8 @@ export const OutlineButton = styled.div`
     /* height: 33px; */
 
     /* Background/Primary */
-
-    border: 2px solid #000094;
+    background: ${props => props.disabled ? '#E8E8E8' : ''};
+    border: 2px solid ${props => props.disabled ? '#E8E8E8' : '#000094'};
     border-radius: 4px;
     font-family: 'Titillium Web';
     font-style: normal;
@@ -352,7 +357,7 @@ export const OutlineButton = styled.div`
 
     /* Background/Primary */
     cursor: pointer;
-    color: #000094;
+    color: ${props => props.disabled ? '#1C0E15' : '#000094'};
 `
 
 export const TextInput = styled.input`
