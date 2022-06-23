@@ -35,11 +35,11 @@ const NextPrevButtons = ({ next, previous, goToSlide, ...rest }) => {
     const disabledColor = 'invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%)'
     const { carouselState: { currentSlide } } = rest;
     return (
-        <Style display='flex' position='relative' bottom='20.5%' left='95%'>
+        <Style display='flex' position='relative' justifyContent='end' bottom='460px'>
             <Padding horizontal='4px'>
                 <ButtonText disabled={currentSlide === 0} onClick={() => previous()} >
-                    <Image src='/images/arrow_left.svg' alt="arrow-left" width='12px' 
-                    filter={currentSlide === 0 ? disabledColor : activeColor}/>
+                    <Image src='/images/arrow_left.svg' alt="arrow-left" width='12px'
+                        filter={currentSlide === 0 ? disabledColor : activeColor} />
                 </ButtonText></Padding>
             <Padding horizontal='4px'>
                 <ButtonText disabled={currentSlide !== 0} onClick={() => next()} >
@@ -48,6 +48,7 @@ const NextPrevButtons = ({ next, previous, goToSlide, ...rest }) => {
                     />
                 </ButtonText></Padding>
         </Style>
+
     );
 };
 

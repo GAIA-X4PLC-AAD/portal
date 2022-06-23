@@ -27,7 +27,7 @@ const MyServiceViewCard = ({ index, data }) => {
     const buildCard = () => {
         return (
             <Style maxWidth='315px'>
-                <Padding horizontal={'12px'}>
+                <Padding paddingRight='12px'>
                     <Block border={true} borderBottom={true}>
                         <Padding vertical='20px' horizontal='20px'>
                             <Column>
