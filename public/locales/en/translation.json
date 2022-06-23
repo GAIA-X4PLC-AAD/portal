@@ -9,7 +9,8 @@
         "provider": "Provider",
         "search": "Search",
         "logo-alt-text": "Gaia-x logo image",
-        "dashboard": "Dashboard"
+        "dashboard": "Dashboard",
+        "admin": "Admin"
         
     },
     "dashboard": {

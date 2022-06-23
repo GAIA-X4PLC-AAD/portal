@@ -11,7 +11,13 @@ const SearchSort = ({type, data}) => {
     const criteria = useSelector(state => state.searchCriteriaStore);
     const [direction, setDirection] = useState(criteria.sort_direction || 'ASC');
     const dispatch = useDispatch();
-    
+
+    // Reset direction when you move from different type (service, data, provider, management, participant)
+    useEffect (()=> {
+        if (type != criteria.type)
+            setDirection('ASC');
+    }, []);
+
     useEffect (()=> {
         if (direction != criteria.sort_direction)
             dispatch(updateFilterCriteria({ sort_direction: direction }));
@@ -27,10 +33,10 @@ const SearchSort = ({type, data}) => {
                 break;
         }
     }
-
+    // do not show sort when there is no data
     if (!data || !data.data || data.data.length === 0) return null;
     return (
-        <Style marginLeft='auto' marginRight='0' maxWidth='fit-content'> <BlueLinkText onClick={changeSortDirection}>{t(`admin.sort-direction-${direction}`)} </BlueLinkText></Style>
+        <Style marginLeft='auto' marginRight='0' maxWidth='fit-content' key={type}> <BlueLinkText onClick={changeSortDirection}>{t(`admin.sort-direction-${direction}`)} </BlueLinkText></Style>
     );
 
 }
