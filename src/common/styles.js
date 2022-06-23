@@ -176,14 +176,13 @@ color: #4B4B4B;
 export const BodySmallText = styled.div`
 font-family: 'Titillium Web';
 font-style: normal;
-font-weight: 700;
+font-weight: 400;
 font-size: 15px;
 line-height: 20px;
-/* identical to box height, or 133% */
-
 letter-spacing: 0.25px;
 color: ${props => props.color || '#000000'};
 `;
+
 export const CaptionText = styled.div`
     font-family: 'Titillium Web';
     font-style: normal;

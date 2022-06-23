@@ -1,17 +1,16 @@
 import React from "react";
-import { BodySmallText, CaptionTeleNeoText, Column, Style, Tag, WrapRow } from "../../../common/styles";
+import {  BodySmallText, CaptionTeleNeoText, Column, Style, Tag, WrapRow } from "../../../common/styles";
 import LoadingView from "../../loading_view/LoadingView";
 import PropTypes from 'prop-types';
-import { CaptionText, DetailsContainer, ElementGroup } from "../style";
+import { CaptionText, DetailsContainer, ElementGroup, Row } from "../style";
 import { useTranslation } from "react-i18next";
+import ApproveButton from "./buttons/ApproveButton";
+import DenyButton from "./buttons/DenyButton copy";
 
-const KeyValueDetails = ({id, url_prefix}) => {
+const KeyValueDetails = ({id, url_prefix, searchRefresh}) => {
 
-// TODO: change to right API call
 const URL = `${url_prefix}/${id}/details`;
 
-//const fakeData = {items: [{name: 'First name', value: 'First Name Value'},{name: 'Last name', value: 'Last name Value'},{name: 'Email', value: 'email@domain.com'},{name: 'Phone number', value: '+49 123 456 789'}, {name: 'Address', value: 'August-Bebel-Str. 46 39326 Colbitz Germany'}],
-//                  attachments: [{name: 'atachment 1', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x technical architecture'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}, {name: 'atachment 2', url: 'https://www.bmwk.de/Redaktion/EN/Publikationen/gaia-x-technical-architecture.html', alt: 'Gaia-x Technical architecture 2'}]};
 
     const {t} = useTranslation();
 
@@ -19,7 +18,7 @@ const URL = `${url_prefix}/${id}/details`;
         return (items.map((item, i) => {return( 
             <ElementGroup key={i}>
                 <CaptionTeleNeoText>{item.name}</CaptionTeleNeoText>
-                <BodySmallText>{item.value}</BodySmallText>
+                <BodySmallText color='#1C0E15'>{item.value}</BodySmallText>
             </ElementGroup>)}));
     }
 
@@ -35,6 +34,17 @@ const URL = `${url_prefix}/${id}/details`;
              </ElementGroup>
         );
     }
+    const DenyApprovalButton = () => {
+        if (!(searchRefresh)) return null;
+        return (
+            <Row>
+                <Style marginRight="auto" marginTop="42px">
+                    <DenyButton id={id} searchRefresh={searchRefresh}/>
+                    <ApproveButton id={id} searchRefresh={searchRefresh}/>
+                </Style>
+             </Row>
+        );
+    }
 
     const successView = ({data}) => {
         const person = data;
@@ -44,6 +54,7 @@ const URL = `${url_prefix}/${id}/details`;
                 <Column>
                     {showItemElements(person.items)}
                     {showAttachments(person?.attachments)}
+                    {DenyApprovalButton()}
                 </Column>
                 </DetailsContainer>
         );
@@ -57,7 +68,8 @@ const URL = `${url_prefix}/${id}/details`;
 
 KeyValueDetails.propTypes = {
     id: PropTypes.string,
-    url_prefix: PropTypes.string
+    url_prefix: PropTypes.string,
+    searchRefresh: PropTypes.func
 }
 
 export default KeyValueDetails;

@@ -190,3 +190,11 @@ export const RadioButton = styled.input`
 export const CaptionText = styled(S.CaptionText)`
     color: #B2B2B2;
 `;
+
+export const BlueButton = styled(S.BlueButton)`
+margin-left: 0;
+margin-right: 1em;`
+
+export const CancelButton = styled(S.CancelButton)`
+margin-left: 0;
+margin-right: 1em;`

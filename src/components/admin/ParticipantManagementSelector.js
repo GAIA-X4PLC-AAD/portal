@@ -9,8 +9,8 @@ const ParticipantManagementSelector = ({type}) => {
     const navigate = useNavigate();
     const {t} = useTranslation();
 
-    return (<Column>
-                <Row>
+    return (<Column margin="24px 0">
+                <Row margin="24px 0">
                     <RadioButton 
                         type="radio"
                         name="radio"

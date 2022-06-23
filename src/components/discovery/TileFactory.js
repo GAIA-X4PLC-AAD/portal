@@ -6,7 +6,7 @@ import CompositeServiceTile from "./servicetile/CompositeServiceTile";
 import AdminManagementTile from "../admin/tiles/AdminManagementTile";
 import AdminParticipantTile from "../admin/tiles/AdminParticipantTile";
 
-const TileFactory = ({data, id}) => {
+const TileFactory = ({data, id, searchRefresh}) => {
     const type = data?.type;
     const identifier = id || data?.id;
     
@@ -20,14 +20,15 @@ const TileFactory = ({data, id}) => {
         case 'admin_pcr': return AdminParticipantTile({input: data, id:identifier});
         case 'sd': 
         case 'pr_cred': 
-        case 'v_cred': return AdminManagementTile({input: data, id:identifier});
+        case 'v_cred': return AdminManagementTile({input: data, id:identifier, searchRefresh: searchRefresh});
         default: return null;
     }
 }
 TileFactory.propTypes = {
     input: PropTypes.object,
     id: PropTypes.string,
-    data: PropTypes.object
+    data: PropTypes.object,
+    searchRefresh: PropTypes.func
 }
 
 

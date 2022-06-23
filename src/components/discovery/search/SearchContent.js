@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import LoadingView from "../../loading_view/LoadingView";
 import PropTypes from 'prop-types';
@@ -15,14 +15,19 @@ const SearchContent = ({ type }) => {
     const PROVIDER_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/pr/registrations/search?${criteria.parameters}`;
     const MANAGEMENT_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/management/requests/search?${criteria.parameters}`;
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
-    
+    const [refresh, setRefresh] = useState(0);
+
     const { t, i18n } = useTranslation();
+
+    const searchRefresh = () =>{
+        setRefresh(refresh+1);
+    }
 
     const showData = (data) => {
         if (!data || !data.data || data.data.length === 0) return NoResults();
         else { 
             let _data = data.data
-            return _data.map((item, i) => { return (<TileFactory data={item} id={`${item['id']}`} key={`${item['id']}`} />) })
+            return _data.map((item, i) => { return (<TileFactory data={item} id={`${item['id']}`} key={`${item['id']}`} searchRefresh={searchRefresh}/>) })
         }
     }
 
@@ -64,7 +69,7 @@ const SearchContent = ({ type }) => {
 
 
     return (<LoadingView url={`${getURL(type)}`}
-        successView={loadData} key={URL} />);
+        successView={loadData}  key={URL+refresh}/>);
 }
 
 SearchContent.propTypes = {
