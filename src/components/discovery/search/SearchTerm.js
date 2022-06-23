@@ -33,7 +33,7 @@ const SearchTerm = ({t, type}) => {
         if (type === 'management' || type === 'participant') return null;
         const chips = ['not','provider','storage','service','compute'];
         if(advance === false) {
-            return (<S.AdvancedSearch onClick={()=>setAdvance(true)}>Advanced Search</S.AdvancedSearch>);
+            return (<S.AdvancedSearch onClick={()=>setAdvance(true)}>{t("discovery.search.advance")}</S.AdvancedSearch>);
         } else {
             return chips.map((chip) => {return (<S.AdvancedSearch onClick={()=>{addChipToSearch(chip)}} key={chip}>{t(`discovery.search.chip.text.${chip}`)}</S.AdvancedSearch>)});
         }

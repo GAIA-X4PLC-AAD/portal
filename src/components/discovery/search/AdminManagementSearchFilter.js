@@ -9,13 +9,9 @@ import { updateFilterCriteria } from "../../../actions";
 
 const AdminManagementSearchFilter = ({type}) => {
     
-    // TODO: change to right API call
-
     const REQUEST_URL = process.env.REACT_APP_EDGE_API_URI + '/admin/management/request-types';
     const LOCATION_URL = process.env.REACT_APP_EDGE_API_URI + '/admin/management/locations';
 
-//    const fakeLocation = {"items": [{"loc_code": "Germany","name": "Germany","qty": 10},{"loc_code": "Italy","name": "Italy","qty": 20}]}
-//    const fakeRequestType = {items:[{name: "pr_cred",qty: 10},{name: "v_cred",qty: 20},{name: "sd",qty: 30}]}
     const [filters, setFilters] = useState([]);
     const dispatch = useDispatch();
 

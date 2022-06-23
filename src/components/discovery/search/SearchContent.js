@@ -35,9 +35,9 @@ const SearchContent = ({ type }) => {
         return (<>
             <Row margin="24px 0 0 0">
                 <Column><S.AlertIcon /></Column>
-                <Column><S.ErrorHeader>No results found</S.ErrorHeader></Column>
+                <Column><S.ErrorHeader>{t('discovery.search.noResults')}</S.ErrorHeader></Column>
             </Row>
-            <Row><S.ErrorMessage>Sorry, we couldn’t find any matching results. Try broadening your filters</S.ErrorMessage></Row>
+            <Row><S.ErrorMessage>{t('discovery.search.noResultsMessage')}</S.ErrorMessage></Row>
         </>);
     }
 

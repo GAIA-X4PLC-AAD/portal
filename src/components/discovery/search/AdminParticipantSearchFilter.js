@@ -9,13 +9,8 @@ import { updateFilterCriteria } from "../../../actions";
 
 const AdminParticipantSearchFilter = ({type}) => {
     
-    // TODO: change to right API call
-
     const REGISTRATION_URL = process.env.REACT_APP_EDGE_API_URI + '/admin/pr/registration-types';
     const LOCATION_URL = process.env.REACT_APP_EDGE_API_URI + '/admin/pr/locations';
-
-//    const fakeLocation = {"items": [{"loc_code": "Germany","name": "Germany","qty": 10},{"loc_code": "Italy","name": "Italy","qty": 20}]}
-//    const fakeRegistrationType = {items: [{name: "admin_ppr",qty: 10},{name: "admin_pcr",qty: 20},{name: "admin_np",qty: 30}]}
 
     const [filters, setFilters] = useState([]);
     const dispatch = useDispatch();

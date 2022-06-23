@@ -178,7 +178,10 @@
             "chip.text.service": "Service",
             "chip.filter.service": "SERVICE=",
             "chip.text.compute": "Compute",
-            "chip.filter.compute": "COMPUTE="
+            "chip.filter.compute": "COMPUTE=",
+            "noResults": "No results found",
+            "noResultsMessage": "Sorry, we couldn’t find any matching results. Try broadening your filters",
+            "advance": "Advanced Search"
         }
     },
     "account": {
