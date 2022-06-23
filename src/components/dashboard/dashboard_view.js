@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ButtonText, H4Text, HeaderTitle, Row, Style } from "../../common/styles";
+import { ButtonText, H4Text, HeaderTitle, Image, Row, Style } from "../../common/styles";
 import PropTypes from 'prop-types';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -31,11 +31,22 @@ const responsive = {
 };
 
 const NextPrevButtons = ({ next, previous, goToSlide, ...rest }) => {
+    const activeColor = 'invert(14%) sepia(71%) saturate(5805%) hue-rotate(243deg) brightness(56%) contrast(132%)'
+    const disabledColor = 'invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%)'
     const { carouselState: { currentSlide } } = rest;
     return (
-        <Style display='flex' position='relative' left='88%' bottom='20.5%'>
-            <Padding horizontal='4px'><ButtonText disabled={currentSlide === 0} onClick={() => previous()} >Previous</ButtonText></Padding>
-            <Padding horizontal='4px'><ButtonText disabled={currentSlide !== 0} onClick={() => next()} >Next</ButtonText></Padding>
+        <Style display='flex' position='relative' bottom='20.5%' left='95%'>
+            <Padding horizontal='4px'>
+                <ButtonText disabled={currentSlide === 0} onClick={() => previous()} >
+                    <Image src='/images/arrow_left.svg' alt="arrow-left" width='12px' 
+                    filter={currentSlide === 0 ? disabledColor : activeColor}/>
+                </ButtonText></Padding>
+            <Padding horizontal='4px'>
+                <ButtonText disabled={currentSlide !== 0} onClick={() => next()} >
+                    <Image src='/images/arrow_right.svg' alt="arrow-right" width='12px'
+                        filter={currentSlide !== 0 ? disabledColor : activeColor}
+                    />
+                </ButtonText></Padding>
         </Style>
     );
 };
@@ -119,6 +130,8 @@ const ServicesListView = (props,) => {
         return <MyServiceViewCard key={`${element['id']}`} data={element} />
     })
 
+    const shouldDisplayNextPrev = _items.length > 3;
+
     return <>
         <H4Text>{props.params['title']}</H4Text>
         <Carousel
@@ -126,7 +139,7 @@ const ServicesListView = (props,) => {
             swipeable={false}
             draggable={false}
             responsive={responsive}
-            renderButtonGroupOutside={true}
+            renderButtonGroupOutside={shouldDisplayNextPrev}
             customButtonGroup={<NextPrevButtons />}>
             {(_items !== undefined || _items != null) ? itemsViews : <></>}
         </Carousel>

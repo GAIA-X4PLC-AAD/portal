@@ -61,7 +61,7 @@ const DashboardPage = () => {
 
         {/* BODY VIEW */}
         <Padding horizontal='12px' />
-        <Style maxWidth='900px'>
+        <Style minWidth='900px'>
             <DashboardView type={type} />
         </Style>
     </Row>;

@@ -144,6 +144,7 @@ export const Image = styled.img`
   /* height: fit-content; */
   max-width: ${props => props.maxWidth || ''};
   min-width: ${props => props.minWidth || ''};
+  filter: ${props => props.filter || ''};;
 `;
 
 
