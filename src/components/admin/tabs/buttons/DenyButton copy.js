@@ -13,7 +13,8 @@ const DenyButton = ({id, searchRefresh})=>{
             searchRefresh();
             console.log(`deny ${id} sucess`);
         },(error)=> {
-            console.log(`ERROR on deny ${id}`)            
+            console.log(`ERROR on deny ${id}`);
+            alert("ko");
           console.log(error);
         });     
     }

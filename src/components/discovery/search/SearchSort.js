@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { updateFilterCriteria } from '../../../actions';
 
-const SearchSort = ({type}) => {
+const SearchSort = ({type, data}) => {
 
     const {t} = useTranslation();
     const criteria = useSelector(state => state.searchCriteriaStore);
@@ -28,14 +28,15 @@ const SearchSort = ({type}) => {
         }
     }
 
-//    if (!(type === 'management' || type === 'participant')) return null;
+    if (!data || !data.data || data.data.length === 0) return null;
     return (
         <Style marginLeft='auto' marginRight='0' maxWidth='fit-content'> <BlueLinkText onClick={changeSortDirection}>{t(`admin.sort-direction-${direction}`)} </BlueLinkText></Style>
     );
 
 }
 SearchSort.propTypes = {
-    type: PropTypes.string
+    type: PropTypes.string,
+    data: PropTypes.object
 }
 
 export default SearchSort;

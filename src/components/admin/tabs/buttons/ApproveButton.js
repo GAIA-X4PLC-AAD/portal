@@ -13,7 +13,8 @@ const ApproveButton = ({id, searchRefresh})=>{
             searchRefresh();
             console.log(`approved ${id} sucess`);
         },(error)=> {
-            console.log(`ERROR on approved ${id}`)            
+            console.log(`ERROR on approved ${id}`);
+            alert("ko");
           console.log(error);
         });     
     }
