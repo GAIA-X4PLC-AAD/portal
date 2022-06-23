@@ -32,7 +32,7 @@ const AdminLocationFilterView = ({ data , header, onFormChanged}) => {
         return <S.Category>{t("admin.location")}</S.Category>;
     }
 
-    const showCategories = (data, header) => {
+    const showCategories = (data) => {
             return (<ExpandableView
                 initiallyExpanded={true}
                 border={true}
