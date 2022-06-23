@@ -35,7 +35,8 @@ const MyServiceViewCard = ({ index, data }) => {
                                 
                                 <Style minWidth='100%'>
                                     <Padding vertical='18px'>
-                                        <Style height='160px' backgroundColor='#fafafa'/>
+                                        {/* <Style height='160px' backgroundColor='#fafafa'/> */}
+                                        <Image src={data['url']} alt="Logo" width='240px' height='200px' />
                                     </Padding>
                                 </Style>
                                 <Row justifyContent='start' alignItems='center'>
@@ -43,7 +44,7 @@ const MyServiceViewCard = ({ index, data }) => {
                                     <Padding horizontal='8px'>
                                         {colItem({
                                             title: data['name'],
-                                            subtitle: data['url'],
+                                            subtitle: 'provider_url',
                                         })}
                                     </Padding>
                                 </Row>

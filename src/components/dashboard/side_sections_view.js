@@ -1,13 +1,39 @@
 import React, { useState, useRef, useEffect } from "react";
 
 
+
 import PropTypes from 'prop-types';
 import LoadingView from "../loading_view/LoadingView";
 import { Style, BodySmallBoldText, Column, Row, CaptionText } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
 import { Block } from "../expandable/style";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import NextPrevButtons from "../../common/vertical_steps/next_prev_buttons";
+
+
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
 const _leftPanelWidth = '225px'
+
 
 const colItemView = ({ title, caption, subtitle, }) => {
   return <Column>
@@ -34,7 +60,7 @@ const sectionView = (props,) => {
 
   const sectionItemsViews = sectionItems.map((element, _index) => {
     return (
-      <Style key={`${element['title']}${_index}`}>
+      <Style key={`${element['title']}${_index}`} width={_leftPanelWidth}>
         <Padding vertical='8px' horizontal='8px'>
           {colItemView({ title: element['title'], subtitle: element['subtitle'], caption: element['date'] })}
         </Padding>
@@ -42,15 +68,34 @@ const sectionView = (props,) => {
     );
   })
 
+  const sectionItemsGroupedViews = []
+  const chunkSize = 10;
+  for (let i = 0; i < sectionItemsViews.length; i += chunkSize) {
+    const chunk = <Column>{sectionItemsViews.slice(i, i + chunkSize)}</Column>;
+    sectionItemsGroupedViews.push(chunk)
+  }
+
+  const shouldDisplayNextPrev = sectionItemsViews.length > 3;
+
   return <>
     <BodySmallBoldText>{props.params['title']}</BodySmallBoldText>
     <Block border={true} borderBottom={true} width={_leftPanelWidth}>
-      {
-        <Padding vertical='8px' horizontal='8px'>{(sectionItems !== undefined || sectionItems != null) ? sectionItemsViews : <></>}</Padding>
-      }
+      {(sectionItems !== undefined || sectionItems != null) ?
+        <Carousel
+          arrows={false}
+          swipeable={true}
+          draggable={false}
+          responsive={responsive}
+          renderButtonGroupOutside={shouldDisplayNextPrev}
+          customButtonGroup={<NextPrevButtons bottom='0px' />}
+        >
+          <Row>{sectionItemsGroupedViews}</Row>
+        </Carousel> :
+        <></>}
     </Block>
   </>;
 }
+
 
 sectionView.propTypes = {
   title: PropTypes.string.isRequired,
@@ -67,12 +112,12 @@ const SideSectionsView = () => {
       <LoadingView
         url={_transactionsUrl}
         successView={sectionView}
-        params={{'title': 'My Transactions'}}
+        params={{ 'title': 'My Transactions' }}
       />
       <LoadingView
         url={_newsUrl}
         successView={sectionView}
-        params={{'title': 'News'}}
+        params={{ 'title': 'News' }}
       />
     </>
   )
