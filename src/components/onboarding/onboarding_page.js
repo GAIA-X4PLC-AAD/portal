@@ -217,12 +217,53 @@ const OnboardingPage = () => {
                     opacity={opacity}
                     backgroundProps={{ opacity }}
                 >
-                    {credentialsMissingView()}
+                    {dontHaveDidView()}
                 </StyledModal>
             </div>
         );
     }
 
+
+    const dontHaveDidView = () => {
+        const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
+            return (
+                <Padding vertical='8px'>
+                    <Card background={background} borderColor='#E9E9E9'>
+                        <Padding vertical='4px' horizontal='16px'>
+                            <Row>
+                                <Circle radius='56px' borderColor='#0' background='#C4C4C4'>LOGO</Circle>
+                                <Padding paddingLeft='16px' />
+                                <ButtonText color='#000000'>Identify Service Provider 1</ButtonText>
+                                <Style flexGrow='1' />
+                                <ButtonText color='#00A2E4'>Link</ButtonText>
+                            </Row>
+                        </Padding>
+                    </Card>
+                </Padding>
+            )
+        }
+        return <>
+            <Style width='633px'>
+                <Padding>
+                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Padding horizontal='24px' vertical='12px'>
+                            <H4LightText>Don’t have a DID?</H4LightText>
+                            <BodyText>Please select a idSP to create DID</BodyText>
+                            <HorizontalLine />
+                            {buildIdentifyServiceProvider({ background: '#46DAFF1F' })}
+                            {buildIdentifyServiceProvider({ background: '#fff' })}
+                            {buildIdentifyServiceProvider({ background: '#fff' })}
+                            {buildIdentifyServiceProvider({ background: '#fff' })}
+
+                            <Padding paddingTop='32px'>
+                                <Row><OutlineButton>Close</OutlineButton></Row>
+                            </Padding>
+                        </Padding>
+                    </Card>
+                </Padding>
+            </Style>
+        </>
+    }
 
 
     const credentialsMissingView = () => {

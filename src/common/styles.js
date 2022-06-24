@@ -212,7 +212,7 @@ export const ButtonText = styled.div`
     align-items: center;
     letter-spacing: 0.25px;
     cursor: pointer;
-    color: ${props => props.disabled ? '#bababa' : (props.color ? '#00A2E4' : '#000094')};
+    color: ${props => props.disabled ? '#bababa' : (props.color || '#000094')};
 `
 
 export const H4Text = styled.div`
