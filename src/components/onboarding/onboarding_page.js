@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 
 
-import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image } from "../../common/styles";
+import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal, FadingBackground } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
 import RadioButton from "../../common/radio";
 import Checkbox from "../../common/checkbox";
+
+import styled from "styled-components";
+import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
 
 const OnboardingPage = () => {
@@ -37,7 +40,7 @@ const OnboardingPage = () => {
                                 </Column>
                             </Padding>
                             <Style flexGrow='1'></Style>
-                            <Circle radius='8px' background='#E9E9E9' borderColor='#0' />
+                            <Circle radius='8px' background={isActive ? '#6BB324' : '#E9E9E9'} borderColor='#0' />
                         </Row>
                     </Padding>
                 </Card>
@@ -142,7 +145,6 @@ const OnboardingPage = () => {
                             <H4LightText>Almost done</H4LightText>
                             <BodyText>Please upload your organization details or select express registration via DID.</BodyText>
                             <ButtonText color='#00A2E4'>Resend confirmation link</ButtonText>
-
                         </Padding>
                     </Card>
                 </Padding>
@@ -152,27 +154,88 @@ const OnboardingPage = () => {
 
     const verifyQrView = () => {
         return <>
-            <Style width='633px' height='246px'>
-                <Padding horizontal='20px'>
+            <ModalProvider backgroundComponent={FadingBackground}>
+                <Style width='633px' height='246px'>
+                    <Padding horizontal='20px'>
+                        <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                            <Padding horizontal='24px'>
+                                <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
+                                <HorizontalLine />
+                                <Column justifyContent='center' alignItems='center'>
+                                    <Padding vertical='8px'>
+                                        <Image src='/images/QRCode.png' width='200px' />
+                                    </Padding>
+                                    <Padding vertical='20px'>
+                                        <Row alignItems='space-between'>
+                                            <OutlineButton disabled>I don&#39;t have a DID</OutlineButton>
+                                            <Padding horizontal='8px' />
+                                            <FancyModalButton />
+                                        </Row>
+                                    </Padding>
+                                    <Padding vertical='20px'></Padding>
+                                </Column>
+                            </Padding>
+                        </Card>
+                    </Padding>
+                </Style>
+            </ModalProvider>
+
+        </>
+    }
+
+    function FancyModalButton() {
+        const [isOpen, setIsOpen] = useState(false);
+        const [opacity, setOpacity] = useState(0);
+
+        function toggleModal(e) {
+            setOpacity(0);
+            setIsOpen(!isOpen);
+        }
+
+        function afterOpen() {
+            setTimeout(() => {
+                setOpacity(1);
+            }, 100);
+        }
+
+        function beforeClose() {
+            return new Promise((resolve) => {
+                setOpacity(0);
+                setTimeout(resolve, 300);
+            });
+        }
+
+        return (
+            <div>
+                <OutlineButton onClick={toggleModal}>Contine</OutlineButton>
+                <StyledModal
+                    isOpen={isOpen}
+                    afterOpen={afterOpen}
+                    beforeClose={beforeClose}
+                    onBackgroundClick={toggleModal}
+                    onEscapeKeydown={toggleModal}
+                    opacity={opacity}
+                    backgroundProps={{ opacity }}
+                >
+                    {credentialsMissingView()}
+                </StyledModal>
+            </div>
+        );
+    }
+
+
+
+    const credentialsMissingView = () => {
+        return <>
+            <Style width='633px'>
+                <Padding>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                        <Padding horizontal='24px'>
-                            <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
+                        <Padding horizontal='24px' vertical='12px'>
+                            <H4LightText>Credentials are missing</H4LightText>
+                            <BodyText>Lorem ipsum dolor si jet.</BodyText>
                             <HorizontalLine />
-                            <Column justifyContent='center' alignItems='center'>
-                                <Padding vertical='8px'>
-                                    <Image src='/images/QRCode.png' width='200px' />
-                                </Padding>
-                                <Padding vertical='20px'>
-                                    <Row alignItems='space-between'>
-                                        <OutlineButton disabled>I don&#39;t have a DID</OutlineButton>
-                                        <Padding horizontal='8px' />
-                                        <OutlineButton>Contine</OutlineButton>
-                                    </Row>
-                                </Padding>
-                                <Padding vertical='20px'></Padding>
-                            </Column>
-
-
+                            <BodyText>We couldn&#39;t find any authorized credentials. Please contact your organization.</BodyText>
+                            <Padding vertical='20px'><Row><OutlineButton>Continue</OutlineButton></Row></Padding>
                         </Padding>
                     </Card>
                 </Padding>

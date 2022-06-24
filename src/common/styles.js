@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
 export const CancelButton = styled.button`
     border: 2px solid #e8e8e8;
@@ -382,3 +383,17 @@ export const TextInput = styled.input`
 
     ::placeholder {}
 `
+
+export const StyledModal = Modal.styled`
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  opacity: ${(props) => props.opacity};
+  transition : all 0.3s ease-in-out;`;
+
+export const FadingBackground = styled(BaseModalBackground)`
+  opacity: ${(props) => props.opacity};
+  transition: all 0.3s ease-in-out;
+`;
