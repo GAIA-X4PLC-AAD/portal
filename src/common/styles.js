@@ -251,7 +251,7 @@ export const BodyText = styled.div`
 
     /* greyscale/dark */
 
-    color: #4B4B4B;
+    color: ${props => props.color || '#4B4B4B'};
 `
 
 export const BodyBoldText = styled.div`

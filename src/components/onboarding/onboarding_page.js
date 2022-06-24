@@ -284,6 +284,65 @@ const OnboardingPage = () => {
         </>
     }
 
+    const organizationFillDetailsView = () => {
+
+        return <>
+            <Style width='633px' height='246px'>
+                <Padding horizontal='20px'>
+                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Padding horizontal='24px'>
+                            <H4LightText>Organization details</H4LightText>
+                            <BodyText>Lorem ipsum dolor si jet .</BodyText>
+                            <HorizontalLine />
+                            <Padding vertical='12px'>
+                                <Column>
+                                    <TextInput type="text" placeholder="Organization Name" />
+                                    <Padding vertical='4px' />
+                                    <TextInput type="text" placeholder="Email" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="Phone" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="City" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="Address" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="Zip Code" />
+                                    <Padding vertical='28px'>
+                                        <Row>
+                                            <OutlineButton>Registration via DID</OutlineButton>
+                                            <Padding horizontal='10px' />
+                                            <OutlineButton>Send</OutlineButton>
+                                        </Row>
+                                    </Padding>
+                                </Column>
+                            </Padding>
+                        </Padding>
+                    </Card>
+                </Padding>
+            </Style>
+        </>
+    }
+
+    const complienceCheckMessageView = () => {
+        return <>
+            <Style width='633px' height='246px'>
+                <Padding horizontal='20px'>
+                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Padding horizontal='24px'>
+                            <H4LightText>Complience Check</H4LightText>
+                            <BodyText color='#818C99'>Your onboarding request will be checked by the AISBL. This may take  some time. Please enter your email address to recieve status updates of your onboarding. </BodyText>
+                            <HorizontalLine />
+                            <Padding vertical='8px' />
+                            <TextInput type="text" placeholder="Email" />
+                            <Padding vertical='32px' />
+                        </Padding>
+
+                    </Card>
+                </Padding>
+            </Style>
+        </>
+    }
+
     return <>
         <Row>
             <Column>
@@ -291,7 +350,7 @@ const OnboardingPage = () => {
                 <Padding vertical='64px'>
                     <Row>
                         <Style width='307px'>{stepsPane()}</Style>
-                        {verifyQrView()}
+                        {complienceCheckMessageView()}
                     </Row>
                 </Padding>
             </Column>
