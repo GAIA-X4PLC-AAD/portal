@@ -7,7 +7,7 @@ import KeyValueDetails from "../tabs/KeyValueDetails";
 
 const AdminParticipantTile = ({ input }) => {
 
-    const URL = process.env.REACT_APP_EDGE_API_URI + '/admin/management/requests';
+    const URL = process.env.REACT_APP_EDGE_API_URI + '/api/admin/management/requests';
 
     
     return (

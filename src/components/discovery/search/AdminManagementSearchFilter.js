@@ -9,8 +9,8 @@ import { updateFilterCriteria } from "../../../actions";
 
 const AdminManagementSearchFilter = ({type}) => {
     
-    const REQUEST_URL = process.env.REACT_APP_EDGE_API_URI + '/admin/management/request-types';
-    const LOCATION_URL = process.env.REACT_APP_EDGE_API_URI + '/admin/management/locations';
+    const REQUEST_URL = process.env.REACT_APP_EDGE_API_URI + '/api/admin/management/request-types';
+    const LOCATION_URL = process.env.REACT_APP_EDGE_API_URI + '/api/admin/management/locations';
 
     const [filters, setFilters] = useState([]);
     const dispatch = useDispatch();

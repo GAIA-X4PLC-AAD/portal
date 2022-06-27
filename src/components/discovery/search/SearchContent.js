@@ -12,8 +12,8 @@ import SearchSort from "./SearchSort";
 const SearchContent = ({ type }) => {
 
     const criteria = useSelector(state => state.searchCriteriaStore);
-    const PROVIDER_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/pr/registrations/search?${criteria.parameters}`;
-    const MANAGEMENT_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/management/requests/search?${criteria.parameters}`;
+    const PROVIDER_URL = process.env.REACT_APP_EDGE_API_URI + `/api/admin/pr/registrations/search?${criteria.parameters}`;
+    const MANAGEMENT_URL = process.env.REACT_APP_EDGE_API_URI + `/api/admin/management/requests/search?${criteria.parameters}`;
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
     const [refresh, setRefresh] = useState(0);
 

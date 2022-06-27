@@ -43,9 +43,13 @@ const SearchTerm = ({t, type}) => {
             doSearch();
         }
     }
+    const searchMargin = (type) => {
+        if (type === 'management' || type === 'participant') return '0 0 24px auto';
+        return '0 0 0 auto';
+    }
 
     return (
-            <Column key={type} margin='0 0 0 auto'>
+            <Column key={type} margin={searchMargin(type)}>
                 <Row>
                     <S.SearchTerm type="text" onKeyPress={onKeyPress} value={searchTerm} onChange={(e)=> {setSearchTerm(e.target.value)}}/>
                     <S.SearchPlusButton onClick={doSearch}><S.SearchPlusImage/></S.SearchPlusButton>     

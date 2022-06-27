@@ -11,7 +11,7 @@ const DenyButton = ({id, searchRefresh})=>{
     
     const onDeny = ( id) => {
         console.log(`onDeny ${id}`)
-        axios.delete(process.env.REACT_APP_EDGE_API_URI +`/management/requests/${id}`).then(   (response) => {
+        axios.delete(process.env.REACT_APP_EDGE_API_URI +`/api/management/requests/${id}`).then(   (response) => {
             searchRefresh();
             console.log(`deny ${id} sucess`);
         },(error)=> {
