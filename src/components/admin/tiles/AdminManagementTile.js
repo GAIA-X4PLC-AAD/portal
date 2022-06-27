@@ -11,7 +11,7 @@ const AdminManagementTile = ({ input , searchRefresh}) => {
     const URL = process.env.REACT_APP_EDGE_API_URI + '/admin/pr/registrations';
     
     return (
-        <ExpandableView initiallyExpanded={false} view={<KeyValueDetails id={input.id} url_prefix={URL} searchRefresh={searchRefresh}/>} title={<ManagementHeader participant={input}/>} border={true} />
+        <ExpandableView initiallyExpanded={false} width='100%' view={<KeyValueDetails id={input.id} url_prefix={URL} searchRefresh={searchRefresh}/>} title={<ManagementHeader participant={input}/>} border={true} />
     );
 
 }

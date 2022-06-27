@@ -27,7 +27,7 @@ const SearchContent = ({ type }) => {
         if (!data || !data.data || data.data.length === 0) return NoResults();
         else { 
             let _data = data.data
-            return _data.map((item, i) => { return (<TileFactory data={item} id={`${item['id']}`} key={`${item['id']}`} searchRefresh={searchRefresh}/>) })
+            return _data.map((item, i) => { return (<TileFactory data={item} id={`${item['id']}`} key={`${item['id']}`} searchRefresh={searchRefresh} />) })
         }
     }
 

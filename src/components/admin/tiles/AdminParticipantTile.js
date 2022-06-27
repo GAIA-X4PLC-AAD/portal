@@ -11,7 +11,7 @@ const AdminParticipantTile = ({ input }) => {
 
     
     return (
-        <ExpandableView initiallyExpanded={false} view={<KeyValueDetails id={input.id} url_prefix={URL}/>} title={<ParticipantHeader participant={input}/>} border={true} />
+        <ExpandableView initiallyExpanded={false} width='100%' view={<KeyValueDetails id={input.id} url_prefix={URL}/>} title={<ParticipantHeader participant={input}/>} border={true} />
     );
 
 }
