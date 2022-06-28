@@ -81,6 +81,7 @@ export const Row = styled.div`
     padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
     margin: ${props => props.margin || '0'};
     width: ${props => props.width || 'auto'};
+    height: ${props => props.height || 'auto'};
     justify-content: ${props => props.justifyContent || ''};
     align-items: ${props => props.alignItems || ''};
 `
@@ -91,6 +92,7 @@ export const Column = styled.div`
     padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
     margin: ${props => props.margin || '0'};
     width: ${props => props.width || 'auto'};
+    height: ${props => props.height || 'auto'};
     align-items: ${props => props.alignItems || ''};
     justify-content: ${props => props.justifyContent || ''};
 `

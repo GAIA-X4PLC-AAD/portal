@@ -48,14 +48,14 @@ const DashboardPage = () => {
         return <>
             {_welcomeView}
             {_cardView}
-            <SideSectionsView/>
+            <SideSectionsView />
         </>
     }
 
     return <Row>
 
         {/* SIDE BAR */}
-        <Style maxWidth={_leftPanelWidth}>
+        <Style minWidth={_leftPanelWidth}>
             {sideBarView()}
         </Style>
 

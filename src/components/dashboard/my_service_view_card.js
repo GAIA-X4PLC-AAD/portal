@@ -36,7 +36,7 @@ const MyServiceViewCard = ({ index, data }) => {
                                 <Style minWidth='100%'>
                                     <Padding vertical='18px'>
                                         {/* <Style height='160px' backgroundColor='#fafafa'/> */}
-                                        <Image src={data['url']} alt="Logo" width='240px' height='200px' />
+                                        <Image src={data['preview_img']} alt="Logo" width='240px' height='200px' />
                                     </Padding>
                                 </Style>
                                 <Row justifyContent='start' alignItems='center'>

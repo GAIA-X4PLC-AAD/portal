@@ -13,7 +13,7 @@ function LoadingView({ url, successView, params }) {
     const [{ data, error, isLoading }] = useResource(() => ({ url: url }), []);
 
     useEffect(() => {
-        console.log(`LoadingView.useEffect, isLoading: ${isLoading}`)
+        // console.log(`LoadingView.useEffect, isLoading: ${isLoading}`)
     }, [isLoading, error, data]);
 
     let isError = error != undefined;

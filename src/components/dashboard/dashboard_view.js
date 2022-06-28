@@ -69,8 +69,8 @@ const DashboardView = () => {
 
     const buildList = () => {
 
-        const _myServicesUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/services`;
-        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/datasets`;
+        const _myServicesUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/services`;
+        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/datasets`;
 
         return (
             <>
@@ -94,9 +94,8 @@ const ServicesListView = (props,) => {
     const [_items, setItems] = useState([]);
 
     useEffect(() => {
-
         if (props.data !== undefined) {
-            const _items = props.data['data']
+            const _items = props.data['results']
             setItems(_items)
         }
 
@@ -129,13 +128,14 @@ ServicesListView.propTypes = {
     params: PropTypes.object,
 }
 
-const ServicesLoadingListView = ({ url, title }) => {
+const ServicesLoadingListView = ({ url, title, }) => {
+
     return (
         <>
             <LoadingView
                 url={url}
                 successView={ServicesListView}
-                params={{ 'title': title }}
+                params={{ 'title': title}}
             />
         </>
     )
@@ -143,7 +143,7 @@ const ServicesLoadingListView = ({ url, title }) => {
 
 ServicesLoadingListView.propTypes = {
     url: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
 }
 
 export default DashboardView;
