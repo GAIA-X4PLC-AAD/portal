@@ -80,7 +80,7 @@ const sectionView = (props,) => {
   return (
     <>
       <BodySmallBoldText>{`${props.params['title']} (${sectionItemsViews.length})`}</BodySmallBoldText>
-      <Block border={true} borderBottom={true}>
+      <Block border={true} borderBottom={true} position='relative'>
         {(sectionItems !== undefined || sectionItems != null) ?
           <Carousel
             arrows={false}
@@ -89,7 +89,7 @@ const sectionView = (props,) => {
             responsive={responsive}
             itemClass="carousel-item-padding-40-px"
             renderButtonGroupOutside={shouldDisplayNextPrev}
-            customButtonGroup={<NextPrevButtons bottom='0px' />}
+            customButtonGroup={<NextPrevButtons bottom="" position="absolute" top='-32px' right='0px'/>}
           >
             {itemsViews2}
           </Carousel> :

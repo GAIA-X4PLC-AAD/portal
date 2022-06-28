@@ -48,6 +48,7 @@ export const Block = styled.div`
   border-bottom: ${props => props.borderBottom ? '1px solid #E9E9E9' : ''};
   box-shadow: ${props => props.boxShadow};
   border-radius: 4px;
+  position: ${props => props.position || ''};
   @apply py-0;
 `
 

@@ -105,6 +105,8 @@ export const Style = styled.div`
     display: ${props => props.display || ''};
     position: ${props => props.position || ''};
     left: ${props => props.left || ''};
+    right: ${props => props.right || ''};
+    top: ${props => props.top || ''};
     bottom: ${props => props.bottom || ''};
     text-align: start;
     padding-top: ${props => props.paddingTop || '0px'};
