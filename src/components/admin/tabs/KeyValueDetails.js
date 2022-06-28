@@ -14,21 +14,29 @@ const URL = `${url_prefix}/${id}/details`;
 
     const {t} = useTranslation();
 
+    const showSelfDescription = (sd_data) => {
+        if (!sd_data) return null;
+        const attributes = sd_data.flatMap((a)=> a.attributes)
+        return showItemElements(attributes);
+    }
+    
     const showItemElements = (items) => {
+        if (!items) return null;
         return (items.map((item, i) => {return( 
             <ElementGroup key={i}>
                 <CaptionTeleNeoText>{item.name}</CaptionTeleNeoText>
                 <BodySmallText color='#1C0E15'>{item.value}</BodySmallText>
             </ElementGroup>)}));
     }
-
+    
     const showAttachments = (attachments) => {
         if (!attachments) return null;
         return (
             <ElementGroup>
                 <CaptionText>{t('admin.attachments')}</CaptionText>
                 <WrapRow>
-                        {attachments.map((attachment, i) => {return( <Style marginTop='8px' key={i}><Tag>{attachment.name}</Tag></Style>
+                        {attachments.map((attachment, i) => {return( <Style marginTop='8px' key={i}><Tag>
+                            {attachment.name}</Tag></Style>
                         )})}
                 </WrapRow>
              </ElementGroup>
@@ -52,7 +60,8 @@ const URL = `${url_prefix}/${id}/details`;
         return (
                 <DetailsContainer>
                 <Column>
-                    {showItemElements(person.items)}
+                    {showItemElements(person?.items)}
+                    {showSelfDescription(person?.sd_data)}
                     {showAttachments(person?.attachments)}
                     {DenyApprovalButton()}
                 </Column>
