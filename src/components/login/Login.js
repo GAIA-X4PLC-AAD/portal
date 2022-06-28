@@ -6,7 +6,7 @@ import { signIn, signInMenuEnter, signInMenuQuit } from "../../actions";
 import { Link, useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import LoginFail from "./LoginFail";
-import AuthPolling from "../AuthPolling";
+import AuthPolling from "./AuthPolling";
 import axios from "axios";
 import configData from "../../config/config.json";
 
