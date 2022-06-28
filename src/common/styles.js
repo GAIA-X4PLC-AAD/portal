@@ -295,6 +295,8 @@ export const Tag = styled.div`
   color: white;
   line-height: 16px;
 `;
+export const TagLink = styled(Tag)`
+    cursor: pointer;`;
 
 export const BlueLinkText = styled.div`
     font-family: Titillium Web;

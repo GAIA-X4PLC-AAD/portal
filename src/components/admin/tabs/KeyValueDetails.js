@@ -1,5 +1,5 @@
 import React from "react";
-import {  BodySmallText, CaptionTeleNeoText, Column, Style, Tag, WrapRow } from "../../../common/styles";
+import {  BodySmallText, CaptionTeleNeoText, Column, Style, TagLink, WrapRow } from "../../../common/styles";
 import LoadingView from "../../loading_view/LoadingView";
 import PropTypes from 'prop-types';
 import { CaptionText, DetailsContainer, ElementGroup, Row } from "../style";
@@ -11,6 +11,9 @@ const KeyValueDetails = ({id, url_prefix, searchRefresh}) => {
 
 const URL = `${url_prefix}/${id}/details`;
 
+    const openLink =  (url) => {
+        window.open(url, '_blank').focus();
+    }
 
     const {t} = useTranslation();
 
@@ -35,8 +38,13 @@ const URL = `${url_prefix}/${id}/details`;
             <ElementGroup>
                 <CaptionText>{t('admin.attachments')}</CaptionText>
                 <WrapRow>
-                        {attachments.map((attachment, i) => {return( <Style marginTop='8px' key={i}><Tag>
-                            {attachment.name}</Tag></Style>
+                        {attachments.map((attachment, i) => {
+                            return( 
+                            <Style marginTop='8px' key={i}>
+                                <TagLink onClick={()=>openLink(attachment.url)}>
+                                    {attachment.name}
+                                </TagLink>
+                            </Style>
                         )})}
                 </WrapRow>
              </ElementGroup>
