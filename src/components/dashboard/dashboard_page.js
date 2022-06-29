@@ -6,6 +6,7 @@ import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle } from
 import { Padding } from "../discovery/tabs/style";
 import DashboardView from "./dashboard_view";
 import SideSectionsView from "./side_sections_view";
+import { useSelector } from "react-redux";
 
 
 const DashboardPage = () => {
@@ -13,6 +14,8 @@ const DashboardPage = () => {
     const type = 'dashboard';
     const _leftPanelWidth = '225px'
 
+//   const _isPr = useSelector((state) => state.user.user.is_pr && state.isUserSignedIn)
+    const _isPr = useSelector((state) => true)
 
     const colItemView = ({ title, caption, subtitle, }) => {
         return <Column>
@@ -52,7 +55,7 @@ const DashboardPage = () => {
         </>
     }
 
-    return <Row>
+    return _isPr ? <Row>
 
         {/* SIDE BAR */}
         <Style minWidth={_leftPanelWidth}>
@@ -64,7 +67,7 @@ const DashboardPage = () => {
         <Style minWidth='900px'>
             <DashboardView type={type} />
         </Style>
-    </Row>;
+    </Row> : <>Unauthorized!</>;
 
 }
 

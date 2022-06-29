@@ -78,6 +78,7 @@ const DashboardView = () => {
                 {buildPlot1()}
                 {ServicesLoadingListView({ url: _myServicesUrl, title: t('dashboard.my_services') })}
                 {ServicesLoadingListView({ url: _myDatasetsUrl, title: t('dashboard.my_data_sets') })}
+                {ServicesLoadingListView({ url: _myDatasetsUrl, title: t('dashboard.solution_packages') })}
             </>
         );
     }
