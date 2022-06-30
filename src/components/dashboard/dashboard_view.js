@@ -10,6 +10,7 @@ import MyServiceViewCard from "./my_service_view_card";
 import { Padding } from "../discovery/tabs/style";
 import LoadingView from "../loading_view/LoadingView";
 import NextPrevButtons from "../../common/vertical_steps/next_prev_buttons";
+import PlotLoadingView from "./plot_view";
 
 const responsive = {
     superLargeDesktop: {
@@ -38,33 +39,9 @@ const DashboardView = () => {
     const { t, i18n } = useTranslation();
 
     const buildPlot1 = () => {
+        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/statistics`;
 
-        var trace1 = {
-            x: [1, 2, 3, 4],
-            y: [0, 2, 3, 5],
-            fill: 'tozeroy',
-            fillcolor: 'rgba(186, 0, 255, 0.1)',
-            line_color: "#0000ff",
-            type: 'scatter'
-        };
-
-        var trace2 = {
-            x: [1, 2, 3, 4],
-            y: [3, 5, 1, 7],
-            fill: 'tozeroy',
-            fillcolor: 'rgba(141, 141, 255, 0.1)',
-            line_color: 'indigo',
-            type: 'scatter'
-        };
-        var data = [trace1, trace2,];
-
-        return <Plot
-            data={data}
-            layout={{
-
-            }}
-
-        />
+        return <PlotLoadingView url={_myDatasetsUrl} title="testing"/>
     }
 
     const buildList = () => {
@@ -74,7 +51,7 @@ const DashboardView = () => {
 
         return (
             <>
-                <HeaderTitle>{t(`dashboard.reporting`)}</HeaderTitle>
+                {/* <HeaderTitle>{t(`dashboard.reporting`)}</HeaderTitle> */}
                 {buildPlot1()}
                 {ServicesLoadingListView({ url: _myServicesUrl, title: t('dashboard.my_services') })}
                 {ServicesLoadingListView({ url: _myDatasetsUrl, title: t('dashboard.my_data_sets') })}

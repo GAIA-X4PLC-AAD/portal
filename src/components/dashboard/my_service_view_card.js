@@ -32,7 +32,9 @@ const MyServiceViewCard = ({ index, data }) => {
                     <Block border={true} borderBottom={true}>
                         <Padding vertical='20px' horizontal='20px'>
                             <Column>
-                                {isOwn ? <Circle radius='10px' background='#0000' borderColor='#0000' /> : <Circle radius='10px' background='#7fcdbb' borderColor='#0000' />}
+                                {isOwn ? <Circle radius='10px' background='#0000' borderColor='#0000' /> : 
+                                    (<>{isActivated ? <Circle radius='10px' background='#7fcdbb' borderColor='#0000' /> 
+                                        : <Circle radius='10px' background='#ef6548' borderColor='#0000' />}</>)}
 
                                 <Style minWidth='100%'>
                                     <Padding vertical='18px'>
