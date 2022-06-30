@@ -1,7 +1,7 @@
 import { SIGN_IN, SIGN_OUT, } from "../actions/types";
 const INITIAL_STATE = {
     isUserSignedIn: false,
-    user: {'first_name': 'Katherine'}
+    user: {'first_name': 'Katherine', 'is_pr': true, 'date_format': 'yyyy-mm-dd', 'i18n': 'en'}
 };
 
 

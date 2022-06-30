@@ -3,7 +3,7 @@ import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Modal from "../../Modal";
 import VerticalSteps from "../../common/vertical_steps/VerticalSteps";
-import AuthPolling from "../AuthPolling";
+import AuthPolling from "../login/AuthPolling";
 import axios from "axios";
 import configData from "../../config/config.json";
 import LoginFail from "../login/LoginFail";
