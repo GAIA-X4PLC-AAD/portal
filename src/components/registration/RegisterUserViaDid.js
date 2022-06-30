@@ -6,7 +6,7 @@ import Modal from "../../Modal";
 import "./Register.css";
 import VerticalSteps from "../../common/vertical_steps/VerticalSteps";
 import configData from "../../config/config.json";
-import AuthPolling from "../AuthPolling";
+import AuthPolling from "../login/AuthPolling";
 
 import PropTypes from 'prop-types';
 

@@ -11,6 +11,7 @@ import { Padding } from "../discovery/tabs/style";
 const MyServiceViewCard = ({ index, data }) => {
 
     const isActivated = data['is_activated']
+    const isOwn = data['is_own']
 
     const { t, i18n } = useTranslation();
 
@@ -27,15 +28,18 @@ const MyServiceViewCard = ({ index, data }) => {
     const buildCard = () => {
         return (
             <Style maxWidth='315px'>
-                <Padding horizontal={'12px'}>
+                <Padding paddingRight='12px'>
                     <Block border={true} borderBottom={true}>
                         <Padding vertical='20px' horizontal='20px'>
                             <Column>
-                            {isActivated ? <Circle radius='10px' background='#0000' borderColor='#0000'/> : <Circle radius='10px' background='#7fcdbb' borderColor='#0000'/>}
-                                
+                                {isOwn ? <Circle radius='10px' background='#0000' borderColor='#0000' /> : 
+                                    (<>{isActivated ? <Circle radius='10px' background='#7fcdbb' borderColor='#0000' /> 
+                                        : <Circle radius='10px' background='#ef6548' borderColor='#0000' />}</>)}
+
                                 <Style minWidth='100%'>
                                     <Padding vertical='18px'>
-                                        <Style height='160px' backgroundColor='#fafafa'/>
+                                        {/* <Style height='160px' backgroundColor='#fafafa'/> */}
+                                        <Image src={data['preview_img']} alt="Logo" width='240px' height='200px' />
                                     </Padding>
                                 </Style>
                                 <Row justifyContent='start' alignItems='center'>
@@ -43,7 +47,7 @@ const MyServiceViewCard = ({ index, data }) => {
                                     <Padding horizontal='8px'>
                                         {colItem({
                                             title: data['name'],
-                                            subtitle: data['url'],
+                                            subtitle: 'provider_url',
                                         })}
                                     </Padding>
                                 </Row>
@@ -53,7 +57,9 @@ const MyServiceViewCard = ({ index, data }) => {
                                     </Padding>
                                 </Style>
 
-                                <Padding vertical><ButtonText>{isActivated ? t('dashboard.edit') : t('dashboard.activate')}</ButtonText></Padding>
+                                <Padding vertical>{isOwn ? <ButtonText>{t('dashboard.edit')}</ButtonText> : <></>}</Padding>
+                                <Padding vertical>{!isOwn ? <ButtonText>{isActivated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText> : <></>}</Padding>
+
                             </Column>
                         </Padding>
                     </Block>

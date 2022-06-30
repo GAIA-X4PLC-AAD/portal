@@ -9,8 +9,7 @@
         "provider": "Provider",
         "search": "Search",
         "logo-alt-text": "Gaia-x logo image",
-        "dashboard": "Dashboard",
-        "admin": "Admin"
+        "dashboard": "Dashboard"
         
     },
     "dashboard": {
@@ -29,7 +28,7 @@
         "register": "Register"
     },
     "article": {
-        "what-is-new": "What's new",
+        "what-is-new": "Qué hay de nuevo",
         "what-is-new-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
         "what-is-gaiax": "What is Gaia-X?",
         "what-is-gaiax-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
@@ -180,10 +179,7 @@
             "chip.text.service": "Service",
             "chip.filter.service": "SERVICE=",
             "chip.text.compute": "Compute",
-            "chip.filter.compute": "COMPUTE=",
-            "noResults": "No results found",
-            "noResultsMessage": "Sorry, we couldn’t find any matching results. Try broadening your filters",
-            "advance": "Advanced Search"
+            "chip.filter.compute": "COMPUTE="
         }
     },
     "account": {
@@ -244,26 +240,5 @@
             "removeUserHeader": "Remove user",
             "removeUserMessage": "are you sure do you want to remove user {{userName}}?"
         }
-    },
-    "admin": {
-        "participant" : "Participants",
-        "message-participant": "Lorem ipsum dolor si jet subtitle",
-        "management" : "Management",
-        "message-management": "Lorem ipsum dolor si jet subtitle",
-        "registration_type" : "Registration type",
-        "admin_ppr" : "Provider",
-        "admin_pcr" : "Consumer",
-        "admin_np" : "Natural person",
-        "request_type": "Request type",
-        "pr_cred": "Participant credentials",
-        "v_cred": "Verified credentials",
-        "sd": "Self-Description",
-        "location": "Location",
-        "details": "Details",
-        "sort-direction-ASC": "Sort: A-Z",
-        "sort-direction-DESC": "Sort: Z-A",
-        "attachments": "Attachments",
-        "approve": "Approve",
-        "deny": "Deny"
     }
 }

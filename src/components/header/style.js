@@ -38,6 +38,9 @@ export const HeaderButton = styled.button`
   padding: 1.33em;
   text-decoration: none;
   font-weight: 700;
+  margin-left: 4px;
+    margin-right: 4px;
+    min-width: 100px;
   &:hover{
     cursor: pointer;
 };

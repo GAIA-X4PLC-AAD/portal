@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
 export const CancelButton = styled.button`
     border: 2px solid #e8e8e8;
@@ -80,6 +81,7 @@ export const Row = styled.div`
     padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
     margin: ${props => props.margin || '0'};
     width: ${props => props.width || 'auto'};
+    height: ${props => props.height || 'auto'};
     justify-content: ${props => props.justifyContent || ''};
     align-items: ${props => props.alignItems || ''};
 `
@@ -92,7 +94,9 @@ export const Column = styled.div`
     padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
     margin: ${props => props.margin || '0'};
     width: ${props => props.width || 'auto'};
+    height: ${props => props.height || 'auto'};
     align-items: ${props => props.alignItems || ''};
+    justify-content: ${props => props.justifyContent || ''};
 `
 export const WrapColumn = styled(Column)`
     flex-wrap: wrap`;
@@ -105,6 +109,8 @@ export const Style = styled.div`
     display: ${props => props.display || ''};
     position: ${props => props.position || ''};
     left: ${props => props.left || ''};
+    right: ${props => props.right || ''};
+    top: ${props => props.top || ''};
     bottom: ${props => props.bottom || ''};
     text-align: start;
     padding-top: ${props => props.paddingTop || '0px'};
@@ -148,6 +154,7 @@ export const Image = styled.img`
   /* height: fit-content; */
   max-width: ${props => props.maxWidth || ''};
   min-width: ${props => props.minWidth || ''};
+  filter: ${props => props.filter || ''};;
 `;
 
 
@@ -233,7 +240,7 @@ export const ButtonText = styled.div`
     align-items: center;
     letter-spacing: 0.25px;
     cursor: pointer;
-    color: ${props => props.disabled ? '#bababa' : (props.color ? '#00A2E4' : '#000094')};
+    color: ${props => props.disabled ? '#bababa' : (props.color || '#000094')};
 `
 
 export const H4Text = styled.div`
@@ -276,7 +283,7 @@ export const BodyText = styled.div`
 
     /* greyscale/dark */
 
-    color: #4B4B4B;
+    color: ${props => props.color || '#4B4B4B'};
 `;
 
 export const Tag = styled.div`
@@ -333,14 +340,17 @@ export const MasterButton = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 16px 30px;
+    padding: 16px 8px;
+    margin-right: 10px;
     gap: 8px;
     cursor: pointer;
-    width: 98px;
+    width: 136px;
+    
 
     /* Background/Primary */
 
-    background: #000094;
+    /* background: #000094; */
+    background: ${props => props.disabled ? '#E8E8E8' : '#000094'};
     border-radius: 4px;
 
     /* Button */
@@ -352,17 +362,18 @@ export const MasterButton = styled.div`
     line-height: 20px;
     /* identical to box height, or 111% */
 
+
     display: flex;
     align-items: center;
     text-align: center;
     letter-spacing: 0.25px;
-    color: #FFFFFF;
+    color: ${props => props.disabled ? '#1C0E15' : '#FFFFFF'};
 `
 
 export const HorizontalLine = styled.div`
     height: 1px;
     border: 0;
-    border-top: 1px solid ${props => props.color || '#E8E8E8'};;
+    border-top: 1px solid ${props => props.color || '#E8E8E8'};
     margin: 1em 0;
     padding: 0;
 `
@@ -380,8 +391,8 @@ export const OutlineButton = styled.div`
     /* height: 33px; */
 
     /* Background/Primary */
-
-    border: 2px solid #000094;
+    background: ${props => props.disabled ? '#E8E8E8' : ''};
+    border: 2px solid ${props => props.disabled ? '#E8E8E8' : '#000094'};
     border-radius: 4px;
     font-family: 'Titillium Web';
     font-style: normal;
@@ -397,7 +408,7 @@ export const OutlineButton = styled.div`
 
     /* Background/Primary */
     cursor: pointer;
-    color: #000094;
+    color: ${props => props.disabled ? '#1C0E15' : '#000094'};
 `
 
 export const TextInput = styled.input`
@@ -422,3 +433,17 @@ export const TextInput = styled.input`
 
     ::placeholder {}
 `
+
+export const StyledModal = Modal.styled`
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  opacity: ${(props) => props.opacity};
+  transition : all 0.3s ease-in-out;`;
+
+export const FadingBackground = styled(BaseModalBackground)`
+  opacity: ${(props) => props.opacity};
+  transition: all 0.3s ease-in-out;
+`;
