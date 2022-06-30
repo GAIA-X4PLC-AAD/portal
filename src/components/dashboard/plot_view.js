@@ -33,10 +33,10 @@ const responsive = {
 };
 
 
-const PlotView = ({ plotData }) => {
+const PlotView = ({ plots }) => {
 
     return <Plot
-        data={[plotData]}
+        data={plots}
         layout={{
 
         }}
@@ -45,7 +45,7 @@ const PlotView = ({ plotData }) => {
 
 PlotView.propTypes = {
     type: PropTypes.string,
-    plotData: PropTypes.object.isRequired,
+    plots: PropTypes.array.isRequired,
 };
 
 const PlotSuccessView = (props,) => {
@@ -57,32 +57,19 @@ const PlotSuccessView = (props,) => {
         if (props.data !== undefined) {
             const _items = props.data['results']
             _setData(_items)
-            // to force update the Carousel view
-            setInterval(() => { _setFake1(false) }, 1000);
         }
 
     }, [props.data]);
 
     const itemsViews = _data?.map((element1, _index) => {
 
-        const plotViews = element1['charts']?.map((element2, _index) => {
-            return <PlotView plotData={element2} key={`${_index}-${element1['name']}`} />
-        })
+        const plotViews = <PlotView plots={element1['charts']} key={`${_index}-${element1['name']}`} />
 
         return <Style key={`${_index}-${_index}}`}>
             {(_data !== undefined && _data != null) ?
                 <>
                     <H4Text>{element1['name']}</H4Text>
-                    <Carousel
-                        arrows={false}
-                        swipeable={false}
-                        draggable={false}
-                        responsive={responsive}
-
-                        renderButtonGroupOutside={true}
-                        customButtonGroup={<NextPrevButtons />}>
-                        {plotViews}
-                    </Carousel>
+                    {plotViews}
                 </> : <></>}
         </Style>
     }) ?? []

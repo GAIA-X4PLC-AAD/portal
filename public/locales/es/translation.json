@@ -1,0 +1,244 @@
+{
+    "app": {
+        "main-title": "main title"
+    },
+    "left-menu": {
+        "home": "Home",
+        "services": "Services",
+        "data": "Data",
+        "provider": "Provider",
+        "search": "Search",
+        "logo-alt-text": "Gaia-x logo image",
+        "dashboard": "Dashboard"
+        
+    },
+    "dashboard": {
+        "reporting": "Reporting",
+        "my_services": "My Services",
+        "my_data_sets": "My Data Sets",
+        "solution_packages": "My Solution Packages",
+        "activate": "Activate",
+        "deactivate": "Deactivate",
+        "edit": "Edit"
+    },
+    "top-menu": {
+        "help": "Help",
+        "signin": "Sign in",
+        "signout": "Sign out",
+        "register": "Register"
+    },
+    "article": {
+        "what-is-new": "What's new",
+        "what-is-new-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
+        "what-is-gaiax": "What is Gaia-X?",
+        "what-is-gaiax-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
+        "details-button": "Details"
+    },
+       
+    "home": {
+        "welcome.title": "Welcome to GAIA-X",
+        "welcome.subtitle": "A federated Data Infrastructure for Europe"
+    },
+
+    "message-bar": {
+        "not-found": "Oh no! We couldn't find any results."
+    },
+
+    "form": {
+        "registerDid":"Registration via DID",
+        "continue": "Continue",
+        "cancel": "Cancel",
+        "close": "Close",
+        "prev": "Previous",
+        "send": "Send",
+        "finish": "Finish",
+        "user": "User",
+        "organization": "Organization",
+        "lStreet": "Street",
+        "lFirstName": "First Name",
+        "lLastName": "Last Name",
+        "lEmail": "Email address",
+        "lPhone": "Phone number",
+        "lStreetnNumber": "Street and number",
+        "lZIP": "ZIP",
+        "lCity": "City",
+        "lCountry": "Country",
+        "lAisbl": "Apply for AISBL Membership",
+	    "formUserTitleEmail": "Please enter valid email address.",
+        "regViaDID": "Register via DID",
+        "noDid": "I don't have a DID",
+        "regViaDIDNoDID": "I don't have a DID",
+        "regViaDIDIdPHeading": "Don't have a DID?",
+        "regViaDIDIdPSelect": "Please select IdSP to create a DID",
+        "almostDone": "...almost done: please check your email inbox now. We have sent you a message with a confirmation link.",
+        "formUserHeadline": "Welcome to GAIA-X",
+        "formUserOrganization": "Do you want to register a user or a provider?",
+        "formUserOne": "Create your account in a few steps and benefit of our secure and transparent Federated Catalogue.",
+        "formUserTwo": "Cool, so you want to become a customer! To issue you Verified Credentials, we need your account details.",
+        "formUserThree": "Thanks for sending us your account details.",
+        "formUserDidReg": "Please scan the QR code with you wallet app.",
+        "formUserDidRegHelp": "So you have already a DID? Please scan the code.",
+        "formOrganizationOne": "Cool, so you want to become a provider! To issue you Verified credentials, we need your organization's details.",
+        "formOrganizationOneInformation": "Please upload your organization details or select express registration via DID.",
+        "formOrganizationProofOfOnboarding": "Proof of onboarding authorization",
+        "formOrganizationPleaseVerifyYourself": "Please verify yourself as employee of your organization.",
+        "formDisplayVC": "We found the following details of your organization.",
+        "formDisplayVCHeading": "Organization details",
+        "formDisplayVCUser": "We found the following account details.",
+        "formDisplayVCHeadingUser": "Account details",
+        "formComplianceCheck": "But first, we have to do the compliance check.",
+        "formComplianceCheckHeading": "Your onboarding request will be checked by the AISBL. This may take some time. Please enter your email address to receive status updates of your onboarding.",
+        "formEmailValidationError": "Invalid email format, please check.",
+        "formOrganizationNameValidationError": "Not valid empty string or blank for organization.",
+        "formOrganizationAISBLValidationError":"Uploaded AISBL is not boolean.",
+        "formOrganizationNoProcuraError": "We couldn't find any authorized credentials. Please contact your organization.",
+        "organizationFormEmailSentHelp": "Thanks for sending us your organization's details.",
+        "userFormEmailSentHelp": "Thanks for sending us your account details.",
+        "formEmailSentMessage":"...almost done: please check your email inbox now. We have sent you a message with a confirmation link.",
+        "confirmationLoading": "Loading....",
+        "organizationConfirmationMessageSuccess": "Thank's for confirming the email we've sent you. After submitting, your organization's details will be checked by the AISBL. You'll receive an email with your DID and Verified Credentials soon.",
+        "organizationConfirmationMessageError": "The confirmation code is not longer valid.",
+        "userConfirmationMessageSuccess": "Thank's for confirming the email we've sent you. After submitting, your organization's details will be checked by the AISBL. You'll receive an email with your DID and Verified Credentials soon.",
+        "userConfirmationMessageError": "The confirmation code is not longer valid.",
+        "confirmationHelp": "Confirmation link clicked!",
+        "ok": "Ok"
+    },
+    "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
+    "footer_slogan_cap": "ERLEBEN, WAS VERBINDET.",
+    "footer_business_only": "Gaia-X - For business customers only",
+    "login": {
+        "fail.header": "Login failed",
+        "fail.widgetMessage": "You need to install a wallet browser extension to login with your credentials.",
+        "close": "Close",
+        "welcome": "Welcome to Gaia-X",
+        "signinContinue":"Sign in to continue",
+        "scanMessage": "Scan the QR code with your mobile device.",
+        "faq":"FAQ & Support",
+        "missingAccount": "Don’t have any account?",
+        "register": "Register now",
+        "loginButton": "Login"
+    },
+    "links": {
+        "imprint": "Imprint",
+        "privacy": "Privacy",
+        "policy": "Policy",
+        "cookie_settings": "Cookie Settings",
+        "terms_and_conditions": "Terms & Conditions",
+        "contact": "Contact",
+        "help": "Help"
+    },
+    "work-in-progress.message" : "Work in progress....",
+    "service-tile": {
+        "details": "Details",
+        "price": "Price",
+        "screenshots": "Screenshots",
+        "contact": "Contact",
+        "datasets": "Data sets",
+        "services": "Services",
+        "sample": "Sample record",
+        "header": {
+            "stack": "Stack",
+            "security": "Security",
+            "location": "Location",
+            "sustainability": "Sustainability",
+            "sortDescription": "Short Description",
+            "availability": "Availability"
+        },
+        "bookButton": "Book",
+        "description": "Description",
+        "certificates": "Certificates",
+        "member_since_UP": "MEMBER SINCE",
+        "last_update_UP": "LAST UPDATE",
+        "location_UP": "LOCATION",
+        "source_UP": "SOURCE",
+        "category_UP": "CATEGORY",
+        "cloud_service_UP": "CLOUD SERVICE",
+        "frequency_of_update_UP": "FREQUENCY OF UPDATE",
+        "sample_header_text": "Try this simple queries below in the BigQuery UI"
+    },
+    "discovery": {
+        "contactTypes": {
+            "tech_phone": "Technical phone number",
+            "tech_email": "Technical email address",
+            "supp_phone": "Support phone number",
+            "supp_email": "Support email address"
+        },
+        "lists": {
+            "data": "Data",
+            "services": "Services",
+            "ppr": "Provider"
+        },
+        "search": {
+            "filter": "Filter",
+            "chip.text.not": "Not",
+            "chip.filter.not": "NOT=",
+            "chip.text.provider": "Provider",
+            "chip.filter.provider": "PROVIDER=",
+            "chip.text.storage": "Storage",
+            "chip.filter.storage": "STORAGE=",
+            "chip.text.service": "Service",
+            "chip.filter.service": "SERVICE=",
+            "chip.text.compute": "Compute",
+            "chip.filter.compute": "COMPUTE="
+        }
+    },
+    "account": {
+        "myAccount": "My Account",
+        "myAccountDescription": "Here you can manage all your information",
+        "detailsTab" : "Details",
+        "logHistoryTab" : "Log History",
+        "credentialsTab" : "Credentials",
+        "details": {
+            "basicData": "Basic data",
+            "details":"Details",
+            "editAccount": "Edit account",
+            "email": "Email Address",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "companyName": "Company name",
+            "comercialRegister": "Comercial Regisger",
+            "registeredAddress": "Registered address",
+            "website": "Website",
+            "individualContact": "Individual contact",
+            "certifications": "Certifications",
+            "alias": "Alias",
+            "localAttestation": "Local Attestation",
+            "transparencyRegister": "Transparency register",
+            "dunsNumber": "D-U-N-S Number",
+            "legalEntityIdentifier": "Legal Entity Identifier",
+            "dataProviderOfficer": "Data Provider Officer",
+            "attributeOfVC": "Attribute of VC"
+        },
+        "edit": {
+            "uploadMessage": "Please upload your new self description.",
+            "upload": "Upload",
+            "removeAccount": "Remove account",
+            "cancel": "Cancel",
+            "save": "Save",
+            "uploadCompleted": "Upload completed",
+            "uploadCompletedMessage": "Your self.description file will be verified by the AISLB. You will get a notification when it is approved.",
+            "removeAccountHeader": "Remove Account",
+            "removeAccountMessage": "are you sure do you want to remove your Gaia-x account?",
+            "remove": "Remove"
+        },
+        "loginHistory": {
+            "date": "Date",
+            "time": "Time",
+            "name": "Name"
+        },
+        "credentials": {
+            "name": "Name",
+            "role": "Role",
+            "addUser": "Add user",
+            "firstName": "First name",
+            "lastName": "Last name",
+            "email": "Email",
+            "edit": "Edit",
+            "remove": "Remove",
+            "cancel": "Cancel",
+            "save": "Save",
+            "removeUserHeader": "Remove user",
+            "removeUserMessage": "are you sure do you want to remove user {{userName}}?"
+        }
+    }
+}
