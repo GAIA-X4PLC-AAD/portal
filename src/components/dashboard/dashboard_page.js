@@ -7,6 +7,7 @@ import { Padding } from "../discovery/tabs/style";
 import DashboardView from "./dashboard_view";
 import SideSectionsView from "./side_sections_view";
 import { useSelector } from "react-redux";
+import DateTimeCard from "./date_time_card";
 
 
 const DashboardPage = () => {
@@ -14,7 +15,7 @@ const DashboardPage = () => {
     const type = 'dashboard';
     const _leftPanelWidth = '225px'
 
-//   const _isPr = useSelector((state) => state.user.user.is_pr && state.isUserSignedIn)
+    //   const _isPr = useSelector((state) => state.user.user.is_pr && state.isUserSignedIn)
     const _isPr = useSelector((state) => true)
 
     const colItemView = ({ title, caption, subtitle, }) => {
@@ -42,15 +43,17 @@ const DashboardPage = () => {
             </Row>
         </>
 
-        const _cardView = <Padding vertical='24px'>
+        const _dateView = <Padding vertical='24px'>
             <Card>
-                <Padding vertical='16px' horizontal='24px'>{colItemView({ title: '2pm', subtitle: 'Tuesday, 9th March 2021', caption: '' })}</Padding>
+                <Padding vertical='16px' horizontal='24px'>
+                    {colItemView({ title: '2pm', subtitle: 'Tuesday, 9th March 2021', caption: '' })}
+                </Padding>
             </Card>
         </Padding>
 
         return <>
             {_welcomeView}
-            {_cardView}
+            <DateTimeCard/>
             <SideSectionsView />
         </>
     }

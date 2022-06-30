@@ -7,6 +7,7 @@ import './index.css';
 import App from './App';
 import './i18n';
 import reducers from './reducers';
+import moment from 'moment';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -38,6 +39,8 @@ const store = createStore(reducers, persistedStore, composeEnhancers(
 store.subscribe(() => {
   saveToLocalStorage(store.getState());
 });
+
+// moment.defineLocale('en', null)
 
 
 ReactDOM.render(
