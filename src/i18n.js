@@ -20,6 +20,7 @@ i18n
     wait: false,
     debug: true,
     fallbackLng: 'en',
+    lng: 'en', // if you're using a language detector, do not define the lng option
     preload: ['en', 'es'],
     defaultNS: ['translation'],
     backend: {
