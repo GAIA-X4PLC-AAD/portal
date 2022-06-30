@@ -9,7 +9,8 @@
         "provider": "Provider",
         "search": "Search",
         "logo-alt-text": "Gaia-x logo image",
-        "dashboard": "Dashboard"
+        "dashboard": "Dashboard",
+        "admin": "Admin"
         
     },
     "dashboard": {
@@ -179,7 +180,10 @@
             "chip.text.service": "Service",
             "chip.filter.service": "SERVICE=",
             "chip.text.compute": "Compute",
-            "chip.filter.compute": "COMPUTE="
+            "chip.filter.compute": "COMPUTE=",
+            "noResults": "No results found",
+            "noResultsMessage": "Sorry, we couldn’t find any matching results. Try broadening your filters",
+            "advance": "Advanced Search"
         }
     },
     "account": {
@@ -240,5 +244,26 @@
             "removeUserHeader": "Remove user",
             "removeUserMessage": "are you sure do you want to remove user {{userName}}?"
         }
+    },
+    "admin": {
+        "participant" : "Participants",
+        "message-participant": "Lorem ipsum dolor si jet subtitle",
+        "management" : "Management",
+        "message-management": "Lorem ipsum dolor si jet subtitle",
+        "registration_type" : "Registration type",
+        "admin_ppr" : "Provider",
+        "admin_pcr" : "Consumer",
+        "admin_np" : "Natural person",
+        "request_type": "Request type",
+        "pr_cred": "Participant credentials",
+        "v_cred": "Verified credentials",
+        "sd": "Self-Description",
+        "location": "Location",
+        "details": "Details",
+        "sort-direction-ASC": "Sort: A-Z",
+        "sort-direction-DESC": "Sort: Z-A",
+        "attachments": "Attachments",
+        "approve": "Approve",
+        "deny": "Deny"
     }
 }

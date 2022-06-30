@@ -165,22 +165,6 @@ letter-spacing: 0.4px;
 color: #B2B2B2;
 `;
 
-export const Tag = styled.div`
-  /* Tag */
-  padding: 2px 12px;
-  gap: 10px;
-  margin: 0px 8px;
-  /* Background/Primary */
-  background: #000094;
-  border-radius: 12px;
-  /* Caption */
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  color: white;
-  line-height: 16px;
-`
 export const FlagImg = styled.img`
   width: 19px;
   height: 19px;

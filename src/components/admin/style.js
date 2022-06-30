@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as S from '../../../common/styles';
+import * as S from '../../common/styles';
 
 export const Column = styled.div`
     font-family: 'Titillium Web';
@@ -43,7 +43,6 @@ export const Filters = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 8px;
     padding: 0px 0px 12px;
     gap: 12px;
     width: 312px;
@@ -69,7 +68,6 @@ export const Rounded=styled.div`
 `;
 
 export const FilterHeader=styled.div`
-    margin-top:80px;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -162,6 +160,41 @@ line-height: 24px;
 letter-spacing: 0.25px;
 color: #262626;`;
 
-export const FloatRight=styled.div`
-float:right;
+export const Row=styled(S.Row)`
+    justify-content: space-around;
+    align-items: center;
 `;
+export const DetailsContainer=styled.div`
+    max-width: 470px;
+    margin: 24px auto;
+`;
+
+export const ElementGroup=styled.div`
+    margin-top: 12px;
+    margin-bottom: 12px;
+`;
+
+export const RadioButton = styled.input`
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  margin-right: 10px;
+  background: #FFFFFF;
+  border: 1px solid #E9E9E9;
+  &:checked {
+      background: #000094;
+      border: 1px solid #000094;
+    }
+`;
+
+export const CaptionText = styled(S.CaptionText)`
+    color: #B2B2B2;
+`;
+
+export const BlueButton = styled(S.BlueButton)`
+margin-left: 0;
+margin-right: 1em;`
+
+export const CancelButton = styled(S.CancelButton)`
+margin-left: 0;
+margin-right: 1em;`
