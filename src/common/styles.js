@@ -408,8 +408,8 @@ export const OutlineButton = styled.div`
 
     /* Background/Primary */
     cursor: pointer;
-    color: ${props => props.disabled ? '#1C0E15' : '#000094'};
-`
+    color: ${props => props.disabled ? '#1C0E15' : '#000094'}
+`;
 
 export const TextInput = styled.input`
     font-family: 'Titillium Web';
