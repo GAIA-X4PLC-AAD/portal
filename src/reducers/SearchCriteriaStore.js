@@ -6,13 +6,16 @@ const INITIAL_STATE = {
     filterCriteria : [],
     size : 15,
     page : 1,
+    sort_field: '',
+    sort_direction: 'ASC'
 };
 
 const parameterBuilder = (state) => {
     let criterias = state.filterCriteria.map((criteria) => {return (`&${encodeURIComponent(criteria.key)}=${encodeURIComponent(criteria.value)}`)}).
     reduce((previous, current) => previous+current, '');
+    let sort = state.sort_field?`&sort_field=${state.sort_field}&sort_direction=${state.sort_direction}`:'';
     let searchTerm = state.searchTerms?`&search_terms=${encodeURIComponent(state.searchTerms)}`:'';
-    let parameter = `size=${state.size}&page=${state.page}${searchTerm}${criterias}`;        
+    let parameter = `size=${state.size}&page=${state.page}${searchTerm}${criterias}${sort}`;        
     return parameter;
 }
 
@@ -27,7 +30,9 @@ const updatePage = (currentState, pageNumber) => {
 }
 
 const setInitialStateType = (type)=>{
-    const state = {...INITIAL_STATE, type: type};
+    let sort_field=type==='participant'||type==='management'?'participant_name':'';
+    let sort_direction=type==='participant'||type==='management'?'ASC':'';
+    const state = {...INITIAL_STATE, type: type, sort_field: sort_field, sort_direction: sort_direction};
     return {...state, parameters: parameterBuilder(state)}
 }
 

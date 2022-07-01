@@ -30,9 +30,10 @@ const SearchTerm = ({t, type}) => {
     }
 
     const showAdvanceSearchChip = (advance) => {
+        if (type === 'management' || type === 'participant') return null;
         const chips = ['not','provider','storage','service','compute'];
         if(advance === false) {
-            return (<S.AdvancedSearch onClick={()=>setAdvance(true)}>Advanced Search</S.AdvancedSearch>);
+            return (<S.AdvancedSearch onClick={()=>setAdvance(true)}>{t("discovery.search.advance")}</S.AdvancedSearch>);
         } else {
             return chips.map((chip) => {return (<S.AdvancedSearch onClick={()=>{addChipToSearch(chip)}} key={chip}>{t(`discovery.search.chip.text.${chip}`)}</S.AdvancedSearch>)});
         }
@@ -42,9 +43,13 @@ const SearchTerm = ({t, type}) => {
             doSearch();
         }
     }
+    const searchMargin = (type) => {
+        if (type === 'management' || type === 'participant') return '0 0 24px auto';
+        return '0 0 0 auto';
+    }
 
     return (
-            <Column key={type}>
+            <Column key={type} margin={searchMargin(type)}>
                 <Row>
                     <S.SearchTerm type="text" onKeyPress={onKeyPress} value={searchTerm} onChange={(e)=> {setSearchTerm(e.target.value)}}/>
                     <S.SearchPlusButton onClick={doSearch}><S.SearchPlusImage/></S.SearchPlusButton>     

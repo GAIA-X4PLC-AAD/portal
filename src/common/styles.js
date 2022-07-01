@@ -85,6 +85,8 @@ export const Row = styled.div`
     justify-content: ${props => props.justifyContent || ''};
     align-items: ${props => props.alignItems || ''};
 `
+export const WrapRow = styled(Row)`
+    flex-wrap: wrap`;
 
 export const Column = styled.div`
     display: flex;
@@ -96,6 +98,8 @@ export const Column = styled.div`
     align-items: ${props => props.alignItems || ''};
     justify-content: ${props => props.justifyContent || ''};
 `
+export const WrapColumn = styled(Column)`
+    flex-wrap: wrap`;
 
 export const Style = styled.div`
     border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
@@ -121,7 +125,7 @@ export const Style = styled.div`
     width: ${props => props.width || ''};
     margin-left: ${props => props.marginLeft || '0px'};
     margin-right: ${props => props.marginRight || '0px'};
-    margin-right: ${props => props.marginRight || '0px'};
+    margin-bottom: ${props => props.marginBottom || '0px'};
     margin-top: ${props => props.marginTop || '0px'};
     z-index: ${props => props.zIndex || 'auto'};
     background-color: ${props => props.backgroundColor || ''};
@@ -155,16 +159,36 @@ export const Image = styled.img`
 
 
 export const BodySmallBoldText = styled.div`
-    font-family: 'Titillium Web';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 20px;
-    /* identical to box height, or 133% */
+<<<<<<< HEAD
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 15px;
+line-height: 20px;
+/* identical to box height, or 133% */
+letter-spacing: 0.25px;
+color: #000000;
+`;
 
-    letter-spacing: 0.25px;
-    color: ${props => props.color || '#000000'};
-`
+export const CaptionTeleNeoText = styled.div`
+font-family: 'TeleNeo';
+font-style: normal;
+font-weight: 400;
+font-size: 12px;
+line-height: 16px;
+letter-spacing: 0.4px;
+color: #4B4B4B;
+`;
+//#1C0E15;;
+export const BodySmallText = styled.div`
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 20px;
+letter-spacing: 0.25px;
+color: ${props => props.color || '#000000'};
+`;
 
 export const CaptionText = styled.div`
     font-family: 'Titillium Web';
@@ -175,7 +199,7 @@ export const CaptionText = styled.div`
 
     letter-spacing: 0.4px;
     color: #000000;
-`
+`;
 
 export const Card = styled.div`
     box-sizing: border-box;
@@ -243,12 +267,16 @@ export const H4LightText = styled.div`
     color: #1C0E15;
 `
 
+
 export const BodyText = styled.div`
     font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 24px;
+    letter-spacing: 0.25px;
+    color: #2A2A2A;
+
     /* identical to box height, or 133% */
 
     letter-spacing: 0.25px;
@@ -256,7 +284,39 @@ export const BodyText = styled.div`
     /* greyscale/dark */
 
     color: ${props => props.color || '#4B4B4B'};
-`
+`;
+
+export const Tag = styled.div`
+  /* Tag */
+  padding: 2px 12px;
+  gap: 10px;
+  margin: 0px 8px;
+  /* Background/Primary */
+  background: #000094;
+  border-radius: 12px;
+  /* Caption */
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  color: white;
+  line-height: 16px;
+`;
+export const TagLink = styled(Tag)`
+    cursor: pointer;`;
+
+export const BlueLinkText = styled.div`
+    font-family: Titillium Web;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0.25px;
+    text-align: center;
+    color: #000094;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
+`;
 
 export const BodyBoldText = styled.div`
 /* Body Bold */
@@ -274,20 +334,6 @@ export const BodyBoldText = styled.div`
     color: #2A2A2A;
 `
 
-export const BodySmallText = styled.div`
-    font-family: 'Titillium Web';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 15px;
-    line-height: 20px;
-    /* identical to box height, or 133% */
-
-    letter-spacing: 0.25px;
-
-    /* Text/Dark Grey */
-
-    color: #2A2A2A;
-`
 
 export const MasterButton = styled.div`
     display: flex;
@@ -362,8 +408,8 @@ export const OutlineButton = styled.div`
 
     /* Background/Primary */
     cursor: pointer;
-    color: ${props => props.disabled ? '#1C0E15' : '#000094'};
-`
+    color: ${props => props.disabled ? '#1C0E15' : '#000094'}
+`;
 
 export const TextInput = styled.input`
     font-family: 'Titillium Web';

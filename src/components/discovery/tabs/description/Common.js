@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as S from '../style';
+import { Tag } from '../../../../common/styles';
+
 
 export const ShowElements = (elements) => {
     if (elements === undefined || elements === []) return;
     return (
-        elements.map((elem, i) => {return (<S.Tag key={i}>{elem}</S.Tag>)})
+        elements.map((elem, i) => {return (<Tag key={i}>{elem}</Tag>)})
     );
 
 }
