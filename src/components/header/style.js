@@ -46,3 +46,15 @@ export const HeaderButton = styled.button`
 };
 `
 
+export const SimpleButton = styled.button`
+
+  border-color: #0000;
+  background-color: #fff;
+
+  text-decoration: none;
+  font-weight: 700;
+  &:hover{
+    cursor: pointer;
+};
+`
+

@@ -220,14 +220,16 @@ export const Circle = styled.div`
     width: ${props => props.radius || '50px'};
     min-width: ${props => props.radius || '50px'};
     height: ${props => props.radius || '50px'};
-
+    cursor: ${props => props.isButton ? 'pointer' : ''};
     justify-content: center;
-    background-color: #F9F9F9;
+    background-color: ${props => props.backgroundColor || '#F9F9F9'};
     /* clip-path: circle(); */
     background: ${props => props.background || '#F9F9F9'};
 
-    border: 1px solid ${props => props.borderColor || '#E9E9E9'};
+    border: ${props => props.borderThickness || '1px'} solid ${props => props.borderColor || '#E9E9E9'};
     border-radius: 50%;
+    background-image: url(${props => props.backgroundImage || ''});
+    background-size: contain;
 `
 
 export const ButtonText = styled.div`
