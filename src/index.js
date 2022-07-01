@@ -40,8 +40,6 @@ store.subscribe(() => {
   saveToLocalStorage(store.getState());
 });
 
-// moment.defineLocale('en', null)
-
 
 ReactDOM.render(
   <Provider store={store}>
