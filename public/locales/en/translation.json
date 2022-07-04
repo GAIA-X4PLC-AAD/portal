@@ -265,5 +265,9 @@
         "attachments": "Attachments",
         "approve": "Approve",
         "deny": "Deny"
+    },
+    "solution_pkg": {
+        "a_s": "{as, plural, =1 {1 available service} other {# available services}}"
     }
 }
+
