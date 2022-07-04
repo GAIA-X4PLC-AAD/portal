@@ -7,6 +7,7 @@ import Article from "./components/article/Article";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
+
 import PropTypes from 'prop-types';
 import { Column } from "./common/styles";
 import { Padding } from "./components/discovery/tabs/style";
@@ -40,27 +41,37 @@ const Home = ({ t }) => {
     return <Column>
       <h1>{t('article.what-is-new')}</h1>
       <h4>{t('filler')}</h4>
-      <Padding vertical='20px'/>
+      <Padding vertical='20px' />
     </Column>
   }
 
-  // const CustomDot = ({ onClick, ...rest }) => {
-  //   const {
-  //     onMove,
-  //     index,
-  //     active,
-  //     carouselState: { currentSlide, deviceType }
-  //   } = rest;
-  //   const carouselItems = [CarouselItem1, CaourselItem2, CarouselItem3];
-  //   return (
-  //     <button
-  //       className={active ? "active" : "inactive"}
-  //       onClick={() => onClick()}
-  //     >
-  //       {React.Children.toArray(carouselItems)[index]}
-  //     </button>
-  //   );
-  // };
+  const slides = [
+    buildSliderContent(),
+    buildSliderContent(),
+    buildSliderContent()
+  ]
+
+  const CustomDot = ({ onClick, ...rest }) => {
+    const {
+      onMove,
+      index,
+      active,
+      carouselState: { currentSlide, deviceType }
+    } = rest;
+    const carouselItems = slides;
+    return (
+      <button
+        className={active ? "active" : "inactive"}
+        onClick={() => onClick()}
+      >
+        {React.Children.toArray(carouselItems)[index]}
+      </button>
+    );
+  }
+
+  CustomDot.propTypes = {
+    onClick: PropTypes.func
+  }
 
   const HomeSlider = () => {
     return <Carousel
@@ -68,11 +79,10 @@ const Home = ({ t }) => {
       swipeable={true}
       draggable={true}
       showDots
+      // customDot={<CustomDot />}
       responsive={responsive}
     >
-      {buildSliderContent()}
-      {buildSliderContent()}
-      {buildSliderContent()}
+      {slides}
     </Carousel>
   }
 
