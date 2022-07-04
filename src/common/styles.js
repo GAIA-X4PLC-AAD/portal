@@ -449,3 +449,26 @@ export const FadingBackground = styled(BaseModalBackground)`
   opacity: ${(props) => props.opacity};
   transition: all 0.3s ease-in-out;
 `;
+
+export const SliderBullet = styled.button`
+    width: 18px;
+    height: 5px;
+    border: 0px solid #0000;
+    background-color: #fff;
+    background: ${(props) => props.isActive ? '#8D8DFF' : '#FFFFFF'};
+    /* padding: 0px 4px; */
+    margin: 0px 4px;
+    border-radius: 4px;
+`
+
+/* export const HeaderButton = styled.button`
+  border: 2px solid #000094;
+  border-radius: 4px 4px 4px 4px;
+  background-color: #fff;
+  color: #000094;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  padding: 1.33em;
+  text-decoration: none;
+  font-weight: 700;
+` */

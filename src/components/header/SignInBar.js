@@ -7,7 +7,8 @@ import * as S from './style';
 
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { BodyBoldText, ButtonText, Circle, Row } from '../../common/styles';
+import { BodyBoldText, ButtonText, Circle, DropDownArrowUp, Row } from '../../common/styles';
+import { DropDownArrowDown } from '../account/ProviderCredentialStyle';
 
 //
 // each function component is independent, isolated and testable.
@@ -77,10 +78,12 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
   const signedInButtons =
     <>
       <Row alignItems='center'>
-        <UserAvatarButton />
         {/* <UserInfoButton /> */}
         <PprInfoButton />
         <SignOutButton onClicked={handleSignOut} />
+        <UserAvatarButton />
+        <ButtonText>Help</ButtonText>
+        <DropDownArrowUp/>
       </Row>
     </>;
 

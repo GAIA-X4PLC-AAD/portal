@@ -9,7 +9,7 @@ import "react-multi-carousel/lib/styles.css";
 
 
 import PropTypes from 'prop-types';
-import { Column } from "./common/styles";
+import { Circle, Column, SliderBullet } from "./common/styles";
 import { Padding } from "./components/discovery/tabs/style";
 
 const Home = ({ t }) => {
@@ -37,18 +37,20 @@ const Home = ({ t }) => {
 
   const isInSignInMenu = useSelector((state) => state.signin.isInSignInMenu)
 
-  const buildSliderContent = () => {
+  const buildSliderContent = ({index = 0}) => {
     return <Column>
-      <h1>{t('article.what-is-new')}</h1>
+      <h1>{t('article.what-is-new')} {index}</h1>
       <h4>{t('filler')}</h4>
       <Padding vertical='20px' />
     </Column>
   }
 
   const slides = [
-    buildSliderContent(),
-    buildSliderContent(),
-    buildSliderContent()
+    buildSliderContent({index: 1}),
+    buildSliderContent({index: 2}),
+    buildSliderContent({index: 3}),
+    buildSliderContent({index: 4}),
+    buildSliderContent({index: 5}),
   ]
 
   const CustomDot = ({ onClick, ...rest }) => {
@@ -58,15 +60,17 @@ const Home = ({ t }) => {
       active,
       carouselState: { currentSlide, deviceType }
     } = rest;
-    const carouselItems = slides;
-    return (
-      <button
-        className={active ? "active" : "inactive"}
-        onClick={() => onClick()}
-      >
-        {React.Children.toArray(carouselItems)[index]}
-      </button>
-    );
+
+    const carouselItems = [
+      <SliderBullet key='sb01' isActive={active} onClick={() => onClick()} />,
+      <SliderBullet key='sb02' isActive={active} onClick={() => onClick()} />,
+      <SliderBullet key='sb04' isActive={active} onClick={() => onClick()} />,
+      <SliderBullet key='sb05' isActive={active} onClick={() => onClick()} />,
+      <SliderBullet key='sb06' isActive={active} onClick={() => onClick()} />,
+    ];
+    return <>
+      {React.Children.toArray(carouselItems)[index]}
+    </>;
   }
 
   CustomDot.propTypes = {
@@ -79,7 +83,7 @@ const Home = ({ t }) => {
       swipeable={true}
       draggable={true}
       showDots
-      // customDot={<CustomDot />}
+      customDot={<CustomDot />}
       responsive={responsive}
     >
       {slides}
@@ -95,8 +99,7 @@ const Home = ({ t }) => {
             <img src='/images/logo_white.svg' height='80px' width='200px'></img>
           </div>
           {HomeSlider()}
-          {/* <h1>{t('article.what-is-new')}</h1>
-          <h4>{t('filler')}</h4> */}
+          <Padding vertical='20px'/>
           <div className='banner-slider'>
           </div>
         </div>
