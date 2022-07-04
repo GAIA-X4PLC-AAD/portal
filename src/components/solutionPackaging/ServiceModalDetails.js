@@ -49,7 +49,10 @@ const ServiceModalDetails = ({service, closeModal}) => {
         );
     }
    
-    const tabLabels =[ 'Details', 'Price', 'Screenshots', 'Contacts'];
+    const tabLabels =[ t('solution_pkg.details'), 
+                        t('solution_pkg.price'), 
+                        t('solution_pkg.screenshots'), 
+                        t('solution_pkg.contact')];
 
     const tabViews = [DescriptionTab({ id: service.id, type: 'services'}),
                       PriceTab({ id: service.id, type: 'services' }),
@@ -57,12 +60,12 @@ const ServiceModalDetails = ({service, closeModal}) => {
                       ContactTab({ id: service.id, type: 'services' })];
     return (   
         <Modal width='fit-content'>
-            <Column>
+            <Column margin="8px 0px 0px 0px">
                 {showTileHeader()}
                 <TabView labels={tabLabels} views={tabViews} width='864px;'/>
                 <Row margin='24px 24px 24px 10px'>
-                    <BlueButton onClick={closeModal}>Cancel</BlueButton>
-                    <BlueButton>Select</BlueButton>
+                    <BlueButton onClick={closeModal}>{t('solution_pkg.cancel')}</BlueButton>
+                    <BlueButton>{t('solution_pkg.select')}</BlueButton>
                 </Row>
             </Column>
         </Modal>

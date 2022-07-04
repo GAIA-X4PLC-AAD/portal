@@ -267,7 +267,13 @@
         "deny": "Deny"
     },
     "solution_pkg": {
-        "a_s": "{as, plural, =1 {1 available service} other {# available services}}"
+        "a_s": "{as, plural, =1 {1 available service} other {# available services}}",
+        "cancel": "Cancel",
+        "select": "Select",
+        "details":"Details",
+        "price": "Price",
+        "screenshots": "Screenshots",
+        "contact": "Contacts"
     }
 }
 
