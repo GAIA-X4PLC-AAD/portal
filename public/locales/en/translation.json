@@ -19,7 +19,10 @@
         "about": "About",
         "support": "Support",
         "english": "English",
-        "spanish": "Spanish"
+        "spanish": "Spanish",
+        "close": "Close",
+        "choose-language": "Choose Language",
+        "select-system-language": "Please select a system language"
         
     },
     "dashboard": {
