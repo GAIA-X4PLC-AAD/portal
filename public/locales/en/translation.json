@@ -7,10 +7,19 @@
         "services": "Services",
         "data": "Data",
         "provider": "Provider",
+        "provide": "Provide",
+        "help": "Help",
         "search": "Search",
         "logo-alt-text": "Gaia-x logo image",
         "dashboard": "Dashboard",
-        "admin": "Admin"
+        "admin": "Admin",
+        "logout": "Logout",
+        "user-info": "User Info",
+        "change-language": "Change Language",
+        "about": "About",
+        "support": "Support",
+        "english": "English",
+        "spanish": "Spanish"
         
     },
     "dashboard": {

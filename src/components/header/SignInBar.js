@@ -8,24 +8,33 @@ import * as S from './style';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { BodyBoldText, ButtonText, Circle, DropDownArrowUp, Row } from '../../common/styles';
-import { DropDownArrowDown } from '../account/ProviderCredentialStyle';
 
-//
-// each function component is independent, isolated and testable.
-// state is managed inside the component itself
-//
+import { Menu, MenuItem, MenuButton, SubMenu } from '@szhsin/react-menu';
+import '@szhsin/react-menu/dist/index.css';
+
+
 
 // USER AVATAR
-function UserAvatarButton() {
+function UserAvatarButton({ onClicked }) {
+  const { t, } = useTranslation();
   const _userName = useSelector((state) => state.user.user.first_name)
   const navigate = useNavigate();
 
-  return <S.SimpleButton onClick={() => navigate("/account/user/details")}>
-    <Circle background='#ffffff' backgroundColor='#ffffff' borderColor='#000094'
-       backgroundImage='/images/identicon.png' isButton borderThickness='2px'>
-      <ButtonText>{_userName.substring(0, 2)}</ButtonText>
-    </Circle>
-  </S.SimpleButton>
+  const userButton = <Circle background='#ffffff' backgroundColor='#ffffff' borderColor='#E9E9E9'
+    radius='41px'
+    backgroundImage='/images/identicon.png' isButton borderThickness='1.36667px'>
+    <ButtonText>{_userName.substring(0, 2)}</ButtonText>
+
+  </Circle>
+
+  return <Menu menuButton={userButton}>
+    <MenuItem onClick={onClicked}>{t('left-menu.user-info')}</MenuItem>
+    <MenuItem onClick={onClicked}>{t('left-menu.logout')}</MenuItem>
+  </Menu>
+}
+
+UserAvatarButton.propTypes = {
+  onClicked: PropTypes.func,
 }
 
 // USER INFO
@@ -78,12 +87,7 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
   const signedInButtons =
     <>
       <Row alignItems='center'>
-        {/* <UserInfoButton /> */}
-        <PprInfoButton />
-        <SignOutButton onClicked={handleSignOut} />
-        <UserAvatarButton />
-        <ButtonText>Help</ButtonText>
-        <DropDownArrowUp/>
+        <UserAvatarButton onClicked={handleSignOut}/>
       </Row>
     </>;
 

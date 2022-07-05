@@ -41,7 +41,7 @@ const DashboardView = () => {
     const buildPlot1 = () => {
         const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/statistics`;
 
-        return <PlotLoadingView url={_myDatasetsUrl} title="testing"/>
+        return <PlotLoadingView url={_myDatasetsUrl} title="testing" />
     }
 
     const buildList = () => {
@@ -96,7 +96,6 @@ const ServicesListView = (props,) => {
             customButtonGroup={<NextPrevButtons />}>
             {(_items !== undefined || _items != null) ? itemsViews : <></>}
         </Carousel>
-
     </>;
 }
 
@@ -113,7 +112,7 @@ const ServicesLoadingListView = ({ url, title, }) => {
             <LoadingView
                 url={url}
                 successView={ServicesListView}
-                params={{ 'title': title}}
+                params={{ 'title': title }}
             />
         </>
     )
