@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as S from "../../common/styles";
+import SearchView from "../discovery/search/SearchView";
 import LoadingView from "../loading_view/LoadingView";
 import ServiceModalDetails from "./ServiceModalDetails";
 import { AvailabeServices, SlotBox } from "./style";
 
 const SolutionPackagingView = () => {
 
+    
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/2/details/`;
     const {t} = useTranslation();
     
+    const [addItem, setAddItem] = useState(-1);
     const [displayModal, setDisplayModal] = useState(false);
+    const [solutionPkgCopy, setSolutionPkgCopy] = useState(null);
+    const [solutionPkg, setSolutionPkg] = useState(null);
 
-    const fakeData = {dependent_services:[{
+    const [fakeData,setFakeData] = useState( {dependent_services:[{
         available_services: 3,
         "id": "97",
         "name": "The Service Power",
@@ -35,29 +40,58 @@ const SolutionPackagingView = () => {
         "last_updated": "2022-06-09",
         "terms_of_use": "term of use"
       },
-        {available_services: 1},{available_services: 4}]}
+        {available_services: 1},
+        {available_services: 4}]})
+
+    const [fakeDataCopy, setFakeDataCopy] = useState(null);
+
+    useEffect(() => {
+         if(!fakeDataCopy) {
+                setFakeDataCopy(fakeData);
+        }
+        }, [fakeData]);
+
+    useEffect(() => {
+        if(!solutionPkgCopy)
+            setSolutionPkgCopy(solutionPkg);
+    }, [solutionPkg]);
+
     const successView = ({data}) => {
         if (!data) return null;
+        if (!solutionPkg) {
+            setSolutionPkg(data);
+            return null;
+        }
         return (<>
-                    {showDetails(data)}
+                    {showDetails(solutionPkg)}
                     {showSlots(fakeData)}
-                    {showButtons(data)}
+                    {showButtons(solutionPkg)}
                 </>);
     }
 
-    const onClickReset = () => {
+    const onSaveClick = () => {
         setDisplayModal(true);
     }
     const closeModal = () => {
         setDisplayModal(false);
     }
 
+    const onResetClick = () => {
+        setFakeData(fakeDataCopy);
+        setSolutionPkg(solutionPkgCopy);
+        setAddItem(-1);
+    }
+    const onBookClick = () => {
+        console.log('fakeData', fakeData);
+        console.log('fakeDataCopy', fakeDataCopy);
+     }
+
     const showButtons = (data) => {
         return (
             <S.Row margin="32px;" gap='20px'>
-                <S.BlueButton onClick={onClickReset}>Reset</S.BlueButton>
-                <S.BlueButton>Save</S.BlueButton>
-                <S.BlueButton>Book</S.BlueButton>
+                <S.BlueButton onClick={onResetClick} >Reset</S.BlueButton>
+                <S.BlueButton onClick={onSaveClick}>Save</S.BlueButton>
+                <S.BlueButton onClick={onBookClick}>Book</S.BlueButton>
             </S.Row>
         );
     } 
@@ -65,15 +99,15 @@ const SolutionPackagingView = () => {
     const showSlots = (data) => {
         return (
             <S.Row margin="32px;" gap='20px'>
-                {data.dependent_services.map((service,i) => {return (<React.Fragment key={i}>{showSlot(service)}</React.Fragment>)})}
+                {data.dependent_services.map((service,i) => {return (<React.Fragment key={i}>{showSlot(service,i)}</React.Fragment>)})}
             </S.Row>
         );
     } 
-    const addSlot = (service) => {
+    const emptySlot = (service, i) => {
         return (
-            <S.BlueLinkText>
+            <S.BlueLinkText onClick={()=>setAddItem(i)}>
             <S.Style textAlign="left">
-                Add
+                {addItem===i?'Select...':'Add'}
             </S.Style>                        
             </S.BlueLinkText>
         );
@@ -81,9 +115,9 @@ const SolutionPackagingView = () => {
     //"solution_packaging": {
     //    "available_services": "available service | available services"
     
-    const showSlot = (service) => {
+    const showSlot = (service,i) => {
         return(<S.Column>
-            <SlotBox>{slotDetails(service)}</SlotBox>    
+            <SlotBox selected={addItem===i}>{slotDetails(service,i)}</SlotBox>    
                 <AvailabeServices>
                     <S.CaptionText>
                         {t('solution_pkg.a_s', {as: service.available_services})}
@@ -93,8 +127,14 @@ const SolutionPackagingView = () => {
         );
     }
 
-    const slotDetails = (service) => {
-        if (!service.id) return addSlot(service);
+    // todo: change to right elements
+    const removeSlot = (service, i) => {
+        let copy = JSON.parse(JSON.stringify(fakeData));
+        copy.dependent_services[i].id= null; 
+        setFakeData(copy);
+    }
+    const slotDetails = (service, i) => {
+        if (!service.id) return emptySlot(service, i);
         return (
             <S.Column height="100%">
                 <S.Style marginBottom="auto" textAlign="left">
@@ -105,7 +145,7 @@ const SolutionPackagingView = () => {
                         <S.BodySmallText>{service.description}</S.BodySmallText>
                     </S.Style>
                 </S.Style>
-                <S.Row margin="0 auto 0 0">
+                <S.Row margin="0 auto 0 0" onClick={()=>removeSlot(service,i)}>
                     <S.BlueLinkText>
                         <S.Style textAlign="left">
                             Remove
@@ -183,6 +223,7 @@ const SolutionPackagingView = () => {
                 </S.Style>
                 <LoadingView url={URL} successView={successView}/>
                 {displayModal?<ServiceModalDetails service={fakeData.dependent_services[0]} closeModal={closeModal}/>:null}
+                {addItem>=0?<SearchView type="services" />:null}
             </S.Column>
             );
 }

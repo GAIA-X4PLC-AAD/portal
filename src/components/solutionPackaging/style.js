@@ -16,7 +16,8 @@ height: 435px;
 left: 485px;
 top: 622px;
 background: #FFFFFF;
-border: 1px solid #E9E9E9`;
+border: 1px solid ${props =>props.selected? '#000094': '#E9E9E9'};
+`;
 
 export const AvailabeServices = styled.div`
 display: flex;
