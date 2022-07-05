@@ -16,32 +16,7 @@ import i18next from 'i18next';
 import * as S from './style';
 import { BodyText, ButtonText, Card, Circle, DropDownArrowDownSmall, H4LightText, HorizontalLine, Image, OutlineButton, Row, Style } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
-
-const buildIdentifyServiceProvider = ({ background = '#fff', name, icon, code }) => {
-  return (
-    <Padding vertical='8px'>
-      <Card background={background} borderColor='#E9E9E9' onClick={() => changeLanguage({ _lang: code })}>
-        <Padding vertical='4px' horizontal='16px'>
-          <Row>
-            <Circle radius='56px' borderColor='#0' background='#C4C4C4'>{code}</Circle>
-            {/* <Image src={`/images/${icon}`} /> */}
-            <Padding paddingLeft='16px' />
-            <ButtonText color='#000000'>{name}</ButtonText>
-            <Padding paddingLeft='148px' />
-          </Row>
-        </Padding>
-      </Card>
-    </Padding>
-  )
-}
-
-const changeLanguage = ({ _lang }) => {
-  i18next.changeLanguage(_lang, (err, t) => {
-    if (err) return console.log('something went wrong loading', err);
-    t('key');
-  });
-}
-
+import buildLanguageItemView from '../../common/language_item';
 
 
 const CenterBar = () => {
@@ -64,7 +39,8 @@ const CenterBar = () => {
   const onCloseModal = () => setOpenModal(false);
 
 
-  <ButtonText>{t('left-menu.admin')}</ButtonText>
+
+  const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
 
   return (
     <>
@@ -80,18 +56,16 @@ const CenterBar = () => {
 
         <ButtonText onClick={() => navigate('/provider')}>{t('left-menu.provider')}</ButtonText>
 
-        <ButtonText onClick={() => navigate('/account/provider/details')}>{t('left-menu.provide')}</ButtonText>
-
         <Row>
           <Menu menuButton={<ButtonText>{t('left-menu.help')}</ButtonText>} menuClassName="szh-menu">
             <MenuItem>{t('left-menu.about')}</MenuItem>
             <MenuItem>{t('left-menu.support')}</MenuItem>
-            <MenuItem onClick={onOpenModal} >
-              {t('left-menu.change-language')}
-            </MenuItem>
           </Menu>
           <DropDownArrowDownSmall />
         </Row>
+
+        { isUserSignedIn ? <></>: <ButtonText onClick={onOpenModal}>{t('left-menu.change-language')}</ButtonText>}
+        
 
         <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
           <H4LightText>{t('left-menu.choose-language')}</H4LightText>
@@ -99,9 +73,9 @@ const CenterBar = () => {
           <HorizontalLine />
 
           <Padding vertical='20px' horizontal='40px'>
-            {buildIdentifyServiceProvider({ background: _isEn ? '#46DAFF1F' : '#fff', name: 'English', code: 'en' })}
-            {buildIdentifyServiceProvider({ background: _isEs ? '#46DAFF1F' : '#fff', name: 'Spanish', code: 'es' })}
-            {/* {buildIdentifyServiceProvider({ background: '#fff', name: 'Deutsch', code: 'de' })} */}
+            {buildLanguageItemView({ background: _isEn ? '#46DAFF1F' : '#fff', name: 'English', code: 'en' })}
+            {buildLanguageItemView({ background: _isEs ? '#46DAFF1F' : '#fff', name: 'Spanish', code: 'es' })}
+
             <Padding paddingTop='30px'/>
             <Row><OutlineButton onClick={onCloseModal}>{t('left-menu.close')}</OutlineButton></Row>
           </Padding>

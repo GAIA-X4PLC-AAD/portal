@@ -167,7 +167,6 @@ export const Image = styled.img`
 
 
 export const BodySmallBoldText = styled.div`
-<<<<<<< HEAD
 font-family: 'Titillium Web';
 font-style: normal;
 font-weight: 700;
@@ -480,3 +479,12 @@ export const SliderBullet = styled.button`
   text-decoration: none;
   font-weight: 700;
 ` */
+
+export const Padding = styled.div`
+  padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
+  padding-top: ${props => props.paddingTop || ''};
+  padding-left: ${props => props.paddingLeft || ''};
+  padding-right: ${props => props.paddingRight || ''};
+  align-self: ${props => props.alignSelf || ''};
+`
+
