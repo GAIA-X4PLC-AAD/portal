@@ -70,7 +70,7 @@ const App = (props) => {
                 <Route path="/admin/management" element={<SearchView type="management"/>} />
                 <Route path="/dashboard" element={<DashboardPage/>} />
                 <Route path="/onboarding" element={<OnboardingPage/>} />
-                <Route path="/solutionpackaging" element={<SolutionPackagingView />}/>
+                <Route path="/sp" element={<SolutionPackagingView />}/>
               </Routes>
             </div>
             <div className='footer-container'>

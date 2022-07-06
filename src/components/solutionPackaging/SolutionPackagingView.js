@@ -131,7 +131,9 @@ const SolutionPackagingView = () => {
     const removeSlot = (service, i) => {
         let copy = JSON.parse(JSON.stringify(fakeData));
         copy.dependent_services[i].id= null; 
+        copy.dependent_services[i].available_services=copy.dependent_services[i].available_services+1;
         setFakeData(copy);
+        setAddItem(i);
     }
     const slotDetails = (service, i) => {
         if (!service.id) return emptySlot(service, i);
@@ -213,7 +215,6 @@ const SolutionPackagingView = () => {
         )
 
     }
-    // width='307px' height='310px'/>
 
     return(
             <S.Column>

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import LoadingView from "../../../loading_view/LoadingView";
 import configData from "../../../../config/config.json";
 
-const PriceTab = ( { id, type} ) => {
+const PriceTab = ( { id, type, showButton=true} ) => {
 
 
         const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/${id}/price/`;
@@ -12,7 +12,7 @@ const PriceTab = ( { id, type} ) => {
         return (
             <LoadingView
                 url={URL}
-                successView={PriceWidgetFactory}/>
+                successView={PriceWidgetFactory(showButton)}/>
         );
         
     
@@ -20,7 +20,8 @@ const PriceTab = ( { id, type} ) => {
     
     PriceTab.propTypes = {
         id: PropTypes.string,
-        type: PropTypes.string
+        type: PropTypes.string,
+        showButton: PropTypes.bool
     }
 
 export default PriceTab;

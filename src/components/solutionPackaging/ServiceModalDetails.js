@@ -55,7 +55,7 @@ const ServiceModalDetails = ({service, closeModal}) => {
                         t('solution_pkg.contact')];
 
     const tabViews = [DescriptionTab({ id: service.id, type: 'services'}),
-                      PriceTab({ id: service.id, type: 'services' }),
+                      PriceTab({ id: service.id, type: 'services' , showButton:false}),
                       ScreenshotsTab({ id: service.id, type: 'services' }),
                       ContactTab({ id: service.id, type: 'services' })];
     return (   
