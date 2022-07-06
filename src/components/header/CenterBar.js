@@ -26,6 +26,7 @@ const CenterBar = () => {
 
   const _isEn = _lang.indexOf('en') == 0
   const _isEs = _lang.indexOf('es') == 0
+  const _isDe = _lang.indexOf('de') == 0
 
   // const _isPr = useSelector((state) => state.user.user.is_pr && state.isUserSignedIn)
   const _isPr = useSelector((state) => true)
@@ -75,6 +76,7 @@ const CenterBar = () => {
           <Padding vertical='20px' horizontal='40px'>
             {buildLanguageItemView({ background: _isEn ? '#46DAFF1F' : '#fff', name: 'English', code: 'en' })}
             {buildLanguageItemView({ background: _isEs ? '#46DAFF1F' : '#fff', name: 'Spanish', code: 'es' })}
+            {buildLanguageItemView({ background: _isDe ? '#46DAFF1F' : '#fff', name: 'German', code: 'de' })}
 
             <Padding paddingTop='30px'/>
             <Row><OutlineButton onClick={onCloseModal}>{t('left-menu.close')}</OutlineButton></Row>

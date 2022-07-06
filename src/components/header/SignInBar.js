@@ -26,6 +26,7 @@ function UserAvatarButton({ onClicked }) {
 
   const _isEn = _lang.indexOf('en') == 0
   const _isEs = _lang.indexOf('es') == 0
+  const _isDe = _lang.indexOf('de') == 0
 
   const _userName = useSelector((state) => state.user.user.first_name)
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ function UserAvatarButton({ onClicked }) {
       <Padding vertical='20px' horizontal='40px'>
         {buildLanguageItemView({ background: _isEn ? '#46DAFF1F' : '#fff', name: 'English', code: 'en' })}
         {buildLanguageItemView({ background: _isEs ? '#46DAFF1F' : '#fff', name: 'Spanish', code: 'es' })}
+        {buildLanguageItemView({ background: _isDe ? '#46DAFF1F' : '#fff', name: 'German', code: 'de' })}
         {/* {buildIdentifyServiceProvider({ background: '#fff', name: 'Deutsch', code: 'de' })} */}
         <Padding paddingTop='30px' />
         <Row><OutlineButton onClick={onCloseModal}>{t('left-menu.close')}</OutlineButton></Row>
