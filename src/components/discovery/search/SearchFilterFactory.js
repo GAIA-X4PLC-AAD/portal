@@ -9,7 +9,9 @@ const SearchFilterFactory = ({type}) => {
         case 'data': 
         case 'ppr': 
         case 'services': 
-            return DiscoverySearchFilter({type});
+        return DiscoverySearchFilter({type});
+        case 'solution_pkg':
+            return DiscoverySearchFilter({type:'services'});
         case 'participant': 
             return AdminParticipantSearchFilter({type});
         case 'management': 

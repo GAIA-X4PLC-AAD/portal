@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import * as S from "../../common/styles";
 import SearchView from "../discovery/search/SearchView";
 import LoadingView from "../loading_view/LoadingView";
@@ -7,10 +8,12 @@ import ServiceModalDetails from "./ServiceModalDetails";
 import { AvailabeServices, SlotBox } from "./style";
 
 const SolutionPackagingView = () => {
-
     
-    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/2/details/`;
+    const {id} = useParams();
+
+    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/${id}/details/`;
     const {t} = useTranslation();
+    
     
     const [addItem, setAddItem] = useState(-1);
     const [displayModal, setDisplayModal] = useState(false);
@@ -67,6 +70,10 @@ const SolutionPackagingView = () => {
                     {showSlots(fakeData)}
                     {showButtons(solutionPkg)}
                 </>);
+    }
+
+    const openLink =  (url) => {
+        window.open(url, '_blank').focus();
     }
 
     const onSaveClick = () => {
@@ -142,7 +149,7 @@ const SolutionPackagingView = () => {
                 <S.Style marginBottom="auto" textAlign="left">
                     <S.Image src={service.img_preview_url} alt={service.name} width='201px' height='134px'/>
                     <S.H4Text>{service.name}</S.H4Text>
-                    <S.BlueLinkText><S.Style textAlign="left">{service.ppr_url}</S.Style></S.BlueLinkText>
+                    <S.BlueLinkText><S.Style textAlign="left" onClick={()=>{openLink(service.ppr_url)}}>{service.ppr_url}</S.Style></S.BlueLinkText>
                     <S.Style marginTop="10px">
                         <S.BodySmallText>{service.description}</S.BodySmallText>
                     </S.Style>
@@ -224,7 +231,7 @@ const SolutionPackagingView = () => {
                 </S.Style>
                 <LoadingView url={URL} successView={successView}/>
                 {displayModal?<ServiceModalDetails service={fakeData.dependent_services[0]} closeModal={closeModal}/>:null}
-                {addItem>=0?<SearchView type="services" />:null}
+                {addItem>=0?<SearchView type="solution_pkg" />:null}
             </S.Column>
             );
 }

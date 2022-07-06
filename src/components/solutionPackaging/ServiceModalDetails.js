@@ -14,6 +14,9 @@ import TabView from '../tab/TabView';
 const ServiceModalDetails = ({service, closeModal}) => {
 
     const {t} = useTranslation();
+    const openLink =  (url) => {
+        window.open(url, '_blank').focus();
+    }
 
     const showTileHeader = () => {
 
@@ -29,7 +32,7 @@ const ServiceModalDetails = ({service, closeModal}) => {
                     </a>
                     <Style flexGrow='0'>
                         <S.DiscoveryTileFirstRow width={'140px'}>{service.name}</S.DiscoveryTileFirstRow>
-                        <S.DiscoveryTileSecondRow>{service.ppr_name}</S.DiscoveryTileSecondRow>
+                        <S.DiscoveryTileSecondRow onClick={()=>openLink(service.ppr_url)}>{service.ppr_name}</S.DiscoveryTileSecondRow>
                     </Style>
                     <div>
                         <S.DiscoveryTileFirstRow>{t("service-tile.header.stack")}</S.DiscoveryTileFirstRow>

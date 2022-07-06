@@ -14,6 +14,7 @@ const SearchContent = ({ type }) => {
     const criteria = useSelector(state => state.searchCriteriaStore);
     const PROVIDER_URL = process.env.REACT_APP_EDGE_API_URI + `/api/admin/pr/registrations/search?${criteria.parameters}`;
     const MANAGEMENT_URL = process.env.REACT_APP_EDGE_API_URI + `/api/admin/management/requests/search?${criteria.parameters}`;
+    const SP_URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/search?${criteria.parameters}`;
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
     const [refresh, setRefresh] = useState(0);
 
@@ -63,6 +64,7 @@ const SearchContent = ({ type }) => {
         switch(type) {
             case 'participant': return `${PROVIDER_URL}`;
             case 'management': return `${MANAGEMENT_URL}`;
+            case 'solution_pkg': return `${SP_URL}`;
             default: return `${URL}`;
         }
     }

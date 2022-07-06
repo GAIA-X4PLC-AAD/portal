@@ -167,7 +167,8 @@
         "lists": {
             "data": "Data",
             "services": "Services",
-            "ppr": "Provider"
+            "ppr": "Provider",
+            "solution_pkg": "Select your service"
         },
         "search": {
             "filter": "Filter",
