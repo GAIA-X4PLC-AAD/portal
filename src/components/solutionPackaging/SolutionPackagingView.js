@@ -5,6 +5,7 @@ import * as S from "../../common/styles";
 import SearchView from "../discovery/search/SearchView";
 import LoadingView from "../loading_view/LoadingView";
 import ServiceModalDetails from "./ServiceModalDetails";
+import SlotDetails from "./SlotDetails";
 import { AvailabeServices, SlotBox } from "./style";
 
 const SolutionPackagingView = () => {
@@ -59,6 +60,25 @@ const SolutionPackagingView = () => {
             setSolutionPkgCopy(solutionPkg);
     }, [solutionPkg]);
 
+    
+    
+    const onSaveClick = () => {
+        setDisplayModal(true);
+    }
+    const closeModal = () => {
+        setDisplayModal(false);
+    }
+    
+    const onResetClick = () => {
+        setFakeData(fakeDataCopy);
+        setSolutionPkg(solutionPkgCopy);
+        setAddItem(-1);
+    }
+    const onBookClick = () => {
+        console.log('fakeData', fakeData);
+        console.log('fakeDataCopy', fakeDataCopy);
+    }
+
     const successView = ({data}) => {
         if (!data) return null;
         if (!solutionPkg) {
@@ -71,28 +91,7 @@ const SolutionPackagingView = () => {
                     {showButtons(solutionPkg)}
                 </>);
     }
-
-    const openLink =  (url) => {
-        window.open(url, '_blank').focus();
-    }
-
-    const onSaveClick = () => {
-        setDisplayModal(true);
-    }
-    const closeModal = () => {
-        setDisplayModal(false);
-    }
-
-    const onResetClick = () => {
-        setFakeData(fakeDataCopy);
-        setSolutionPkg(solutionPkgCopy);
-        setAddItem(-1);
-    }
-    const onBookClick = () => {
-        console.log('fakeData', fakeData);
-        console.log('fakeDataCopy', fakeDataCopy);
-     }
-
+    
     const showButtons = (data) => {
         return (
             <S.Row margin="32px;" gap='20px'>
@@ -106,34 +105,17 @@ const SolutionPackagingView = () => {
     const showSlots = (data) => {
         return (
             <S.Row margin="32px;" gap='20px'>
-                {data.dependent_services.map((service,i) => {return (<React.Fragment key={i}>{showSlot(service,i)}</React.Fragment>)})}
+                {data.dependent_services.map((service,i) => {return (<SlotDetails service={service} 
+                                onRemove={()=>removeSlot(service,i)} 
+                                onAdd={()=>setAddItem(i)}
+                                selected={addItem===i}
+                                key={i}/>
+
+                )})}
             </S.Row>
         );
     } 
-    const emptySlot = (service, i) => {
-        return (
-            <S.BlueLinkText onClick={()=>setAddItem(i)}>
-            <S.Style textAlign="left">
-                {addItem===i?'Select...':'Add'}
-            </S.Style>                        
-            </S.BlueLinkText>
-        );
-    }
-    //"solution_packaging": {
-    //    "available_services": "available service | available services"
-    
-    const showSlot = (service,i) => {
-        return(<S.Column>
-            <SlotBox selected={addItem===i}>{slotDetails(service,i)}</SlotBox>    
-                <AvailabeServices>
-                    <S.CaptionText>
-                        {t('solution_pkg.a_s', {as: service.available_services})}
-                    </S.CaptionText>
-                </AvailabeServices>
-        </S.Column>
-        );
-    }
-
+  
     // todo: change to right elements
     const removeSlot = (service, i) => {
         let copy = JSON.parse(JSON.stringify(fakeData));
@@ -141,33 +123,6 @@ const SolutionPackagingView = () => {
         copy.dependent_services[i].available_services=copy.dependent_services[i].available_services+1;
         setFakeData(copy);
         setAddItem(i);
-    }
-    const slotDetails = (service, i) => {
-        if (!service.id) return emptySlot(service, i);
-        return (
-            <S.Column height="100%">
-                <S.Style marginBottom="auto" textAlign="left">
-                    <S.Image src={service.img_preview_url} alt={service.name} width='201px' height='134px'/>
-                    <S.H4Text>{service.name}</S.H4Text>
-                    <S.BlueLinkText><S.Style textAlign="left" onClick={()=>{openLink(service.ppr_url)}}>{service.ppr_url}</S.Style></S.BlueLinkText>
-                    <S.Style marginTop="10px">
-                        <S.BodySmallText>{service.description}</S.BodySmallText>
-                    </S.Style>
-                </S.Style>
-                <S.Row margin="0 auto 0 0" onClick={()=>removeSlot(service,i)}>
-                    <S.BlueLinkText>
-                        <S.Style textAlign="left">
-                            Remove
-                        </S.Style>                        
-                        
-                    </S.BlueLinkText>
-                    <S.Style marginLeft ="15px">
-                        <S.Image src='/images/X_image.svg' />    
-                    </S.Style>
-                    
-                </S.Row>
-            </S.Column>
-        );
     }
 
     const showDetails = (data) => {
@@ -222,7 +177,7 @@ const SolutionPackagingView = () => {
         )
 
     }
-
+    if (!id) return null;
     return(
             <S.Column>
                 <S.Style textAlign="left">

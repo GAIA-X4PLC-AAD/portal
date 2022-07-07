@@ -25,11 +25,8 @@ const ServiceModalDetails = ({service, closeModal}) => {
             <S.DiscoveryTile>
 
                 <S.DiscoveryTileHeader>
-
-                    <Checkbox type="checkbox" />
-                    <a href={"#" || service.services.ppr_url}>
+                    <Checkbox type="checkbox" />            
                         <Image src={service.logo} alt="Provider Logo" width='48px' height='48px' />
-                    </a>
                     <Style flexGrow='0'>
                         <S.DiscoveryTileFirstRow width={'140px'}>{service.name}</S.DiscoveryTileFirstRow>
                         <S.DiscoveryTileSecondRow onClick={()=>openLink(service.ppr_url)}>{service.ppr_name}</S.DiscoveryTileSecondRow>
