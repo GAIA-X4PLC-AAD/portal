@@ -56,13 +56,13 @@ export const DropDownArrowDownSmall = styled.div`
 export const ArrowLeft = styled.div`
     content: url('/images/DropDownArrowDown.svg');
     transform: rotate(90deg);
-    filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%);
+    /* filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%); */
 `;
 
 export const ArrowRight = styled.div`
     content: url('/images/DropDownArrowDown.svg');
 
-    filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%);
+
     transform: rotate(270deg)
 `;
 

@@ -606,11 +606,12 @@ ul,li{padding:0;margin:0;list-style:none}.gallery-container{margin-top:50px}.app
   display: flex;
   justify-content: space-between;
   list-style: none;
-  cursor: pointer;
+
   align-items: center
 }
 
 .pagination a {
+  cursor: pointer;
   padding: 10px;
   border-radius: 0px;
   font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
@@ -629,7 +630,7 @@ ul,li{padding:0;margin:0;list-style:none}.gallery-container{margin-top:50px}.app
   :disabled {
       cursor:default;
       pointer-events: none;
-      opacity: 0.1; 
+      opacity: 0.3; 
   }
 }
 
@@ -650,6 +651,8 @@ ul,li{padding:0;margin:0;list-style:none}.gallery-container{margin-top:50px}.app
 }
 
 .pagination__link--disabled a {
-  color: rgb(198, 197, 202);
-
+  /* filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%); */
+  cursor: none;
+  pointer-events: none;
+  opacity: 0.1; 
 }

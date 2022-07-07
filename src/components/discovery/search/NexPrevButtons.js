@@ -17,7 +17,8 @@ const NextPrevButtons = ({ data }) => {
     if (!data) return null;
 
     const handlePageClick = (event) => {
-        dispatch(updatePageNumber(Math.max(1, event.selected)))
+        // dispatch(updatePageNumber(Math.max(1, event.selected)))
+        dispatch(updatePageNumber(event.selected))
       };
 
     return <ReactPaginate
