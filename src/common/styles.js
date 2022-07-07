@@ -15,21 +15,22 @@ export const CancelButton = styled.button`
 
 
 export const BlueButton = styled.button`
-border: 2px solid #000094;
-border-radius: 4px 4px 4px 4px;
-font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
-letter-spacing: 0.25px;
-color: #000094;
-background-color: #fff;
-padding: 0.3em 2em;
-cursor: pointer;
-margin-left:1em;
-:disabled {
-    cursor:default;
-    pointer-events: none;
-    opacity: 0.3; 
-}
+    border: 2px solid #000094;
+    border-radius: 4px 4px 4px 4px;
+    font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
+    letter-spacing: 0.25px;
+    color: #000094;
+    background-color: #fff;
+    padding: 0.3em 2em;
+    cursor: pointer;
+    margin-left:1em;
+    :disabled {
+        cursor:default;
+        pointer-events: none;
+        opacity: 0.3; 
+    }
 `;
+
 export const DropDownArrowUp = styled.div`
     content: url('/images/DropDownArrowUp.svg');
     margin: auto;
@@ -50,6 +51,19 @@ export const DropDownArrowDownSmall = styled.div`
     object-fit:none;
 
     transform: scale(0.5);
+`;
+
+export const ArrowLeft = styled.div`
+    content: url('/images/DropDownArrowDown.svg');
+    transform: rotate(90deg);
+    filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%);
+`;
+
+export const ArrowRight = styled.div`
+    content: url('/images/DropDownArrowDown.svg');
+
+    filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%);
+    transform: rotate(270deg)
 `;
 
 export const RedTextClickable = styled.div`

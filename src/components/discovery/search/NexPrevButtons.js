@@ -1,41 +1,40 @@
-import React from "react";
-import {  useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector, } from "react-redux";
 import PropTypes from 'prop-types';
 import * as S from './style';
-import {  updatePageNumber } from "../../../actions";
+import ReactPaginate from 'react-paginate';
+import { updatePageNumber } from "../../../actions";
+import { ArrowLeft, ArrowRight, DropDownArrowDown } from '../../../common/styles';
 
-const NextPrevButtons = ({data}) => {
+
+const NextPrevButtons = ({ data }) => {
 
     const criteria = useSelector(state => state.searchCriteriaStore);
     const dispatch = useDispatch();
 
-    // Change searchCriteriaStore increasing value
-    const onNextButtonClick = () => {
-        dispatch(updatePageNumber(criteria.page  + 1 ));
-    }
-    // Change searchCriteriaStore decreasing value
-    const onPrevButtonClick = () => {
-        dispatch(updatePageNumber(criteria.page - 1 ));
-    }
+    const itemsPerPage = 15
 
-    // Shows or not Next button
-    const showNext = () => {
-        if (data.next && data.next.length>0) { 
-            return (<S.Button onClick={onNextButtonClick}>Next</S.Button>);
-        }
-    }
-
-    // Shows or not previous button
-    const showPrev = () => {
-        if (data.prev && data.prev.length>0) {
-            return (<S.Button onClick={ onPrevButtonClick}>Prev</S.Button>);
-        }
-    }
     if (!data) return null;
-    return (<>
-    {showPrev()}
-    {showNext()}
-    </>);
+
+    const handlePageClick = (event) => {
+        dispatch(updatePageNumber(Math.max(1, event.selected)))
+      };
+
+    return <ReactPaginate
+        initialPage={criteria.page}
+        breakLabel="..."
+        nextLabel={<><ArrowRight /></>}
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={itemsPerPage}
+        previousLabel={<><ArrowLeft /></>}
+        renderOnZeroPageCount={null}
+        containerClassName={"pagination"}
+        previousLinkClassName={"pagination__link"}
+        nextLinkClassName={"pagination__link"}
+        disabledClassName={"pagination__link--disabled"}
+        activeClassName={"pagination__link--active"}
+      />
 }
 
 NextPrevButtons.propTypes = {
