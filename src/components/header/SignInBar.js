@@ -31,6 +31,13 @@ function UserAvatarButton({ onClicked }) {
   const _userName = useSelector((state) => state.user.user.first_name)
   const navigate = useNavigate();
 
+  const _userRole = useSelector((state) => state.user.user.user_role)
+  const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
+
+  const _isPpr = _userRole == 'gaiax-ppr' && isUserSignedIn
+  const _isPcr = _userRole == 'gaiax-pcr' && isUserSignedIn
+  const _isFr = _userRole == 'gaiax-fr' && isUserSignedIn
+
   // language modal
   const [openModal, setOpenModal] = useState(false);
 
@@ -45,7 +52,8 @@ function UserAvatarButton({ onClicked }) {
   </Circle>
 
   return <Menu menuButton={userButton}>
-    <MenuItem onClick={() => navigate('/admin/participant')}>{t('left-menu.user-info')}</MenuItem>
+    { (_isPcr || _isPpr) ? <MenuItem onClick={() => navigate('/admin/participant')}>{t('left-menu.user-info')}</MenuItem> : '' }
+    
     <MenuItem onClick={onOpenModal} >
       {t('left-menu.change-language')}
     </MenuItem>
