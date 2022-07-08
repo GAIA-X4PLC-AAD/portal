@@ -1,18 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SlotBox } from "./style";
 import * as S from "../../common/styles";
 import PropTypes from "prop-types";
+import ServiceModalDetails from "./ServiceModalDetails";
 
 const ServicePreview = ({ service , onSelect}) => {
     const { t } = useTranslation();
+    const [displayModal, setDisplayModal] = useState(false);
 
     const onSelectFunction = () => {
-//        onSelect(service.id);
+        onSelect(service.id);
     }
-    console.log("ServicePreview", service);
+    const openLink =  (url) => {
+        window.open(url, '_blank').focus();
+    }
+    const closeModal = () => {
+        setDisplayModal(false);
+    }
     return (
-        <SlotBox>
+        <SlotBox width='306px'>
             <S.Column height="100%">
                 <S.Style marginBottom="auto" textAlign="left">
                     {/*<S.Image src={service.img_preview_url} alt={service.name} width='201px' height='134px'/>*/}
@@ -23,11 +30,15 @@ const ServicePreview = ({ service , onSelect}) => {
                     </S.Style>
                 </S.Style>
                 <S.Row margin="0 auto 0 0">
+                    <S.CancelButton onClick={()=>setDisplayModal(true)}>
+                            Details
+                    </S.CancelButton>
                     <S.BlueButton onClick={onSelectFunction}>
                             Select
                     </S.BlueButton>
                 </S.Row>
             </S.Column>
+            {displayModal?<ServiceModalDetails service={service} closeModal={closeModal}/>:null}
         </SlotBox>    
     );
 }

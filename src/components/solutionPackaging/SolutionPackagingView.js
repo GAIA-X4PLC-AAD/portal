@@ -17,7 +17,6 @@ const SolutionPackagingView = () => {
     
     
     const [addItem, setAddItem] = useState(-1);
-    const [displayModal, setDisplayModal] = useState(false);
     const [solutionPkgCopy, setSolutionPkgCopy] = useState(null);
     const [solutionPkg, setSolutionPkg] = useState(null);
 
@@ -63,11 +62,9 @@ const SolutionPackagingView = () => {
     
     
     const onSaveClick = () => {
-        setDisplayModal(true);
+       // TODO: missing things
     }
-    const closeModal = () => {
-        setDisplayModal(false);
-    }
+
     
     const onResetClick = () => {
         setFakeData(fakeDataCopy);
@@ -177,6 +174,10 @@ const SolutionPackagingView = () => {
         )
 
     }
+    const onSelect = (params) => {
+        console.log (params);
+    }
+
     if (!id) return null;
     return(
             <S.Column>
@@ -185,8 +186,7 @@ const SolutionPackagingView = () => {
                     <S.BodyText>Lorem ipsum dolor si jet subtitle</S.BodyText>
                 </S.Style>
                 <LoadingView url={URL} successView={successView}/>
-                {displayModal?<ServiceModalDetails service={fakeData.dependent_services[0]} closeModal={closeModal}/>:null}
-                {addItem>=0?<SearchView type="solution_pkg" />:null}
+                {addItem>=0?<SearchView type="solution_pkg" onSelect={onSelect}/>:null}
             </S.Column>
             );
 }

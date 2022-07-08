@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import LoadingView from "../../loading_view/LoadingView";
 import PropTypes from 'prop-types';
-import NextPrevButtons from "./NexPrevButtons";
 import TileFactory from "../TileFactory";
 import { HeaderTitle, Row, Column, Style } from "../../../common/styles";
 import { useTranslation } from "react-i18next";
 import * as S from "./style";
 import SearchSort from "./SearchSort";
 import ServicePreview from "../../solutionPackaging/ServicePreview";
+import Carousel from "react-multi-carousel";
+import NextPrevButtons from "./NexPrevButtons";
+import NP from "../../../common/vertical_steps/next_prev_buttons";
 
-import { Carousel } from "react-responsive-carousel";
-import "react-multi-carousel/lib/styles.css";
 
-const SearchContent = ({ type }) => {
+const SearchContent = ({ type, onSelect }) => {
 
     const criteria = useSelector(state => state.searchCriteriaStore);
     const PROVIDER_URL = process.env.REACT_APP_EDGE_API_URI + `/api/admin/pr/registrations/search?${criteria.parameters}`;
@@ -46,37 +46,37 @@ const SearchContent = ({ type }) => {
                 superLargeDesktop: {
                     // the naming can be any, depends on you.
                     breakpoint: { max: 4000, min: 3000 },
-                    items: 4
+                    items: 4,
+                    slidesToSlide: 4
                 },
                 desktop: {
                     breakpoint: { max: 3000, min: 1024 },
-                    items: 2
+                    items: 3,
+                    slidesToSlide: 3
                 },
                 tablet: {
                     breakpoint: { max: 1024, min: 464 },
-                    items: 2
+                    items: 2,
+                    slidesToSlide: 2
                 },
                 mobile: {
                     breakpoint: { max: 464, min: 0 },
-                    items: 1
+                    items: 1,
+                    slidesToSlide: 1
                 }
             };
-            //const views = _data.map((item) => { return (<ServicePreview service={item} key={`${item['id']}`} s/ea/rchRefresh={searchRefresh} />) });
-            const views = _data.map((item) => { return (<><h1>hello</h1></>) });
 
-            return (
-                <Style height="440px">
-
-                    <Carousel
-                    arrows={true}
+            return (<>
+              <Carousel
+                    arrows={false}
                     swipeable={false}
                     draggable={false}
                     responsive={responsive}
-                    renderButtonGroupOutside={true}
-                    customButtonGroup={<NextPrevButtons />}>
-                    {views}
-                </Carousel>
-             </Style>
+                    renderButtonGroupOutside={shouldDisplayNextPrev}
+                    customButtonGroup={<NP bottom='470px'/>}
+                    >
+                    {_data.map((item) => { return (<ServicePreview service={item} key={`${item['id']}`} searchRefresh={searchRefresh} onSelect={onSelect}/>) })}
+                </Carousel></>
             );
         }
     }
@@ -123,7 +123,8 @@ const SearchContent = ({ type }) => {
 }
 
 SearchContent.propTypes = {
-    type: PropTypes.string
+    type: PropTypes.string,
+    onSelect: PropTypes.func
 };
 
 

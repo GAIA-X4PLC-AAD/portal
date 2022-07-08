@@ -4,7 +4,7 @@ import Modal from '../../Modal';
 import * as S from '../discovery/style';
 import { useTranslation } from 'react-i18next';
 import Checkbox from '../../common/checkbox';
-import { BlueButton, Column, Image, Row, Style } from '../../common/styles';
+import { BlueButton, CancelButton, Column, Image, Row, Style } from '../../common/styles';
 import DescriptionTab from '../discovery/tabs/description/DescriptionTab';
 import PriceTab from '../discovery/tabs/priceTab/PriceTab';
 import ScreenshotsTab from '../discovery/tabs/screenshots/ScreenshotsTab';
@@ -64,7 +64,7 @@ const ServiceModalDetails = ({service, closeModal}) => {
                 {showTileHeader()}
                 <TabView labels={tabLabels} views={tabViews} width='864px;'/>
                 <Row margin='24px 24px 24px 10px'>
-                    <BlueButton onClick={closeModal}>{t('solution_pkg.cancel')}</BlueButton>
+                    <CancelButton onClick={closeModal}>{t('solution_pkg.cancel')}</CancelButton>
                     <BlueButton>{t('solution_pkg.select')}</BlueButton>
                 </Row>
             </Column>

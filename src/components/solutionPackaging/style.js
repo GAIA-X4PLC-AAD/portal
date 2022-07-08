@@ -11,7 +11,7 @@ justify-content: center;
 align-items: center;
 padding: 12px;
 gap: 10px;
-width: 225px;
+width: ${props =>props.width? props.width : '225px'};
 height: 435px;
 left: 485px;
 top: 622px;
