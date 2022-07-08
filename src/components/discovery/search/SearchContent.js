@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import LoadingView from "../../loading_view/LoadingView";
 import PropTypes from 'prop-types';
@@ -21,7 +21,7 @@ const SearchContent = ({ type, onSelect }) => {
     const SP_URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/search?${criteria.parameters}`;
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
     const [refresh, setRefresh] = useState(0);
-
+   
     const { t, i18n } = useTranslation();
 
     const searchRefresh = () =>{
@@ -36,50 +36,71 @@ const SearchContent = ({ type, onSelect }) => {
         }
     }
 
+    const CarouselComp = ({data}) => {
+        // use state and useEffect are required in order to force carousel to re-render
+        const [items, setItems] = useState([]);
+     
+        useEffect(() => {
+            if(items.length === 0){
+                console.log('add data to items', data)
+                    setItems(data);
+            }
+        }, [data]);
 
-    const showCarrousel = (data) => {
-        if (!data || !data.data || data.data.length === 0) return NoResults();
+        const shouldDisplayNextPrev = items.length > 3;
+        const responsive = {
+            superLargeDesktop: {
+                // the naming can be any, depends on you.
+                breakpoint: { max: 4000, min: 3000 },
+                items: 4,
+                slidesToSlide: 4
+            },
+            desktop: {
+                breakpoint: { max: 3000, min: 1024 },
+                items: 3,
+                slidesToSlide: 3
+            },
+            tablet: {
+                breakpoint: { max: 1024, min: 464 },
+                items: 2,
+                slidesToSlide: 2
+            },
+            mobile: {
+                breakpoint: { max: 464, min: 0 },
+                items: 1,
+                slidesToSlide: 1
+            }
+        };    
+        return (
+          <Carousel
+                arrows={false}
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                renderButtonGroupOutside={shouldDisplayNextPrev}
+                customButtonGroup={<NP bottom='470px'/>}
+                >
+                {items.map((item) => { return (<ServicePreview service={item} key={`${item['id']}`} onSelect={onSelect}/>)})}
+            </Carousel>
+        );
+    }
+    CarouselComp.propTypes = {
+        data: PropTypes.array
+    }
+
+    const showCarousel = (items) => {
+         if (!items || !items.data || items.data.length === 0) return NoResults();
         else { 
-            let _data = data.data
-            const shouldDisplayNextPrev = _data.length > 3;
-            const responsive = {
-                superLargeDesktop: {
-                    // the naming can be any, depends on you.
-                    breakpoint: { max: 4000, min: 3000 },
-                    items: 4,
-                    slidesToSlide: 4
-                },
-                desktop: {
-                    breakpoint: { max: 3000, min: 1024 },
-                    items: 3,
-                    slidesToSlide: 3
-                },
-                tablet: {
-                    breakpoint: { max: 1024, min: 464 },
-                    items: 2,
-                    slidesToSlide: 2
-                },
-                mobile: {
-                    breakpoint: { max: 464, min: 0 },
-                    items: 1,
-                    slidesToSlide: 1
-                }
-            };
-
-            return (<>
-              <Carousel
-                    arrows={false}
-                    swipeable={false}
-                    draggable={false}
-                    responsive={responsive}
-                    renderButtonGroupOutside={shouldDisplayNextPrev}
-                    customButtonGroup={<NP bottom='470px'/>}
-                    >
-                    {_data.map((item) => { return (<ServicePreview service={item} key={`${item['id']}`} searchRefresh={searchRefresh} onSelect={onSelect}/>) })}
-                </Carousel></>
-            );
+             let _data = items.data
+             const key = getURL(type);
+             return (<CarouselComp data={_data}/>);
+     
         }
     }
+    showCarousel.propTypes = {
+        items: PropTypes.object
+    }
+    
     const NoResults = () => {
         return (<>
             <Row margin="24px 0 0 0">
@@ -100,7 +121,7 @@ const SearchContent = ({ type, onSelect }) => {
         return (<>
             {showHeader(type)}
             <SearchSort type={type} data={data}/>
-            {type==='solution_pkg'?showCarrousel(data):showData(data)}
+            {type==='solution_pkg'?showCarousel(data):showData(data)}
             <Style display='flex' justifyContent='center'>
                 <NextPrevButtons data={data} />
             </Style>
