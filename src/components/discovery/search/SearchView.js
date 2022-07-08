@@ -10,7 +10,7 @@ import { updateSearchType, updateSeartTypeWithTerm } from "../../../actions";
 import AdminHeader from "../../admin/AdminHeader";
 
 
-const SearchView = ({type}) => {
+const SearchView = ({type, onSelect}) => {
     
 
     const store = useSelector(state => state.searchCriteriaStore);
@@ -32,14 +32,13 @@ const SearchView = ({type}) => {
                     <Style maxWidth='313px'>
                         <SearchFilterFactory type={type} />
                     </Style>
-
             </Column>
             <Column maxWidth='100%'>
                 <SearchTerm type={type}/>
 
                 <Padding horizontal='12px' />
                 <Style maxWidth='900px'>
-                    <SearchContent type={type} />
+                    <SearchContent type={type} onSelect={onSelect} />
                 </Style>
 
             </Column>
@@ -51,7 +50,8 @@ const SearchView = ({type}) => {
 }
 
 SearchView.propTypes = {
-    type: PropTypes.string
+    type: PropTypes.string,
+    onSelect: PropTypes.func
 }
 
 export default SearchView;
