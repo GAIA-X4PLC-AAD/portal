@@ -23,7 +23,7 @@ color: #000094;
 background-color: #fff;
 padding: 0.3em 2em;
 cursor: pointer;
-margin-left:1em;
+margin-left:${props => props.marginLeft || '1em'};
 :disabled {
     cursor:default;
     pointer-events: none;

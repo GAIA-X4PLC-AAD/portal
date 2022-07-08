@@ -38,7 +38,7 @@ const ServicePreview = ({ service , onSelect}) => {
                     </S.BlueButton>
                 </S.Row>
             </S.Column>
-            {displayModal?<ServiceModalDetails service={service} closeModal={closeModal}/>:null}
+            {displayModal?<ServiceModalDetails service={service} closeModal={closeModal} onSelect={onSelectFunction}/>:null}
         </SlotBox>    
     );
 }

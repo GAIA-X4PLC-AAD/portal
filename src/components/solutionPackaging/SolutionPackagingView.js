@@ -4,9 +4,7 @@ import { useParams } from "react-router-dom";
 import * as S from "../../common/styles";
 import SearchView from "../discovery/search/SearchView";
 import LoadingView from "../loading_view/LoadingView";
-import ServiceModalDetails from "./ServiceModalDetails";
 import SlotDetails from "./SlotDetails";
-import { AvailabeServices, SlotBox } from "./style";
 
 const SolutionPackagingView = () => {
     

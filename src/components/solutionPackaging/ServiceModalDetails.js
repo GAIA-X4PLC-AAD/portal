@@ -11,7 +11,7 @@ import ScreenshotsTab from '../discovery/tabs/screenshots/ScreenshotsTab';
 import ContactTab from '../discovery/tabs/ContactTab/ContactTab';
 import TabView from '../tab/TabView';
 
-const ServiceModalDetails = ({service, closeModal}) => {
+const ServiceModalDetails = ({service, closeModal, onSelect}) => {
 
     const {t} = useTranslation();
     const openLink =  (url) => {
@@ -65,7 +65,7 @@ const ServiceModalDetails = ({service, closeModal}) => {
                 <TabView labels={tabLabels} views={tabViews} width='864px;'/>
                 <Row margin='24px 24px 24px 10px'>
                     <CancelButton onClick={closeModal}>{t('solution_pkg.cancel')}</CancelButton>
-                    <BlueButton>{t('solution_pkg.select')}</BlueButton>
+                    <BlueButton onClick={onSelect}>{t('solution_pkg.select')}</BlueButton>
                 </Row>
             </Column>
         </Modal>
@@ -73,7 +73,8 @@ const ServiceModalDetails = ({service, closeModal}) => {
 }
 ServiceModalDetails.propTypes = {
     service: PropTypes.object,
-    closeModal: PropTypes.func
+    closeModal: PropTypes.func,
+    onSelect: PropTypes.func
 }
 
 

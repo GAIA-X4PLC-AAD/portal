@@ -4,13 +4,16 @@ import React, { useState, useEffect } from "react";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import { ColumnItem } from "./Common";
-import { Image, Column, Style, Tag } from "../../../../common/styles";
+import { Image, Column, Style, Tag, BlueButton } from "../../../../common/styles";
 import { Columns } from "../dataPreview/style";
 import DataPreview from "../dataPreview/DataPreview";
+import { useNavigate } from "react-router-dom";
 
 
 const DescriptionTabView = (props,) => {
   const [details, setDetails] = useState({});
+
+  const navigate = useNavigate();
 
   const providerLink = (data) => {
     // return (<a href={data.ppr_url} target="_blank" rel="noreferrer">{data.ppr_name}</a>);
@@ -52,10 +55,20 @@ const DescriptionTabView = (props,) => {
     data: PropTypes.array
   };
 
+  const showBookButton = () => {
+    if (props.params['type'] != 'composite-service') return null;
+    return (
+      <Style marginTop='auto' marginBottom='auto'>
+    <BlueButton marginLeft='0px' onClick={() => { navigate(`/sp/${details['id']}`) }}>
+      Book
+    </BlueButton>
+    </Style>
+    );
+
+  }
   useEffect(() => {
 
     if (props.data !== undefined) {
-      console.log(`DescriptionTab, props.data['dependent_services']: ${props.data['dependent_services']}`)
       setDetails(props.data)
     }
 
@@ -70,7 +83,7 @@ const DescriptionTabView = (props,) => {
             <S.Padding horizontal='8px'>
               <S.Title>{`${details['name']}`}</S.Title>
               <S.Body>{`${details['description']}`}</S.Body>
-
+              {showBookButton()}
               <S.Padding vertical='8px' horizontal='0px'>
                 <S.Subtitle>TAGS</S.Subtitle>
               </S.Padding>
