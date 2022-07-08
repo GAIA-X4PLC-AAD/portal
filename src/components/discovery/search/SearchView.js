@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from 'prop-types';
 import SearchFilterFactory from "./SearchFilterFactory";
-import { Row, Style, WrapColumn, Column } from "../../../common/styles";
+import { Row, Style, Column } from "../../../common/styles";
 import { Padding } from "../tabs/style";
 import SearchContent from "./SearchContent";
 import SearchTerm from "./SearchTerm";
@@ -9,8 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateSearchType, updateSeartTypeWithTerm } from "../../../actions";
 import AdminHeader from "../../admin/AdminHeader";
 
-const SearchView = ({ type }) => {
 
+const SearchView = ({type}) => {
+    
 
     const store = useSelector(state => state.searchCriteriaStore);
     const dispatch = useDispatch();

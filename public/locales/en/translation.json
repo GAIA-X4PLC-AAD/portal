@@ -32,7 +32,8 @@
         "solution_packages": "My Solution Packages",
         "activate": "Activate",
         "deactivate": "Deactivate",
-        "edit": "Edit"
+        "edit": "Edit",
+        "manage": "Manage"
     },
     "top-menu": {
         "help": "Help",
@@ -186,7 +187,8 @@
         "lists": {
             "data": "Data",
             "services": "Services",
-            "ppr": "Provider"
+            "ppr": "Provider",
+            "solution_pkg": "Select your service"
         },
         "search": {
             "filter": "Filter",
@@ -284,5 +286,15 @@
         "attachments": "Attachments",
         "approve": "Approve",
         "deny": "Deny"
+    },
+    "solution_pkg": {
+        "a_s": "{as, plural, =1 {1 available service} other {# available services}}",
+        "cancel": "Cancel",
+        "select": "Select",
+        "details":"Details",
+        "price": "Price",
+        "screenshots": "Screenshots",
+        "contact": "Contacts"
     }
 }
+

@@ -106,6 +106,7 @@ export const Row = styled.div`
     height: ${props => props.height || 'auto'};
     justify-content: ${props => props.justifyContent || ''};
     align-items: ${props => props.alignItems || ''};
+    gap: ${props => props.gap || 'unset'}
 `
 export const WrapRow = styled(Row)`
     flex-wrap: wrap`;
@@ -173,6 +174,7 @@ export const Image = styled.img`
   width: ${props => props.width || ''};
   height: ${props => props.height || ''};
   object-fit: ${props => props.objectFit || 'cover'};
+  object-position: ${props=> props.objectPosition || '50% 50%'}
   /* height: fit-content; */
   max-width: ${props => props.maxWidth || ''};
   min-width: ${props => props.minWidth || ''};
@@ -219,7 +221,7 @@ export const CaptionText = styled.div`
     line-height: 16px;
 
     letter-spacing: 0.4px;
-    color: #000000;
+    color: ${props => props.color || '#000000'};
 `;
 
 export const Card = styled.div`
@@ -456,9 +458,16 @@ export const TextInput = styled.input`
 
     ::placeholder {}
 `
+export const H2Text = styled.div`
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 36px;
+line-height: 48px;
+color: #1C0E15;
+`;
 
 export const StyledModal = Modal.styled`
-
   display: flex;
   align-items: center;
   justify-content: center;
