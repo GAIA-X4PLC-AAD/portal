@@ -19,6 +19,8 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import RegisterDisplayVC from './components/registration/RegisterDisplayVC';
 import RegisterComplianceCheck from './components/registration/RegisterComplianceCheck';
+import ProvideOverview from './components/provide/ProvideOverview';
+
 import { createBrowserHistory } from "history";
 import Provider from './components/account/Provider';
 
@@ -69,6 +71,7 @@ const App = (props) => {
                 <Route path="/admin/management" element={<SearchView type="management"/>} />
                 <Route path="/dashboard" element={<DashboardPage/>} />
                 <Route path="/onboarding" element={<OnboardingPage/>} />
+                <Route path="/provide/start" element={<ProvideOverview />} />
               </Routes>
             </div>
             <div className='footer-container'>
