@@ -7,7 +7,6 @@ const INITIAL_STATE = {
 };
 
 const updateFile = (currentState, file, parsed_descriptor) => {
-    console.log("Update file");
     return { ...currentState, file: file, parsed_descriptor: parsed_descriptor };
 }
 
@@ -18,7 +17,7 @@ const updateState = (currentState, newState) => {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case SET_DESCRIPTOR_FILE:
-            return updateFile(state, action.file);
+            return updateFile(state, action.file, action.parsed_descriptor);
         default:
             return updateState(state);
     }

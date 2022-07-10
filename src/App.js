@@ -30,6 +30,7 @@ import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
 import DashboardPage from './components/dashboard/dashboard_page';
 import OnboardingPage from './components/onboarding/onboarding_page';
+import ProvideAttributes from './components/provide/ProvideAttributes';
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
@@ -72,6 +73,7 @@ const App = (props) => {
                 <Route path="/dashboard" element={<DashboardPage/>} />
                 <Route path="/onboarding" element={<OnboardingPage/>} />
                 <Route path="/provide/start" element={<ProvideOverview />} />
+                <Route path="/provide/confirm/:id" element={<ProvideAttributes />} />
               </Routes>
             </div>
             <div className='footer-container'>

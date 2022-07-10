@@ -43,5 +43,5 @@ export const updateSearchFromHome = (searchTerm) => {
 }
 
 export const setDescriptorFile = (file, parsed_descriptor) => {
-    return { type: SET_DESCRIPTOR_FILE, file: file }
+    return { type: SET_DESCRIPTOR_FILE, file: file, parsed_descriptor: parsed_descriptor }
 }

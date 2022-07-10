@@ -18,7 +18,6 @@ class ProvideOverview extends Component {
     }
 
     changeHandler = (event) => {
-        console.log(this);
         var file = event.target.files[0];
         this.setState({ file: file });
     }
@@ -35,9 +34,8 @@ class ProvideOverview extends Component {
         formData.append("descriptor_type", "service");
 
         axios.post(process.env.REACT_APP_EDGE_API_URI + '/sd-service/convert', formData).then((response) => {
-            console.log(response.data);
-            this.props.setDescriptorFile(this.state.file, response.data.result)
-            this.props.navigate("/provide/0")
+            this.props.setDescriptorFile(this.state.file, response.data)
+            this.props.navigate("/provide/confirm/0")
         }, (error) => {
             alert('Failed to validate service descriptor.');
         });
