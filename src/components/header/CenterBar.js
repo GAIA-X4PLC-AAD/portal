@@ -21,6 +21,7 @@ import buildLanguageItemView from '../../common/language_item';
 
 const CenterBar = () => {
 
+  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const _lang = i18n['language']
 
@@ -35,44 +36,50 @@ const CenterBar = () => {
   const _isPcr = _userRole == 'gaiax-pcr' && isUserSignedIn
   const _isFr = _userRole == 'gaiax-fr' && isUserSignedIn
 
-  const navigate = useNavigate();
-
   // language modal
   const [openModal, setOpenModal] = useState(false);
 
   const onOpenModal = () => setOpenModal(true);
   const onCloseModal = () => setOpenModal(false);
 
-  // user signed or not
+  // selected page
+  const [selectedPage, setSelectedPage] = useState(-1);
 
-  console.log(`isUserSignedIn: ${isUserSignedIn}`)
 
   return (
     <>
       <S.TopMenuLinks>
 
-        {(_isPpr || _isPcr) ? <ButtonText onClick={() => navigate('/dashboard')}>{t('left-menu.dashboard')}</ButtonText> : ''}
+        {/* DASHBOARD: 0 */}
+        {(_isPpr || _isPcr) ?
+          <ButtonText selected={selectedPage == 0} color='#000000' onClick={() => { navigate('/dashboard'); setSelectedPage(0); }}>{t('left-menu.dashboard')}</ButtonText> : ''}
 
-        { _isFr ? <ButtonText onClick={() => navigate('/admin/participant')}>{t('left-menu.admin')}</ButtonText> : ''}
+        {/* ADMIN: 1 */}
+        {_isFr ?
+          <ButtonText selected={selectedPage == 1} color='#000000' onClick={() => { navigate('/admin/participant'); setSelectedPage(1); }}>{t('left-menu.admin')}</ButtonText> : ''}
 
-        <ButtonText onClick={() => navigate('/services')}>{t('left-menu.services')}</ButtonText>
+        {/* SERVICES: 2 */}
+        <ButtonText selected={selectedPage == 2} color='#000000' onClick={() => { navigate('/services'); setSelectedPage(2); }}>{t('left-menu.services')}</ButtonText>
 
-        <ButtonText onClick={() => navigate('/data')}>{t('left-menu.data')}</ButtonText>
+        {/* DATA: 3 */}
+        <ButtonText selected={selectedPage == 3} color='#000000' onClick={() => { navigate('/data'); setSelectedPage(3) }}>{t('left-menu.data')}</ButtonText>
 
-        <ButtonText onClick={() => navigate('/provider')}>{t('left-menu.provider')}</ButtonText>
+        {/* PROVIDER: 4 */}
+        <ButtonText selected={selectedPage == 4} color='#000000' onClick={() => { navigate('/provider'); setSelectedPage(4) }}>{t('left-menu.provider')}</ButtonText>
 
-        { _isPpr ? <ButtonText onClick={() => navigate('/provide')}>{t('left-menu.provide')}</ButtonText> : ''}
+        {/* PROVIDE: 5 */}
+        {_isPpr ?
+          <ButtonText selected={selectedPage == 5} color='#000000' onClick={() => { navigate('/provide'); setSelectedPage(5) }}>{t('left-menu.provide')}</ButtonText> : ''}
 
         <Row>
-          <Menu menuButton={<ButtonText>{t('left-menu.help')}</ButtonText>} menuClassName="szh-menu">
+          <Menu menuButton={<ButtonText color='#000000'>{t('left-menu.help')}</ButtonText>} menuClassName="szh-menu">
             <MenuItem>{t('left-menu.about')}</MenuItem>
             <MenuItem>{t('left-menu.support')}</MenuItem>
           </Menu>
           <DropDownArrowDownSmall />
         </Row>
 
-        { isUserSignedIn ? <></>: <ButtonText onClick={onOpenModal}>{t('left-menu.change-language')}</ButtonText>}
-        
+        {isUserSignedIn ? <></> : <ButtonText color='#000000' onClick={onOpenModal}>{t('left-menu.change-language')}</ButtonText>}
 
         <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
           <H4LightText>{t('left-menu.choose-language')}</H4LightText>
@@ -84,7 +91,7 @@ const CenterBar = () => {
             {buildLanguageItemView({ background: _isEs ? '#46DAFF1F' : '#fff', name: 'Spanish', code: 'es' })}
             {buildLanguageItemView({ background: _isDe ? '#46DAFF1F' : '#fff', name: 'German', code: 'de' })}
 
-            <Padding paddingTop='30px'/>
+            <Padding paddingTop='30px' />
             <Row><OutlineButton onClick={onCloseModal}>{t('left-menu.close')}</OutlineButton></Row>
           </Padding>
 

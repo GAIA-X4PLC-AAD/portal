@@ -256,6 +256,7 @@ export const Circle = styled.div`
 `
 
 export const ButtonText = styled.div`
+    border-bottom: ${props =>  props.selected? '4px solid #000094' : '4px solid #0000'}; 
     font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 700;
