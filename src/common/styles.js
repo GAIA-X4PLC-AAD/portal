@@ -44,6 +44,14 @@ export const DropDownArrowDown = styled.div`
     height:100%;
 `;
 
+export const DropDownArrowDownSmall = styled.div`
+    content: url('/images/DropDownArrowDown.svg');
+    margin: auto;
+    object-fit:none;
+
+    transform: scale(0.5);
+`;
+
 export const RedTextClickable = styled.div`
     font-family: 'Titillium Web';
     font-style: normal;
@@ -131,7 +139,7 @@ export const Style = styled.div`
     background-color: ${props => props.backgroundColor || ''};
     text-align: ${props => props.textAlign || ''};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
-    /* border-radius: 4px; */
+    border-radius: ${props => props.borderRadius || ''};
 `
 
 export const HeaderTitle = styled.div`
@@ -159,7 +167,6 @@ export const Image = styled.img`
 
 
 export const BodySmallBoldText = styled.div`
-<<<<<<< HEAD
 font-family: 'Titillium Web';
 font-style: normal;
 font-weight: 700;
@@ -472,3 +479,12 @@ export const SliderBullet = styled.button`
   text-decoration: none;
   font-weight: 700;
 ` */
+
+export const Padding = styled.div`
+  padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
+  padding-top: ${props => props.paddingTop || ''};
+  padding-left: ${props => props.paddingLeft || ''};
+  padding-right: ${props => props.paddingRight || ''};
+  align-self: ${props => props.alignSelf || ''};
+`
+

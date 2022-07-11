@@ -40,12 +40,12 @@ color: #000094;
 `;
 
 export const Header = styled.div`
-margin-top:36px;
-font-family: 'Titillium Web';
-font-style: normal;
-font-weight: 700;
-font-size: 18px;
-line-height: 24px;
-letter-spacing: 0.25px;
-color: #262626;
+    margin-top:36px;
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.25px;
+    color: #262626;
 `;
