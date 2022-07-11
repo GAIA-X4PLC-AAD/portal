@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next';
-
+import PropTypes from 'prop-types';
 
 import { Menu, MenuItem, MenuButton, SubMenu } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
@@ -19,7 +19,7 @@ import { Padding } from '../discovery/tabs/style';
 import buildLanguageItemView from '../../common/language_item';
 
 
-const CenterBar = () => {
+const CenterBar = ({selectedPage, onPageChanged}) => {
 
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
@@ -42,9 +42,9 @@ const CenterBar = () => {
   const onOpenModal = () => setOpenModal(true);
   const onCloseModal = () => setOpenModal(false);
 
-  // selected page
-  const [selectedPage, setSelectedPage] = useState(-1);
-
+  const changePage = ({ page }) => {
+    onPageChanged({page: page})
+  }
 
   return (
     <>
@@ -52,24 +52,24 @@ const CenterBar = () => {
 
         {/* DASHBOARD: 0 */}
         {(_isPpr || _isPcr) ?
-          <ButtonText selected={selectedPage == 0} color='#000000' onClick={() => { navigate('/dashboard'); setSelectedPage(0); }}>{t('left-menu.dashboard')}</ButtonText> : ''}
+          <ButtonText selected={selectedPage === 'dashboard'} color='#000000' onClick={() => { changePage({page: 'dashboard'}); navigate('/dashboard'); }}>{t('left-menu.dashboard')}</ButtonText> : ''}
 
         {/* ADMIN: 1 */}
         {_isFr ?
-          <ButtonText selected={selectedPage == 1} color='#000000' onClick={() => { navigate('/admin/participant'); setSelectedPage(1); }}>{t('left-menu.admin')}</ButtonText> : ''}
+          <ButtonText selected={selectedPage === 'admin'} color='#000000' onClick={() => { changePage({page: 'admin'}); navigate('/admin/participant'); }}>{t('left-menu.admin')}</ButtonText> : ''}
 
         {/* SERVICES: 2 */}
-        <ButtonText selected={selectedPage == 2} color='#000000' onClick={() => { navigate('/services'); setSelectedPage(2); }}>{t('left-menu.services')}</ButtonText>
+        <ButtonText selected={selectedPage === 'services'} color='#000000' onClick={() => { changePage({page: 'services'}); navigate('/services'); }}>{t('left-menu.services')}</ButtonText>
 
         {/* DATA: 3 */}
-        <ButtonText selected={selectedPage == 3} color='#000000' onClick={() => { navigate('/data'); setSelectedPage(3) }}>{t('left-menu.data')}</ButtonText>
+        <ButtonText selected={selectedPage === 'data'} color='#000000' onClick={() => { changePage({page: 'data'}); navigate('/data'); }}>{t('left-menu.data')}</ButtonText>
 
         {/* PROVIDER: 4 */}
-        <ButtonText selected={selectedPage == 4} color='#000000' onClick={() => { navigate('/provider'); setSelectedPage(4) }}>{t('left-menu.provider')}</ButtonText>
+        <ButtonText selected={selectedPage === 'provider'} color='#000000' onClick={() => { changePage({page: 'provider'}); navigate('/provider'); }}>{t('left-menu.provider')}</ButtonText>
 
         {/* PROVIDE: 5 */}
         {_isPpr ?
-          <ButtonText selected={selectedPage == 5} color='#000000' onClick={() => { navigate('/provide'); setSelectedPage(5) }}>{t('left-menu.provide')}</ButtonText> : ''}
+          <ButtonText selected={selectedPage === 'provide'} color='#000000' onClick={() => { changePage({page: 'provide'}); navigate('/provide'); }}>{t('left-menu.provide')}</ButtonText> : ''}
 
         <Row>
           <Menu menuButton={<ButtonText color='#000000'>{t('left-menu.help')}</ButtonText>} menuClassName="szh-menu">
@@ -100,6 +100,11 @@ const CenterBar = () => {
       </S.TopMenuLinks>
     </>
   )
+}
+
+CenterBar.propTypes = {
+  selectedPage: PropTypes.string,
+  onPageChanged: PropTypes.func,
 }
 
 export default CenterBar

@@ -48,7 +48,7 @@ const Home = () => {
   const isInSignInMenu = useSelector((state) => state.signin.isInSignInMenu)
 
   const buildSliderContent = ({ index = 0 }) => {
-    return <Column justifyContent='center' alignItems='center'>
+    return <Column key = {`${index}`} justifyContent='center' alignItems='center'>
       <H2Text color={'#fff'}>{t('article.what-is-new')} {index}</H2Text>
       <Style maxWidth='600px'>
         <BodyText color={'#fff'} textAlign='center'>{t('filler')}</BodyText>
@@ -106,25 +106,24 @@ const Home = () => {
 
 
   return (
-    <div className="home">
+    <>
       <div className='banner-container'>
-        <div>
-          <div className='banner-logo'>
-            <img src='/images/logo_white.svg' height='80px' width='200px'></img>
-          </div>
-          {HomeSlider()}
-          <Padding vertical='20px' />
+        <Column alignItems='center' height='100px'>
+          <Padding key='i01' paddingTop='140px' />
+          <img key='i02' src='/images/gaia-x-logo-white.png' height='111px' width='200px'></img>
+          <Padding key='i03' paddingTop='40px' />
+          <Style key='i04' height='100%' width='100%'>{HomeSlider()}</Style>
 
-        </div>
-      </div>
+
+        </Column>
+      </div >
+
       <div className='search-container'>
         <Padding vertical='40px'>
-          <SearchTerm type='home' inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF'/>
+          <SearchTerm type='home' inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF' />
         </Padding>
-
-        {/* <Search /> */}
       </div>
-    </div>
+    </>
   );
 }
 

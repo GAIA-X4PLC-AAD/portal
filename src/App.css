@@ -6,7 +6,7 @@
 :root {
   --width-menu: 150px;
   --height-menu: 50px;
-  --banner-height: 400px;
+  --banner-height: 600px;
   --content-width: 80%;
   --content-height: 40%;
 }
@@ -82,8 +82,9 @@
 .banner-container {
   /*
   background-image: url('../public/images/banner_gradient.png');
-  min-height: var(--banner-height);
+
   */
+  min-height: var(--banner-height);
   background-image: url('../public/images/Vector_2727\ 1_merged01.png');
   background-size: 100% auto;
   background-position: 50% 50%;

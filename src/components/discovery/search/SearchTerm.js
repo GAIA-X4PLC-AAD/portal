@@ -15,7 +15,7 @@ const SearchTerm = ({t, type, inputWidth='800px', advancedTextColor='#000094', a
     const dispatch = useDispatch();
 
     useEffect(()=>{
-        console.log(`type of criteria.type = ${criteria.type} , type= ${type}, searchSterm = ${criteria.searchTerms}`);
+        // console.log(`type of criteria.type = ${criteria.type} , type= ${type}, searchSterm = ${criteria.searchTerms}`);
         if (criteria.type === 'home') {
             setSearchTerm(criteria.searchTerms);
         }
