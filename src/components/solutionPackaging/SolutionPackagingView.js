@@ -103,10 +103,8 @@ const SolutionPackagingView = () => {
     // TODO: change index in scopeServiceId for right id
     const onAddClick = (index) => {
         setAddItem(index);
-        setTimeout(() => {
-            dispatch(updateFilterCriteria({scopeServiceId: index}));
-        }, 500);
     }
+
     const showSlots = (data) => {
         return (
             <S.Row margin="32px;" gap='20px'>
@@ -194,7 +192,7 @@ const SolutionPackagingView = () => {
                     <S.BodyText>Lorem ipsum dolor si jet subtitle</S.BodyText>
                 </S.Style>
                 <LoadingView url={URL} successView={successView}/>
-                {addItem>=0?<SearchView type="solution_pkg" onSelect={onSelect}/>:null}
+                {addItem>=0?<SearchView type="solution_pkg" onSelect={onSelect} serviceId={id} slot={addItem}/>:null}
             </S.Column>
             );
 }
