@@ -19,7 +19,7 @@ const RegisterConfirmation = (props) => {
     }
 
     useEffect(() => {
-        // axios.get(configData.ONBOARDING_API_URI + `/register/${type}/confirm_email`, { params: { uniqueId: key } }).
+        // axios.get(process.env.REACT_APP_EDGE_API_URI + `/register/${type}/confirm_email`, { params: { uniqueId: key } }).
         //     then(
         //         (reason) => {
         //             setMessage(`form.${type}ConfirmationMessageSuccess`);

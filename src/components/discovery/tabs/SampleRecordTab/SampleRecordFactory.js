@@ -22,7 +22,7 @@ const SampleRecordFactory = ({data, t}) => {
    
     const showSamples = (samples) => {
         return (samples.map((sample, index)=> {
-                        return <DefaultSample sample={sample} key={sample.id}/>;
+                        return <DefaultSample sample={sample} key={`${sample.id}:${index}`}/>;
             }
         ));
     }

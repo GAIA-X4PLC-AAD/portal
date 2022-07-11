@@ -1,7 +1,7 @@
-import React, {useState, useEffect } from "react";
+import React from 'react'
 import { Link, useParams } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import axios from "axios";
+import PropTypes from 'prop-types';
 import "./Account.css";
 import AccountPaneDetails from "./AccountPaneDetails";
 import AccountPaneLoginHistory from "./AccountPaneLoginHistory";
@@ -35,22 +35,22 @@ const AccountHome = (props) => {
             <div className="provider-account-details layout">
                 <div className="provider-account-section1__cover-group layout">
                     <div className="provider-account-section1__image13">
-                    My Account
+                        {props.t("account.myAccount")}
                     </div>
                     <h4 className="provider-account-section1__highlights4 layout">
-                        Here you can manage all your information
+                        {props.t("account.myAccountDescription")}
                     </h4>
                 </div>
                 <div className="provider-account-details_tab layout">
                     <h4 className="provider-account-section1__highlights5 layout">
-                        <Link to="/account/details/">
-                            Details
+                        <Link to="/account/user/details/">
+                            {props.t("account.detailsTab")}
                         </Link>
                         {showDetailsSelected("details")}
                     </h4>
                     <h4 className="provider-account-section1__highlights5 layout">
-                        <Link to="/account/history/">
-                            Login History
+                        <Link to="/account/user/history/">
+                            {props.t("account.logHistoryTab")}
                         </Link>
                         {showDetailsSelected("history")}
                     </h4>
@@ -61,6 +61,9 @@ const AccountHome = (props) => {
         </div>
         )
 
+}
+AccountHome.propTypes = {
+    t: PropTypes.func
 }
 
 export default withTranslation()(AccountHome);

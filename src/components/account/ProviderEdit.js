@@ -27,7 +27,7 @@ const ProviderEdit = (props) => {
       var formData = new FormData();
       formData.append("providerFile", file);
 
-      axios.post(configData.EDGE_API_URI + '/api/upload_provider_sd', formData, {
+      axios.post(process.env.REACT_APP_EDGE_API_URI + '/account/provider/upload_provider_sd', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -40,7 +40,7 @@ const ProviderEdit = (props) => {
     };
 
     const deleteAccount = () => {
-      axios.delete(configData.EDGE_API_URI + '/account/provider').then(   
+      axios.delete(process.env.REACT_APP_EDGE_API_URI + '/account/provider').then(   
         (response) => {
           navigate("/");
         },(error)=> {

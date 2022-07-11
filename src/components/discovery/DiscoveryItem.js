@@ -19,7 +19,8 @@ const DiscoveryItem = ({type}) => {
 
 DiscoveryItem.propTypes = {
     input: PropTypes.object,
-    id: PropTypes.string
+    id: PropTypes.string,
+    type: PropTypes.string,
 }
 
 export default DiscoveryItem;

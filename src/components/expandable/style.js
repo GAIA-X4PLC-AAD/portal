@@ -45,10 +45,11 @@ export const Block = styled.div`
   border-top: ${props => props.border ? '1px solid #E9E9E9' : ''};
   border-left: ${props => props.border ? '1px solid #E9E9E9' : ''};
   border-right: ${props => props.border ? '1px solid #E9E9E9' : ''};
+  border-bottom: ${props => props.borderBottom ? '1px solid #E9E9E9' : ''};
   box-shadow: ${props => props.boxShadow};
   border-radius: 4px;
-  /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
-  /* min-height: 40%; */
+  position: ${props => props.position || ''};
+  @apply py-0;
 `
 
 export const ToggleButton = styled.div`

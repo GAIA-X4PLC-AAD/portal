@@ -27,7 +27,7 @@ const RegisterOrganization = (props) => {
     }
 
     const onRegisterDID = () => {
-        axios.get(configData.EDGE_API_URI + configData.uri_path.auth_status_path).
+        axios.get(process.env.REACT_APP_EDGE_API_URI + configData.uri_path.auth_status_path).
         then(
             (response) => {
                 navigate("/register/did");
@@ -50,7 +50,7 @@ const RegisterOrganization = (props) => {
 
     const onSubmit =  async () => {
         console.log("request: " + JSON.stringify(input));
-        axios.post(configData.ONBOARDING_API_URI+'/register/organization', input).
+        axios.post(process.env.REACT_APP_EDGE_API_URI+'/api/register/organization', input).
         then(
             (reason)=> {navigate("/register/email?formType=organization");
         },(error)=> {

@@ -16,19 +16,20 @@ const ServiceTile = ({ input, id, t }) => {
     const type = "services";
 
     const showComponent = () => {
+        let _width = "100%"
         return (
             <>
                 <ExpandableView
                     initiallyExpanded={true} view={DescriptionTab({ id: id, type: type })}
-                    title={t("service-tile.details")}
+                    title={<>{t("service-tile.details")}</>}    // converting string to a React element to remove console warning
                     titleTrailerPadding="12px"
                     viewLeadingPadding="40px"
                     titleLeadingPadding="40px"
                     arrowColor="#B3B3B3" 
-                    width="848px"/>
-                <ExpandableView initiallyExpanded={false} view={PriceTab({ id: id, type: type })} title={t("service-tile.price")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px"/>
-                <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={t("service-tile.screenshots")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px"/>
-                <ExpandableView initiallyExpanded={false} view={ContactTab({ id: id, type: type })} title={t("service-tile.contact")} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width="848px"/>
+                    width={_width}/>
+                <ExpandableView initiallyExpanded={false} view={PriceTab({ id: id, type: type })} title={<>{t("service-tile.price")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width}/>
+                <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={<>{t("service-tile.screenshots")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={'900px'}/>
+                <ExpandableView initiallyExpanded={false} view={ContactTab({ id: id, type: type })} title={<>{t("service-tile.contact")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width}/>
             </>
         )
     }
@@ -70,7 +71,6 @@ const ServiceTile = ({ input, id, t }) => {
     }
 
     const showTileContent = () => {
-        console.log(`id: ${id}`)
         return (
             <S.DiscoveryDetailsContent>
                 <S.DiscoveryDetailsBody>

@@ -1,0 +1,61 @@
+replicaCount: 1
+
+image:
+  repository: gaia_x-portal
+  name: demo
+  tag: latest
+  pullPolicy: IfNotPresent
+  args: []
+
+ports:
+  - name: http
+    containerPort: 80
+    protocol: TCP
+
+livenessProbe_enabled: false
+#livenessProbe:
+#  httpGet:
+#    scheme: HTTP
+#    path: /actuator/health/liveness
+#    port: 4004
+#  initialDelaySeconds: 10
+#  periodSeconds: 10
+#  timeoutSeconds: 2
+#  failureThreshold: 20
+#  successThreshold: 1
+
+readinessProbe_enabled: false
+#readinessProbe:
+#  httpGet:
+#    scheme: HTTP
+#    path: /actuator/health/readiness
+#    port: 4004
+#  initialDelaySeconds: 10
+#  periodSeconds: 10
+#  timeoutSeconds: 2
+#  failureThreshold: 3
+#  successThreshold: 1
+
+resources:
+  limits:
+    memory: 1Gi
+
+service:
+  type: ClusterIP
+  ports:
+  - port: 80
+    targetPort: http
+    protocol: TCP
+    name: http
+
+
+fullnameOverride: demo
+
+#env:
+#  SPRING_PROFILES_ACTIVE: "mesh"
+#  SPRING_CONFIG_LOCATION: file:/config-repo/application.yml
+
+configmap:
+  enabled: false
+  volumeMounts:
+    mountPath: /config-repo

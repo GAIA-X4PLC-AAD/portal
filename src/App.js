@@ -26,6 +26,8 @@ import PropTypes from 'prop-types';
 import Header from './components/header';
 import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
+import DashboardPage from './components/dashboard/dashboard_page';
+import OnboardingPage from './components/onboarding/onboarding_page';
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
@@ -63,6 +65,10 @@ const App = (props) => {
                 <Route path="/servicetile/:id" element={<DiscoveryItem type="service"/>} />
                 <Route path="/pprtile/:idd" element={<DiscoveryItem type="ppr"/>} />
                 <Route path="/datatile/:id" element={<DiscoveryItem type="data"/>} />
+                <Route path="/admin/participant" element={<SearchView type="participant"/>} />
+                <Route path="/admin/management" element={<SearchView type="management"/>} />
+                <Route path="/dashboard" element={<DashboardPage/>} />
+                <Route path="/onboarding" element={<OnboardingPage/>} />
               </Routes>
             </div>
             <div className='footer-container'>

@@ -13,7 +13,7 @@ const DescriptionTab = ({ id, type }) => {
 
   let _type = type;
   if (_type == 'composite-service' || _type == 'service') _type = 'services'
-  const URL = configData.EDGE_API_URI + `/discovery/${_type}/${id}/details/`;
+  const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${_type}/${id}/details/`;
 
 
   const getSuccessView = (type) => {

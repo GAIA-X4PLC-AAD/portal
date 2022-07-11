@@ -9,9 +9,15 @@ const CenterBar = () => {
 
   const { t, } = useTranslation();
 
+
+  // const _isPr = useSelector((state) => state.user.user.is_pr && state.isUserSignedIn)
+  const _isPr = useSelector((state) => true)
+
   return (
     <>
       <S.TopMenuLinks>
+        {(_isPr) ? <Link to="/dashboard"> {t('left-menu.dashboard')}</Link> : ''}
+        <Link to="/admin/participant"> {t('left-menu.admin')}</Link>
         <Link to="/services"> {t('left-menu.services')}</Link>
         <Link to="/data"> {t('left-menu.data')}</Link>
         <Link to="/provider"> {t('left-menu.provider')}</Link>

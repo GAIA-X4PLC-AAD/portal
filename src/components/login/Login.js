@@ -6,7 +6,7 @@ import { signIn, signInMenuEnter, signInMenuQuit } from "../../actions";
 import { Link, useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import LoginFail from "./LoginFail";
-import AuthPolling from "../AuthPolling";
+import AuthPolling from "./AuthPolling";
 import axios from "axios";
 import configData from "../../config/config.json";
 
@@ -32,7 +32,7 @@ class Login extends Component {
 
   componentDidMount() {
     this.props.signInMenuEnter();
-    axios.get(configData.EDGE_API_URI + configData.uri_path.user_did_register)
+    axios.get(process.env.REACT_APP_EDGE_API_URI + configData.uri_path.user_did_register)
       .then((body) => {
         let qrCodePath = body.data.qrCodePath;
         this.setState({ imgLink: qrCodePath, walletLink: body.data.walletLink });
@@ -84,7 +84,7 @@ class Login extends Component {
           onAuthZFailed={this.onAuthZFailed}
           onAuthZSuccess={this.onAuthZSuccess}
           onAuthZWait={this.onAuthZWait}
-          statusURL={configData.EDGE_API_URI + configData.uri_path.auth_status_path}
+          statusURL={process.env.REACT_APP_EDGE_API_URI + configData.uri_path.auth_status_path}
         />
         <LoginFail showAlertMessage={this.state.showLoginFail} message={this.state.loginFailMessage} />
         <div className="login-group layout">

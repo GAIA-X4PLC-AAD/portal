@@ -11,7 +11,7 @@ const ProviderDetails = (props) => {
     const [provider, setProvider] = useState(null);
     
     useEffect (()=>{
-        axios.get(configData.EDGE_API_URI + '/account/provider').then(   (response) => {
+        axios.get(process.env.REACT_APP_EDGE_API_URI + '/account/provider').then(   (response) => {
             setProvider(response.data);
     },(error)=> {
           alert('ko');
@@ -32,7 +32,7 @@ const ProviderDetails = (props) => {
                     <div className="provider-account-details_info-item">
                         <div className="provider-account-section1__flex3 layout">
                             <div className="provider-account-section1__image14 layout">
-                                <img src={provider?.avatarImageLink} alt="User avatar image."/>
+                                <img src={provider?.avatarImageLink} alt="User avatar image." height={143} width={143}/>
                             </div>
                             <div className="provider-account-section1__block7 layout">
                                 <div className="provider-account-section1__block8 layout">

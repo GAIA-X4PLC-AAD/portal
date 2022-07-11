@@ -6,17 +6,39 @@ import { useTranslation } from 'react-i18next';
 import * as S from './style';
 
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import { BodyBoldText, ButtonText, Circle, DropDownArrowUp, Row } from '../../common/styles';
+import { DropDownArrowDown } from '../account/ProviderCredentialStyle';
 
 //
 // each function component is independent, isolated and testable.
 // state is managed inside the component itself
 //
 
+// USER AVATAR
+function UserAvatarButton() {
+  const _userName = useSelector((state) => state.user.user.first_name)
+  const navigate = useNavigate();
+
+  return <S.SimpleButton onClick={() => navigate("/account/user/details")}>
+    <Circle background='#ffffff' backgroundColor='#ffffff' borderColor='#000094'
+       backgroundImage='/images/identicon.png' isButton borderThickness='2px'>
+      <ButtonText>{_userName.substring(0, 2)}</ButtonText>
+    </Circle>
+  </S.SimpleButton>
+}
+
 // USER INFO
 function UserInfoButton() {
   const _userName = useSelector((state) => state.user.user.first_name)
+  const navigate = useNavigate();
 
-  return <S.HeaderButton onClick={() => { }}>{_userName}</S.HeaderButton>
+  return <S.HeaderButton onClick={() => navigate("/account/user/details")}>{_userName}</S.HeaderButton>
+}
+
+function PprInfoButton() {
+  const navigate = useNavigate();
+  return <S.HeaderButton onClick={() => navigate("/account/provider/details")}>Provider</S.HeaderButton>
 }
 
 // SIGNOUT
@@ -55,14 +77,20 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
 
   const signedInButtons =
     <>
-      <UserInfoButton />
-      <SignOutButton onClicked={handleSignOut} />
+      <Row alignItems='center'>
+        {/* <UserInfoButton /> */}
+        <PprInfoButton />
+        <SignOutButton onClicked={handleSignOut} />
+        <UserAvatarButton />
+        <ButtonText>Help</ButtonText>
+        <DropDownArrowUp/>
+      </Row>
     </>;
 
   const signedOutButtons =
     <>
       <RegisterButton onClicked={handleRegister} />
-      <SignInButton onClicked={handleSignIn} data-cy='dateInput'/>
+      <SignInButton onClicked={handleSignIn} data-cy='dateInput' />
     </>;
 
   if (isInSignInMenu) { return (<></>); }

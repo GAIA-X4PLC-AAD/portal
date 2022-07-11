@@ -43,6 +43,7 @@ export const Filters = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 8px;
     padding: 0px 0px 12px;
     gap: 12px;
     width: 312px;
@@ -68,6 +69,7 @@ export const Rounded=styled.div`
 `;
 
 export const FilterHeader=styled.div`
+    margin-top:80px;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -159,3 +161,7 @@ font-size: 18px;
 line-height: 24px;
 letter-spacing: 0.25px;
 color: #262626;`;
+
+export const FloatRight=styled.div`
+float:right;
+`;

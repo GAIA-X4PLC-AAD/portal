@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import configData from "../../../config/config.json";
 import LoadingView from "../../loading_view/LoadingView";
 import PropTypes from 'prop-types';
 import NextPrevButtons from "./NexPrevButtons";
@@ -8,20 +7,27 @@ import TileFactory from "../TileFactory";
 import { HeaderTitle, Row, Column, Style } from "../../../common/styles";
 import { useTranslation } from "react-i18next";
 import * as S from "./style";
+import SearchSort from "./SearchSort";
 
 const SearchContent = ({ type }) => {
 
     const criteria = useSelector(state => state.searchCriteriaStore);
-    const URL = configData.EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
+    const PROVIDER_URL = process.env.REACT_APP_EDGE_API_URI + `/api/admin/pr/registrations/search?${criteria.parameters}`;
+    const MANAGEMENT_URL = process.env.REACT_APP_EDGE_API_URI + `/api/admin/management/requests/search?${criteria.parameters}`;
+    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
+    const [refresh, setRefresh] = useState(0);
 
     const { t, i18n } = useTranslation();
+
+    const searchRefresh = () =>{
+        setRefresh(refresh+1);
+    }
 
     const showData = (data) => {
         if (!data || !data.data || data.data.length === 0) return NoResults();
         else { 
-            // let _data = data.data.slice(0, 1)
             let _data = data.data
-            return _data.map((item, i) => { return (<TileFactory data={item} id={`${item['id']}`} key={`${item['id']}`} />) })
+            return _data.map((item, i) => { return (<TileFactory data={item} id={`${item['id']}`} key={`${item['id']}`} searchRefresh={searchRefresh} />) })
         }
     }
 
@@ -29,15 +35,22 @@ const SearchContent = ({ type }) => {
         return (<>
             <Row margin="24px 0 0 0">
                 <Column><S.AlertIcon /></Column>
-                <Column><S.ErrorHeader>No results found</S.ErrorHeader></Column>
+                <Column><S.ErrorHeader>{t('discovery.search.noResults')}</S.ErrorHeader></Column>
             </Row>
-            <Row><S.ErrorMessage>Sorry, we couldn’t find any matching results. Try broadening your filters</S.ErrorMessage></Row>
+            <Row><S.ErrorMessage>{t('discovery.search.noResultsMessage')}</S.ErrorMessage></Row>
         </>);
     }
 
+    const showHeader = (type) => {
+        if (type === 'management' || type === 'participant') return null;
+        return (<HeaderTitle>{t(`discovery.lists.${type}`)}</HeaderTitle>);
+    }
+
+
     const loadData = ({ data }) => {
         return (<>
-            <HeaderTitle>{t(`discovery.lists.${type}`)}</HeaderTitle>
+            {showHeader(type)}
+            <SearchSort type={type} data={data}/>
             {showData(data)}
             <Style display='flex' justifyContent='center'>
                 <NextPrevButtons data={data} />
@@ -46,9 +59,17 @@ const SearchContent = ({ type }) => {
         );
     }
 
-    console.log(URL);
-    return (<LoadingView url={URL}
-        successView={loadData} key={URL} />);
+    const getURL = (type) => {
+        switch(type) {
+            case 'participant': return `${PROVIDER_URL}`;
+            case 'management': return `${MANAGEMENT_URL}`;
+            default: return `${URL}`;
+        }
+    }
+
+
+    return (<LoadingView url={`${getURL(type)}`}
+        successView={loadData}  key={URL+refresh}/>);
 }
 
 SearchContent.propTypes = {

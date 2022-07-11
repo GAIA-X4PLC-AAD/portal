@@ -17,7 +17,7 @@ const RegisterDisplayVC = (props) => {
     const mockPath = mock === "user" ? configData.uri_path.mock_vc_user : configData.uri_path.mock_vc_organization
 
     const getVRVC = () => {
-        axios.get(configData.EDGE_API_URI + mockPath).
+        axios.get(process.env.REACT_APP_EDGE_API_URI + mockPath).
             then(
                 (response) => {
                     setVRVC(response.data);

@@ -1,32 +1,78 @@
 stages:
   - build
+  - docker
   - deploy
 
-image: docker:latest
+variables:
+    REGISTRY_PATH: ${CI_REGISTRY}/gaia-x/data-infrastructure-federation-services/por
+    IMAGE_NAME: ${CI_PROJECT_NAME}/portal-${CI_PROJECT_NAME}
+    TAG: ${CI_PIPELINE_ID}
+    CI: "false"
+    REACT_APP_EDGE_API_URI: "https://ybgaiax.me"
 
-services:
-  - docker:dind
 
-docker_build:
+application-build:
   stage: build
+  image:
+    name: node:17-alpine3.14
+  artifacts:
+    paths:
+      - build
   only:
     refs:
-      - main
+      - testPipeLineHelm
   script:
-    - docker login -u $DOCKER_REGISTRY_USER -p $DOCKER_REGISTRY_PASSWORD https://gaiaxregistry.azurecr.io 
-    - docker build -t gaiaxregistry.azurecr.io/frontend:latest .
-    - docker push gaiaxregistry.azurecr.io/frontend:latest
+    - npm install
+    - npm run build
+    - ls -l
 
-recreate_pods:
+
+docker-build:
+  stage: docker
+  dependencies:
+    - application-build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [ "" ]
+  only:
+    refs:
+      - testPipeLineHelm
+  script:
+    - mkdir -p deploy/docker/output
+    - mv build deploy/docker/output/build
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - >-
+      /kaniko/executor
+      --context "${CI_PROJECT_DIR}/deploy/docker"
+      --dockerfile "${CI_PROJECT_DIR}/deploy/docker/Dockerfile"
+      --destination "${REGISTRY_PATH}/${IMAGE_NAME}:${TAG}"
+
+
+.base_deploy: &base_deploy
   stage: deploy
   only:
     refs:
-      - main
-  image: mcr.microsoft.com/azure-cli
+      - testPipeLineHelm
+  image: alpine/k8s:1.21.12
   script:
-    - az login --service-principal --username $AZ_APP_ID --password $AZ_PASSWORD --tenant $AZ_TENANT_ID
-    - az account set --subscription $AZ_SUBSCRIPTION_ID
-    - az aks install-cli
-    - az aks get-credentials --resource-group t-systems-gaia-x-development --name gaiax-k8s-001
-    - kubectl rollout restart deployment.apps/frontend -n portal-development
-    - kubectl rollout restart deployment.apps/frontend -n portal-test        
+    - mkdir -p /root/.kube
+    - echo "${K8S_CONFIG}"  | base64 -d > /root/.kube/config
+    - helm upgrade --install gaia-x-${CI_PROJECT_NAME} deploy/helm/app --values deploy/helm/app/values.yaml -n gaia-x-portal --set image.repository="${REGISTRY_PATH}" --set image.name="${IMAGE_NAME}" --set image.tag=${TAG} --set fullnameOverride=${CI_PROJECT_NAME} --wait
+
+
+Deploy to Test:
+  <<: *base_deploy
+  environment:
+    name: az-test
+  variables:
+    K8S_CONFIG: "${AZ_KUBE_CONFIG}"
+
+
+Deploy to Demo:
+  <<: *base_deploy
+  environment:
+    name: ecodemo
+  when: manual
+  variables:
+    K8S_CONFIG: "${ECO_K8S}"
