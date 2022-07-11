@@ -26,11 +26,16 @@ const CenterBar = () => {
 
   const _isEn = _lang.indexOf('en') == 0
   const _isEs = _lang.indexOf('es') == 0
+  const _isDe = _lang.indexOf('de') == 0
 
-  // const _isPr = useSelector((state) => state.user.user.is_pr && state.isUserSignedIn)
-  const _isPr = useSelector((state) => true)
+  const _userRole = useSelector((state) => state.user.user.user_role)
+  const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
+
+  const _isPpr = _userRole == 'gaiax-ppr' && isUserSignedIn
+  const _isPcr = _userRole == 'gaiax-pcr' && isUserSignedIn
+  const _isFr = _userRole == 'gaiax-fr' && isUserSignedIn
+
   const navigate = useNavigate();
-
 
   // language modal
   const [openModal, setOpenModal] = useState(false);
@@ -38,23 +43,25 @@ const CenterBar = () => {
   const onOpenModal = () => setOpenModal(true);
   const onCloseModal = () => setOpenModal(false);
 
+  // user signed or not
 
-
-  const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
+  console.log(`isUserSignedIn: ${isUserSignedIn}`)
 
   return (
     <>
       <S.TopMenuLinks>
 
-        {(_isPr) ? <ButtonText onClick={() => navigate('/dashboard')}>{t('left-menu.dashboard')}</ButtonText> : ''}
+        {(_isPpr || _isPcr) ? <ButtonText onClick={() => navigate('/dashboard')}>{t('left-menu.dashboard')}</ButtonText> : ''}
 
-        <ButtonText onClick={() => navigate('/admin/participant')}>{t('left-menu.admin')}</ButtonText>
+        { _isFr ? <ButtonText onClick={() => navigate('/admin/participant')}>{t('left-menu.admin')}</ButtonText> : ''}
 
         <ButtonText onClick={() => navigate('/services')}>{t('left-menu.services')}</ButtonText>
 
         <ButtonText onClick={() => navigate('/data')}>{t('left-menu.data')}</ButtonText>
 
         <ButtonText onClick={() => navigate('/provider')}>{t('left-menu.provider')}</ButtonText>
+
+        { _isPpr ? <ButtonText onClick={() => navigate('/provide')}>{t('left-menu.provide')}</ButtonText> : ''}
 
         <Row>
           <Menu menuButton={<ButtonText>{t('left-menu.help')}</ButtonText>} menuClassName="szh-menu">
@@ -75,6 +82,7 @@ const CenterBar = () => {
           <Padding vertical='20px' horizontal='40px'>
             {buildLanguageItemView({ background: _isEn ? '#46DAFF1F' : '#fff', name: 'English', code: 'en' })}
             {buildLanguageItemView({ background: _isEs ? '#46DAFF1F' : '#fff', name: 'Spanish', code: 'es' })}
+            {buildLanguageItemView({ background: _isDe ? '#46DAFF1F' : '#fff', name: 'German', code: 'de' })}
 
             <Padding paddingTop='30px'/>
             <Row><OutlineButton onClick={onCloseModal}>{t('left-menu.close')}</OutlineButton></Row>

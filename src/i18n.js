@@ -12,7 +12,7 @@ i18n
     wait: false,
     debug: true,
     fallbackLng: 'en',
-    preload: ['en', 'es'],
+    preload: ['en', 'es', 'de'],
     defaultNS: ['translation'],
     backend: {
         loadPath: '/locales/{{lng}}/{{ns}}.json'

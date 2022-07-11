@@ -15,15 +15,15 @@
         "admin": "Admin",
         "logout": "Logout",
         "user-info": "User Info",
-        "change-language": "Change Language",
+        "change-language": "Language",
         "about": "About",
         "support": "Support",
         "english": "English",
         "spanish": "Spanish",
+        "german": "German",
         "close": "Close",
-        "choose-language": "Choose Language",
-        "select-system-language": "Please select a system language"
-        
+        "choose-language": "Language",
+        "select-system-language": "Please select a system language"  
     },
     "dashboard": {
         "reporting": "Reporting",
@@ -50,7 +50,14 @@
        
     "home": {
         "welcome.title": "Welcome to GAIA-X",
-        "welcome.subtitle": "A federated Data Infrastructure for Europe"
+        "welcome.subtitle": "A federated Data Infrastructure for Europe",
+        "search_placeholder": "Search...",
+        "advanced": "Advanced",
+        "not": "Not",
+        "provider": "Provider",
+        "storage": "Storage",
+        "service": "Service",
+        "compute": "Compute"
     },
 
     "message-bar": {

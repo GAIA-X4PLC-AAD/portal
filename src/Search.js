@@ -4,9 +4,11 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import MessageBar from './MessageBar';
 import './Search.css';
 import { updateSearchFromHome } from './actions';
+import { useTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
 
 class Search extends Component {
+
 
     constructor(props) {
         super(props);
@@ -41,6 +43,9 @@ class Search extends Component {
     }
 
     render() {
+
+        const t = this.props.t;
+
         return(
         <div className='search-flex-col'>
             <div className='search'>
@@ -50,7 +55,7 @@ class Search extends Component {
                         <input 
                             type="text" 
                             id="searchElement"
-                            placeholder="Search..." 
+                            placeholder={t('home.search_placeholder')}
                             onKeyDown={(e) => this.onKeyPressed(e)}
                             value={this.state.searchText}
                             onChange={(e) => this.onChange(e)}
@@ -65,7 +70,7 @@ class Search extends Component {
                     className='button-16'
                     type="submit"
                     onClick={() => this.searchProcessing()}>
-                        Advanced
+                        {t('home.advanced')}
                 </button>
             </div>
             <div className='additionalSearchOptions'>
@@ -73,31 +78,31 @@ class Search extends Component {
                             className='button-17'
                             type="submit" 
                             onClick={() => this.updateText(" NOT=")}>
-                                NOT
+                                {t('home.not')}
                         </button>
                         <button 
                             className='button-17'
                             type="submit" 
                             onClick={() => this.updateText(" Provider=")}>
-                                Provider
+                                {t('home.provider')}
                         </button>
                         <button 
                             className='button-17'
                             type="submit" 
                             onClick={() => this.updateText(" Storage=")}>
-                                Storage
+                                {t('home.storage')}
                         </button>
                         <button 
                             className='button-17'
                             type="submit" 
                             onClick={() => this.updateText(" Service=")}>
-                                Service
+                                {t('home.service')}
                         </button>
                         <button 
                             className='button-17'
                             type="submit" 
                             onClick={() => this.updateText(" Compute=")}>
-                                Compute
+                                {t('home.compute')}
                         </button>
             </div>
             <div className="home-messageBar" >{ this.state.searchResults != null && <MessageBar itemCount={this.state.searchResults.length} />}</div>
@@ -108,11 +113,13 @@ class Search extends Component {
 }
 Search.propTypes = {
     updateSearchFromHome: PropTypes.func,
-    navigate: PropTypes.func
+    navigate: PropTypes.func,
+    t: PropTypes.func,
 }
 
 const Wrap = (props) => {
     const navigate = useNavigate();
-    return <Search {...props} navigate={navigate}/>
+    const { t, i18n } = useTranslation();
+    return <Search {...props} navigate={navigate} t={t}/>
 }
 export default connect (null, {updateSearchFromHome}) (Wrap);
