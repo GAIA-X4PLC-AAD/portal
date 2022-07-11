@@ -220,14 +220,16 @@ export const Circle = styled.div`
     width: ${props => props.radius || '50px'};
     min-width: ${props => props.radius || '50px'};
     height: ${props => props.radius || '50px'};
-
+    cursor: ${props => props.isButton ? 'pointer' : ''};
     justify-content: center;
-    background-color: #F9F9F9;
+    background-color: ${props => props.backgroundColor || '#F9F9F9'};
     /* clip-path: circle(); */
     background: ${props => props.background || '#F9F9F9'};
 
-    border: 1px solid ${props => props.borderColor || '#E9E9E9'};
+    border: ${props => props.borderThickness || '1px'} solid ${props => props.borderColor || '#E9E9E9'};
     border-radius: 50%;
+    background-image: url(${props => props.backgroundImage || ''});
+    background-size: contain;
 `
 
 export const ButtonText = styled.div`
@@ -447,3 +449,26 @@ export const FadingBackground = styled(BaseModalBackground)`
   opacity: ${(props) => props.opacity};
   transition: all 0.3s ease-in-out;
 `;
+
+export const SliderBullet = styled.button`
+    width: 18px;
+    height: 5px;
+    border: 0px solid #0000;
+    background-color: #fff;
+    background: ${(props) => props.isActive ? '#8D8DFF' : '#FFFFFF'};
+    /* padding: 0px 4px; */
+    margin: 0px 4px;
+    border-radius: 4px;
+`
+
+/* export const HeaderButton = styled.button`
+  border: 2px solid #000094;
+  border-radius: 4px 4px 4px 4px;
+  background-color: #fff;
+  color: #000094;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  padding: 1.33em;
+  text-decoration: none;
+  font-weight: 700;
+` */

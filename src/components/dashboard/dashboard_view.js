@@ -39,15 +39,15 @@ const DashboardView = () => {
     const { t, i18n } = useTranslation();
 
     const buildPlot1 = () => {
-        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/statistics`;
+        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/statistics`;
 
         return <PlotLoadingView url={_myDatasetsUrl} title="testing"/>
     }
 
     const buildList = () => {
 
-        const _myServicesUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/services`;
-        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/datasets`;
+        const _myServicesUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/services`;
+        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/datasets`;
 
         return (
             <>
