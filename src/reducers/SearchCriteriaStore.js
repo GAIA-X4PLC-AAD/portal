@@ -7,7 +7,8 @@ const INITIAL_STATE = {
     size : 15,
     page : 1,
     sort_field: '',
-    sort_direction: 'ASC'
+    sort_direction: 'ASC',
+    scopeServiceId: null
 };
 
 const parameterBuilder = (state) => {
@@ -15,7 +16,8 @@ const parameterBuilder = (state) => {
     reduce((previous, current) => previous+current, '');
     let sort = state.sort_field?`&sort_field=${state.sort_field}&sort_direction=${state.sort_direction}`:'';
     let searchTerm = state.searchTerms?`&search_terms=${encodeURIComponent(state.searchTerms)}`:'';
-    let parameter = `size=${state.size}&page=${state.page}${searchTerm}${criterias}${sort}`;        
+    let scopeServiceId = state.scopeServiceId?`&scope_service_id=${state.scopeServiceId}`:'';
+    let parameter = `size=${state.size}&page=${state.page}${searchTerm}${criterias}${sort}${scopeServiceId}`;        
     return parameter;
 }
 

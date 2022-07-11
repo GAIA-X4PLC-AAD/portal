@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { updateFilterCriteria } from "../../actions";
 import * as S from "../../common/styles";
 import SearchView from "../discovery/search/SearchView";
 import LoadingView from "../loading_view/LoadingView";
@@ -10,9 +12,10 @@ const SolutionPackagingView = () => {
     
     const {id} = useParams();
 
+    const dispatch = useDispatch();
+
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/${id}/details/`;
     const {t} = useTranslation();
-    
     
     const [addItem, setAddItem] = useState(-1);
     const [solutionPkgCopy, setSolutionPkgCopy] = useState(null);
@@ -97,12 +100,19 @@ const SolutionPackagingView = () => {
         );
     } 
 
+    // TODO: change index in scopeServiceId for right id
+    const onAddClick = (index) => {
+        setAddItem(index);
+        setTimeout(() => {
+            dispatch(updateFilterCriteria({scopeServiceId: index}));
+        }, 500);
+    }
     const showSlots = (data) => {
         return (
             <S.Row margin="32px;" gap='20px'>
                 {data.dependent_services.map((service,i) => {return (<SlotDetails service={service} 
                                 onRemove={()=>removeSlot(service,i)} 
-                                onAdd={()=>setAddItem(i)}
+                                onAdd={()=>onAddClick(i)}
                                 selected={addItem===i}
                                 key={i}/>
 
