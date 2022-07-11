@@ -6,14 +6,15 @@ import { withTranslation } from "react-i18next";
 import { Navigate, useNavigate } from 'react-router-dom';
 import { setDescriptorFile } from '../../actions';
 import PropTypes from 'prop-types';
-
+import "./Provide.css"
+import { HeaderTitle, BodySmallText, BodySmallBoldText, BlueButton, BlueLabel, CancelButton } from "../../common/styles";
 
 class ProvideOverview extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            file: null
+            file: {}
         };
     }
 
@@ -44,9 +45,18 @@ class ProvideOverview extends Component {
     render() {
         return (
             <div>
-                <input type="file" name="file" onChange={this.changeHandler} />
-                <div>
-                    <button disabled={this.state.file == null} onClick={this.handleSubmission}>Submit</button>
+                <div className="provide-header-description">
+                    <HeaderTitle>Provide Service</HeaderTitle>
+                    <BodySmallText>Provide Service/Data/Node</BodySmallText>
+                </div>
+                <div className="provide-upload">
+                    <BodySmallBoldText>Please upload your Service/Data/Node self description</BodySmallBoldText>
+                    <BlueLabel><input className="hidden" type="file" name="file" onChange={this.changeHandler} />Upload</BlueLabel>
+                    <BodySmallBoldText className="provide-upload-file"> {this.state.file.name}</BodySmallBoldText>
+                    <div className="provide-button-area">
+                        <CancelButton>Back</CancelButton>
+                        <BlueButton disabled={this.state.file == null} onClick={this.handleSubmission}>Submit</BlueButton>
+                    </div>
                 </div>
             </div>
         );
