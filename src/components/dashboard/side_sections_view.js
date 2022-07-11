@@ -107,8 +107,8 @@ sectionView.propTypes = {
 
 const SideSectionsView = () => {
 
-  const _transactionsUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/transactions`;
-  const _newsUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/news/`;
+  const _transactionsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/transactions`;
+  const _newsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/news/`;
 
   return (
     <>

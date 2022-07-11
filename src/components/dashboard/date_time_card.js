@@ -29,9 +29,14 @@ const DateTimeCard = () => {
     const _lang = i18n['language']
 
 
-    if (_lang.indexOf('es') == 0) {
+    const _isEs = _lang.indexOf('es') == 0
+    const _isDe = _lang.indexOf('de') == 0
+    if (_isEs) {
         require('moment/locale/es');
         moment.locale('es');
+    } else if (_isDe) {
+        require('moment/locale/de');
+        moment.locale('de');
     } else {
         moment.locale('en');
     }

@@ -46,6 +46,7 @@ class AuthPolling extends Component {
     }
 
     async componentDidMount() {
+        // this.state.onAuthZSuccess();
         await this.fetchData();
         let timerId = setInterval(() => this.fetchData(), 2000);
         this.setState({timerId:timerId});

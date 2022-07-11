@@ -7,11 +7,23 @@
         "services": "Services",
         "data": "Data",
         "provider": "Provider",
+        "provide": "Provide",
+        "help": "Help",
         "search": "Search",
         "logo-alt-text": "Gaia-x logo image",
         "dashboard": "Dashboard",
-        "admin": "Admin"
-        
+        "admin": "Admin",
+        "logout": "Logout",
+        "user-info": "User Info",
+        "change-language": "Language",
+        "about": "About",
+        "support": "Support",
+        "english": "English",
+        "spanish": "Spanish",
+        "german": "German",
+        "close": "Close",
+        "choose-language": "Language",
+        "select-system-language": "Please select a system language"  
     },
     "dashboard": {
         "reporting": "Reporting",
@@ -20,7 +32,8 @@
         "solution_packages": "My Solution Packages",
         "activate": "Activate",
         "deactivate": "Deactivate",
-        "edit": "Edit"
+        "edit": "Edit",
+        "manage": "Manage"
     },
     "top-menu": {
         "help": "Help",
@@ -38,7 +51,14 @@
        
     "home": {
         "welcome.title": "Welcome to GAIA-X",
-        "welcome.subtitle": "A federated Data Infrastructure for Europe"
+        "welcome.subtitle": "A federated Data Infrastructure for Europe",
+        "search_placeholder": "Search...",
+        "advanced": "Advanced",
+        "not": "Not",
+        "provider": "Provider",
+        "storage": "Storage",
+        "service": "Service",
+        "compute": "Compute"
     },
 
     "message-bar": {
@@ -167,7 +187,8 @@
         "lists": {
             "data": "Data",
             "services": "Services",
-            "ppr": "Provider"
+            "ppr": "Provider",
+            "solution_pkg": "Select your service"
         },
         "search": {
             "filter": "Filter",
@@ -265,5 +286,15 @@
         "attachments": "Attachments",
         "approve": "Approve",
         "deny": "Deny"
+    },
+    "solution_pkg": {
+        "a_s": "{as, plural, =1 {1 available service} other {# available services}}",
+        "cancel": "Cancel",
+        "select": "Select",
+        "details":"Details",
+        "price": "Price",
+        "screenshots": "Screenshots",
+        "contact": "Contacts"
     }
 }
+

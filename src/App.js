@@ -28,6 +28,7 @@ import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
 import DashboardPage from './components/dashboard/dashboard_page';
 import OnboardingPage from './components/onboarding/onboarding_page';
+import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
@@ -69,6 +70,7 @@ const App = (props) => {
                 <Route path="/admin/management" element={<SearchView type="management"/>} />
                 <Route path="/dashboard" element={<DashboardPage/>} />
                 <Route path="/onboarding" element={<OnboardingPage/>} />
+                <Route path="/sp/:id" element={<SolutionPackagingView />}/>
               </Routes>
             </div>
             <div className='footer-container'>

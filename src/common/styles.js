@@ -15,21 +15,22 @@ export const CancelButton = styled.button`
 
 
 export const BlueButton = styled.button`
-border: 2px solid #000094;
-border-radius: 4px 4px 4px 4px;
-font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
-letter-spacing: 0.25px;
-color: #000094;
-background-color: #fff;
-padding: 0.3em 2em;
-cursor: pointer;
-margin-left:1em;
-:disabled {
-    cursor:default;
-    pointer-events: none;
-    opacity: 0.3; 
-}
+    border: 2px solid #000094;
+    border-radius: 4px 4px 4px 4px;
+    font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
+    letter-spacing: 0.25px;
+    color: #000094;
+    background-color: #fff;
+    padding: 0.3em 2em;
+    cursor: pointer;
+    margin-left:1em;
+    :disabled {
+        cursor:default;
+        pointer-events: none;
+        opacity: 0.3; 
+    }
 `;
+
 export const DropDownArrowUp = styled.div`
     content: url('/images/DropDownArrowUp.svg');
     margin: auto;
@@ -42,6 +43,27 @@ export const DropDownArrowDown = styled.div`
     margin: auto;
     object-fit:none;
     height:100%;
+`;
+
+export const DropDownArrowDownSmall = styled.div`
+    content: url('/images/DropDownArrowDown.svg');
+    margin: auto;
+    object-fit:none;
+
+    transform: scale(0.5);
+`;
+
+export const ArrowLeft = styled.div`
+    content: url('/images/DropDownArrowDown.svg');
+    transform: rotate(90deg);
+    /* filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%); */
+`;
+
+export const ArrowRight = styled.div`
+    content: url('/images/DropDownArrowDown.svg');
+
+
+    transform: rotate(270deg)
 `;
 
 export const RedTextClickable = styled.div`
@@ -84,6 +106,7 @@ export const Row = styled.div`
     height: ${props => props.height || 'auto'};
     justify-content: ${props => props.justifyContent || ''};
     align-items: ${props => props.alignItems || ''};
+    gap: ${props => props.gap || 'unset'}
 `
 export const WrapRow = styled(Row)`
     flex-wrap: wrap`;
@@ -131,7 +154,7 @@ export const Style = styled.div`
     background-color: ${props => props.backgroundColor || ''};
     text-align: ${props => props.textAlign || ''};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
-    /* border-radius: 4px; */
+    border-radius: ${props => props.borderRadius || ''};
 `
 
 export const HeaderTitle = styled.div`
@@ -151,6 +174,7 @@ export const Image = styled.img`
   width: ${props => props.width || ''};
   height: ${props => props.height || ''};
   object-fit: ${props => props.objectFit || 'cover'};
+  object-position: ${props=> props.objectPosition || '50% 50%'}
   /* height: fit-content; */
   max-width: ${props => props.maxWidth || ''};
   min-width: ${props => props.minWidth || ''};
@@ -159,7 +183,6 @@ export const Image = styled.img`
 
 
 export const BodySmallBoldText = styled.div`
-<<<<<<< HEAD
 font-family: 'Titillium Web';
 font-style: normal;
 font-weight: 700;
@@ -198,7 +221,7 @@ export const CaptionText = styled.div`
     line-height: 16px;
 
     letter-spacing: 0.4px;
-    color: #000000;
+    color: ${props => props.color || '#000000'};
 `;
 
 export const Card = styled.div`
@@ -435,9 +458,16 @@ export const TextInput = styled.input`
 
     ::placeholder {}
 `
+export const H2Text = styled.div`
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 700;
+font-size: 36px;
+line-height: 48px;
+color: #1C0E15;
+`;
 
 export const StyledModal = Modal.styled`
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -472,3 +502,12 @@ export const SliderBullet = styled.button`
   text-decoration: none;
   font-weight: 700;
 ` */
+
+export const Padding = styled.div`
+  padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
+  padding-top: ${props => props.paddingTop || ''};
+  padding-left: ${props => props.paddingLeft || ''};
+  padding-right: ${props => props.paddingRight || ''};
+  align-self: ${props => props.alignSelf || ''};
+`
+

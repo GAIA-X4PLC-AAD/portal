@@ -3,27 +3,27 @@
         "main-title": "main title"
     },
     "left-menu": {
-        "home": "Inicio",
-        "services": "Servicios",
-        "data": "Datos",
-        "provider": "Proveedor",
-        "provide": "Proporcionar",
-        "help": "Ayuda",
-        "search": "Busque en",
+        "home": "Startseite",
+        "services": "Dienstleistungen",
+        "data": "Daten",
+        "provider": "Anbieter",
+        "provide": "Bereitstellen",
+        "help": "Hilfe",
+        "search": "Suche",
         "logo-alt-text": "Gaia-x logo image",
-        "dashboard": "Tablero de mandos",
-        "admin": "Administración",
-        "logout": "Cierre de sesión",
-        "user-info": "Información del usuario",
-        "change-language": "Idioma",
-        "about": "Acerca de",
-        "support": "Soporte",
+        "dashboard": "Dashboard",
+        "admin": "Verwaltung",
+        "logout": "Abmeldung",
+        "user-info": "Benutzer-Infos",
+        "change-language": "Sprache",
+        "about": "Über",
+        "support": "Unterstützung",
         "english": "English",
-        "spanish": "Spanish",
-        "german": "German",
-        "close": "Cerrar",
-        "choose-language": "Idioma",
-        "select-system-language": "Seleccione un idioma del sistema"  
+        "spanish": "Spanisch",
+        "german": "Deutsch",
+        "close": "Schließen",
+        "choose-language": "Sprache",
+        "select-system-language": "Bitte wählen Sie eine Systemsprache"  
     },
     "dashboard": {
         "reporting": "Reporting",
@@ -35,29 +35,29 @@
         "edit": "Edit"
     },
     "top-menu": {
-        "help": "Ayuda",
-        "signin": "Acceder",
-        "signout": "Firmar la salida",
-        "register": "Registro"
+        "help": "Hilfe",
+        "signin": "Eintragen",
+        "signout": "Abmelden",
+        "register": "Register"
     },
     "article": {
-        "what-is-new": "Qué hay de nuevo",
+        "what-is-new": "Was gibt es Neues?",
         "what-is-new-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
-        "what-is-gaiax": "What is Gaia-X?",
+        "what-is-gaiax": "Was ist Gaia-X?",
         "what-is-gaiax-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
-        "details-button": "Details"
+        "details-button": "Einzelheiten"
     },
        
     "home": {
         "welcome.title": "Welcome to GAIA-X",
         "welcome.subtitle": "A federated Data Infrastructure for Europe",
-        "search_placeholder": "Buscar...",
-        "advanced": "Avanzado",
-        "not": "No",
-        "provider": "Proveedor",
-        "storage": "Almacenamiento",
-        "service": "Servicio",
-        "compute": "Compute"
+        "search_placeholder": "Suche...",
+        "advanced": "Fortgeschrittene",
+        "not": "Nicht",
+        "provider": "Anbieter",
+        "storage": "Lagerung",
+        "service": "Dienst",
+        "compute": "Berechnen"
     },
 
     "message-bar": {

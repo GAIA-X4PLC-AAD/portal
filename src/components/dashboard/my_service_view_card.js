@@ -27,13 +27,13 @@ const MyServiceViewCard = ({ index, data }) => {
 
     const buildCard = () => {
         return (
-            <Style maxWidth='315px'>
+            <Style maxWidth='290px'>
                 <Padding paddingRight='12px'>
                     <Block border={true} borderBottom={true}>
                         <Padding vertical='20px' horizontal='20px'>
                             <Column>
-                                {isOwn ? <Circle radius='10px' background='#0000' borderColor='#0000' /> : 
-                                    (<>{isActivated ? <Circle radius='10px' background='#7fcdbb' borderColor='#0000' /> 
+                                {isOwn ? <Circle radius='10px' background='#0000' borderColor='#0000' /> :
+                                    (<>{isActivated ? <Circle radius='10px' background='#7fcdbb' borderColor='#0000' />
                                         : <Circle radius='10px' background='#ef6548' borderColor='#0000' />}</>)}
 
                                 <Style minWidth='100%'>
@@ -58,7 +58,14 @@ const MyServiceViewCard = ({ index, data }) => {
                                 </Style>
 
                                 <Padding vertical>{isOwn ? <ButtonText>{t('dashboard.edit')}</ButtonText> : <></>}</Padding>
-                                <Padding vertical>{!isOwn ? <ButtonText>{isActivated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText> : <></>}</Padding>
+                                <Padding vertical>{!isOwn ? <>
+                                    <Row>
+                                        <ButtonText>{isActivated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText>
+                                        <Style flexGrow='1'></Style>
+                                        <ButtonText>{t('dashboard.manage')}</ButtonText>
+                                    </Row></> :
+                                    <></>}
+                                </Padding>
 
                             </Column>
                         </Padding>

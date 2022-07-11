@@ -39,15 +39,15 @@ const DashboardView = () => {
     const { t, i18n } = useTranslation();
 
     const buildPlot1 = () => {
-        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/statistics`;
+        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/statistics`;
 
-        return <PlotLoadingView url={_myDatasetsUrl} title="testing"/>
+        return <PlotLoadingView url={_myDatasetsUrl} title="testing" />
     }
 
     const buildList = () => {
 
-        const _myServicesUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/services`;
-        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/api/dashboard/datasets`;
+        const _myServicesUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/services`;
+        const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/datasets`;
 
         return (
             <>
@@ -96,7 +96,6 @@ const ServicesListView = (props,) => {
             customButtonGroup={<NextPrevButtons />}>
             {(_items !== undefined || _items != null) ? itemsViews : <></>}
         </Carousel>
-
     </>;
 }
 
@@ -113,7 +112,7 @@ const ServicesLoadingListView = ({ url, title, }) => {
             <LoadingView
                 url={url}
                 successView={ServicesListView}
-                params={{ 'title': title}}
+                params={{ 'title': title }}
             />
         </>
     )

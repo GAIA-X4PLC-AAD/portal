@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next';
@@ -7,25 +7,78 @@ import * as S from './style';
 
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
-import { BodyBoldText, ButtonText, Circle, DropDownArrowUp, Row } from '../../common/styles';
-import { DropDownArrowDown } from '../account/ProviderCredentialStyle';
+import { BodyBoldText, BodyText, ButtonText, Circle, DropDownArrowUp, H4LightText, HorizontalLine, OutlineButton, Row } from '../../common/styles';
 
-//
-// each function component is independent, isolated and testable.
-// state is managed inside the component itself
-//
+import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider } from '@szhsin/react-menu';
+import '@szhsin/react-menu/dist/index.css';
+
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+import { Padding } from '../discovery/tabs/style';
+import buildLanguageItemView from '../../common/language_item';
+
+
 
 // USER AVATAR
-function UserAvatarButton() {
+function UserAvatarButton({ onClicked }) {
+  const { t, i18n } = useTranslation();
+  const _lang = i18n['language']
+
+  const _isEn = _lang.indexOf('en') == 0
+  const _isEs = _lang.indexOf('es') == 0
+  const _isDe = _lang.indexOf('de') == 0
+
   const _userName = useSelector((state) => state.user.user.first_name)
   const navigate = useNavigate();
 
-  return <S.SimpleButton onClick={() => navigate("/account/user/details")}>
-    <Circle background='#ffffff' backgroundColor='#ffffff' borderColor='#000094'
-       backgroundImage='/images/identicon.png' isButton borderThickness='2px'>
-      <ButtonText>{_userName.substring(0, 2)}</ButtonText>
-    </Circle>
-  </S.SimpleButton>
+  const _userRole = useSelector((state) => state.user.user.user_role)
+  const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
+
+  const _isPpr = _userRole == 'gaiax-ppr' && isUserSignedIn
+  const _isPcr = _userRole == 'gaiax-pcr' && isUserSignedIn
+  const _isFr = _userRole == 'gaiax-fr' && isUserSignedIn
+
+  // language modal
+  const [openModal, setOpenModal] = useState(false);
+
+  const onOpenModal = () => setOpenModal(true);
+  const onCloseModal = () => setOpenModal(false);
+
+  const userButton = <Circle background='#ffffff' backgroundColor='#ffffff' borderColor='#E9E9E9'
+    radius='41px'
+    backgroundImage='/images/identicon.png' isButton borderThickness='1.36667px'>
+    <ButtonText>{_userName.substring(0, 2)}</ButtonText>
+
+  </Circle>
+
+  return <Menu menuButton={userButton}>
+    { (_isPcr || _isPpr) ? <MenuItem onClick={() => navigate('/admin/participant')}>{t('left-menu.user-info')}</MenuItem> : '' }
+    
+    <MenuItem onClick={onOpenModal} >
+      {t('left-menu.change-language')}
+    </MenuItem>
+    <MenuDivider />
+    <MenuItem onClick={onClicked}>{t('left-menu.logout')}</MenuItem>
+
+    <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
+      <H4LightText>{t('left-menu.choose-language')}</H4LightText>
+      <BodyText>{t('left-menu.select-system-language')}</BodyText>
+      <HorizontalLine />
+
+      <Padding vertical='20px' horizontal='40px'>
+        {buildLanguageItemView({ background: _isEn ? '#46DAFF1F' : '#fff', name: 'English', code: 'en' })}
+        {buildLanguageItemView({ background: _isEs ? '#46DAFF1F' : '#fff', name: 'Spanish', code: 'es' })}
+        {buildLanguageItemView({ background: _isDe ? '#46DAFF1F' : '#fff', name: 'German', code: 'de' })}
+        {/* {buildIdentifyServiceProvider({ background: '#fff', name: 'Deutsch', code: 'de' })} */}
+        <Padding paddingTop='30px' />
+        <Row><OutlineButton onClick={onCloseModal}>{t('left-menu.close')}</OutlineButton></Row>
+      </Padding>
+    </Modal>
+  </Menu>
+}
+
+UserAvatarButton.propTypes = {
+  onClicked: PropTypes.func,
 }
 
 // USER INFO
@@ -78,12 +131,7 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
   const signedInButtons =
     <>
       <Row alignItems='center'>
-        {/* <UserInfoButton /> */}
-        <PprInfoButton />
-        <SignOutButton onClicked={handleSignOut} />
-        <UserAvatarButton />
-        <ButtonText>Help</ButtonText>
-        <DropDownArrowUp/>
+        <UserAvatarButton onClicked={handleSignOut} />
       </Row>
     </>;
 
