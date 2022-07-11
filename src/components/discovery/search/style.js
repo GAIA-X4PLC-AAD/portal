@@ -80,8 +80,7 @@ export const FilterHeader=styled.div`
 `;
 
 export const SearchTerm=styled.input`
-width: 800px;
-height: 48px;
+width: ${props => props.width || '800px'};
 right: 0%;
 background: #F8F8F8;
 border: 1px solid #E9E9E9;
@@ -103,7 +102,7 @@ margin:auto;
 content: url('/images/plus-button.svg');
 width: 20px;
 height: 20px;
-background: #000094;
+
 object-fit:fill;`;
 
 export const SearchPlusButton=styled.div`
@@ -128,7 +127,7 @@ export const AdvancedSearch = styled.div`
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
-    color: #000094;
+    color: ${props => props.color || '#000094'};
 `;
 
 export const AlertIcon=styled.img`

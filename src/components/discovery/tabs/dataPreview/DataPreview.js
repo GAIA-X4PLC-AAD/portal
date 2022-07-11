@@ -2,7 +2,7 @@ import React from "react";
 import * as S from './style';
 import PropTypes from 'prop-types';
 
-const DataPreview = ({data, width, minHeight, shouldShowDetailsButton = true, margin = '0'}) => {
+const DataPreview = ({data, width, minHeight, shouldShowDetailsButton = true, margin = '0', marginRight='0px', displayLogo=true}) => {
 
     const showDetailsButton = ()=> {
         if (!data.onDetailsClick) return null;
@@ -10,7 +10,8 @@ const DataPreview = ({data, width, minHeight, shouldShowDetailsButton = true, ma
     }
 
     const showLogo = () => {
-        if (!data.img_logo_url) return null;
+        if (!data.img_logo_url || !displayLogo) return null;
+
         return (<S.Logo src={data.img_logo_url} alt='Logo image'/>)
     }
 
@@ -20,11 +21,11 @@ const DataPreview = ({data, width, minHeight, shouldShowDetailsButton = true, ma
     }
 
     return (
-        <S.Preview width={width} minHeight={minHeight} margin={margin}>
+        <S.Preview width={width} minHeight={minHeight} margin={margin} marginRight={marginRight}>
             <S.PreviewImage src={data.img_preview_url} alt='preview image'/>
             <S.Columns>
                 {showLogo()}
-                <S.Rows width={calcSizeWithLogo}>
+                <S.Rows width={displayLogo ? calcSizeWithLogo : ''}>
                     <S.Headline>{data.headline}</S.Headline>
                     <S.Subline>{data.subline}</S.Subline>
                 </S.Rows>
@@ -43,6 +44,8 @@ DataPreview.propTypes = {
     minHeight: PropTypes.string,
     shouldShowDetailsButton: PropTypes.bool,
     margin: PropTypes.string,
+    displayLogo: PropTypes.bool,
+    marginRight: PropTypes.string,
 }
 
 export default DataPreview;

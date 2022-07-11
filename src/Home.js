@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation, withTranslation } from "react-i18next";
 import Search from "./Search";
 import Article from "./components/article/Article";
@@ -9,48 +9,62 @@ import "react-multi-carousel/lib/styles.css";
 
 
 import PropTypes from 'prop-types';
-import { Circle, Column, SliderBullet } from "./common/styles";
+import { Circle, Column, SliderBullet, H2Text, BodyText, Style } from "./common/styles";
 import { Padding } from "./components/discovery/tabs/style";
+import SearchTerm from "./components/discovery/search/SearchTerm";
+import { updateSearchType, updateSeartTypeWithTerm } from "./actions";
 
-const Home = ({ t }) => {
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 1
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 1
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 1
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1
+  }
+};
 
+const Home = () => {
 
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 1
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 1
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 1
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
-  };
+  const { t, i18n } = useTranslation();
+
+  const store = useSelector(state => state.searchCriteriaStore);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(updateSeartTypeWithTerm("home", store.searchTerms));
+  // }, );
 
   const isInSignInMenu = useSelector((state) => state.signin.isInSignInMenu)
 
-  const buildSliderContent = ({index = 0}) => {
-    return <Column>
-      <h1>{t('article.what-is-new')} {index}</h1>
-      <h4>{t('filler')}</h4>
+  const buildSliderContent = ({ index = 0 }) => {
+    return <Column justifyContent='center' alignItems='center'>
+      <H2Text color={'#fff'}>{t('article.what-is-new')} {index}</H2Text>
+      <Style maxWidth='600px'>
+        <BodyText color={'#fff'} textAlign='center'>{t('filler')}</BodyText>
+      </Style>
+
+      <h4></h4>
       <Padding vertical='20px' />
     </Column>
   }
 
   const slides = [
-    buildSliderContent({index: 1}),
-    buildSliderContent({index: 2}),
-    buildSliderContent({index: 3}),
-    buildSliderContent({index: 4}),
-    buildSliderContent({index: 5}),
+    buildSliderContent({ index: 1 }),
+    buildSliderContent({ index: 2 }),
+    buildSliderContent({ index: 3 }),
+    buildSliderContent({ index: 4 }),
+    buildSliderContent({ index: 5 }),
   ]
 
   const CustomDot = ({ onClick, ...rest }) => {
@@ -94,26 +108,21 @@ const Home = ({ t }) => {
   return (
     <div className="home">
       <div className='banner-container'>
-        <div className='banner-content'>
+        <div>
           <div className='banner-logo'>
             <img src='/images/logo_white.svg' height='80px' width='200px'></img>
           </div>
           {HomeSlider()}
-          <Padding vertical='20px'/>
-          <div className='banner-slider'>
-          </div>
+          <Padding vertical='20px' />
+
         </div>
       </div>
       <div className='search-container'>
-        <div>
-          <Search />
-        </div>
-      </div>
-      <div className="home-article">
-        <Article headerMessage="article.what-is-new" category="NEWS" />
-      </div>
-      <div className="home-article">
-        <Article headerMessage="article.what-is-gaiax" category="ARTICLE" />
+        <Padding vertical='40px'>
+          <SearchTerm type='home' inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF'/>
+        </Padding>
+
+        {/* <Search /> */}
       </div>
     </div>
   );

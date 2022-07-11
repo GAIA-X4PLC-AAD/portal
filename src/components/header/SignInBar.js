@@ -107,7 +107,7 @@ SignOutButton.propTypes = {
 // SIGNIN
 const SignInButton = ({ onClicked }) => {
   const { t, } = useTranslation();
-  return <S.HeaderButton onClick={onClicked} id="top-menu-signin">{t('top-menu.signin')}</S.HeaderButton>
+  return <S.HeaderButton border={true} onClick={onClicked} id="top-menu-signin">{t('top-menu.signin')}</S.HeaderButton>
 }
 
 SignInButton.propTypes = {
@@ -117,7 +117,7 @@ SignInButton.propTypes = {
 // REGISTER
 const RegisterButton = ({ onClicked }) => {
   const { t, } = useTranslation();
-  return <S.HeaderButton onClick={onClicked} id="top-menu-register">{t('top-menu.register')}</S.HeaderButton>
+  return <S.HeaderButton border={false} onClick={onClicked} id="top-menu-register">{t('top-menu.register')}</S.HeaderButton>
 }
 
 RegisterButton.propTypes = {
@@ -137,8 +137,8 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
 
   const signedOutButtons =
     <>
-      <RegisterButton onClicked={handleRegister} />
       <SignInButton onClicked={handleSignIn} data-cy='dateInput' />
+      <RegisterButton onClicked={handleRegister} />
     </>;
 
   if (isInSignInMenu) { return (<></>); }
