@@ -602,6 +602,57 @@ ul,li{padding:0;margin:0;list-style:none}.gallery-container{margin-top:50px}.app
 } */
 
 
-.szh-menu {
-  border-radius: 0px
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+
+  align-items: center
+}
+
+.pagination a {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 0px;
+  font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
+  letter-spacing: 0.25px;
+  margin: 0em 0.4em;
+  color: #575F6A;
+}
+
+.pagination__link {
+  border-radius: 4px 4px 4px 4px;
+  color: #000094;
+  background-color: #fff;
+  padding: 0.1em 1em;
+  cursor: pointer;
+  margin-left:1em;
+  :disabled {
+      cursor:default;
+      pointer-events: none;
+      opacity: 0.3; 
+  }
+}
+
+.pagination__link--active a {
+  border-bottom: 2px solid #000094;
+  border-radius: 0px;
+
+  color: #000094;
+  background-color: #fff;
+  padding: 0.3em 0.5em;
+  cursor: pointer;
+
+  :disabled {
+      cursor:default;
+      pointer-events: none;
+      opacity: 0.1; 
+  }
+}
+
+.pagination__link--disabled a {
+  /* filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%); */
+  cursor: none;
+  pointer-events: none;
+  opacity: 0.1; 
 }
