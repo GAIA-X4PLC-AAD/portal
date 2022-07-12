@@ -8,7 +8,7 @@ variables:
     IMAGE_NAME: ${CI_PROJECT_NAME}/portal-${CI_PROJECT_NAME}
     TAG: ${CI_PIPELINE_ID}
     CI: "false"
-    REACT_APP_EDGE_API_URI: "https://ybgaiax.me"
+    REACT_APP_EDGE_API_URI: "https://ybgaiax.me/api"
 
 
 application-build:
