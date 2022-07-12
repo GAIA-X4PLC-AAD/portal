@@ -32,7 +32,8 @@ const CenterBar = ({selectedPage, onPageChanged}) => {
   const _userRole = useSelector((state) => state.user.user.user_role)
   const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
 
-  const _isPpr = _userRole == 'gaiax-ppr' && isUserSignedIn
+  // const _isPpr = _userRole == 'gaiax-ppr' && isUserSignedIn
+  const _isPpr = true
   const _isPcr = _userRole == 'gaiax-pcr' && isUserSignedIn
   const _isFr = _userRole == 'gaiax-fr' && isUserSignedIn
 
@@ -69,7 +70,7 @@ const CenterBar = ({selectedPage, onPageChanged}) => {
 
         {/* PROVIDE: 5 */}
         {_isPpr ?
-          <ButtonText selected={selectedPage === 'provide'} color='#000000' onClick={() => { changePage({page: 'provide'}); navigate('/provide'); }}>{t('left-menu.provide')}</ButtonText> : ''}
+          <ButtonText selected={selectedPage === 'provide'} color='#000000' onClick={() => { changePage({page: 'provide'}); navigate('/provide/start'); }}>{t('left-menu.provide')}</ButtonText> : ''}
 
         <Row>
           <Menu menuButton={<ButtonText color='#000000'>{t('left-menu.help')}</ButtonText>} menuClassName="szh-menu">
