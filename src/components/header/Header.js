@@ -14,6 +14,7 @@ import CenterBar from "./CenterBar";
 
 import PropTypes from 'prop-types';
 import { UPDATE_SELECTED_PAGE } from "../../actions/types";
+import { Row } from "../../common/styles";
 
 function Header(props) {
     const { t, } = useTranslation();
@@ -38,6 +39,9 @@ function Header(props) {
     // selected page
     const [selectedPage, setSelectedPage] = useState(useSelector((state) => state.user.selectedPage));
 
+    console.log(`selectedPage: ${selectedPage}`)
+
+    const _selectedPage = selectedPage === undefined ? 'home' : selectedPage['page']
 
     const changePage = ({ page }) => {
 
@@ -53,10 +57,10 @@ function Header(props) {
                         <img src="/images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />
                     </Link>
                 </S.TopMenuLogo>
-                <CenterBar selectedPage={selectedPage['page']} onPageChanged={(page) => {setSelectedPage(page); dispatch({ type: UPDATE_SELECTED_PAGE, page: page })}} />
-                <S.TopMenuSignIn>
+                <CenterBar selectedPage={_selectedPage} onPageChanged={(page) => { setSelectedPage(page); dispatch({ type: UPDATE_SELECTED_PAGE, page: page }) }} />
+                <Row>
                     <SignInBar handleSignOut={handleSignOut} handleSignIn={handleSignIn} handleRegister={handleRegister} />
-                </S.TopMenuSignIn>
+                </Row>
 
             </S.TopMenu>
         </>

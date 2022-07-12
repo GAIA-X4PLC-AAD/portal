@@ -30,7 +30,7 @@ export const CheckBox = styled.input`
     border: 1px solid #E9E9E9 !important;
     border-radius: 3px;
     align-self: center;
-    margin: 0;
+    /* margin: 0; */
 `;
 
 export const CheckBoxText = styled.div`
@@ -127,6 +127,17 @@ export const AdvancedSearch = styled.div`
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
+    color: ${props => props.color || '#000094'};
+`;
+
+export const AdvancedSearchText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    margin: 0px 12px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+
     color: ${props => props.color || '#000094'};
 `;
 

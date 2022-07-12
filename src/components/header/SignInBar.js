@@ -144,9 +144,7 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
   if (isInSignInMenu) { return (<></>); }
   else {
     return (
-      <>
-        {isUserSignedIn ? signedInButtons : signedOutButtons}
-      </>
+      isUserSignedIn ? signedInButtons : signedOutButtons
     )
   }
 
