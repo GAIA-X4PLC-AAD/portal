@@ -120,7 +120,7 @@ const Home = () => {
 
       <div className='search-container'>
         <Padding vertical='40px'>
-          <SearchTerm type='home' inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF' />
+          <SearchTerm type='home' inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF' displayAsColumn={false}/>
         </Padding>
       </div>
     </>

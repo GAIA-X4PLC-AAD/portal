@@ -130,6 +130,17 @@ export const AdvancedSearch = styled.div`
     color: ${props => props.color || '#000094'};
 `;
 
+export const AdvancedSearchText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    margin: 0px 12px;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 20px;
+
+    color: ${props => props.color || '#000094'};
+`;
+
 export const AlertIcon=styled.img`
 display:block;
 margin:auto;
