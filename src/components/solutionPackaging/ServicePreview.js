@@ -30,12 +30,12 @@ const ServicePreview = ({ service , onSelect}) => {
                     </S.Style>
                 </S.Style>
                 <S.Row margin="0 auto 0 0">
-                    <S.CancelButton onClick={()=>setDisplayModal(true)}>
+                    <S.CancelButtonSmall onClick={()=>setDisplayModal(true)}>
                     {t('solution_pkg.details')}
-                    </S.CancelButton>
-                    <S.BlueButton onClick={onSelectFunction}>
-                    {t('solution_pkg.selectButton')}
-                    </S.BlueButton>
+                    </S.CancelButtonSmall>
+                    <S.BlueButtonSmall onClick={onSelectFunction}>
+                    {t('solution_pkg.select')}
+                    </S.BlueButtonSmall>  
                 </S.Row>
             </S.Column>
             {displayModal?<ServiceModalDetails service={service} closeModal={closeModal} onSelect={onSelectFunction}/>:null}
