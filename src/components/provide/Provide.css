@@ -64,10 +64,15 @@
 }
 
 .provide-attribute-table {
-    margin: auto;
     min-width: 470px;
+    margin-top: 15px;
 }
 
 .provide-attribute-table thead {
  color: #bababa;
 }
+
+.provide-attribute-table tr.invalid {
+    color: #EE1D23;
+}
+   

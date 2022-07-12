@@ -94,6 +94,16 @@ export const RedTextClickable = styled.div`
     cursor: pointer;
 `;
 
+export const RedText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 1px;
+    color: #EE1D23;
+`;
+
 export const BlueTextClickable = styled.div`
     font-family: 'Titillium Web';
     font-style: normal;
