@@ -6,94 +6,10 @@
 :root {
   --width-menu: 150px;
   --height-menu: 50px;
-  --banner-height: 400px;
+  --banner-height: 600px;
   --content-width: 80%;
   --content-height: 40%;
 }
-
-/*
-.left-menu {
-  display: block;
-  height: 100%;
-  width: var(--width-menu);
-  position: fixed;
-  z-index: 10;
-  top: 0;
-  left: 0;
-  background-color: white;
-  overflow-x: hidden;
-  padding-top: 10px;
-  border-right-color: blueviolet;
-  border-right-width: 0.5vh;
-  border-right-style: solid;  
-}
-
-.left-menu img{
-  max-width: 100%;
-  object-fit: cover;
-}
-
-.left-menu a {
-  padding: 8px 8px 8px 32px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-}
-
-.left-menu a:hover {
-  color: #0a0349;
-}
-
-
-.top-menu {
-  display: block;
-  height: var(--height-menu);
-  width: 100%;
-  position: fixed;
-  z-index: 5;
-  top: 0;
-  left: 0;
-  background-color: white;
-  overflow-x: hidden;
-  padding-top: 10px;
-  border-bottom-color: blueviolet;
-  border-bottom-width: 0.5vh;
-  border-bottom-style: solid;
-  direction: ltr;
-  text-align: right;
-  
-}
-
-.top-menu a {
-  padding: 8px 8px 8px 32px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display:flexbox;
-}
-
-.top-menu a:hover {
-  color: #0a0349;
-}
-
-.content {
-  display: block;
-  position: fixed;
-  width: calc(90% - var(--width-menu));
-  top: var(--height-menu);
-  left: var(--width-menu);
-  height: 100%;
-  overflow-y: scroll;
-  margin: 30px;
-}
-*/
 
 .home-screen {
   display: flex;
@@ -166,8 +82,9 @@
 .banner-container {
   /*
   background-image: url('../public/images/banner_gradient.png');
-  min-height: var(--banner-height);
+
   */
+  min-height: var(--banner-height);
   background-image: url('../public/images/Vector_2727\ 1_merged01.png');
   background-size: 100% auto;
   background-position: 50% 50%;

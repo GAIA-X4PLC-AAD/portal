@@ -107,7 +107,7 @@ class Search extends Component {
             </div>
             <div className="home-messageBar" >{ this.state.searchResults != null && <MessageBar itemCount={this.state.searchResults.length} />}</div>
         </div>
-        );
+        )
     }
 
 }

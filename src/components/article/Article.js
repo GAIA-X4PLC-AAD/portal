@@ -6,24 +6,25 @@ import './Article.css';
 import { withTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
 import DataPreview from "../discovery/tabs/dataPreview/DataPreview";
+import { Padding, H1Text, BodyText } from "../../common/styles";
 
-const Article = ({category, headerMessage,t}) => {
-    const [callFlag, setCallFlag] = useState(false); 
+const Article = ({ category, headerMessage, t }) => {
+    const [callFlag, setCallFlag] = useState(false);
     const [articles, setArticles] = useState([]);
 
-    function openLink  (url)  {
+    function openLink(url) {
         window.open(url, '_blank').focus();
     }
-    const getUrl= (url) => {
+    const getUrl = (url) => {
         return (<a href={url} target="_blank" rel="noreferrer">{url}</a>);
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         const callGetArticleAPI = async () => {
-            
-            const {data} = await axios.get(process.env.REACT_APP_EDGE_API_URI+'/articles/filter',{
-                params: {category: category}
-            });        
+
+            const { data } = await axios.get(process.env.REACT_APP_EDGE_API_URI + '/articles/filter', {
+                params: { category: category }
+            });
 
             setCallFlag(true);
             setArticles(data);
@@ -33,10 +34,10 @@ const Article = ({category, headerMessage,t}) => {
         if (!callFlag) {
             callGetArticleAPI();
         }
-    },[articles,callFlag]);
-    
+    }, [articles, callFlag]);
+
     // get first 3 rows
-    const renderArticles = articles.filter((v,i)=> {return i<3}).map((article)=> { 
+    const renderArticles = articles.filter((v, i) => { return i < 3 }).map((article) => {
         let parsed = {
             headline: article.title,
             img_preview_url: article.previewImagePath,
@@ -44,28 +45,25 @@ const Article = ({category, headerMessage,t}) => {
             subline: getUrl(article.url),
             description: article.teaserText,
             onDetailsClick: () => { openLink(article.url) }
-          }
-        
-        return ( 
-            <DataPreview data={parsed} key={`article_${article.title}`} margin="12px;"/>
+        }
+
+        return (
+            <DataPreview data={parsed} key={`article_${article.title}`}
+            shouldShowDetailsButton={false}
+                margin="0px" marginRight='24px' displayLogo={false} />
         );
     });
 
     return (
         <div className="articles-layout">
-            <div className="article-header-message">
-                
-                <h2>{t(headerMessage)}</h2>
-            </div>
-            <div className="article-header-message">
-                <p>{t(`${headerMessage}-message`)}</p>
-            </div>
+            <H1Text>{t(headerMessage)}</H1Text>
+            <BodyText textAlign='start'>{t(`${headerMessage}-message`)}</BodyText>
 
-                <div className="articles-panel-layout"> 
-                        {renderArticles}
-                </div>        
+            <div className="articles-panel-layout">
+                {renderArticles}
+            </div>
         </div>
-        );
+    );
 }
 
 

@@ -29,10 +29,16 @@ import SearchView from './components/discovery/search/SearchView';
 import DashboardPage from './components/dashboard/dashboard_page';
 import OnboardingPage from './components/onboarding/onboarding_page';
 import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
+import { Column, Padding } from './common/styles';
+import Article from './components/article/Article';
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
   const history = createBrowserHistory();
+
+  const ViewContainer = (view) => {
+    return <div className='body-container'>{view}</div>
+  }
 
   return (
 
@@ -41,38 +47,42 @@ const App = (props) => {
         <div id="content" className="content">
           <div className='home-top-border'></div>
           <Header />
+          <Column>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/data" element={ViewContainer(<SearchView type="data" />)} />
+              <Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />
+              <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
+              <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
+              <Route path="/register" element={ViewContainer(<Register />)} />
+              <Route path="/register/user" element={ViewContainer(<RegisterUser />)} />
+              <Route path="/register/user/viadid" element={ViewContainer(<RegisterUserViaDid />)} />
+              <Route path="/register/organization" element={ViewContainer(<RegisterOrganization />)} />
+              <Route path="/confirmation/:type/:key" element={ViewContainer(<RegisterConfirmation />)} />
+              <Route path="/register/email" element={ViewContainer(<RegisterMailSent />)} />
+              <Route path="/register/did" element={ViewContainer(<RegisterViaDID />)} />
+              <Route path="/register/IdP" element={ViewContainer(<RegisterViaDIDIdP />)} />
+              <Route path="/register/displayVC" element={ViewContainer(<RegisterDisplayVC />)} />
+              <Route path="/register/compliance" element={ViewContainer(<RegisterComplianceCheck />)} />
+              <Route path="/signin" element={ViewContainer(<Login />)} />
+              <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />
+              <Route path="/account/user/:tab" element={ViewContainer(<AccountHome />)} />
+              <Route path="/account/provider/:tab" element={ViewContainer(<Provider />)} />
+              <Route path="/servicetile/:id" element={ViewContainer(<DiscoveryItem type="service" />)} />
+              <Route path="/pprtile/:idd" element={ViewContainer(<DiscoveryItem type="ppr" />)} />
+              <Route path="/datatile/:id" element={ViewContainer(<DiscoveryItem type="data" />)} />
+              <Route path="/admin/participant" element={ViewContainer(<SearchView type="participant" />)} />
+              <Route path="/admin/management" element={ViewContainer(<SearchView type="management" />)} />
+              <Route path="/dashboard" element={ViewContainer(<DashboardPage />)} />
+              <Route path="/onboarding" element={ViewContainer(<OnboardingPage />)} />
+              <Route path="/sp/:id" element={ViewContainer(<SolutionPackagingView />)} />
+            </Routes>
+
+            {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
+
+          </Column>
           <div className='home-screen'>
-            <div className='body-container'>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/data" element={<SearchView type="data" />} />
-                <Route path="/provider" element={<SearchView type="ppr" />} />
-                <Route path="/services" element={<SearchView type="services" />} />
-                <Route path="/help" element={<WorkInProgress component="Help" />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/register/user" element={<RegisterUser />} />
-                <Route path="/register/user/viadid" element={<RegisterUserViaDid />} />
-                <Route path="/register/organization" element={<RegisterOrganization />} />
-                <Route path="/confirmation/:type/:key" element={<RegisterConfirmation />} />
-                <Route path="/register/email" element={<RegisterMailSent />} />
-                <Route path="/register/did" element={<RegisterViaDID />} />
-                <Route path="/register/IdP" element={<RegisterViaDIDIdP />} />
-                <Route path="/register/displayVC" element={<RegisterDisplayVC />} />
-                <Route path="/register/compliance" element={<RegisterComplianceCheck />} />
-                <Route path="/signin" element={<Login />} />
-                <Route path="/loginfail" element={<LoginFail />} />
-                <Route path="/account/user/:tab" element={<AccountHome />} />
-                <Route path="/account/provider/:tab" element={<Provider />} />
-                <Route path="/servicetile/:id" element={<DiscoveryItem type="service"/>} />
-                <Route path="/pprtile/:idd" element={<DiscoveryItem type="ppr"/>} />
-                <Route path="/datatile/:id" element={<DiscoveryItem type="data"/>} />
-                <Route path="/admin/participant" element={<SearchView type="participant"/>} />
-                <Route path="/admin/management" element={<SearchView type="management"/>} />
-                <Route path="/dashboard" element={<DashboardPage/>} />
-                <Route path="/onboarding" element={<OnboardingPage/>} />
-                <Route path="/sp/:id" element={<SolutionPackagingView />}/>
-              </Routes>
-            </div>
+
             <div className='footer-container'>
               <div className='footer-flex-col'>
                 <div className='footer-banner'>

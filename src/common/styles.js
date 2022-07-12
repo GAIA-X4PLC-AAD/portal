@@ -174,8 +174,8 @@ export const Image = styled.img`
   width: ${props => props.width || ''};
   height: ${props => props.height || ''};
   object-fit: ${props => props.objectFit || 'cover'};
-  object-position: ${props=> props.objectPosition || '50% 50%'}
-  /* height: fit-content; */
+  object-position: ${props => props.objectPosition || '50% 50%'};
+
   max-width: ${props => props.maxWidth || ''};
   min-width: ${props => props.minWidth || ''};
   filter: ${props => props.filter || ''};;
@@ -250,12 +250,13 @@ export const Circle = styled.div`
     background: ${props => props.background || '#F9F9F9'};
 
     border: ${props => props.borderThickness || '1px'} solid ${props => props.borderColor || '#E9E9E9'};
-    border-radius: 50%;
+    border-radius: ${props => props.borderRadius || '50%' } ;
     background-image: url(${props => props.backgroundImage || ''});
     background-size: contain;
 `
 
 export const ButtonText = styled.div`
+    border-bottom: ${props => props.selected ? '4px solid #000094' : '4px solid #0000'}; 
     font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 700;
@@ -300,7 +301,6 @@ export const BodyText = styled.div`
     font-size: 18px;
     line-height: 24px;
     letter-spacing: 0.25px;
-    color: #2A2A2A;
 
     /* identical to box height, or 133% */
 
@@ -308,6 +308,7 @@ export const BodyText = styled.div`
 
     /* greyscale/dark */
 
+    text-align: ${props => props.textAlign || ''};
     color: ${props => props.color || '#4B4B4B'};
 `;
 
@@ -386,8 +387,6 @@ export const MasterButton = styled.div`
     font-size: 18px;
     line-height: 20px;
     /* identical to box height, or 111% */
-
-
     display: flex;
     align-items: center;
     text-align: center;
@@ -458,13 +457,15 @@ export const TextInput = styled.input`
 
     ::placeholder {}
 `
+
 export const H2Text = styled.div`
-font-family: 'Titillium Web';
-font-style: normal;
-font-weight: 700;
-font-size: 36px;
-line-height: 48px;
-color: #1C0E15;
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 48px;
+    color: ${props => props.color || '#1C0E15' };
+    /* color: white; */
 `;
 
 export const StyledModal = Modal.styled`
@@ -510,4 +511,16 @@ export const Padding = styled.div`
   padding-right: ${props => props.paddingRight || ''};
   align-self: ${props => props.alignSelf || ''};
 `
+
+export const H1Text = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 64px;
+    /* identical to box height, or 133% */
+
+
+    color: #000000;
+`;
 

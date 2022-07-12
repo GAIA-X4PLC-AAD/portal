@@ -80,10 +80,15 @@ const DescriptionTabView = (props,) => {
               </S.HorizontalContainer>
 
               <S.HorizontalContainer>
+                {details['certificates'] && details['certificates'].map((elem, i) => { return (<Tag key={`${elem}:${i}`}>{elem}</Tag>) })}
+              </S.HorizontalContainer>
+
+              <S.HorizontalContainer>
                 <ColumnItem title='STACK' subtitle={`${details['stack']}`} />
                 <ColumnItem title='DATE' subtitle={`${details['last_updated']}`} />
                 <ColumnItem title='TERMS OF USE' subtitle={`${details['terms_of_use']}`} />
                 <ColumnItem title='LOCATION' subtitle={`${details['location']}`} />
+                <ColumnItem title='SECURITY' subtitle={`${details['security']}`} />
                 <ColumnItem title='CATEGORY' subtitle={`${details['category']}`} />
               </S.HorizontalContainer>
             </S.Padding>

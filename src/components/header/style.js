@@ -22,25 +22,24 @@ export const TopMenuLinkButton = styled.a`
   text-decoration: none;
 `;
 
-export const TopMenuSignIn= styled.a`
+export const TopMenuSignIn = styled.a`
   display: flex;
   column-gap: 2em;
   width: 230px;
 `;
 
 export const HeaderButton = styled.button`
-  border: 2px solid #000094;
+  border: ${props => props.border ? '2px solid #000094' : '2px solid #ffff'};
   border-radius: 4px 4px 4px 4px;
   background-color: #fff;
   color: #000094;
   margin-block-start: 1.33em;
   margin-block-end: 1.33em;
-  padding: 1.33em;
+  padding: 12px 20px;
   text-decoration: none;
   font-weight: 700;
-  margin-left: 4px;
-    margin-right: 4px;
-    min-width: 100px;
+
+  min-width: 93px;
   &:hover{
     cursor: pointer;
 };
