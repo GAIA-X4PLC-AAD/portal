@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateFilterCriteria } from "../../../actions";
 import * as S from "./style";
-import { ButtonText, Circle, Column, Padding, Row } from "../../../common/styles";
+import { ButtonText, Circle, Column, Padding, Row, Style } from "../../../common/styles";
 import { withTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
 
@@ -55,14 +55,15 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
                 <S.SearchTerm type="text" width={inputWidth} onKeyPress={onKeyPress} value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value) }} />
                 <S.SearchPlusButton onClick={doSearch}><Circle background={advancedSearchBgColor} radius='46px' borderRadius='4px' borderColor={advancedSearchBgColor}><S.SearchPlusImage /></Circle></S.SearchPlusButton>
             </Row>
-            <Row>
-                <Padding horizontal={displayAsColumn ? '0px' : '12px'}>{showAdvanceSearchChip(advance)}</Padding>
+            <Row alignItems='space-equally'>
+                {/* <Padding horizontal={displayAsColumn ? '0px' : '12px'}>{showAdvanceSearchChip(advance)}</Padding> */}
+                {showAdvanceSearchChip(advance)}
             </Row>
         </>
 
     return (
         displayAsColumn ?
-            <Column key={type} margin={searchMargin(type)} alignItems='center' justifyContent='center'>
+            <Column key={type} margin={searchMargin(type)} alignItems='end' justifyContent='left'>
                 {_searchViews}
             </Column> :
             <Row key={type} margin={searchMargin(type)} alignItems='center' justifyContent='center'>

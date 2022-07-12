@@ -117,7 +117,8 @@ export const Button = S.BlueButton;
 
 export const AdvancedSearch = styled.div`
     padding-top: 8px;
-    margin-left:auto;
+    /* margin-left:auto; */
+    margin-left: 12px;
     font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 700;
