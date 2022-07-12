@@ -52,7 +52,13 @@ const App = (props) => {
           <Header />
           <Column>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={
+                <Column>
+                  <Home />
+                  {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
+                </Column>
+              }
+              />
               <Route path="/data" element={ViewContainer(<SearchView type="data" />)} />
               <Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
@@ -79,9 +85,10 @@ const App = (props) => {
               <Route path="/dashboard" element={ViewContainer(<DashboardPage />)} />
               <Route path="/onboarding" element={ViewContainer(<OnboardingPage />)} />
               <Route path="/sp/:id" element={ViewContainer(<SolutionPackagingView />)} />
+              <Route path="/provide/start" element={ViewContainer(<ProvideOverview />)} />
+              <Route path="/provide/confirm/:id" element={ViewContainer(<ProvideAttributes />)} />
             </Routes>
 
-            {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
 
           </Column>
           <div className='home-screen'>
