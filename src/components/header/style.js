@@ -33,13 +33,14 @@ export const HeaderButton = styled.button`
   border-radius: 4px 4px 4px 4px;
   background-color: #fff;
   color: #000094;
-  margin-block-start: 1.33em;
-  margin-block-end: 1.33em;
+  margin: 1.33em 0px;
+  /* margin-block-start: 1.33em;
+  margin-block-end: 1.33em; */
   padding: 12px 20px;
   text-decoration: none;
   font-weight: 700;
 
-  min-width: 93px;
+
   &:hover{
     cursor: pointer;
 };
