@@ -31,7 +31,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
 
     const showAdvanceSearchChip = (advance) => {
         if (type === 'management' || type === 'participant') return null;
-        const chips = ['not', 'provider', 'storage', 'service', 'compute'];
+        const chips = ['not', 'provider', 'storage', 'service', 'compute'].filter((chip)=>{return !searchTerm.includes(t(`discovery.search.chip.filter.${chip}`))});
         if (advance === false) {
             return (<S.AdvancedSearch color={advancedTextColor} onClick={() => setAdvance(true)}>{t("discovery.search.advance")}</S.AdvancedSearch>);
         } else {
