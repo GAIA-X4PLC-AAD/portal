@@ -31,10 +31,10 @@ const ServicePreview = ({ service , onSelect}) => {
                 </S.Style>
                 <S.Row margin="0 auto 0 0">
                     <S.CancelButton onClick={()=>setDisplayModal(true)}>
-                            Details
+                    {t('solution_pkg.details')}
                     </S.CancelButton>
                     <S.BlueButton onClick={onSelectFunction}>
-                            Select
+                    {t('solution_pkg.selectButton')}
                     </S.BlueButton>
                 </S.Row>
             </S.Column>

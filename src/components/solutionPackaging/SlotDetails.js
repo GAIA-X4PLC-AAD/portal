@@ -31,7 +31,7 @@ const SlotDetails = ({service, onRemove, onAdd, selected}) => {
                <SlotBox selected={selected}>
                 <S.BlueLinkText onClick={onAdd}>
                     <S.Style textAlign="left">
-                        {selected?'Select...':'Add'}
+                        {selected?t('solution_pkg.selectMessage'):t('solution_pkg.add')}
                     </S.Style>                        
                 </S.BlueLinkText>
                 </SlotBox>
@@ -56,7 +56,7 @@ const SlotDetails = ({service, onRemove, onAdd, selected}) => {
                     <S.Row margin="0 auto 0 0" onClick={onRemove}>
                         <S.BlueLinkText>
                             <S.Style textAlign="left">
-                                Remove
+                            {t('solution_pkg.remove')}
                             </S.Style>                        
                             
                         </S.BlueLinkText>

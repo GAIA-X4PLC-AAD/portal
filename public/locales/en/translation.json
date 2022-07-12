@@ -274,7 +274,18 @@
         "details":"Details",
         "price": "Price",
         "screenshots": "Screenshots",
-        "contact": "Contacts"
+        "contact": "Contacts",
+        "book": "Book",
+        "reset": "Reset",
+        "save": "Save",
+        "remove": "Remove",
+        "add": "Add",
+        "selectMessage": "Select...",
+        "description": "Description",
+        "features": "FEATURES",
+        "stack": "STACK",
+        "location": "LOCATION",
+        "lastUpdated": "LAST UPDATED"
     }
 }
 

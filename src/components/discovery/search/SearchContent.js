@@ -18,7 +18,7 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
     const criteria = useSelector(state => state.searchCriteriaStore);
     const PROVIDER_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/pr/registrations/search?${criteria.parameters}`;
     const MANAGEMENT_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/management/requests/search?${criteria.parameters}`;
-    const SP_URL = process.env.REACT_APP_EDGE_API_URI + `/${serviceId}/${slot}/discovery/services/search?${criteria.parameters}`;
+    const SP_URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/search?${criteria.parameters}`;
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
     const [refresh, setRefresh] = useState(0);
    
@@ -42,23 +42,22 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
      
         useEffect(() => {
             if(items.length === 0){
-                console.log('add data to items', data)
                     setItems(data);
             }
         }, [data]);
 
-        const shouldDisplayNextPrev = items.length > 3;
+        const shouldDisplayNextPrev = items.length > 2;
         const responsive = {
             superLargeDesktop: {
                 // the naming can be any, depends on you.
                 breakpoint: { max: 4000, min: 3000 },
-                items: 4,
-                slidesToSlide: 4
+                items: 3,
+                slidesToSlide: 3
             },
             desktop: {
                 breakpoint: { max: 3000, min: 1024 },
-                items: 3,
-                slidesToSlide: 3
+                items: 2,
+                slidesToSlide: 2
             },
             tablet: {
                 breakpoint: { max: 1024, min: 464 },
@@ -92,7 +91,6 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
          if (!items || !items.data || items.data.length === 0) return NoResults();
         else { 
              let _data = items.data
-             const key = getURL(type);
              return (<CarouselComp data={_data}/>);
      
         }

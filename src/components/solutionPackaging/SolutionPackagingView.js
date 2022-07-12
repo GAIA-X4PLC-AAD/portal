@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
+import Carousel from "react-multi-carousel";
 import { useParams } from "react-router-dom";
-import { updateFilterCriteria } from "../../actions";
 import * as S from "../../common/styles";
 import SearchView from "../discovery/search/SearchView";
 import LoadingView from "../loading_view/LoadingView";
 import SlotDetails from "./SlotDetails";
+import NP from "../../common/vertical_steps/next_prev_buttons";
+import PropTypes from 'prop-types';
 
 const SolutionPackagingView = () => {
     
@@ -45,7 +47,8 @@ const SolutionPackagingView = () => {
         "terms_of_use": "term of use"
       },
         {available_services: 1},
-        {available_services: 4}]})
+        {available_services: 4},
+        {available_services: 5}]})
 
     const [fakeDataCopy, setFakeDataCopy] = useState(null);
 
@@ -93,9 +96,9 @@ const SolutionPackagingView = () => {
     const showButtons = (data) => {
         return (
             <S.Row margin="32px;" gap='20px'>
-                <S.BlueButton onClick={onResetClick} >Reset</S.BlueButton>
-                <S.BlueButton onClick={onSaveClick}>Save</S.BlueButton>
-                <S.BlueButton onClick={onBookClick}>Book</S.BlueButton>
+                <S.BlueButton onClick={onResetClick} >{t('solution_pkg.reset')}</S.BlueButton>
+                <S.BlueButton onClick={onSaveClick}>{t('solution_pkg.save')}</S.BlueButton>
+                <S.BlueButton onClick={onBookClick}>{t('solution_pkg.book')}</S.BlueButton>
             </S.Row>
         );
     } 
@@ -105,17 +108,69 @@ const SolutionPackagingView = () => {
         setAddItem(index);
     }
 
-    const showSlots = (data) => {
-        return (
-            <S.Row margin="32px;" gap='20px'>
-                {data.dependent_services.map((service,i) => {return (<SlotDetails service={service} 
+    const CarouselComp = ({data}) => {
+        // use state and useEffect are required in order to force carousel to re-render
+        const [items, setItems] = useState([]);
+     
+        console.log('carrouselComp', data);
+        useEffect(() => {
+            if(items.length === 0){
+                    setItems(data);
+            }
+        }, [data]);
+
+        const shouldDisplayNextPrev = items.length > 5;
+        const responsive = {
+            superLargeDesktop: {
+                // the naming can be any, depends on you.
+                breakpoint: { max: 4000, min: 3000 },
+                items: 3,
+                slidesToSlide: 3
+            },
+            desktop: {
+                breakpoint: { max: 3000, min: 1024 },
+                items: 5,
+                slidesToSlide: 5
+            },
+            tablet: {
+                breakpoint: { max: 1024, min: 464 },
+                items: 2,
+                slidesToSlide: 2
+            },
+            mobile: {
+                breakpoint: { max: 464, min: 0 },
+                items: 1,
+                slidesToSlide: 1
+            }
+        };    
+        console.log('carrouselComp items', items);
+        return (        
+          <Carousel
+                arrows={false}
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                renderButtonGroupOutside={shouldDisplayNextPrev}
+                customButtonGroup={<NP bottom='510px'/>}
+                >
+                {items.map((service,i) => {return (<SlotDetails service={service} 
                                 onRemove={()=>removeSlot(service,i)} 
                                 onAdd={()=>onAddClick(i)}
                                 selected={addItem===i}
                                 key={i}/>
 
                 )})}
-            </S.Row>
+            </Carousel>
+        );
+    }
+    CarouselComp.propTypes = {
+        data: PropTypes.array
+    }
+    const showSlots = (data) => {
+        return (
+            <S.Style marginBottom="32px" marginTop="32px">
+                <CarouselComp data={data.dependent_services}/>
+            </S.Style>
         );
     } 
   
@@ -142,7 +197,7 @@ const SolutionPackagingView = () => {
                     </S.Style>
                 </S.Row>
                 <S.Style textAlign="left" marginTop='36px'>
-                    <S.BodyBoldText>Description</S.BodyBoldText>
+                    <S.BodyBoldText>{t('solution_pkg.description')}</S.BodyBoldText>
                     <S.Style marginTop='14px'>
                     <S.BodyText>{data.description}</S.BodyText>
                     </S.Style>
@@ -150,25 +205,25 @@ const SolutionPackagingView = () => {
                 <S.Row margin='auto 0 0 0' gap="24px">
                     <S.Column> 
                         <S.Style marginBottom='8px'>
-                            <S.CaptionText color="#B2B2B2">FEATURES</S.CaptionText>
+                            <S.CaptionText color="#B2B2B2">{t('solution_pkg.features')}</S.CaptionText>
                         </S.Style>
                         <S.BodySmallText>{data.features}</S.BodySmallText>
                     </S.Column>
                     <S.Column> 
                         <S.Style marginBottom='8px'>
-                        <S.CaptionText color="#B2B2B2">STACK</S.CaptionText>
+                        <S.CaptionText color="#B2B2B2">{t('solution_pkg.stack')}</S.CaptionText>
                         </S.Style>
                         <S.BodySmallText>{data.stack}</S.BodySmallText>
                     </S.Column>
                     <S.Column> 
                         <S.Style marginBottom='8px'>
-                            <S.CaptionText color="#B2B2B2">LOCATION</S.CaptionText>
+                            <S.CaptionText color="#B2B2B2">{t('solution_pkg.location')}</S.CaptionText>
                         </S.Style>
                         <S.BodySmallText>{data.location}</S.BodySmallText>
                     </S.Column>
                     <S.Column> 
                         <S.Style marginBottom='8px'>
-                            <S.CaptionText color="#B2B2B2">LAST UPDATED</S.CaptionText>
+                            <S.CaptionText color="#B2B2B2">{t('solution_pkg.lastUpdated')}</S.CaptionText>
                         </S.Style>
                         <S.BodySmallText>{data.last_updated}</S.BodySmallText>
                     </S.Column>
