@@ -30,7 +30,7 @@ export const CheckBox = styled.input`
     border: 1px solid #E9E9E9 !important;
     border-radius: 3px;
     align-self: center;
-    margin: 0;
+    /* margin: 0; */
 `;
 
 export const CheckBoxText = styled.div`

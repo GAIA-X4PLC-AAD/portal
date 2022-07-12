@@ -35,9 +35,9 @@ const ExpandableView = ({
         <S.ToggleButton
             onClick={() => { setIsExpanded(!isExpanded) }}
             noBorder={border}
-            background={elevation}
-            horizontalPadding='40px'>
+            background={elevation}>
             <Style flexGrow={1} paddingLeft={titleLeadingPadding}>{title}</Style>
+            {/* {title} */}
             <Down isOpen={isExpanded} paddingRight={titleTrailerPadding} arrowColor={arrowColor} />
         </S.ToggleButton>
 

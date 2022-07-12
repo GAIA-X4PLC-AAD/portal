@@ -9,7 +9,7 @@ import PriceTab from "../tabs/priceTab/PriceTab";
 import DescriptionTab from "../tabs/description/DescriptionTab";
 import ScreenshotsTab from "../tabs/screenshots/ScreenshotsTab";
 import { CheckBox } from "../search/style";
-import { Image, Style } from "../../../common/styles";
+import { Column, Image, Padding, Row, Style } from "../../../common/styles";
 
 
 const ServiceTile = ({ input, id, t }) => {
@@ -25,11 +25,11 @@ const ServiceTile = ({ input, id, t }) => {
                     titleTrailerPadding="12px"
                     viewLeadingPadding="40px"
                     titleLeadingPadding="40px"
-                    arrowColor="#B3B3B3" 
-                    width={_width}/>
-                <ExpandableView initiallyExpanded={false} view={PriceTab({ id: id, type: type })} title={<>{t("service-tile.price")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width}/>
-                <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={<>{t("service-tile.screenshots")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={'900px'}/>
-                <ExpandableView initiallyExpanded={false} view={ContactTab({ id: id, type: type })} title={<>{t("service-tile.contact")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width}/>
+                    arrowColor="#B3B3B3"
+                    width={_width} />
+                <ExpandableView initiallyExpanded={false} view={PriceTab({ id: id, type: type })} title={<>{t("service-tile.price")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} />
+                <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={<>{t("service-tile.screenshots")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={'900px'} />
+                <ExpandableView initiallyExpanded={false} view={ContactTab({ id: id, type: type })} title={<>{t("service-tile.contact")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} />
             </>
         )
     }
@@ -40,7 +40,8 @@ const ServiceTile = ({ input, id, t }) => {
 
         return (
             <S.DiscoveryTile>
-                <S.DiscoveryTileHeader>
+                <Row alignItems='Center' justifyContent='space-around'>
+                    {/* <Padding horizontal='28px' vertical='26px'><CheckBox type="checkbox" /></Padding> */}
                     <CheckBox type="checkbox" />
                     <a href={"#" || input.services.ppr_url}>
                         {/* <Image */}
@@ -65,7 +66,7 @@ const ServiceTile = ({ input, id, t }) => {
                     <S.DiscoveryDetailsButton>
                         {t("service-tile.details")}
                     </S.DiscoveryDetailsButton>
-                </S.DiscoveryTileHeader>
+                </Row>
             </S.DiscoveryTile>
         );
     }
