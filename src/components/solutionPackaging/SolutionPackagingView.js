@@ -243,8 +243,8 @@ const SolutionPackagingView = () => {
     return(
             <S.Column>
                 <S.Style textAlign="left">
-                    <S.H2Text>Solution Packaging</S.H2Text>
-                    <S.BodyText>Lorem ipsum dolor si jet subtitle</S.BodyText>
+                    <S.H2Text>{t('solution_pkg.solutionPackaging')}</S.H2Text>
+                    <S.BodyText>{t('solution_pkg.solutionPackagingSubtitle')}</S.BodyText>
                 </S.Style>
                 <LoadingView url={URL} successView={successView}/>
                 {addItem>=0?<SearchView type="solution_pkg" onSelect={onSelect} serviceId={id} slot={addItem}/>:null}
