@@ -1,25 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFilterCriteria } from "../../../actions";
+import { updateFilterCriteria, updateSearchFromHome } from "../../../actions";
 import * as S from "./style";
-import { ButtonText, Circle, Column, Padding, Row, Style } from "../../../common/styles";
+import {  Circle, Column, Row } from "../../../common/styles";
 import { withTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
 import axios from "axios";
+import {  useNavigate } from "react-router-dom";
 
 const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#000094', advancedSearchBgColor = '#000094', displayAsColumn = true }) => {
+
+    const API_TYPE = (type) => {switch (type) {
+        case 'home':
+        case 'solution_pkg': return 'services';
+        default: return type;
+    }}
+
 
     const criteria = useSelector(state => state.searchCriteriaStore);
     const [searchTerm, setSearchTerm] = useState('');
     const [advance, setAdvance] = useState(false);
     const [chips, setChips] = useState([]);
-    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/suggestions?searchTerm=${encodeURIComponent(searchTerm)}`;
+    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${API_TYPE(type)}/suggestions?searchTerm=${encodeURIComponent(searchTerm)}`;
+    const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
     useEffect(()=>{
         callApi();
     }, [advance]);
+    
+    useEffect(() => {
+        if (criteria.type === 'home') {
+            setSearchTerm(criteria.searchTerms);
+        }
+    }, []);
 
     useEffect(
         ()=>{
@@ -28,11 +43,6 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
         }
     , [searchTerm]);
 
-    useEffect(() => {
-        if (criteria.type === 'home') {
-            setSearchTerm(criteria.searchTerms);
-        }
-    }, []);
 
     const callApi = () => {
         axios.get(URL).then(res => {
@@ -40,7 +50,12 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
         });
     }
     const doSearch = () => {
-        dispatch(updateFilterCriteria({ searchTerms: searchTerm }))
+        if(type === 'home'){
+            dispatch(updateSearchFromHome(searchTerm));
+            navigate('/services');
+        } else {
+            dispatch(updateFilterCriteria({ searchTerms: searchTerm }))
+        }
     }
 
     const addChipToSearch = (chip) => {
