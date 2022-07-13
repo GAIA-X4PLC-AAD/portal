@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import { ColumnItem } from "./Common";
-import { Image, Column, Style, Tag } from "../../../../common/styles";
+import { Image, Column, Style, Tag, Padding } from "../../../../common/styles";
 import { Columns } from "../dataPreview/style";
 import DataPreview from "../dataPreview/DataPreview";
 
@@ -63,41 +63,43 @@ const DescriptionTabView = (props,) => {
 
   return (
     <>
-      <Column>
-        <S.ExpandedContainer>
-          <Image src={`${details['img_preview_url']}`} width='279px' height='328px' />
-          <S.VerticalContainer horizontal='8px'>
-            <S.Padding horizontal='8px'>
-              <S.Title>{`${details['name']}`}</S.Title>
-              <S.Body>{`${details['description']}`}</S.Body>
+      <Padding paddingTop='16px' paddingBottom='26px'>
+        <Column>
+          <S.ExpandedContainer>
+            <Image src={`${details['img_preview_url']}`} width='279px' height='328px' />
+            <S.VerticalContainer horizontal='8px'>
+              <S.Padding horizontal='8px'>
+                <S.Title>{`${details['name']}`}</S.Title>
+                <S.Body>{`${details['description']}`}</S.Body>
 
-              <S.Padding vertical='8px' horizontal='0px'>
-                <S.Subtitle>TAGS</S.Subtitle>
+                <S.Padding vertical='8px' horizontal='0px'>
+                  <S.Subtitle>TAGS</S.Subtitle>
+                </S.Padding>
+
+                <S.HorizontalContainer>
+                  {details['tags'] && details['tags'].map((elem, i) => { return (<Tag key={`${elem}:${i}`}>{elem}</Tag>) })}
+                </S.HorizontalContainer>
+
+                <S.HorizontalContainer>
+                  {details['certificates'] && details['certificates'].map((elem, i) => { return (<Tag key={`${elem}:${i}`}>{elem}</Tag>) })}
+                </S.HorizontalContainer>
+
+                <S.HorizontalContainer>
+                  <ColumnItem title='STACK' subtitle={`${details['stack']}`} />
+                  <ColumnItem title='DATE' subtitle={`${details['last_updated']}`} />
+                  <ColumnItem title='TERMS OF USE' subtitle={`${details['terms_of_use']}`} />
+                  <ColumnItem title='LOCATION' subtitle={`${details['location']}`} />
+                  <ColumnItem title='SECURITY' subtitle={`${details['security']}`} />
+                  <ColumnItem title='CATEGORY' subtitle={`${details['category']}`} />
+                </S.HorizontalContainer>
               </S.Padding>
+            </S.VerticalContainer>
+          </S.ExpandedContainer>
 
-              <S.HorizontalContainer>
-                {details['tags'] && details['tags'].map((elem, i) => { return (<Tag key={`${elem}:${i}`}>{elem}</Tag>) })}
-              </S.HorizontalContainer>
+          {buildCompositeServices()}
 
-              <S.HorizontalContainer>
-                {details['certificates'] && details['certificates'].map((elem, i) => { return (<Tag key={`${elem}:${i}`}>{elem}</Tag>) })}
-              </S.HorizontalContainer>
-
-              <S.HorizontalContainer>
-                <ColumnItem title='STACK' subtitle={`${details['stack']}`} />
-                <ColumnItem title='DATE' subtitle={`${details['last_updated']}`} />
-                <ColumnItem title='TERMS OF USE' subtitle={`${details['terms_of_use']}`} />
-                <ColumnItem title='LOCATION' subtitle={`${details['location']}`} />
-                <ColumnItem title='SECURITY' subtitle={`${details['security']}`} />
-                <ColumnItem title='CATEGORY' subtitle={`${details['category']}`} />
-              </S.HorizontalContainer>
-            </S.Padding>
-          </S.VerticalContainer>
-        </S.ExpandedContainer>
-
-        {buildCompositeServices()}
-
-      </Column>
+        </Column>
+      </Padding>
     </>
   )
 }
