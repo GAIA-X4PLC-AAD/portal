@@ -5,37 +5,54 @@ import * as S from "./style";
 import { ButtonText, Circle, Column, Padding, Row, Style } from "../../../common/styles";
 import { withTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
+import axios from "axios";
 
 const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#000094', advancedSearchBgColor = '#000094', displayAsColumn = true }) => {
 
     const criteria = useSelector(state => state.searchCriteriaStore);
     const [searchTerm, setSearchTerm] = useState('');
     const [advance, setAdvance] = useState(false);
+    const [chips, setChips] = useState([]);
+    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/suggestions?searchTerm=${encodeURIComponent(searchTerm)}`;
 
     const dispatch = useDispatch();
 
+    useEffect(()=>{
+        callApi();
+    }, [advance]);
+
+    useEffect(
+        ()=>{
+            const chipAdded = chips.forEach(chip => {if(searchTerm.includes(chip.term)) return true}) || false;
+            if(!chipAdded) callApi();
+        }
+    , [searchTerm]);
+
     useEffect(() => {
-        // console.log(`type of criteria.type = ${criteria.type} , type= ${type}, searchSterm = ${criteria.searchTerms}`);
         if (criteria.type === 'home') {
             setSearchTerm(criteria.searchTerms);
         }
     }, []);
 
+    const callApi = () => {
+        axios.get(URL).then(res => {
+            setChips(res.data.results);
+        });
+    }
     const doSearch = () => {
         dispatch(updateFilterCriteria({ searchTerms: searchTerm }))
     }
 
     const addChipToSearch = (chip) => {
-        setSearchTerm(`${searchTerm} ` + t(`discovery.search.chip.filter.${chip}`));
+        setSearchTerm(`${searchTerm} ${chip.term}`);
     }
 
     const showAdvanceSearchChip = (advance) => {
         if (type === 'management' || type === 'participant') return null;
-        const chips = ['not', 'provider', 'storage', 'service', 'compute'].filter((chip)=>{return !searchTerm.includes(t(`discovery.search.chip.filter.${chip}`))});
         if (advance === false) {
             return (<S.AdvancedSearch color={advancedTextColor} onClick={() => setAdvance(true)}>{t("discovery.search.advance")}</S.AdvancedSearch>);
         } else {
-            return chips.map((chip) => { return (<S.AdvancedSearch color={advancedTextColor} onClick={() => { addChipToSearch(chip) }} key={chip}>{t(`discovery.search.chip.text.${chip}`)}</S.AdvancedSearch>) });
+            return chips.map((chip) => { return (<S.AdvancedSearch color={advancedTextColor} onClick={() => { addChipToSearch(chip) }} key={chip}>{chip.label}</S.AdvancedSearch>) });
         }
     }
     const onKeyPress = (e) => {
