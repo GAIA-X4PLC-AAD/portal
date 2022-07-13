@@ -20,7 +20,7 @@ class ProvideAttributes extends Component {
     componentDidMount() {
 
         const serviceDescriptor = this.props.serviceDescriptor;
-        if (!serviceDescriptor.parsed_descriptor || !serviceDescriptor.file.name) {
+        if (!serviceDescriptor.parsed_descriptor || !serviceDescriptor.file.content) {
             // we have to navigate like this because otherwise we are not in React.useEffects()
             this.setState({}, () => this.props.navigate("/provide/start"));
         }
@@ -45,7 +45,9 @@ class ProvideAttributes extends Component {
         // Update the formData object 
         formData.append(
             "file",
-            serviceDescriptor.file,
+            new Blob([serviceDescriptor.file.content], {
+                type: 'text/json'
+            }),
             serviceDescriptor.file.name
         );
 
@@ -75,7 +77,7 @@ class ProvideAttributes extends Component {
 
         const body = selectedDescriptor.attributes.map(function (attribute, i) {
             if ((checked === true && attribute.mandatory) || checked === false) {
-                return <tr key={i} className={attribute.mandatory && !attribute.value ? "invalid" : ""} ><td>{attribute.name}</td><td>{attribute.mandatory && !attribute.value ? "Required" : attribute.value }</td></tr>
+                return <tr key={i} className={attribute.mandatory && !attribute.value ? "invalid" : ""} ><td>{attribute.name}</td><td>{attribute.mandatory && !attribute.value ? "Required" : attribute.value}</td></tr>
             }
 
         })
@@ -88,7 +90,7 @@ class ProvideAttributes extends Component {
         }
 
         let info_label;
-       
+
 
         let next;
         if (id == descriptor.length - 1) {

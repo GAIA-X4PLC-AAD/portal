@@ -14,13 +14,20 @@ class ProvideOverview extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            file: {}
+            file: props.file
         };
     }
 
     changeHandler = (event) => {
         var file = event.target.files[0];
-        this.setState({ file: file });
+        let reader = new FileReader();
+
+        reader.onload = (e) => {
+            let myString = e.target.result;
+            this.setState({ file: { content: myString, name: file.name } })
+        }
+        reader.readAsText(file);
+
     }
 
     handleSubmission = () => {
@@ -29,7 +36,9 @@ class ProvideOverview extends Component {
         // Update the formData object 
         formData.append(
             "file",
-            this.state.file,
+            new Blob([this.state.file.content], {
+                type: 'text/json'
+            }),
             this.state.file.name
         );
         formData.append("descriptor_type", "service");
@@ -66,11 +75,16 @@ class ProvideOverview extends Component {
 
 ProvideOverview.propTypes = {
     setDescriptorFile: PropTypes.func,
-    navigate: PropTypes.func
+    navigate: PropTypes.func,
+    file: PropTypes.any
 }
+
+const mapStateToProps = state => {
+    return { file: state.serviceDescriptor.file };
+};
 
 const Wrap = (props) => {
     const navigate = useNavigate();
     return <ProvideOverview {...props} navigate={navigate} />
 }
-export default connect(null, { setDescriptorFile })(Wrap);
+export default connect(mapStateToProps, { setDescriptorFile })(Wrap);
