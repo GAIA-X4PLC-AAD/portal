@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { resetDescriptorFile } from '../../actions';
 import axios from "axios";
 import "./Provide.css"
 import { HeaderTitle, BodyText, BlueButton, CancelButton, RedText } from "../../common/styles";
@@ -14,15 +15,6 @@ class ProvideAttributes extends Component {
         super(props);
         this.state = {
             checked: true
-        }
-    }
-
-    componentDidMount() {
-
-        const serviceDescriptor = this.props.serviceDescriptor;
-        if (!serviceDescriptor.parsed_descriptor || !serviceDescriptor.file.content) {
-            // we have to navigate like this because otherwise we are not in React.useEffects()
-            this.setState({}, () => this.props.navigate("/provide/start"));
         }
     }
 
@@ -38,6 +30,7 @@ class ProvideAttributes extends Component {
     }
 
     clickSend = () => {
+        const { type } = this.props.params;
         const formData = new FormData();
 
         const serviceDescriptor = this.props.serviceDescriptor;
@@ -52,8 +45,9 @@ class ProvideAttributes extends Component {
         );
 
 
-        axios.post(process.env.REACT_APP_EDGE_API_URI + '/sd-service/services', formData).then((response) => {
+        axios.post(process.env.REACT_APP_EDGE_API_URI + '/sd-service/' + type, formData).then((response) => {
             this.props.navigate("/dashboard")
+            this.props.resetDescriptorFile()
         }, (error) => {
             alert('Failed to validate service descriptor.');
         });
@@ -64,13 +58,18 @@ class ProvideAttributes extends Component {
     }
 
     render() {
+        // Guard: Check if we have a valid state to be on the attribute page.
+        const serviceDescriptor = this.props.serviceDescriptor;
+        if (!serviceDescriptor.parsed_descriptor || !serviceDescriptor.file.content) {
+            return <Navigate to="/provide/start" />
+        }
 
         const { index, type } = this.props.params;
         const checked = this.state.checked;
         const descriptor = this.props.serviceDescriptor.parsed_descriptor.results;
         const that = this;
         const header = descriptor.map(function (object, i) {
-            return <NavLink key={i} to={"/provide/confirm/" + i}><div className="provide-tab"><div className={i == index ? "provide-tab-inside  provide-tab-inside-active" : "provide-tab-inside"}>{i + 2}</div></div></NavLink>;
+            return <NavLink key={i} to={"/provide/"+type+"/confirm/" + i}><div className="provide-tab"><div className={i == index ? "provide-tab-inside  provide-tab-inside-active" : "provide-tab-inside"}>{i + 1}</div></div></NavLink>;
         });
 
         const selectedDescriptor = descriptor[index];
@@ -95,7 +94,7 @@ class ProvideAttributes extends Component {
         let next;
         if (index == descriptor.length - 1) {
             if (!this.props.serviceDescriptor.parsed_descriptor.valid) {
-                info_label = <RedText>Service Descriptor is invalid.</RedText>
+                info_label = <RedText>Service Descriptor is invalid. Please fix descriptor to proceed.</RedText>
             }
 
             next = <BlueButton disabled={!this.props.serviceDescriptor.parsed_descriptor.valid} onClick={this.clickSend}>Send</BlueButton>
@@ -110,7 +109,7 @@ class ProvideAttributes extends Component {
             </div>
 
             <div className="provide-header">
-                <NavLink to="/provide/start"><div className="provide-tab"><div className="provide-tab-inside">1</div></div></NavLink>{header}
+                {header}
             </div>
             <ToggleSwitch label="Show only mandatory attributes" onChange={this.onChange} defaultChecked={this.state.checked} />
             <table className="provide-attribute-table">
@@ -122,8 +121,8 @@ class ProvideAttributes extends Component {
                 </tbody>
             </table>
             <div className="provide-button-area">
-                {info_label}
                 {back} {next}
+                {info_label}
             </div>
 
         </div>
@@ -133,7 +132,8 @@ class ProvideAttributes extends Component {
 ProvideAttributes.propTypes = {
     navigate: PropTypes.func,
     params: PropTypes.any,
-    serviceDescriptor: PropTypes.any
+    serviceDescriptor: PropTypes.any,
+    resetDescriptorFile: PropTypes.func,
 }
 
 const mapStateToProps = state => {
@@ -144,4 +144,4 @@ const Wrap = (props) => {
     const navigate = useNavigate();
     return <ProvideAttributes {...props} navigate={navigate} params={useParams()} />
 }
-export default connect(mapStateToProps, {})(Wrap);
+export default connect(mapStateToProps, { resetDescriptorFile })(Wrap);

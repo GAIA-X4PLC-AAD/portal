@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
+import { resetDescriptorFile } from '../../actions';
+import PropTypes from 'prop-types';
 import "./ProvideSelection.css"
 import { HeaderTitle, BodySmallText, BodyText, BodyBoldText, BlueButton, BlueUploadLabel, CancelButton } from "../../common/styles";
 
@@ -8,9 +10,9 @@ import { HeaderTitle, BodySmallText, BodyText, BodyBoldText, BlueButton, BlueUpl
 class ProvideSelection extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            checked: true
-        }
+
+        // reset the sd dialog state to ensure we get a fresh dialog.
+        props.resetDescriptorFile();
     }
 
     render() {
@@ -27,7 +29,7 @@ class ProvideSelection extends Component {
                         <BodySmallText>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet purus maecenas rhoncus sit sit sed quis urna leo.
                         </BodySmallText>
-                        <NavLink to="/provide/service/upload"><BlueButton>Provide Service</BlueButton></NavLink>
+                        <NavLink to="/provide/services/upload"><BlueButton>Provide Service</BlueButton></NavLink>
                     </div>
                     <div className="provide-selection-block">
                         <BodyBoldText>Data</BodyBoldText>
@@ -41,7 +43,7 @@ class ProvideSelection extends Component {
                         <BodySmallText>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquet purus maecenas rhoncus sit sit sed quis urna leo.
                         </BodySmallText>
-                        <NavLink to="/provide/node/upload"><BlueButton>Provide Node</BlueButton></NavLink>
+                        <NavLink to="/provide/nodes/upload"><BlueButton>Provide Node</BlueButton></NavLink>
                     </div>
                 </div>
             </div>
@@ -51,6 +53,7 @@ class ProvideSelection extends Component {
 }
 
 ProvideSelection.propTypes = {
+    resetDescriptorFile: PropTypes.func
 }
 
-export default connect(null, {})(ProvideSelection);
+export default connect(null, { resetDescriptorFile })(ProvideSelection);

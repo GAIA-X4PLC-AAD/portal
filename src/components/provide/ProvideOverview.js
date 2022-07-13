@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { connect } from 'react-redux';
 import axios from "axios";
 import { withTranslation } from "react-i18next";
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { Navigate, NavLink, useNavigate, useParams } from 'react-router-dom';
 import { setDescriptorFile } from '../../actions';
 import PropTypes from 'prop-types';
 import "./Provide.css"
@@ -66,8 +66,8 @@ class ProvideOverview extends Component {
                     <BlueUploadLabel><input className="hidden" type="file" name="file" onChange={this.changeHandler} />Upload</BlueUploadLabel>
                     <BodySmallBoldText className="provide-upload-file"> {this.state.file.name}</BodySmallBoldText>
                     <div className="provide-button-area">
-                        <CancelButton onClick={() => this.props.navigate(-1)}>Back</CancelButton>
-                        <BlueButton disabled={this.state.file == null} onClick={this.handleSubmission}>Submit</BlueButton>
+                        <NavLink to="/provide/start"> <CancelButton >Back</CancelButton></NavLink>
+                        <BlueButton disabled={this.state.file.name == null} onClick={this.handleSubmission}>Submit</BlueButton>
                     </div>
                 </div>
             </div>

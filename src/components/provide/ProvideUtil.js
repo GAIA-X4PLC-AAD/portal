@@ -2,9 +2,9 @@
 export const toTypeLabel = (type) => {
     let typeLabel;
     switch (type) {
-        case "service": typeLabel = "Service"; break;
+        case "services": typeLabel = "Service"; break;
         case "data": typeLabel = "Data"; break;
-        case "node": typeLabel = "Node"; break;
+        case "nodes": typeLabel = "Node"; break;
         default: typeLabel = "Service/Data/Node"
     }
     return typeLabel;
