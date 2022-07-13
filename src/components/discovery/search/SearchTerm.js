@@ -38,8 +38,13 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
 
     useEffect(
         ()=>{
-            const chipAdded = chips.forEach(chip => {if(searchTerm.includes(chip.term)) return true}) || false;
-            if(!chipAdded) callApi();
+            const chipAdded = chips.reduce((chipAdded,chip) => {
+                if (chipAdded) return chipAdded;
+                if(searchTerm.includes(chip.term)) return true;
+                return false;
+            },false);
+            console.log('chipAdded', chipAdded);
+            if(chipAdded || searchTerm==='') callApi();
         }
     , [searchTerm]);
 
@@ -67,7 +72,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
         if (advance === false) {
             return (<S.AdvancedSearch color={advancedTextColor} onClick={() => setAdvance(true)}>{t("discovery.search.advance")}</S.AdvancedSearch>);
         } else {
-            return chips.map((chip) => { return (<S.AdvancedSearch color={advancedTextColor} onClick={() => { addChipToSearch(chip) }} key={chip}>{chip.label}</S.AdvancedSearch>) });
+            return chips.map((chip) => { return (<S.AdvancedSearch color={advancedTextColor} onClick={() => { addChipToSearch(chip) }} key={chip.label}>{chip.label}</S.AdvancedSearch>) });
         }
     }
     const onKeyPress = (e) => {
