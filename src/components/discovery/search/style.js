@@ -124,17 +124,21 @@ export const AdvancedSearch = styled.div`
     font-weight: 700;
     font-size: 18px;
     line-height: 20px;
-
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
     color: ${props => props.color || '#000094'};
+    ${props => props.displayAbsolute ? `
+    position: absolute;
+    right: -16px;
+    transform: translateX(100%);
+  `: ''}
 `;
 
 export const AdvancedSearchText = styled.div`
     font-family: 'Titillium Web';
     font-style: normal;
-    margin: 0px 12px;
+    margin: auto 12px;
     font-weight: 700;
     font-size: 18px;
     line-height: 20px;

@@ -67,11 +67,16 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
         setSearchTerm(`${searchTerm} ${chip.term}`);
     }
 
-    const showAdvanceSearchChip = (advance) => {
+    const showAdvanceMessage = (advance, displayAbsolute=false) => {
         if (type === 'management' || type === 'participant') return null;
         if (advance === false) {
-            return (<S.AdvancedSearch color={advancedTextColor} onClick={() => setAdvance(true)}>{t("discovery.search.advance")}</S.AdvancedSearch>);
-        } else {
+            return (<S.AdvancedSearch color={advancedTextColor} displayAbsolute={displayAbsolute} onClick={() => setAdvance(true)}>{t("discovery.search.advance")}</S.AdvancedSearch>);
+        }
+    }
+
+    const showAdvanceSearchChip = (advance) => {
+        if (type === 'management' || type === 'participant') return null;
+        if (advance === true) {
             return chips.map((chip) => { return (<S.AdvancedSearch color={advancedTextColor} onClick={() => { addChipToSearch(chip) }} key={chip.label}>{chip.label}</S.AdvancedSearch>) });
         }
     }
@@ -81,31 +86,40 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
         }
     }
     const searchMargin = (type) => {
-        if (type === 'management' || type === 'participant') return '0 0 24px auto';
-        return '0 0 0 auto';
+        switch (type) {
+            case 'management':
+            case 'participant':
+                    return '0 0 24px auto';
+            case 'home': 
+                return '0 auto 0 auto';
+            default: 
+                return '0 0 0 auto';
+        }
     }
 
     const _searchViews =
         <>
-            { displayAsColumn ? '': <S.AdvancedSearchText color='white'>Search for lorem ipsum</S.AdvancedSearchText> }
-            <Row>
+            <Row position='relative'>
+                { displayAsColumn ? '': <S.AdvancedSearchText color='white'>Search for lorem ipsum</S.AdvancedSearchText> }
                 <S.SearchTerm type="text" width={inputWidth} onKeyPress={onKeyPress} value={searchTerm} onChange={(e) => { setSearchTerm(e.target.value) }} />
                 <S.SearchPlusButton onClick={doSearch}><Circle background={advancedSearchBgColor} radius='46px' borderRadius='4px' borderColor={advancedSearchBgColor}><S.SearchPlusImage /></Circle></S.SearchPlusButton>
+                { displayAsColumn ? '': showAdvanceMessage(advance, !displayAsColumn) }
             </Row>
-            <Row alignItems='space-equally'>
+            <Row height='28px' justifyContent='left' alignItems='space-equally' alignSelf='end'>
                 {/* <Padding horizontal={displayAsColumn ? '0px' : '12px'}>{showAdvanceSearchChip(advance)}</Padding> */}
+                { displayAsColumn ? showAdvanceMessage(advance): null }
                 {showAdvanceSearchChip(advance)}
             </Row>
         </>
 
+    const justify = displayAsColumn? 'left': 'center';
+    const align = displayAsColumn? 'end': 'center';
+    const width = displayAsColumn? 'auto': 'fit-content';
+
     return (
-        displayAsColumn ?
-            <Column key={type} margin={searchMargin(type)} alignItems='end' justifyContent='left'>
+            <Column key={type} margin={searchMargin(type)} width={width} alignItems={align} justifyContent={justify}>
                 {_searchViews}
-            </Column> :
-            <Row key={type} margin={searchMargin(type)} alignItems='center' justifyContent='center'>
-                {_searchViews}
-            </Row>
+            </Column>
     );
 
 }

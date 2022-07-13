@@ -123,7 +123,9 @@ export const Row = styled.div`
     height: ${props => props.height || 'auto'};
     justify-content: ${props => props.justifyContent || ''};
     align-items: ${props => props.alignItems || ''};
-    gap: ${props => props.gap || 'unset'}
+    align-self: ${props => props.alignSelf || ''};
+    gap: ${props => props.gap || 'unset'};
+    position: ${props => props.position || 'unset'};
 `
 export const WrapRow = styled(Row)`
     flex-wrap: wrap`;
