@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from "axios";
 import "./Provide.css"
-import { HeaderTitle, BodySmallText, BlueButton, CancelButton, RedText } from "../../common/styles";
+import { HeaderTitle, BodyText, BlueButton, CancelButton, RedText } from "../../common/styles";
 import { ToggleSwitch } from "../../common/toggle/ToggleSwitch"
-import { Thumbs } from "react-responsive-carousel";
+import { toTypeLabel } from "./ProvideUtil"
 
 class ProvideAttributes extends Component {
     constructor(props) {
@@ -27,14 +27,14 @@ class ProvideAttributes extends Component {
     }
 
     clickBack = () => {
-        const { id } = this.props.params;
-        this.props.navigate("/provide/confirm/" + (parseInt(id) - 1))
+        const { index, type } = this.props.params;
+        this.props.navigate("/provide/" + type + "/confirm/" + (parseInt(index) - 1))
     }
 
     clickNext = () => {
-        const { id } = this.props.params;
+        const { index, type } = this.props.params;
 
-        this.props.navigate("/provide/confirm/" + (parseInt(id) + 1))
+        this.props.navigate("/provide/" + type + "/confirm/" + (parseInt(index) + 1))
     }
 
     clickSend = () => {
@@ -65,15 +65,15 @@ class ProvideAttributes extends Component {
 
     render() {
 
-        const { id } = this.props.params;
+        const { index, type } = this.props.params;
         const checked = this.state.checked;
         const descriptor = this.props.serviceDescriptor.parsed_descriptor.results;
         const that = this;
         const header = descriptor.map(function (object, i) {
-            return <NavLink key={i} to={"/provide/confirm/" + i}><div className="provide-tab"><div className={i == id ? "provide-tab-inside  provide-tab-inside-active" : "provide-tab-inside"}>{i + 2}</div></div></NavLink>;
+            return <NavLink key={i} to={"/provide/confirm/" + i}><div className="provide-tab"><div className={i == index ? "provide-tab-inside  provide-tab-inside-active" : "provide-tab-inside"}>{i + 2}</div></div></NavLink>;
         });
 
-        const selectedDescriptor = descriptor[id];
+        const selectedDescriptor = descriptor[index];
 
         const body = selectedDescriptor.attributes.map(function (attribute, i) {
             if ((checked === true && attribute.mandatory) || checked === false) {
@@ -83,17 +83,17 @@ class ProvideAttributes extends Component {
         })
 
         let back;
-        if (id != 0) {
+        if (index != 0) {
             back = <CancelButton onClick={this.clickBack} >Back</CancelButton>
         } else {
-            back = <NavLink to="/provide/start"><CancelButton>Back</CancelButton></NavLink>
+            back = <NavLink to={"/provide/" + type + "/upload"}><CancelButton>Back</CancelButton></NavLink>
         }
 
         let info_label;
 
 
         let next;
-        if (id == descriptor.length - 1) {
+        if (index == descriptor.length - 1) {
             if (!this.props.serviceDescriptor.parsed_descriptor.valid) {
                 info_label = <RedText>Service Descriptor is invalid.</RedText>
             }
@@ -106,7 +106,7 @@ class ProvideAttributes extends Component {
         return <div>
             <div className="provide-header-description">
                 <HeaderTitle>Provide Service</HeaderTitle>
-                <BodySmallText>Provide Service/Data/Node</BodySmallText>
+                <BodyText>Provide {toTypeLabel(type)}</BodyText>
             </div>
 
             <div className="provide-header">

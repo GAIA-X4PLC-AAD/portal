@@ -1,0 +1,18 @@
+.provide-selection {
+    display: flex;
+    text-align: left;
+}
+
+.provide-selection-block {
+    margin-right: 100px;
+}
+
+.provide-selection-block:last-child {
+    margin-right: 0;
+}
+
+.provide-selection-block button {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 20px;
+}

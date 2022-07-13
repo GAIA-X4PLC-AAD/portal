@@ -34,6 +34,7 @@ import ProvideAttributes from './components/provide/ProvideAttributes';
 import { Column, Padding } from './common/styles';
 import Article from './components/article/Article';
 import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
+import ProvideSelection from './components/provide/ProvideSelection';
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
@@ -85,8 +86,10 @@ const App = (props) => {
               <Route path="/dashboard" element={ViewContainer(<DashboardPage />)} />
               <Route path="/onboarding" element={ViewContainer(<OnboardingPage />)} />
               <Route path="/sp/:id" element={ViewContainer(<SolutionPackagingView />)} />
-              <Route path="/provide/start" element={ViewContainer(<ProvideOverview />)} />
-              <Route path="/provide/confirm/:id" element={ViewContainer(<ProvideAttributes />)} />
+              <Route path="/provide/start" element={ViewContainer(<ProvideSelection />)} />
+              <Route path="/provide/:type/upload" element={ViewContainer(<ProvideOverview />)} />
+              <Route path="/provide/:type/upload/:id" element={ViewContainer(<ProvideOverview />)} />
+              <Route path="/provide/:type/confirm/:index" element={ViewContainer(<ProvideAttributes />)} />
             </Routes>
 
 
