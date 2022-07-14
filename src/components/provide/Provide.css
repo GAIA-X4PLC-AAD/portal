@@ -24,6 +24,7 @@
 
 .provide-tab-inside {
     background: #E5E5E5;
+    color: #2A2A2A;
 
     /* Body Small Bold */
     font-family: 'Titillium Web';
@@ -35,7 +36,6 @@
     letter-spacing: 0.25px;
 
     /* Text/White */
-    color: #FFFFFF;
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -47,6 +47,7 @@
 
 .provide-tab-inside-active {
     background: #000094;
+    color: #FFFFFF;
 }
 
 .provide-upload {
@@ -59,15 +60,42 @@
 }
 
 .provide-button-area {
-    margin-top: 15px;
+    margin-top: 25px;
     text-align: left;
 }
 
+.provide-button-area button {
+    width: 140px;
+}
+
+.provide-button-area button:first-child {
+    margin-left: 0;
+}
+
 .provide-attribute-table {
-    margin: auto;
     min-width: 470px;
+    margin-top: 25px;
+    text-align: left;
+    font-size: 15px;
+    
+    font-weight: normal;
+    border-collapse: collapse;
+}
+
+.provide-attribute-table td{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.provide-attribute-table tr{
+    border-bottom: 1px solid #E9E9E9 ;
 }
 
 .provide-attribute-table thead {
  color: #bababa;
 }
+
+.provide-attribute-table tr.invalid {
+    color: #EE1D23;
+}
+   
