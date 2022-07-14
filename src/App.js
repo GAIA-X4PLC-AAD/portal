@@ -92,8 +92,6 @@ const App = (props) => {
               <Route path="/provide/:type/confirm/:index" element={ViewContainer(<ProvideAttributes />)} />
               <Route path="/provide/:type/confirm/:id/:index" element={ViewContainer(<ProvideAttributes />)} />
             </Routes>
-
-
           </Column>
           <div className='home-screen'>
             <div className='footer-container'>
@@ -120,8 +118,6 @@ const App = (props) => {
               </div>
             </div>
           </div>
-
-
         </div>
       </Router>
     </div>
