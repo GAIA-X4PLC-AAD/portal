@@ -8,7 +8,7 @@ import { Block } from "../expandable/style";
 import { Padding } from "../discovery/tabs/style";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { UPDATE_SELECTED_PAGE } from "../../actions/types";
+
 
 
 const MyServiceViewCard = ({ index, data }) => {
@@ -35,7 +35,6 @@ const MyServiceViewCard = ({ index, data }) => {
     const openSd = () => {
 
         navigate(`/provide/confirm/${_id}`)
-        dispatch({ type: UPDATE_SELECTED_PAGE, page: 'provide' })
     }
 
     const buildCard = () => {
