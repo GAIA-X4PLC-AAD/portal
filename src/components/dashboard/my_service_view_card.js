@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { UPDATE_SELECTED_PAGE } from "../../actions/types";
 
 
-const MyServiceViewCard = ({ index, data }) => {
+const MyServiceViewCard = ({ index, data, itemType }) => {
 
     const isActivated = data['is_activated']
     const isOwn = data['is_own']
@@ -34,7 +34,7 @@ const MyServiceViewCard = ({ index, data }) => {
 
     const openSd = () => {
 
-        navigate(`/provide/confirm/${_id}`)
+        navigate(`/provide/${itemType}/upload/${_id}`)
         dispatch({ type: UPDATE_SELECTED_PAGE, page: 'provide' })
     }
 
@@ -92,7 +92,7 @@ const MyServiceViewCard = ({ index, data }) => {
 }
 
 MyServiceViewCard.propTypes = {
-    type: PropTypes.string,
+    itemType: PropTypes.string,
     index: PropTypes.number,
     isEditable: PropTypes.bool,
     data: PropTypes.object,
