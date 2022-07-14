@@ -1,12 +1,12 @@
 
 import React, {useEffect } from 'react';
 
-import * as S from './style';
+// import * as S from './style';
 import PropTypes from 'prop-types';
 
 import { useResource } from "@axios-use/react";
 
-import { Center, Style } from '../../common/styles';
+import { Center, Style, AnimatedVisibility, CircularLoader } from '../../common/styles';
 
 
 function LoadingView({ url, successView, params }) {
@@ -22,20 +22,20 @@ function LoadingView({ url, successView, params }) {
         <>
             <Center>
                 <Style zIndex={-1}>
-                    <S.AnimatedVisibility visible={isLoading} data-tag='animated-visibility-loader'>
-                        <S.CircularLoader />
-                    </S.AnimatedVisibility>
+                    <AnimatedVisibility visible={isLoading} data-tag='animated-visibility-loader'>
+                        <CircularLoader />
+                    </AnimatedVisibility>
                 </Style>
 
                 <Style zIndex={-1}>
-                    <S.AnimatedVisibility visible={isError} data-tag='animated-visibility-error'>
+                    <AnimatedVisibility visible={isError} data-tag='animated-visibility-error'>
                         <p>Error Loading Content!</p>
-                    </S.AnimatedVisibility>
+                    </AnimatedVisibility>
                 </Style>
 
-                <S.AnimatedVisibility visible={!isLoading && error == undefined && !(data === undefined)} data-tag='animated-visibility-success'>
+                <AnimatedVisibility visible={!isLoading && error == undefined && !(data === undefined)} data-tag='animated-visibility-success'>
                     {successView({ data: data, params: params })}
-                </S.AnimatedVisibility>
+                </AnimatedVisibility>
             </Center>
         </>
     );

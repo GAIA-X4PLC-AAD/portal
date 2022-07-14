@@ -1,26 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BodySmallBoldText, ButtonText, CaptionText, Circle, Column, HeaderTitle, Image, Row, Style } from "../../common/styles";
+import { AnimatedVisibility, CircularLoader, BodySmallBoldText, BodyText, ButtonText, CaptionText, Card, Circle, Column, H4LightText, HeaderTitle, HorizontalLine, Image, OutlineButton, Row, Style } from "../../common/styles";
 import PropTypes from 'prop-types';
-
+import axios from "axios";
 import { Block } from "../expandable/style";
 import { Padding } from "../discovery/tabs/style";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { UPDATE_SELECTED_PAGE } from "../../actions/types";
 
+import { Menu, MenuItem } from '@szhsin/react-menu';
+import '@szhsin/react-menu/dist/index.css';
 
-const MyServiceViewCard = ({ index, data }) => {
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
+
+const MyServiceViewCard = ({ index, data, itemType }) => {
 
     const isActivated = data['is_activated']
     const isOwn = data['is_own']
+    const _name = data['name']
+    const _status = data['status'] ?? 'deployed'
     const _id = data['id']
 
     const { t, i18n } = useTranslation()
 
     const navigate = useNavigate()
-    const dispatch = useDispatch()
 
     const colItem = ({ title, caption, subtitle, }) => {
         return <Column>
@@ -33,9 +37,87 @@ const MyServiceViewCard = ({ index, data }) => {
     }
 
     const openSd = () => {
+        navigate(`/provide/${itemType}/upload/${_id}`)
+    }
 
-        navigate(`/provide/confirm/${_id}`)
-        dispatch({ type: UPDATE_SELECTED_PAGE, page: 'provide' })
+    const edit = () => {
+        navigate(`/lcm/${_id}`)
+    }
+
+    const create = () => {
+        navigate(`/lcm/${_id}`)
+    }
+
+    const downloadLogs = () => {
+        navigate(`/lcm/${_id}/logs`)
+    }
+
+
+    const buildDeleteDialog = ({ closeModal }) => {
+
+        const [isLoading, setIsLoading] = useState(false);
+
+        const deleteService = () => {
+            setIsLoading(true)
+            axios.delete(process.env.REACT_APP_EDGE_API_URI + `/lcm/${_id}`,).then((response) => {
+                setIsLoading(false)
+            }, (error) => {
+                setIsLoading(false)
+                alert('Failed to validate service descriptor.')
+            });
+
+        }
+
+
+        return <>
+            <Style width='633px'>
+                <Padding horizontal='24px' vertical='12px'>
+                    <H4LightText>You&#39;re about to delete a service</H4LightText>
+                    <HorizontalLine />
+                    <BodyText>Are you sure you want to delete {_name}?</BodyText>
+                    <Padding vertical='20px'>
+                        <Row alignItems='center'>
+                            <OutlineButton onClick={() => deleteService()}>Delete</OutlineButton>
+                            <Padding paddingLeft='20px' />
+                            <OutlineButton onClick={closeModal}>Cancel</OutlineButton>
+                            {isLoading ? <Padding horizontal='16px'>
+                                <AnimatedVisibility visible={isLoading} data-tag='animated-visibility-loader'>
+                                    <CircularLoader />
+                                </AnimatedVisibility>
+                            </Padding> : ''}
+                        </Row>
+                    </Padding>
+                </Padding>
+            </Style>
+        </>
+    }
+    const buildManageButton = () => {
+
+        // delete dialog confirmation
+        const [openModal, setOpenModal] = useState(false);
+
+        const onOpenModal = () => setOpenModal(true);
+        const onCloseModal = () => setOpenModal(false);
+
+        if (_status == 'undeployed' || _status == 'undeploying' || _status == 'deploying') return <></>
+        if (!isActivated) return <></>
+
+        return <>
+            <Padding paddingRight='16px'>
+                <Menu menuButton={<ButtonText onClick={() => manageButton()}>{t('dashboard.manage.manage')}</ButtonText>}>
+                    {_status == 'undeployed' ? <MenuItem onClick={() => create()}>{t('dashboard.manage.create')}</MenuItem> : ''}
+                    {_status == 'deployed' ? <MenuItem onClick={() => edit()}>{t('dashboard.manage.edit')}</MenuItem> : ''}
+                    {_status == 'deployed' ? <MenuItem onClick={() => downloadLogs()}>{t('dashboard.manage.download-logs')}</MenuItem> : ''}
+                    {_status == 'deployed' ? <MenuItem onClick={onOpenModal}>{t('dashboard.manage.delete')}</MenuItem> : ''}
+                </Menu>
+            </Padding>
+            <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
+                {buildDeleteDialog({ closeModal: onCloseModal })}
+            </Modal>
+        </>;
+    }
+    const manageButton = () => {
+
     }
 
     const buildCard = () => {
@@ -64,18 +146,20 @@ const MyServiceViewCard = ({ index, data }) => {
                                         })}
                                     </Padding>
                                 </Row>
+                                {!isOwn ? <CaptionText>Status: {_status}</CaptionText> : <CaptionText>&#8203;</CaptionText>}
                                 <Style maxWidth='213px'>
                                     <Padding vertical='10px'>
                                         <CaptionText>{data['description']}</CaptionText>
                                     </Padding>
                                 </Style>
 
-                                <Padding vertical>{isOwn ? <ButtonText onClick={() => openSd() }>{t('dashboard.edit')}</ButtonText> : <></>}</Padding>
+                                <Padding vertical>{isOwn ? <ButtonText onClick={() => openSd()}>{t('dashboard.edit')}</ButtonText> : <></>}</Padding>
                                 <Padding vertical>{!isOwn ? <>
                                     <Row>
+                                        {buildManageButton()}
                                         <ButtonText>{isActivated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText>
-                                        <Style flexGrow='1'></Style>
-                                        <ButtonText>{t('dashboard.manage')}</ButtonText>
+
+
                                     </Row></> :
                                     <></>}
                                 </Padding>
@@ -92,7 +176,7 @@ const MyServiceViewCard = ({ index, data }) => {
 }
 
 MyServiceViewCard.propTypes = {
-    type: PropTypes.string,
+    itemType: PropTypes.string,
     index: PropTypes.number,
     isEditable: PropTypes.bool,
     data: PropTypes.object,
