@@ -58,6 +58,7 @@ docker-build:
   script:
     - mkdir -p /root/.kube
     - echo "${K8S_CONFIG}"  | base64 -d > /root/.kube/config
+    - helm delete gaia-x-${CI_PROJECT_NAME} -n gaia-x-portal --wait
     - helm upgrade --install gaia-x-${CI_PROJECT_NAME} deploy/helm/app --values deploy/helm/app/values.yaml -n gaia-x-portal --set image.repository="${REGISTRY_PATH}" --set image.name="${IMAGE_NAME}" --set image.tag=${TAG} --set fullnameOverride=${CI_PROJECT_NAME} --wait
 
 
