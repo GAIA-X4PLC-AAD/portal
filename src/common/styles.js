@@ -145,7 +145,11 @@ export const WrapColumn = styled(Column)`
 
 export const Style = styled.div`
     border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
-    border-bottom: ${props => props.borderBottom ? '1px solid #E9E9E9' : ''};
+    border-bottom: ${props => props.borderBottom ? `1px solid #E9E9E9` : ''};
+    border-bottom: ${props => props.shiftedBottomBorder ? `1px solid white` : ''};
+    overflow: ${props => props.overflow || ''};;
+    box-shadow: ${props => props.shiftedBottomBorder ? '40px 1px 0px 0px #e9e9e9' : ''};
+    /* clip-path: inset(-1px -2px 0px 0px); */
     flex-grow: ${props => props.flexGrow || 0};
     justify-content: ${props => props.justifyContent || ''};
     display: ${props => props.display || ''};
@@ -526,6 +530,7 @@ export const SliderBullet = styled.button`
 export const Padding = styled.div`
   padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
   padding-top: ${props => props.paddingTop || ''};
+  padding-bottom: ${props => props.paddingBottom || ''};
   padding-left: ${props => props.paddingLeft || ''};
   padding-right: ${props => props.paddingRight || ''};
   align-self: ${props => props.alignSelf || ''};

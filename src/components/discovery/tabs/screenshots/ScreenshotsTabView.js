@@ -12,7 +12,7 @@ const ScreenshotsTabView = (props,) => {
   const [slideImages, setSlideImages] = useState([]);
 
   useEffect(() => {
-    console.log(`ScreenshotsTabView, props.data: ${props.data}`)
+
     if (props.data !== undefined) {
       const _screenshots = props.data[0]['preview_imgs']
       setSlideImages(_screenshots)
@@ -33,7 +33,7 @@ const ScreenshotsTabView = (props,) => {
   })
 
   return (
-    <Style minWidth='100%'>
+    <Style maxWidth='760px'>
       <ImageGallery items={_images}
         showFullscreenButton={false}
         showBullets={true}

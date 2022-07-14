@@ -10,20 +10,41 @@ import PriceTab from "../tabs/priceTab/PriceTab";
 import DescriptionTab from "../tabs/description/DescriptionTab";
 import SampleRecordTab from "../tabs/SampleRecordTab/SampleRecordTab";
 import { CheckBox } from "../search/style";
-import { Image, Style } from "../../../common/styles";
+import { Column, Image, Padding, Row, Style } from "../../../common/styles";
 
 const DataTile = ({ input, id, t }) => {
 
     const type = "data";
 
+    const padTitle = ({ _titleView }) => {
+        return <Padding paddingTop='18px' paddingBottom='8px'>
+            {_titleView}
+        </Padding>
+    }
+
     const showComponent = () => {
         let _width = "100%"
         return (
             <>
-                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id, type: type })} title={<>{t("service-tile.details")}</>} titleTrailerPadding="12px" viewLeadingPadding="24px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} />
-                <ExpandableView initiallyExpanded={false} view={PriceTab({ id, type: type })} title={<>{t("service-tile.price")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} />
-                <ExpandableView initiallyExpanded={false} view={SampleRecordTab({ id })} title={<>{t("service-tile.sample")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} />
-                <ExpandableView initiallyExpanded={false} view={ContactTab({ id, type: type })} title={<>{t("service-tile.contact")}</>} titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} />
+                <ExpandableView initiallyExpanded={true} view={DescriptionTab({ id, type: type })}
+                    title={<>{padTitle({ _titleView: <>{t("service-tile.details")}</> })}</>}
+                    titleTrailerPadding="12px" viewLeadingPadding="24px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width}
+                    shiftedBottomBorder={true}
+                    borderBottom={false} />
+                <ExpandableView initiallyExpanded={false}
+                    view={PriceTab({ id, type: type })}
+                    title={<>{padTitle({ _titleView: <>{t("service-tile.price")}</> })}</>}
+                    titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width}
+                    shiftedBottomBorder={true} borderBottom={false} />
+                <ExpandableView initiallyExpanded={false} view={SampleRecordTab({ id })}
+                    title={<>{padTitle({ _titleView: <>{t("service-tile.sample")}</> })}</>}
+                    titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width}
+                    shiftedBottomBorder={true} borderBottom={false} />
+                <ExpandableView initiallyExpanded={false}
+                    view={ContactTab({ id, type: type })}
+                    title={<>{padTitle({ _titleView: <>{t("service-tile.contact")}</> })}</>}
+                    titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} 
+                    shiftedBottomBorder={false} borderBottom={false}/>
             </>
         )
     }
@@ -31,27 +52,46 @@ const DataTile = ({ input, id, t }) => {
     const showTileHeader = () => {
         return (
             <S.DiscoveryTile>
-                <S.DiscoveryTileHeader>
-                    <CheckBox type="checkbox" />
-                    <a href={"#" || input.ppr_url}>
-                        <Image src={input.logo} alt="Provider Logo" width='48px' height='48px' />
+                <Row alignItems='Center' justifyContent='start'>
+                    <Padding horizontal='28px' vertical='24px'><CheckBox type="checkbox" /></Padding>
+                    {/* LOGO */}
+                    <a href={"#" || input.services.ppr_url}>
+                        {/* <Image */}
+                        <Image src={input.logo} alt='Provider Logo' width='48px' height='48px' />
                     </a>
-                    <Style flexGrow='0'>
-                        <S.DiscoveryTileFirstRow width={'140px'}>{input.name}</S.DiscoveryTileFirstRow>
-                        <S.DiscoveryTileSecondRow>{input.ppr_name}</S.DiscoveryTileSecondRow>
+                    <Padding paddingLeft='62px' />
+
+                    <Row alignItems='Center' justifyContent='space-between'>
+                        {/* NAME */}
+                        <Column>
+                            <S.DiscoveryTileFirstRow width={'152px'}>{input.name}</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.ppr_name}</S.DiscoveryTileSecondRow>
+                        </Column>
+                        {/* SHORT DESCRIPTION */}
+                        <Padding paddingLeft='60px' />
+                        <Column>
+                            <S.DiscoveryTileFirstRow width={'80px'}>{t("service-tile.header.sortDescription")}</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.short_description}</S.DiscoveryTileSecondRow>
+                        </Column>
+                        <Padding paddingLeft='80px' />
+                        {/* LOCATION */}
+                        <Column>
+                            <S.DiscoveryTileFirstRow width={'120px'}>{t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.location}</S.DiscoveryTileSecondRow>
+                        </Column>
+                    </Row>
+                    {/* DETAILS */}
+                    <Style flexGrow='1'>
+
                     </Style>
-                    <div>
-                        <S.DiscoveryTileFirstRow>{t("service-tile.header.sortDescription")}</S.DiscoveryTileFirstRow>
-                        <S.DiscoveryTileSecondRow>{input.short_description}</S.DiscoveryTileSecondRow>
-                    </div>
-                    <div>
-                        <S.DiscoveryTileFirstRow>{t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
-                        <S.DiscoveryTileSecondRow>{input.location}</S.DiscoveryTileSecondRow>
-                    </div>
+
                     <S.DiscoveryDetailsButton>
                         {t("service-tile.details")}
                     </S.DiscoveryDetailsButton>
-                </S.DiscoveryTileHeader>
+                    <Padding paddingLeft='20px' />
+
+                </Row>
+
             </S.DiscoveryTile>
         );
     }
