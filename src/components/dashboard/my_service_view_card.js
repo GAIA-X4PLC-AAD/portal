@@ -6,14 +6,21 @@ import PropTypes from 'prop-types';
 
 import { Block } from "../expandable/style";
 import { Padding } from "../discovery/tabs/style";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { UPDATE_SELECTED_PAGE } from "../../actions/types";
 
 
 const MyServiceViewCard = ({ index, data }) => {
 
     const isActivated = data['is_activated']
     const isOwn = data['is_own']
+    const _id = data['id']
 
-    const { t, i18n } = useTranslation();
+    const { t, i18n } = useTranslation()
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const colItem = ({ title, caption, subtitle, }) => {
         return <Column>
@@ -23,6 +30,12 @@ const MyServiceViewCard = ({ index, data }) => {
             </Row>
             <CaptionText>{subtitle}</CaptionText>
         </Column>
+    }
+
+    const openSd = () => {
+
+        navigate(`/provide/confirm/${_id}`)
+        dispatch({ type: UPDATE_SELECTED_PAGE, page: 'provide' })
     }
 
     const buildCard = () => {
@@ -57,7 +70,7 @@ const MyServiceViewCard = ({ index, data }) => {
                                     </Padding>
                                 </Style>
 
-                                <Padding vertical>{isOwn ? <ButtonText>{t('dashboard.edit')}</ButtonText> : <></>}</Padding>
+                                <Padding vertical>{isOwn ? <ButtonText onClick={() => openSd() }>{t('dashboard.edit')}</ButtonText> : <></>}</Padding>
                                 <Padding vertical>{!isOwn ? <>
                                     <Row>
                                         <ButtonText>{isActivated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText>

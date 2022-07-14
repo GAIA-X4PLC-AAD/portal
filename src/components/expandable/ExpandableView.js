@@ -20,6 +20,9 @@ const ExpandableView = ({
     viewLeadingPadding = '0px',
     arrowColor = '#000094',
     width = 'fit-content',
+    maxWidth1='850px',
+    borderBottom=true,
+    shiftedBottomBorder=false,
     boxShadow,
 }) => {
     const [isExpanded, setIsExpanded] = useState(initiallyExpanded);
@@ -30,7 +33,7 @@ const ExpandableView = ({
     }
 
     return <S.Block border={border} boxShadow={boxShadow} width={width}>
-        
+
         {/* TITLE */}
         <S.ToggleButton
             onClick={() => { setIsExpanded(!isExpanded) }}
@@ -42,12 +45,15 @@ const ExpandableView = ({
         </S.ToggleButton>
 
         {/* BODY */}
-        <Style borderBottom={true}>
+        <Style borderBottom={borderBottom} shiftedBottomBorder={shiftedBottomBorder} 
+                overflow={'hidden'}>
             <Collapse isOpened={isExpanded}>
                 <Style
+                    maxWidth={maxWidth1}
                     borderTop={border}
-                    paddingLeft={viewLeadingPadding}
-                >{exapandableContent()}</Style>
+                    paddingLeft={viewLeadingPadding}>
+                    {exapandableContent()}
+                </Style>
             </Collapse>
         </Style>
     </S.Block>;
@@ -64,7 +70,10 @@ ExpandableView.propTypes = {
     viewLeadingPadding: PropTypes.string,
     arrowColor: PropTypes.string,
     boxShadow: PropTypes.string,
-    width: PropTypes.string
+    width: PropTypes.string,
+    maxWidth1: PropTypes.string,
+    borderBottom: PropTypes.bool,
+    shiftedBottomBorder: PropTypes.bool,
 }
 
 export default ExpandableView

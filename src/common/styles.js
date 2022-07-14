@@ -31,6 +31,23 @@ export const BlueButton = styled.button`
     }
 `;
 
+export const BlueLabel = styled.label`
+border: 2px solid #000094;
+border-radius: 4px 4px 4px 4px;
+font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
+letter-spacing: 0.25px;
+color: #000094;
+background-color: #fff;
+padding: 0.3em 2em;
+cursor: pointer;
+margin-left:1em;
+display: inline-block;
+:disabled {
+    cursor:default;
+    pointer-events: none;
+    opacity: 0.3; 
+}
+`;
 export const DropDownArrowUp = styled.div`
     content: url('/images/DropDownArrowUp.svg');
     margin: auto;
@@ -106,7 +123,9 @@ export const Row = styled.div`
     height: ${props => props.height || 'auto'};
     justify-content: ${props => props.justifyContent || ''};
     align-items: ${props => props.alignItems || ''};
-    gap: ${props => props.gap || 'unset'}
+    align-self: ${props => props.alignSelf || ''};
+    gap: ${props => props.gap || 'unset'};
+    position: ${props => props.position || 'unset'};
 `
 export const WrapRow = styled(Row)`
     flex-wrap: wrap`;
@@ -126,7 +145,11 @@ export const WrapColumn = styled(Column)`
 
 export const Style = styled.div`
     border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
-    border-bottom: ${props => props.borderBottom ? '1px solid #E9E9E9' : ''};
+    border-bottom: ${props => props.borderBottom ? `1px solid #E9E9E9` : ''};
+    border-bottom: ${props => props.shiftedBottomBorder ? `1px solid white` : ''};
+    overflow: ${props => props.overflow || ''};;
+    box-shadow: ${props => props.shiftedBottomBorder ? '40px 1px 0px 0px #e9e9e9' : ''};
+    /* clip-path: inset(-1px -2px 0px 0px); */
     flex-grow: ${props => props.flexGrow || 0};
     justify-content: ${props => props.justifyContent || ''};
     display: ${props => props.display || ''};
@@ -507,6 +530,7 @@ export const SliderBullet = styled.button`
 export const Padding = styled.div`
   padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
   padding-top: ${props => props.paddingTop || ''};
+  padding-bottom: ${props => props.paddingBottom || ''};
   padding-left: ${props => props.paddingLeft || ''};
   padding-right: ${props => props.paddingRight || ''};
   align-self: ${props => props.alignSelf || ''};
