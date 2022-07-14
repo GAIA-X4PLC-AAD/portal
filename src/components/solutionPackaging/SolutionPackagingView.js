@@ -23,8 +23,8 @@ const SolutionPackagingView = () => {
 
   
     useEffect(() => {
-        if(!slotsCopy)
-            setSlotsCopy();
+        if(!slotsCopy && slots ) 
+            setSlotsCopy(cloneArray(slots));
     }, [slots]);
 
     
@@ -121,7 +121,7 @@ const SolutionPackagingView = () => {
                 draggable={false}
                 responsive={responsive}
                 renderButtonGroupOutside={shouldDisplayNextPrev}
-                customButtonGroup={<NP bottom='510px'/>}
+                 customButtonGroup={<NP bottom='510px'/>}
                 >
                 {items.map((service,i) => {return (<SlotDetails service={service} 
                                 onRemove={()=>removeSlot(i)} 
