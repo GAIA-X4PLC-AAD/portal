@@ -56,7 +56,7 @@ const ServiceModalDetails = ({service, closeModal, onSelect}) => {
 
     const tabViews = [DescriptionTab({ id: service.id, type: 'services'}),
                       PriceTab({ id: service.id, type: 'services' , showButton:false}),
-                      ScreenshotsTab({ id: service.id, type: 'services' }),
+                      ScreenshotsTab({ serviceId: service.id, type: 'services' }),
                       ContactTab({ id: service.id, type: 'services' })];
     return (   
         <Modal width='fit-content'>
