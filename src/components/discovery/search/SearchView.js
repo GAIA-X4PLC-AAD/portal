@@ -32,16 +32,6 @@ const SearchView = ({type, onSelect, serviceId, slot}) => {
                     <Style maxWidth='313px'>
                         <SearchFilterFactory type={type} serviceId={serviceId} slot={slot}/>
                     </Style>
-<<<<<<< HEAD
-            </Column>
-            <Column maxWidth='100%'>
-                <SearchTerm type={type}/>
-
-                <Padding horizontal='12px' />
-                <Style maxWidth='900px'>
-                    <SearchContent type={type} onSelect={onSelect} serviceId={serviceId} slot={slot}/>
-                </Style>
-=======
 
                 </Column>
                 <Column maxWidth='100%'>
@@ -51,7 +41,6 @@ const SearchView = ({type, onSelect, serviceId, slot}) => {
                     <Style maxWidth='900px'>
                         <SearchContent type={type} />
                     </Style>
->>>>>>> 6c0b2c58a9c8eced34330e434a8fb5f37f73d6ff
 
                 </Column>
             </Row>

@@ -1,5 +1,5 @@
 import i18n from 'i18next';
-// import ICU from "i18next-icu";
+import ICU from "i18next-icu";
 
 
 import { initReactI18next } from 'react-i18next';
@@ -15,7 +15,7 @@ i18n
   .use(Backend)
   .use(LanguageDetector)
   .use(initReactI18next)
-  // .use(ICU)
+  .use(ICU)
   .init({
     detection: options,
     useSuspense: false,

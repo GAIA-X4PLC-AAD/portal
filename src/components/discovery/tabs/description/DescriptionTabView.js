@@ -4,11 +4,7 @@ import React, { useState, useEffect } from "react";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import { ColumnItem } from "./Common";
-<<<<<<< HEAD
-import { Image, Column, Style, Tag, BlueButton } from "../../../../common/styles";
-=======
-import { Image, Column, Style, Tag, Padding } from "../../../../common/styles";
->>>>>>> 6c0b2c58a9c8eced34330e434a8fb5f37f73d6ff
+import { Image, Column, Style, Tag, Padding, BlueButton } from "../../../../common/styles";
 import { Columns } from "../dataPreview/style";
 import DataPreview from "../dataPreview/DataPreview";
 import { useNavigate } from "react-router-dom";
@@ -80,18 +76,6 @@ const DescriptionTabView = (props,) => {
 
   return (
     <>
-<<<<<<< HEAD
-      <Column>
-        <S.ExpandedContainer>
-          <Image src={`${details['img_preview_url']}`} width='279px' height='328px' />
-          <S.VerticalContainer horizontal='8px'>
-            <S.Padding horizontal='8px'>
-              <S.Title>{`${details['name']}`}</S.Title>
-              <S.Body>{`${details['description']}`}</S.Body>
-              {showBookButton()}
-              <S.Padding vertical='8px' horizontal='0px'>
-                <S.Subtitle>TAGS</S.Subtitle>
-=======
       <Padding paddingTop='16px' paddingBottom='26px'>
         <Column>
           <S.ExpandedContainer>
@@ -100,6 +84,7 @@ const DescriptionTabView = (props,) => {
               <S.Padding horizontal='8px'>
                 <S.Title>{`${details['name']}`}</S.Title>
                 <S.Body>{`${details['description']}`}</S.Body>
+                {showBookButton()}
 
                 <S.Padding vertical='8px' horizontal='0px'>
                   <S.Subtitle>TAGS</S.Subtitle>
@@ -121,7 +106,6 @@ const DescriptionTabView = (props,) => {
                   <ColumnItem title='SECURITY' subtitle={`${details['security']}`} />
                   <ColumnItem title='CATEGORY' subtitle={`${details['category']}`} />
                 </S.HorizontalContainer>
->>>>>>> 6c0b2c58a9c8eced34330e434a8fb5f37f73d6ff
               </S.Padding>
             </S.VerticalContainer>
           </S.ExpandedContainer>
