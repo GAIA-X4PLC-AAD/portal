@@ -43,7 +43,6 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
                 if(searchTerm.includes(chip.term)) return true;
                 return false;
             },false);
-            console.log('chipAdded', chipAdded);
             if(chipAdded || searchTerm==='') callApi();
         }
     , [searchTerm]);
