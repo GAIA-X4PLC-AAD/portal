@@ -19,6 +19,8 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import RegisterDisplayVC from './components/registration/RegisterDisplayVC';
 import RegisterComplianceCheck from './components/registration/RegisterComplianceCheck';
+import ProvideOverview from './components/provide/ProvideOverview';
+
 import { createBrowserHistory } from "history";
 import Provider from './components/account/Provider';
 
@@ -28,9 +30,10 @@ import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
 import DashboardPage from './components/dashboard/dashboard_page';
 import OnboardingPage from './components/onboarding/onboarding_page';
-import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
+import ProvideAttributes from './components/provide/ProvideAttributes';
 import { Column, Padding } from './common/styles';
 import Article from './components/article/Article';
+import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
@@ -49,7 +52,13 @@ const App = (props) => {
           <Header />
           <Column>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={
+                <Column>
+                  <Home />
+                  {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
+                </Column>
+              }
+              />
               <Route path="/data" element={ViewContainer(<SearchView type="data" />)} />
               <Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
@@ -76,13 +85,13 @@ const App = (props) => {
               <Route path="/dashboard" element={ViewContainer(<DashboardPage />)} />
               <Route path="/onboarding" element={ViewContainer(<OnboardingPage />)} />
               <Route path="/sp/:id" element={ViewContainer(<SolutionPackagingView />)} />
+              <Route path="/provide/start" element={ViewContainer(<ProvideOverview />)} />
+              <Route path="/provide/confirm/:id" element={ViewContainer(<ProvideAttributes />)} />
             </Routes>
 
-            {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
 
           </Column>
           <div className='home-screen'>
-
             <div className='footer-container'>
               <div className='footer-flex-col'>
                 <div className='footer-banner'>

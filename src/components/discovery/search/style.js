@@ -117,23 +117,28 @@ export const Button = S.BlueButton;
 
 export const AdvancedSearch = styled.div`
     padding-top: 8px;
-    margin-left:auto;
+    /* margin-left:auto; */
+    margin-left: 12px;
     font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
     line-height: 20px;
-
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
     color: ${props => props.color || '#000094'};
+    ${props => props.displayAbsolute ? `
+    position: absolute;
+    right: -16px;
+    transform: translateX(100%);
+  `: ''}
 `;
 
 export const AdvancedSearchText = styled.div`
     font-family: 'Titillium Web';
     font-style: normal;
-    margin: 0px 12px;
+    margin: auto 12px;
     font-weight: 700;
     font-size: 18px;
     line-height: 20px;

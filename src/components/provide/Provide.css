@@ -1,0 +1,73 @@
+.provide-header {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.hidden {
+    display: none;
+}
+
+.provide-header-description {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.provide-tab {
+    box-shadow: 0px 5px 10px rgba(29, 36, 48, 0.15);
+    border-radius: 4px;
+
+    width: 140px;
+    height: 64px;
+
+    margin-right: 15px;
+}
+
+.provide-tab-inside {
+    background: #E5E5E5;
+
+    /* Body Small Bold */
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 40px;
+    /* identical to box height, or 133% */
+    letter-spacing: 0.25px;
+
+    /* Text/White */
+    color: #FFFFFF;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    margin-top: 12px;
+
+}
+
+.provide-tab-inside-active {
+    background: #000094;
+}
+
+.provide-upload {
+    text-align: left;
+}
+
+.provide-upload-file {
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.provide-button-area {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.provide-attribute-table {
+    margin: auto;
+    min-width: 470px;
+}
+
+.provide-attribute-table thead {
+ color: #bababa;
+}

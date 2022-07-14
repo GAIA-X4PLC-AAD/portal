@@ -31,6 +31,23 @@ export const BlueButton = styled.button`
     }
 `;
 
+export const BlueLabel = styled.label`
+border: 2px solid #000094;
+border-radius: 4px 4px 4px 4px;
+font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
+letter-spacing: 0.25px;
+color: #000094;
+background-color: #fff;
+padding: 0.3em 2em;
+cursor: pointer;
+margin-left:1em;
+display: inline-block;
+:disabled {
+    cursor:default;
+    pointer-events: none;
+    opacity: 0.3; 
+}
+`;
 export const DropDownArrowUp = styled.div`
     content: url('/images/DropDownArrowUp.svg');
     margin: auto;
@@ -106,7 +123,9 @@ export const Row = styled.div`
     height: ${props => props.height || 'auto'};
     justify-content: ${props => props.justifyContent || ''};
     align-items: ${props => props.alignItems || ''};
-    gap: ${props => props.gap || 'unset'}
+    align-self: ${props => props.alignSelf || ''};
+    gap: ${props => props.gap || 'unset'};
+    position: ${props => props.position || 'unset'};
 `
 export const WrapRow = styled(Row)`
     flex-wrap: wrap`;
