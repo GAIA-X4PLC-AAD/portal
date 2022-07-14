@@ -4,7 +4,11 @@ import React, { useState, useEffect } from "react";
 import * as S from '../style';
 import PropTypes from 'prop-types';
 import { ColumnItem } from "./Common";
+<<<<<<< HEAD
 import { Image, Column, Style, Tag, BlueButton } from "../../../../common/styles";
+=======
+import { Image, Column, Style, Tag, Padding } from "../../../../common/styles";
+>>>>>>> 6c0b2c58a9c8eced34330e434a8fb5f37f73d6ff
 import { Columns } from "../dataPreview/style";
 import DataPreview from "../dataPreview/DataPreview";
 import { useNavigate } from "react-router-dom";
@@ -40,7 +44,7 @@ const DescriptionTabView = (props,) => {
               onDetailsClick: () => { return; }
             }
             return <Style marginLeft={index == 0 ? '0px' : '10px'} marginTop={'36px'} key={record.id}>
-              <DataPreview data={parsed} width='240px' minHeight='' shouldShowDetailsButton={false} />
+              <DataPreview data={parsed} width='230px' minHeight='' shouldShowDetailsButton={false} />
             </Style>
           })
           }
@@ -76,6 +80,7 @@ const DescriptionTabView = (props,) => {
 
   return (
     <>
+<<<<<<< HEAD
       <Column>
         <S.ExpandedContainer>
           <Image src={`${details['img_preview_url']}`} width='279px' height='328px' />
@@ -86,26 +91,45 @@ const DescriptionTabView = (props,) => {
               {showBookButton()}
               <S.Padding vertical='8px' horizontal='0px'>
                 <S.Subtitle>TAGS</S.Subtitle>
+=======
+      <Padding paddingTop='16px' paddingBottom='26px'>
+        <Column>
+          <S.ExpandedContainer>
+            <Image src={`${details['img_preview_url']}`} width='279px' height='328px' />
+            <S.VerticalContainer horizontal='8px'>
+              <S.Padding horizontal='8px'>
+                <S.Title>{`${details['name']}`}</S.Title>
+                <S.Body>{`${details['description']}`}</S.Body>
+
+                <S.Padding vertical='8px' horizontal='0px'>
+                  <S.Subtitle>TAGS</S.Subtitle>
+                </S.Padding>
+
+                <S.HorizontalContainer>
+                  {details['tags'] && details['tags'].map((elem, i) => { return (<Tag key={`${elem}:${i}`}>{elem}</Tag>) })}
+                </S.HorizontalContainer>
+
+                <S.HorizontalContainer>
+                  {details['certificates'] && details['certificates'].map((elem, i) => { return (<Tag key={`${elem}:${i}`}>{elem}</Tag>) })}
+                </S.HorizontalContainer>
+
+                <S.HorizontalContainer>
+                  <ColumnItem title='STACK' subtitle={`${details['stack']}`} />
+                  <ColumnItem title='DATE' subtitle={`${details['last_updated']}`} />
+                  <ColumnItem title='TERMS OF USE' subtitle={`${details['terms_of_use']}`} />
+                  <ColumnItem title='LOCATION' subtitle={`${details['location']}`} />
+                  <ColumnItem title='SECURITY' subtitle={`${details['security']}`} />
+                  <ColumnItem title='CATEGORY' subtitle={`${details['category']}`} />
+                </S.HorizontalContainer>
+>>>>>>> 6c0b2c58a9c8eced34330e434a8fb5f37f73d6ff
               </S.Padding>
+            </S.VerticalContainer>
+          </S.ExpandedContainer>
 
-              <S.HorizontalContainer>
-                {details['tags'] && details['tags'].map((elem, i) => { return (<Tag key={`${elem}:${i}`}>{elem}</Tag>) })}
-              </S.HorizontalContainer>
+          {buildCompositeServices()}
 
-              <S.HorizontalContainer>
-                <ColumnItem title='STACK' subtitle={`${details['stack']}`} />
-                <ColumnItem title='DATE' subtitle={`${details['last_updated']}`} />
-                <ColumnItem title='TERMS OF USE' subtitle={`${details['terms_of_use']}`} />
-                <ColumnItem title='LOCATION' subtitle={`${details['location']}`} />
-                <ColumnItem title='CATEGORY' subtitle={`${details['category']}`} />
-              </S.HorizontalContainer>
-            </S.Padding>
-          </S.VerticalContainer>
-        </S.ExpandedContainer>
-
-        {buildCompositeServices()}
-
-      </Column>
+        </Column>
+      </Padding>
     </>
   )
 }

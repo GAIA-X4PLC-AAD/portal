@@ -8,19 +8,19 @@ variables:
     IMAGE_NAME: ${CI_PROJECT_NAME}/portal-${CI_PROJECT_NAME}
     TAG: ${CI_PIPELINE_ID}
     CI: "false"
-    REACT_APP_EDGE_API_URI: "https://ybgaiax.me"
+    REACT_APP_EDGE_API_URI: "https://ybgaiax.me/api"
 
 
 application-build:
   stage: build
   image:
-    name: node:17-alpine3.14
+    name: registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/demo/node:17-alpine3.14
   artifacts:
     paths:
       - build
   only:
     refs:
-      - testPipeLineHelm
+      - main
   script:
     - npm install
     - npm run build
@@ -36,7 +36,7 @@ docker-build:
     entrypoint: [ "" ]
   only:
     refs:
-      - testPipeLineHelm
+      - main
   script:
     - mkdir -p deploy/docker/output
     - mv build deploy/docker/output/build
@@ -53,11 +53,12 @@ docker-build:
   stage: deploy
   only:
     refs:
-      - testPipeLineHelm
-  image: alpine/k8s:1.21.12
+      - main
+  image: registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/demo/alpine/k8s:1.21.12
   script:
     - mkdir -p /root/.kube
     - echo "${K8S_CONFIG}"  | base64 -d > /root/.kube/config
+    - helm delete gaia-x-${CI_PROJECT_NAME} -n gaia-x-portal --wait
     - helm upgrade --install gaia-x-${CI_PROJECT_NAME} deploy/helm/app --values deploy/helm/app/values.yaml -n gaia-x-portal --set image.repository="${REGISTRY_PATH}" --set image.name="${IMAGE_NAME}" --set image.tag=${TAG} --set fullnameOverride=${CI_PROJECT_NAME} --wait
 
 

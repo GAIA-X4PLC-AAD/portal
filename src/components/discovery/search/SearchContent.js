@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import LoadingView from "../../loading_view/LoadingView";
 import PropTypes from 'prop-types';
 import TileFactory from "../TileFactory";
-import { HeaderTitle, Row, Column, Style } from "../../../common/styles";
+import { HeaderTitle, Row, Column, Style, Padding } from "../../../common/styles";
 import { useTranslation } from "react-i18next";
 import * as S from "./style";
 import SearchSort from "./SearchSort";
@@ -24,13 +24,13 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
    
     const { t, i18n } = useTranslation();
 
-    const searchRefresh = () =>{
-        setRefresh(refresh+1);
+    const searchRefresh = () => {
+        setRefresh(refresh + 1);
     }
 
     const showData = (data) => {
         if (!data || !data.data || data.data.length === 0) return NoResults();
-        else { 
+        else {
             let _data = data.data
             return _data.map((item) => { return (<TileFactory data={item} id={`${item['id']}`} key={`${item['id']}`} searchRefresh={searchRefresh} />) })
         }
@@ -114,21 +114,20 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
         return (<HeaderTitle>{t(`discovery.lists.${type}`)}</HeaderTitle>);
     }
 
-
     const loadData = ({ data }) => {
         return (<>
             {showHeader(type)}
             <SearchSort type={type} data={data}/>
             {type==='solution_pkg'?showCarousel(data):showData(data)}
-            <Style display='flex' justifyContent='center'>
+            <Padding vertical='12px'>
                 <NextPrevButtons data={data} />
-            </Style>
+            </Padding>
         </>
         );
     }
 
     const getURL = (type) => {
-        switch(type) {
+        switch (type) {
             case 'participant': return `${PROVIDER_URL}`;
             case 'management': return `${MANAGEMENT_URL}`;
             case 'solution_pkg': return `${SP_URL}`;
@@ -138,7 +137,7 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
 
 
     return (<LoadingView url={`${getURL(type)}`}
-        successView={loadData}  key={URL+refresh}/>);
+        successView={loadData} key={URL + refresh} />);
 }
 
 SearchContent.propTypes = {

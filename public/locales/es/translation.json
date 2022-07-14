@@ -3,27 +3,27 @@
         "main-title": "main title"
     },
     "left-menu": {
-        "home": "Home",
-        "services": "Services",
-        "data": "Data",
-        "provider": "Provider",
-        "provide": "Provide",
-        "help": "Help",
-        "search": "Search",
+        "home": "Inicio",
+        "services": "Servicios",
+        "data": "Datos",
+        "provider": "Proveedor",
+        "provide": "Proporcionar",
+        "help": "Ayuda",
+        "search": "Busque en",
         "logo-alt-text": "Gaia-x logo image",
-        "dashboard": "Dashboard",
-        "admin": "Admin",
-        "logout": "Logout",
-        "user-info": "User Info",
-        "change-language": "Language",
-        "about": "About",
-        "support": "Support",
+        "dashboard": "Tablero de mandos",
+        "admin": "Administración",
+        "logout": "Cierre de sesión",
+        "user-info": "Información del usuario",
+        "change-language": "Idioma",
+        "about": "Acerca de",
+        "support": "Soporte",
         "english": "English",
         "spanish": "Spanish",
         "german": "German",
-        "close": "Close",
-        "choose-language": "Language",
-        "select-system-language": "Please select a system language"  
+        "close": "Cerrar",
+        "choose-language": "Idioma",
+        "select-system-language": "Seleccione un idioma del sistema"  
     },
     "dashboard": {
         "reporting": "Reporting",
@@ -32,23 +32,16 @@
         "solution_packages": "My Solution Packages",
         "activate": "Activate",
         "deactivate": "Deactivate",
-        "edit": "Edit",
-        "manage": {
-            "manage": "Manage",
-            "create": "Create",
-            "edit": "Edit",
-            "download-logs": "Download Logs",
-            "delete": "Delete"
-        }
+        "edit": "Edit"
     },
     "top-menu": {
-        "help": "Help",
-        "signin": "Sign in",
-        "signout": "Sign out",
-        "register": "Sign Up"
+        "help": "Ayuda",
+        "signin": "Acceder",
+        "signout": "Firmar la salida",
+        "register": "Registro"
     },
     "article": {
-        "what-is-new": "What's new",
+        "what-is-new": "Qué hay de nuevo",
         "what-is-new-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
         "what-is-gaiax": "What is Gaia-X?",
         "what-is-gaiax-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
@@ -58,12 +51,12 @@
     "home": {
         "welcome.title": "Welcome to GAIA-X",
         "welcome.subtitle": "A federated Data Infrastructure for Europe",
-        "search_placeholder": "Search...",
-        "advanced": "Advanced",
-        "not": "Not",
-        "provider": "Provider",
-        "storage": "Storage",
-        "service": "Service",
+        "search_placeholder": "Buscar...",
+        "advanced": "Avanzado",
+        "not": "No",
+        "provider": "Proveedor",
+        "storage": "Almacenamiento",
+        "service": "Servicio",
         "compute": "Compute"
     },
 
@@ -193,8 +186,7 @@
         "lists": {
             "data": "Data",
             "services": "Services",
-            "ppr": "Provider",
-            "solution_pkg": "Select your service"
+            "ppr": "Provider"
         },
         "search": {
             "filter": "Filter",
@@ -207,10 +199,7 @@
             "chip.text.service": "Service",
             "chip.filter.service": "SERVICE=",
             "chip.text.compute": "Compute",
-            "chip.filter.compute": "COMPUTE=",
-            "noResults": "No results found",
-            "noResultsMessage": "Sorry, we couldn’t find any matching results. Try broadening your filters",
-            "advance": "Advanced Search"
+            "chip.filter.compute": "COMPUTE="
         }
     },
     "account": {
@@ -271,49 +260,5 @@
             "removeUserHeader": "Remove user",
             "removeUserMessage": "are you sure do you want to remove user {{userName}}?"
         }
-    },
-    "admin": {
-        "participant" : "Participants",
-        "message-participant": "Lorem ipsum dolor si jet subtitle",
-        "management" : "Management",
-        "message-management": "Lorem ipsum dolor si jet subtitle",
-        "registration_type" : "Registration type",
-        "admin_ppr" : "Provider",
-        "admin_pcr" : "Consumer",
-        "admin_np" : "Natural person",
-        "request_type": "Request type",
-        "pr_cred": "Participant credentials",
-        "v_cred": "Verified credentials",
-        "sd": "Self-Description",
-        "location": "Location",
-        "details": "Details",
-        "sort-direction-ASC": "Sort: A-Z",
-        "sort-direction-DESC": "Sort: Z-A",
-        "attachments": "Attachments",
-        "approve": "Approve",
-        "deny": "Deny"
-    },
-    "solution_pkg": {
-        "solutionPackaging": "Solution Packaging",
-        "solutionPackagingSubtitle": "Lorem ipsum dolor si jet subtitle",
-        "a_s": "{as, plural, =1 {1 available service} other {# available services}}",
-        "cancel": "Cancel",
-        "select": "Select",
-        "details":"Details",
-        "price": "Price",
-        "screenshots": "Screenshots",
-        "contact": "Contacts",
-        "book": "Book",
-        "reset": "Reset",
-        "save": "Save",
-        "remove": "Remove",
-        "add": "Add",
-        "selectMessage": "Select...",
-        "description": "Description",
-        "features": "FEATURES",
-        "stack": "STACK",
-        "location": "LOCATION",
-        "lastUpdated": "LAST UPDATED"
     }
 }
-

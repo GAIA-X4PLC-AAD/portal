@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { signOut, signIn } from "../../actions";
+import { signOut } from "../../actions";
 
 import { useNavigate } from 'react-router-dom';
 
@@ -13,11 +13,12 @@ import * as S from './style';
 import CenterBar from "./CenterBar";
 
 import PropTypes from 'prop-types';
+import { Row } from "../../common/styles";
 
 function Header(props) {
     const { t, } = useTranslation();
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const handleSignOut = () => {
         dispatch(signOut())
@@ -34,6 +35,7 @@ function Header(props) {
         navigate('/register')
     };
 
+
     return (
         <>
             <S.TopMenu >
@@ -42,10 +44,10 @@ function Header(props) {
                         <img src="/images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />
                     </Link>
                 </S.TopMenuLogo>
-                <CenterBar />
-                <S.TopMenuSignIn>
+                <CenterBar  />
+                <Row>
                     <SignInBar handleSignOut={handleSignOut} handleSignIn={handleSignIn} handleRegister={handleRegister} />
-                </S.TopMenuSignIn>
+                </Row>
 
             </S.TopMenu>
         </>

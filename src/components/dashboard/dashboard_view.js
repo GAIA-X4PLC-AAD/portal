@@ -41,7 +41,7 @@ const DashboardView = () => {
     const buildPlot1 = () => {
         const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/statistics`;
 
-        return <PlotLoadingView url={_myDatasetsUrl} title="testing"/>
+        return <PlotLoadingView url={_myDatasetsUrl} title="testing" />
     }
 
     const buildList = () => {
@@ -53,9 +53,9 @@ const DashboardView = () => {
             <>
                 {/* <HeaderTitle>{t(`dashboard.reporting`)}</HeaderTitle> */}
                 {buildPlot1()}
-                {ServicesLoadingListView({ url: _myServicesUrl, title: t('dashboard.my_services') })}
-                {ServicesLoadingListView({ url: _myDatasetsUrl, title: t('dashboard.my_data_sets') })}
-                {ServicesLoadingListView({ url: _myDatasetsUrl, title: t('dashboard.solution_packages') })}
+                {ServicesLoadingListView({ url: _myServicesUrl, title: t('dashboard.my_services'), type: 'services' })}
+                {ServicesLoadingListView({ url: _myDatasetsUrl, title: t('dashboard.my_data_sets'), type: 'data' })}
+                {ServicesLoadingListView({ url: _myDatasetsUrl, title: t('dashboard.solution_packages'), type: 'nodes' })}
             </>
         );
     }
@@ -80,7 +80,7 @@ const ServicesListView = (props,) => {
     }, [props.data]);
 
     const itemsViews = _items.map((element, _index) => {
-        return <MyServiceViewCard key={`${element['id']}`} data={element} />
+        return <MyServiceViewCard key={`${element['id']}`} data={element} itemType={props.params['type']}/>
     })
 
     const shouldDisplayNextPrev = _items.length > 3;
@@ -96,7 +96,6 @@ const ServicesListView = (props,) => {
             customButtonGroup={<NextPrevButtons />}>
             {(_items !== undefined || _items != null) ? itemsViews : <></>}
         </Carousel>
-
     </>;
 }
 
@@ -106,14 +105,14 @@ ServicesListView.propTypes = {
     params: PropTypes.object,
 }
 
-const ServicesLoadingListView = ({ url, title, }) => {
+const ServicesLoadingListView = ({ url, title, type}) => {
 
     return (
         <>
             <LoadingView
                 url={url}
                 successView={ServicesListView}
-                params={{ 'title': title}}
+                params={{ 'title': title, 'type': type }}
             />
         </>
     )
@@ -122,6 +121,7 @@ const ServicesLoadingListView = ({ url, title, }) => {
 ServicesLoadingListView.propTypes = {
     url: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
 }
 
 export default DashboardView;

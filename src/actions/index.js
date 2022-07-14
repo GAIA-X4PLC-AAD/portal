@@ -1,4 +1,4 @@
-import { SIGN_IN_MENU, NOT_SIGN_IN_MENU, SIGN_IN, SIGN_OUT, UPDATE_SEARCH_FILTER_CRITERIA, UPDATE_SEARCH_PAGE_NUMBER, UPDATE_SEARCH_TYPE, UPDATE_SEARCH_FROM_HOME, UPDATE_SEARCH_TYPE_AND_TERM } from "./types";
+import { SIGN_IN_MENU, NOT_SIGN_IN_MENU, SIGN_IN, SIGN_OUT, UPDATE_SEARCH_FILTER_CRITERIA, UPDATE_SEARCH_PAGE_NUMBER, UPDATE_SEARCH_TYPE, UPDATE_SEARCH_FROM_HOME, UPDATE_SEARCH_TYPE_AND_TERM, SET_DESCRIPTOR_FILE, RESET_DESCRIPTOR_FILE } from "./types";
 
 
 export const signInMenuEnter = () => {
@@ -22,22 +22,30 @@ export const signOut = () => {
 };
 
 export const updateFilterCriteria = (filterCriteria) => {
-    return {type: UPDATE_SEARCH_FILTER_CRITERIA, filterCriteria};
+    return { type: UPDATE_SEARCH_FILTER_CRITERIA, filterCriteria };
 };
 
 export const updatePageNumber = (pageNumber) => {
-    return {type: UPDATE_SEARCH_PAGE_NUMBER, pageNumber};
+    return { type: UPDATE_SEARCH_PAGE_NUMBER, pageNumber };
 };
 
 export const updateSearchType = (type) => {
-    return {type: UPDATE_SEARCH_TYPE, searchType: type};
+    return { type: UPDATE_SEARCH_TYPE, searchType: type };
 };
 
 export const updateSeartTypeWithTerm = (type, term) => {
-    return {type: UPDATE_SEARCH_TYPE_AND_TERM, searchType: type, searchTerm:term};
+    return { type: UPDATE_SEARCH_TYPE_AND_TERM, searchType: type, searchTerm: term };
 };
 
 
 export const updateSearchFromHome = (searchTerm) => {
-    return {type: UPDATE_SEARCH_FROM_HOME, searchTerm: searchTerm}
+    return { type: UPDATE_SEARCH_FROM_HOME, searchTerm: searchTerm }
+}
+
+export const setDescriptorFile = (file, parsed_descriptor) => {
+    return { type: SET_DESCRIPTOR_FILE, file: file, parsed_descriptor: parsed_descriptor }
+}
+
+export const resetDescriptorFile = () => {
+    return { type: RESET_DESCRIPTOR_FILE }
 }

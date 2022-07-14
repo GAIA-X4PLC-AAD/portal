@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
+
 
 export const CancelButton = styled.button`
     border: 2px solid #e8e8e8;
@@ -27,6 +28,43 @@ export const CancelButtonSmall = styled.button`
 
 
 export const BlueButton = styled.button`
+    border: 2px solid #000094;
+    border-radius: 4px 4px 4px 4px;
+    font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
+    letter-spacing: 0.25px;
+    color: #000094;
+    background-color: #fff;
+    padding: 0.3em 2em;
+    cursor: pointer;
+    margin-left:${props => props.marginLeft || '1em'};
+    :disabled {
+        cursor:default;
+        pointer-events: none;
+        opacity: 0.3; 
+    }
+    `;
+    export const BlueButtonSmall = styled.button`
+    border: 2px solid #000094;
+    border-radius: 4px 4px 4px 4px;
+    font: 700 14px/1.11 "Titillium Web", Helvetica, Arial, serif;
+    letter-spacing: 0.25px;
+    color: #000094;
+    background-color: #fff;
+    padding: 0.3em 2em;
+    cursor: pointer;
+    margin-left:${props => props.marginLeft || '1em'};
+    margin-top:15px;
+    min-width: 65px;
+    text-align: center;
+    display: inline-block;
+    :disabled {
+        cursor:default;
+        pointer-events: none;
+        opacity: 0.3; 
+    }
+    `;
+
+export const BlueUploadLabel = styled.label`
 border: 2px solid #000094;
 border-radius: 4px 4px 4px 4px;
 font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
@@ -35,29 +73,17 @@ color: #000094;
 background-color: #fff;
 padding: 0.3em 2em;
 cursor: pointer;
-margin-left:${props => props.marginLeft || '1em'};
+margin-top:15px;
+min-width: 65px;
+text-align: center;
+display: inline-block;
 :disabled {
     cursor:default;
     pointer-events: none;
     opacity: 0.3; 
 }
 `;
-export const BlueButtonSmall = styled.button`
-border: 2px solid #000094;
-border-radius: 4px 4px 4px 4px;
-font: 700 14px/1.11 "Titillium Web", Helvetica, Arial, serif;
-letter-spacing: 0.25px;
-color: #000094;
-background-color: #fff;
-padding: 0.3em 2em;
-cursor: pointer;
-margin-left:${props => props.marginLeft || '1em'};
-:disabled {
-    cursor:default;
-    pointer-events: none;
-    opacity: 0.3; 
-}
-`;
+
 export const DropDownArrowUp = styled.div`
     content: url('/images/DropDownArrowUp.svg');
     margin: auto;
@@ -72,6 +98,27 @@ export const DropDownArrowDown = styled.div`
     height:100%;
 `;
 
+export const DropDownArrowDownSmall = styled.div`
+    content: url('/images/DropDownArrowDown.svg');
+    margin: auto;
+    object-fit:none;
+
+    transform: scale(0.5);
+`;
+
+export const ArrowLeft = styled.div`
+    content: url('/images/DropDownArrowDown.svg');
+    transform: rotate(90deg);
+    /* filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%); */
+`;
+
+export const ArrowRight = styled.div`
+    content: url('/images/DropDownArrowDown.svg');
+
+
+    transform: rotate(270deg)
+`;
+
 export const RedTextClickable = styled.div`
     font-family: 'Titillium Web';
     font-style: normal;
@@ -81,6 +128,16 @@ export const RedTextClickable = styled.div`
     min-width: 1px;
     color: #EE1D23;
     cursor: pointer;
+`;
+
+export const RedText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 1px;
+    color: #EE1D23;
 `;
 
 export const BlueTextClickable = styled.div`
@@ -112,7 +169,9 @@ export const Row = styled.div`
     height: ${props => props.height || 'auto'};
     justify-content: ${props => props.justifyContent || ''};
     align-items: ${props => props.alignItems || ''};
-    gap: ${props => props.gap || 'unset'}
+    align-self: ${props => props.alignSelf || ''};
+    gap: ${props => props.gap || 'unset'};
+    position: ${props => props.position || 'unset'};
 `
 export const WrapRow = styled(Row)`
     flex-wrap: wrap`;
@@ -132,7 +191,11 @@ export const WrapColumn = styled(Column)`
 
 export const Style = styled.div`
     border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
-    border-bottom: ${props => props.borderBottom ? '1px solid #E9E9E9' : ''};
+    border-bottom: ${props => props.borderBottom ? `1px solid #E9E9E9` : ''};
+    border-bottom: ${props => props.shiftedBottomBorder ? `1px solid white` : ''};
+    overflow: ${props => props.overflow || ''};;
+    box-shadow: ${props => props.shiftedBottomBorder ? '40px 1px 0px 0px #e9e9e9' : ''};
+    /* clip-path: inset(-1px -2px 0px 0px); */
     flex-grow: ${props => props.flexGrow || 0};
     justify-content: ${props => props.justifyContent || ''};
     display: ${props => props.display || ''};
@@ -161,7 +224,7 @@ export const Style = styled.div`
     text-align: ${props => props.textAlign || ''};
     overflow-wrap: ${props => props.overflowWrap || ''};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
-    /* border-radius: 4px; */
+    border-radius: ${props => props.borderRadius || ''};
 `
 
 export const HeaderTitle = styled.div`
@@ -181,8 +244,8 @@ export const Image = styled.img`
   width: ${props => props.width || ''};
   height: ${props => props.height || ''};
   object-fit: ${props => props.objectFit || 'cover'};
-  object-position: ${props=> props.objectPosition || '50% 50%'}
-  /* height: fit-content; */
+  object-position: ${props => props.objectPosition || '50% 50%'};
+
   max-width: ${props => props.maxWidth || ''};
   min-width: ${props => props.minWidth || ''};
   filter: ${props => props.filter || ''};;
@@ -190,7 +253,6 @@ export const Image = styled.img`
 
 
 export const BodySmallBoldText = styled.div`
-<<<<<<< HEAD
 font-family: 'Titillium Web';
 font-style: normal;
 font-weight: 700;
@@ -251,17 +313,20 @@ export const Circle = styled.div`
     width: ${props => props.radius || '50px'};
     min-width: ${props => props.radius || '50px'};
     height: ${props => props.radius || '50px'};
-
+    cursor: ${props => props.isButton ? 'pointer' : ''};
     justify-content: center;
-    background-color: #F9F9F9;
+    background-color: ${props => props.backgroundColor || '#F9F9F9'};
     /* clip-path: circle(); */
     background: ${props => props.background || '#F9F9F9'};
 
-    border: 1px solid ${props => props.borderColor || '#E9E9E9'};
-    border-radius: 50%;
+    border: ${props => props.borderThickness || '1px'} solid ${props => props.borderColor || '#E9E9E9'};
+    border-radius: ${props => props.borderRadius || '50%' } ;
+    background-image: url(${props => props.backgroundImage || ''});
+    background-size: contain;
 `
 
 export const ButtonText = styled.div`
+    border-bottom: ${props => props.selected ? '4px solid #000094' : '4px solid #0000'}; 
     font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 700;
@@ -306,7 +371,6 @@ export const BodyText = styled.div`
     font-size: 18px;
     line-height: 24px;
     letter-spacing: 0.25px;
-    color: #2A2A2A;
 
     /* identical to box height, or 133% */
 
@@ -314,6 +378,7 @@ export const BodyText = styled.div`
 
     /* greyscale/dark */
 
+    text-align: ${props => props.textAlign || ''};
     color: ${props => props.color || '#4B4B4B'};
 `;
 
@@ -392,8 +457,6 @@ export const MasterButton = styled.div`
     font-size: 18px;
     line-height: 20px;
     /* identical to box height, or 111% */
-
-
     display: flex;
     align-items: center;
     text-align: center;
@@ -436,7 +499,7 @@ export const OutlineButton = styled.div`
     align-items: center;
     text-align: center;
     letter-spacing: 0.25px;
-
+    align-self: center;
     /* Background/Primary */
     cursor: pointer;
     color: ${props => props.disabled ? '#1C0E15' : '#000094'}
@@ -464,13 +527,15 @@ export const TextInput = styled.input`
 
     ::placeholder {}
 `
+
 export const H2Text = styled.div`
-font-family: 'Titillium Web';
-font-style: normal;
-font-weight: 700;
-font-size: 36px;
-line-height: 48px;
-color: #1C0E15;
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 48px;
+    color: ${props => props.color || '#1C0E15' };
+    /* color: white; */
 `;
 
 export const StyledModal = Modal.styled`
@@ -485,3 +550,89 @@ export const FadingBackground = styled(BaseModalBackground)`
   opacity: ${(props) => props.opacity};
   transition: all 0.3s ease-in-out;
 `;
+
+export const SliderBullet = styled.button`
+    width: 18px;
+    height: 5px;
+    border: 0px solid #0000;
+    background-color: #fff;
+    background: ${(props) => props.isActive ? '#8D8DFF' : '#FFFFFF'};
+    /* padding: 0px 4px; */
+    margin: 0px 4px;
+    border-radius: 4px;
+`
+
+/* export const HeaderButton = styled.button`
+  border: 2px solid #000094;
+  border-radius: 4px 4px 4px 4px;
+  background-color: #fff;
+  color: #000094;
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  padding: 1.33em;
+  text-decoration: none;
+  font-weight: 700;
+` */
+
+export const Padding = styled.div`
+  padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
+  padding-top: ${props => props.paddingTop || ''};
+  padding-bottom: ${props => props.paddingBottom || ''};
+  padding-left: ${props => props.paddingLeft || ''};
+  padding-right: ${props => props.paddingRight || ''};
+  align-self: ${props => props.alignSelf || ''};
+`
+
+export const H1Text = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 64px;
+    /* identical to box height, or 133% */
+
+
+    color: #000000;
+`;
+
+
+
+export const AnimatedVisibility = styled.div`
+${(props) => {
+    if (props.visible) {
+      return css`
+    opacity:1;
+    width:100%;
+    height:100%; 
+    margin-left: auto;
+    margin-right: auto;
+    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+  `;
+    } else {
+      return css`
+    opacity:0;
+    width:0;
+    height:0;
+    margin-left: auto;
+    margin-right: auto;
+    transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+  `;
+    }
+
+  }}
+`
+
+export const CircularLoader = styled.div`
+  border: 6px solid #f3f3f3; /* Light grey */
+  border-top: 6px solid #3498db; /* Blue */
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 48px;
+  height: 48px;
+  animation: spin 2s linear infinite;
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`

@@ -1,15 +1,12 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
+import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
-import reduxThunk from 'redux-thunk';
+
 import './index.css';
 import App from './App';
 import './i18n';
 import reducers from './reducers';
-import moment from 'moment';
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const saveToLocalStorage = (state) => {
   try {
@@ -31,16 +28,14 @@ const loadFromLocalStorage = () => {
 
 const persistedStore = loadFromLocalStorage();
 
-
-const store = createStore(reducers, persistedStore, composeEnhancers(
-  applyMiddleware(reduxThunk)
-));
+const store = configureStore({
+  reducer: reducers,
+  preloadedState: persistedStore,
+});
 
 store.subscribe(() => {
   saveToLocalStorage(store.getState());
 });
-
-// moment.defineLocale('en', null)
 
 
 ReactDOM.render(

@@ -41,6 +41,7 @@ export const CircularLoader = styled.div`
 export const Block = styled.div`
   /* border: 1px solid #ccc; */
   margin: 12px 0px;
+
   width: ${props => props.width ? props.width: '100%'};
   border-top: ${props => props.border ? '1px solid #E9E9E9' : ''};
   border-left: ${props => props.border ? '1px solid #E9E9E9' : ''};
@@ -59,7 +60,7 @@ export const ToggleButton = styled.div`
   /* border-bottom: ${props => props.border ? '1px solid #E9E9E9' : ''}; */
   border-radius: 4px;
   box-shadow: none;
-  padding: 8px 0px;
+  /* padding: 8px 0px; */
   /* padding: ${props => props.horizontalPadding || '20px'}; */
   /* margin: 0px ${props => props.horizontalPadding || '0px'}; */
   cursor: pointer;
