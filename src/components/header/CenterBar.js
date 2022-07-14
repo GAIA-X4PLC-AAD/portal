@@ -45,8 +45,6 @@ const CenterBar = () => {
   const onCloseModal = () => setOpenModal(false);
 
 
-  console.log('location pathname', location.pathname);
-
   return (
     <>
       <S.TopMenuLinks>

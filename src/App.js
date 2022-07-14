@@ -46,10 +46,9 @@ const App = (props) => {
 
   return (
 
-    <div className="App">
-      <Router history={history}>
-        <div id="content" className="content">
-          <div className='home-top-border'></div>
+    <div className=''>
+      <div className='main-content'>
+        <Router history={history}>
           <Header />
           <Column>
             <Routes>
@@ -92,38 +91,33 @@ const App = (props) => {
               <Route path="/provide/:type/confirm/:index" element={ViewContainer(<ProvideAttributes />)} />
               <Route path="/provide/:type/confirm/:id/:index" element={ViewContainer(<ProvideAttributes />)} />
             </Routes>
-
-
           </Column>
-          <div className='home-screen'>
-            <div className='footer-container'>
-              <div className='footer-flex-col'>
-                <div className='footer-banner'>
-                  <img src='/images/logo_white.svg' height='50px' ></img>
-                  <p>{t('footer_slogan_cap')}</p>
-                </div>
-                <div className='footer-content'>
-                  2022 Deutsche Telekom IoT GmbH
-                  <div>
-                    <a href='#'>{t('links.imprint')}</a>
-                    <a href='#'>{t('links.privacy')}</a>
-                    <a href='#'>{t('links.policy')}</a>
-                    <a href='#'>{t('links.cookie_settings')}</a>
-                    <a href='#'>{t('links.terms_and_conditions')}</a>
-                    <a href='#'>{t('links.contact')}</a>
-                    <Link to="/help">{t('links.help')}</Link>
-                  </div>
-                </div>
-              </div>
-              <div className='footer-bottom'>
-                <p>{t('footer_business_only')}</p>
-              </div>
+        </Router>
+      </div>
+
+      <div className='footer-container'>
+        <div className='footer-flex-col'>
+          <div className='footer-banner'>
+            <img src='/images/logo_white.svg' height='50px' ></img>
+            <p>{t('footer_slogan_cap')}</p>
+          </div>
+          <div className='footer-content'>
+            2022 Deutsche Telekom IoT GmbH
+            <div>
+              <a href='#'>{t('links.imprint')}</a>
+              <a href='#'>{t('links.privacy')}</a>
+              <a href='#'>{t('links.policy')}</a>
+              <a href='#'>{t('links.cookie_settings')}</a>
+              <a href='#'>{t('links.terms_and_conditions')}</a>
+              <a href='#'>{t('links.contact')}</a>
+              <a href='#'>{t('links.help')}</a>
             </div>
           </div>
-
-
         </div>
-      </Router>
+        <div className='footer-bottom'>
+          <p>{t('footer_business_only')}</p>
+        </div>
+      </div>
     </div>
 
   );
