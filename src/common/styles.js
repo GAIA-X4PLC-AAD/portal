@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
+
 
 export const CancelButton = styled.button`
     border: 2px solid #e8e8e8;
@@ -464,7 +465,7 @@ export const OutlineButton = styled.div`
     align-items: center;
     text-align: center;
     letter-spacing: 0.25px;
-
+    align-self: center;
     /* Background/Primary */
     cursor: pointer;
     color: ${props => props.disabled ? '#1C0E15' : '#000094'}
@@ -560,3 +561,44 @@ export const H1Text = styled.div`
     color: #000000;
 `;
 
+
+
+export const AnimatedVisibility = styled.div`
+${(props) => {
+    if (props.visible) {
+      return css`
+    opacity:1;
+    width:100%;
+    height:100%; 
+    margin-left: auto;
+    margin-right: auto;
+    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+  `;
+    } else {
+      return css`
+    opacity:0;
+    width:0;
+    height:0;
+    margin-left: auto;
+    margin-right: auto;
+    transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+  `;
+    }
+
+  }}
+`
+
+export const CircularLoader = styled.div`
+  border: 6px solid #f3f3f3; /* Light grey */
+  border-top: 6px solid #3498db; /* Blue */
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 48px;
+  height: 48px;
+  animation: spin 2s linear infinite;
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`

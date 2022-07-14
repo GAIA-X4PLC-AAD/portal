@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { BodySmallBoldText, BodyText, ButtonText, CaptionText, Card, Circle, Column, H4LightText, HeaderTitle, HorizontalLine, Image, OutlineButton, Row, Style } from "../../common/styles";
+import { AnimatedVisibility, CircularLoader, BodySmallBoldText, BodyText, ButtonText, CaptionText, Card, Circle, Column, H4LightText, HeaderTitle, HorizontalLine, Image, OutlineButton, Row, Style } from "../../common/styles";
 import PropTypes from 'prop-types';
-
+import axios from "axios";
 import { Block } from "../expandable/style";
 import { Padding } from "../discovery/tabs/style";
 import { useNavigate } from "react-router-dom";
@@ -40,7 +40,35 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
         navigate(`/provide/${itemType}/upload/${_id}`)
     }
 
+    const edit = () => {
+        navigate(`/lcm/${_id}`)
+    }
+
+    const create = () => {
+        navigate(`/lcm/${_id}`)
+    }
+
+    const downloadLogs = () => {
+        navigate(`/lcm/${_id}/logs`)
+    }
+
+
     const buildDeleteDialog = ({ closeModal }) => {
+
+        const [isLoading, setIsLoading] = useState(false);
+
+        const deleteService = () => {
+            setIsLoading(true)
+            axios.delete(process.env.REACT_APP_EDGE_API_URI + `/lcm/${_id}`,).then((response) => {
+                setIsLoading(false)
+            }, (error) => {
+                setIsLoading(false)
+                alert('Failed to validate service descriptor.')
+            });
+
+        }
+
+
         return <>
             <Style width='633px'>
                 <Padding horizontal='24px' vertical='12px'>
@@ -48,10 +76,15 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                     <HorizontalLine />
                     <BodyText>Are you sure you want to delete {_name}?</BodyText>
                     <Padding vertical='20px'>
-                        <Row>
-                            <OutlineButton>Delete</OutlineButton>
+                        <Row alignItems='center'>
+                            <OutlineButton onClick={() => deleteService()}>Delete</OutlineButton>
                             <Padding paddingLeft='20px' />
                             <OutlineButton onClick={closeModal}>Cancel</OutlineButton>
+                            {isLoading ? <Padding horizontal='16px'>
+                                <AnimatedVisibility visible={isLoading} data-tag='animated-visibility-loader'>
+                                    <CircularLoader />
+                                </AnimatedVisibility>
+                            </Padding> : ''}
                         </Row>
                     </Padding>
                 </Padding>
@@ -72,9 +105,9 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
         return <>
             <Padding paddingRight='16px'>
                 <Menu menuButton={<ButtonText onClick={() => manageButton()}>{t('dashboard.manage.manage')}</ButtonText>}>
-                    {_status == 'undeployed' ? <MenuItem>{t('dashboard.manage.create')}</MenuItem> : ''}
-                    {_status == 'deployed' ? <MenuItem>{t('dashboard.manage.edit')}</MenuItem> : ''}
-                    {_status == 'deployed' ? <MenuItem>{t('dashboard.manage.download-logs')}</MenuItem> : ''}
+                    {_status == 'undeployed' ? <MenuItem onClick={() => create()}>{t('dashboard.manage.create')}</MenuItem> : ''}
+                    {_status == 'deployed' ? <MenuItem onClick={() => edit()}>{t('dashboard.manage.edit')}</MenuItem> : ''}
+                    {_status == 'deployed' ? <MenuItem onClick={() => downloadLogs()}>{t('dashboard.manage.download-logs')}</MenuItem> : ''}
                     {_status == 'deployed' ? <MenuItem onClick={onOpenModal}>{t('dashboard.manage.delete')}</MenuItem> : ''}
                 </Menu>
             </Padding>
