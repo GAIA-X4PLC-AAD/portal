@@ -31,7 +31,7 @@ export const BlueButton = styled.button`
     }
 `;
 
-export const BlueLabel = styled.label`
+export const BlueUploadLabel = styled.label`
 border: 2px solid #000094;
 border-radius: 4px 4px 4px 4px;
 font: 700 18px/1.11 "Titillium Web", Helvetica, Arial, serif;
@@ -40,7 +40,9 @@ color: #000094;
 background-color: #fff;
 padding: 0.3em 2em;
 cursor: pointer;
-margin-left:1em;
+margin-top:15px;
+min-width: 65px;
+text-align: center;
 display: inline-block;
 :disabled {
     cursor:default;
@@ -92,6 +94,16 @@ export const RedTextClickable = styled.div`
     min-width: 1px;
     color: #EE1D23;
     cursor: pointer;
+`;
+
+export const RedText = styled.div`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+    min-width: 1px;
+    color: #EE1D23;
 `;
 
 export const BlueTextClickable = styled.div`
