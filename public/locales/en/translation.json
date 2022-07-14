@@ -33,7 +33,13 @@
         "activate": "Activate",
         "deactivate": "Deactivate",
         "edit": "Edit",
-        "manage": "Manage"
+        "manage": {
+            "manage": "Manage",
+            "create": "Create",
+            "edit": "Edit",
+            "download-logs": "Download Logs",
+            "delete": "Delete"
+        }
     },
     "top-menu": {
         "help": "Help",
