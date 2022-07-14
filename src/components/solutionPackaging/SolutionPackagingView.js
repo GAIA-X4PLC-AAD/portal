@@ -220,7 +220,8 @@ const SolutionPackagingView = () => {
     const onSelect = (service) => {
         console.log ('onSelect' , service);
         let copy = cloneArray(slots);
-        copy[addItem] = {...service, available_services:slots[addItem].available_services-1}
+        let available_services = slots[addItem].id? slots[addItem].available_services : slots[addItem].available_services -1;
+        copy[addItem] = {...service, available_services}
         setSlots(copy);
     }
 
