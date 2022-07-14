@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { signOut, signIn } from "../../actions";
+import { signOut } from "../../actions";
 
 import { useNavigate } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ import { Row } from "../../common/styles";
 function Header(props) {
     const { t, } = useTranslation();
     const navigate = useNavigate();
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     const handleSignOut = () => {
         dispatch(signOut())

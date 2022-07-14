@@ -11,7 +11,7 @@ const ApproveButton = ({id, searchRefresh})=>{
 
     const onApprove = ( id) => {
         console.log(`onApprove ${id}`)
-        axios.post(process.env.REACT_APP_EDGE_API_URI +`/api/management/requests/${id}`).then(   (response) => {
+        axios.post(process.env.REACT_APP_EDGE_API_URI +`/management/requests/${id}`).then(   (response) => {
             searchRefresh();
             console.log(`approved ${id} sucess`);
         },(error)=> {
