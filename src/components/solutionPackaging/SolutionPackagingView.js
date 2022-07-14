@@ -20,48 +20,14 @@ const SolutionPackagingView = () => {
     const {t} = useTranslation();
     
     const [addItem, setAddItem] = useState(-1);
-    const [solutionPkgCopy, setSolutionPkgCopy] = useState(null);
-    const [solutionPkg, setSolutionPkg] = useState(null);
+    const [slotsCopy, setSlotsCopy] = useState(null);
+    const [slots, setSlots] = useState(null);
 
-    const [fakeData,setFakeData] = useState( {dependent_services:[{
-        available_services: 3,
-        "id": "97",
-        "name": "The Service Power",
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Android_O_Preview_Logo.png/1200px-Android_O_Preview_Logo.png",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...",
-        "features": "features",
-        "stack": "stack",
-        "security": "security",
-        "location": "Magdeburg",
-        "category": "Category #7",
-        "tags": [
-          "Atag",
-          "Btag",
-          "Ctag"
-        ],
-        "img_preview_url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg",
-        "ppr_name": "The Service Power",
-        "ppr_url": "https://my.company.url",
-        "location_flag": "https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/2880px-Flag_of_Germany.svg.png",
-        "last_updated": "2022-06-09",
-        "terms_of_use": "term of use"
-      },
-        {available_services: 1},
-        {available_services: 4},
-        {available_services: 5}]})
-
-    const [fakeDataCopy, setFakeDataCopy] = useState(null);
-
+  
     useEffect(() => {
-         if(!fakeDataCopy) {
-                setFakeDataCopy(fakeData);
-        }
-        }, [fakeData]);
-
-    useEffect(() => {
-        if(!solutionPkgCopy)
-            setSolutionPkgCopy(solutionPkg);
-    }, [solutionPkg]);
+        if(!slotsCopy)
+            setSlotsCopy();
+    }, [slots]);
 
     
     
@@ -69,27 +35,35 @@ const SolutionPackagingView = () => {
        // TODO: missing things
     }
 
+    const createSlots = (data) => {
+        const slotData =  data.dependent_services.reduce((result, service) => {
+            var available_services = (result[service.slot_id]?.available_services || 0) + (service.included?0:1);
+            var ervice = service.included? {...service, available_services} : {...result[service.slot_id] || null, available_services};
+            result[service.slot_id] = ervice;
+            return result;
+        }, []);
+        setSlots(slotData);
+    }
     
     const onResetClick = () => {
-        setFakeData(fakeDataCopy);
-        setSolutionPkg(solutionPkgCopy);
+        setSlots(slotsCopy);
         setAddItem(-1);
     }
+    
     const onBookClick = () => {
-        console.log('fakeData', fakeData);
-        console.log('fakeDataCopy', fakeDataCopy);
+        console.log('slots', slots);
+        console.log('slotsCopy', slotsCopy);
     }
 
     const successView = ({data}) => {
         if (!data) return null;
-        if (!solutionPkg) {
-            setSolutionPkg(data);
-            return null;
+        if (!slots) {
+            createSlots(data);
         }
         return (<>
-                    {showDetails(solutionPkg)}
-                    {showSlots(fakeData)}
-                    {showButtons(solutionPkg)}
+                    {showDetails(data)}
+                    {show(slots)}
+                    {showButtons(data)}
                 </>);
     }
     
@@ -112,7 +86,6 @@ const SolutionPackagingView = () => {
         // use state and useEffect are required in order to force carousel to re-render
         const [items, setItems] = useState([]);
      
-        console.log('carrouselComp', data);
         useEffect(() => {
             if(items.length === 0){
                     setItems(data);
@@ -143,7 +116,6 @@ const SolutionPackagingView = () => {
                 slidesToSlide: 1
             }
         };    
-        console.log('carrouselComp items', items);
         return (        
           <Carousel
                 arrows={false}
@@ -166,20 +138,32 @@ const SolutionPackagingView = () => {
     CarouselComp.propTypes = {
         data: PropTypes.array
     }
-    const showSlots = (data) => {
+    const show = (data) => {
+        if (!data) return null;
+        console.log(data);
         return (
             <S.Style marginBottom="32px" marginTop="32px">
-                <CarouselComp data={data.dependent_services}/>
+                <CarouselComp data={data}/>
             </S.Style>
         );
     } 
   
+  // clone array with map function to keep keys from original array
+    const cloneArray = (array) => {
+        let keys= array.keys();
+        let newItem = [];
+        console.log('keys', keys)
+        for (const key  in array) {
+            newItem[key] = JSON.parse(JSON.stringify(array[key]));
+        }
+        return newItem;
+    }
     // todo: change to right elements
     const removeSlot = (service, i) => {
-        let copy = JSON.parse(JSON.stringify(fakeData));
-        copy.dependent_services[i].id= null; 
-        copy.dependent_services[i].available_services=copy.dependent_services[i].available_services+1;
-        setFakeData(copy);
+        let copy = cloneArray(slots);
+        copy[i].id= null; 
+        copy[i].available_services=copy[i].available_services+1;
+        setSlots(copy);
         setAddItem(i);
     }
 

@@ -7,10 +7,7 @@ const DiscoverySearchFilter = ({type, serviceId, slot}) => {
 
     const addParams = serviceId || slot || '' != ''?`/${serviceId}/${slot}`:''; 
     
-    console.log('addParams', addParams);
-    console.log('serviceId', serviceId);
-    console.log('slot', slot);
-    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery${addParams}/${type}/filter-criterias`;
+    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}${addParams}/filter-criterias`;
 
     return (
         <LoadingView
