@@ -48,7 +48,7 @@ const SlotDetails = ({service, onRemove, onAdd, selected}) => {
                     <S.Style marginBottom="auto" textAlign="left">
                         <S.Image src={service.img_preview_url} alt={service.name} width='201px' height='134px'/>
                         <S.H4Text>{service.name}</S.H4Text>
-                        <S.BlueLinkText><S.Style textAlign="left" onClick={()=>{openLink(service.ppr_url)}}>{service.ppr_url}</S.Style></S.BlueLinkText>
+                        <S.BlueLinkText><S.Style textAlign="left" overflowWrap='anywhere' onClick={()=>{openLink(service.ppr_url)}}>{service.ppr_url}</S.Style></S.BlueLinkText>
                         <S.Style marginTop="10px">
                             <S.BodySmallText>{service.description}</S.BodySmallText>
                         </S.Style>

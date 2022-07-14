@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import Carousel from "react-multi-carousel";
 import { useParams } from "react-router-dom";
 import * as S from "../../common/styles";
@@ -14,7 +13,6 @@ const SolutionPackagingView = () => {
     
     const {id} = useParams();
 
-    const dispatch = useDispatch();
 
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/${id}/details/`;
     const {t} = useTranslation();
@@ -78,7 +76,7 @@ const SolutionPackagingView = () => {
     } 
 
     // TODO: change index in scopeServiceId for right id
-    const onAddClick = (index) => {
+    const onAddClick = ( index) => {
         setAddItem(index);
     }
 
@@ -126,7 +124,7 @@ const SolutionPackagingView = () => {
                 customButtonGroup={<NP bottom='510px'/>}
                 >
                 {items.map((service,i) => {return (<SlotDetails service={service} 
-                                onRemove={()=>removeSlot(service,i)} 
+                                onRemove={()=>removeSlot(i)} 
                                 onAdd={()=>onAddClick(i)}
                                 selected={addItem===i}
                                 key={i}/>
@@ -159,7 +157,7 @@ const SolutionPackagingView = () => {
         return newItem;
     }
     // todo: change to right elements
-    const removeSlot = (service, i) => {
+    const removeSlot = (i) => {
         let copy = cloneArray(slots);
         copy[i].id= null; 
         copy[i].available_services=copy[i].available_services+1;
@@ -219,8 +217,11 @@ const SolutionPackagingView = () => {
         )
 
     }
-    const onSelect = (params) => {
-        console.log (params);
+    const onSelect = (service) => {
+        console.log ('onSelect' , service);
+        let copy = cloneArray(slots);
+        copy[addItem] = {...service, available_services:slots[addItem].available_services-1}
+        setSlots(copy);
     }
 
     if (!id) return null;

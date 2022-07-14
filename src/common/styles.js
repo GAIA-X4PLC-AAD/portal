@@ -159,6 +159,7 @@ export const Style = styled.div`
     z-index: ${props => props.zIndex || 'auto'};
     background-color: ${props => props.backgroundColor || ''};
     text-align: ${props => props.textAlign || ''};
+    overflow-wrap: ${props => props.overflowWrap || ''};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     /* border-radius: 4px; */
 `

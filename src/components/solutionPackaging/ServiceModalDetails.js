@@ -65,7 +65,7 @@ const ServiceModalDetails = ({service, closeModal, onSelect}) => {
                 <TabView labels={tabLabels} views={tabViews} width='864px;'/>
                 <Row margin='24px 24px 24px 10px'>
                     <CancelButton onClick={closeModal}>{t('solution_pkg.cancel')}</CancelButton>
-                    <BlueButton onClick={onSelect}>{t('solution_pkg.select')}</BlueButton>
+                    <BlueButton onClick={()=>{onSelect(service)}}>{t('solution_pkg.select')}</BlueButton>
                 </Row>
             </Column>
         </Modal>
