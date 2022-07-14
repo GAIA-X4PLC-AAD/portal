@@ -9,8 +9,8 @@ import { updateFilterCriteria } from "../../../actions";
 
 const AdminParticipantSearchFilter = ({type}) => {
     
-    const REGISTRATION_URL = process.env.REACT_APP_EDGE_API_URI + '/api/admin/pr/registration-types';
-    const LOCATION_URL = process.env.REACT_APP_EDGE_API_URI + '/api/admin/pr/locations';
+    const REGISTRATION_URL = process.env.REACT_APP_EDGE_API_URI + '/admin/pr/registration-types';
+    const LOCATION_URL = process.env.REACT_APP_EDGE_API_URI + '/admin/pr/locations';
 
     const [filters, setFilters] = useState([]);
     const dispatch = useDispatch();
