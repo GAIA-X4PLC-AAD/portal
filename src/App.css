@@ -1,6 +1,8 @@
 .App {
   text-align: center;
   font: 700 14px/1.33 "Titillium Web", Helvetica, Arial, serif;
+  display:flex; 
+  flex-direction:column; 
 }
 
 :root {
@@ -11,6 +13,22 @@
   --content-height: 40%;
 }
 
+body{ 
+  font: 700 14px/1.33 "Titillium Web", Helvetica, Arial, serif;
+  margin:0;
+  padding:0;
+  height:100%;
+  height:100vh;
+  margin:0; 
+}
+
+.main-content {
+  min-height : calc(100vh - 10rem);
+}
+
+.footer-container {
+  margin-top:auto; 
+}
 .home-screen {
   display: flex;
   flex-direction: column;
@@ -143,8 +161,7 @@
   min-height:640px;
 }
 
-.footer-container {
-}
+
 
 .footer-flex-col {
   display: flex;
