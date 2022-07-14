@@ -138,7 +138,6 @@ const SolutionPackagingView = () => {
     }
     const show = (data) => {
         if (!data) return null;
-        console.log(data);
         return (
             <S.Style marginBottom="32px" marginTop="32px">
                 <CarouselComp data={data}/>
@@ -150,7 +149,6 @@ const SolutionPackagingView = () => {
     const cloneArray = (array) => {
         let keys= array.keys();
         let newItem = [];
-        console.log('keys', keys)
         for (const key  in array) {
             newItem[key] = JSON.parse(JSON.stringify(array[key]));
         }
@@ -218,7 +216,6 @@ const SolutionPackagingView = () => {
 
     }
     const onSelect = (service) => {
-        console.log ('onSelect' , service);
         let copy = cloneArray(slots);
         let available_services = slots[addItem].id? slots[addItem].available_services : slots[addItem].available_services -1;
         copy[addItem] = {...service, available_services}
