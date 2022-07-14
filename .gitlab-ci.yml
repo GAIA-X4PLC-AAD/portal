@@ -14,7 +14,7 @@ variables:
 application-build:
   stage: build
   image:
-    name: node:17-alpine3.14
+    name: registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/demo/node:17-alpine3.14
   artifacts:
     paths:
       - build
@@ -54,7 +54,7 @@ docker-build:
   only:
     refs:
       - main
-  image: alpine/k8s:1.21.12
+  image: registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/demo/alpine/k8s:1.21.12
   script:
     - mkdir -p /root/.kube
     - echo "${K8S_CONFIG}"  | base64 -d > /root/.kube/config
