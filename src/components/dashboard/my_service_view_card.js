@@ -37,7 +37,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     }
 
     const openSd = () => {
-        navigate(`/provide/${itemType}/upload/${_id}`)
+        navigate(`/provide/${itemType}/upload/${_id}/edit`)
     }
 
     const edit = () => {

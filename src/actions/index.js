@@ -1,5 +1,7 @@
-import { SIGN_IN_MENU, NOT_SIGN_IN_MENU, SIGN_IN, SIGN_OUT, UPDATE_SEARCH_FILTER_CRITERIA, UPDATE_SEARCH_PAGE_NUMBER, UPDATE_SEARCH_TYPE, UPDATE_SEARCH_FROM_HOME, UPDATE_SEARCH_TYPE_AND_TERM, SET_DESCRIPTOR_FILE, RESET_DESCRIPTOR_FILE } from "./types";
-
+import {
+    SIGN_IN_MENU, NOT_SIGN_IN_MENU, SIGN_IN, SIGN_OUT, UPDATE_SEARCH_FILTER_CRITERIA, UPDATE_SEARCH_PAGE_NUMBER, UPDATE_SEARCH_TYPE, UPDATE_SEARCH_FROM_HOME,
+    UPDATE_SEARCH_TYPE_AND_TERM, SET_DESCRIPTOR_FILE, RESET_DESCRIPTOR_FILE, LCM_SERVICES_LOADED, RESET_LCM_SERVICES, LCM_SELECT_SERVICE,CHANGE_USER_ROLE
+} from "./types";
 
 export const signInMenuEnter = () => {
     return { type: SIGN_IN_MENU };
@@ -49,3 +51,21 @@ export const setDescriptorFile = (file, parsed_descriptor) => {
 export const resetDescriptorFile = () => {
     return { type: RESET_DESCRIPTOR_FILE }
 }
+
+<<<<<<< src/actions/index.js
+export const lcmServicesLoaded = (id, services) => {
+    return { type: LCM_SERVICES_LOADED, id: id, services: services }
+}
+
+export const resetLcmServices = () => {
+    return { type: RESET_LCM_SERVICES }
+}
+
+export const selectLcmService = (serviceName, lcm) => {
+    return { type: LCM_SELECT_SERVICE, serviceName, lcm }
+}
+=======
+export const changeUserRole = (role) => {
+    return { type: CHANGE_USER_ROLE, role };
+};
+>>>>>>> src/actions/index.js

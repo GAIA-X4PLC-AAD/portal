@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
+import { connect, useDispatch, useSelector } from "react-redux";
 import { compose } from 'redux';
 import "./Login.css";
-import { signIn, signInMenuEnter, signInMenuQuit } from "../../actions";
+import { changeUserRole, signIn, signInMenuEnter, signInMenuQuit } from "../../actions";
 import { Link, useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import LoginFail from "./LoginFail";
@@ -11,10 +11,49 @@ import axios from "axios";
 import configData from "../../config/config.json";
 
 import PropTypes from 'prop-types';
+import { Column, OutlineButton, Padding, Row } from "../../common/styles";
 
 export const withNavigation = (Component) => {
   return props => <Component {...props} navigate={useNavigate()} />;
 }
+
+const UserRolesSection = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  // "FR", "Visitor", "PPR", "PCR User", "PCR Organization"
+
+  const appMode = process.env.REACT_APP_MODE
+  const isSecurityDisabled = appMode == 'SECURITY_DISABLED'
+
+  if (!isSecurityDisabled) return
+
+  const _currentUserRole = useSelector(state => state.user.user_role)
+
+  const _changeUserRole = ({role}) => {
+    dispatch(changeUserRole(role))
+    dispatch(signIn())
+    navigate('/')
+  };
+
+  return <Padding vertical='20px'>
+    <Column>
+      <Row>
+        <OutlineButton onClick={() => _changeUserRole({role: 'ppr'})}>PPR</OutlineButton>
+        <OutlineButton onClick={() => _changeUserRole({role: 'fr'})}>FR</OutlineButton>
+        {/* <OutlineButton onClick={() => _changeUserRole({role: 'vr'})}>Visitor</OutlineButton> */}
+      </Row>
+      <Padding paddingTop='10px'></Padding>
+      <Row>
+        <OutlineButton onClick={() => _changeUserRole({role: 'pcr-user'})}>PCR User</OutlineButton>
+        <OutlineButton onClick={() => _changeUserRole({role: 'pcr-org'})}>PCR Org.</OutlineButton>
+      </Row>
+    </Column>
+  </Padding>
+}
+
+UserRolesSection.propTypes = {
+
+};
 
 class Login extends Component {
 
@@ -28,7 +67,6 @@ class Login extends Component {
     }
 
   }
-
 
   componentDidMount() {
     this.props.signInMenuEnter();
@@ -78,14 +116,21 @@ class Login extends Component {
 
 
   render() {
+
+    const appMode = process.env.REACT_APP_MODE
+    const isSecurityDisabled = appMode == 'SECURITY_DISABLED'
+
     return (
       <div className="login-block5 layout">
-        <AuthPolling
-          onAuthZFailed={this.onAuthZFailed}
-          onAuthZSuccess={this.onAuthZSuccess}
-          onAuthZWait={this.onAuthZWait}
-          statusURL={process.env.REACT_APP_EDGE_API_URI + configData.uri_path.auth_status_path}
-        />
+        {
+          isSecurityDisabled ? '' : <AuthPolling
+            onAuthZFailed={this.onAuthZFailed}
+            onAuthZSuccess={this.onAuthZSuccess}
+            onAuthZWait={this.onAuthZWait}
+            statusURL={process.env.REACT_APP_EDGE_API_URI + configData.uri_path.auth_status_path}
+          />
+        }
+
         <LoginFail showAlertMessage={this.state.showLoginFail} message={this.state.loginFailMessage} />
         <div className="login-group layout">
           <h1 className="login-hero-title layout">{this.props.t("login.welcome")}</h1>
@@ -103,6 +148,7 @@ class Login extends Component {
             <div className="login-button layout">
               <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t("login.loginButton")}</a>
             </div>
+            <UserRolesSection />
           </div>
           <div className="login-block10 layout">
             <Link to="/help"><h4 className="login-highlights5 layout">{this.props.t("login.faq")}</h4></Link>
