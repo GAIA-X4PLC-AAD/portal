@@ -59,7 +59,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
 
         const deleteService = () => {
             setIsLoading(true)
-            axios.delete(process.env.REACT_APP_EDGE_API_URI + `/lcm/${_id}`,).then((response) => {
+            axios.delete(process.env.REACT_APP_EDGE_API_URI + `/lcm-service/service/${_id}`,).then((response) => {
                 setIsLoading(false)
             }, (error) => {
                 setIsLoading(false)
