@@ -12,9 +12,9 @@ const NextPrevButtons = ({ data }) => {
     const criteria = useSelector(state => state.searchCriteriaStore);
     const dispatch = useDispatch();
 
-    const itemsPerPage = criteria.size;
+    const itemsPerPage = criteria.size
 
-    console.log('data', data);
+
     if (!data || !data.data || data.data.length===0) return null;
 
     const handlePageClick = (event) => {
