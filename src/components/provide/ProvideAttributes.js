@@ -9,6 +9,7 @@ import "./Provide.css"
 import { HeaderTitle, BodyText, BlueButton, CancelButton, RedText } from "../../common/styles";
 import { ToggleSwitch } from "../../common/toggle/ToggleSwitch"
 import { toTypeLabel } from "./ProvideUtil"
+import {Tab} from "../../common/tabs/tab";
 
 class ProvideAttributes extends Component {
     constructor(props) {
@@ -69,7 +70,7 @@ class ProvideAttributes extends Component {
         const descriptor = this.props.serviceDescriptor.parsed_descriptor.results;
         const that = this;
         const header = descriptor.map(function (object, i) {
-            return <NavLink key={i} to={"/provide/"+type+"/confirm/" + i}><div className="provide-tab"><div className={i == index ? "provide-tab-inside  provide-tab-inside-active" : "provide-tab-inside"}>{i + 1}</div></div></NavLink>;
+            return <Tab key={i} index={i} currentIndex={index} link={"/provide/"+type+"/confirm/" + i} />
         });
 
         const selectedDescriptor = descriptor[index];
@@ -78,7 +79,6 @@ class ProvideAttributes extends Component {
             if ((checked === true && attribute.mandatory) || checked === false) {
                 return <tr key={i} className={attribute.mandatory && !attribute.value ? "invalid" : ""} ><td>{attribute.name}</td><td>{attribute.mandatory && !attribute.value ? "Required" : attribute.value}</td></tr>
             }
-
         })
 
         let back;

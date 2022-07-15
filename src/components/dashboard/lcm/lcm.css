@@ -1,0 +1,76 @@
+.lcm-header {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.lcm-header-description {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.lcm-service-description {
+    text-align: left;
+}
+
+.lcm-service-description div:first-of-type {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.lcm-service-description label {
+    width: 150px;
+    display: inline-block;
+    font-weight: normal;
+    line-height: 50px;
+}
+
+
+.lcm-attribute-table {
+    min-width: 470px;
+    margin-top: 25px;
+    text-align: left;
+    font-size: 15px;
+
+    font-weight: normal;
+    border-collapse: collapse;
+}
+
+.lcm-attribute-table td {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.lcm-attribute-table tr {
+    border-bottom: 1px solid #E9E9E9;
+}
+
+/* ensure radiobutton column has the right size */
+.lcm-attribute-table tr td:first-child {
+    width: 50px;
+}
+
+/* size of radion button */
+.lcm-attribute-table tr td input {
+    width: 16px;
+    height: 16px;
+}
+
+.lcm-attribute-table thead {
+    color: #bababa;
+}
+
+.lcm-link-bar {
+    display: flex;
+    margin-bottom: 32px;
+}
+
+.lcm-link-bar div{
+    margin-right: 25px;
+}
+
+#lcm-upload{
+    border: 0px;
+    margin-top: 0px;
+    text-align: left;
+    padding-left: 0;
+}
