@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector, } from "react-redux";
 import PropTypes from 'prop-types';
-import * as S from './style';
 import ReactPaginate from 'react-paginate';
 import { updatePageNumber } from "../../../actions";
 import { ArrowLeft, ArrowRight } from '../../../common/styles';
@@ -11,8 +10,6 @@ const NextPrevButtons = ({ data }) => {
 
     const criteria = useSelector(state => state.searchCriteriaStore);
     const dispatch = useDispatch();
-
-    const itemsPerPage = criteria.size;
 
     console.log('data', data);
     if (!data || !data.data || data.data.length===0) return null;
