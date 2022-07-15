@@ -32,3 +32,25 @@ background: #E9E9E9;
 border-radius: 12px;
 width: fit-content;
 `;
+
+export const BookSaveInput = styled.input`
+height: 36px;
+width: 446px;
+margin: 0px 24px;
+background: #FFFFFF;
+border: 1px solid #E8E8E8;
+border-radius: 4px;
+
+font-family: 'Titillium Web';
+font-style: normal;
+font-weight: 400;
+font-size: 15px;
+line-height: 20px;
+/* identical to box height, or 133% */
+
+letter-spacing: 0.25px;
+
+/* greyscale/darker */
+
+color: #1C0E15;
+`;

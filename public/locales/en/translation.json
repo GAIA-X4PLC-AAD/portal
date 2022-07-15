@@ -316,7 +316,11 @@
         "features": "FEATURES",
         "stack": "STACK",
         "location": "LOCATION",
-        "lastUpdated": "LAST UPDATED"
+        "lastUpdated": "LAST UPDATED",
+        "enterNameMessage": "Please enter a name",
+        "saveBookModalMessage-book": "Book solution package",
+        "saveBookModalMessage-save": "Save solution package"
+        
     }
 }
 
