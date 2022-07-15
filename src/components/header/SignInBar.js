@@ -31,11 +31,12 @@ function UserAvatarButton({ onClicked }) {
   const _userName = useSelector((state) => state.user.user.first_name)
   const navigate = useNavigate();
 
-  const _userRole = useSelector((state) => state.user.user.user_role)
+  const _userRole = useSelector((state) => state.user.user_role)
   const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
 
-  const _isPpr = _userRole == 'gaiax-ppr' && isUserSignedIn
-  const _isPcr = _userRole == 'gaiax-pcr' && isUserSignedIn
+  const _isPpr = _userRole == 'ppr' && isUserSignedIn
+  const _isPcrUser = _userRole == 'pcr-user' && isUserSignedIn
+  const _isPcrOrg = _userRole == 'pcr-org' && isUserSignedIn
   const _isFr = _userRole == 'gaiax-fr' && isUserSignedIn
 
   // language modal
@@ -52,8 +53,10 @@ function UserAvatarButton({ onClicked }) {
   </Circle>
 
   return <Menu menuButton={userButton}>
-    { (_isPcr || _isPpr) ? <MenuItem onClick={() => navigate('/admin/participant')}>{t('left-menu.user-info')}</MenuItem> : '' }
+    { (_isPcrOrg || _isPpr) ? <MenuItem onClick={() => navigate('/account/provider/details')}>{t('left-menu.user-info')}</MenuItem> : '' }
+    {  _isPcrUser  ? <MenuItem onClick={() => navigate('/account/user/details')}>{t('left-menu.user-info')}</MenuItem> : '' }
     
+
     <MenuItem onClick={onOpenModal} >
       {t('left-menu.change-language')}
     </MenuItem>
@@ -81,6 +84,9 @@ UserAvatarButton.propTypes = {
   onClicked: PropTypes.func,
 }
 
+function onAccount () {
+
+}
 // USER INFO
 function UserInfoButton() {
   const _userName = useSelector((state) => state.user.user.first_name)

@@ -10,12 +10,14 @@ import NP from "../../common/vertical_steps/next_prev_buttons";
 import PropTypes from 'prop-types';
 import SaveBookModal from "./SaveBookModal";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const SolutionPackagingView = () => {
     
     const {id} = useParams();
 
-
+    const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
+  
     const SAVE_URL = process.env.REACT_APP_EDGE_API_URI + '/sp-service/save';
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/${id}/details/`;
     const {t} = useTranslation();
@@ -90,8 +92,8 @@ const SolutionPackagingView = () => {
         return (
             <S.Row margin="32px;" gap='20px'>
                 <S.BlueButton onClick={onResetClick} >{t('solution_pkg.reset')}</S.BlueButton>
-                <S.BlueButton onClick={onSaveClick}>{t('solution_pkg.save')}</S.BlueButton>
-                <S.BlueButton onClick={onBookClick}>{t('solution_pkg.book')}</S.BlueButton>
+                <S.BlueButton disabled={!isUserSignedIn} onClick={onSaveClick}>{t('solution_pkg.save')}</S.BlueButton>
+                <S.BlueButton disabled={!isUserSignedIn} onClick={onBookClick}>{t('solution_pkg.book')}</S.BlueButton>
             </S.Row>
         );
     } 
