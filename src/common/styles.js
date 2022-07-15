@@ -24,6 +24,7 @@ export const CancelButtonSmall = styled.button`
     padding: 0.3em 2em;
     cursor: pointer;
     margin-left: 1em;
+    margin-top:15px;
 `;
 
 

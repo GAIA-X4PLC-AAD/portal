@@ -12,7 +12,7 @@ align-items: center;
 padding: 12px;
 gap: 10px;
 width: ${props =>props.width? props.width : '225px'};
-height: 435px;
+height: 480px;
 left: 485px;
 top: 622px;
 background: #FFFFFF;

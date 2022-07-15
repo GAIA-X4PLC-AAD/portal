@@ -22,7 +22,9 @@ const SaveBookModal = ({action, closeModal, onSaveBook}) => {
                     </Padding>
                 </ActionCancelModalHeader>
                 <ModalMessage> 
+                    <Padding paddingLeft='24px'>
                     {t('solution_pkg.enterNameMessage')}
+                    </Padding>
                 </ModalMessage>
                 <BookSaveInput value={name} onChange={(e)=>setName(e.target.value)} /> 
                 
