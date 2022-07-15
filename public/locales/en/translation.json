@@ -211,6 +211,9 @@
             "noResults": "No results found",
             "noResultsMessage": "Sorry, we couldn’t find any matching results. Try broadening your filters",
             "advance": "Advanced Search"
+        },
+        "description": {
+            "build": "Build"
         }
     },
     "account": {

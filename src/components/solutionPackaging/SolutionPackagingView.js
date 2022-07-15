@@ -1,37 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Carousel from "react-multi-carousel";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../../common/styles";
 import SearchView from "../discovery/search/SearchView";
 import LoadingView from "../loading_view/LoadingView";
 import SlotDetails from "./SlotDetails";
 import NP from "../../common/vertical_steps/next_prev_buttons";
 import PropTypes from 'prop-types';
+import SaveBookModal from "./SaveBookModal";
+import axios from "axios";
 
 const SolutionPackagingView = () => {
     
     const {id} = useParams();
 
 
+    const SAVE_URL = process.env.REACT_APP_EDGE_API_URI + '/sp-service/save';
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/${id}/details/`;
     const {t} = useTranslation();
+    const navigate = useNavigate();
     
     const [addItem, setAddItem] = useState(-1);
     const [slotsCopy, setSlotsCopy] = useState(null);
     const [slots, setSlots] = useState(null);
+    const [action,  setAction] = useState(null);
   
     useEffect(() => {
-        console.log('slots', slots);
         if(!slotsCopy && slots ) 
             setSlotsCopy(cloneArray(slots));
     }, [slots]);
-
-    
-    
-    const onSaveClick = () => {
-       // TODO: missing things
-    }
 
     const createSlots = (data) => {
         const slotData =  data.dependent_services.reduce((result, service) => {
@@ -48,11 +46,33 @@ const SolutionPackagingView = () => {
         setSlots(slotsCopy);
         setAddItem(-1);
     }
-    
+     
+    const onSaveBookAction = (name, action) => {
+        const selected = slots.map((service)=> {
+            if (service.id){
+                return {service_id: service.id, slot_id: service.slot_id};
+            }
+        }).filter((service)=> service !== undefined);
+        let saveData = {
+            "name": name,
+            "service_id": id,
+            "action": action,
+            "selected_items": selected}
+
+        axios.post(SAVE_URL, saveData).then((response) => {
+            navigate('/dashboard');
+        });
+        console.log ('savedData', saveData);
+     }
+
+
     const onBookClick = () => {
-        console.log('slots', slots);
-        console.log('slotsCopy', slotsCopy);
+        setAction('book');
     }
+    const onSaveClick = () => {
+        setAction('save');
+     }
+
 
     const successView = ({data}) => {
         if (!data) return null;
@@ -60,10 +80,10 @@ const SolutionPackagingView = () => {
             createSlots(data);
         }
         return (<>
-                    {showDetails(data)}
-                    {show(slots)}
-                    {showButtons(data)}
-                </>);
+            {showDetails(data)}
+            {show(slots)}
+            {showButtons(data)}
+            </>);
     }
     
     const showButtons = (data) => {
@@ -233,6 +253,7 @@ const SolutionPackagingView = () => {
                 </S.Style>
                 <LoadingView url={URL} successView={successView}/>
                 {addItem>=0?<SearchView type="solution_pkg" onSelect={onSelect} serviceId={id} slot={addItem} key={`${id}-${addItem}`}/>:null}
+                {action? <SaveBookModal action={action} closeModal={()=>{setAction(null)}} onSaveBook={onSaveBookAction}/>:null}
             </S.Column>
             );
 }

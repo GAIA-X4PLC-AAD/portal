@@ -8,10 +8,13 @@ import { Image, Column, Style, Tag, Padding, BlueButton } from "../../../../comm
 import { Columns } from "../dataPreview/style";
 import DataPreview from "../dataPreview/DataPreview";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 
 const DescriptionTabView = (props,) => {
   const [details, setDetails] = useState({});
+
+  const {t} = useTranslation();
 
   const navigate = useNavigate();
 
@@ -55,12 +58,12 @@ const DescriptionTabView = (props,) => {
     data: PropTypes.array
   };
 
-  const showBookButton = () => {
+  const showBuildButton = () => {
     if (props.params['type'] != 'composite-service') return null;
     return (
       <Style marginTop='auto' marginBottom='auto'>
     <BlueButton marginLeft='0px' onClick={() => { navigate(`/sp/${details['id']}`) }}>
-      Book
+       {t('discovery.description.build')}
     </BlueButton>
     </Style>
     );
@@ -84,7 +87,7 @@ const DescriptionTabView = (props,) => {
               <S.Padding horizontal='8px'>
                 <S.Title>{`${details['name']}`}</S.Title>
                 <S.Body>{`${details['description']}`}</S.Body>
-                {showBookButton()}
+                {showBuildButton()}
 
                 <S.Padding vertical='8px' horizontal='0px'>
                   <S.Subtitle>TAGS</S.Subtitle>
