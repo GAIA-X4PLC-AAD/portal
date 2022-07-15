@@ -1,4 +1,4 @@
-import { SIGN_IN_MENU, NOT_SIGN_IN_MENU, SIGN_IN, SIGN_OUT, UPDATE_SEARCH_FILTER_CRITERIA, UPDATE_SEARCH_PAGE_NUMBER, UPDATE_SEARCH_TYPE, UPDATE_SEARCH_FROM_HOME, UPDATE_SEARCH_TYPE_AND_TERM, SET_DESCRIPTOR_FILE, RESET_DESCRIPTOR_FILE } from "./types";
+import { SIGN_IN_MENU, NOT_SIGN_IN_MENU, SIGN_IN, SIGN_OUT, UPDATE_SEARCH_FILTER_CRITERIA, UPDATE_SEARCH_PAGE_NUMBER, UPDATE_SEARCH_TYPE, UPDATE_SEARCH_FROM_HOME, UPDATE_SEARCH_TYPE_AND_TERM, SET_DESCRIPTOR_FILE, RESET_DESCRIPTOR_FILE, CHANGE_USER_ROLE } from "./types";
 
 
 export const signInMenuEnter = () => {
@@ -49,3 +49,7 @@ export const setDescriptorFile = (file, parsed_descriptor) => {
 export const resetDescriptorFile = () => {
     return { type: RESET_DESCRIPTOR_FILE }
 }
+
+export const changeUserRole = (role) => {
+    return { type: CHANGE_USER_ROLE, role };
+};
