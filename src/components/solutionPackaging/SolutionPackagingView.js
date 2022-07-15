@@ -20,9 +20,9 @@ const SolutionPackagingView = () => {
     const [addItem, setAddItem] = useState(-1);
     const [slotsCopy, setSlotsCopy] = useState(null);
     const [slots, setSlots] = useState(null);
-
   
     useEffect(() => {
+        console.log('slots', slots);
         if(!slotsCopy && slots ) 
             setSlotsCopy(cloneArray(slots));
     }, [slots]);
@@ -35,9 +35,10 @@ const SolutionPackagingView = () => {
 
     const createSlots = (data) => {
         const slotData =  data.dependent_services.reduce((result, service) => {
-            var available_services = (result[service.slot_id]?.available_services || 0) + (service.included?0:1);
-            var ervice = service.included? {...service, available_services} : {...result[service.slot_id] || null, available_services};
-            result[service.slot_id] = ervice;
+            const slot_id = service.slot_id;
+            var available_services = (result[slot_id]?.available_services || 0) + (service.included?0:1);
+            var serviceSlot = service.included? {...service, available_services} : {...result[slot_id] || {slot_id}, available_services};
+            result[slot_id] = serviceSlot;
             return result;
         }, []);
         setSlots(slotData);
@@ -218,7 +219,8 @@ const SolutionPackagingView = () => {
     const onSelect = (service) => {
         let copy = cloneArray(slots);
         let available_services = slots[addItem].id? slots[addItem].available_services : slots[addItem].available_services -1;
-        copy[addItem] = {...service, available_services}
+        let slot_id = slots[addItem].slot_id;
+        copy[addItem] = {...service, slot_id, available_services};
         setSlots(copy);
     }
 
@@ -230,7 +232,7 @@ const SolutionPackagingView = () => {
                     <S.BodyText>{t('solution_pkg.solutionPackagingSubtitle')}</S.BodyText>
                 </S.Style>
                 <LoadingView url={URL} successView={successView}/>
-                {addItem>=0?<SearchView type="solution_pkg" onSelect={onSelect} serviceId={id} slot={addItem}/>:null}
+                {addItem>=0?<SearchView type="solution_pkg" onSelect={onSelect} serviceId={id} slot={addItem} key={`${id}-${addItem}`}/>:null}
             </S.Column>
             );
 }

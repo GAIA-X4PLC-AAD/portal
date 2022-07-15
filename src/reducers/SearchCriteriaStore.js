@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     searchTerms: "",
     filterCriteria: [],
     size: 15,
-    page: 1,
+    page: 0,
     sort_field: '',
     sort_direction: 'ASC'
 };
@@ -21,7 +21,7 @@ const parameterBuilder = (state) => {
 }
 
 const updateState = (currentState, newState) => {
-    const state = { ...currentState, ...newState, page: 1 }
+    const state = { ...currentState, ...newState, page: 0 }
     return { ...state, parameters: parameterBuilder(state) }
 }
 

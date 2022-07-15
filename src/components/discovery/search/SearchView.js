@@ -39,7 +39,7 @@ const SearchView = ({type, onSelect, serviceId, slot}) => {
 
                     <Padding horizontal='12px' />
                     <Style maxWidth='900px'>
-                        <SearchContent type={type} />
+                        <SearchContent type={type} serviceId={serviceId} slot={slot} onSelect={onSelect} />
                     </Style>
 
                 </Column>

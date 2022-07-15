@@ -28,7 +28,7 @@ const NextPrevButtons = ({ data }) => {
         nextLabel={<><ArrowRight /></>}
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
-        pageCount={itemsPerPage}
+        pageCount={data.pages_count}
         previousLabel={<><ArrowLeft /></>}
         renderOnZeroPageCount={null}
         containerClassName={"pagination"}
