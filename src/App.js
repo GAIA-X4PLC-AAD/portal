@@ -88,6 +88,7 @@ const App = (props) => {
               <Route path="/provide/start" element={ViewContainer(<ProvideSelection />)} />
               <Route path="/provide/:type/upload" element={ViewContainer(<ProvideOverview />)} />
               <Route path="/provide/:type/upload/:id" element={ViewContainer(<ProvideOverview />)} />
+              <Route path="/provide/:type/upload/:id/:mode" element={ViewContainer(<ProvideOverview />)} />
               <Route path="/provide/:type/confirm/:index" element={ViewContainer(<ProvideAttributes />)} />
               <Route path="/provide/:type/confirm/:id/:index" element={ViewContainer(<ProvideAttributes />)} />
             </Routes>

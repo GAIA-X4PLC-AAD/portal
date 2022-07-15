@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import { useEffect, useState } from "react";
 import { connect } from 'react-redux';
 import axios from "axios";
-import { withTranslation } from "react-i18next";
-import { Navigate, NavLink, useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { setDescriptorFile } from '../../actions';
 import PropTypes from 'prop-types';
 import "./Provide.css"
 import { HeaderTitle, BodyText, BodySmallBoldText, BlueButton, BlueUploadLabel, CancelButton } from "../../common/styles";
-import {toTypeLabel} from "./ProvideUtil"
+import { toTypeLabel } from "./ProvideUtil"
 
 class ProvideOverview extends Component {
 
@@ -54,7 +52,14 @@ class ProvideOverview extends Component {
 
     render() {
         const type = this.props.params.type;
-        
+
+        const mode = this.props.params.mode;
+        let back;
+
+        if (mode != "edit") {
+            back = <NavLink to="/provide/start"> <CancelButton >Back</CancelButton></NavLink>
+        }
+
         return (
             <div>
                 <div className="provide-header-description">
@@ -66,7 +71,7 @@ class ProvideOverview extends Component {
                     <BlueUploadLabel><input className="hidden" type="file" name="file" onChange={this.changeHandler} />Upload</BlueUploadLabel>
                     <BodySmallBoldText className="provide-upload-file"> {this.state.file.name}</BodySmallBoldText>
                     <div className="provide-button-area">
-                        <NavLink to="/provide/start"> <CancelButton >Back</CancelButton></NavLink>
+                        {back}
                         <BlueButton disabled={this.state.file.name == null} onClick={this.handleSubmission}>Submit</BlueButton>
                     </div>
                 </div>
@@ -80,6 +85,7 @@ ProvideOverview.propTypes = {
     setDescriptorFile: PropTypes.func,
     navigate: PropTypes.func,
     params: PropTypes.any,
+    search: PropTypes.any,
     file: PropTypes.any
 }
 
