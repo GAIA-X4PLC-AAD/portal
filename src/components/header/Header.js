@@ -32,7 +32,7 @@ function Header(props) {
 
     const handleRegister = () => {
         // dispatch(signIn())
-        navigate('/register')
+        navigate('/onboarding')
     };
 
 

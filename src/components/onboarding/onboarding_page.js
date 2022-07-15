@@ -13,6 +13,50 @@ import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
 const OnboardingPage = () => {
 
+    const [activeStage, setActiveStage] = useState(1)
+    const [customerOrOrganization, setCustomerOrOrganization] = useState(null)
+    const [isAISBLChecked, setIsAISBLChecked] = useState(false);
+
+    const CUSTOMER = 'customer'
+    const ORGANIZATION = 'organization'
+
+
+    const nextStage = () => {
+        console.log(`OnboardingPage, activeStage: ${activeStage}`)
+        // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
+        if (activeStage == 1) {
+            setActiveStage(2)
+        } else if (activeStage == 2) {
+            setActiveStage(3)
+        } else if (activeStage == 3) {
+            setActiveStage(4)
+        }
+    }
+
+    const previousStage = () => {
+        // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
+        if (activeStage == 2) {
+            setActiveStage(1)
+        } else if (activeStage == 3) {
+            setActiveStage(2)
+        } else if (activeStage == 4) {
+            setActiveStage(3)
+        }
+    }
+
+    const currentStageView = () => {
+        console.log(`OnboardingPage, currentStageView, activeStage ${activeStage}`)
+
+        if (activeStage == 1) {
+            return customerOrProviderView()
+        } else if (activeStage == 2) {
+            if (customerOrOrganization == ORGANIZATION) return organizationDetailsView();
+            else { return userFillDetailsView() }
+        } else if (activeStage == 3) {
+            return confirmationEmailView()
+        } else return verifyQrView()
+    }
+
     const welcomingMessage = () => {
         return (
             <>
@@ -48,16 +92,16 @@ const OnboardingPage = () => {
         )
     }
 
-    const stepsPane = () => {
+    const stepsPane = ({ activeStage = 1, isNextDisabled = false }) => {
         return (
             <>
-                {buildStepCardView({ stage: '1', title: 'Customer or provider', subtitle: 'Step 1', })}
-                {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2' })}
-                {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3', isActive: true })}
-                {buildStepCardView({ stage: '4', title: 'Email notification', subtitle: 'Step 4' })}
+                {buildStepCardView({ stage: '1', title: 'Customer or provider', subtitle: 'Step 1', isActive: activeStage == 1 })}
+                {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2', isActive: activeStage == 2 })}
+                {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3', isActive: activeStage == 3 })}
+                {buildStepCardView({ stage: '4', title: 'Email notification', subtitle: 'Step 4', isActive: activeStage == 4 })}
                 <Row>
-                    <Padding vertical='32px'><MasterButton disabled>Previous</MasterButton></Padding>
-                    <Padding vertical='32px'><MasterButton>Next</MasterButton></Padding>
+                    <Padding vertical='32px'><MasterButton disabled={activeStage == 1} onClick={() => previousStage()}>Previous</MasterButton></Padding>
+                    <Padding vertical='32px'><MasterButton disabled={isNextDisabled} onClick={() => nextStage()}>Next</MasterButton></Padding>
                 </Row>
             </>
         )
@@ -74,8 +118,8 @@ const OnboardingPage = () => {
                             <HorizontalLine />
                             <Padding vertical='40px'>
                                 <Column>
-                                    <RadioButton name='step1'><BodyText>Customer</BodyText></RadioButton>
-                                    <RadioButton name='step1'><BodyText>Provider</BodyText></RadioButton>
+                                    <RadioButton name='step1' onClick={() => setCustomerOrOrganization(CUSTOMER)} defaultChecked={CUSTOMER == customerOrOrganization}><BodyText>Customer</BodyText></RadioButton>
+                                    <RadioButton name='step1' onClick={() => setCustomerOrOrganization(ORGANIZATION)} defaultChecked={ORGANIZATION == customerOrOrganization}><BodyText>Provider</BodyText></RadioButton>
                                 </Column>
                             </Padding>
                         </Padding>
@@ -87,7 +131,6 @@ const OnboardingPage = () => {
 
 
     const organizationDetailsView = () => {
-        const [isChecked, setIsChecked] = useState(false);
 
         return <>
             <Style width='633px' height='246px'>
@@ -110,8 +153,8 @@ const OnboardingPage = () => {
                                     <Row alignItems='center'>
                                         <label>
                                             <Checkbox
-                                                checked={isChecked}
-                                                onChange={(event) => { setIsChecked(event.target.checked) }}
+                                                checked={isAISBLChecked}
+                                                onChange={(event) => { setIsAISBLChecked(event.target.checked) }}
                                             />
                                         </label>
                                         <Padding horizontal='4px' />
@@ -284,6 +327,47 @@ const OnboardingPage = () => {
         </>
     }
 
+
+    const userFillDetailsView = () => {
+
+        return <>
+            <Style width='633px' height='246px'>
+                <Padding horizontal='20px'>
+                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Padding horizontal='24px'>
+                            <H4LightText>Organization details</H4LightText>
+                            <BodyText>Lorem ipsum dolor si jet .</BodyText>
+                            <HorizontalLine />
+                            <Padding vertical='12px'>
+                                <Column>
+                                    <TextInput type="text" placeholder="First Name" />
+                                    <Padding vertical='4px' />
+                                    <TextInput type="text" placeholder="Last Name" />
+                                    <Padding vertical='16px' />
+                                    <TextInput type="text" placeholder="Email" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="Phone" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="City" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="Address" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="Zip Code" />
+                                    <Padding vertical='28px'>
+                                        <Row>
+                                            <OutlineButton>Registration via DID</OutlineButton>
+                                            <Padding horizontal='10px' />
+                                            <OutlineButton>Send</OutlineButton>
+                                        </Row>
+                                    </Padding>
+                                </Column>
+                            </Padding>
+                        </Padding>
+                    </Card>
+                </Padding>
+            </Style>
+        </>
+    }
     const organizationFillDetailsView = () => {
 
         return <>
@@ -343,14 +427,15 @@ const OnboardingPage = () => {
         </>
     }
 
+
     return <>
         <Row>
             <Column>
                 {welcomingMessage()}
                 <Padding vertical='64px'>
                     <Row>
-                        <Style width='307px'>{stepsPane()}</Style>
-                        {complienceCheckMessageView()}
+                        <Style width='307px'>{stepsPane({ activeStage: activeStage, isNextDisabled: customerOrOrganization == null })}</Style>
+                        {currentStageView()}
                     </Row>
                 </Padding>
             </Column>
