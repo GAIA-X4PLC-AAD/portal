@@ -53,7 +53,7 @@ const CenterBar = () => {
       <S.TopMenuLinks>
 
         {/* DASHBOARD: 0 */}
-        {(_isPpr || _isPcrUser) ?
+        {(_isPpr || _isPcrUser || _isPcrOrg) ?
           <ButtonText selected={location.pathname === '/dashboard'} color='#000000' onClick={() => { navigate('/dashboard'); }}>{t('left-menu.dashboard')}</ButtonText> : ''}
 
         {/* ADMIN: 1 */}
