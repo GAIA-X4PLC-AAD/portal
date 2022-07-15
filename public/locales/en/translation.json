@@ -211,6 +211,9 @@
             "noResults": "No results found",
             "noResultsMessage": "Sorry, we couldn’t find any matching results. Try broadening your filters",
             "advance": "Advanced Search"
+        },
+        "description": {
+            "build": "Build"
         }
     },
     "account": {
@@ -294,13 +297,30 @@
         "deny": "Deny"
     },
     "solution_pkg": {
+        "solutionPackaging": "Solution Packaging",
+        "solutionPackagingSubtitle": "Lorem ipsum dolor si jet subtitle",
         "a_s": "{as, plural, =1 {1 available service} other {# available services}}",
         "cancel": "Cancel",
         "select": "Select",
         "details":"Details",
         "price": "Price",
         "screenshots": "Screenshots",
-        "contact": "Contacts"
+        "contact": "Contacts",
+        "book": "Book",
+        "reset": "Reset",
+        "save": "Save",
+        "remove": "Remove",
+        "add": "Add",
+        "selectMessage": "Select...",
+        "description": "Description",
+        "features": "FEATURES",
+        "stack": "STACK",
+        "location": "LOCATION",
+        "lastUpdated": "LAST UPDATED",
+        "enterNameMessage": "Please enter a name",
+        "saveBookModalMessage-book": "Book solution package",
+        "saveBookModalMessage-save": "Save solution package"
+        
     }
 }
 

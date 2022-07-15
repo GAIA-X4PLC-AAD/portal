@@ -52,7 +52,6 @@ export const resetDescriptorFile = () => {
     return { type: RESET_DESCRIPTOR_FILE }
 }
 
-<<<<<<< src/actions/index.js
 export const lcmServicesLoaded = (id, services) => {
     return { type: LCM_SERVICES_LOADED, id: id, services: services }
 }
@@ -64,8 +63,7 @@ export const resetLcmServices = () => {
 export const selectLcmService = (serviceName, lcm) => {
     return { type: LCM_SELECT_SERVICE, serviceName, lcm }
 }
-=======
 export const changeUserRole = (role) => {
     return { type: CHANGE_USER_ROLE, role };
 };
->>>>>>> src/actions/index.js
+

@@ -4,14 +4,14 @@ import Modal from '../../Modal';
 import * as S from '../discovery/style';
 import { useTranslation } from 'react-i18next';
 import Checkbox from '../../common/checkbox';
-import { BlueButton, Column, Image, Row, Style } from '../../common/styles';
+import { BlueButton, CancelButton, Column, Image, Row, Style } from '../../common/styles';
 import DescriptionTab from '../discovery/tabs/description/DescriptionTab';
 import PriceTab from '../discovery/tabs/priceTab/PriceTab';
 import ScreenshotsTab from '../discovery/tabs/screenshots/ScreenshotsTab';
 import ContactTab from '../discovery/tabs/ContactTab/ContactTab';
 import TabView from '../tab/TabView';
 
-const ServiceModalDetails = ({service, closeModal}) => {
+const ServiceModalDetails = ({service, closeModal, onSelect}) => {
 
     const {t} = useTranslation();
     const openLink =  (url) => {
@@ -56,7 +56,7 @@ const ServiceModalDetails = ({service, closeModal}) => {
 
     const tabViews = [DescriptionTab({ id: service.id, type: 'services'}),
                       PriceTab({ id: service.id, type: 'services' , showButton:false}),
-                      ScreenshotsTab({ id: service.id, type: 'services' }),
+                      ScreenshotsTab({ serviceId: service.id, type: 'services' }),
                       ContactTab({ id: service.id, type: 'services' })];
     return (   
         <Modal width='fit-content'>
@@ -64,8 +64,8 @@ const ServiceModalDetails = ({service, closeModal}) => {
                 {showTileHeader()}
                 <TabView labels={tabLabels} views={tabViews} width='864px;'/>
                 <Row margin='24px 24px 24px 10px'>
-                    <BlueButton onClick={closeModal}>{t('solution_pkg.cancel')}</BlueButton>
-                    <BlueButton>{t('solution_pkg.select')}</BlueButton>
+                    <CancelButton onClick={closeModal}>{t('solution_pkg.cancel')}</CancelButton>
+                    <BlueButton onClick={()=>{onSelect(service)}}>{t('solution_pkg.select')}</BlueButton>
                 </Row>
             </Column>
         </Modal>
@@ -73,7 +73,8 @@ const ServiceModalDetails = ({service, closeModal}) => {
 }
 ServiceModalDetails.propTypes = {
     service: PropTypes.object,
-    closeModal: PropTypes.func
+    closeModal: PropTypes.func,
+    onSelect: PropTypes.func
 }
 
 

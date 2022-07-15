@@ -1,127 +1,186 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import Carousel from "react-multi-carousel";
+import { useNavigate, useParams } from "react-router-dom";
 import * as S from "../../common/styles";
 import SearchView from "../discovery/search/SearchView";
 import LoadingView from "../loading_view/LoadingView";
-import ServiceModalDetails from "./ServiceModalDetails";
 import SlotDetails from "./SlotDetails";
-import { AvailabeServices, SlotBox } from "./style";
+import NP from "../../common/vertical_steps/next_prev_buttons";
+import PropTypes from 'prop-types';
+import SaveBookModal from "./SaveBookModal";
+import axios from "axios";
 
 const SolutionPackagingView = () => {
     
     const {id} = useParams();
 
+
+    const SAVE_URL = process.env.REACT_APP_EDGE_API_URI + '/sp-service/save';
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/${id}/details/`;
     const {t} = useTranslation();
-    
+    const navigate = useNavigate();
     
     const [addItem, setAddItem] = useState(-1);
-    const [displayModal, setDisplayModal] = useState(false);
-    const [solutionPkgCopy, setSolutionPkgCopy] = useState(null);
-    const [solutionPkg, setSolutionPkg] = useState(null);
-
-    const [fakeData,setFakeData] = useState( {dependent_services:[{
-        available_services: 3,
-        "id": "97",
-        "name": "The Service Power",
-        "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Android_O_Preview_Logo.png/1200px-Android_O_Preview_Logo.png",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris...",
-        "features": "features",
-        "stack": "stack",
-        "security": "security",
-        "location": "Magdeburg",
-        "category": "Category #7",
-        "tags": [
-          "Atag",
-          "Btag",
-          "Ctag"
-        ],
-        "img_preview_url": "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-674010.jpg&fm=jpg",
-        "ppr_name": "The Service Power",
-        "ppr_url": "https://my.company.url",
-        "location_flag": "https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/2880px-Flag_of_Germany.svg.png",
-        "last_updated": "2022-06-09",
-        "terms_of_use": "term of use"
-      },
-        {available_services: 1},
-        {available_services: 4}]})
-
-    const [fakeDataCopy, setFakeDataCopy] = useState(null);
-
+    const [slotsCopy, setSlotsCopy] = useState(null);
+    const [slots, setSlots] = useState(null);
+    const [action,  setAction] = useState(null);
+  
     useEffect(() => {
-         if(!fakeDataCopy) {
-                setFakeDataCopy(fakeData);
-        }
-        }, [fakeData]);
+        if(!slotsCopy && slots ) 
+            setSlotsCopy(cloneArray(slots));
+    }, [slots]);
 
-    useEffect(() => {
-        if(!solutionPkgCopy)
-            setSolutionPkgCopy(solutionPkg);
-    }, [solutionPkg]);
-
-    
-    
-    const onSaveClick = () => {
-        setDisplayModal(true);
-    }
-    const closeModal = () => {
-        setDisplayModal(false);
+    const createSlots = (data) => {
+        const slotData =  data.dependent_services.reduce((result, service) => {
+            const slot_id = service.slot_id;
+            var available_services = (result[slot_id]?.available_services || 0) + (service.included?0:1);
+            var serviceSlot = service.included? {...service, available_services} : {...result[slot_id] || {slot_id}, available_services};
+            result[slot_id] = serviceSlot;
+            return result;
+        }, []);
+        setSlots(slotData);
     }
     
     const onResetClick = () => {
-        setFakeData(fakeDataCopy);
-        setSolutionPkg(solutionPkgCopy);
+        setSlots(slotsCopy);
         setAddItem(-1);
     }
+     
+    const onSaveBookAction = (name, action) => {
+        const selected = slots.map((service)=> {
+            if (service.id){
+                return {service_id: service.id, slot_id: service.slot_id};
+            }
+        }).filter((service)=> service !== undefined);
+        let saveData = {
+            "name": name,
+            "service_id": id,
+            "action": action,
+            "selected_items": selected}
+
+        axios.post(SAVE_URL, saveData).then((response) => {
+            navigate('/dashboard');
+        });
+        console.log ('savedData', saveData);
+     }
+
+
     const onBookClick = () => {
-        console.log('fakeData', fakeData);
-        console.log('fakeDataCopy', fakeDataCopy);
+        setAction('book');
     }
+    const onSaveClick = () => {
+        setAction('save');
+     }
+
 
     const successView = ({data}) => {
         if (!data) return null;
-        if (!solutionPkg) {
-            setSolutionPkg(data);
-            return null;
+        if (!slots) {
+            createSlots(data);
         }
         return (<>
-                    {showDetails(solutionPkg)}
-                    {showSlots(fakeData)}
-                    {showButtons(solutionPkg)}
-                </>);
+            {showDetails(data)}
+            {show(slots)}
+            {showButtons(data)}
+            </>);
     }
     
     const showButtons = (data) => {
         return (
             <S.Row margin="32px;" gap='20px'>
-                <S.BlueButton onClick={onResetClick} >Reset</S.BlueButton>
-                <S.BlueButton onClick={onSaveClick}>Save</S.BlueButton>
-                <S.BlueButton onClick={onBookClick}>Book</S.BlueButton>
+                <S.BlueButton onClick={onResetClick} >{t('solution_pkg.reset')}</S.BlueButton>
+                <S.BlueButton onClick={onSaveClick}>{t('solution_pkg.save')}</S.BlueButton>
+                <S.BlueButton onClick={onBookClick}>{t('solution_pkg.book')}</S.BlueButton>
             </S.Row>
         );
     } 
 
-    const showSlots = (data) => {
-        return (
-            <S.Row margin="32px;" gap='20px'>
-                {data.dependent_services.map((service,i) => {return (<SlotDetails service={service} 
-                                onRemove={()=>removeSlot(service,i)} 
-                                onAdd={()=>setAddItem(i)}
+    // TODO: change index in scopeServiceId for right id
+    const onAddClick = ( index) => {
+        setAddItem(index);
+    }
+
+    const CarouselComp = ({data}) => {
+        // use state and useEffect are required in order to force carousel to re-render
+        const [items, setItems] = useState([]);
+     
+        useEffect(() => {
+            if(items.length === 0){
+                    setItems(data);
+            }
+        }, [data]);
+
+        const shouldDisplayNextPrev = items.length > 5;
+        const responsive = {
+            superLargeDesktop: {
+                // the naming can be any, depends on you.
+                breakpoint: { max: 4000, min: 3000 },
+                items: 3,
+                slidesToSlide: 3
+            },
+            desktop: {
+                breakpoint: { max: 3000, min: 1024 },
+                items: 5,
+                slidesToSlide: 5
+            },
+            tablet: {
+                breakpoint: { max: 1024, min: 464 },
+                items: 2,
+                slidesToSlide: 2
+            },
+            mobile: {
+                breakpoint: { max: 464, min: 0 },
+                items: 1,
+                slidesToSlide: 1
+            }
+        };    
+        return (        
+          <Carousel
+                arrows={false}
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                renderButtonGroupOutside={shouldDisplayNextPrev}
+                 customButtonGroup={<NP bottom='510px'/>}
+                >
+                {items.map((service,i) => {return (<SlotDetails service={service} 
+                                onRemove={()=>removeSlot(i)} 
+                                onAdd={()=>onAddClick(i)}
                                 selected={addItem===i}
                                 key={i}/>
 
                 )})}
-            </S.Row>
+            </Carousel>
+        );
+    }
+    CarouselComp.propTypes = {
+        data: PropTypes.array
+    }
+    const show = (data) => {
+        if (!data) return null;
+        return (
+            <S.Style marginBottom="32px" marginTop="32px">
+                <CarouselComp data={data}/>
+            </S.Style>
         );
     } 
   
+  // clone array with map function to keep keys from original array
+    const cloneArray = (array) => {
+        let keys= array.keys();
+        let newItem = [];
+        for (const key  in array) {
+            newItem[key] = JSON.parse(JSON.stringify(array[key]));
+        }
+        return newItem;
+    }
     // todo: change to right elements
-    const removeSlot = (service, i) => {
-        let copy = JSON.parse(JSON.stringify(fakeData));
-        copy.dependent_services[i].id= null; 
-        copy.dependent_services[i].available_services=copy.dependent_services[i].available_services+1;
-        setFakeData(copy);
+    const removeSlot = (i) => {
+        let copy = cloneArray(slots);
+        copy[i].id= null; 
+        copy[i].available_services=copy[i].available_services+1;
+        setSlots(copy);
         setAddItem(i);
     }
 
@@ -139,7 +198,7 @@ const SolutionPackagingView = () => {
                     </S.Style>
                 </S.Row>
                 <S.Style textAlign="left" marginTop='36px'>
-                    <S.BodyBoldText>Description</S.BodyBoldText>
+                    <S.BodyBoldText>{t('solution_pkg.description')}</S.BodyBoldText>
                     <S.Style marginTop='14px'>
                     <S.BodyText>{data.description}</S.BodyText>
                     </S.Style>
@@ -147,25 +206,25 @@ const SolutionPackagingView = () => {
                 <S.Row margin='auto 0 0 0' gap="24px">
                     <S.Column> 
                         <S.Style marginBottom='8px'>
-                            <S.CaptionText color="#B2B2B2">FEATURES</S.CaptionText>
+                            <S.CaptionText color="#B2B2B2">{t('solution_pkg.features')}</S.CaptionText>
                         </S.Style>
                         <S.BodySmallText>{data.features}</S.BodySmallText>
                     </S.Column>
                     <S.Column> 
                         <S.Style marginBottom='8px'>
-                        <S.CaptionText color="#B2B2B2">STACK</S.CaptionText>
+                        <S.CaptionText color="#B2B2B2">{t('solution_pkg.stack')}</S.CaptionText>
                         </S.Style>
                         <S.BodySmallText>{data.stack}</S.BodySmallText>
                     </S.Column>
                     <S.Column> 
                         <S.Style marginBottom='8px'>
-                            <S.CaptionText color="#B2B2B2">LOCATION</S.CaptionText>
+                            <S.CaptionText color="#B2B2B2">{t('solution_pkg.location')}</S.CaptionText>
                         </S.Style>
                         <S.BodySmallText>{data.location}</S.BodySmallText>
                     </S.Column>
                     <S.Column> 
                         <S.Style marginBottom='8px'>
-                            <S.CaptionText color="#B2B2B2">LAST UPDATED</S.CaptionText>
+                            <S.CaptionText color="#B2B2B2">{t('solution_pkg.lastUpdated')}</S.CaptionText>
                         </S.Style>
                         <S.BodySmallText>{data.last_updated}</S.BodySmallText>
                     </S.Column>
@@ -177,16 +236,24 @@ const SolutionPackagingView = () => {
         )
 
     }
+    const onSelect = (service) => {
+        let copy = cloneArray(slots);
+        let available_services = slots[addItem].id? slots[addItem].available_services : slots[addItem].available_services -1;
+        let slot_id = slots[addItem].slot_id;
+        copy[addItem] = {...service, slot_id, available_services};
+        setSlots(copy);
+    }
+
     if (!id) return null;
     return(
             <S.Column>
                 <S.Style textAlign="left">
-                    <S.H2Text>Solution Packaging</S.H2Text>
-                    <S.BodyText>Lorem ipsum dolor si jet subtitle</S.BodyText>
+                    <S.H2Text>{t('solution_pkg.solutionPackaging')}</S.H2Text>
+                    <S.BodyText>{t('solution_pkg.solutionPackagingSubtitle')}</S.BodyText>
                 </S.Style>
                 <LoadingView url={URL} successView={successView}/>
-                {displayModal?<ServiceModalDetails service={fakeData.dependent_services[0]} closeModal={closeModal}/>:null}
-                {addItem>=0?<SearchView type="solution_pkg" />:null}
+                {addItem>=0?<SearchView type="solution_pkg" onSelect={onSelect} serviceId={id} slot={addItem} key={`${id}-${addItem}`}/>:null}
+                {action? <SaveBookModal action={action} closeModal={()=>{setAction(null)}} onSaveBook={onSaveBookAction}/>:null}
             </S.Column>
             );
 }

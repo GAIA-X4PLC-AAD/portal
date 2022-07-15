@@ -3,7 +3,7 @@ import AdminManagementSearchFilter from './AdminManagementSearchFilter';
 import AdminParticipantSearchFilter from './AdminParticipantSearchFilter';
 import DiscoverySearchFilter from './DiscoverySearchFilter';
 
-const SearchFilterFactory = ({type}) => {
+const SearchFilterFactory = ({type,serviceId, slot}) => {
     
     switch (type) {
         case 'data': 
@@ -11,7 +11,7 @@ const SearchFilterFactory = ({type}) => {
         case 'services': 
         return DiscoverySearchFilter({type});
         case 'solution_pkg':
-            return DiscoverySearchFilter({type:'services'});
+            return DiscoverySearchFilter({type:'services', serviceId:serviceId, slot:slot});
         case 'participant': 
             return AdminParticipantSearchFilter({type});
         case 'management': 
@@ -21,7 +21,9 @@ const SearchFilterFactory = ({type}) => {
 }
 
 SearchFilterFactory.propTypes = {
-    type: PropTypes.string
+    type: PropTypes.string,
+    serviceId: PropTypes.string,
+    slot: PropTypes.number
 };
 
 export default SearchFilterFactory;
