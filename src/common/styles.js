@@ -261,7 +261,7 @@ font-size: 15px;
 line-height: 20px;
 /* identical to box height, or 133% */
 letter-spacing: 0.25px;
-color: #000000;
+color: ${props => props.color || '#000000'};
 `;
 
 export const CaptionTeleNeoText = styled.div`
@@ -442,6 +442,9 @@ export const MasterButton = styled.div`
     gap: 8px;
     cursor: pointer;
     width: 136px;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
     
 
     /* Background/Primary */
