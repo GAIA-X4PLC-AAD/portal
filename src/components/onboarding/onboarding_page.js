@@ -10,12 +10,14 @@ import Checkbox from "../../common/checkbox";
 import styled from "styled-components";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
+import OrganizationDetailsView from "./onboarding_provider";
+
 
 const OnboardingPage = () => {
 
     const [activeStage, setActiveStage] = useState(1)
     const [customerOrOrganization, setCustomerOrOrganization] = useState(null)
-    const [isAISBLChecked, setIsAISBLChecked] = useState(false);
+  
 
     const CUSTOMER = 'customer'
     const ORGANIZATION = 'organization'
@@ -50,7 +52,7 @@ const OnboardingPage = () => {
         if (activeStage == 1) {
             return customerOrProviderView()
         } else if (activeStage == 2) {
-            if (customerOrOrganization == ORGANIZATION) return organizationDetailsView();
+            if (customerOrOrganization == ORGANIZATION) return <OrganizationDetailsView onSuccess={()=>{setActiveStage(3)}}/> ;
             else { return userFillDetailsView() }
         } else if (activeStage == 3) {
             return confirmationEmailView()
@@ -100,7 +102,7 @@ const OnboardingPage = () => {
                 {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3', isActive: activeStage == 3 })}
                 {buildStepCardView({ stage: '4', title: 'Email notification', subtitle: 'Step 4', isActive: activeStage == 4 })}
                 <Row>
-                    <Padding vertical='32px'><MasterButton disabled={activeStage == 1} onClick={() => previousStage()}>Previous</MasterButton></Padding>
+                    <Padding vertical='32px'><MasterButton disabled={activeStage === 1} onClick={() => previousStage()}>Previous</MasterButton></Padding>
                     <Padding vertical='32px'><MasterButton disabled={isNextDisabled} onClick={() => nextStage()}>Next</MasterButton></Padding>
                 </Row>
             </>
@@ -129,55 +131,6 @@ const OnboardingPage = () => {
         </>
     }
 
-
-    const organizationDetailsView = () => {
-
-        return <>
-            <Style width='633px' height='246px'>
-                <Padding horizontal='20px'>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                        <Padding horizontal='24px'>
-                            <H4LightText>Do you want to register as a customer or provider?</H4LightText>
-                            <ButtonText color='#00A2E4'>Learn more</ButtonText>
-                            <HorizontalLine />
-                            <Padding vertical='24px'>
-                                <Column>
-                                    <BodyText>Please upload your organization details or select express registration via DID.</BodyText>
-                                    <Padding vertical='16px' alignSelf='start'><OutlineButton>Upload</OutlineButton></Padding>
-                                    <Padding vertical='16px' />
-                                    <TextInput type="text" placeholder="Organization Name" />
-                                    <Padding vertical='4px' />
-                                    <TextInput type="text" placeholder="Email" />
-                                    <Padding vertical='8px' />
-                                    {/* Checkbox */}
-                                    <Row alignItems='center'>
-                                        <label>
-                                            <Checkbox
-                                                checked={isAISBLChecked}
-                                                onChange={(event) => { setIsAISBLChecked(event.target.checked) }}
-                                            />
-                                        </label>
-                                        <Padding horizontal='4px' />
-                                        <BodyText>Apply for AISBL Membership</BodyText>
-                                        <Padding horizontal='7px' />
-                                        <Image objectFit='contain' src='/images/question-mark.svg' />
-                                    </Row>
-
-                                    <Padding vertical='28px'>
-                                        <Row>
-                                            <OutlineButton>Registration via DID</OutlineButton>
-                                            <Padding horizontal='10px' />
-                                            <OutlineButton>Send</OutlineButton>
-                                        </Row>
-                                    </Padding>
-                                </Column>
-                            </Padding>
-                        </Padding>
-                    </Card>
-                </Padding>
-            </Style>
-        </>
-    }
 
     const confirmationEmailView = () => {
         return <>
