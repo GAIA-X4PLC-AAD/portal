@@ -1,35 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from "axios";
 
+import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal, FadingBackground } from '../../common/styles';
+import { Padding } from '../discovery/tabs/style';
+import RadioButton from '../../common/radio';
+import Checkbox from '../../common/checkbox';
 
-import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal, FadingBackground } from "../../common/styles";
-import { Padding } from "../discovery/tabs/style";
-import RadioButton from "../../common/radio";
-import Checkbox from "../../common/checkbox";
+import styled from 'styled-components';
+import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
-import styled from "styled-components";
-import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
-
-import OrganizationDetailsView from "./onboarding_provider";
+import OrganizationDetailsView from './onboarding_provider';
 
 
 const OnboardingPage = () => {
 
+    const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/customer/';
+
+
     const [activeStage, setActiveStage] = useState(1)
     const [customerOrOrganization, setCustomerOrOrganization] = useState(null)
-  
+
+    const userFillDetailsFormRef = React.createRef()
+    const nextButtonRef = React.createRef()
+
+    const [userFormDetailsInput, setInput] = useState({});
 
     const CUSTOMER = 'customer'
     const ORGANIZATION = 'organization'
 
 
-    const nextStage = () => {
+    const registerUserApi = async () => {
+
+        try {
+            const _result = await axios.post(registerUserUrl, userFormDetailsInput, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            if (_result.response) return true
+          } catch (err) {
+            if (err) alert(err.message)
+
+          }
+
+          return false
+    }
+
+    const nextStage = async () => {
         console.log(`OnboardingPage, activeStage: ${activeStage}`)
         // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
         if (activeStage == 1) {
             setActiveStage(2)
         } else if (activeStage == 2) {
-            setActiveStage(3)
+            if (validateUserFillDetailsForm()) {
+                const _result = await registerUserApi()
+                console.log(`nextStage, _result: ${_result}`)
+                // if (_result) setActiveStage(3)
+                setActiveStage(3)
+            }
+
         } else if (activeStage == 3) {
             setActiveStage(4)
         }
@@ -52,7 +82,7 @@ const OnboardingPage = () => {
         if (activeStage == 1) {
             return customerOrProviderView()
         } else if (activeStage == 2) {
-            if (customerOrOrganization == ORGANIZATION) return <OrganizationDetailsView onSuccess={()=>{setActiveStage(3)}}/> ;
+            if (customerOrOrganization == ORGANIZATION) return <OrganizationDetailsView onSuccess={() => { setActiveStage(3) }} />;
             else { return userFillDetailsView() }
         } else if (activeStage == 3) {
             return confirmationEmailView()
@@ -95,15 +125,22 @@ const OnboardingPage = () => {
     }
 
     const stepsPane = ({ activeStage = 1, isNextDisabled = false }) => {
+
+        const nextStr = activeStage == 2 ? 'Send' : 'Next'
+
         return (
             <>
                 {buildStepCardView({ stage: '1', title: 'Customer or provider', subtitle: 'Step 1', isActive: activeStage == 1 })}
                 {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2', isActive: activeStage == 2 })}
                 {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3', isActive: activeStage == 3 })}
-                {buildStepCardView({ stage: '4', title: 'Email notification', subtitle: 'Step 4', isActive: activeStage == 4 })}
+                {buildStepCardView({ stage: '4', title: 'Request submission', subtitle: 'Step 4', isActive: activeStage == 4 })}
+                {buildStepCardView({ stage: '5', title: 'Proof on onboarding', subtitle: 'Step 6', isActive: activeStage == 4 })}
+                {buildStepCardView({ stage: '6', title: 'VC details', subtitle: 'Step 6', isActive: activeStage == 4 })}
+                {buildStepCardView({ stage: '7', title: 'Finish onboarding', subtitle: 'Step 7', isActive: activeStage == 4 })}
                 <Row>
                     <Padding vertical='32px'><MasterButton disabled={activeStage === 1} onClick={() => previousStage()}>Previous</MasterButton></Padding>
-                    <Padding vertical='32px'><MasterButton disabled={isNextDisabled} onClick={() => nextStage()}>Next</MasterButton></Padding>
+
+                    <Padding vertical='32px'><MasterButton ref={nextButtonRef} disabled={isNextDisabled} onClick={() => nextStage()}>{nextStr}</MasterButton></Padding>
                 </Row>
             </>
         )
@@ -115,9 +152,6 @@ const OnboardingPage = () => {
                 <Padding horizontal='20px'>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
-                            <H4LightText>Do you want to register as a customer or provider?</H4LightText>
-                            <ButtonText color='#00A2E4'>Learn more</ButtonText>
-                            <HorizontalLine />
                             <Padding vertical='40px'>
                                 <Column>
                                     <RadioButton name='step1' onClick={() => setCustomerOrOrganization(CUSTOMER)} defaultChecked={CUSTOMER == customerOrOrganization}><BodyText>Customer</BodyText></RadioButton>
@@ -280,8 +314,31 @@ const OnboardingPage = () => {
         </>
     }
 
+    const validateUserFillDetailsForm = () => {
+        return userFillDetailsFormRef.current.reportValidity()
+    }
+
+    const onUserFormSubmit = () => {
+
+    }
 
     const userFillDetailsView = () => {
+
+
+        const getValue = (target) => {
+            switch (target.type) {
+                case 'checkbox': return target.checked;
+                case 'file': return target.files[0];
+                default: return target.value;
+            }
+        }
+
+        const onFormChanged = (e) => {
+            const key = e.target.name;
+            const value = getValue(e.target);
+            setInput(values => ({ ...values, [key]: value }))
+        }
+
 
         return <>
             <Style width='633px' height='246px'>
@@ -292,28 +349,29 @@ const OnboardingPage = () => {
                             <BodyText>Lorem ipsum dolor si jet .</BodyText>
                             <HorizontalLine />
                             <Padding vertical='12px'>
-                                <Column>
-                                    <TextInput type="text" placeholder="First Name" />
-                                    <Padding vertical='4px' />
-                                    <TextInput type="text" placeholder="Last Name" />
-                                    <Padding vertical='16px' />
-                                    <TextInput type="text" placeholder="Email" />
-                                    <Padding vertical='8px' />
-                                    <TextInput type="text" placeholder="Phone" />
-                                    <Padding vertical='8px' />
-                                    <TextInput type="text" placeholder="City" />
-                                    <Padding vertical='8px' />
-                                    <TextInput type="text" placeholder="Address" />
-                                    <Padding vertical='8px' />
-                                    <TextInput type="text" placeholder="Zip Code" />
-                                    <Padding vertical='28px'>
-                                        <Row>
-                                            <OutlineButton>Registration via DID</OutlineButton>
-                                            <Padding horizontal='10px' />
-                                            <OutlineButton>Send</OutlineButton>
-                                        </Row>
-                                    </Padding>
-                                </Column>
+                                <form ref={userFillDetailsFormRef} noValidate>
+                                    <Column>
+                                        <TextInput type='text' placeholder='First Name' name='first_name' value={userFormDetailsInput.first_name || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <Padding vertical='4px' />
+                                        <TextInput type='text' placeholder='Last Name' name='last_name' value={userFormDetailsInput.last_name || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <Padding vertical='16px' />
+                                        <TextInput type='text' placeholder='Email' name='email' value={userFormDetailsInput.email || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <Padding vertical='8px' />
+                                        <TextInput type='text' placeholder='Phone' name='phone' value={userFormDetailsInput.phone || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <Padding vertical='8px' />
+                                        <TextInput type='text' placeholder='City' name='city' value={userFormDetailsInput.city || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <Padding vertical='8px' />
+                                        <TextInput type='text' placeholder='Address' name='address' value={userFormDetailsInput.address || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <Padding vertical='8px' />
+                                        <TextInput type='text' placeholder='Zip Code' name='zip_code' value={userFormDetailsInput.zip_code || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <Padding vertical='28px'>
+                                            <Row>
+                                                <OutlineButton onClick={e => validateUserFillDetailsForm()}>Registration via DID</OutlineButton>
+                                            </Row>
+                                        </Padding>
+                                    </Column>
+                                </form>
+
                             </Padding>
                         </Padding>
                     </Card>
@@ -333,17 +391,17 @@ const OnboardingPage = () => {
                             <HorizontalLine />
                             <Padding vertical='12px'>
                                 <Column>
-                                    <TextInput type="text" placeholder="Organization Name" />
+                                    <TextInput type='text' placeholder='Organization Name' />
                                     <Padding vertical='4px' />
-                                    <TextInput type="text" placeholder="Email" />
+                                    <TextInput type='text' placeholder='Email' />
                                     <Padding vertical='8px' />
-                                    <TextInput type="text" placeholder="Phone" />
+                                    <TextInput type='text' placeholder='Phone' />
                                     <Padding vertical='8px' />
-                                    <TextInput type="text" placeholder="City" />
+                                    <TextInput type='text' placeholder='City' />
                                     <Padding vertical='8px' />
-                                    <TextInput type="text" placeholder="Address" />
+                                    <TextInput type='text' placeholder='Address' />
                                     <Padding vertical='8px' />
-                                    <TextInput type="text" placeholder="Zip Code" />
+                                    <TextInput type='text' placeholder='Zip Code' />
                                     <Padding vertical='28px'>
                                         <Row>
                                             <OutlineButton>Registration via DID</OutlineButton>
@@ -360,6 +418,17 @@ const OnboardingPage = () => {
         </>
     }
 
+    const disableNextButton = () => {
+        if (activeStage == 1) {
+            return customerOrOrganization == null
+        }
+        // else if () {
+
+        // }
+
+        return false
+    }
+
     const complienceCheckMessageView = () => {
         return <>
             <Style width='633px' height='246px'>
@@ -370,7 +439,7 @@ const OnboardingPage = () => {
                             <BodyText color='#818C99'>Your onboarding request will be checked by the AISBL. This may take  some time. Please enter your email address to recieve status updates of your onboarding. </BodyText>
                             <HorizontalLine />
                             <Padding vertical='8px' />
-                            <TextInput type="text" placeholder="Email" />
+                            <TextInput type='text' placeholder='Email' />
                             <Padding vertical='32px' />
                         </Padding>
 
@@ -387,7 +456,7 @@ const OnboardingPage = () => {
                 {welcomingMessage()}
                 <Padding vertical='64px'>
                     <Row>
-                        <Style width='307px'>{stepsPane({ activeStage: activeStage, isNextDisabled: customerOrOrganization == null })}</Style>
+                        <Style width='307px'>{stepsPane({ activeStage: activeStage, isNextDisabled: disableNextButton() })}</Style>
                         {currentStageView()}
                     </Row>
                 </Padding>
