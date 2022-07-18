@@ -303,6 +303,9 @@ export const Card = styled.div`
     border: 1px solid  ${props => props.borderColor || '#818C99'};
     border-radius: 4px;
     box-shadow: ${props => props.boxShadow || ''};
+    :hover{
+        background: ${props => props.hoverBackground ||  props.background || '#E9E9E9'};  
+    }
 `
 
 export const Circle = styled.div`

@@ -80,7 +80,20 @@
         "step_1": "Step 1",
         "step_2": "Step 2",
         "step_3": "Step 3",
-        "step_4": "Step 4"
+        "step_4": "Step 4",
+        "organization_body_text": "Please upload your organization details or select express registration via DID.",
+        "organization_name_placeholder": "Organization Name",
+        "email_placeholder": "Email",
+        "organization_aisbl": "Apply for AISBL Membership",
+        "register_did_button": "Register via DID",
+        "send_button": "Send",
+        "organization_headline": "To issue you Verified credentials, we need your organization's details.",
+        "close": "Close",
+        "upload": "Upload",
+        "errorHeader": "Error",
+        "missing_file": "Please upload a description file."
+
+
     },
     "form": {
         "registerDid":"Registration via DID",
