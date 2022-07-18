@@ -16,27 +16,14 @@ class LcmFinal extends Component {
             id: null
         }
 
-        console.log("asd");
-
         const { id } = this.props.params;
         const idFromState = this.state.id;
         if (id != idFromState) {
-            const request = {
-                "services": [
-                ]
-            }
-
-            this.props.lcm.services.forEach((service) => {
-                service.applicableLcm.forEach((lcm) => {
-                    if (lcm.selected) {
-                        request.services.push({ lcmServiceId: lcm.id, serviceId: service.serviceName })
-                    }
-                });
-            });
+            const request = this._getServicesRequest();
             axios.post(process.env.REACT_APP_EDGE_API_URI + "/lcm-service/service/configuration", request).then((response) => {
                 this.setState({ services: response.data.services, id: id })
             }, (error) => {
-                //  alert('Failed to load services.');
+                alert('Failed to load services.');
             });
         }
 
@@ -48,11 +35,60 @@ class LcmFinal extends Component {
     }
 
     downloadTemplate = () => {
+        const request = this._getServicesRequest();
 
+        axios.post(process.env.REACT_APP_EDGE_API_URI + "/lcm-service/service/configuration", request).then((response) => {
+            const blob = new Blob([JSON.stringify(response.data)], {
+                type: 'text/json'
+            })
+
+            const url = window.URL.createObjectURL(
+                blob,
+            );
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute(
+                'download',
+                `template.json`,
+            );
+
+            // Append to html link element page
+            document.body.appendChild(link);
+
+            // Start download
+            link.click();
+
+            // Clean up and remove the link
+            link.parentNode.removeChild(link);
+        }, (error) => {
+            alert('Failed to load services.');
+        });
     }
 
     configurationUpload = (event) => {
+        var file = event.target.files[0];
+        let reader = new FileReader();
 
+        reader.onload = (e) => {
+            let myString = e.target.result;
+            const formData = new FormData();
+
+            // Update the formData object 
+            formData.append(
+                "file",
+                new Blob([myString], {
+                    type: 'text/json'
+                }),
+                file.name
+            );
+    
+            axios.post(process.env.REACT_APP_EDGE_API_URI + '/lcm-service/configuration', formData).then((response) => {
+                // TODO what to do here?
+            }, (error) => {
+                alert('Failed to validate service descriptor.');
+            });
+        }
+        reader.readAsText(file);
     }
 
     render() {
@@ -98,6 +134,22 @@ class LcmFinal extends Component {
                 <BlueButton onClick={this.submitLcm}>Send</BlueButton>
             </div>
         </div>
+    }
+
+    _getServicesRequest() {
+        const request = {
+            "services": [
+            ]
+        }
+
+        this.props.lcm.services.forEach((service) => {
+            service.applicableLcm.forEach((lcm) => {
+                if (lcm.selected) {
+                    request.services.push({ lcmServiceId: lcm.id, serviceId: service.serviceName })
+                }
+            });
+        });
+        return request;
     }
 }
 

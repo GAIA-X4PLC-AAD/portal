@@ -63,6 +63,7 @@ export const resetLcmServices = () => {
 export const selectLcmService = (serviceName, lcm) => {
     return { type: LCM_SELECT_SERVICE, serviceName, lcm }
 }
+
 export const changeUserRole = (role) => {
     return { type: CHANGE_USER_ROLE, role };
 };
