@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 
 import Checkbox from "../../common/checkbox";
-import {  Column, Row, Style, Card, BodyText, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image } from "../../common/styles";
+import {  Column, Row, Style, Card, BodyText, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, BodySmallBoldText } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
 import DidOnboardingView from "./onboarding_did";
 import { useTranslation } from "react-i18next";
@@ -87,7 +87,7 @@ const OrganizationDetailsView = ({onSuccess}) => {
                   );
         }
     }
-   
+   console.log(input.document);
     const organizationDetailsFormView = () => {
     return <>
         <Style width='633px' height='246px'>
@@ -101,7 +101,14 @@ const OrganizationDetailsView = ({onSuccess}) => {
                             <Column>
                                 <BodyText>{t('onboarding.organization_body_text')}</BodyText>
                                 <input name='document' type="file" ref={fileRef} onChange={e=> onFormChanged(e)} hidden/>
-                                <Padding vertical='16px' alignSelf='start' onClick={e=>fileRef.current.click()}><OutlineButton>Upload</OutlineButton></Padding>
+                                <Row alignItems='center'>
+                                <Padding vertical='16px' alignSelf='start' onClick={e=>fileRef.current.click()}>
+                                    <OutlineButton>{t('onboarding.upload')}</OutlineButton>
+                                </Padding>
+                                <Padding vertical='16px' horizontal='16px'>
+                                    <BodySmallBoldText> {input.document?.name}</BodySmallBoldText>
+                                </Padding>
+                                </Row>
                                 <Padding vertical='16px' />
                                 <TextInput name='name' type="text" value={input.name||''}  placeholder={t('onboarding.organization_name_placeholder')}  onChange={(e)=>onFormChanged(e)} required/>
                                 <Padding vertical='4px' />

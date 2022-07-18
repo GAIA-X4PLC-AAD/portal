@@ -89,6 +89,7 @@
         "send_button": "Send",
         "organization_headline": "To issue you Verified credentials, we need your organization's details.",
         "close": "Close",
+        "upload": "Upload",
         "errorHeader": "Error",
         "missing_file": "Please upload a description file."
 
