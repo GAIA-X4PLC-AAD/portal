@@ -1,6 +1,6 @@
 import React, { useState} from "react";
 
-import {  Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, StyledModal, Circle, ButtonText, BodyText,FadingBackground } from "../../common/styles";
+import {  Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, StyledModal, Circle, ButtonText, BodyText,FadingBackground, CancelButton, BlueButton } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
 import { ModalProvider } from "styled-react-modal";
 
@@ -30,7 +30,7 @@ function FancyModalButton() {
 
     return (
         <div>
-            <OutlineButton onClick={toggleModal}>I don&#39;t have a DID</OutlineButton>
+            <CancelButton onClick={toggleModal}>I don&#39;t have a DID</CancelButton>
             <StyledModal
                 isOpen={isOpen}
                 afterOpen={afterOpen}
@@ -105,7 +105,7 @@ const verifyQrView = () => {
                                     <Row alignItems='space-between'>
                                         <FancyModalButton />
                                         <Padding horizontal='8px' />
-                                        <OutlineButton disabled>Continue</OutlineButton>
+                                        <BlueButton>Continue</BlueButton>
                                     </Row>
                                 </Padding>
                                 <Padding vertical='20px'></Padding>
