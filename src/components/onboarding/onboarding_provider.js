@@ -3,8 +3,10 @@ import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 
 import Checkbox from "../../common/checkbox";
-import {  Column, Row, Style, Card, BodyText, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image } from "../../common/styles";
+import {  Column, Row, Style, Card, BodyText, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
+import { ModalProvider } from "styled-react-modal";
+import DidOnboardingView from "./onboarding_did";
 
 const OrganizationDetailsView = ({onSuccess}) => {
 
@@ -15,6 +17,7 @@ const OrganizationDetailsView = ({onSuccess}) => {
 
   const [input, setInput] = useState({});
   const [eMessage,setEMessage] = useState('');
+  const [did, setDid] = useState(false);
 
  const getValue = (target) => {
     switch (target.type) {
@@ -55,6 +58,8 @@ const OrganizationDetailsView = ({onSuccess}) => {
         }
     }
 
+   
+    const organizationDetailsFormView = () => {
     return <>
         <Style width='633px' height='246px'>
             <Padding horizontal='20px'>
@@ -90,7 +95,7 @@ const OrganizationDetailsView = ({onSuccess}) => {
 
                                 <Padding vertical='28px'>
                                     <Row>
-                                        <OutlineButton>Registration via DID</OutlineButton>
+                                        <OutlineButton onClick={()=> setDid(true)}>Registration via DID</OutlineButton>
                                         <Padding horizontal='10px' />
                                         <OutlineButton onClick={e=>onFormSubmit()}>Send</OutlineButton>
                                     </Row>
@@ -103,6 +108,9 @@ const OrganizationDetailsView = ({onSuccess}) => {
             </Padding>
         </Style>
     </>
+    }
+
+    return did? <DidOnboardingView /> : organizationDetailsFormView();
 }
 
 OrganizationDetailsView.propTypes = {

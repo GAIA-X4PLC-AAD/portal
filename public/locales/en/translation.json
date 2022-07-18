@@ -70,7 +70,18 @@
     "message-bar": {
         "not-found": "Oh no! We couldn't find any results."
     },
-
+    "onboarding": {
+        "customerprovider": "Customer or provider",
+        "organization_details": "Organization details",
+        "customer_details": "Customer details",
+        "user_details": "User details",
+        "email_confirmation": "Email confirmation",
+        "request_submission": "Request submission",
+        "step_1": "Step 1",
+        "step_2": "Step 2",
+        "step_3": "Step 3",
+        "step_4": "Step 4"
+    },
     "form": {
         "registerDid":"Registration via DID",
         "continue": "Continue",

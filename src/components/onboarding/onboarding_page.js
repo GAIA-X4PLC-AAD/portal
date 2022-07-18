@@ -13,6 +13,11 @@ import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
 import OrganizationDetailsView from './onboarding_provider';
 
+import StepsPane from "./steps_pane";
+
+export const CUSTOMER = 'customer'
+export const ORGANIZATION = 'organization'
+
 
 const QrLoadingView = () => {
     const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
@@ -92,8 +97,6 @@ const OnboardingPage = () => {
     const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/customer/'
     const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
 
-    const CUSTOMER = 'customer'
-    const ORGANIZATION = 'organization'
 
     const [activeStage, setActiveStage] = useState(1)
     const [customerOrOrganization, setCustomerOrOrganization] = useState(null)
@@ -198,43 +201,15 @@ const OnboardingPage = () => {
         )
     }
 
-    const buildStepCardView = ({ stage, title, subtitle, isActive }) => {
-        return (
-            <Padding vertical='12px' paddingTop={stage == 1 ? '0px' : ''}>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px ${isActive ? '3' : '2'}px 4px 0px rgb(29 36 48 / ${isActive ? '25' : '12'}%)`}>
-                    <Padding vertical='12px' horizontal='10px'>
-                        <Row alignItems='center'>
-                            <Circle radius='44px' background={isActive ? '#000094' : '#E9E9E9'} borderColor='#0'>
-                                <BodySmallBoldText color={isActive ? '#fff' : '#2A2A2A'}>{stage}</BodySmallBoldText>
-                            </Circle>
-                            <Padding horizontal='20px'>
-                                <Column>
-                                    <BodyBoldText>{title}</BodyBoldText>
-                                    <BodySmallText>{subtitle}</BodySmallText>
-                                </Column>
-                            </Padding>
-                            <Style flexGrow='1'></Style>
-                            <Circle radius='8px' background={isActive ? '#6BB324' : '#E9E9E9'} borderColor='#0' />
-                        </Row>
-                    </Padding>
-                </Card>
-            </Padding>
-        )
-    }
-
     const stepsPane = ({ activeStage = 1, isNextDisabled = false }) => {
 
-        const nextStr = activeStage == 2 ? 'Send' : 'Next'
+
+        const isCustomer = CUSTOMER == customerOrOrganization
+        const nextStr = isCustomer && activeStage == 2 ? 'Send' : 'Next'
 
         return (
             <>
-                {buildStepCardView({ stage: '1', title: 'Customer or provider', subtitle: 'Step 1', isActive: activeStage == 1 })}
-                {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2', isActive: activeStage == 2 })}
-                {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3', isActive: activeStage == 3 })}
-                {buildStepCardView({ stage: '4', title: 'Request submission', subtitle: 'Step 4', isActive: activeStage == 4 })}
-                {buildStepCardView({ stage: '5', title: 'Proof on onboarding', subtitle: 'Step 5', isActive: activeStage == 5 })}
-                {buildStepCardView({ stage: '6', title: 'VC details', subtitle: 'Step 6', isActive: activeStage == 6 })}
-                {buildStepCardView({ stage: '7', title: 'Finish onboarding', subtitle: 'Step 7', isActive: activeStage == 7 })}
+               <StepsPane type={customerOrOrganization} currentStage={activeStage} />
                 <Row>
                     <Padding vertical='32px'><MasterButton disabled={activeStage === 1} onClick={() => previousStage()}>Previous</MasterButton></Padding>
 
