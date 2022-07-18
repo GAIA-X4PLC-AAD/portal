@@ -30,7 +30,7 @@ function FancyModalButton() {
 
     return (
         <div>
-            <OutlineButton onClick={toggleModal}>Continue</OutlineButton>
+            <OutlineButton onClick={toggleModal}>I don&#39;t have a DID</OutlineButton>
             <StyledModal
                 isOpen={isOpen}
                 afterOpen={afterOpen}
@@ -40,13 +40,13 @@ function FancyModalButton() {
                 opacity={opacity}
                 backgroundProps={{ opacity }}
             >
-                {dontHaveDidView()}
+                {dontHaveDidView(toggleModal)}
             </StyledModal>
         </div>
     );
 }
 
-const dontHaveDidView = () => {
+const dontHaveDidView = (onClose) => {
     const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
         return (
             <Padding vertical='8px'>
@@ -78,7 +78,7 @@ const dontHaveDidView = () => {
                         {buildIdentifyServiceProvider({ background: '#fff' })}
 
                         <Padding paddingTop='32px'>
-                            <Row><OutlineButton>Close</OutlineButton></Row>
+                            <Row><OutlineButton onClick={onClose}>Close</OutlineButton></Row>
                         </Padding>
                     </Padding>
                 </Card>
@@ -103,9 +103,9 @@ const verifyQrView = () => {
                                 </Padding>
                                 <Padding vertical='20px'>
                                     <Row alignItems='space-between'>
-                                        <OutlineButton disabled>I don&#39;t have a DID</OutlineButton>
-                                        <Padding horizontal='8px' />
                                         <FancyModalButton />
+                                        <Padding horizontal='8px' />
+                                        <OutlineButton disabled>Continue</OutlineButton>
                                     </Row>
                                 </Padding>
                                 <Padding vertical='20px'></Padding>
