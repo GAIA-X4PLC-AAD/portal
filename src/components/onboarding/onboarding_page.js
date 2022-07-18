@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from "axios";
 
-import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal, FadingBackground } from '../../common/styles';
+import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal, FadingBackground, H1Text } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
 import RadioButton from '../../common/radio';
 import Checkbox from '../../common/checkbox';
+import { useResource } from "@axios-use/react";
 
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
@@ -13,10 +14,86 @@ import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import OrganizationDetailsView from './onboarding_provider';
 
 
+const QrLoadingView = () => {
+    const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
+    const [{ data, error, isLoading }] = useResource(() => ({ url: didRegisterUserUrl }), [])
+
+    useEffect(() => { }, [isLoading, error, data]);
+
+
+    let isError = error != undefined;
+
+    if (!isLoading && error == undefined && !(data === undefined)) {
+        return <Image src='/images/QRCode.png' width='200px' />
+    } else {
+        return <BodyText>Loading...</BodyText>
+    }
+
+}
+
+
+const DontHaveDidView = ({ toggleProofOfOnboardingModal }) => {
+
+    const onboardingIdpUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/idp'
+    const [{ data, error, isLoading }] = useResource(() => ({ url: onboardingIdpUrl }), [])
+
+    useEffect(() => { }, [isLoading, error, data]);
+
+
+    const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
+        return (
+            <Padding vertical='8px'>
+                <Card background={background} borderColor='#E9E9E9'>
+                    <Padding vertical='4px' horizontal='16px'>
+                        <Row>
+                            <Circle radius='56px' borderColor='#0' background='#C4C4C4'>LOGO</Circle>
+                            <Padding paddingLeft='16px' />
+                            <ButtonText color='#000000'>Identify Service Provider 1</ButtonText>
+                            <Style flexGrow='1' />
+                            <ButtonText color='#00A2E4'>Link</ButtonText>
+                        </Row>
+                    </Padding>
+                </Card>
+            </Padding>
+        )
+    }
+
+    return <>
+        <Style width='633px'>
+            <Padding>
+                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Padding horizontal='24px' vertical='12px'>
+                        <H4LightText>Don’t have a DID?</H4LightText>
+                        <BodyText>Please select a idSP to create DID</BodyText>
+                        <HorizontalLine />
+                        {buildIdentifyServiceProvider({ background: '#46DAFF1F' })}
+                        {buildIdentifyServiceProvider({ background: '#fff' })}
+                        {buildIdentifyServiceProvider({ background: '#fff' })}
+                        {buildIdentifyServiceProvider({ background: '#fff' })}
+
+                        <Padding paddingTop='32px'>
+                            <Row><OutlineButton onClick={() => toggleProofOfOnboardingModal()}>Close</OutlineButton></Row>
+                        </Padding>
+                    </Padding>
+                </Card>
+            </Padding>
+        </Style>
+    </>
+
+
+}
+
+DontHaveDidView.propTypes = {
+    toggleProofOfOnboardingModal: PropTypes.func.isRequired,
+}
+
 const OnboardingPage = () => {
 
-    const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/customer/';
+    const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/customer/'
+    const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
 
+    const CUSTOMER = 'customer'
+    const ORGANIZATION = 'organization'
 
     const [activeStage, setActiveStage] = useState(1)
     const [customerOrOrganization, setCustomerOrOrganization] = useState(null)
@@ -26,9 +103,13 @@ const OnboardingPage = () => {
 
     const [userFormDetailsInput, setInput] = useState({});
 
-    const CUSTOMER = 'customer'
-    const ORGANIZATION = 'organization'
+    const [proofOfOnboardingIsOpen, setProofOfOnboardingIsOpen] = useState(false);
+    const [proofOfOnboardingOpacity, setProofOfOnboardingOpacity] = useState(0);
 
+    function toggleProofOfOnboardingModal(e) {
+        setProofOfOnboardingOpacity(0);
+        setProofOfOnboardingIsOpen(!proofOfOnboardingIsOpen);
+    }
 
     const registerUserApi = async () => {
 
@@ -39,16 +120,28 @@ const OnboardingPage = () => {
                 }
             })
             if (_result.response) return true
-          } catch (err) {
+        } catch (err) {
             if (err) alert(err.message)
 
-          }
+        }
 
-          return false
+        return false
+    }
+
+    const didRegisteredUserApi = async () => {
+
+        try {
+            const _result = await axios.get(didRegisterUserUrl, {})
+            if (_result.response) return _result.response
+        } catch (err) {
+            if (err) alert(err.message)
+
+        }
+
+        return null
     }
 
     const nextStage = async () => {
-        console.log(`OnboardingPage, activeStage: ${activeStage}`)
         // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
         if (activeStage == 1) {
             setActiveStage(2)
@@ -60,8 +153,10 @@ const OnboardingPage = () => {
                 setActiveStage(3)
             }
 
-        } else if (activeStage == 3) {
-            setActiveStage(4)
+        } else if (activeStage == 3 || activeStage == 4) {
+            setActiveStage(5)
+        } else if (activeStage == 5) {
+            toggleProofOfOnboardingModal()
         }
     }
 
@@ -73,11 +168,12 @@ const OnboardingPage = () => {
             setActiveStage(2)
         } else if (activeStage == 4) {
             setActiveStage(3)
+        } else if (activeStage == 5) {
+            setActiveStage(4)
         }
     }
 
     const currentStageView = () => {
-        console.log(`OnboardingPage, currentStageView, activeStage ${activeStage}`)
 
         if (activeStage == 1) {
             return customerOrProviderView()
@@ -86,6 +182,8 @@ const OnboardingPage = () => {
             else { return userFillDetailsView() }
         } else if (activeStage == 3) {
             return confirmationEmailView()
+        } else if (activeStage == 4 || activeStage == 5) {
+            return verifyQrView()
         } else return verifyQrView()
     }
 
@@ -134,9 +232,9 @@ const OnboardingPage = () => {
                 {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2', isActive: activeStage == 2 })}
                 {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3', isActive: activeStage == 3 })}
                 {buildStepCardView({ stage: '4', title: 'Request submission', subtitle: 'Step 4', isActive: activeStage == 4 })}
-                {buildStepCardView({ stage: '5', title: 'Proof on onboarding', subtitle: 'Step 6', isActive: activeStage == 4 })}
-                {buildStepCardView({ stage: '6', title: 'VC details', subtitle: 'Step 6', isActive: activeStage == 4 })}
-                {buildStepCardView({ stage: '7', title: 'Finish onboarding', subtitle: 'Step 7', isActive: activeStage == 4 })}
+                {buildStepCardView({ stage: '5', title: 'Proof on onboarding', subtitle: 'Step 5', isActive: activeStage == 5 })}
+                {buildStepCardView({ stage: '6', title: 'VC details', subtitle: 'Step 6', isActive: activeStage == 6 })}
+                {buildStepCardView({ stage: '7', title: 'Finish onboarding', subtitle: 'Step 7', isActive: activeStage == 7 })}
                 <Row>
                     <Padding vertical='32px'><MasterButton disabled={activeStage === 1} onClick={() => previousStage()}>Previous</MasterButton></Padding>
 
@@ -182,6 +280,9 @@ const OnboardingPage = () => {
         </>
     }
 
+
+
+
     const verifyQrView = () => {
         return <>
             <ModalProvider backgroundComponent={FadingBackground}>
@@ -193,13 +294,13 @@ const OnboardingPage = () => {
                                 <HorizontalLine />
                                 <Column justifyContent='center' alignItems='center'>
                                     <Padding vertical='8px'>
-                                        <Image src='/images/QRCode.png' width='200px' />
+                                        <QrLoadingView />
                                     </Padding>
                                     <Padding vertical='20px'>
                                         <Row alignItems='space-between'>
-                                            <OutlineButton disabled>I don&#39;t have a DID</OutlineButton>
+                                            <OutlineButton disabled onClick={() => toggleProofOfOnboardingModal()}>I don&#39;t have a DID</OutlineButton>
                                             <Padding horizontal='8px' />
-                                            <FancyModalButton />
+                                            <ProofOfOnboardingButton />
                                         </Row>
                                     </Padding>
                                     <Padding vertical='20px'></Padding>
@@ -209,91 +310,42 @@ const OnboardingPage = () => {
                     </Padding>
                 </Style>
             </ModalProvider>
-
         </>
     }
 
-    function FancyModalButton() {
-        const [isOpen, setIsOpen] = useState(false);
-        const [opacity, setOpacity] = useState(0);
-
-        function toggleModal(e) {
-            setOpacity(0);
-            setIsOpen(!isOpen);
-        }
-
+    function ProofOfOnboardingButton() {
         function afterOpen() {
             setTimeout(() => {
-                setOpacity(1);
+                setProofOfOnboardingOpacity(1);
             }, 100);
         }
 
         function beforeClose() {
             return new Promise((resolve) => {
-                setOpacity(0);
+                setProofOfOnboardingOpacity(0);
                 setTimeout(resolve, 300);
             });
         }
 
         return (
             <div>
-                <OutlineButton onClick={toggleModal}>Contine</OutlineButton>
                 <StyledModal
-                    isOpen={isOpen}
+                    isOpen={proofOfOnboardingIsOpen}
                     afterOpen={afterOpen}
                     beforeClose={beforeClose}
-                    onBackgroundClick={toggleModal}
-                    onEscapeKeydown={toggleModal}
-                    opacity={opacity}
-                    backgroundProps={{ opacity }}
+                    onBackgroundClick={toggleProofOfOnboardingModal}
+                    onEscapeKeydown={toggleProofOfOnboardingModal}
+                    opacity={proofOfOnboardingOpacity}
+                    backgroundProps={{ opacity: proofOfOnboardingOpacity }}
                 >
-                    {dontHaveDidView()}
+                    <DontHaveDidView toggleProofOfOnboardingModal={toggleProofOfOnboardingModal} />
                 </StyledModal>
             </div>
         );
     }
 
 
-    const dontHaveDidView = () => {
-        const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
-            return (
-                <Padding vertical='8px'>
-                    <Card background={background} borderColor='#E9E9E9'>
-                        <Padding vertical='4px' horizontal='16px'>
-                            <Row>
-                                <Circle radius='56px' borderColor='#0' background='#C4C4C4'>LOGO</Circle>
-                                <Padding paddingLeft='16px' />
-                                <ButtonText color='#000000'>Identify Service Provider 1</ButtonText>
-                                <Style flexGrow='1' />
-                                <ButtonText color='#00A2E4'>Link</ButtonText>
-                            </Row>
-                        </Padding>
-                    </Card>
-                </Padding>
-            )
-        }
-        return <>
-            <Style width='633px'>
-                <Padding>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                        <Padding horizontal='24px' vertical='12px'>
-                            <H4LightText>Don’t have a DID?</H4LightText>
-                            <BodyText>Please select a idSP to create DID</BodyText>
-                            <HorizontalLine />
-                            {buildIdentifyServiceProvider({ background: '#46DAFF1F' })}
-                            {buildIdentifyServiceProvider({ background: '#fff' })}
-                            {buildIdentifyServiceProvider({ background: '#fff' })}
-                            {buildIdentifyServiceProvider({ background: '#fff' })}
 
-                            <Padding paddingTop='32px'>
-                                <Row><OutlineButton>Close</OutlineButton></Row>
-                            </Padding>
-                        </Padding>
-                    </Card>
-                </Padding>
-            </Style>
-        </>
-    }
 
 
     const credentialsMissingView = () => {
@@ -318,9 +370,6 @@ const OnboardingPage = () => {
         return userFillDetailsFormRef.current.reportValidity()
     }
 
-    const onUserFormSubmit = () => {
-
-    }
 
     const userFillDetailsView = () => {
 
@@ -379,44 +428,7 @@ const OnboardingPage = () => {
             </Style>
         </>
     }
-    const organizationFillDetailsView = () => {
 
-        return <>
-            <Style width='633px' height='246px'>
-                <Padding horizontal='20px'>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                        <Padding horizontal='24px'>
-                            <H4LightText>Organization details</H4LightText>
-                            <BodyText>Lorem ipsum dolor si jet .</BodyText>
-                            <HorizontalLine />
-                            <Padding vertical='12px'>
-                                <Column>
-                                    <TextInput type='text' placeholder='Organization Name' />
-                                    <Padding vertical='4px' />
-                                    <TextInput type='text' placeholder='Email' />
-                                    <Padding vertical='8px' />
-                                    <TextInput type='text' placeholder='Phone' />
-                                    <Padding vertical='8px' />
-                                    <TextInput type='text' placeholder='City' />
-                                    <Padding vertical='8px' />
-                                    <TextInput type='text' placeholder='Address' />
-                                    <Padding vertical='8px' />
-                                    <TextInput type='text' placeholder='Zip Code' />
-                                    <Padding vertical='28px'>
-                                        <Row>
-                                            <OutlineButton>Registration via DID</OutlineButton>
-                                            <Padding horizontal='10px' />
-                                            <OutlineButton>Send</OutlineButton>
-                                        </Row>
-                                    </Padding>
-                                </Column>
-                            </Padding>
-                        </Padding>
-                    </Card>
-                </Padding>
-            </Style>
-        </>
-    }
 
     const disableNextButton = () => {
         if (activeStage == 1) {
