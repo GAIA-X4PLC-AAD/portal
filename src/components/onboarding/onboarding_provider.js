@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 
 import Checkbox from "../../common/checkbox";
@@ -7,6 +7,7 @@ import {  Column, Row, Style, Card, BodyText, ButtonText, H4LightText, Horizonta
 import { Padding } from "../discovery/tabs/style";
 import DidOnboardingView from "./onboarding_did";
 import { useTranslation } from "react-i18next";
+import Modal from "../../Modal";
 
 const OrganizationDetailsView = ({onSuccess}) => {
 
@@ -20,6 +21,10 @@ const OrganizationDetailsView = ({onSuccess}) => {
   const [input, setInput] = useState({});
   const [eMessage,setEMessage] = useState('');
   const [did, setDid] = useState(false);
+
+  useEffect (() => {
+    console.log('eMessage effect', eMessage);
+  }, [eMessage]);
 
  const getValue = (target) => {
     switch (target.type) {
@@ -37,11 +42,10 @@ const OrganizationDetailsView = ({onSuccess}) => {
 
 
     const onFormSubmit = () => {
+        console.log(input.document);
         if (!input.document) {
-            setEMessage('Please upload a document');
-            return;
-        }
-        if (formRef.current.reportValidity())
+            setEMessage(t('onboarding.missing_file'));
+        }  else if (formRef.current.reportValidity())
         {
             let formData = new FormData();
             formData.append('name', input.name);
@@ -64,6 +68,25 @@ const OrganizationDetailsView = ({onSuccess}) => {
         }
     }
 
+    const onError = (eMessage) => {
+        if (eMessage || eMessage != '') {
+                return (
+                    <Modal>
+                      <div className="login-fail-flex-col">
+                        <div className='login-fail-header'>{t("onboarding.errorHeader")}</div>
+                        <div className='login-fail-content'>
+                        {eMessage}
+                        </div>
+                        <div className='login-fail-footer'>
+                          <button className="gaiax-button" onClick={()=>{setEMessage('')}}>
+                            {t('onboarding.close')}
+                          </button>
+                        </div>
+                      </div>
+                    </Modal>
+                  );
+        }
+    }
    
     const organizationDetailsFormView = () => {
     return <>
@@ -112,6 +135,7 @@ const OrganizationDetailsView = ({onSuccess}) => {
                 </Card>
             </Padding>
         </Style>
+        {onError(eMessage)}
     </>
     }
 

@@ -87,7 +87,11 @@
         "organization_aisbl": "Apply for AISBL Membership",
         "register_did_button": "Register via DID",
         "send_button": "Send",
-        "organization_headline": "To issue you Verified credentials, we need your organization's details."
+        "organization_headline": "To issue you Verified credentials, we need your organization's details.",
+        "close": "Close",
+        "errorHeader": "Error",
+        "missing_file": "Please upload a description file."
+
 
     },
     "form": {
