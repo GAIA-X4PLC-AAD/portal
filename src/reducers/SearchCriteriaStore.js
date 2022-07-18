@@ -11,6 +11,7 @@ const INITIAL_STATE = {
 };
 
 const parameterBuilder = (state) => {
+
     let criterias = state.filterCriteria.map((criteria) => { return (`&${encodeURIComponent(criteria.key)}=${encodeURIComponent(criteria.value)}`) }).
         reduce((previous, current) => previous + current, '');
     let sort = state.sort_field ? `&sort_field=${state.sort_field}&sort_direction=${state.sort_direction}` : '';
@@ -20,7 +21,7 @@ const parameterBuilder = (state) => {
 }
 
 const updateState = (currentState, newState) => {
-    const state = { ...currentState, ...newState, page: 1 }
+    const state = { ...currentState, ...newState, page: 0 }
     return { ...state, parameters: parameterBuilder(state) }
 }
 

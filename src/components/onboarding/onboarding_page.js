@@ -10,8 +10,55 @@ import Checkbox from "../../common/checkbox";
 import styled from "styled-components";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal";
 
+import OrganizationDetailsView from "./onboarding_provider";
+import StepsPane from "./steps_pane";
+
 
 const OnboardingPage = () => {
+
+    const [activeStage, setActiveStage] = useState(1)
+    const [customerOrOrganization, setCustomerOrOrganization] = useState(null)
+  
+
+    const CUSTOMER = 'customer'
+    const ORGANIZATION = 'organization'
+
+
+    const nextStage = () => {
+        console.log(`OnboardingPage, activeStage: ${activeStage}`)
+        // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
+        if (activeStage == 1) {
+            setActiveStage(2)
+        } else if (activeStage == 2) {
+            setActiveStage(3)
+        } else if (activeStage == 3) {
+            setActiveStage(4)
+        }
+    }
+
+    const previousStage = () => {
+        // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
+        if (activeStage == 2) {
+            setActiveStage(1)
+        } else if (activeStage == 3) {
+            setActiveStage(2)
+        } else if (activeStage == 4) {
+            setActiveStage(3)
+        }
+    }
+
+    const currentStageView = () => {
+        console.log(`OnboardingPage, currentStageView, activeStage ${activeStage}`)
+
+        if (activeStage == 1) {
+            return customerOrProviderView()
+        } else if (activeStage == 2) {
+            if (customerOrOrganization == ORGANIZATION) return <OrganizationDetailsView onSuccess={()=>{setActiveStage(3)}}/> ;
+            else { return userFillDetailsView() }
+        } else if (activeStage == 3) {
+            return confirmationEmailView()
+        } else return verifyQrView()
+    }
 
     const welcomingMessage = () => {
         return (
@@ -24,40 +71,13 @@ const OnboardingPage = () => {
         )
     }
 
-    const buildStepCardView = ({ stage, title, subtitle, isActive }) => {
-        return (
-            <Padding vertical='12px' paddingTop={stage == 1 ? '0px' : ''}>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px ${isActive ? '3' : '2'}px 4px 0px rgb(29 36 48 / ${isActive ? '25' : '12'}%)`}>
-                    <Padding vertical='12px' horizontal='10px'>
-                        <Row alignItems='center'>
-                            <Circle radius='44px' background={isActive ? '#000094' : '#E9E9E9'} borderColor='#0'>
-                                <BodySmallBoldText color={isActive ? '#fff' : '#2A2A2A'}>{stage}</BodySmallBoldText>
-                            </Circle>
-                            <Padding horizontal='20px'>
-                                <Column>
-                                    <BodyBoldText>{title}</BodyBoldText>
-                                    <BodySmallText>{subtitle}</BodySmallText>
-                                </Column>
-                            </Padding>
-                            <Style flexGrow='1'></Style>
-                            <Circle radius='8px' background={isActive ? '#6BB324' : '#E9E9E9'} borderColor='#0' />
-                        </Row>
-                    </Padding>
-                </Card>
-            </Padding>
-        )
-    }
-
-    const stepsPane = () => {
+    const stepsPane = ({ activeStage = 1, isNextDisabled = false }) => {
         return (
             <>
-                {buildStepCardView({ stage: '1', title: 'Customer or provider', subtitle: 'Step 1', })}
-                {buildStepCardView({ stage: '2', title: 'Organization details', subtitle: 'Step 2' })}
-                {buildStepCardView({ stage: '3', title: 'Confirmation email', subtitle: 'Step 3', isActive: true })}
-                {buildStepCardView({ stage: '4', title: 'Email notification', subtitle: 'Step 4' })}
+               <StepsPane type={customerOrOrganization} currentStage={activeStage} />
                 <Row>
-                    <Padding vertical='32px'><MasterButton disabled>Previous</MasterButton></Padding>
-                    <Padding vertical='32px'><MasterButton>Next</MasterButton></Padding>
+                    <Padding vertical='32px'><MasterButton disabled={activeStage === 1} onClick={() => previousStage()}>Previous</MasterButton></Padding>
+                    <Padding vertical='32px'><MasterButton disabled={isNextDisabled} onClick={() => nextStage()}>Next</MasterButton></Padding>
                 </Row>
             </>
         )
@@ -74,8 +94,8 @@ const OnboardingPage = () => {
                             <HorizontalLine />
                             <Padding vertical='40px'>
                                 <Column>
-                                    <RadioButton name='step1'><BodyText>Customer</BodyText></RadioButton>
-                                    <RadioButton name='step1'><BodyText>Provider</BodyText></RadioButton>
+                                    <RadioButton name='step1' onClick={() => setCustomerOrOrganization(CUSTOMER)} defaultChecked={CUSTOMER == customerOrOrganization}><BodyText>Customer</BodyText></RadioButton>
+                                    <RadioButton name='step1' onClick={() => setCustomerOrOrganization(ORGANIZATION)} defaultChecked={ORGANIZATION == customerOrOrganization}><BodyText>Provider</BodyText></RadioButton>
                                 </Column>
                             </Padding>
                         </Padding>
@@ -85,56 +105,6 @@ const OnboardingPage = () => {
         </>
     }
 
-
-    const organizationDetailsView = () => {
-        const [isChecked, setIsChecked] = useState(false);
-
-        return <>
-            <Style width='633px' height='246px'>
-                <Padding horizontal='20px'>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                        <Padding horizontal='24px'>
-                            <H4LightText>Do you want to register as a customer or provider?</H4LightText>
-                            <ButtonText color='#00A2E4'>Learn more</ButtonText>
-                            <HorizontalLine />
-                            <Padding vertical='24px'>
-                                <Column>
-                                    <BodyText>Please upload your organization details or select express registration via DID.</BodyText>
-                                    <Padding vertical='16px' alignSelf='start'><OutlineButton>Upload</OutlineButton></Padding>
-                                    <Padding vertical='16px' />
-                                    <TextInput type="text" placeholder="Organization Name" />
-                                    <Padding vertical='4px' />
-                                    <TextInput type="text" placeholder="Email" />
-                                    <Padding vertical='8px' />
-                                    {/* Checkbox */}
-                                    <Row alignItems='center'>
-                                        <label>
-                                            <Checkbox
-                                                checked={isChecked}
-                                                onChange={(event) => { setIsChecked(event.target.checked) }}
-                                            />
-                                        </label>
-                                        <Padding horizontal='4px' />
-                                        <BodyText>Apply for AISBL Membership</BodyText>
-                                        <Padding horizontal='7px' />
-                                        <Image objectFit='contain' src='/images/question-mark.svg' />
-                                    </Row>
-
-                                    <Padding vertical='28px'>
-                                        <Row>
-                                            <OutlineButton>Registration via DID</OutlineButton>
-                                            <Padding horizontal='10px' />
-                                            <OutlineButton>Send</OutlineButton>
-                                        </Row>
-                                    </Padding>
-                                </Column>
-                            </Padding>
-                        </Padding>
-                    </Card>
-                </Padding>
-            </Style>
-        </>
-    }
 
     const confirmationEmailView = () => {
         return <>
@@ -284,6 +254,47 @@ const OnboardingPage = () => {
         </>
     }
 
+
+    const userFillDetailsView = () => {
+
+        return <>
+            <Style width='633px' height='246px'>
+                <Padding horizontal='20px'>
+                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Padding horizontal='24px'>
+                            <H4LightText>Organization details</H4LightText>
+                            <BodyText>Lorem ipsum dolor si jet .</BodyText>
+                            <HorizontalLine />
+                            <Padding vertical='12px'>
+                                <Column>
+                                    <TextInput type="text" placeholder="First Name" />
+                                    <Padding vertical='4px' />
+                                    <TextInput type="text" placeholder="Last Name" />
+                                    <Padding vertical='16px' />
+                                    <TextInput type="text" placeholder="Email" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="Phone" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="City" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="Address" />
+                                    <Padding vertical='8px' />
+                                    <TextInput type="text" placeholder="Zip Code" />
+                                    <Padding vertical='28px'>
+                                        <Row>
+                                            <OutlineButton>Registration via DID</OutlineButton>
+                                            <Padding horizontal='10px' />
+                                            <OutlineButton>Send</OutlineButton>
+                                        </Row>
+                                    </Padding>
+                                </Column>
+                            </Padding>
+                        </Padding>
+                    </Card>
+                </Padding>
+            </Style>
+        </>
+    }
     const organizationFillDetailsView = () => {
 
         return <>
@@ -343,14 +354,15 @@ const OnboardingPage = () => {
         </>
     }
 
+
     return <>
         <Row>
             <Column>
                 {welcomingMessage()}
                 <Padding vertical='64px'>
                     <Row>
-                        <Style width='307px'>{stepsPane()}</Style>
-                        {complienceCheckMessageView()}
+                        <Style width='307px'>{stepsPane({ activeStage: activeStage, isNextDisabled: customerOrOrganization == null })}</Style>
+                        {currentStageView()}
                     </Row>
                 </Padding>
             </Column>

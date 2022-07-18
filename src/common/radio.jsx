@@ -60,10 +60,10 @@ const Label = styled.label`
     `}
 `;
 
-const RadioButton = ({ name, children }) => (
+const RadioButton = ({ name, onClick, defaultChecked, children }) => (
     <RadioWrapper>
         <Label>
-            <Input name={name} type="radio" />
+            <Input name={name} type="radio" onClick={onClick} defaultChecked = {defaultChecked}/>
             <Mark />
             {children}
         </Label>
@@ -72,6 +72,8 @@ const RadioButton = ({ name, children }) => (
 
 RadioButton.propTypes = {
     name: PropTypes.string,
+    onClick: PropTypes.func,
+    defaultChecked: PropTypes.bool,
     children: PropTypes.object
 };
 

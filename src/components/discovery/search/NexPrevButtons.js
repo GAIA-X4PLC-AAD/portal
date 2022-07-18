@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector, } from "react-redux";
 import PropTypes from 'prop-types';
-import * as S from './style';
 import ReactPaginate from 'react-paginate';
 import { updatePageNumber } from "../../../actions";
 import { ArrowLeft, ArrowRight } from '../../../common/styles';
@@ -13,7 +12,6 @@ const NextPrevButtons = ({ data }) => {
     const dispatch = useDispatch();
 
     const itemsPerPage = criteria.size
-
 
     if (!data || !data.data || data.data.length===0) return null;
 
@@ -28,7 +26,7 @@ const NextPrevButtons = ({ data }) => {
         nextLabel={<><ArrowRight /></>}
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
-        pageCount={itemsPerPage}
+        pageCount={data.pages_count}
         previousLabel={<><ArrowLeft /></>}
         renderOnZeroPageCount={null}
         containerClassName={"pagination"}

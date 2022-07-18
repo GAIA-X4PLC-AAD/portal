@@ -70,7 +70,18 @@
     "message-bar": {
         "not-found": "Oh no! We couldn't find any results."
     },
-
+    "onboarding": {
+        "customerprovider": "Customer or provider",
+        "organization_details": "Organization details",
+        "customer_details": "Customer details",
+        "user_details": "User details",
+        "email_confirmation": "Email confirmation",
+        "request_submission": "Request submission",
+        "step_1": "Step 1",
+        "step_2": "Step 2",
+        "step_3": "Step 3",
+        "step_4": "Step 4"
+    },
     "form": {
         "registerDid":"Registration via DID",
         "continue": "Continue",
@@ -211,6 +222,9 @@
             "noResults": "No results found",
             "noResultsMessage": "Sorry, we couldn’t find any matching results. Try broadening your filters",
             "advance": "Advanced Search"
+        },
+        "description": {
+            "build": "Build"
         }
     },
     "account": {
@@ -294,13 +308,30 @@
         "deny": "Deny"
     },
     "solution_pkg": {
+        "solutionPackaging": "Solution Packaging",
+        "solutionPackagingSubtitle": "Lorem ipsum dolor si jet subtitle",
         "a_s": "{as, plural, =1 {1 available service} other {# available services}}",
         "cancel": "Cancel",
         "select": "Select",
         "details":"Details",
         "price": "Price",
         "screenshots": "Screenshots",
-        "contact": "Contacts"
+        "contact": "Contacts",
+        "book": "Book",
+        "reset": "Reset",
+        "save": "Save",
+        "remove": "Remove",
+        "add": "Add",
+        "selectMessage": "Select...",
+        "description": "Description",
+        "features": "FEATURES",
+        "stack": "STACK",
+        "location": "LOCATION",
+        "lastUpdated": "LAST UPDATED",
+        "enterNameMessage": "Please enter a name",
+        "saveBookModalMessage-book": "Book solution package",
+        "saveBookModalMessage-save": "Save solution package"
+        
     }
 }
 

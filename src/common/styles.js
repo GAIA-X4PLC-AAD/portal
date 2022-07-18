@@ -14,6 +14,19 @@ export const CancelButton = styled.button`
     margin-left: 1em;
 `;
 
+export const CancelButtonSmall = styled.button`
+    border: 2px solid #e8e8e8;
+    border-radius: 4px 4px 4px 4px;
+    font: 700 14px/1.11 "Titillium Web", Helvetica, Arial, serif;
+    letter-spacing: 0.25px;
+    color: #1c0e15;
+    background-color: #e8e8e8;
+    padding: 0.3em 2em;
+    cursor: pointer;
+    margin-left: 1em;
+    margin-top:15px;
+`;
+
 
 export const BlueButton = styled.button`
     border: 2px solid #000094;
@@ -24,13 +37,33 @@ export const BlueButton = styled.button`
     background-color: #fff;
     padding: 0.3em 2em;
     cursor: pointer;
-    margin-left:1em;
+    margin-left:${props => props.marginLeft || '1em'};
     :disabled {
         cursor:default;
         pointer-events: none;
         opacity: 0.3; 
     }
-`;
+    `;
+    export const BlueButtonSmall = styled.button`
+    border: 2px solid #000094;
+    border-radius: 4px 4px 4px 4px;
+    font: 700 14px/1.11 "Titillium Web", Helvetica, Arial, serif;
+    letter-spacing: 0.25px;
+    color: #000094;
+    background-color: #fff;
+    padding: 0.3em 2em;
+    cursor: pointer;
+    margin-left:${props => props.marginLeft || '1em'};
+    margin-top:15px;
+    min-width: 65px;
+    text-align: center;
+    display: inline-block;
+    :disabled {
+        cursor:default;
+        pointer-events: none;
+        opacity: 0.3; 
+    }
+    `;
 
 export const BlueUploadLabel = styled.label`
 border: 2px solid #000094;
@@ -51,6 +84,7 @@ display: inline-block;
     opacity: 0.3; 
 }
 `;
+
 export const DropDownArrowUp = styled.div`
     content: url('/images/DropDownArrowUp.svg');
     margin: auto;
@@ -189,6 +223,7 @@ export const Style = styled.div`
     z-index: ${props => props.zIndex || 'auto'};
     background-color: ${props => props.backgroundColor || ''};
     text-align: ${props => props.textAlign || ''};
+    overflow-wrap: ${props => props.overflowWrap || ''};
     /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
     border-radius: ${props => props.borderRadius || ''};
 `
@@ -226,7 +261,7 @@ font-size: 15px;
 line-height: 20px;
 /* identical to box height, or 133% */
 letter-spacing: 0.25px;
-color: #000000;
+color: ${props => props.color || '#000000'};
 `;
 
 export const CaptionTeleNeoText = styled.div`
@@ -407,6 +442,9 @@ export const MasterButton = styled.div`
     gap: 8px;
     cursor: pointer;
     width: 136px;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
     
 
     /* Background/Primary */

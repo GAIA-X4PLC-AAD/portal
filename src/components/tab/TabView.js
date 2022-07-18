@@ -16,7 +16,6 @@ const TabView = ({labels, views}) => {
 
     const showLabels = () => {
         return labels.map((label, index) => {
-            console.log(index);
             return (
                 <Style marginTop='24px' marginRight='28px' marginLeft='28px' marginBottom='12px' key={index}>
                 <BodyText key={index} className="tab-label" onClick={() => setSelected(index)}>

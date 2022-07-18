@@ -34,6 +34,8 @@ const SearchSort = ({type, data}) => {
                 break;
         }
     }
+    // it should not be displayed in solution package
+    if (type === 'solution_pkg') return null;
     // do not show sort when there is no data
     if (!data || !data.data || data.data.length === 0) return null;
     return (
