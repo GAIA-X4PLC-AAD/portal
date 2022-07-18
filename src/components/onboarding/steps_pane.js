@@ -2,11 +2,12 @@ import { useTranslation } from "react-i18next";
 import React from "react";
 import PropTypes from 'prop-types';
 import { BodyBoldText, BodySmallBoldText, BodySmallText, Card, Circle, Column, Padding, Row, Style } from "../../common/styles";
+import { CUSTOMER } from "./onboarding_page";
 
-const StepsPane = ({type, currentStage}) => {
+const StepsPane = ({ type, currentStage }) => {
 
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
     const buildStepCardView = ({ stage, title, subtitle, isActive }) => {
         return (
@@ -35,9 +36,13 @@ const StepsPane = ({type, currentStage}) => {
     return (
         <>
             {buildStepCardView({ stage: '1', title: t(`onboarding.customerprovider`), subtitle: t('onboarding.step_1'), isActive: (1 === currentStage) })}
-            {buildStepCardView({ stage: '2', title: t(`onboarding.${type||'user'}_details`), subtitle: t('onboarding.step_2'), isActive: (2 === currentStage) })}
-            {buildStepCardView({ stage: '3', title: t(`onboarding.email_confirmation`), subtitle: t('onboarding.step_3'), isActive: (3 === currentStage)})}
+            {buildStepCardView({ stage: '2', title: t(`onboarding.${type || 'user'}_details`), subtitle: t('onboarding.step_2'), isActive: (2 === currentStage) })}
+            {buildStepCardView({ stage: '3', title: t(`onboarding.email_confirmation`), subtitle: t('onboarding.step_3'), isActive: (3 === currentStage) })}
             {buildStepCardView({ stage: '4', title: t(`onboarding.request_submission`), subtitle: t('onboarding.step_4'), isActive: (4 === currentStage) })}
+            {buildStepCardView({ stage: '5', title: 'Proof on onboarding', subtitle: 'Step 5', isActive: currentStage == 5 })}
+            {buildStepCardView({ stage: '6', title: 'VC details', subtitle: 'Step 6', isActive: currentStage == 6 })}
+            {buildStepCardView({ stage: '7', title: 'Finish onboarding', subtitle: 'Step 7', isActive: currentStage == 7 })}
+
         </>
     )
 }
