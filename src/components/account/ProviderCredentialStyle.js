@@ -9,7 +9,7 @@ export const FlexTable = styled.div`
     display: flex;
     flex-flow: row wrap;
     transition: 0.5s;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #E9E9E9;
 `;
 
 export const FlexHeader = styled(FlexTable)`
