@@ -18,6 +18,7 @@ import VCCustomer from './vc_customer';
 
 import { useTranslation } from 'react-i18next';
 import { t } from 'i18next';
+import DidOnboardingView from './onboarding_did';
 
 export const CUSTOMER = 'user'
 export const ORGANIZATION = 'organization'
@@ -79,7 +80,7 @@ RegistartinViaDidView.propTypes = {
 }
 
 
-const RequestVCView = ({ confirmationCode }) => {
+const RequestVCView = ({ type, confirmationCode }) => {
     const {t} = useTranslation()
 
     const thanksForConfirmingVC = <>
@@ -97,7 +98,7 @@ const RequestVCView = ({ confirmationCode }) => {
         </Style>
     </>
 
-    const requestVCUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/vc/request/' + confirmationCode
+    const requestVCUrl = process.env.REACT_APP_EDGE_API_URI + `/onboarding/register/${type}/vc/request/` + confirmationCode
     const [{ data, error, isLoading, code }] = useResource(() => ({ url: requestVCUrl, method: 'POST', data: {}, }), [])
 
     useEffect(() => { }, [isLoading, error, data]);
@@ -113,13 +114,14 @@ const RequestVCView = ({ confirmationCode }) => {
 
 }
 RequestVCView.propTypes = {
+    type: PropTypes.string.isRequired,
     confirmationCode: PropTypes.string.isRequired,
 }
 
-const EmailConfirmedView = ({ confirmationCode }) => {
+const EmailConfirmedView = ({ type, confirmationCode }) => {
     const {t} = useTranslation()
 
-    const isEmailConfirmedUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/confirm_email/' + confirmationCode
+    const isEmailConfirmedUrl = process.env.REACT_APP_EDGE_API_URI + `/onboarding/register/${type}/confirm_email/` + confirmationCode
     const [{ data, error, isLoading }] = useResource(() => ({ url: isEmailConfirmedUrl, method: 'POST', data: {}, }), [])
 
     const [shouldReturnVCView, setShouldReturnVCView] = useState(false);
@@ -164,7 +166,7 @@ const EmailConfirmedView = ({ confirmationCode }) => {
     let isError = error != undefined;
     const isSuccess = !isLoading && error == undefined && !(data === undefined)
 
-    if (shouldReturnVCView) return <RequestVCView confirmationCode={confirmationCode} />
+    if (shouldReturnVCView) return <RequestVCView type={type} confirmationCode={confirmationCode} />
 
     if (isSuccess) {
         return thanksForConfirmingView
@@ -174,6 +176,7 @@ const EmailConfirmedView = ({ confirmationCode }) => {
 }
 
 EmailConfirmedView.propTypes = {
+    type: PropTypes.string.isRequired,
     confirmationCode: PropTypes.string.isRequired,
 }
 
@@ -383,10 +386,10 @@ const OnboardingPage = () => {
         } else if (activeStage == 3) {
             return confirmationEmailView()
         } else if (activeStage == 4) {
-            return EmailConfirmedView({ confirmationCode: confirmationCode })
+            return EmailConfirmedView({ type: customerOrOrganization, confirmationCode: confirmationCode })
         }
         else if (activeStage == 5) {
-            return verifyQrView()
+            return <DidOnboardingViewmay  />
         } else return verifyQrView()
 
         // return <><h1>Stage View</h1></>
