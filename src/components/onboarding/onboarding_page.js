@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-
+import { Link, useParams } from "react-router-dom";
 import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal, FadingBackground, H1Text } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
 import RadioButton from '../../common/radio';
@@ -15,7 +15,7 @@ import OrganizationDetailsView from './onboarding_provider';
 
 import StepsPane from './steps_pane';
 
-export const CUSTOMER = 'customer'
+export const CUSTOMER = 'user'
 export const ORGANIZATION = 'organization'
 
 
@@ -73,6 +73,57 @@ RegistartinViaDidView.propTypes = {
     toggleRegistrationViaDidModal: PropTypes.func.isRequired,
 }
 
+
+const EmailConfirmedView = ({ confirmationCode = '' }) => {
+
+    const thanksForConfirmingView = <>
+        <Style width='633px' height='246px'>
+            <Padding horizontal='20px'>
+                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Padding horizontal='24px'>
+                        <H4LightText>Thanks for confirming..</H4LightText>
+                        <BodyText>Thanks for confirming the email we’ve sent you. After submitting, your organization’s details will be checked by the AISBL. You’ll recieve an email  with your DID and verified credentials soon. </BodyText>
+                        <Padding vertical='20px' />
+                    </Padding>
+                </Card>
+            </Padding>
+        </Style>
+    </>
+
+    const alreadyConfirmedView = <>
+        <Style width='633px' height='246px'>
+            <Padding horizontal='20px'>
+                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Padding horizontal='24px'>
+                        <H4LightText>Already confirmed!</H4LightText>
+                        <BodyText>Your email is already been confirmed..</BodyText>
+                        <Padding vertical='20px' />
+                    </Padding>
+                </Card>
+            </Padding>
+        </Style>
+    </>
+
+
+    const isEmailConfirmedUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/confirm_email/' + confirmationCode
+    const [{ data, error, isLoading }] = useResource(() => ({ url: isEmailConfirmedUrl, method: 'POST', data: {}, }), [])
+
+    useEffect(() => { }, [isLoading, error, data]);
+
+
+    let isError = error != undefined;
+    const isSuccess = !isLoading && error == undefined && !(data === undefined)
+
+    if (isSuccess) {
+        return thanksForConfirmingView
+    } else {
+        return alreadyConfirmedView
+    }
+}
+
+EmailConfirmedView.propTypes = {
+    confirmationCode: PropTypes.string.isRequired,
+}
 
 
 const QrLoadingView = () => {
@@ -152,9 +203,11 @@ const OnboardingPage = () => {
     const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/'
     const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
 
+    const { userType, confirmationCode } = useParams();
 
-    const [activeStage, setActiveStage] = useState(1)
-    const [customerOrOrganization, setCustomerOrOrganization] = useState(null)
+    const [activeStage, setActiveStage] = useState(confirmationCode === undefined ? 1 : 4)
+    // const [activeStage, setActiveStage] = useState(4)
+    const [customerOrOrganization, setCustomerOrOrganization] = useState(userType == ORGANIZATION ? ORGANIZATION : CUSTOMER)
 
     const userFillDetailsFormRef = React.createRef()
     const nextButtonRef = React.createRef()
@@ -206,25 +259,27 @@ const OnboardingPage = () => {
             if (_result.response) return _result.response
         } catch (err) {
             if (err) alert(err.message)
-
         }
 
         return null
     }
 
-    const nextStage = async () => {
+    const nextStage =  () => {
         // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
         if (activeStage == 1) {
             setActiveStage(2)
         } else if (activeStage == 2) {
             if (validateUserFillDetailsForm()) {
-                const _result = await registerUserApi()
-                console.log(`nextStage, _result: ${_result}`)
+                // const _result = await registerUserApi()
+                // console.log(`nextStage, _result: ${_result}`)
                 // if (_result) setActiveStage(3)
                 setActiveStage(3)
             }
 
-        } else if (activeStage == 3 || activeStage == 4) {
+        } else if (activeStage == 3) {
+            setActiveStage(4)
+
+        } else if (activeStage == 4) {
             setActiveStage(5)
         } else if (activeStage == 5) {
             dontHaveDidModal()
@@ -244,7 +299,9 @@ const OnboardingPage = () => {
         }
     }
 
-    const currentStageView = () => {
+
+    // CURRENT STAGE VIEW
+    const CurrentStageView = () => {
 
         if (activeStage == 1) {
             return customerOrProviderView()
@@ -253,10 +310,17 @@ const OnboardingPage = () => {
             else { return userFillDetailsView() }
         } else if (activeStage == 3) {
             return confirmationEmailView()
-        } else if (activeStage == 4 || activeStage == 5) {
+        } else if (activeStage == 4) {
+            return EmailConfirmedView({ confirmationCode: confirmationCode })
+        } 
+        else if (activeStage == 5) {
             return verifyQrView()
         } else return verifyQrView()
+
+        // return <><h1>Stage View</h1></>
     }
+
+
 
     const welcomingMessage = () => {
         return (
@@ -269,7 +333,7 @@ const OnboardingPage = () => {
         )
     }
 
-    const stepsPane = ({ activeStage = 1, isNextDisabled = false }) => {
+    const stepsPane = ({ activeStage = 1, isNextDisabled = false, isPreviousDisabled = false }) => {
 
 
         const isCustomer = CUSTOMER == customerOrOrganization
@@ -279,9 +343,9 @@ const OnboardingPage = () => {
             <>
                 <StepsPane type={customerOrOrganization} currentStage={activeStage} />
                 <Row>
-                    <Padding vertical='32px'><MasterButton disabled={activeStage === 1} onClick={() => previousStage()}>Previous</MasterButton></Padding>
+                    <Padding vertical='32px'>{!isPreviousDisabled && <MasterButton disabled={isPreviousDisabled} onClick={() => previousStage()}>Previous</MasterButton>}</Padding>
 
-                    <Padding vertical='32px'><MasterButton ref={nextButtonRef} disabled={isNextDisabled} onClick={() => nextStage()}>{nextStr}</MasterButton></Padding>
+                    <Padding vertical='32px'>{!isNextDisabled && <MasterButton ref={nextButtonRef} disabled={isNextDisabled} onClick={() => nextStage()}>{nextStr}</MasterButton>}</Padding>
                 </Row>
             </>
         )
@@ -314,7 +378,7 @@ const OnboardingPage = () => {
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
                             <H4LightText>Almost done</H4LightText>
-                            <BodyText>Please upload your organization details or select express registration via DID.</BodyText>
+                            <BodyText>Please check your email inbox now. We have sent you a message with a confirmation link. </BodyText>
                             <ButtonText color='#00A2E4'>Resend confirmation link</ButtonText>
                         </Padding>
                     </Card>
@@ -364,33 +428,58 @@ const OnboardingPage = () => {
 
 
     const verifyQrView = () => {
-        return <>
-            <ModalProvider backgroundComponent={FadingBackground}>
-                <Style width='633px' height='246px'>
-                    <Padding horizontal='20px'>
-                        <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                            <Padding horizontal='24px'>
-                                <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
-                                <HorizontalLine />
-                                <Column justifyContent='center' alignItems='center'>
-                                    <Padding vertical='8px'>
-                                        <QrLoadingView />
-                                    </Padding>
-                                    <Padding vertical='20px'>
-                                        <Row alignItems='space-between'>
-                                            <OutlineButton disabled onClick={() => dontHaveDidModal()}>I don&#39;t have a DID</OutlineButton>
-                                            <Padding horizontal='8px' />
-                                            <ProofOfOnboardingButton />
-                                        </Row>
-                                    </Padding>
-                                    <Padding vertical='20px'></Padding>
-                                </Column>
+        console.log(`will show verifyQrView..`)
+        return <Style width='633px' height='246px'>
+            <Padding horizontal='20px'>
+                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Padding horizontal='24px'>
+                        <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
+                        <HorizontalLine />
+                        <Column justifyContent='center' alignItems='center'>
+                            <Padding vertical='8px'>
+                                <QrLoadingView />
                             </Padding>
-                        </Card>
+                            <Padding vertical='20px'>
+                                <Row alignItems='space-between'>
+                                    <OutlineButton disabled onClick={() => dontHaveDidModal()}>I don&#39;t have a DID</OutlineButton>
+                                    <Padding horizontal='8px' />
+                                    <ProofOfOnboardingButton />
+                                </Row>
+                            </Padding>
+                            <Padding vertical='20px'></Padding>
+                        </Column>
                     </Padding>
-                </Style>
-            </ModalProvider>
-        </>
+                </Card>
+            </Padding>
+        </Style>
+
+        // return <>
+        //     <ModalProvider backgroundComponent={FadingBackground}>
+        //         <Style width='633px' height='246px'>
+        //             <Padding horizontal='20px'>
+        //                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+        //                     <Padding horizontal='24px'>
+        //                         <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
+        //                         <HorizontalLine />
+        //                         <Column justifyContent='center' alignItems='center'>
+        //                             <Padding vertical='8px'>
+        //                                 <QrLoadingView />
+        //                             </Padding>
+        //                             <Padding vertical='20px'>
+        //                                 <Row alignItems='space-between'>
+        //                                     <OutlineButton disabled onClick={() => dontHaveDidModal()}>I don&#39;t have a DID</OutlineButton>
+        //                                     <Padding horizontal='8px' />
+        //                                     <ProofOfOnboardingButton />
+        //                                 </Row>
+        //                             </Padding>
+        //                             <Padding vertical='20px'></Padding>
+        //                         </Column>
+        //                     </Padding>
+        //                 </Card>
+        //             </Padding>
+        //         </Style>
+        //     </ModalProvider>
+        // </>
     }
 
     function ProofOfOnboardingButton() {
@@ -425,9 +514,6 @@ const OnboardingPage = () => {
     }
 
 
-
-
-
     const credentialsMissingView = () => {
         return <>
             <Style width='633px'>
@@ -452,7 +538,6 @@ const OnboardingPage = () => {
 
 
     const userFillDetailsView = () => {
-
 
         const getValue = (target) => {
             switch (target.type) {
@@ -515,11 +600,21 @@ const OnboardingPage = () => {
     const disableNextButton = () => {
         if (activeStage == 1) {
             return customerOrOrganization == null
+        } else if (activeStage == 3) {  // for user email confirmation
+            return true
         }
-        // else if () {
+        return false
+    }
 
-        // }
-
+    const disablePreviousButton = () => {
+        if (activeStage == 1) {
+            return true
+        } else if (activeStage == 3) {
+            return true
+        }
+        else if (activeStage == 4) {
+            return true
+        }
         return false
     }
 
@@ -550,8 +645,8 @@ const OnboardingPage = () => {
                 {welcomingMessage()}
                 <Padding vertical='64px'>
                     <Row>
-                        <Style width='307px'>{stepsPane({ activeStage: activeStage, isNextDisabled: disableNextButton() })}</Style>
-                        {currentStageView()}
+                        <Style width='307px'>{stepsPane({ activeStage: activeStage, isNextDisabled: disableNextButton(), isPreviousDisabled: disablePreviousButton() })}</Style>
+                        <CurrentStageView />
                     </Row>
                 </Padding>
             </Column>
@@ -562,6 +657,7 @@ const OnboardingPage = () => {
 }
 
 OnboardingPage.propTypes = {
+    confirmationCode: PropTypes.string,
     type: PropTypes.string
 }
 

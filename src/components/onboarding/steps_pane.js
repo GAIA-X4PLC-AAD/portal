@@ -15,7 +15,7 @@ const StepsPane = ({ type, currentStage }) => {
                 <Card background='#fff' borderColor='#0' boxShadow={`0px ${isActive ? '3' : '2'}px 4px 0px rgb(29 36 48 / ${isActive ? '25' : '12'}%)`}>
                     <Padding vertical='12px' horizontal='10px'>
                         <Row alignItems='center'>
-                            <Circle radius='44px' background={isActive ? '#000094' : '#E9E9E9'} borderColor='#0'>
+                            <Circle radius='44px' background={(isActive ) ? '#000094' : '#E9E9E9'} borderColor='#0'>
                                 <BodySmallBoldText color={isActive ? '#fff' : '#2A2A2A'}>{stage}</BodySmallBoldText>
                             </Circle>
                             <Padding horizontal='20px'>
@@ -25,7 +25,7 @@ const StepsPane = ({ type, currentStage }) => {
                                 </Column>
                             </Padding>
                             <Style flexGrow='1'></Style>
-                            <Circle radius='8px' background={isActive ? '#6BB324' : '#E9E9E9'} borderColor='#0' />
+                            <Circle radius='8px' background={isActive  || (stage < currentStage) ? '#6BB324' : '#E9E9E9'} borderColor='#0' />
                         </Row>
                     </Padding>
                 </Card>
