@@ -389,7 +389,7 @@ const OnboardingPage = () => {
             return EmailConfirmedView({ type: customerOrOrganization, confirmationCode: confirmationCode })
         }
         else if (activeStage == 5) {
-            return <DidOnboardingViewmay  />
+            return <DidOnboardingView  />
         } else return verifyQrView()
 
         // return <><h1>Stage View</h1></>
