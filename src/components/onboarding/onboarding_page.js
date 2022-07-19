@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal, FadingBackground, H1Text } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
 import RadioButton from '../../common/radio';
@@ -74,7 +74,50 @@ RegistartinViaDidView.propTypes = {
 }
 
 
-const EmailConfirmedView = ({ confirmationCode = '' }) => {
+const RequestVCView = ({ confirmationCode }) => {
+
+    const thanksForConfirmingVC = <>
+        <Style width='633px' height='246px'>
+            <Padding horizontal='20px'>
+                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Padding horizontal='24px'>
+                        <H4LightText>VC Confirmation</H4LightText>
+                        <BodyText>VC confirmation has been submitted</BodyText>
+                        <Padding vertical='20px' />
+
+                    </Padding>
+                </Card>
+            </Padding>
+        </Style>
+    </>
+
+    const requestVCUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/vc/request/' + confirmationCode
+    const [{ data, error, isLoading, code }] = useResource(() => ({ url: requestVCUrl, method: 'POST', data: {}, }), [])
+
+    useEffect(() => { }, [isLoading, error, data]);
+
+    let isError = error != undefined;
+    const isSuccess = !isLoading && error == undefined && !(data === undefined)
+
+    if (isSuccess) {
+        return thanksForConfirmingVC
+    } else {
+        return <>Error Requesting VC</>
+    }
+
+}
+RequestVCView.propTypes = {
+    confirmationCode: PropTypes.string.isRequired,
+}
+
+const EmailConfirmedView = ({ confirmationCode }) => {
+
+    const isEmailConfirmedUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/confirm_email/' + confirmationCode
+    const [{ data, error, isLoading }] = useResource(() => ({ url: isEmailConfirmedUrl, method: 'POST', data: {}, }), [])
+
+    const [shouldReturnVCView, setShouldReturnVCView] = useState(false);
+
+    const navigate = useNavigate();
 
     const thanksForConfirmingView = <>
         <Style width='633px' height='246px'>
@@ -83,7 +126,10 @@ const EmailConfirmedView = ({ confirmationCode = '' }) => {
                     <Padding horizontal='24px'>
                         <H4LightText>Thanks for confirming..</H4LightText>
                         <BodyText>Thanks for confirming the email we’ve sent you. After submitting, your organization’s details will be checked by the AISBL. You’ll recieve an email  with your DID and verified credentials soon. </BodyText>
-                        <Padding vertical='20px' />
+
+                        <Padding vertical='32px'>
+                            <Row><OutlineButton onClick={() => navigate('/')}>Submit</OutlineButton></Row>
+                        </Padding>
                     </Padding>
                 </Card>
             </Padding>
@@ -105,14 +151,14 @@ const EmailConfirmedView = ({ confirmationCode = '' }) => {
     </>
 
 
-    const isEmailConfirmedUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/confirm_email/' + confirmationCode
-    const [{ data, error, isLoading }] = useResource(() => ({ url: isEmailConfirmedUrl, method: 'POST', data: {}, }), [])
 
     useEffect(() => { }, [isLoading, error, data]);
 
 
     let isError = error != undefined;
     const isSuccess = !isLoading && error == undefined && !(data === undefined)
+
+    if (shouldReturnVCView) return <RequestVCView confirmationCode={confirmationCode} />
 
     if (isSuccess) {
         return thanksForConfirmingView
@@ -149,6 +195,8 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
     const onboardingIdpUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/idp'
     const [{ data, error, isLoading }] = useResource(() => ({ url: onboardingIdpUrl }), [])
 
+    console.log(`DontHaveDidView, data: ${data}`)
+
     useEffect(() => { }, [isLoading, error, data]);
 
 
@@ -169,6 +217,12 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
             </Padding>
         )
     }
+
+    let isError = error != undefined;
+    const isSuccess = !isLoading && error == undefined && !(data === undefined)
+
+    // if (isSuccess) return
+
 
     return <>
         <Style width='633px'>
@@ -203,9 +257,16 @@ const OnboardingPage = () => {
     const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/'
     const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
 
-    const { userType, confirmationCode } = useParams();
+    const { userType, confirmationCode, vcConfirmationCode } = useParams();
 
-    const [activeStage, setActiveStage] = useState(confirmationCode === undefined ? 1 : 4)
+    console.log(`OnboardingPage, vcConfirmationCode: ${vcConfirmationCode}`)
+    let initialPage = 1
+    if (confirmationCode !== undefined) {
+        initialPage = 4
+    } else if (vcConfirmationCode !== undefined) {
+        initialPage = 5
+    }
+    const [activeStage, setActiveStage] = useState(initialPage)
     // const [activeStage, setActiveStage] = useState(4)
     const [customerOrOrganization, setCustomerOrOrganization] = useState(userType == ORGANIZATION ? ORGANIZATION : CUSTOMER)
 
@@ -264,7 +325,7 @@ const OnboardingPage = () => {
         return null
     }
 
-    const nextStage =  () => {
+    const nextStage = () => {
         // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
         if (activeStage == 1) {
             setActiveStage(2)
@@ -312,7 +373,7 @@ const OnboardingPage = () => {
             return confirmationEmailView()
         } else if (activeStage == 4) {
             return EmailConfirmedView({ confirmationCode: confirmationCode })
-        } 
+        }
         else if (activeStage == 5) {
             return verifyQrView()
         } else return verifyQrView()
@@ -379,7 +440,7 @@ const OnboardingPage = () => {
                         <Padding horizontal='24px'>
                             <H4LightText>Almost done</H4LightText>
                             <BodyText>Please check your email inbox now. We have sent you a message with a confirmation link. </BodyText>
-                            <ButtonText color='#00A2E4'>Resend confirmation link</ButtonText>
+                            <Padding vertical='10px'/>
                         </Padding>
                     </Card>
                 </Padding>
@@ -428,58 +489,33 @@ const OnboardingPage = () => {
 
 
     const verifyQrView = () => {
-        console.log(`will show verifyQrView..`)
-        return <Style width='633px' height='246px'>
-            <Padding horizontal='20px'>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                    <Padding horizontal='24px'>
-                        <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
-                        <HorizontalLine />
-                        <Column justifyContent='center' alignItems='center'>
-                            <Padding vertical='8px'>
-                                <QrLoadingView />
+        return <>
+            <ModalProvider backgroundComponent={FadingBackground}>
+                <Style width='633px' height='246px'>
+                    <Padding horizontal='20px'>
+                        <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                            <Padding horizontal='24px'>
+                                <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
+                                <HorizontalLine />
+                                <Column justifyContent='center' alignItems='center'>
+                                    <Padding vertical='8px'>
+                                        <QrLoadingView />
+                                    </Padding>
+                                    <Padding vertical='20px'>
+                                        <Row alignItems='space-between'>
+                                            <OutlineButton disabled onClick={() => dontHaveDidModal()}>I don&#39;t have a DID</OutlineButton>
+                                            <Padding horizontal='8px' />
+                                            <ProofOfOnboardingButton />
+                                        </Row>
+                                    </Padding>
+                                    <Padding vertical='20px'></Padding>
+                                </Column>
                             </Padding>
-                            <Padding vertical='20px'>
-                                <Row alignItems='space-between'>
-                                    <OutlineButton disabled onClick={() => dontHaveDidModal()}>I don&#39;t have a DID</OutlineButton>
-                                    <Padding horizontal='8px' />
-                                    <ProofOfOnboardingButton />
-                                </Row>
-                            </Padding>
-                            <Padding vertical='20px'></Padding>
-                        </Column>
+                        </Card>
                     </Padding>
-                </Card>
-            </Padding>
-        </Style>
-
-        // return <>
-        //     <ModalProvider backgroundComponent={FadingBackground}>
-        //         <Style width='633px' height='246px'>
-        //             <Padding horizontal='20px'>
-        //                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-        //                     <Padding horizontal='24px'>
-        //                         <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
-        //                         <HorizontalLine />
-        //                         <Column justifyContent='center' alignItems='center'>
-        //                             <Padding vertical='8px'>
-        //                                 <QrLoadingView />
-        //                             </Padding>
-        //                             <Padding vertical='20px'>
-        //                                 <Row alignItems='space-between'>
-        //                                     <OutlineButton disabled onClick={() => dontHaveDidModal()}>I don&#39;t have a DID</OutlineButton>
-        //                                     <Padding horizontal='8px' />
-        //                                     <ProofOfOnboardingButton />
-        //                                 </Row>
-        //                             </Padding>
-        //                             <Padding vertical='20px'></Padding>
-        //                         </Column>
-        //                     </Padding>
-        //                 </Card>
-        //             </Padding>
-        //         </Style>
-        //     </ModalProvider>
-        // </>
+                </Style>
+            </ModalProvider>
+        </>
     }
 
     function ProofOfOnboardingButton() {
@@ -583,6 +619,15 @@ const OnboardingPage = () => {
                                         <Padding vertical='28px'>
                                             <Row>
                                                 <OutlineButton onClick={e => validateUserFillDetailsForm()}>Registration via DID</OutlineButton>
+                                                <Style flexGrow='1' />
+                                                <OutlineButton onClick={() => {
+                                                    if (validateUserFillDetailsForm()) {
+                                                        // const _result = await registerUserApi()
+                                                        // console.log(`nextStage, _result: ${_result}`)
+                                                        // if (_result) setActiveStage(3)
+                                                        setActiveStage(3)
+                                                    }
+                                                }}>Submit</OutlineButton>
                                             </Row>
                                         </Padding>
                                     </Column>
@@ -600,9 +645,14 @@ const OnboardingPage = () => {
     const disableNextButton = () => {
         if (activeStage == 1) {
             return customerOrOrganization == null
+        } else if (activeStage == 2) {
+            return true
         } else if (activeStage == 3) {  // for user email confirmation
             return true
+        } else if (activeStage == 4) {  // for request submission
+            return true
         }
+
         return false
     }
 
@@ -613,6 +663,8 @@ const OnboardingPage = () => {
             return true
         }
         else if (activeStage == 4) {
+            return true
+        } else if (activeStage == 5) {
             return true
         }
         return false
@@ -637,7 +689,6 @@ const OnboardingPage = () => {
             </Style>
         </>
     }
-
 
     return <>
         <Row>
