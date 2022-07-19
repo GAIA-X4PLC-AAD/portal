@@ -69,7 +69,6 @@ const App = (props) => {
               <Route path="/register/user" element={ViewContainer(<RegisterUser />)} />
               <Route path="/register/user/viadid" element={ViewContainer(<RegisterUserViaDid />)} />
               <Route path="/register/organization" element={ViewContainer(<RegisterOrganization />)} />
-              <Route path="/confirmation/:type/:key" element={ViewContainer(<RegisterConfirmation />)} />
               <Route path="/register/email" element={ViewContainer(<RegisterMailSent />)} />
               <Route path="/register/did" element={ViewContainer(<RegisterViaDID />)} />
               <Route path="/register/IdP" element={ViewContainer(<RegisterViaDIDIdP />)} />
@@ -86,6 +85,8 @@ const App = (props) => {
               <Route path="/admin/management" element={ViewContainer(<SearchView type="management" />)} />
               <Route path="/dashboard" element={ViewContainer(<DashboardPage />)} />
               <Route path="/onboarding" element={ViewContainer(<OnboardingPage />)} />
+              <Route path="/confirmation/:userType/:confirmationCode" element={ViewContainer(<OnboardingPage />)} />
+              <Route path="/onboarding/proof/:vcConfirmationCode" element={ViewContainer(<OnboardingPage />)} />
               <Route path="/sp/:id" element={ViewContainer(<SolutionPackagingView />)} />
               <Route path="/provide/start" element={ViewContainer(<ProvideSelection />)} />
               <Route path="/provide/:type/upload" element={ViewContainer(<ProvideOverview />)} />
