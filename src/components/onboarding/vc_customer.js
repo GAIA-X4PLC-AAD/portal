@@ -17,7 +17,7 @@ const VCCustomer = () => {
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>Organization details</H4LightText>
+                        <H4LightText>{t("onboarding.customer_details")}</H4LightText>
                         <BodyText>Lorem ipsum dolor si jet .</BodyText>
                         <HorizontalLine />
                         <Padding vertical='12px' horizontal='80px'>

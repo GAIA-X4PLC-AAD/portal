@@ -14,6 +14,7 @@ import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 import OrganizationDetailsView from './onboarding_provider';
 
 import StepsPane from "./steps_pane";
+import VCCustomer from './vc_customer';
 
 export const CUSTOMER = 'customer'
 export const ORGANIZATION = 'organization'
@@ -444,7 +445,8 @@ const OnboardingPage = () => {
                 <Padding vertical='64px'>
                     <Row>
                         <Style width='307px'>{stepsPane({ activeStage: activeStage, isNextDisabled: disableNextButton() })}</Style>
-                        {currentStageView()}
+                        {/*currentStageView()*/}
+                        <VCCustomer/>
                     </Row>
                 </Padding>
             </Column>
