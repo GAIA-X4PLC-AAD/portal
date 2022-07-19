@@ -1,43 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from "axios";
+import axios from 'axios';
 
 import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal, FadingBackground, H1Text } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
 import RadioButton from '../../common/radio';
 import Checkbox from '../../common/checkbox';
-import { useResource } from "@axios-use/react";
+import { useResource } from '@axios-use/react';
 
 import styled from 'styled-components';
 import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
 import OrganizationDetailsView from './onboarding_provider';
 
-import StepsPane from "./steps_pane";
+import StepsPane from './steps_pane';
 
 export const CUSTOMER = 'customer'
 export const ORGANIZATION = 'organization'
 
 
-const QrLoadingView = () => {
-    const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
-    const [{ data, error, isLoading }] = useResource(() => ({ url: didRegisterUserUrl }), [])
-
-    useEffect(() => { }, [isLoading, error, data]);
-
-
-    let isError = error != undefined;
-
-    if (!isLoading && error == undefined && !(data === undefined)) {
-        return <Image src='/images/QRCode.png' width='200px' />
-    } else {
-        return <BodyText>Loading...</BodyText>
-    }
-
-}
-
-
-const DontHaveDidView = ({ toggleProofOfOnboardingModal }) => {
+const RegistartinViaDidView = ({ toggleRegistrationViaDidModal }) => {
 
     const onboardingIdpUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/idp'
     const [{ data, error, isLoading }] = useResource(() => ({ url: onboardingIdpUrl }), [])
@@ -77,7 +59,7 @@ const DontHaveDidView = ({ toggleProofOfOnboardingModal }) => {
                         {buildIdentifyServiceProvider({ background: '#fff' })}
 
                         <Padding paddingTop='32px'>
-                            <Row><OutlineButton onClick={() => toggleProofOfOnboardingModal()}>Close</OutlineButton></Row>
+                            <Row><OutlineButton onClick={() => toggleRegistrationViaDidModal()}>Close</OutlineButton></Row>
                         </Padding>
                     </Padding>
                 </Card>
@@ -85,16 +67,89 @@ const DontHaveDidView = ({ toggleProofOfOnboardingModal }) => {
         </Style>
     </>
 
+}
+
+RegistartinViaDidView.propTypes = {
+    toggleRegistrationViaDidModal: PropTypes.func.isRequired,
+}
+
+
+
+const QrLoadingView = () => {
+    const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
+    const [{ data, error, isLoading }] = useResource(() => ({ url: didRegisterUserUrl }), [])
+
+    useEffect(() => { }, [isLoading, error, data]);
+
+
+    let isError = error != undefined;
+
+    if (!isLoading && error == undefined && !(data === undefined)) {
+        return <Image src='/images/QRCode.png' width='200px' />
+    } else {
+        return <BodyText>Loading...</BodyText>
+    }
+
+}
+
+
+const DontHaveDidView = ({ dontHaveDidModal }) => {
+
+    const onboardingIdpUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/idp'
+    const [{ data, error, isLoading }] = useResource(() => ({ url: onboardingIdpUrl }), [])
+
+    useEffect(() => { }, [isLoading, error, data]);
+
+
+    const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
+        return (
+            <Padding vertical='8px'>
+                <Card background={background} borderColor='#E9E9E9'>
+                    <Padding vertical='4px' horizontal='16px'>
+                        <Row>
+                            <Circle radius='56px' borderColor='#0' background='#C4C4C4'>LOGO</Circle>
+                            <Padding paddingLeft='16px' />
+                            <ButtonText color='#000000'>Identify Service Provider 1</ButtonText>
+                            <Style flexGrow='1' />
+                            <ButtonText color='#00A2E4'>Link</ButtonText>
+                        </Row>
+                    </Padding>
+                </Card>
+            </Padding>
+        )
+    }
+
+    return <>
+        <Style width='633px'>
+            <Padding>
+                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Padding horizontal='24px' vertical='12px'>
+                        <H4LightText>Don’t have a DID?</H4LightText>
+                        <BodyText>Please select a idSP to create DID</BodyText>
+                        <HorizontalLine />
+                        {buildIdentifyServiceProvider({ background: '#46DAFF1F' })}
+                        {buildIdentifyServiceProvider({ background: '#fff' })}
+                        {buildIdentifyServiceProvider({ background: '#fff' })}
+                        {buildIdentifyServiceProvider({ background: '#fff' })}
+
+                        <Padding paddingTop='32px'>
+                            <Row><OutlineButton onClick={() => dontHaveDidModal()}>Close</OutlineButton></Row>
+                        </Padding>
+                    </Padding>
+                </Card>
+            </Padding>
+        </Style>
+    </>
 
 }
 
 DontHaveDidView.propTypes = {
-    toggleProofOfOnboardingModal: PropTypes.func.isRequired,
+    dontHaveDidModal: PropTypes.func.isRequired,
 }
 
 const OnboardingPage = () => {
 
-    const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/customer/'
+    const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/'
     const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
 
 
@@ -106,12 +161,23 @@ const OnboardingPage = () => {
 
     const [userFormDetailsInput, setInput] = useState({});
 
-    const [proofOfOnboardingIsOpen, setProofOfOnboardingIsOpen] = useState(false);
-    const [proofOfOnboardingOpacity, setProofOfOnboardingOpacity] = useState(0);
+    // DONT HAVE DID MODAL
+    const [dontHaveDidModalIsOpen, setDontHaveDidModalIsOpen] = useState(false);
+    const [dontHaveDidModalOpacity, setDontHaveModalOpacity] = useState(0);
 
-    function toggleProofOfOnboardingModal(e) {
-        setProofOfOnboardingOpacity(0);
-        setProofOfOnboardingIsOpen(!proofOfOnboardingIsOpen);
+    function dontHaveDidModal(e) {
+        setDontHaveModalOpacity(0);
+        setDontHaveDidModalIsOpen(!dontHaveDidModalIsOpen);
+    }
+
+
+    // REGISTRATION VIA DID
+    const [registrationViaDidModalIsOpen, setRegistrationViaDidModalIsOpen] = useState(false);
+    const [registrationViaDidModalOpacity, setRegistrationViaDidModalOpacity] = useState(0);
+
+    function registrationViaDidModal(e) {
+        setRegistrationViaDidModalOpacity(0);
+        registrationViaDidModalOpacity(!registrationViaDidModalIsOpen);
     }
 
     const registerUserApi = async () => {
@@ -119,11 +185,13 @@ const OnboardingPage = () => {
         try {
             const _result = await axios.post(registerUserUrl, userFormDetailsInput, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
                 }
             })
             if (_result.response) return true
         } catch (err) {
+            console.log(`registerUserApi, err: ${err}`)
             if (err) alert(err.message)
 
         }
@@ -159,7 +227,7 @@ const OnboardingPage = () => {
         } else if (activeStage == 3 || activeStage == 4) {
             setActiveStage(5)
         } else if (activeStage == 5) {
-            toggleProofOfOnboardingModal()
+            dontHaveDidModal()
         }
     }
 
@@ -209,7 +277,7 @@ const OnboardingPage = () => {
 
         return (
             <>
-               <StepsPane type={customerOrOrganization} currentStage={activeStage} />
+                <StepsPane type={customerOrOrganization} currentStage={activeStage} />
                 <Row>
                     <Padding vertical='32px'><MasterButton disabled={activeStage === 1} onClick={() => previousStage()}>Previous</MasterButton></Padding>
 
@@ -255,7 +323,44 @@ const OnboardingPage = () => {
         </>
     }
 
+    const organizationFillDetailsView = () => {
 
+        return <>
+            <Style width='633px' height='246px'>
+                <Padding horizontal='20px'>
+                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Padding horizontal='24px'>
+                            <H4LightText>Organization details</H4LightText>
+                            <BodyText>Lorem ipsum dolor si jet .</BodyText>
+                            <HorizontalLine />
+                            <Padding vertical='12px'>
+                                <Column>
+                                    <TextInput type='text' placeholder='Organization Name' />
+                                    <Padding vertical='4px' />
+                                    <TextInput type='text' placeholder='Email' />
+                                    <Padding vertical='8px' />
+                                    <TextInput type='text' placeholder='Phone' />
+                                    <Padding vertical='8px' />
+                                    <TextInput type='text' placeholder='City' />
+                                    <Padding vertical='8px' />
+                                    <TextInput type='text' placeholder='Address' />
+                                    <Padding vertical='8px' />
+                                    <TextInput type='text' placeholder='Zip Code' />
+                                    <Padding vertical='28px'>
+                                        <Row>
+                                            <OutlineButton>Registration via DID</OutlineButton>
+                                            <Padding horizontal='10px' />
+                                            <OutlineButton>Send</OutlineButton>
+                                        </Row>
+                                    </Padding>
+                                </Column>
+                            </Padding>
+                        </Padding>
+                    </Card>
+                </Padding>
+            </Style>
+        </>
+    }
 
 
     const verifyQrView = () => {
@@ -273,7 +378,7 @@ const OnboardingPage = () => {
                                     </Padding>
                                     <Padding vertical='20px'>
                                         <Row alignItems='space-between'>
-                                            <OutlineButton disabled onClick={() => toggleProofOfOnboardingModal()}>I don&#39;t have a DID</OutlineButton>
+                                            <OutlineButton disabled onClick={() => dontHaveDidModal()}>I don&#39;t have a DID</OutlineButton>
                                             <Padding horizontal='8px' />
                                             <ProofOfOnboardingButton />
                                         </Row>
@@ -291,13 +396,13 @@ const OnboardingPage = () => {
     function ProofOfOnboardingButton() {
         function afterOpen() {
             setTimeout(() => {
-                setProofOfOnboardingOpacity(1);
+                setDontHaveModalOpacity(1);
             }, 100);
         }
 
         function beforeClose() {
             return new Promise((resolve) => {
-                setProofOfOnboardingOpacity(0);
+                setDontHaveModalOpacity(0);
                 setTimeout(resolve, 300);
             });
         }
@@ -305,15 +410,15 @@ const OnboardingPage = () => {
         return (
             <div>
                 <StyledModal
-                    isOpen={proofOfOnboardingIsOpen}
+                    isOpen={dontHaveDidModalIsOpen}
                     afterOpen={afterOpen}
                     beforeClose={beforeClose}
-                    onBackgroundClick={toggleProofOfOnboardingModal}
-                    onEscapeKeydown={toggleProofOfOnboardingModal}
-                    opacity={proofOfOnboardingOpacity}
-                    backgroundProps={{ opacity: proofOfOnboardingOpacity }}
+                    onBackgroundClick={dontHaveDidModal}
+                    onEscapeKeydown={dontHaveDidModal}
+                    opacity={dontHaveDidModalOpacity}
+                    backgroundProps={{ opacity: dontHaveDidModalOpacity }}
                 >
-                    <DontHaveDidView toggleProofOfOnboardingModal={toggleProofOfOnboardingModal} />
+                    <DontHaveDidView dontHaveDidModal={dontHaveDidModal} />
                 </StyledModal>
             </div>
         );
@@ -384,6 +489,8 @@ const OnboardingPage = () => {
                                         <TextInput type='text' placeholder='Phone' name='phone' value={userFormDetailsInput.phone || ''} onChange={(e) => onFormChanged(e)} required />
                                         <Padding vertical='8px' />
                                         <TextInput type='text' placeholder='City' name='city' value={userFormDetailsInput.city || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <Padding vertical='8px' />
+                                        <TextInput type='text' placeholder='Country' name='country' value={userFormDetailsInput.country || ''} onChange={(e) => onFormChanged(e)} required />
                                         <Padding vertical='8px' />
                                         <TextInput type='text' placeholder='Address' name='address' value={userFormDetailsInput.address || ''} onChange={(e) => onFormChanged(e)} required />
                                         <Padding vertical='8px' />
