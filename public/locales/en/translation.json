@@ -84,6 +84,13 @@
         "organization_body_text": "Please upload your organization details or select express registration via DID.",
         "organization_name_placeholder": "Organization Name",
         "email_placeholder": "Email",
+        "phone_placeholder": "Phone",
+        "street_number_placeholder": "Address",
+        "city_placeholder": "City",
+        "zip_placeholder": "ZIP",
+        "first_name_placeholder": "First Name",
+        "last_name_placeholder": "Last Name",
+        "country_placeholder": "Country",
         "organization_aisbl": "Apply for AISBL Membership",
         "register_did_button": "Register via DID",
         "send_button": "Send",
@@ -91,9 +98,11 @@
         "close": "Close",
         "upload": "Upload",
         "errorHeader": "Error",
-        "missing_file": "Please upload a description file."
-
-
+        "missing_file": "Please upload a description file.",
+        "home_button": "Home",
+        "continue_button": "Continue",
+        "customer_details":"Customer details",
+        "organization_details":"Organization details"
     },
     "form": {
         "registerDid":"Registration via DID",
