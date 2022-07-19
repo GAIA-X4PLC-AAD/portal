@@ -1,10 +1,14 @@
 import React, { useState} from "react";
+import PropTypes from 'prop-types';
 
-import {  Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, StyledModal, Circle, ButtonText, BodyText,FadingBackground } from "../../common/styles";
+import {  Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, StyledModal, Circle, ButtonText, BodyText,FadingBackground, CancelButton, BlueButton } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
 import { ModalProvider } from "styled-react-modal";
+import LoadingView from "../loading_view/LoadingView";
 
 const DidOnboardingView = () => {
+
+    const URL = process.env.REACT_APP_EDGE_API_URI + '/onboarding/idp';
 
 function FancyModalButton() {
     const [isOpen, setIsOpen] = useState(false);
@@ -28,9 +32,58 @@ function FancyModalButton() {
         });
     }
 
+    const dontHaveDidView = ({data}) => {
+        const BuildIdentifyServiceProvider = ({ idp }) => {
+            return (
+                <Padding vertical='8px'>
+                    <Card background='#fff' hoverBackground='#46DAFF1F'  borderColor='#E9E9E9'>
+                        <Padding vertical='4px' horizontal='16px'>
+                            <Row>
+                                <Circle radius='56px' borderColor='#0' background='#C4C4C4'>
+                                    <Image src={idp.logoUrl} alt={idp.name} width='56px' height='56px'/></Circle>
+                                <Padding paddingLeft='16px' />
+                                <ButtonText color='#000000'>{idp.name}</ButtonText>
+                                <Style flexGrow='1' />
+                                <ButtonText color='#00A2E4' onClick={()=>{window.open(idp.link, '_blank').focus()}}>Link</ButtonText>
+                            </Row>
+                        </Padding>
+                    </Card>
+                </Padding>
+            )
+        }
+        BuildIdentifyServiceProvider.propTypes= {
+            idp: PropTypes.object.isRequired
+        }
+
+    
+        if (!data) return null;
+        else 
+        return <>
+            <Style width='633px'>
+                <Padding>
+                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Padding horizontal='24px' vertical='12px'>
+                            <H4LightText>Don’t have a DID?</H4LightText>
+                            <BodyText>Please select a idSP to create DID</BodyText>
+                            <HorizontalLine />
+                            {data.map((idp, i) => {return <BuildIdentifyServiceProvider idp={idp} key={i}/>})}
+                            <Padding paddingTop='32px'>
+                                <Row><OutlineButton onClick={toggleModal}>Close</OutlineButton></Row>
+                            </Padding>
+                        </Padding>
+                    </Card>
+                </Padding>
+            </Style>
+        </>
+    }
+    
+    dontHaveDidView.propTypes = {
+        data: PropTypes.object
+    }
+
     return (
         <div>
-            <OutlineButton onClick={toggleModal}>Continue</OutlineButton>
+            <CancelButton onClick={toggleModal}>I don&#39;t have a DID</CancelButton>
             <StyledModal
                 isOpen={isOpen}
                 afterOpen={afterOpen}
@@ -40,53 +93,14 @@ function FancyModalButton() {
                 opacity={opacity}
                 backgroundProps={{ opacity }}
             >
-                {dontHaveDidView()}
+            <LoadingView 
+                    url={URL}
+                successView={dontHaveDidView}/>
             </StyledModal>
         </div>
     );
-}
 
-const dontHaveDidView = () => {
-    const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
-        return (
-            <Padding vertical='8px'>
-                <Card background={background} borderColor='#E9E9E9'>
-                    <Padding vertical='4px' horizontal='16px'>
-                        <Row>
-                            <Circle radius='56px' borderColor='#0' background='#C4C4C4'>LOGO</Circle>
-                            <Padding paddingLeft='16px' />
-                            <ButtonText color='#000000'>Identify Service Provider 1</ButtonText>
-                            <Style flexGrow='1' />
-                            <ButtonText color='#00A2E4'>Link</ButtonText>
-                        </Row>
-                    </Padding>
-                </Card>
-            </Padding>
-        )
     }
-    return <>
-        <Style width='633px'>
-            <Padding>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                    <Padding horizontal='24px' vertical='12px'>
-                        <H4LightText>Don’t have a DID?</H4LightText>
-                        <BodyText>Please select a idSP to create DID</BodyText>
-                        <HorizontalLine />
-                        {buildIdentifyServiceProvider({ background: '#46DAFF1F' })}
-                        {buildIdentifyServiceProvider({ background: '#fff' })}
-                        {buildIdentifyServiceProvider({ background: '#fff' })}
-                        {buildIdentifyServiceProvider({ background: '#fff' })}
-
-                        <Padding paddingTop='32px'>
-                            <Row><OutlineButton>Close</OutlineButton></Row>
-                        </Padding>
-                    </Padding>
-                </Card>
-            </Padding>
-        </Style>
-    </>
-}
-
 
 const verifyQrView = () => {
     return <>
@@ -103,9 +117,9 @@ const verifyQrView = () => {
                                 </Padding>
                                 <Padding vertical='20px'>
                                     <Row alignItems='space-between'>
-                                        <OutlineButton disabled>I don&#39;t have a DID</OutlineButton>
-                                        <Padding horizontal='8px' />
                                         <FancyModalButton />
+                                        <Padding horizontal='8px' />
+                                        <BlueButton>Continue</BlueButton>
                                     </Row>
                                 </Padding>
                                 <Padding vertical='20px'></Padding>

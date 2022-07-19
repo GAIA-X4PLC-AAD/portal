@@ -1,6 +1,7 @@
 .lcm-header {
     display: flex;
     margin-bottom: 25px;
+    text-align: left;
 }
 
 .lcm-header-description {

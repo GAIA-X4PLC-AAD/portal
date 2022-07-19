@@ -3,12 +3,15 @@ import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 
 import Checkbox from "../../common/checkbox";
-import {  Column, Row, Style, Card, BodyText, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal } from "../../common/styles";
+import {  Column, Row, Style, Card, BodyText, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, BodySmallBoldText } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
-import { ModalProvider } from "styled-react-modal";
 import DidOnboardingView from "./onboarding_did";
+import { useTranslation } from "react-i18next";
+import Modal from "../../Modal";
 
 const OrganizationDetailsView = ({onSuccess}) => {
+
+    const {t} = useTranslation();
 
     const URL = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/organization/';
 
@@ -19,6 +22,10 @@ const OrganizationDetailsView = ({onSuccess}) => {
   const [eMessage,setEMessage] = useState('');
   const [did, setDid] = useState(false);
 
+  useEffect (() => {
+    console.log('eMessage effect', eMessage);
+  }, [eMessage]);
+
  const getValue = (target) => {
     switch (target.type) {
         case "checkbox": return target.checked;
@@ -28,8 +35,6 @@ const OrganizationDetailsView = ({onSuccess}) => {
  }
 
   const onFormChanged = (e) => {
-    console.log('e.target.name: ' , e.target.name);
-    console.log('e.target.value: ' , e.target.value);
       const key = e.target.name;
       const value = getValue(e.target);
       setInput(values => ({ ...values, [key]: value }))
@@ -37,47 +42,77 @@ const OrganizationDetailsView = ({onSuccess}) => {
 
 
     const onFormSubmit = () => {
-        if (formRef.current.reportValidity())
+        console.log(input.document);
+        if (!input.document) {
+            setEMessage(t('onboarding.missing_file'));
+        }  else if (formRef.current.reportValidity())
         {
-            console.log("Submit button was clicked so we'll submit the form");
-            axios.post(URL, input, {
+            let formData = new FormData();
+            formData.append('name', input.name);
+            formData.append('email', input.email);
+            formData.append('aisbl', input.aisbl||false);
+            formData.append('document', input.document);
+             axios.post(URL, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                     }
                 }).then (
                     response => {
-                        //move to next step
                         onSuccess();
                     }, 
                     error => {
                         console.log(error);
                         setEMessage(error.response.data);
-                        // remove onSuccess call
-                        onSuccess ();
+
                     });
         }
     }
 
-   
+    const onError = (eMessage) => {
+        if (eMessage || eMessage != '') {
+                return (
+                    <Modal>
+                      <div className="login-fail-flex-col">
+                        <div className='login-fail-header'>{t("onboarding.errorHeader")}</div>
+                        <div className='login-fail-content'>
+                        {eMessage}
+                        </div>
+                        <div className='login-fail-footer'>
+                          <button className="gaiax-button" onClick={()=>{setEMessage('')}}>
+                            {t('onboarding.close')}
+                          </button>
+                        </div>
+                      </div>
+                    </Modal>
+                  );
+        }
+    }
+   console.log(input.document);
     const organizationDetailsFormView = () => {
     return <>
         <Style width='633px' height='246px'>
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>Do you want to register as a customer or provider?</H4LightText>
-                        <ButtonText color='#00A2E4'>Learn more</ButtonText>
+                        <H4LightText>{t('onboarding.organization_headline')}</H4LightText>
                         <HorizontalLine />
                         <Padding vertical='24px'>
                              <form  ref={formRef} noValidate>
                             <Column>
-                                <BodyText>Please upload your organization details or select express registration via DID.</BodyText>
-                                <input name='file' type="file" ref={fileRef} onChange={e=> onFormChanged(e)} hidden/>
-                                <Padding vertical='16px' alignSelf='start' onClick={e=>fileRef.current.click()}><OutlineButton>Upload</OutlineButton></Padding>
+                                <BodyText>{t('onboarding.organization_body_text')}</BodyText>
+                                <input name='document' type="file" ref={fileRef} onChange={e=> onFormChanged(e)} hidden/>
+                                <Row alignItems='center'>
+                                <Padding vertical='16px' alignSelf='start' onClick={e=>fileRef.current.click()}>
+                                    <OutlineButton>{t('onboarding.upload')}</OutlineButton>
+                                </Padding>
+                                <Padding vertical='16px' horizontal='16px'>
+                                    <BodySmallBoldText> {input.document?.name}</BodySmallBoldText>
+                                </Padding>
+                                </Row>
                                 <Padding vertical='16px' />
-                                <TextInput name='name' type="text" value={input.name||''}  placeholder="Organization Name"  onChange={(e)=>onFormChanged(e)} required/>
+                                <TextInput name='name' type="text" value={input.name||''}  placeholder={t('onboarding.organization_name_placeholder')}  onChange={(e)=>onFormChanged(e)} required/>
                                 <Padding vertical='4px' />
-                                <TextInput name='email' type="email" value={input.email||''} placeholder="Email"  onChange={(e)=>onFormChanged(e)} required/>
+                                <TextInput name='email' type="email" value={input.email||''} placeholder={t('onboarding.email_placeholder')}  onChange={(e)=>onFormChanged(e)} required/>
                                 <Padding vertical='8px' />
                                 {/* Checkbox */}
                                 <Row alignItems='center'>
@@ -88,16 +123,16 @@ const OrganizationDetailsView = ({onSuccess}) => {
                                         />
                                     </label>
                                     <Padding horizontal='4px' />
-                                    <BodyText>Apply for AISBL Membership</BodyText>
+                                    <BodyText>{t('onboarding.organization_aisbl')}</BodyText>
                                     <Padding horizontal='7px' />
                                     <Image objectFit='contain' src='/images/question-mark.svg' />
                                 </Row>
 
                                 <Padding vertical='28px'>
                                     <Row>
-                                        <OutlineButton onClick={()=> setDid(true)}>Registration via DID</OutlineButton>
+                                        <OutlineButton onClick={()=> setDid(true)}>{t('onboarding.register_did_button')}</OutlineButton>
                                         <Padding horizontal='10px' />
-                                        <OutlineButton onClick={e=>onFormSubmit()}>Send</OutlineButton>
+                                        <OutlineButton onClick={e=>onFormSubmit()}>{t('onboarding.send_button')}</OutlineButton>
                                     </Row>
                                 </Padding>
                             </Column>
@@ -107,6 +142,7 @@ const OrganizationDetailsView = ({onSuccess}) => {
                 </Card>
             </Padding>
         </Style>
+        {onError(eMessage)}
     </>
     }
 
