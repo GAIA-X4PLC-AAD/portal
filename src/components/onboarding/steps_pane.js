@@ -39,9 +39,9 @@ const StepsPane = ({ type, currentStage }) => {
             {buildStepCardView({ stage: '2', title: t(`onboarding.${type || 'user'}_details`), subtitle: t('onboarding.step_2'), isActive: (2 === currentStage) })}
             {buildStepCardView({ stage: '3', title: t(`onboarding.email_confirmation`), subtitle: t('onboarding.step_3'), isActive: (3 === currentStage) })}
             {buildStepCardView({ stage: '4', title: t(`onboarding.request_submission`), subtitle: t('onboarding.step_4'), isActive: (4 === currentStage) })}
-            {buildStepCardView({ stage: '5', title: 'Proof on onboarding', subtitle: 'Step 5', isActive: currentStage == 5 })}
-            {buildStepCardView({ stage: '6', title: 'VC details', subtitle: 'Step 6', isActive: currentStage == 6 })}
-            {buildStepCardView({ stage: '7', title: 'Finish onboarding', subtitle: 'Step 7', isActive: currentStage == 7 })}
+            {buildStepCardView({ stage: '5', title: t(`onboarding.proof_on_onboarding`), subtitle: t('onboarding.step_5'), isActive: currentStage == 5 })}
+            {buildStepCardView({ stage: '6', title: t(`onboarding.vc_details`), subtitle: t('onboarding.step_6'), isActive: currentStage == 6 })}
+            {buildStepCardView({ stage: '7', title: t('onboarding.finish_onboarding'), subtitle: t('onboarding.step_7'), isActive: currentStage == 7 })}
 
         </>
     )

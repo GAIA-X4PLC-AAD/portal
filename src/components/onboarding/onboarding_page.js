@@ -15,6 +15,9 @@ import OrganizationDetailsView from './onboarding_provider';
 
 import StepsPane from './steps_pane';
 
+import { useTranslation } from 'react-i18next';
+import { t } from 'i18next';
+
 export const CUSTOMER = 'user'
 export const ORGANIZATION = 'organization'
 
@@ -26,6 +29,7 @@ const RegistartinViaDidView = ({ toggleRegistrationViaDidModal }) => {
 
     useEffect(() => { }, [isLoading, error, data]);
 
+    const {t} = useTranslation()
 
     const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
         return (
@@ -50,8 +54,8 @@ const RegistartinViaDidView = ({ toggleRegistrationViaDidModal }) => {
             <Padding>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px' vertical='12px'>
-                        <H4LightText>Don’t have a DID?</H4LightText>
-                        <BodyText>Please select a idSP to create DID</BodyText>
+                        <H4LightText>{t('form.regViaDIDIdPHeading')}</H4LightText>
+                        <BodyText>{t('onboarding.msg_select_idsp')}</BodyText>
                         <HorizontalLine />
                         {buildIdentifyServiceProvider({ background: '#46DAFF1F' })}
                         {buildIdentifyServiceProvider({ background: '#fff' })}
@@ -75,14 +79,15 @@ RegistartinViaDidView.propTypes = {
 
 
 const RequestVCView = ({ confirmationCode }) => {
+    const {t} = useTranslation()
 
     const thanksForConfirmingVC = <>
         <Style width='633px' height='246px'>
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>VC Confirmation</H4LightText>
-                        <BodyText>VC confirmation has been submitted</BodyText>
+                        <H4LightText>{t('onboarding.vs_confirmation')}</H4LightText>
+                        <BodyText>{t('onboarding.msg_vs_confirmation')}</BodyText>
                         <Padding vertical='20px' />
 
                     </Padding>
@@ -111,6 +116,7 @@ RequestVCView.propTypes = {
 }
 
 const EmailConfirmedView = ({ confirmationCode }) => {
+    const {t} = useTranslation()
 
     const isEmailConfirmedUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/confirm_email/' + confirmationCode
     const [{ data, error, isLoading }] = useResource(() => ({ url: isEmailConfirmedUrl, method: 'POST', data: {}, }), [])
@@ -124,11 +130,10 @@ const EmailConfirmedView = ({ confirmationCode }) => {
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>Thanks for confirming..</H4LightText>
-                        <BodyText>Thanks for confirming the email we’ve sent you. After submitting, your organization’s details will be checked by the AISBL. You’ll recieve an email  with your DID and verified credentials soon. </BodyText>
-
+                        <H4LightText>{t('onboarding.thanks_for_confirming')}</H4LightText>
+                        <BodyText>{t('onboarding.msg_thanks_for_confirming')}</BodyText>
                         <Padding vertical='32px'>
-                            <Row><OutlineButton onClick={() => navigate('/')}>Submit</OutlineButton></Row>
+                            <Row><OutlineButton onClick={() => navigate('/')}>{t('form.submit')}</OutlineButton></Row>
                         </Padding>
                     </Padding>
                 </Card>
@@ -141,8 +146,8 @@ const EmailConfirmedView = ({ confirmationCode }) => {
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>Already confirmed!</H4LightText>
-                        <BodyText>Your email is already been confirmed..</BodyText>
+                        <H4LightText>{t('onboarding.already_confirmed')}</H4LightText>
+                        <BodyText>{t('onboarding.msg_already_confirmed')}</BodyText>
                         <Padding vertical='20px' />
                     </Padding>
                 </Card>
@@ -198,6 +203,7 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
     console.log(`DontHaveDidView, data: ${data}`)
 
     useEffect(() => { }, [isLoading, error, data]);
+    const {t} = useTranslation()
 
 
     const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
@@ -224,13 +230,14 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
     // if (isSuccess) return
 
 
+
     return <>
         <Style width='633px'>
             <Padding>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px' vertical='12px'>
-                        <H4LightText>Don’t have a DID?</H4LightText>
-                        <BodyText>Please select a idSP to create DID</BodyText>
+                        <H4LightText>{t('form.regViaDIDIdPHeading')}</H4LightText>
+                        <BodyText>{t('form.regViaDIDIdPSelect')}</BodyText>
                         <HorizontalLine />
                         {buildIdentifyServiceProvider({ background: '#46DAFF1F' })}
                         {buildIdentifyServiceProvider({ background: '#fff' })}
@@ -238,7 +245,7 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
                         {buildIdentifyServiceProvider({ background: '#fff' })}
 
                         <Padding paddingTop='32px'>
-                            <Row><OutlineButton onClick={() => dontHaveDidModal()}>Close</OutlineButton></Row>
+                            <Row><OutlineButton onClick={() => dontHaveDidModal()}>{t('login.close')}</OutlineButton></Row>
                         </Padding>
                     </Padding>
                 </Card>
@@ -253,6 +260,9 @@ DontHaveDidView.propTypes = {
 }
 
 const OnboardingPage = () => {
+
+
+    const { t } = useTranslation();
 
     const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/'
     const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
@@ -387,8 +397,8 @@ const OnboardingPage = () => {
         return (
             <>
                 <Column alignItems='start'>
-                    <H4Text>Welcome to Gaia-X</H4Text>
-                    <BodyText>Create your account in a few steps and benefit of our secure and transparent Federated Catalogue.</BodyText>
+                    <H4Text>{t('onboarding.welcome_to_gaiax')}</H4Text>
+                    <BodyText>{t('onboarding.msg_create_your_account')}</BodyText>
                 </Column>
             </>
         )
@@ -398,15 +408,13 @@ const OnboardingPage = () => {
 
 
         const isCustomer = CUSTOMER == customerOrOrganization
-        const nextStr = isCustomer && activeStage == 2 ? 'Send' : 'Next'
 
         return (
             <>
                 <StepsPane type={customerOrOrganization} currentStage={activeStage} />
                 <Row>
-                    <Padding vertical='32px'>{!isPreviousDisabled && <MasterButton disabled={isPreviousDisabled} onClick={() => previousStage()}>Previous</MasterButton>}</Padding>
-
-                    <Padding vertical='32px'>{!isNextDisabled && <MasterButton ref={nextButtonRef} disabled={isNextDisabled} onClick={() => nextStage()}>{nextStr}</MasterButton>}</Padding>
+                    <Padding vertical='32px'>{!isPreviousDisabled && <MasterButton disabled={isPreviousDisabled} onClick={() => previousStage()}>{t('form.prev')}</MasterButton>}</Padding>
+                    <Padding vertical='32px'>{!isNextDisabled && <MasterButton ref={nextButtonRef} disabled={isNextDisabled} onClick={() => nextStage()}>{t('form.next')}</MasterButton>}</Padding>
                 </Row>
             </>
         )
@@ -420,8 +428,8 @@ const OnboardingPage = () => {
                         <Padding horizontal='24px'>
                             <Padding vertical='40px'>
                                 <Column>
-                                    <RadioButton name='step1' onClick={() => setCustomerOrOrganization(CUSTOMER)} defaultChecked={CUSTOMER == customerOrOrganization}><BodyText>Customer</BodyText></RadioButton>
-                                    <RadioButton name='step1' onClick={() => setCustomerOrOrganization(ORGANIZATION)} defaultChecked={ORGANIZATION == customerOrOrganization}><BodyText>Provider</BodyText></RadioButton>
+                                    <RadioButton name='step1' onClick={() => setCustomerOrOrganization(CUSTOMER)} defaultChecked={CUSTOMER == customerOrOrganization}><BodyText>{t('onboarding.customer')}</BodyText></RadioButton>
+                                    <RadioButton name='step1' onClick={() => setCustomerOrOrganization(ORGANIZATION)} defaultChecked={ORGANIZATION == customerOrOrganization}><BodyText>{t('onboarding.organization')}</BodyText></RadioButton>
                                 </Column>
                             </Padding>
                         </Padding>
@@ -438,48 +446,9 @@ const OnboardingPage = () => {
                 <Padding horizontal='20px'>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
-                            <H4LightText>Almost done</H4LightText>
-                            <BodyText>Please check your email inbox now. We have sent you a message with a confirmation link. </BodyText>
-                            <Padding vertical='10px'/>
-                        </Padding>
-                    </Card>
-                </Padding>
-            </Style>
-        </>
-    }
-
-    const organizationFillDetailsView = () => {
-
-        return <>
-            <Style width='633px' height='246px'>
-                <Padding horizontal='20px'>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                        <Padding horizontal='24px'>
-                            <H4LightText>Organization details</H4LightText>
-                            <BodyText>Lorem ipsum dolor si jet .</BodyText>
-                            <HorizontalLine />
-                            <Padding vertical='12px'>
-                                <Column>
-                                    <TextInput type='text' placeholder='Organization Name' />
-                                    <Padding vertical='4px' />
-                                    <TextInput type='text' placeholder='Email' />
-                                    <Padding vertical='8px' />
-                                    <TextInput type='text' placeholder='Phone' />
-                                    <Padding vertical='8px' />
-                                    <TextInput type='text' placeholder='City' />
-                                    <Padding vertical='8px' />
-                                    <TextInput type='text' placeholder='Address' />
-                                    <Padding vertical='8px' />
-                                    <TextInput type='text' placeholder='Zip Code' />
-                                    <Padding vertical='28px'>
-                                        <Row>
-                                            <OutlineButton>Registration via DID</OutlineButton>
-                                            <Padding horizontal='10px' />
-                                            <OutlineButton>Send</OutlineButton>
-                                        </Row>
-                                    </Padding>
-                                </Column>
-                            </Padding>
+                            <H4LightText>{t('onboarding.almost_done')}</H4LightText>
+                            <BodyText>{t('onboarding.check_email')}</BodyText>
+                            <Padding vertical='10px' />
                         </Padding>
                     </Card>
                 </Padding>
@@ -495,7 +464,7 @@ const OnboardingPage = () => {
                     <Padding horizontal='20px'>
                         <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                             <Padding horizontal='24px'>
-                                <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
+                                <H4LightText>{t('onboarding.msg_verify_organization')}</H4LightText>
                                 <HorizontalLine />
                                 <Column justifyContent='center' alignItems='center'>
                                     <Padding vertical='8px'>
@@ -503,7 +472,7 @@ const OnboardingPage = () => {
                                     </Padding>
                                     <Padding vertical='20px'>
                                         <Row alignItems='space-between'>
-                                            <OutlineButton disabled onClick={() => dontHaveDidModal()}>I don&#39;t have a DID</OutlineButton>
+                                            <OutlineButton disabled onClick={() => dontHaveDidModal()}>{t('form.regViaDIDNoDID')}</OutlineButton>
                                             <Padding horizontal='8px' />
                                             <ProofOfOnboardingButton />
                                         </Row>
@@ -595,30 +564,30 @@ const OnboardingPage = () => {
                 <Padding horizontal='20px'>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
-                            <H4LightText>Organization details</H4LightText>
+                            <H4LightText>{t('onboarding.customer_details')}</H4LightText>
                             <BodyText>Lorem ipsum dolor si jet .</BodyText>
                             <HorizontalLine />
                             <Padding vertical='12px'>
                                 <form ref={userFillDetailsFormRef} noValidate>
                                     <Column>
-                                        <TextInput type='text' placeholder='First Name' name='first_name' value={userFormDetailsInput.first_name || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <TextInput type='text' placeholder={t('form.lFirstName')} name='first_name' value={userFormDetailsInput.first_name || ''} onChange={(e) => onFormChanged(e)} required />
                                         <Padding vertical='4px' />
-                                        <TextInput type='text' placeholder='Last Name' name='last_name' value={userFormDetailsInput.last_name || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <TextInput type='text' placeholder={t('form.lLastName')} name='last_name' value={userFormDetailsInput.last_name || ''} onChange={(e) => onFormChanged(e)} required />
                                         <Padding vertical='16px' />
-                                        <TextInput type='text' placeholder='Email' name='email' value={userFormDetailsInput.email || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <TextInput type='text' placeholder={t('form.lEmail')} name='email' value={userFormDetailsInput.email || ''} onChange={(e) => onFormChanged(e)} required />
                                         <Padding vertical='8px' />
-                                        <TextInput type='text' placeholder='Phone' name='phone' value={userFormDetailsInput.phone || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <TextInput type='text' placeholder={t('form.lPhone')} name='phone' value={userFormDetailsInput.phone || ''} onChange={(e) => onFormChanged(e)} required />
                                         <Padding vertical='8px' />
-                                        <TextInput type='text' placeholder='City' name='city' value={userFormDetailsInput.city || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <TextInput type='text' placeholder={t('form.lCity')} name='city' value={userFormDetailsInput.city || ''} onChange={(e) => onFormChanged(e)} required />
                                         <Padding vertical='8px' />
-                                        <TextInput type='text' placeholder='Country' name='country' value={userFormDetailsInput.country || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <TextInput type='text' placeholder={t('form.lCountry')} name='country' value={userFormDetailsInput.country || ''} onChange={(e) => onFormChanged(e)} required />
                                         <Padding vertical='8px' />
-                                        <TextInput type='text' placeholder='Address' name='address' value={userFormDetailsInput.address || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <TextInput type='text' placeholder={t('form.lAddress')} name='address' value={userFormDetailsInput.address || ''} onChange={(e) => onFormChanged(e)} required />
                                         <Padding vertical='8px' />
-                                        <TextInput type='text' placeholder='Zip Code' name='zip_code' value={userFormDetailsInput.zip_code || ''} onChange={(e) => onFormChanged(e)} required />
+                                        <TextInput type='text' placeholder={t('form.lZIP')} name='zip_code' value={userFormDetailsInput.zip_code || ''} onChange={(e) => onFormChanged(e)} required />
                                         <Padding vertical='28px'>
                                             <Row>
-                                                <OutlineButton onClick={e => validateUserFillDetailsForm()}>Registration via DID</OutlineButton>
+                                                <OutlineButton onClick={e => setActiveStage(5)}>{t('form.registerDid')}</OutlineButton>
                                                 <Style flexGrow='1' />
                                                 <OutlineButton onClick={() => {
                                                     if (validateUserFillDetailsForm()) {
@@ -627,7 +596,7 @@ const OnboardingPage = () => {
                                                         // if (_result) setActiveStage(3)
                                                         setActiveStage(3)
                                                     }
-                                                }}>Submit</OutlineButton>
+                                                }}>{t('form.submit')}</OutlineButton>
                                             </Row>
                                         </Padding>
                                     </Column>
