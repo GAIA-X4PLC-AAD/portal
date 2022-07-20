@@ -71,6 +71,7 @@
         "not-found": "Oh no! We couldn't find any results."
     },
     "onboarding": {
+        "UserOrganization_header": "Do you want to register a user or a provider?",
         "customerprovider": "Customer or provider",
         "organization_details": "Organization details",
         "customer_details": "Customer details",
@@ -96,6 +97,7 @@
         "send_button": "Send",
         "organization_headline": "To issue you Verified credentials, we need your organization's details.",
         "close": "Close",
+        "finish_button": "Finish",
         "upload": "Upload",
         "errorHeader": "Error",
         "missing_file": "Please upload a description file.",

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal, FadingBackground, H1Text } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
 import RadioButton from '../../common/radio';
@@ -119,6 +119,28 @@ const RequestVCView = ({ type, confirmationCode }) => {
 RequestVCView.propTypes = {
     type: PropTypes.string.isRequired,
     confirmationCode: PropTypes.string.isRequired,
+}
+
+const EmailAlreadyConfirmedView = () =>{
+    const {t} = useTranslation()
+
+    return <>
+        <Style>
+            <Padding horizontal='20px'>
+                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Padding horizontal='24px'>
+                        <H4LightText>{t('onboarding.email_already_confirmed')}</H4LightText>
+                        <HorizontalLine />
+                        <Padding vertical='16px' />
+                        <BodyText>{t('onboarding.msg_email_already_confirmed')}</BodyText>
+                           <Padding vertical='32px'>
+                            <Row><OutlineButton onClick={() => navigate('/')}>{t('onboarding.home_button')}</OutlineButton></Row>
+                        </Padding>
+                    </Padding>
+                </Card>
+            </Padding>
+        </Style>
+    </>
 }
 
 const EmailConfirmedView = ({ type, confirmationCode }) => {
@@ -273,16 +295,20 @@ const OnboardingPage = () => {
 
     const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/'
     const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
+    
+    const location = useLocation();
+    console.log(location);
+    const { userType, confirmationCode } = useParams();
 
-    const { userType, confirmationCode, vcConfirmationCode } = useParams();
-
-    console.log(`OnboardingPage, vcConfirmationCode: ${vcConfirmationCode}`)
     let initialPage = 1
     if (confirmationCode !== undefined) {
         initialPage = 4
-    } else if (vcConfirmationCode !== undefined) {
+    } else if (location && location.pathname.includes('/proof')) {
         initialPage = 5
+    } else if (location && location.pathname.includes('email_already_confirmed')) {
+        initialPage = 4;
     }
+
     const [activeStage, setActiveStage] = useState(initialPage)
     // const [activeStage, setActiveStage] = useState(4)
     const [customerOrOrganization, setCustomerOrOrganization] = useState(userType == ORGANIZATION ? ORGANIZATION : CUSTOMER)
@@ -388,7 +414,11 @@ const OnboardingPage = () => {
         } else if (activeStage == 3) {
             return confirmationEmailView()
         } else if (activeStage == 4) {
-            return EmailConfirmedView({ type: customerOrOrganization, confirmationCode: confirmationCode })
+            if (confirmationCode !== undefined) {
+                return EmailConfirmedView({ type: customerOrOrganization, confirmationCode: confirmationCode })
+            } else {
+                return EmailAlreadyConfirmedView();
+            }
         }
         else if (activeStage == 5) {
             return <DidOnboardingView nextStage={()=>{setActiveStage(6)}} />
@@ -437,7 +467,7 @@ const OnboardingPage = () => {
             <Style width='633px' height='246px'>
                 <Padding horizontal='20px'>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                       <H4LightText>Do you want to register as a customer or provider?</H4LightText>
+                       <H4LightText>{t('onboarding.UserOrganization_header')}</H4LightText>
                         <HorizontalLine/>
                         <Padding horizontal='24px'>
                             <Padding vertical='40px'>
