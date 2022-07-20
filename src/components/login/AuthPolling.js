@@ -13,6 +13,7 @@ class AuthPolling extends Component {
             onAuthZFailed: props.onAuthZFailed,
             onAuthZWait: props.onAuthZWait,
             timerId: null,
+            continuePollingOnFailure: props.continuePollingOnFailure || false,
         }
         this.statusURL = props.statusURL
     }
@@ -30,7 +31,7 @@ class AuthPolling extends Component {
                 this.state.onAuthZSuccess();
                 break;
             case 'FAIL':
-                this.doCleanup();
+                if (!this.state.continuePollingOnFailure) this.doCleanup();
                 this.state.onAuthZFailed();
                 break;
             default:
@@ -68,6 +69,7 @@ AuthPolling.propTypes = {
     onAuthZWait: PropTypes.func,
     statusURL: PropTypes.string,
     t: PropTypes.func,
+    continuePollingOnFailure: PropTypes.bool
 }
 
 export default AuthPolling;

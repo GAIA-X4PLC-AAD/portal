@@ -437,6 +437,8 @@ const OnboardingPage = () => {
             <Style width='633px' height='246px'>
                 <Padding horizontal='20px'>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                       <H4LightText>Do you want to register as a customer or provider?</H4LightText>
+                        <HorizontalLine/>
                         <Padding horizontal='24px'>
                             <Padding vertical='40px'>
                                 <Column>

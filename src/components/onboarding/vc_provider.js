@@ -44,10 +44,6 @@ const VCProvider = ({nextStage}) => {
                                     <Padding vertical='3px' />
                                     <TextInput type='text' value={vc.city} readOnly/>
                                     <Padding vertical='12px' />
-                                    <CaptionTeleNeoText>{t('onboarding.country_placeholder')}</CaptionTeleNeoText>
-                                    <Padding vertical='3px' />
-                                    <TextInput type='text' value={vc.country} readOnly/>
-                                    <Padding vertical='12px' />
                                     <CaptionTeleNeoText>{t('onboarding.zip_placeholder')}</CaptionTeleNeoText>
                                     <Padding vertical='3px' />
                                     <TextInput type='text' value={vc.zip} readOnly/>

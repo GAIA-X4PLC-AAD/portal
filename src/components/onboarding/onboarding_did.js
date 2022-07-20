@@ -163,6 +163,7 @@ const verifyQrView = ({data}) => {
             onAuthZSuccess={onAuthZSuccess}
             onAuthZWait={onAuthZWait}
             statusURL={data.pollUrl}
+            continuePollingOnFailure={true}
           />
         }
         {AuthFail()}

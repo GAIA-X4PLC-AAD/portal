@@ -56,7 +56,7 @@ const OrganizationDetailsView = ({nextStage, didStage}) => {
                         nextStage();
                     }, 
                     error => {
-                        setEMessage(error.response.data);
+                        setEMessage(error.response.data.message);
 
                     });
         }
