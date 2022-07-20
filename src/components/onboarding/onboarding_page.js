@@ -221,7 +221,6 @@ const OnboardingPage = () => {
     const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
     
     const location = useLocation();
-    console.log(location);
     const { userType, confirmationCode } = useParams();
 
     let initialPage = 1
@@ -461,29 +460,15 @@ const OnboardingPage = () => {
     const disableNextButton = () => {
         if (activeStage == 1) {
             return customerOrOrganization == null
-        } else if (activeStage == 2) {
-            return true
-        } else if (activeStage == 3) {  // for user email confirmation
-            return true
-        } else if (activeStage == 4) {  // for request submission
-            return true
-        }
-
-        return false
+        } 
+        return true
     }
 
     const disablePreviousButton = () => {
-        if (activeStage == 1) {
-            return true
-        } else if (activeStage == 3) {
-            return true
+        if (activeStage === 2) {
+            return false
         }
-        else if (activeStage == 4) {
-            return true
-        } else if (activeStage == 5) {
-            return true
-        }
-        return false
+        return true
     }
 
     const complienceCheckMessageView = () => {

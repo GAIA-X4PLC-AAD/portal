@@ -16,7 +16,6 @@ const FinishProvider = () => {
     
     const onFormSubmit = () => {
         if (formRef.current.reportValidity()) {
-            console.log(email);
             axios.post(URL).then ( () => {
                 navigate('/');
             }, error => {
