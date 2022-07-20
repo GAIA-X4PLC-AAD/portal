@@ -20,7 +20,7 @@ const VCProvider = ({nextStage}) => {
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
                         <H4LightText>{t('onboarding.organization_details')}</H4LightText>
-                        <BodyText>Lorem ipsum dolor si jet .</BodyText>
+                        <BodyText>{t('onboarding.organization_details_subtext')}</BodyText>
                         <HorizontalLine />
                         <Padding vertical='12px' horizontal='80px'>
                                 <Column>
@@ -75,10 +75,10 @@ const VCProvider = ({nextStage}) => {
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>Registration status</H4LightText>
+                        <H4LightText>{t('onboarding.vc_error_header')}</H4LightText>
                         <HorizontalLine />
                         <Padding vertical='12px'>
-                           <BodyText>You have already triggered the compliance check. Your registration is still in process.</BodyText>
+                           <BodyText>{t('onboarding.vc_error_message')}</BodyText>
                         </Padding>
                         <Padding vertical='28px'>
                             <BlueButton onClick={e=>navigate('/')} marginLeft="0">{t('onboarding.home_button')}</BlueButton>

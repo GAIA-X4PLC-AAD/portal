@@ -8,8 +8,6 @@ import { withTranslation } from "react-i18next";
 import LoginFail from "./LoginFail";
 import AuthPolling from "./AuthPolling";
 import axios from "axios";
-import configData from "../../config/config.json";
-
 import PropTypes from 'prop-types';
 import { Column, OutlineButton, Padding, Row } from "../../common/styles";
 
@@ -143,9 +141,7 @@ class Login extends Component {
             {this.props.t("login.scanMessage")}
           </h2>
           <div className="login-block8 layout">
-            <div width="241px" height="243px">
-              <img src={this.state.imgLink} width="150px" height="150px" alt="Loading..." />
-            </div>
+              <img className="login-image16 layout" src={this.state.imgLink} alt="Loading..." />
             <div className="login-button layout">
               <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t("login.loginButton")}</a>
             </div>

@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
-import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal, FadingBackground, H1Text } from '../../common/styles';
+import {  useLocation, useNavigate, useParams } from "react-router-dom";
+import {  Column, Row, Style, Card, Circle, H4Text, BodyText, ButtonText, H4LightText, MasterButton, HorizontalLine, OutlineButton, TextInput, Image } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
 import RadioButton from '../../common/radio';
-import Checkbox from '../../common/checkbox';
 import { useResource } from '@axios-use/react';
-
-import styled from 'styled-components';
-import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
 
 import OrganizationDetailsView from './onboarding_provider';
 
@@ -25,62 +20,6 @@ import FinishProvider from './finish_provider';
 
 export const CUSTOMER = 'user'
 export const ORGANIZATION = 'organization'
-
-
-const RegistartinViaDidView = ({ toggleRegistrationViaDidModal }) => {
-
-    const onboardingIdpUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/idp'
-    const [{ data, error, isLoading }] = useResource(() => ({ url: onboardingIdpUrl }), [])
-
-    useEffect(() => { }, [isLoading, error, data]);
-
-    const {t} = useTranslation()
-
-    const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
-        return (
-            <Padding vertical='8px'>
-                <Card background={background} borderColor='#E9E9E9'>
-                    <Padding vertical='4px' horizontal='16px'>
-                        <Row>
-                            <Circle radius='56px' borderColor='#0' background='#C4C4C4'>LOGO</Circle>
-                            <Padding paddingLeft='16px' />
-                            <ButtonText color='#000000'>Identify Service Provider 1</ButtonText>
-                            <Style flexGrow='1' />
-                            <ButtonText color='#00A2E4'>Link</ButtonText>
-                        </Row>
-                    </Padding>
-                </Card>
-            </Padding>
-        )
-    }
-
-    return <>
-        <Style width='633px'>
-            <Padding>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                    <Padding horizontal='24px' vertical='12px'>
-                        <H4LightText>{t('form.regViaDIDIdPHeading')}</H4LightText>
-                        <BodyText>{t('onboarding.msg_select_idsp')}</BodyText>
-                        <HorizontalLine />
-                        {buildIdentifyServiceProvider({ background: '#46DAFF1F' })}
-                        {buildIdentifyServiceProvider({ background: '#fff' })}
-                        {buildIdentifyServiceProvider({ background: '#fff' })}
-                        {buildIdentifyServiceProvider({ background: '#fff' })}
-
-                        <Padding paddingTop='32px'>
-                            <Row><OutlineButton onClick={() => toggleRegistrationViaDidModal()}>Close</OutlineButton></Row>
-                        </Padding>
-                    </Padding>
-                </Card>
-            </Padding>
-        </Style>
-    </>
-
-}
-
-RegistartinViaDidView.propTypes = {
-    toggleRegistrationViaDidModal: PropTypes.func.isRequired,
-}
 
 
 const RequestVCView = ({ type, confirmationCode }) => {
@@ -123,16 +62,17 @@ RequestVCView.propTypes = {
 
 const EmailAlreadyConfirmedView = () =>{
     const {t} = useTranslation()
+    const navigate = useNavigate();
 
     return <>
         <Style>
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>{t('onboarding.email_already_confirmed')}</H4LightText>
+                        <H4LightText>{t('onboarding.already_confirmed')}</H4LightText>
                         <HorizontalLine />
                         <Padding vertical='16px' />
-                        <BodyText>{t('onboarding.msg_email_already_confirmed')}</BodyText>
+                           <BodyText>{t('onboarding.msg_already_confirmed')}</BodyText>
                            <Padding vertical='32px'>
                             <Row><OutlineButton onClick={() => navigate('/')}>{t('onboarding.home_button')}</OutlineButton></Row>
                         </Padding>
@@ -169,22 +109,6 @@ const EmailConfirmedView = ({ type, confirmationCode }) => {
         </Style>
     </>
 
-    const alreadyConfirmedView = <>
-        <Style width='633px' height='246px'>
-            <Padding horizontal='20px'>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                    <Padding horizontal='24px'>
-                        <H4LightText>{t('onboarding.already_confirmed')}</H4LightText>
-                        <BodyText>{t('onboarding.msg_already_confirmed')}</BodyText>
-                        <Padding vertical='20px' />
-                    </Padding>
-                </Card>
-            </Padding>
-        </Style>
-    </>
-
-
-
     useEffect(() => { }, [isLoading, error, data]);
 
 
@@ -196,7 +120,7 @@ const EmailConfirmedView = ({ type, confirmationCode }) => {
     if (isSuccess) {
         return thanksForConfirmingView
     } else {
-        return alreadyConfirmedView
+        return EmailAlreadyConfirmedView
     }
 }
 
@@ -328,46 +252,6 @@ const OnboardingPage = () => {
     }
 
 
-    // REGISTRATION VIA DID
-    const [registrationViaDidModalIsOpen, setRegistrationViaDidModalIsOpen] = useState(false);
-    const [registrationViaDidModalOpacity, setRegistrationViaDidModalOpacity] = useState(0);
-
-    function registrationViaDidModal(e) {
-        setRegistrationViaDidModalOpacity(0);
-        registrationViaDidModalOpacity(!registrationViaDidModalIsOpen);
-    }
-
-    const registerUserApi = async () => {
-
-        try {
-            const _result = await axios.post(registerUserUrl, userFormDetailsInput, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                }
-            })
-            if (_result.response) return true
-        } catch (err) {
-            console.log(`registerUserApi, err: ${err}`)
-            if (err) alert(err.message)
-
-        }
-
-        return false
-    }
-
-    const didRegisteredUserApi = async () => {
-
-        try {
-            const _result = await axios.get(didRegisterUserUrl, {})
-            if (_result.response) return _result.response
-        } catch (err) {
-            if (err) alert(err.message)
-        }
-
-        return null
-    }
-
     const nextStage = () => {
         // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
         if (activeStage == 1) {
@@ -421,7 +305,7 @@ const OnboardingPage = () => {
             }
         }
         else if (activeStage == 5) {
-            return <DidOnboardingView nextStage={()=>{setActiveStage(6)}} />
+            return <DidOnboardingView userType={customerOrOrganization} nextStage={()=>{setActiveStage(6)}} />
         } else if( activeStage == 6) {
             if (customerOrOrganization == ORGANIZATION) return <VCProvider nextStage={() => { setActiveStage(7) }}/>;
             else { return  <VCCustomer nextStage={() => { setActiveStage(7) }}/>; }
@@ -493,87 +377,6 @@ const OnboardingPage = () => {
                             <H4LightText>{t('onboarding.almost_done')}</H4LightText>
                             <BodyText>{t('onboarding.check_email')}</BodyText>
                             <Padding vertical='10px' />
-                        </Padding>
-                    </Card>
-                </Padding>
-            </Style>
-        </>
-    }
-
-
-    const verifyQrView = () => {
-        return <>
-            <ModalProvider backgroundComponent={FadingBackground}>
-                <Style width='633px' height='246px'>
-                    <Padding horizontal='20px'>
-                        <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                            <Padding horizontal='24px'>
-                                <H4LightText>{t('onboarding.msg_verify_organization')}</H4LightText>
-                                <HorizontalLine />
-                                <Column justifyContent='center' alignItems='center'>
-                                    <Padding vertical='8px'>
-                                        <QrLoadingView />
-                                    </Padding>
-                                    <Padding vertical='20px'>
-                                        <Row alignItems='space-between'>
-                                            <OutlineButton disabled onClick={() => dontHaveDidModal()}>{t('form.regViaDIDNoDID')}</OutlineButton>
-                                            <Padding horizontal='8px' />
-                                            <ProofOfOnboardingButton />
-                                        </Row>
-                                    </Padding>
-                                    <Padding vertical='20px'></Padding>
-                                </Column>
-                            </Padding>
-                        </Card>
-                    </Padding>
-                </Style>
-            </ModalProvider>
-        </>
-    }
-
-    function ProofOfOnboardingButton() {
-        function afterOpen() {
-            setTimeout(() => {
-                setDontHaveModalOpacity(1);
-            }, 100);
-        }
-
-        function beforeClose() {
-            return new Promise((resolve) => {
-                setDontHaveModalOpacity(0);
-                setTimeout(resolve, 300);
-            });
-        }
-
-        return (
-            <div>
-                <StyledModal
-                    isOpen={dontHaveDidModalIsOpen}
-                    afterOpen={afterOpen}
-                    beforeClose={beforeClose}
-                    onBackgroundClick={dontHaveDidModal}
-                    onEscapeKeydown={dontHaveDidModal}
-                    opacity={dontHaveDidModalOpacity}
-                    backgroundProps={{ opacity: dontHaveDidModalOpacity }}
-                >
-                    <DontHaveDidView dontHaveDidModal={dontHaveDidModal} />
-                </StyledModal>
-            </div>
-        );
-    }
-
-
-    const credentialsMissingView = () => {
-        return <>
-            <Style width='633px'>
-                <Padding>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                        <Padding horizontal='24px' vertical='12px'>
-                            <H4LightText>Credentials are missing</H4LightText>
-                            <BodyText>Lorem ipsum dolor si jet.</BodyText>
-                            <HorizontalLine />
-                            <BodyText>We couldn&#39;t find any authorized credentials. Please contact your organization.</BodyText>
-                            <Padding vertical='20px'><Row><OutlineButton>Continue</OutlineButton></Row></Padding>
                         </Padding>
                     </Card>
                 </Padding>

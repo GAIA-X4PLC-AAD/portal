@@ -93,7 +93,7 @@ function FancyModalButton() {
                                 <Padding paddingLeft='16px' />
                                 <ButtonText color='#000000'>{idp.name}</ButtonText>
                                 <Style flexGrow='1' />
-                                <ButtonText color='#00A2E4' onClick={()=>{window.open(idp.link, '_blank').focus()}}>Link</ButtonText>
+                                <ButtonText color='#00A2E4' onClick={()=>{window.open(idp.link, '_blank').focus()}}>{t('onboarding.not_did_modal_link')}</ButtonText>
                             </Row>
                         </Padding>
                     </Card>
@@ -112,12 +112,12 @@ function FancyModalButton() {
                 <Padding>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px' vertical='12px'>
-                            <H4LightText>Don’t have a DID?</H4LightText>
-                            <BodyText>Please select a idSP to create DID</BodyText>
+                            <H4LightText>{t('onboarding.not_did_modal_header')}</H4LightText>
+                            <BodyText>{t('onboarding.not_did_modal_body')}</BodyText>
                             <HorizontalLine />
                             {data.map((idp, i) => {return <BuildIdentifyServiceProvider idp={idp} key={i}/>})}
                             <Padding paddingTop='32px'>
-                                <Row><OutlineButton onClick={toggleModal}>Close</OutlineButton></Row>
+                                <Row><OutlineButton onClick={toggleModal}>{t('onboarding.close')}</OutlineButton></Row>
                             </Padding>
                         </Padding>
                     </Card>
@@ -133,7 +133,7 @@ function FancyModalButton() {
 
     return (
         <div>
-            <CancelButton onClick={toggleModal}>I don&#39;t have a DID</CancelButton>
+            <CancelButton onClick={toggleModal}>{t('onboarding.not_did_button')}</CancelButton>
             <StyledModal
                 isOpen={isOpen}
                 afterOpen={afterOpen}
@@ -172,7 +172,7 @@ const verifyQrView = ({data}) => {
                 <Padding horizontal='20px'>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
-                            <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
+                            <H4LightText>{t(`onboarding.proof_onboarding_header_${userType}`)}</H4LightText>
                             <HorizontalLine />
                             <Column justifyContent='center' alignItems='center'>
                                 <Padding vertical='8px'>
@@ -182,7 +182,7 @@ const verifyQrView = ({data}) => {
                                     <Row alignItems='space-between'>
                                         <FancyModalButton />
                                         <Padding horizontal='8px' />
-                                        <BlueButton disabled ={!continue_button} onClick={nextStage}>Continue</BlueButton>
+                                        <BlueButton disabled ={!continue_button} onClick={nextStage}>{t('onboarding.continue_button')}</BlueButton>
                                     </Row>
                                 </Padding>
                                 <Padding vertical='20px'></Padding>
