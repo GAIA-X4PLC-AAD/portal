@@ -32,10 +32,10 @@ const FinishProvider = () => {
         <Padding horizontal='20px'>
             <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                 <Padding horizontal='24px'>
-                    <H4LightText>Onboarding completed</H4LightText>
+                    <H4LightText>{t('onboarding.user_onboarding_complete_header')}</H4LightText>
                     <HorizontalLine />
                     <Padding vertical='12px'>
-                       <BodyText>Your onboarding request will be checked by the AISBL. This may take some time. Plase enter your email address to receive status updates of your onboarding.</BodyText>
+                       <BodyText>{t('onboarding.organization_onboarding_complete_body')}</BodyText>
                        <Padding vertical='12px'/>
                        <form ref={formRef}>
                             <TextInput name='email' type="email" value={email||''} placeholder={t('onboarding.email_placeholder')}  onChange={(e)=>setEmail(e.target.value)} required/>

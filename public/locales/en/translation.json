@@ -132,7 +132,11 @@
         "check_email": "Please check your email inbox now. We have sent you a message with a confirmation link.",
         "already_confirmed": "Already confirmed!",
         "msg_already_confirmed": "Your email is already been confirmed..",
-        "msg_verify_organization": "Please verify yourselft as employee of your organization."
+        "msg_verify_organization": "Please verify yourselft as employee of your organization.",
+        "user_onboarding_complete_header": "Onboarding completed",
+        "user_onboarding_complete_body": "You have already triggered the compliance check. Your registration is still in process.",
+        "organization_onboarding_complete_body": "Your onboarding request will be checked by the AISBL. This may take some time. Plase enter your email address to receive status updates of your onboarding."
+
     },
     "form": {
         "registerDid":"Registration via DID",
