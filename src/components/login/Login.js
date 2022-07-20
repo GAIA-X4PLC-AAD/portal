@@ -25,7 +25,7 @@ const UserRolesSection = () => {
   const appMode = process.env.REACT_APP_MODE
   const isSecurityDisabled = appMode == 'SECURITY_DISABLED'
 
-  if (!isSecurityDisabled) return
+  if (!isSecurityDisabled) return null;
 
   const _currentUserRole = useSelector(state => state.user.user_role)
 
@@ -63,17 +63,18 @@ class Login extends Component {
       showLoginFail: false,
       loginFailMessage: null,
       imgLink: null,
-      walletLink: null
+      walletLink: null,
+      pollingUrl: null
     }
 
   }
 
   componentDidMount() {
     this.props.signInMenuEnter();
-    axios.get(process.env.REACT_APP_EDGE_API_URI + configData.uri_path.user_did_register)
+    axios.get(process.env.REACT_APP_EDGE_API_URI + '/onboarding/qr')
       .then((body) => {
         let qrCodePath = body.data.qrCodePath;
-        this.setState({ imgLink: qrCodePath, walletLink: body.data.walletLink });
+        this.setState({ imgLink: qrCodePath, walletLink: body.data.walletLink, pollingUrl: body.data.pollUrl });
       })
   }
 
@@ -119,15 +120,16 @@ class Login extends Component {
 
     const appMode = process.env.REACT_APP_MODE
     const isSecurityDisabled = appMode == 'SECURITY_DISABLED'
-
+    console.log('isSecurityDisabled',isSecurityDisabled);
+    console.log('pollingUrl', this.state.pollingUrl);
     return (
       <div className="login-block5 layout">
         {
-          isSecurityDisabled ? '' : <AuthPolling
+          isSecurityDisabled || this.state.pollingUrl === null? '' : <AuthPolling
             onAuthZFailed={this.onAuthZFailed}
             onAuthZSuccess={this.onAuthZSuccess}
             onAuthZWait={this.onAuthZWait}
-            statusURL={process.env.REACT_APP_EDGE_API_URI + configData.uri_path.auth_status_path}
+            statusURL={this.state.pollingUrl}
           />
         }
 
