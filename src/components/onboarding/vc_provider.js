@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
 import {  useNavigate } from "react-router-dom";
 import Checkbox from "../../common/checkbox";
 import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Row, Style, TextInput, Image, BlueButton } from "../../common/styles";
 import LoadingView from "../loading_view/LoadingView";
 
-const VCProvider = () => {
+const VCProvider = ({nextStage}) => {
 
     const {t} = useTranslation();
     const navigate = useNavigate();
@@ -62,7 +63,7 @@ const VCProvider = () => {
                                         <Image objectFit='contain' src='/images/question-mark.svg' />
                                     </Row>
                                     <Padding vertical='28px'>
-                                        <BlueButton onClick={e=>onFormSubmit()} marginLeft="0">{t('onboarding.continue_button')}</BlueButton>
+                                        <BlueButton onClick={e=>nextStage()} marginLeft="0">{t('onboarding.continue_button')}</BlueButton>
                                     </Padding>
                                 </Column>
                         </Padding>
@@ -109,6 +110,9 @@ const VCProvider = () => {
     }
 
     return <LoadingView url={URL} successView={vcShow}/>
+}
+VCProvider.propTypes = {
+    nextStage: PropTypes.func.isRequired
 }
 
 export default VCProvider;

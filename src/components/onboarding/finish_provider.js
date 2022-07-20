@@ -1,7 +1,12 @@
-import React, { useState } from "react";
-
+import axios from "axios";
+import React, { useState, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { BodyText, Card, H4LightText, HorizontalLine, Padding, Style, TextInput } from "../../common/styles";
+import { BlueButton } from "../admin/style";
 const FinishProvider = () => {
 
+    const {t} = useTranslation();
     const formRef = useRef();
     const [email, setEmail] = useState('');
     const navigate = useNavigate();

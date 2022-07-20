@@ -19,6 +19,9 @@ import VCCustomer from './vc_customer';
 import { useTranslation } from 'react-i18next';
 import { t } from 'i18next';
 import DidOnboardingView from './onboarding_did';
+import VCProvider from './vc_provider';
+import FinishCustomer from './finish_customer';
+import FinishProvider from './finish_provider';
 
 export const CUSTOMER = 'user'
 export const ORGANIZATION = 'organization'
@@ -377,11 +380,10 @@ const OnboardingPage = () => {
 
     // CURRENT STAGE VIEW
     const CurrentStageView = () => {
-
         if (activeStage == 1) {
             return customerOrProviderView()
         } else if (activeStage == 2) {
-            if (customerOrOrganization == ORGANIZATION) return <OrganizationDetailsView onSuccess={() => { setActiveStage(3) }} />;
+            if (customerOrOrganization == ORGANIZATION) return <OrganizationDetailsView nextStage={() => { setActiveStage(3) }} didStage={()=> {setActiveStage(5)}}/>;
             else { return userFillDetailsView() }
         } else if (activeStage == 3) {
             return confirmationEmailView()
@@ -389,13 +391,19 @@ const OnboardingPage = () => {
             return EmailConfirmedView({ type: customerOrOrganization, confirmationCode: confirmationCode })
         }
         else if (activeStage == 5) {
-            return <DidOnboardingView  />
-        } else return verifyQrView()
+            return <DidOnboardingView nextStage={()=>{setActiveStage(6)}} />
+        } else if( activeStage == 6) {
+            if (customerOrOrganization == ORGANIZATION) return <VCProvider nextStage={() => { setActiveStage(7) }}/>;
+            else { return  <VCCustomer nextStage={() => { setActiveStage(7) }}/>; }
+        } else if (activeStage ===7) {
+            if (customerOrOrganization == ORGANIZATION) return <FinishProvider/>;
+            else { return  <FinishCustomer />; }
+           
+        }
+        else return null;
 
         // return <><h1>Stage View</h1></>
     }
-
-
 
     const welcomingMessage = () => {
         return (

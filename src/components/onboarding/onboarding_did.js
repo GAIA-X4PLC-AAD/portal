@@ -9,7 +9,7 @@ import AuthPolling from "../login/AuthPolling";
 import Modal from "../../Modal";
 import { useTranslation } from "react-i18next";
 
-const DidOnboardingView = ({userType, nextStep}) => {
+const DidOnboardingView = ({userType, nextStage}) => {
 
     const {t} = useTranslation();
     const [continue_button, setContinueButton] = useState(false);
@@ -181,7 +181,7 @@ const verifyQrView = ({data}) => {
                                     <Row alignItems='space-between'>
                                         <FancyModalButton />
                                         <Padding horizontal='8px' />
-                                        <BlueButton disabled ={!continue_button} onClick={nextStep}>Continue</BlueButton>
+                                        <BlueButton disabled ={!continue_button} onClick={nextStage}>Continue</BlueButton>
                                     </Row>
                                 </Padding>
                                 <Padding vertical='20px'></Padding>
@@ -199,7 +199,7 @@ const verifyQrView = ({data}) => {
 }
 DidOnboardingView.propTypes = {
     userType: PropTypes.string,
-    nextStep: PropTypes.func,
+    nextStage: PropTypes.func,
 }
 
 export default DidOnboardingView;

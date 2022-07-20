@@ -120,8 +120,7 @@ class Login extends Component {
 
     const appMode = process.env.REACT_APP_MODE
     const isSecurityDisabled = appMode == 'SECURITY_DISABLED'
-    console.log('isSecurityDisabled',isSecurityDisabled);
-    console.log('pollingUrl', this.state.pollingUrl);
+
     return (
       <div className="login-block5 layout">
         {

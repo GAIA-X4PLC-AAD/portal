@@ -1,4 +1,12 @@
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { BodyText, Card, H4LightText, HorizontalLine, Padding, Style } from "../../common/styles";
+import { BlueButton } from "../admin/style";
+
 const FinishCustomer = () => {
+    const { t } = useTranslation();
+    const navigate = useNavigate();
     return <>
     <Style width='633px' height='246px'>
         <Padding horizontal='20px'>

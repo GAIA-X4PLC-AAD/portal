@@ -3,13 +3,12 @@ import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
 
 import Checkbox from "../../common/checkbox";
-import {  Column, Row, Style, Card, BodyText, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, BodySmallBoldText } from "../../common/styles";
+import {  Column, Row, Style, Card, BodyText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, BodySmallBoldText } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
-import DidOnboardingView from "./onboarding_did";
 import { useTranslation } from "react-i18next";
 import Modal from "../../Modal";
 
-const OrganizationDetailsView = ({onSuccess}) => {
+const OrganizationDetailsView = ({nextStage, didStage}) => {
 
     const {t} = useTranslation();
 
@@ -20,11 +19,7 @@ const OrganizationDetailsView = ({onSuccess}) => {
 
   const [input, setInput] = useState({});
   const [eMessage,setEMessage] = useState('');
-  const [did, setDid] = useState(false);
 
-  useEffect (() => {
-    console.log('eMessage effect', eMessage);
-  }, [eMessage]);
 
  const getValue = (target) => {
     switch (target.type) {
@@ -58,10 +53,9 @@ const OrganizationDetailsView = ({onSuccess}) => {
                     }
                 }).then (
                     response => {
-                        onSuccess();
+                        nextStage();
                     }, 
                     error => {
-                        console.log(error);
                         setEMessage(error.response.data);
 
                     });
@@ -87,8 +81,7 @@ const OrganizationDetailsView = ({onSuccess}) => {
                   );
         }
     }
-   console.log(input.document);
-    const organizationDetailsFormView = () => {
+
     return <>
         <Style width='633px' height='246px'>
             <Padding horizontal='20px'>
@@ -130,7 +123,7 @@ const OrganizationDetailsView = ({onSuccess}) => {
 
                                 <Padding vertical='28px'>
                                     <Row>
-                                        <OutlineButton onClick={()=> setDid(true)}>{t('onboarding.register_did_button')}</OutlineButton>
+                                        <OutlineButton onClick={()=> didStage()}>{t('onboarding.register_did_button')}</OutlineButton>
                                         <Padding horizontal='10px' />
                                         <OutlineButton onClick={e=>onFormSubmit()}>{t('onboarding.send_button')}</OutlineButton>
                                     </Row>
@@ -144,13 +137,12 @@ const OrganizationDetailsView = ({onSuccess}) => {
         </Style>
         {onError(eMessage)}
     </>
-    }
 
-    return did? <DidOnboardingView /> : organizationDetailsFormView();
 }
 
 OrganizationDetailsView.propTypes = {
-    onSuccess: PropTypes.func
+    nextStage: PropTypes.func,
+    didStage: PropTypes.func
 }
 
 export default OrganizationDetailsView;

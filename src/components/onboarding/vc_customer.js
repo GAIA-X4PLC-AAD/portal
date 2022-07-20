@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Style, TextInput, BlueButton } from "../../common/styles";
 import LoadingView from "../loading_view/LoadingView";
 
-const VCCustomer = () => {
+const VCCustomer = ({nextStage}) => {
 
     const {t} = useTranslation();
     const navigate = useNavigate();
@@ -54,7 +55,7 @@ const VCCustomer = () => {
                                     <Padding vertical='3px' />
                                     <TextInput type='text' value={vc.zip_code} readOnly/>
                                     <Padding vertical='28px'>
-                                        <BlueButton onClick={e=>onFormSubmit()} marginLeft="0">{t('onboarding.continue_button')}</BlueButton>
+                                        <BlueButton onClick={e=>nextStage()} marginLeft="0">{t('onboarding.continue_button')}</BlueButton>
                                     </Padding>
                                 </Column>
                         </Padding>
@@ -101,6 +102,10 @@ const VCCustomer = () => {
     }
 
     return <LoadingView url={URL} successView={vcShow}/>
+}
+
+VCCustomer.propTypes = {
+    nextStage: PropTypes.func.isRequired
 }
 
 export default VCCustomer;
