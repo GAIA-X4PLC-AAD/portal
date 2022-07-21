@@ -65,7 +65,7 @@ const EmailAlreadyConfirmedView = () =>{
     const navigate = useNavigate();
 
     return <>
-        <Style>
+        <Style width='633px' height='246px'>
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
@@ -74,7 +74,7 @@ const EmailAlreadyConfirmedView = () =>{
                         <Padding vertical='16px' />
                            <BodyText>{t('onboarding.msg_already_confirmed')}</BodyText>
                            <Padding vertical='32px'>
-                            <Row><OutlineButton onClick={() => navigate('/')}>{t('onboarding.home_button')}</OutlineButton></Row>
+                            <Row><OutlineButton onClick={() => navigate('/')}>{t('onboarding.go_home_button')}</OutlineButton></Row>
                         </Padding>
                     </Padding>
                 </Card>

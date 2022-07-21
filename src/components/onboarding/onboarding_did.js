@@ -27,7 +27,7 @@ const DidOnboardingView = ({userType, nextStage}) => {
     
       const onAuthZFailed = () => {
         console.log('onAuthZFailed');
-        setErrorMessage('Authentication failed');
+        setErrorMessage(t(`onboarding.authorization_fail_message_${userType}`));
       }
     
       const onAuthZWait= () =>{

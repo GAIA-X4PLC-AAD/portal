@@ -105,7 +105,8 @@
         "upload": "Upload",
         "errorHeader": "Error",
         "missing_file": "Please upload a description file.",
-        "home_button": "Home",
+        "home_button": "Home", 
+        "go_home_button": "Go to homepage",
         "continue_button": "Continue",
         "welcome_to_gaiax": "Welcome to Gaia-X",
         "msg_create_your_account": "Create your account in a few steps and benefit of our secure and transparent Federated Catalogue.",
@@ -134,10 +135,12 @@
         "msg_already_confirmed": "Your email is already been confirmed..",
         "msg_verify_organization": "Please verify yourselft as employee of your organization.",
         "user_onboarding_complete_header": "Onboarding completed",
-        "user_onboarding_complete_body": "You have already triggered the compliance check. Your registration is still in process.",
-        "organization_onboarding_complete_body": "Your onboarding request will be checked by the AISBL. This may take some time. Plase enter your email address to receive status updates of your onboarding."
-
-    },
+        "user_onboarding_complete_body": "Your onboarding is completed!",
+        "organization_onboarding_complete_body": "Your onboarding request will be checked by the AISBL. This may take some time. Plase enter your email address to receive status updates of your onboarding.",
+        "authorization_fail_header": "Credentials are missing",
+        "authorization_fail_message_user": "We couldn't find any authorized credentials.",
+        "authorization_fail_message_organization": "We couldn't find any authorized credentials. Please contact your organization."
+        },
     "form": {
         "registerDid":"Registration via DID",
         "continue": "Continue",
