@@ -18,7 +18,7 @@ const FinishCustomer = () => {
                        <BodyText>{t('onboarding.user_onboarding_complete_body')}</BodyText>
                     </Padding>
                     <Padding vertical='28px'>
-                        <BlueButton onClick={e=>navigate('/')} marginLeft="0">{t('onboarding.home_button')}</BlueButton>
+                        <BlueButton onClick={e=>navigate('/')} marginLeft="0">{t('onboarding.go_home_button')}</BlueButton>
                     </Padding>
                 </Padding>
             </Card>

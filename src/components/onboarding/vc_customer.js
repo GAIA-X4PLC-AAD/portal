@@ -46,13 +46,13 @@ const VCCustomer = ({nextStage}) => {
                                     <Padding vertical='3px' />
                                     <TextInput type='text' value={vc.phone} readOnly/>
                                     <Padding vertical='12px' />
-                                    <Row>
-                                        <Column>
+                                    <Row width="100%">
+                                        <Column margin='0 auto 0 0'>
                                             <CaptionTeleNeoText>{t('onboarding.city_placeholder')}</CaptionTeleNeoText>
                                             <Padding vertical='3px' />
                                             <TextInput type='text' value={vc.city} readOnly/>
                                         </Column>
-                                        <Column>
+                                        <Column margin='0 0 0 auto'>
                                           <CaptionTeleNeoText>{t('onboarding.country_placeholder')}</CaptionTeleNeoText>
                                           <Padding vertical='3px' />
                                           <TextInput type='text' value={vc.country} readOnly/>
