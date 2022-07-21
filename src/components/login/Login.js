@@ -8,8 +8,6 @@ import { withTranslation } from "react-i18next";
 import LoginFail from "./LoginFail";
 import AuthPolling from "./AuthPolling";
 import axios from "axios";
-import configData from "../../config/config.json";
-
 import PropTypes from 'prop-types';
 import { Column, OutlineButton, Padding, Row } from "../../common/styles";
 
@@ -25,7 +23,7 @@ const UserRolesSection = () => {
   const appMode = process.env.REACT_APP_MODE
   const isSecurityDisabled = appMode == 'SECURITY_DISABLED'
 
-  if (!isSecurityDisabled) return
+  if (!isSecurityDisabled) return null;
 
   const _currentUserRole = useSelector(state => state.user.user_role)
 
@@ -63,17 +61,18 @@ class Login extends Component {
       showLoginFail: false,
       loginFailMessage: null,
       imgLink: null,
-      walletLink: null
+      walletLink: null,
+      pollingUrl: null
     }
 
   }
 
   componentDidMount() {
     this.props.signInMenuEnter();
-    axios.get(process.env.REACT_APP_EDGE_API_URI + configData.uri_path.user_did_register)
+    axios.get(process.env.REACT_APP_EDGE_API_URI + '/onboarding/qr')
       .then((body) => {
         let qrCodePath = body.data.qrCodePath;
-        this.setState({ imgLink: qrCodePath, walletLink: body.data.walletLink });
+        this.setState({ imgLink: qrCodePath, walletLink: body.data.walletLink, pollingUrl: body.data.pollUrl });
       })
   }
 
@@ -123,11 +122,11 @@ class Login extends Component {
     return (
       <div className="login-block5 layout">
         {
-          isSecurityDisabled ? '' : <AuthPolling
+          isSecurityDisabled || this.state.pollingUrl === null? '' : <AuthPolling
             onAuthZFailed={this.onAuthZFailed}
             onAuthZSuccess={this.onAuthZSuccess}
             onAuthZWait={this.onAuthZWait}
-            statusURL={process.env.REACT_APP_EDGE_API_URI + configData.uri_path.auth_status_path}
+            statusURL={this.state.pollingUrl}
           />
         }
 
@@ -142,9 +141,7 @@ class Login extends Component {
             {this.props.t("login.scanMessage")}
           </h2>
           <div className="login-block8 layout">
-            <div width="241px" height="243px">
-              <img src={this.state.imgLink} width="150px" height="150px" alt="Loading..." />
-            </div>
+              <img className="login-image16 layout" src={this.state.imgLink} alt="Loading..." />
             <div className="login-button layout">
               <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t("login.loginButton")}</a>
             </div>

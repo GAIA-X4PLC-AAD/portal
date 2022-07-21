@@ -1,10 +1,12 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Style, TextInput, BlueButton } from "../../common/styles";
 import LoadingView from "../loading_view/LoadingView";
+import { Row } from "../admin/style";
 
-const VCCustomer = () => {
+const VCCustomer = ({nextStage}) => {
 
     const {t} = useTranslation();
     const navigate = useNavigate();
@@ -17,18 +19,24 @@ const VCCustomer = () => {
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>Organization details</H4LightText>
-                        <BodyText>Lorem ipsum dolor si jet .</BodyText>
+                        <H4LightText>{t("onboarding.customer_details")}</H4LightText>
+                        <BodyText>{t('onboarding.customer_details_subtext')}</BodyText>
                         <HorizontalLine />
                         <Padding vertical='12px' horizontal='80px'>
                                 <Column>
-                                    <CaptionTeleNeoText>{t('onboarding.first_name_placeholder')}</CaptionTeleNeoText>
-                                    <Padding vertical='3px' />
-                                    <TextInput type='text' value={vc.first_name} readOnly/>
-                                    <Padding vertical='12px' />
-                                    <CaptionTeleNeoText>{t('onboarding.last_name_placeholder')}</CaptionTeleNeoText>
-                                    <Padding vertical='3px' />
-                                    <TextInput type='text' value={vc.last_name} readOnly/>
+                                    <Row width='100%'>
+                                        <Column margin='0 auto 0 0'>
+                                            <CaptionTeleNeoText>{t('onboarding.first_name_placeholder')}</CaptionTeleNeoText>
+                                            <Padding vertical='3px' />
+                                            <TextInput type='text' value={vc.first_name} readOnly/> 
+                                        </Column>
+                                        <Column margin='0 0 0 auto'>
+                                            <CaptionTeleNeoText>{t('onboarding.last_name_placeholder')}</CaptionTeleNeoText>
+                                            <Padding vertical='3px' />
+                                            <TextInput type='text' value={vc.last_name} readOnly/>
+                                        </Column>
+
+                                    </Row>
                                     <Padding vertical='12px' />
                                     <CaptionTeleNeoText>{t('onboarding.email_placeholder')}</CaptionTeleNeoText>
                                     <Padding vertical='3px' />
@@ -38,23 +46,28 @@ const VCCustomer = () => {
                                     <Padding vertical='3px' />
                                     <TextInput type='text' value={vc.phone} readOnly/>
                                     <Padding vertical='12px' />
+                                    <Row>
+                                        <Column>
+                                            <CaptionTeleNeoText>{t('onboarding.city_placeholder')}</CaptionTeleNeoText>
+                                            <Padding vertical='3px' />
+                                            <TextInput type='text' value={vc.city} readOnly/>
+                                        </Column>
+                                        <Column>
+                                          <CaptionTeleNeoText>{t('onboarding.country_placeholder')}</CaptionTeleNeoText>
+                                          <Padding vertical='3px' />
+                                          <TextInput type='text' value={vc.country} readOnly/>
+                                        </Column>
+                                    </Row>
+                                    <Padding vertical='12px' />
                                     <CaptionTeleNeoText>{t('onboarding.street_number_placeholder')}</CaptionTeleNeoText>
                                     <Padding vertical='3px' />
                                     <TextInput type='text' value={vc.address} readOnly/>
-                                    <Padding vertical='12px' />
-                                    <CaptionTeleNeoText>{t('onboarding.city_placeholder')}</CaptionTeleNeoText>
-                                    <Padding vertical='3px' />
-                                    <TextInput type='text' value={vc.city} readOnly/>
-                                    <Padding vertical='12px' />
-                                    <CaptionTeleNeoText>{t('onboarding.country_placeholder')}</CaptionTeleNeoText>
-                                    <Padding vertical='3px' />
-                                    <TextInput type='text' value={vc.country} readOnly/>
                                     <Padding vertical='12px' />
                                     <CaptionTeleNeoText>{t('onboarding.zip_placeholder')}</CaptionTeleNeoText>
                                     <Padding vertical='3px' />
                                     <TextInput type='text' value={vc.zip_code} readOnly/>
                                     <Padding vertical='28px'>
-                                        <BlueButton onClick={e=>onFormSubmit()} marginLeft="0">{t('onboarding.continue_button')}</BlueButton>
+                                        <BlueButton onClick={e=>nextStage()} marginLeft="0">{t('onboarding.continue_button')}</BlueButton>
                                     </Padding>
                                 </Column>
                         </Padding>
@@ -70,10 +83,10 @@ const VCCustomer = () => {
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>Registration status</H4LightText>
+                        <H4LightText>{t('onboarding.vc_error_header')}</H4LightText>
                         <HorizontalLine />
                         <Padding vertical='12px'>
-                           <BodyText>You have already triggered the compliance check. Your registration is still in process.</BodyText>
+                           <BodyText>{t('onboarding.vc_error_message')}</BodyText>
                         </Padding>
                         <Padding vertical='28px'>
                             <BlueButton onClick={e=>navigate('/')} marginLeft="0">{t('onboarding.home_button')}</BlueButton>
@@ -101,6 +114,10 @@ const VCCustomer = () => {
     }
 
     return <LoadingView url={URL} successView={vcShow}/>
+}
+
+VCCustomer.propTypes = {
+    nextStage: PropTypes.func.isRequired
 }
 
 export default VCCustomer;

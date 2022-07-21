@@ -121,7 +121,8 @@
 .login-image16.layout {
   position: relative;
   height: 209px;
-  margin: 16px; }
+  margin: 16px auto;
+}
 
 .login-block10 {
   display: flex;

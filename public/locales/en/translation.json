@@ -71,9 +71,14 @@
         "not-found": "Oh no! We couldn't find any results."
     },
     "onboarding": {
+        "UserOrganization_header": "Do you want to register a user or a provider?",
         "customerprovider": "Customer or provider",
         "organization_details": "Organization details",
+        "organization_details_subtext": "Lorem ipsum dolor si jet .",
         "customer_details": "Customer details",
+        "customer_details_subtext": "Lorem ipsum dolor si jet .",
+        "vc_error_header": "Registration status",
+        "vc_error_message": "Registration status",
         "user_details": "User details",
         "email_confirmation": "Email confirmation",
         "request_submission": "Request submission",
@@ -96,6 +101,7 @@
         "send_button": "Send",
         "organization_headline": "To issue you Verified credentials, we need your organization's details.",
         "close": "Close",
+        "finish_button": "Finish",
         "upload": "Upload",
         "errorHeader": "Error",
         "missing_file": "Please upload a description file.",
@@ -104,6 +110,12 @@
         "welcome_to_gaiax": "Welcome to Gaia-X",
         "msg_create_your_account": "Create your account in a few steps and benefit of our secure and transparent Federated Catalogue.",
         "msg_select_idsp": "Please select a idSP to create DID",
+        "proof_onboarding_header_organization": "Please verify yourself as employee of your organization.",
+        "proof_onboarding_header_user": "Please verify yourself.",
+        "not_did_button": "I don't have a DID",
+        "not_did_modal_header": "Don’t have a DID?",
+        "not_did_modal_body": "Please select a idSP to create DID",
+        "not_did_modal_link": "Link",
         "vs_confirmation": "VC Confirmation",
         "msg_vs_confirmation": "VC confirmation has been submitted",
         "thanks_for_confirming": "Thanks for confirming..",
@@ -120,7 +132,11 @@
         "check_email": "Please check your email inbox now. We have sent you a message with a confirmation link.",
         "already_confirmed": "Already confirmed!",
         "msg_already_confirmed": "Your email is already been confirmed..",
-        "msg_verify_organization": "Please verify yourselft as employee of your organization."
+        "msg_verify_organization": "Please verify yourselft as employee of your organization.",
+        "user_onboarding_complete_header": "Onboarding completed",
+        "user_onboarding_complete_body": "You have already triggered the compliance check. Your registration is still in process.",
+        "organization_onboarding_complete_body": "Your onboarding request will be checked by the AISBL. This may take some time. Plase enter your email address to receive status updates of your onboarding."
+
     },
     "form": {
         "registerDid":"Registration via DID",

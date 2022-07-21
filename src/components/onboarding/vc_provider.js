@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
 import {  useNavigate } from "react-router-dom";
 import Checkbox from "../../common/checkbox";
 import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Row, Style, TextInput, Image, BlueButton } from "../../common/styles";
 import LoadingView from "../loading_view/LoadingView";
 
-const VCProvider = () => {
+const VCProvider = ({nextStage}) => {
 
     const {t} = useTranslation();
     const navigate = useNavigate();
@@ -18,8 +19,8 @@ const VCProvider = () => {
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>Customer details</H4LightText>
-                        <BodyText>Lorem ipsum dolor si jet .</BodyText>
+                        <H4LightText>{t('onboarding.organization_details')}</H4LightText>
+                        <BodyText>{t('onboarding.organization_details_subtext')}</BodyText>
                         <HorizontalLine />
                         <Padding vertical='12px' horizontal='80px'>
                                 <Column>
@@ -43,10 +44,6 @@ const VCProvider = () => {
                                     <Padding vertical='3px' />
                                     <TextInput type='text' value={vc.city} readOnly/>
                                     <Padding vertical='12px' />
-                                    <CaptionTeleNeoText>{t('onboarding.country_placeholder')}</CaptionTeleNeoText>
-                                    <Padding vertical='3px' />
-                                    <TextInput type='text' value={vc.country} readOnly/>
-                                    <Padding vertical='12px' />
                                     <CaptionTeleNeoText>{t('onboarding.zip_placeholder')}</CaptionTeleNeoText>
                                     <Padding vertical='3px' />
                                     <TextInput type='text' value={vc.zip} readOnly/>
@@ -62,7 +59,7 @@ const VCProvider = () => {
                                         <Image objectFit='contain' src='/images/question-mark.svg' />
                                     </Row>
                                     <Padding vertical='28px'>
-                                        <BlueButton onClick={e=>onFormSubmit()} marginLeft="0">{t('onboarding.continue_button')}</BlueButton>
+                                        <BlueButton onClick={e=>nextStage()} marginLeft="0">{t('onboarding.continue_button')}</BlueButton>
                                     </Padding>
                                 </Column>
                         </Padding>
@@ -78,10 +75,10 @@ const VCProvider = () => {
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>Registration status</H4LightText>
+                        <H4LightText>{t('onboarding.vc_error_header')}</H4LightText>
                         <HorizontalLine />
                         <Padding vertical='12px'>
-                           <BodyText>You have already triggered the compliance check. Your registration is still in process.</BodyText>
+                           <BodyText>{t('onboarding.vc_error_message')}</BodyText>
                         </Padding>
                         <Padding vertical='28px'>
                             <BlueButton onClick={e=>navigate('/')} marginLeft="0">{t('onboarding.home_button')}</BlueButton>
@@ -109,6 +106,9 @@ const VCProvider = () => {
     }
 
     return <LoadingView url={URL} successView={vcShow}/>
+}
+VCProvider.propTypes = {
+    nextStage: PropTypes.func.isRequired
 }
 
 export default VCProvider;
