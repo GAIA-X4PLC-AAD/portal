@@ -11,6 +11,11 @@ const LoginFail = (props) => {
   
   const message = props.message?props.t(props.message):null;
 
+  const onClose = () => {
+    if (props.onClose) props.onClose();
+    else navigate('/');
+  }
+
   if (props.showAlertMessage===false) return null;  
   return (
     <Modal>
@@ -20,7 +25,7 @@ const LoginFail = (props) => {
           {message}       
         </div>
         <div className='login-fail-footer'>
-          <button className="gaiax-button layout" onClick={()=> navigate("/")}>
+          <button className="gaiax-button layout" onClick={onClose}>
             {props.t('login.close')}
           </button>
         </div>
@@ -33,6 +38,7 @@ LoginFail.propTypes = {
   t: PropTypes.func,
   showAlertMessage: PropTypes.bool,
   message: PropTypes.string,
+  onClose: PropTypes.func
 }
 
 export default withTranslation() (LoginFail);

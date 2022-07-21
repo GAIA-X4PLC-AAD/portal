@@ -209,6 +209,7 @@
     "login": {
         "fail.header": "Login failed",
         "fail.widgetMessage": "You need to install a wallet browser extension to login with your credentials.",
+        "fail.authorization_fail_message": "We couldn't find any authorized credentials.",
         "close": "Close",
         "welcome": "Welcome to Gaia-X",
         "signinContinue":"Sign in to continue",

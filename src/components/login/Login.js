@@ -10,6 +10,7 @@ import AuthPolling from "./AuthPolling";
 import axios from "axios";
 import PropTypes from 'prop-types';
 import { Column, OutlineButton, Padding, Row } from "../../common/styles";
+import { t } from "i18next";
 
 export const withNavigation = (Component) => {
   return props => <Component {...props} navigate={useNavigate()} />;
@@ -82,7 +83,7 @@ class Login extends Component {
   }
 
   onAuthZFailed = () => {
-    this.setState({ showLoginFail: true, loginFailMessage: null });
+    this.setState({ showLoginFail: true, loginFailMessage: t('login.fail.authorization_fail_message') });
   }
 
   onAuthZWait() {
@@ -127,10 +128,11 @@ class Login extends Component {
             onAuthZSuccess={this.onAuthZSuccess}
             onAuthZWait={this.onAuthZWait}
             statusURL={this.state.pollingUrl}
+            continuePollingOnFailure={true}
           />
         }
 
-        <LoginFail showAlertMessage={this.state.showLoginFail} message={this.state.loginFailMessage} />
+        <LoginFail showAlertMessage={this.state.showLoginFail} message={this.state.loginFailMessage} onClose={()=> {this.setState({ showLoginFail: false})}}/>
         <div className="login-group layout">
           <h1 className="login-hero-title layout">{this.props.t("login.welcome")}</h1>
           <h4 className="login-highlights3 layout">{this.props.t("login.signinContinue")}</h4>
@@ -142,11 +144,11 @@ class Login extends Component {
           </h2>
           <div className="login-block8 layout">
               <img className="login-image16 layout" src={this.state.imgLink} alt="Loading..." />
+          </div>
             <div className="login-button layout">
               <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t("login.loginButton")}</a>
             </div>
             <UserRolesSection />
-          </div>
           <div className="login-block10 layout">
             <Link to="/help"><h4 className="login-highlights5 layout">{this.props.t("login.faq")}</h4></Link>
           </div>
