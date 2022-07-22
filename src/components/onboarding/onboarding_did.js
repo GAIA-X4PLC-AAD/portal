@@ -5,7 +5,7 @@ import { Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, I
 import { Padding } from "../discovery/tabs/style";
 import LoadingView from "../loading_view/LoadingView";
 import AuthPolling from "../login/AuthPolling";
-import Modal from "../../Modal";
+import { Modal } from 'react-responsive-modal';
 import { useTranslation } from "react-i18next";
 
 const DidOnboardingView = ({ userType, nextStage }) => {
@@ -56,11 +56,18 @@ const DidOnboardingView = ({ userType, nextStage }) => {
             </Modal>
         );
     }
-    function FancyModalButton({ onCloseModal }) {
+    function FancyModalButton() {
         const URL = process.env.REACT_APP_EDGE_API_URI + '/onboarding/idp';
 
+        const [isOpen, setIsOpen] = useState(false);
 
+        const onOpenModal = () => setIsOpen(true);
+        const onCloseModal = () => setIsOpen(false);
 
+        function toggleModal(e) {
+            setIsOpen(!isOpen);
+        }
+    
         const dontHaveDidView = ({ data }) => {
             const BuildIdentifyServiceProvider = ({ idp }) => {
                 return (
@@ -113,10 +120,13 @@ const DidOnboardingView = ({ userType, nextStage }) => {
 
         return (
             <div>
-                <CancelButton onClick={onCloseModal}>{t('onboarding.not_did_button')}</CancelButton>
-                <LoadingView
-                    url={URL}
-                    successView={dontHaveDidView} />
+                <CancelButton onClick={toggleModal}>{t('onboarding.not_did_button')}</CancelButton>
+                <Modal open={isOpen} onClose={onCloseModal} center showCloseIcon={false}>
+                    <LoadingView
+                        url={URL}
+                        successView={dontHaveDidView} />
+                </Modal>
+
             </div>
         );
 
@@ -128,11 +138,6 @@ const DidOnboardingView = ({ userType, nextStage }) => {
 
     const verifyQrView = ({ data }) => {
         if (!data) return null;
-
-        const [isOpen, setIsOpen] = useState(false);
-
-        const onOpenModal = () => setIsOpen(true);
-        const onCloseModal = () => setIsOpen(false);
 
         return <>
             {
@@ -158,6 +163,7 @@ const DidOnboardingView = ({ userType, nextStage }) => {
                                 </Padding>
                                 <Padding vertical='20px'>
                                     <Row alignItems='space-between'>
+                                        <FancyModalButton />
                                         <Padding horizontal='8px' />
                                         <BlueButton disabled={!continue_button} onClick={nextStage}>{t('onboarding.continue_button')}</BlueButton>
                                     </Row>
@@ -167,10 +173,7 @@ const DidOnboardingView = ({ userType, nextStage }) => {
                         </Padding>
                     </Card>
                 </Padding>
-                <Modal
-                    open={isOpen} onClose={onCloseModal} center showCloseIcon={true}>
-                    <FancyModalButton ononCloseModal={onCloseModal} />
-                </Modal>
+
             </Style>
 
         </>
