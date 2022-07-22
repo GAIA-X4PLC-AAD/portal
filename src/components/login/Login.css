@@ -111,8 +111,8 @@
   position: relative;
   height: -webkit-min-content;
   height: -moz-min-content;
-  height: min-content;
-  width: 54.65%;
+  height: fit-content;
+  width: fit-content;
   margin: 32px auto 0px; }
 
 .login-image16 {
@@ -121,7 +121,8 @@
 .login-image16.layout {
   position: relative;
   height: 209px;
-  margin: 16px; }
+  margin: 16px;
+}
 
 .login-block10 {
   display: flex;
@@ -134,7 +135,7 @@
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  width: 54.42%;
+  width: 241px;
   margin: 16px auto 0px; }
 
 .login-highlights5 {
@@ -163,7 +164,7 @@
   height: -webkit-min-content;
   height: -moz-min-content;
   height: min-content;
-  width: 54.42%;
+  width: 241px;
   margin: 16px auto 0px; }
 
 .login-highlights6 {
@@ -186,7 +187,7 @@
 .login-button {
   position: relative;
   height: min-content;
-  width: 54.42%;
+  width: 241px;
   margin: 32px auto 0px;
 }
 

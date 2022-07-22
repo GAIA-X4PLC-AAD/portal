@@ -1,109 +1,165 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
 
-import {  Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, StyledModal, Circle, ButtonText, BodyText,FadingBackground, CancelButton, BlueButton } from "../../common/styles";
+import { Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, StyledModal, Circle, ButtonText, BodyText, FadingBackground, CancelButton, BlueButton, H4Text } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
-import 'react-responsive-modal/styles.css';
-import { Modal } from 'react-responsive-modal';
 import LoadingView from "../loading_view/LoadingView";
+import AuthPolling from "../login/AuthPolling";
+import Modal from "../../Modal";
+import { useTranslation } from "react-i18next";
 
-const DidOnboardingView = () => {
+const DidOnboardingView = ({ userType, nextStage }) => {
 
-    const URL = process.env.REACT_APP_EDGE_API_URI + '/onboarding/idp';
+    const { t } = useTranslation();
+    const [continue_button, setContinueButton] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
-function FancyModalButton() {
-    const [isOpen, setIsOpen] = useState(false);
+    const URL = process.env.REACT_APP_EDGE_API_URI + '/onboarding/qr';
+    const appMode = process.env.REACT_APP_MODE
+    const isSecurityDisabled = appMode == 'SECURITY_DISABLED'
 
-    const onOpenModal = () => setIsOpen(true);
-    const onCloseModal = () => setIsOpen(false);
 
-    function toggleModal(e) {
-        setIsOpen(!isOpen);
+    const onAuthZSuccess = () => {
+        console.log('onAuthZSuccess');
+        setContinueButton(true);
     }
 
-    const dontHaveDidView = ({data}) => {
-        const BuildIdentifyServiceProvider = ({ idp }) => {
-            return (
-                <Padding vertical='8px'>
-                    <Card background='#fff' hoverBackground='#46DAFF1F'  borderColor='#E9E9E9'>
-                        <Padding vertical='4px' horizontal='16px'>
-                            <Row>
-                                <Circle radius='56px' borderColor='#0' background='#C4C4C4'>
-                                    <Image src={idp.logoUrl} alt={idp.name} width='56px' height='56px'/></Circle>
-                                <Padding paddingLeft='16px' />
-                                <ButtonText color='#000000'>{idp.name}</ButtonText>
-                                <Style flexGrow='1' />
-                                <ButtonText color='#00A2E4' onClick={()=>{window.open(idp.link, '_blank').focus()}}>Link</ButtonText>
-                            </Row>
+    const onAuthZFailed = () => {
+        console.log('onAuthZFailed');
+        setErrorMessage(t(`onboarding.authorization_fail_message_${userType}`));
+    }
+
+    const onAuthZWait = () => {
+        console.log('onAuthZWait');
+    }
+
+    const AuthFail = () => {
+
+        if (!errorMessage || errorMessage === '') return null;
+        return (
+            <Modal>
+                <Padding vertical='16px'>
+                    <Column>
+                        <Padding horizontal='24px'>
+                            <H4LightText>{t("onboarding.authorization_fail_header")}</H4LightText>
+                            <Padding vertical='36px' />
+                            <BodyText>
+                                {errorMessage}
+                            </BodyText>
+                            <Padding vertical='16px' />
+                            <BlueButton onClick={() => setErrorMessage('')}>
+                                {t('login.close')}
+                            </BlueButton>
                         </Padding>
-                    </Card>
+                    </Column>
                 </Padding>
-            )
-        }
-        BuildIdentifyServiceProvider.propTypes= {
-            idp: PropTypes.object.isRequired
-        }
-
-    
-        if (!data) return null;
-        else 
-        return <>
-            <Style width='633px'>
-                <Padding>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                        <Padding horizontal='24px' vertical='12px'>
-                            <H4LightText>Don’t have a DID?</H4LightText>
-                            <BodyText>Please select a idSP to create DID</BodyText>
-                            <HorizontalLine />
-                            {data.map((idp, i) => {return <BuildIdentifyServiceProvider idp={idp} key={i}/>})}
-                            <Padding paddingTop='32px'>
-                                <Row><OutlineButton onClick={toggleModal}>Close</OutlineButton></Row>
-                            </Padding>
-                        </Padding>
-                    </Card>
-                </Padding>
-            </Style>
-        </>
-    }
-    
-    dontHaveDidView.propTypes = {
-        data: PropTypes.object
-    }
-
-    return (
-        <div>
-            <CancelButton onClick={toggleModal}>I don&#39;t have a DID</CancelButton>
-            <Modal
-                open={isOpen}
-                onClose={onCloseModal}
-                showCloseIcon={false}
-            >
-            <LoadingView 
-                    url={URL}
-                successView={dontHaveDidView}/>
             </Modal>
-        </div>
-    );
+        );
+    }
+    function FancyModalButton({ onCloseModal }) {
+        const URL = process.env.REACT_APP_EDGE_API_URI + '/onboarding/idp';
+
+
+
+        const dontHaveDidView = ({ data }) => {
+            const BuildIdentifyServiceProvider = ({ idp }) => {
+                return (
+                    <Padding vertical='8px'>
+                        <Card background='#fff' hoverBackground='#46DAFF1F' borderColor='#E9E9E9'>
+                            <Padding vertical='4px' horizontal='16px'>
+                                <Row>
+                                    <Circle radius='56px' borderColor='#0' background='#C4C4C4'>
+                                        <Image src={idp.logoUrl} alt={idp.name} width='56px' height='56px' /></Circle>
+                                    <Padding paddingLeft='16px' />
+                                    <ButtonText color='#000000'>{idp.name}</ButtonText>
+                                    <Style flexGrow='1' />
+                                    <ButtonText color='#00A2E4' onClick={() => { window.open(idp.link, '_blank').focus() }}>{t('onboarding.not_did_modal_link')}</ButtonText>
+                                </Row>
+                            </Padding>
+                        </Card>
+                    </Padding>
+                )
+            }
+            BuildIdentifyServiceProvider.propTypes = {
+                idp: PropTypes.object.isRequired
+            }
+
+
+            if (!data) return null;
+            else
+                return <>
+                    <Style width='633px'>
+                        <Padding>
+                            <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                                <Padding horizontal='24px' vertical='12px'>
+                                    <H4LightText>{t('onboarding.not_did_modal_header')}</H4LightText>
+                                    <BodyText>{t('onboarding.not_did_modal_body')}</BodyText>
+                                    <HorizontalLine />
+                                    {data.map((idp, i) => { return <BuildIdentifyServiceProvider idp={idp} key={i} /> })}
+                                    <Padding paddingTop='32px'>
+                                        <Row><OutlineButton onClick={onCloseModal}>{t('onboarding.close')}</OutlineButton></Row>
+                                    </Padding>
+                                </Padding>
+                            </Card>
+                        </Padding>
+                    </Style>
+                </>
+        }
+
+        dontHaveDidView.propTypes = {
+            data: PropTypes.object,
+            nextStep: PropTypes.func
+        }
+
+        return (
+            <div>
+                <CancelButton onClick={onCloseModal}>{t('onboarding.not_did_button')}</CancelButton>
+                <LoadingView
+                    url={URL}
+                    successView={dontHaveDidView} />
+            </div>
+        );
 
     }
 
-const verifyQrView = () => {
-    return <>
-        <Style width='633px' height='246px'>
+    FancyModalButton.propTypes = {
+        onCloseModal: PropTypes.func,
+    }
+
+    const verifyQrView = ({ data }) => {
+        if (!data) return null;
+
+        const [isOpen, setIsOpen] = useState(false);
+
+        const onOpenModal = () => setIsOpen(true);
+        const onCloseModal = () => setIsOpen(false);
+
+        return <>
+            {
+                isSecurityDisabled ? '' : <AuthPolling
+                    onAuthZFailed={onAuthZFailed}
+                    onAuthZSuccess={onAuthZSuccess}
+                    onAuthZWait={onAuthZWait}
+                    statusURL={data.pollUrl}
+                    continuePollingOnFailure={true}
+                />
+            }
+            {AuthFail()}
+
+            <Style width='633px' height='246px'>
                 <Padding horizontal='20px'>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
-                            <H4LightText>Please verify yourselft as employee of your organization.</H4LightText>
+                            <H4LightText>{t(`onboarding.proof_onboarding_header_${userType}`)}</H4LightText>
                             <HorizontalLine />
                             <Column justifyContent='center' alignItems='center'>
                                 <Padding vertical='8px'>
-                                    <Image src='/images/QRCode.png' width='200px' />
+                                    <Image src={data.qrCodePath} width='200px' />
                                 </Padding>
                                 <Padding vertical='20px'>
                                     <Row alignItems='space-between'>
-                                        <FancyModalButton />
                                         <Padding horizontal='8px' />
-                                        <BlueButton>Continue</BlueButton>
+                                        <BlueButton disabled={!continue_button} onClick={nextStage}>{t('onboarding.continue_button')}</BlueButton>
                                     </Row>
                                 </Padding>
                                 <Padding vertical='20px'></Padding>
@@ -111,12 +167,20 @@ const verifyQrView = () => {
                         </Padding>
                     </Card>
                 </Padding>
+                <Modal
+                    open={isOpen} onClose={onCloseModal} center showCloseIcon={true}>
+                    <FancyModalButton ononCloseModal={onCloseModal} />
+                </Modal>
             </Style>
 
-    </>
-}
+        </>
+    }
 
-    return verifyQrView();
+    return <LoadingView url={URL} successView={verifyQrView} />
+}
+DidOnboardingView.propTypes = {
+    userType: PropTypes.string,
+    nextStage: PropTypes.func,
 }
 
 export default DidOnboardingView;

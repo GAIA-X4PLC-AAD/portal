@@ -13,6 +13,7 @@ class AuthPolling extends Component {
             onAuthZFailed: props.onAuthZFailed,
             onAuthZWait: props.onAuthZWait,
             timerId: null,
+            continuePollingOnFailure: props.continuePollingOnFailure || false,
         }
         this.statusURL = props.statusURL
     }
@@ -21,16 +22,19 @@ class AuthPolling extends Component {
         this.setState({ isLoading: true });
         const response = await fetch(this.statusURL);
         const data = await response.json();
-        switch (data) {
+        switch (data.status) {
             case 'WAIT':
                 this.state.onAuthZWait();
                 break;
             case 'SUCCESS':
                 this.doCleanup();
+                if (data.access_token) {
+                    localStorage.setItem("userJWT", JSON.stringify(data.access_token));
+                }
                 this.state.onAuthZSuccess();
                 break;
             case 'FAIL':
-                this.doCleanup();
+                if (!this.state.continuePollingOnFailure) this.doCleanup();
                 this.state.onAuthZFailed();
                 break;
             default:
@@ -68,6 +72,7 @@ AuthPolling.propTypes = {
     onAuthZWait: PropTypes.func,
     statusURL: PropTypes.string,
     t: PropTypes.func,
+    continuePollingOnFailure: PropTypes.bool
 }
 
 export default AuthPolling;
