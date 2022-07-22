@@ -86,7 +86,8 @@ const App = (props) => {
               <Route path="/dashboard" element={ViewContainer(<DashboardPage />)} />
               <Route path="/onboarding" element={ViewContainer(<OnboardingPage />)} />
               <Route path="/confirmation/:userType/:confirmationCode" element={ViewContainer(<OnboardingPage />)} />
-              <Route path="/onboarding/proof/:vcConfirmationCode" element={ViewContainer(<OnboardingPage />)} />
+              {/* <Route path="/onboarding/proof/:vcConfirmationCode" element={ViewContainer(<OnboardingPage />)} /> */}
+              <Route path="/onboarding/:userType/proof/" element={ViewContainer(<OnboardingPage />)} />
               <Route path="/sp/:id" element={ViewContainer(<SolutionPackagingView />)} />
               <Route path="/provide/start" element={ViewContainer(<ProvideSelection />)} />
               <Route path="/provide/:type/upload" element={ViewContainer(<ProvideOverview />)} />

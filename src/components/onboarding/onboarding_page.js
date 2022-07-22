@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, StyledModal, FadingBackground, H1Text } from '../../common/styles';
+import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, H4Text, BodyText, BodyBoldText, BodySmallText, MasterButton, ButtonText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, H1Text } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
 import RadioButton from '../../common/radio';
 import Checkbox from '../../common/checkbox';
 import { useResource } from '@axios-use/react';
 
 import styled from 'styled-components';
-import Modal, { ModalProvider, BaseModalBackground } from 'styled-react-modal';
+import { Modal } from 'react-responsive-modal';
 
 import OrganizationDetailsView from './onboarding_provider';
 
@@ -31,7 +31,7 @@ const RegistartinViaDidView = ({ toggleRegistrationViaDidModal }) => {
 
     useEffect(() => { }, [isLoading, error, data]);
 
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
         return (
@@ -81,7 +81,7 @@ RegistartinViaDidView.propTypes = {
 
 
 const RequestVCView = ({ type, confirmationCode }) => {
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     const thanksForConfirmingVC = <>
         <Style width='633px' height='246px'>
@@ -119,7 +119,7 @@ RequestVCView.propTypes = {
 }
 
 const EmailConfirmedView = ({ type, confirmationCode }) => {
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     const isEmailConfirmedUrl = process.env.REACT_APP_EDGE_API_URI + `/onboarding/register/${type}/confirm_email/` + confirmationCode
     const [{ data, error, isLoading }] = useResource(() => ({ url: isEmailConfirmedUrl, method: 'POST', data: {}, }), [])
@@ -207,7 +207,7 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
     console.log(`DontHaveDidView, data: ${data}`)
 
     useEffect(() => { }, [isLoading, error, data]);
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
 
     const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
@@ -291,13 +291,9 @@ const OnboardingPage = () => {
 
     // DONT HAVE DID MODAL
     const [dontHaveDidModalIsOpen, setDontHaveDidModalIsOpen] = useState(false);
-    const [dontHaveDidModalOpacity, setDontHaveModalOpacity] = useState(0);
 
-    function dontHaveDidModal(e) {
-        setDontHaveModalOpacity(0);
-        setDontHaveDidModalIsOpen(!dontHaveDidModalIsOpen);
-    }
-
+    const onOpenDontHaveDidModal = () => setDontHaveDidModalIsOpen(true);
+    const onCloseDontHaveDidModal = () => setDontHaveDidModalIsOpen(false);
 
     // REGISTRATION VIA DID
     const [registrationViaDidModalIsOpen, setRegistrationViaDidModalIsOpen] = useState(false);
@@ -389,8 +385,8 @@ const OnboardingPage = () => {
             return EmailConfirmedView({ type: customerOrOrganization, confirmationCode: confirmationCode })
         }
         else if (activeStage == 5) {
-            return <DidOnboardingView  />
-        } else return verifyQrView()
+            return <DidOnboardingView />
+        } else return <></>
 
         // return <><h1>Stage View</h1></>
     }
@@ -460,64 +456,16 @@ const OnboardingPage = () => {
         </>
     }
 
-
-    const verifyQrView = () => {
-        return <>
-            <ModalProvider backgroundComponent={FadingBackground}>
-                <Style width='633px' height='246px'>
-                    <Padding horizontal='20px'>
-                        <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                            <Padding horizontal='24px'>
-                                <H4LightText>{t('onboarding.msg_verify_organization')}</H4LightText>
-                                <HorizontalLine />
-                                <Column justifyContent='center' alignItems='center'>
-                                    <Padding vertical='8px'>
-                                        <QrLoadingView />
-                                    </Padding>
-                                    <Padding vertical='20px'>
-                                        <Row alignItems='space-between'>
-                                            <OutlineButton disabled onClick={() => dontHaveDidModal()}>{t('form.regViaDIDNoDID')}</OutlineButton>
-                                            <Padding horizontal='8px' />
-                                            <ProofOfOnboardingButton />
-                                        </Row>
-                                    </Padding>
-                                    <Padding vertical='20px'></Padding>
-                                </Column>
-                            </Padding>
-                        </Card>
-                    </Padding>
-                </Style>
-            </ModalProvider>
-        </>
-    }
-
     function ProofOfOnboardingButton() {
-        function afterOpen() {
-            setTimeout(() => {
-                setDontHaveModalOpacity(1);
-            }, 100);
-        }
-
-        function beforeClose() {
-            return new Promise((resolve) => {
-                setDontHaveModalOpacity(0);
-                setTimeout(resolve, 300);
-            });
-        }
 
         return (
             <div>
-                <StyledModal
-                    isOpen={dontHaveDidModalIsOpen}
-                    afterOpen={afterOpen}
-                    beforeClose={beforeClose}
-                    onBackgroundClick={dontHaveDidModal}
-                    onEscapeKeydown={dontHaveDidModal}
-                    opacity={dontHaveDidModalOpacity}
-                    backgroundProps={{ opacity: dontHaveDidModalOpacity }}
+                <Modal
+                    open={dontHaveDidModalIsOpen}
+                    onClose={onCloseDontHaveDidModal}
                 >
-                    <DontHaveDidView dontHaveDidModal={dontHaveDidModal} />
-                </StyledModal>
+                    <DontHaveDidView dontHaveDidModal={onCloseDontHaveDidModal} />
+                </Modal>
             </div>
         );
     }

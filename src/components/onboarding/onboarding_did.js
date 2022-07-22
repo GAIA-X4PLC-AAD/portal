@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 
 import {  Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, StyledModal, Circle, ButtonText, BodyText,FadingBackground, CancelButton, BlueButton } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
-import { ModalProvider } from "styled-react-modal";
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 import LoadingView from "../loading_view/LoadingView";
 
 const DidOnboardingView = () => {
@@ -12,24 +13,12 @@ const DidOnboardingView = () => {
 
 function FancyModalButton() {
     const [isOpen, setIsOpen] = useState(false);
-    const [opacity, setOpacity] = useState(0);
+
+    const onOpenModal = () => setIsOpen(true);
+    const onCloseModal = () => setIsOpen(false);
 
     function toggleModal(e) {
-        setOpacity(0);
         setIsOpen(!isOpen);
-    }
-
-    function afterOpen() {
-        setTimeout(() => {
-            setOpacity(1);
-        }, 100);
-    }
-
-    function beforeClose() {
-        return new Promise((resolve) => {
-            setOpacity(0);
-            setTimeout(resolve, 300);
-        });
     }
 
     const dontHaveDidView = ({data}) => {
@@ -84,19 +73,15 @@ function FancyModalButton() {
     return (
         <div>
             <CancelButton onClick={toggleModal}>I don&#39;t have a DID</CancelButton>
-            <StyledModal
-                isOpen={isOpen}
-                afterOpen={afterOpen}
-                beforeClose={beforeClose}
-                onBackgroundClick={toggleModal}
-                onEscapeKeydown={toggleModal}
-                opacity={opacity}
-                backgroundProps={{ opacity }}
+            <Modal
+                open={isOpen}
+                onClose={onCloseModal}
+                showCloseIcon={false}
             >
             <LoadingView 
                     url={URL}
                 successView={dontHaveDidView}/>
-            </StyledModal>
+            </Modal>
         </div>
     );
 
@@ -104,8 +89,7 @@ function FancyModalButton() {
 
 const verifyQrView = () => {
     return <>
-        <ModalProvider backgroundComponent={FadingBackground}>
-            <Style width='633px' height='246px'>
+        <Style width='633px' height='246px'>
                 <Padding horizontal='20px'>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
@@ -128,7 +112,6 @@ const verifyQrView = () => {
                     </Card>
                 </Padding>
             </Style>
-        </ModalProvider>
 
     </>
 }
