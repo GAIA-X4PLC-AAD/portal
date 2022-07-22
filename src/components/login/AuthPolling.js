@@ -22,12 +22,15 @@ class AuthPolling extends Component {
         this.setState({ isLoading: true });
         const response = await fetch(this.statusURL);
         const data = await response.json();
-        switch (data) {
+        switch (data.status) {
             case 'WAIT':
                 this.state.onAuthZWait();
                 break;
             case 'SUCCESS':
                 this.doCleanup();
+                if (data.access_token) {
+                    localStorage.setItem("userJWT", JSON.stringify(data.access_token));
+                }
                 this.state.onAuthZSuccess();
                 break;
             case 'FAIL':

@@ -94,7 +94,6 @@ const VCProvider = ({nextStage}) => {
 
         if (!data) return null;
 
-        const vc = data.vc;
         const first_did = data.first_did;
 
         if (first_did) {
