@@ -1,5 +1,5 @@
-
-import React, {useEffect } from 'react';
+import axios from "axios";
+import React, { useEffect } from 'react';
 
 // import * as S from './style';
 import PropTypes from 'prop-types';
@@ -9,8 +9,15 @@ import { useResource } from "@axios-use/react";
 import { Center, Style, AnimatedVisibility, CircularLoader } from '../../common/styles';
 
 
-function LoadingView({ url, successView, params }) {
-    const [{ data, error, isLoading }] = useResource(() => ({ url: url }), []);
+function LoadingView({ url, successView, params, headers }) {
+
+
+    const axiosInstance = axios.create({
+        baseURL: url,
+        headers: headers
+    });
+
+    const [{ data, error, isLoading }] = useResource(() => ({ url: url, instance: axiosInstance }), []);
 
     useEffect(() => {
         // console.log(`LoadingView.useEffect, isLoading: ${isLoading}`)
@@ -46,6 +53,7 @@ LoadingView.propTypes = {
     url: PropTypes.string.isRequired,
     successView: PropTypes.func.isRequired,
     params: PropTypes.object,
+    headers: PropTypes.object,
 }
 
 export default LoadingView
