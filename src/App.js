@@ -38,9 +38,15 @@ import ProvideSelection from './components/provide/ProvideSelection';
 import LcmServices from './components/dashboard/lcm/LcmServices';
 import LcmFinal from './components/dashboard/lcm/LcmFinal';
 
+import axios from "axios";
+import authHeader from './common/auth-header';
+
 const App = (props) => {
   const { t, i18n } = useTranslation();
   const history = createBrowserHistory();
+
+  
+  axios.defaults.headers.common['Authorization'] = authHeader();
 
   const ViewContainer = (view) => {
     return <div className='body-container'>{view}</div>
