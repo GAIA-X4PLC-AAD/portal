@@ -346,7 +346,7 @@
             "cancel": "Cancel",
             "save": "Save",
             "removeUserHeader": "Remove user",
-            "removeUserMessage": "are you sure do you want to remove user {{userName}}?"
+            "removeUserMessage": "are you sure do you want to remove user {userName}?"
         }
     },
     "admin": {

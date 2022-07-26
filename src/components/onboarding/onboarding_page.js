@@ -120,7 +120,7 @@ const EmailConfirmedView = ({ type, confirmationCode }) => {
     if (isSuccess) {
         return thanksForConfirmingView
     } else {
-        return EmailAlreadyConfirmedView
+        return EmailAlreadyConfirmedView ()
     }
 }
 
