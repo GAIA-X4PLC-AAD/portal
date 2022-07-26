@@ -139,7 +139,8 @@
         "organization_onboarding_complete_body": "Your onboarding request will be checked by the AISBL. This may take some time. Plase enter your email address to receive status updates of your onboarding.",
         "authorization_fail_header": "Credentials are missing",
         "authorization_fail_message_user": "We couldn't find any authorized credentials.",
-        "authorization_fail_message_organization": "We couldn't find any authorized credentials. Please contact your organization."
+        "authorization_fail_message_organization": "We couldn't find any authorized credentials. Please contact your organization.",
+        "errorConfirmingEmail": "Error confirming email"
         },
     "form": {
         "registerDid":"Registration via DID",
