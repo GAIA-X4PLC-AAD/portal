@@ -76,6 +76,7 @@
         "organization_details": "Organization details",
         "organization_details_subtext": "Lorem ipsum dolor si jet .",
         "customer_details": "Customer details",
+        "customer_details_hint": "Please enter your account details or select express registration via DID",
         "customer_details_subtext": "Lorem ipsum dolor si jet .",
         "vc_error_header": "Registration status",
         "vc_error_message": "Registration status",

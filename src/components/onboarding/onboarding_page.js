@@ -20,7 +20,7 @@ import FinishProvider from './finish_provider';
 
 export const CUSTOMER = 'user'
 export const ORGANIZATION = 'organization'
-
+import axios from "axios";
 
 const RequestVCView = ({ type, confirmationCode }) => {
     const {t} = useTranslation()
@@ -239,8 +239,6 @@ const OnboardingPage = () => {
     const userFillDetailsFormRef = React.createRef()
     const nextButtonRef = React.createRef()
 
-    const [userFormDetailsInput, setInput] = useState({});
-
     // DONT HAVE DID MODAL
     const [dontHaveDidModalIsOpen, setDontHaveDidModalIsOpen] = useState(false);
     const [dontHaveDidModalOpacity, setDontHaveModalOpacity] = useState(0);
@@ -389,6 +387,7 @@ const OnboardingPage = () => {
 
 
     const userFillDetailsView = () => {
+        const [userFormDetailsInput, setInput] = useState({});
 
         const getValue = (target) => {
             switch (target.type) {
@@ -404,6 +403,21 @@ const OnboardingPage = () => {
             setInput(values => ({ ...values, [key]: value }))
         }
 
+        const registerUserApi = async () => {
+            try {
+                const _result = await axios.post(registerUserUrl, userFormDetailsInput, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                })
+                if (_result.response) return true
+            } catch (err) {
+                console.log(`registerUserApi, err: ${err}`)
+                if (err) alert(err.message)
+            }
+            return false
+        }
 
         return <>
             <Style width='633px' height='246px'>
@@ -411,7 +425,7 @@ const OnboardingPage = () => {
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
                             <H4LightText>{t('onboarding.customer_details')}</H4LightText>
-                            <BodyText>Lorem ipsum dolor si jet .</BodyText>
+                            <BodyText>{t('onboarding.customer_details_hint')}</BodyText>
                             <HorizontalLine />
                             <Padding vertical='12px'>
                                 <form ref={userFillDetailsFormRef} noValidate>
@@ -435,11 +449,11 @@ const OnboardingPage = () => {
                                             <Row>
                                                 <OutlineButton onClick={e => setActiveStage(5)}>{t('form.registerDid')}</OutlineButton>
                                                 <Style flexGrow='1' />
-                                                <OutlineButton onClick={() => {
+                                                <OutlineButton onClick={async () => {
                                                     if (validateUserFillDetailsForm()) {
-                                                        // const _result = await registerUserApi()
+                                                        const _result = await registerUserApi()
                                                         // console.log(`nextStage, _result: ${_result}`)
-                                                        // if (_result) setActiveStage(3)
+                                                        if (_result) setActiveStage(3)
                                                         setActiveStage(3)
                                                     }
                                                 }}>{t('form.submit')}</OutlineButton>
