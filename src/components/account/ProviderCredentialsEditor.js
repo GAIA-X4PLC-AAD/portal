@@ -1,7 +1,7 @@
 import React, {  useState } from "react";
 import axios from "axios";
 import ActionCancelModal from "../../common/ActionCancelModal";
-import { useTranslation, withTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import config from "../../config/config.json";
 import * as S from './ProviderCredentialStyle';
 
@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 
 const ProviderCredentialsEditor = (props) => {
 
-    const {t} = useTranslation()
+    const {t} = useTranslation();
     // used for knowing if we are in a new user, or editting existing one.
     const isNewCredential = props.isNewCredential===undefined?false:props.isNewCredential;
     const isReadOnly = () => {
@@ -57,7 +57,7 @@ const ProviderCredentialsEditor = (props) => {
             setLoadUser(response.data);
             setUser(response.data);
             setSaving(false);
-            props.updateUser(response.data);           
+            props.updateUser(response.data);    
         },(error)=> {
           console.log(error);
           setSaving(false);
@@ -101,14 +101,14 @@ const ProviderCredentialsEditor = (props) => {
     }
 
     // logic to decide if remove user should be displayed or not
-    const showRemove = () => {
+    const showRemove = (user) => {
         if (isNewCredential || saving) return (<S.CredentialRemove/>);
         else return (
             <S.CredentialRemove onClick={() =>setOnRemove(true)}>
                 {t('account.credentials.remove')}
                 <ActionCancelModal
                     header={t('account.credentials.removeUserHeader')}
-                    message={t('account.credentials.removeUserMessage', { userName: loadUser.userName})} 
+                    message={t('account.credentials.removeUserMessage', user)} 
                     showAlertMessage={onRemove} 
                     actionMessage={t('account.credentials.remove')}
                     actionCallback={()=>deleteUser()} 
@@ -191,7 +191,7 @@ const ProviderCredentialsEditor = (props) => {
             </S.CredentialEditRowSelect>
                 
             </S.CredentialEditRow>
-            {showRemove()}
+            {showRemove(user)}
             {showEditSave(user)}
     </S.CredentialEditWrap>
     );
@@ -199,9 +199,8 @@ const ProviderCredentialsEditor = (props) => {
 
 ProviderCredentialsEditor.propTypes = {
 
-    loadUser: PropTypes.func,
+    loadUser: PropTypes.object,
     isNewCredential: PropTypes.bool,
-    t: PropTypes.func,
     updateUser: PropTypes.func,
     deleteUser: PropTypes.func,
     cancelCallback: PropTypes.func,

@@ -82,6 +82,27 @@ const EmailAlreadyConfirmedView = () =>{
         </Style>
     </>
 }
+const EmailConfirmedError = (message)=>{
+    const navigate = useNavigate();
+    if (!message) return null;
+    return <>
+        <Style width='633px' height='246px'>
+            <Padding horizontal='20px'>
+                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Padding horizontal='24px'>
+                        <H4LightText>{t('onboarding.errorConfirmingEmail')}</H4LightText>
+                        <HorizontalLine />
+                        <Padding vertical='16px' />
+                           <BodyText>{message}</BodyText>
+                           <Padding vertical='32px'>
+                            <Row><OutlineButton onClick={() => navigate('/')}>{t('onboarding.go_home_button')}</OutlineButton></Row>
+                        </Padding>
+                    </Padding>
+                </Card>
+            </Padding>
+        </Style>
+    </>   
+}
 
 const EmailConfirmedView = ({ type, confirmationCode }) => {
     const {t} = useTranslation()
@@ -119,9 +140,9 @@ const EmailConfirmedView = ({ type, confirmationCode }) => {
 
     if (isSuccess) {
         return thanksForConfirmingView
-    } else {
-        return EmailAlreadyConfirmedView
-    }
+    } else {        
+         return EmailConfirmedError(error?.data?.message);
+     }
 }
 
 EmailConfirmedView.propTypes = {
