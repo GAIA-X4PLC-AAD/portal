@@ -46,7 +46,7 @@ const App = (props) => {
   const history = createBrowserHistory();
 
   
-  axios.defaults.headers.common['Authorization'] = authHeader();
+  // axios.defaults.headers.common['Authorization'] = authHeader();
 
   const ViewContainer = (view) => {
     return <div className='body-container'>{view}</div>
