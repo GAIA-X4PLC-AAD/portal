@@ -11,6 +11,7 @@ import axios from "axios";
 import PropTypes from 'prop-types';
 import { Column, OutlineButton, Padding, Row } from "../../common/styles";
 import { t } from "i18next";
+import { FR_ROLE, PPR_ROLE, PCR_ROLE, VR_ROLE, userData, storeJWT } from '../../common/auth';
 
 export const withNavigation = (Component) => {
   return props => <Component {...props} navigate={useNavigate()} />;
@@ -26,28 +27,30 @@ const UserRolesSection = () => {
 
   if (!isSecurityDisabled) return null;
 
-  const _currentUserRole = useSelector(state => state.user.user_role)
+  return null;
 
-  const _changeUserRole = ({role}) => {
-    dispatch(changeUserRole(role))
-    dispatch(signIn())
-    navigate('/')
-  };
+  // const _currentUserRole = useSelector(state => state.user.user_role)
 
-  return <Padding vertical='20px'>
-    <Column>
-      <Row>
-        <OutlineButton onClick={() => _changeUserRole({role: 'ppr'})}>PPR</OutlineButton>
-        <OutlineButton onClick={() => _changeUserRole({role: 'fr'})}>FR</OutlineButton>
-        {/* <OutlineButton onClick={() => _changeUserRole({role: 'vr'})}>Visitor</OutlineButton> */}
-      </Row>
-      <Padding paddingTop='10px'></Padding>
-      <Row>
-        <OutlineButton onClick={() => _changeUserRole({role: 'pcr-user'})}>PCR User</OutlineButton>
-        <OutlineButton onClick={() => _changeUserRole({role: 'pcr-org'})}>PCR Org.</OutlineButton>
-      </Row>
-    </Column>
-  </Padding>
+  // const _changeUserRole = ({ role }) => {
+  //   dispatch(changeUserRole(role))
+  //   dispatch(signIn())
+  //   navigate('/')
+  // };
+
+  // return <Padding vertical='20px'>
+  //   <Column>
+  //     <Row>
+  //       <OutlineButton onClick={() => _changeUserRole({ role: PPR_ROLE })}>PPR</OutlineButton>
+  //       <OutlineButton onClick={() => _changeUserRole({ role: FR_ROLE })}>FR</OutlineButton>
+  //       {/* <OutlineButton onClick={() => _changeUserRole({role: VR_ROLE})}>Visitor</OutlineButton> */}
+  //     </Row>
+  //     <Padding paddingTop='10px'></Padding>
+  //     <Row>
+  //       <OutlineButton onClick={() => _changeUserRole({ role: PCR_ROLE })}>PCR User</OutlineButton>
+  //       <OutlineButton onClick={() => _changeUserRole({ role: PPR_ROLE })}>PCR Org.</OutlineButton>
+  //     </Row>
+  //   </Column>
+  // </Padding>
 }
 
 UserRolesSection.propTypes = {
@@ -77,7 +80,14 @@ class Login extends Component {
       })
   }
 
-  onAuthZSuccess = () => {
+  onAuthZSuccess = (data) => {
+    console.log("login, onAuthZSuccess");
+    storeJWT(data)
+
+    // var role = currentRole()
+    // useDispatch(changeUserRole(role))
+    // useDispatch(signIn())    }
+
     this.props.signIn();
     this.props.navigate('/');
   }
@@ -123,7 +133,7 @@ class Login extends Component {
     return (
       <div className="login-block5 layout">
         {
-          isSecurityDisabled || this.state.pollingUrl === null? '' : <AuthPolling
+          isSecurityDisabled || this.state.pollingUrl === null ? '' : <AuthPolling
             onAuthZFailed={this.onAuthZFailed}
             onAuthZSuccess={this.onAuthZSuccess}
             onAuthZWait={this.onAuthZWait}
@@ -132,7 +142,7 @@ class Login extends Component {
           />
         }
 
-        <LoginFail showAlertMessage={this.state.showLoginFail} message={this.state.loginFailMessage} onClose={()=> {this.setState({ showLoginFail: false})}}/>
+        <LoginFail showAlertMessage={this.state.showLoginFail} message={this.state.loginFailMessage} onClose={() => { this.setState({ showLoginFail: false }) }} />
         <div className="login-group layout">
           <h1 className="login-hero-title layout">{this.props.t("login.welcome")}</h1>
           <h4 className="login-highlights3 layout">{this.props.t("login.signinContinue")}</h4>
@@ -143,12 +153,12 @@ class Login extends Component {
             {this.props.t("login.scanMessage")}
           </h2>
           <div className="login-block8 layout">
-              <img className="login-image16 layout" src={this.state.imgLink} alt="Loading..." />
+            <img className="login-image16 layout" src={this.state.imgLink} alt="Loading..." />
           </div>
-            <div className="login-button layout">
-              <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t("login.loginButton")}</a>
-            </div>
-            <UserRolesSection />
+          <div className="login-button layout">
+            <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t("login.loginButton")}</a>
+          </div>
+          <UserRolesSection />
           <div className="login-block10 layout">
             <Link to="/help"><h4 className="login-highlights5 layout">{this.props.t("login.faq")}</h4></Link>
           </div>

@@ -16,7 +16,7 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { Padding } from '../discovery/tabs/style';
 import buildLanguageItemView from '../../common/language_item';
-
+import { PPR_ROLE, PCR_ROLE, FR_ROLE } from '../../common/auth';
 
 
 // USER AVATAR
@@ -31,13 +31,13 @@ function UserAvatarButton({ onClicked }) {
   const _userName = useSelector((state) => state.user.user.first_name)
   const navigate = useNavigate();
 
-  const _userRole = useSelector((state) => state.user.user_role)
+  const _userRole = useSelector((state) => state.user.user.user_role)
   const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
 
-  const _isPpr = _userRole == 'ppr' && isUserSignedIn
-  const _isPcrUser = _userRole == 'pcr-user' && isUserSignedIn
-  const _isPcrOrg = _userRole == 'pcr-org' && isUserSignedIn
-  const _isFr = _userRole == 'gaiax-fr' && isUserSignedIn
+  const _isPpr = _userRole == PPR_ROLE && isUserSignedIn
+  const _isPcrUser = _userRole == PCR_ROLE && isUserSignedIn
+  const _isPcrOrg = _userRole == PPR_ROLE && isUserSignedIn
+  const _isFr = _userRole == FR_ROLE && isUserSignedIn
 
   // language modal
   const [openModal, setOpenModal] = useState(false);

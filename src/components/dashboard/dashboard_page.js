@@ -15,7 +15,6 @@ const DashboardPage = () => {
     const type = 'dashboard';
     const _leftPanelWidth = '225px'
 
-    //   const _isPr = useSelector((state) => state.user.user.is_pr && state.isUserSignedIn)
     const _isPr = useSelector((state) => true)
 
     const colItemView = ({ title, caption, subtitle, }) => {

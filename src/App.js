@@ -37,16 +37,14 @@ import SolutionPackagingView from './components/solutionPackaging/SolutionPackag
 import ProvideSelection from './components/provide/ProvideSelection';
 import LcmServices from './components/dashboard/lcm/LcmServices';
 import LcmFinal from './components/dashboard/lcm/LcmFinal';
-
-import axios from "axios";
-import authHeader from './common/auth-header';
+import {authHeader} from './common/auth';
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
   const history = createBrowserHistory();
 
-  
   // axios.defaults.headers.common['Authorization'] = authHeader();
+  authHeader();
 
   const ViewContainer = (view) => {
     return <div className='body-container'>{view}</div>
@@ -104,7 +102,7 @@ const App = (props) => {
               <Route path="/lcm/:id" element={ViewContainer(<LcmServices />)} />
               <Route path="/lcm/:id/final" element={ViewContainer(<LcmFinal />)} />
               <Route path="/lcm/:id/:index" element={ViewContainer(<LcmServices />)} />
-              
+
             </Routes>
           </Column>
         </Router>

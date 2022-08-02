@@ -1,22 +1,29 @@
-import { CHANGE_USER_ROLE, SIGN_IN, SIGN_OUT } from "../actions/types";
+import { SIGN_IN, SIGN_OUT } from "../actions/types";
+import { userData, removeJWT } from "../common/auth";
+
 const INITIAL_STATE = {
     isUserSignedIn: false,
-    user_role: 'vr',
-    user: {
-        'first_name': 'Katherine', 'is_pr': true, 'date_format': 'yyyy-mm-dd',
-        'i18n': 'en', 'organization_url': ''
-    }
+    ...userData()
 };
 
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case SIGN_IN:
-            return { ...state, isUserSignedIn: true };
+            console.log("Signing in");
+            return {
+                ...state,
+                isUserSignedIn: true,
+                ...userData()
+            }
         case SIGN_OUT:
-            return { ...state, isUserSignedIn: false };
-        case CHANGE_USER_ROLE:
-            return { ...state, user_role: action.role };
+            console.log("Signing out");
+            removeJWT();
+            return { 
+                ...state, 
+                isUserSignedIn: false, 
+                ...userData() 
+            };
         default:
             return state;
     }

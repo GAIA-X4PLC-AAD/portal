@@ -18,6 +18,8 @@ import { BodyText, ButtonText, DropDownArrowDownSmall, H4LightText, HorizontalLi
 import { Padding } from '../discovery/tabs/style';
 import buildLanguageItemView from '../../common/language_item';
 
+import { FR_ROLE, PPR_ROLE, PCR_ROLE, VR_ROLE } from '../../common/auth';
+
 
 const CenterBar = () => {
 
@@ -30,16 +32,16 @@ const CenterBar = () => {
   const _isEs = _lang.indexOf('es') == 0
   const _isDe = _lang.indexOf('de') == 0
 
-  const _userRole = useSelector((state) => state.user.user_role)
+  const _userRole = useSelector((state) => state.user.user.user_role)
 
   const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
 
-  const _isPpr = _userRole == 'ppr' && isUserSignedIn
-  const _isVr = _userRole == 'vr' && isUserSignedIn
+  const _isPpr = _userRole == PPR_ROLE && isUserSignedIn
+  const _isVr = _userRole == VR_ROLE && isUserSignedIn
 
-  const _isPcrUser = _userRole == 'pcr-user' && isUserSignedIn
-  const _isPcrOrg = _userRole == 'pcr-org' && isUserSignedIn
-  const _isFr = _userRole == 'fr' && isUserSignedIn
+  const _isPcrUser = _userRole == PCR_ROLE && isUserSignedIn
+  const _isPcrOrg = _userRole == PPR_ROLE && isUserSignedIn
+  const _isFr = _userRole == FR_ROLE && isUserSignedIn
 
   // language modal
   const [openModal, setOpenModal] = useState(false);
