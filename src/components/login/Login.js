@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { compose } from 'redux';
 import "./Login.css";
-import { changeUserRole, signIn, signInMenuEnter, signInMenuQuit } from "../../actions";
+import { signIn } from "../../actions";
 import { Link, useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import LoginFail from "./LoginFail";
@@ -49,7 +49,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    this.props.signInMenuEnter();
+    // this.props.signInMenuEnter();
     axios.get(process.env.REACT_APP_EDGE_API_URI + '/onboarding/qr')
       .then((body) => {
         let qrCodePath = body.data.qrCodePath;
@@ -98,7 +98,7 @@ class Login extends Component {
 
 
   componentWillUnmount() {
-    this.props.signInMenuQuit();
+    // this.props.signInMenuQuit();
   }
 
 
@@ -158,10 +158,10 @@ class Login extends Component {
 
 Login.propTypes = {
   t: PropTypes.func,
-  signInMenuEnter: PropTypes.func,
+  // signInMenuEnter: PropTypes.func,
   signIn: PropTypes.func,
   navigate: PropTypes.func,
-  signInMenuQuit: PropTypes.func,
+  // signInMenuQuit: PropTypes.func,
 }
 
-export default compose(withTranslation(), connect(null, { signInMenuEnter, signInMenuQuit, signIn }))(withNavigation(Login));
+export default compose(withTranslation(), connect(null, { signIn }))(withNavigation(Login));

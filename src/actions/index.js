@@ -3,13 +3,13 @@ import {
     UPDATE_SEARCH_TYPE_AND_TERM, SET_DESCRIPTOR_FILE, RESET_DESCRIPTOR_FILE, LCM_SERVICES_LOADED, RESET_LCM_SERVICES, LCM_SELECT_SERVICE,CHANGE_USER_ROLE
 } from "./types";
 
-export const signInMenuEnter = () => {
-    return { type: SIGN_IN_MENU };
-};
+// export const signInMenuEnter = () => {
+//     return { type: SIGN_IN_MENU };
+// };
 
-export const signInMenuQuit = () => {
-    return { type: NOT_SIGN_IN_MENU };
-};
+// export const signInMenuQuit = () => {
+//     return { type: NOT_SIGN_IN_MENU };
+// };
 
 export const signIn = () => {
     return {

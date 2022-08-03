@@ -135,14 +135,6 @@ const App = (props) => {
   );
 }
 
-const mapStateToProps = state => {
-  return { isInSignInMenu: state.signin.isInSignInMenu };
-};
-
-App.propTypes = {
-  isInSignInMenu: PropTypes.bool,
-}
-
-export default connect(mapStateToProps, {})(App);
+export default App;
 
 

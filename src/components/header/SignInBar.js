@@ -132,7 +132,6 @@ RegisterButton.propTypes = {
 const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
   const isUserSignedIn = useSelector((state) => state.user.user.user_role) != VR_ROLE;
   const location = useLocation();
-  const isInSignInMenu = location.pathname === "/signin"
 
   const signedInButtons =
     <>
@@ -147,7 +146,7 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
       <RegisterButton onClicked={handleRegister} />
     </>;
 
-  if (isInSignInMenu) { return (<></>); }
+  if (location.pathname === "/signin") { return (<></>); }
   else {
     return (
       isUserSignedIn ? signedInButtons : signedOutButtons

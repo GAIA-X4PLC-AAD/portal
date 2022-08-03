@@ -56,7 +56,6 @@ function Header(props) {
 
 Header.propTypes = {
     type: PropTypes.string,
-    isInSignInMenu: PropTypes.bool,
 }
 
 export default Header;

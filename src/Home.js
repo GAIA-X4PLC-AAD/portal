@@ -13,7 +13,7 @@ import { Circle, Column, SliderBullet, H2Text, BodyText, Style } from "./common/
 import { Padding } from "./components/discovery/tabs/style";
 import SearchTerm from "./components/discovery/search/SearchTerm";
 import { updateSearchType, updateSeartTypeWithTerm } from "./actions";
-import { signInMenuQuit } from "./actions";
+// import { signInMenuQuit } from "./actions";
 
 const responsive = {
   superLargeDesktop: {
@@ -38,17 +38,6 @@ const responsive = {
 const Home = () => {
 
   const { t, i18n } = useTranslation();
-
-  const store = useSelector(state => state.searchCriteriaStore);
-  const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   dispatch(updateSeartTypeWithTerm("home", store.searchTerms));
-  // }, );
-
-  // const isInSignInMenu = useSelector((state) => state.signin.isInSignInMenu)
-  // const dispatch = useDispatch();
-  // dispatch(signInMenuQuit())
 
   const buildSliderContent = ({ index = 0 }) => {
     return <Column key = {`${index}`} justifyContent='center' alignItems='center'>
