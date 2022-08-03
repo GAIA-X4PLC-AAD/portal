@@ -68,7 +68,7 @@ class AuthPolling extends Component {
 
     componentWillUnmount() {
         console.log("In componentWillUnmount");
-        // this.doCleanup();
+        this.doCleanup();
     }
 
     render() {
