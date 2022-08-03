@@ -15,8 +15,6 @@ const DidOnboardingView = ({ userType, nextStage }) => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const URL = process.env.REACT_APP_EDGE_API_URI + '/onboarding/qr';
-    const appMode = process.env.REACT_APP_MODE
-    const isSecurityDisabled = appMode == 'SECURITY_DISABLED'
 
 
     const onAuthZSuccess = () => {
@@ -141,7 +139,7 @@ const DidOnboardingView = ({ userType, nextStage }) => {
 
         return <>
             {
-                isSecurityDisabled ? '' : <AuthPolling
+                <AuthPolling
                     onAuthZFailed={onAuthZFailed}
                     onAuthZSuccess={onAuthZSuccess}
                     onAuthZWait={onAuthZWait}

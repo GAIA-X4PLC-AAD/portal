@@ -17,23 +17,6 @@ export const withNavigation = (Component) => {
   return props => <Component {...props} navigate={useNavigate()} />;
 }
 
-const UserRolesSection = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  // "FR", "Visitor", "PPR", "PCR User", "PCR Organization"
-
-  const appMode = process.env.REACT_APP_MODE
-  const isSecurityDisabled = appMode == 'SECURITY_DISABLED'
-
-  if (!isSecurityDisabled) return null;
-
-  return null;
-}
-
-UserRolesSection.propTypes = {
-
-};
-
 class Login extends Component {
 
   constructor(props) {
@@ -49,21 +32,21 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    // this.props.signInMenuEnter();
     axios.get(process.env.REACT_APP_EDGE_API_URI + '/onboarding/qr')
       .then((body) => {
-        let qrCodePath = body.data.qrCodePath;
-        this.setState({ imgLink: qrCodePath, walletLink: body.data.walletLink, pollingUrl: body.data.pollUrl });
+        this.setState(
+          {
+            imgLink: body.data.qrCodePath,
+            walletLink: body.data.walletLink,
+            pollingUrl: body.data.pollUrl
+          }
+        );
       })
   }
 
   onAuthZSuccess = (data) => {
     console.log("login, onAuthZSuccess");
     storeJWT(data)
-
-    // var role = currentRole()
-    // useDispatch(changeUserRole(role))
-    // useDispatch(signIn())    }
 
     this.props.signIn();
     this.props.navigate('/');
@@ -103,14 +86,10 @@ class Login extends Component {
 
 
   render() {
-
-    const appMode = process.env.REACT_APP_MODE
-    const isSecurityDisabled = appMode == 'SECURITY_DISABLED'
-
     return (
       <div className="login-block5 layout">
         {
-          isSecurityDisabled || this.state.pollingUrl === null ? '' : <AuthPolling
+          this.state.pollingUrl === null ? '' : <AuthPolling
             onAuthZFailed={this.onAuthZFailed}
             onAuthZSuccess={this.onAuthZSuccess}
             onAuthZWait={this.onAuthZWait}
@@ -135,7 +114,6 @@ class Login extends Component {
           <div className="login-button layout">
             <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t("login.loginButton")}</a>
           </div>
-          <UserRolesSection />
           <div className="login-block10 layout">
             <Link to="/help"><h4 className="login-highlights5 layout">{this.props.t("login.faq")}</h4></Link>
           </div>
@@ -158,10 +136,8 @@ class Login extends Component {
 
 Login.propTypes = {
   t: PropTypes.func,
-  // signInMenuEnter: PropTypes.func,
   signIn: PropTypes.func,
   navigate: PropTypes.func,
-  // signInMenuQuit: PropTypes.func,
 }
 
 export default compose(withTranslation(), connect(null, { signIn }))(withNavigation(Login));
