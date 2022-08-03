@@ -56,13 +56,10 @@ function retrieveRole(dToken) {
 }
 
 function retrieveToken() {
-  console.log("In retrieveToken");
-
   return JSON.parse(localStorage.getItem('userJWT'));
 }
 
 export function authHeader() {
-  console.log("in authHeader");
   const token = retrieveToken();
   if (token) {
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;

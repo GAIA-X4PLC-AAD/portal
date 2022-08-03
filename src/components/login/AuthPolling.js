@@ -19,12 +19,9 @@ class AuthPolling extends Component {
     }
 
     async fetchData() {
-        console.log("fetchData");
-
         this.setState({ isLoading: true });
         const response = await fetch(this.statusURL);
         const data = await response.json();
-        console.log("in fetchData, data: ", data)
 
         switch (data.status) {
             case 'WAIT':
@@ -47,27 +44,15 @@ class AuthPolling extends Component {
     }
 
     doCleanup() {
-        console.log("doCleanup, this.state.timerId: ", this.state.timerId);
         clearInterval(this.state.timerId);
         this.setState({timerId: null});
     }
 
     async componentDidMount() {
-        console.log("componentDidMount")
-        // this.state.onAuthZSuccess();
-        // console.debug("before fetchData");
-        // await this.fetchData();
-        // console.debug("after fetchData");
-
-        // const timerId = setInterval(() => this.fetchData(), 2000);
-        // console.log("componentDidMount, timerId: ", timerId);
-        // this.setState({timerId:timerId});
-        // console.log("componentDidMount, this.state.timerId: ", this.state.timerId);
     }
 
 
     componentWillUnmount() {
-        console.log("In componentWillUnmount");
         this.doCleanup();
     }
 

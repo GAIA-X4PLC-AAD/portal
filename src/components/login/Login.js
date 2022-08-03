@@ -45,7 +45,6 @@ class Login extends Component {
   }
 
   onAuthZSuccess = (data) => {
-    console.log("login, onAuthZSuccess");
     storeJWT(data)
 
     this.props.signIn();
@@ -57,7 +56,6 @@ class Login extends Component {
   }
 
   onAuthZWait() {
-    console.log('onAuthZWait');
   }
 
 
@@ -66,7 +64,6 @@ class Login extends Component {
 
     // if widget does not respond in 1 sec, show logging error message.
     let timeout = window.setTimeout(() => {
-      console.log('timeout');
       this.setState({ showLoginFail: true, loginFailMessage: "login.fail.widgetMessage" });
     }, 1000);
 

@@ -65,7 +65,6 @@ export const selectLcmService = (serviceName, lcm) => {
 }
 
 export const changeUserRole = (role) => {
-    console.log("In changeUserRole, role: ", role);
     return { type: CHANGE_USER_ROLE, role };
 };
 
