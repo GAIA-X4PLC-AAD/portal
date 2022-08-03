@@ -17,6 +17,7 @@ import { Modal } from 'react-responsive-modal';
 import { Padding } from '../discovery/tabs/style';
 import buildLanguageItemView from '../../common/language_item';
 import { PPR_ROLE, PCR_ROLE, FR_ROLE, VR_ROLE } from '../../common/auth';
+import { useLocation } from 'react-router-dom'
 
 
 // USER AVATAR
@@ -130,7 +131,8 @@ RegisterButton.propTypes = {
 
 const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
   const isUserSignedIn = useSelector((state) => state.user.user.user_role) != VR_ROLE;
-  const isInSignInMenu = useSelector((state) => state.signin.isInSignInMenu)
+  const location = useLocation();
+  const isInSignInMenu = location.pathname === "/signin"
 
   const signedInButtons =
     <>
