@@ -34,14 +34,12 @@ const CenterBar = () => {
 
   const _userRole = useSelector((state) => state.user.user.user_role)
 
-  const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
+  const _isPpr = _userRole == PPR_ROLE 
+  const _isVr = _userRole == VR_ROLE 
 
-  const _isPpr = _userRole == PPR_ROLE && isUserSignedIn
-  const _isVr = _userRole == VR_ROLE && isUserSignedIn
-
-  const _isPcrUser = _userRole == PCR_ROLE && isUserSignedIn
-  const _isPcrOrg = _userRole == PPR_ROLE && isUserSignedIn
-  const _isFr = _userRole == FR_ROLE && isUserSignedIn
+  const _isPcrUser = _userRole == PCR_ROLE 
+  const _isPcrOrg = _userRole == PPR_ROLE 
+  const _isFr = _userRole == FR_ROLE 
 
   // language modal
   const [openModal, setOpenModal] = useState(false);
@@ -88,7 +86,7 @@ const CenterBar = () => {
           <DropDownArrowDownSmall />
         </Row>
 
-        {isUserSignedIn ? <></> : <ButtonText color='#000000' onClick={onOpenModal}>{t('left-menu.change-language')}</ButtonText>}
+        {(_userRole != VR_ROLE) ? <></> : <ButtonText color='#000000' onClick={onOpenModal}>{t('left-menu.change-language')}</ButtonText>}
 
         <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
           <H4LightText>{t('left-menu.choose-language')}</H4LightText>

@@ -16,7 +16,7 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { Padding } from '../discovery/tabs/style';
 import buildLanguageItemView from '../../common/language_item';
-import { PPR_ROLE, PCR_ROLE, FR_ROLE } from '../../common/auth';
+import { PPR_ROLE, PCR_ROLE, FR_ROLE, VR_ROLE } from '../../common/auth';
 
 
 // USER AVATAR
@@ -32,12 +32,10 @@ function UserAvatarButton({ onClicked }) {
   const navigate = useNavigate();
 
   const _userRole = useSelector((state) => state.user.user.user_role)
-  const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
-
-  const _isPpr = _userRole == PPR_ROLE && isUserSignedIn
-  const _isPcrUser = _userRole == PCR_ROLE && isUserSignedIn
-  const _isPcrOrg = _userRole == PPR_ROLE && isUserSignedIn
-  const _isFr = _userRole == FR_ROLE && isUserSignedIn
+  const _isPpr = _userRole == PPR_ROLE 
+  const _isPcrUser = _userRole == PCR_ROLE 
+  const _isPcrOrg = _userRole == PPR_ROLE 
+  const _isFr = _userRole == FR_ROLE 
 
   // language modal
   const [openModal, setOpenModal] = useState(false);
@@ -131,7 +129,7 @@ RegisterButton.propTypes = {
 }
 
 const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
-  const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
+  const isUserSignedIn = useSelector((state) => state.user.user.user_role) != VR_ROLE;
   const isInSignInMenu = useSelector((state) => state.signin.isInSignInMenu)
 
   const signedInButtons =

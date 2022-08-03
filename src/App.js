@@ -43,7 +43,6 @@ const App = (props) => {
   const { t, i18n } = useTranslation();
   const history = createBrowserHistory();
 
-  // axios.defaults.headers.common['Authorization'] = authHeader();
   authHeader();
 
   const ViewContainer = (view) => {

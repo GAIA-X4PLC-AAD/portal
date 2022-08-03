@@ -11,12 +11,13 @@ import PropTypes from 'prop-types';
 import SaveBookModal from "./SaveBookModal";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { VR_ROLE } from "../../common/auth";
 
 const SolutionPackagingView = () => {
     
     const {id} = useParams();
 
-    const isUserSignedIn = useSelector((state) => state.user.isUserSignedIn)
+    const isUserSignedIn = useSelector((state) => state.user.user.user_role) != VR_ROLE;
   
     const SAVE_URL = process.env.REACT_APP_EDGE_API_URI + '/sp-service/save';
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/${id}/details/`;

@@ -2,7 +2,6 @@ import { SIGN_IN, SIGN_OUT } from "../actions/types";
 import { userData, removeJWT } from "../common/auth";
 
 const INITIAL_STATE = {
-    isUserSignedIn: false,
     ...userData()
 };
 
@@ -13,7 +12,6 @@ export default (state = INITIAL_STATE, action) => {
             console.log("Signing in");
             return {
                 ...state,
-                isUserSignedIn: true,
                 ...userData()
             }
         case SIGN_OUT:
@@ -21,7 +19,6 @@ export default (state = INITIAL_STATE, action) => {
             removeJWT();
             return { 
                 ...state, 
-                isUserSignedIn: false, 
                 ...userData() 
             };
         default:

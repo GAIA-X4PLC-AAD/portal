@@ -28,29 +28,6 @@ const UserRolesSection = () => {
   if (!isSecurityDisabled) return null;
 
   return null;
-
-  // const _currentUserRole = useSelector(state => state.user.user_role)
-
-  // const _changeUserRole = ({ role }) => {
-  //   dispatch(changeUserRole(role))
-  //   dispatch(signIn())
-  //   navigate('/')
-  // };
-
-  // return <Padding vertical='20px'>
-  //   <Column>
-  //     <Row>
-  //       <OutlineButton onClick={() => _changeUserRole({ role: PPR_ROLE })}>PPR</OutlineButton>
-  //       <OutlineButton onClick={() => _changeUserRole({ role: FR_ROLE })}>FR</OutlineButton>
-  //       {/* <OutlineButton onClick={() => _changeUserRole({role: VR_ROLE})}>Visitor</OutlineButton> */}
-  //     </Row>
-  //     <Padding paddingTop='10px'></Padding>
-  //     <Row>
-  //       <OutlineButton onClick={() => _changeUserRole({ role: PCR_ROLE })}>PCR User</OutlineButton>
-  //       <OutlineButton onClick={() => _changeUserRole({ role: PPR_ROLE })}>PCR Org.</OutlineButton>
-  //     </Row>
-  //   </Column>
-  // </Padding>
 }
 
 UserRolesSection.propTypes = {
