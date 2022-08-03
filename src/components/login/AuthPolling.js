@@ -24,6 +24,7 @@ class AuthPolling extends Component {
         this.setState({ isLoading: true });
         const response = await fetch(this.statusURL);
         const data = await response.json();
+        console.log("in fetchData, data: ", data)
 
         switch (data.status) {
             case 'WAIT':
@@ -48,7 +49,7 @@ class AuthPolling extends Component {
     doCleanup() {
         console.log("doCleanup, this.state.timerId: ", this.state.timerId);
         clearInterval(this.state.timerId);
-        // this.setState({timerId: null});
+        this.setState({timerId: null});
     }
 
     async componentDidMount() {

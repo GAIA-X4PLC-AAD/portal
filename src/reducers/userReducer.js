@@ -1,5 +1,5 @@
 import { SIGN_IN, SIGN_OUT } from "../actions/types";
-import { userData, removeJWT } from "../common/auth";
+import { userData, removeJWT, authHeader } from "../common/auth";
 
 const INITIAL_STATE = {
     ...userData()
@@ -7,6 +7,7 @@ const INITIAL_STATE = {
 
 
 export default (state = INITIAL_STATE, action) => {
+    authHeader();
     switch (action.type) {
         case SIGN_IN:
             console.log("Signing in");
@@ -17,9 +18,9 @@ export default (state = INITIAL_STATE, action) => {
         case SIGN_OUT:
             console.log("Signing out");
             removeJWT();
-            return { 
-                ...state, 
-                ...userData() 
+            return {
+                ...state,
+                ...userData()
             };
         default:
             return state;
