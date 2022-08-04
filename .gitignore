@@ -37,3 +37,4 @@ yarn.lock
 .idea/
 package-lock.json
 deploy/docker/output/build/
+.vscode/launch.json

@@ -36,26 +36,19 @@ export function userData() {
 
 function retrieveRole(dToken) {
   var roles = dToken.realm_access.roles;
-  console.log("roles: ", roles);
-
-  if (roles.includes("gaiax-pcr")) {
-    console.log("it is pcr");
-
-    return PCR_ROLE;
-  } else if (roles.includes("gaiax-ppr")) {
-    console.log("it is ppr");
-
-    return PPR_ROLE;
-  } else if (roles.includes("gaiax-fr")) {
-    console.log("it is fr");
-
+  
+  if (roles.includes("gaiax-fr")) {
     return FR_ROLE;
+  } else if (roles.includes("gaiax-ppr")) {
+    return PPR_ROLE;
+  } else if (roles.includes("gaiax-pcr")) {
+    return PCR_ROLE;
   } else {
     return VR_ROLE;
   }
 }
 
-function retrieveToken() {
+export function retrieveToken() {
   return JSON.parse(localStorage.getItem('userJWT'));
 }
 
@@ -67,12 +60,10 @@ export function authHeader() {
 }
 
 export function removeJWT() {
-  console.log("Removing JWT");
   localStorage.removeItem("userJWT");
 }
 
 export function storeJWT(data) {
-  console.log("Storing JWT");
   if (data && data.access_token) {
     localStorage.setItem("userJWT", JSON.stringify(data.access_token));
   }

@@ -37,13 +37,12 @@ import SolutionPackagingView from './components/solutionPackaging/SolutionPackag
 import ProvideSelection from './components/provide/ProvideSelection';
 import LcmServices from './components/dashboard/lcm/LcmServices';
 import LcmFinal from './components/dashboard/lcm/LcmFinal';
-import {authHeader} from './common/auth';
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import history from "./common/history"
+
 
 const App = (props) => {
   const { t, i18n } = useTranslation();
-  const history = createBrowserHistory();
-
-  authHeader();
 
   const ViewContainer = (view) => {
     return <div className='body-container'>{view}</div>
@@ -53,7 +52,7 @@ const App = (props) => {
 
     <div className=''>
       <div className='main-content'>
-        <Router history={history}>
+        <HistoryRouter history={history}>
           <Header />
           <Column>
             <Routes>
@@ -104,7 +103,7 @@ const App = (props) => {
 
             </Routes>
           </Column>
-        </Router>
+        </HistoryRouter>
       </div>
 
       <div className='footer-container'>
