@@ -39,6 +39,8 @@ import LcmServices from './components/dashboard/lcm/LcmServices';
 import LcmFinal from './components/dashboard/lcm/LcmFinal';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import history from "./common/history"
+import AboutPage from "./components/help/AboutPage"
+import SupportPage from "./components/help/SupportPage"
 
 
 const App = (props) => {
@@ -100,6 +102,8 @@ const App = (props) => {
               <Route path="/lcm/:id" element={ViewContainer(<LcmServices />)} />
               <Route path="/lcm/:id/final" element={ViewContainer(<LcmFinal />)} />
               <Route path="/lcm/:id/:index" element={ViewContainer(<LcmServices />)} />
+              <Route path="/help/about" element={ViewContainer(<AboutPage />)} />
+              <Route path="/help/support" element={ViewContainer(<SupportPage />)} />
 
             </Routes>
           </Column>

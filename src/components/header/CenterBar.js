@@ -20,6 +20,8 @@ import buildLanguageItemView from '../../common/language_item';
 
 import { FR_ROLE, PPR_ROLE, PCR_ROLE, VR_ROLE } from '../../common/auth';
 
+import history from "../../common/history"
+
 
 const CenterBar = () => {
 
@@ -34,12 +36,12 @@ const CenterBar = () => {
 
   const _userRole = useSelector((state) => state.user.user.user_role)
 
-  const _isPpr = _userRole == PPR_ROLE 
-  const _isVr = _userRole == VR_ROLE 
+  const _isPpr = _userRole == PPR_ROLE
+  const _isVr = _userRole == VR_ROLE
 
-  const _isPcrUser = _userRole == PCR_ROLE 
-  const _isPcrOrg = _userRole == PPR_ROLE 
-  const _isFr = _userRole == FR_ROLE 
+  const _isPcrUser = _userRole == PCR_ROLE
+  const _isPcrOrg = _userRole == PPR_ROLE
+  const _isFr = _userRole == FR_ROLE
 
   // language modal
   const [openModal, setOpenModal] = useState(false);
@@ -80,8 +82,8 @@ const CenterBar = () => {
         }
         <Row>
           <Menu menuButton={<ButtonText color='#000000'>{t('left-menu.help')}</ButtonText>} menuClassName="szh-menu">
-            <MenuItem>{t('left-menu.about')}</MenuItem>
-            <MenuItem>{t('left-menu.support')}</MenuItem>
+            <MenuItem onClick={() => history.push('/help/about')}>{t('left-menu.about')}</MenuItem>
+            <MenuItem onClick={() => history.push('/help/support')}>{t('left-menu.support')}</MenuItem>
           </Menu>
           <DropDownArrowDownSmall />
         </Row>
