@@ -31,7 +31,7 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
-  if (401 === error.response.status) {
+  if (401 === error.response.status || 403 === error.response.status) {
     history.push("/signin")
 
     return Promise.resolve();
