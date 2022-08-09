@@ -87,6 +87,7 @@ const DescriptionTabView = (props,) => {
               <S.Padding horizontal='8px'>
                 <S.Title>{`${details['name']}`}</S.Title>
                 <S.Body>{`${details['description']}`}</S.Body>
+
                 {showBuildButton()}
 
                 <S.Padding vertical='8px' horizontal='0px'>
@@ -98,13 +99,13 @@ const DescriptionTabView = (props,) => {
                 </S.HorizontalContainer>
 
                 <S.HorizontalContainer>
-                  <ColumnItem title={t('service-tile.stack_UP')}  subtitle={`${details['stack']}`} />
-                  <ColumnItem title={t('service-tile.last_update_UP')} subtitle={`${details['last_updated']}`} />
-                  <ColumnItem title={t('service-tile.terms_of_use_UP')} subtitle={`${details['terms_of_use']}`} />
+                  <ColumnItem title={t('service-tile.features_UP')}  subtitle={`${details['features']}`} />
+                  <ColumnItem title={t('service-tile.stack_UP')}  subtitle={`${details['stack']}`} />   
                   <ColumnItem title={t('service-tile.location_UP')} subtitle={`${details['location']}`} />
-                  <ColumnItem title={t('service-tile.security_UP')}  subtitle={`${details['security']}`} />
+                  <ColumnItem title={t('service-tile.last_update_UP')} subtitle={`${details['last_updated']}`} />
                   <ColumnItem title={t('service-tile.category_UP')} subtitle={`${details['category']}`} />
-                </S.HorizontalContainer>
+                  <ColumnItem title={t('service-tile.terms_of_use_UP')} subtitle={`${details['terms_of_use']}`} />
+               </S.HorizontalContainer>
               </S.Padding>
             </S.VerticalContainer>
           </S.ExpandedContainer>

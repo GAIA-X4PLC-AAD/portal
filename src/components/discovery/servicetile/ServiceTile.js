@@ -37,7 +37,7 @@ const ServiceTile = ({ input, id, t }) => {
                     shiftedBottomBorder={true}
                     borderBottom={false}
                     width={_width} />
-                <ExpandableView initiallyExpanded={false} view={PriceTab({ id: id, type: type })} title={<>{padTitle({ _titleView: <>{t("service-tile.price")}</> })}</>}  titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} shiftedBottomBorder={true} borderBottom={false}/>
+                <ExpandableView hidden={true} initiallyExpanded={false} view={PriceTab({ id: id, type: type })} title={<>{padTitle({ _titleView: <>{t("service-tile.price")}</> })}</>}  titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} shiftedBottomBorder={true} borderBottom={false}/>
                 <ExpandableView initiallyExpanded={false} view={ScreenshotsTab({ serviceId: id })} title={<>{padTitle({ _titleView: <>{t("service-tile.screenshots")}</> })}</>}  titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} shiftedBottomBorder={true} borderBottom={false}/>
                 <ExpandableView initiallyExpanded={false} view={ContactTab({ id: id, type: type })} title={<>{padTitle({ _titleView: <>{t("service-tile.contact")}</> })}</>}  titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} maxWidth1='850px' shiftedBottomBorder={false} borderBottom={false}/>
             </>

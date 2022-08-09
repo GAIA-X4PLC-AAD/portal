@@ -50,6 +50,7 @@ export const Block = styled.div`
   box-shadow: ${props => props.boxShadow};
   border-radius: 4px;
   position: ${props => props.position || ''};
+  display: ${props => props.display || ''};
   @apply py-0;
 `
 
