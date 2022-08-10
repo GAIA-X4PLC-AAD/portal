@@ -88,7 +88,7 @@ const EmailConfirmedView = ({ type, confirmationCode }) => {
     const [returnedComponent, setReturnedComponent] = useState(<></>);
 
     const { t } = useTranslation()
-    const isEmailConfirmedUrl = process.env.REACT_APP_EDGE_API_URI + `/onboarding/register/${type}/confirm_email5/` + confirmationCode
+    const isEmailConfirmedUrl = process.env.REACT_APP_EDGE_API_URI + `/onboarding/register/${type}/confirm_email/` + confirmationCode
 
     useResource(
         () => (
