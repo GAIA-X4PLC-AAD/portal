@@ -4,7 +4,7 @@ import * as S from '../style';
 import PropTypes from 'prop-types';
 import LoadingView from "../../../loading_view/LoadingView";
 import DescriptionTabView from "./DescriptionTabView";
-import configData from "../../../../config/config.json";
+import DescriptionCompositeView from "./DescriptionCompositeView";
 import DescriptionPprView from "./DescriptionPprView";
 import DescriptionDataView from "./DescriptionDataView";
 
@@ -19,7 +19,7 @@ const DescriptionTab = ({ id, type }) => {
   const getSuccessView = (type) => {
       switch (type ) {
         case 'service': return DescriptionTabView;
-        case 'composite-service': return DescriptionTabView;
+        case 'composite-service': return DescriptionCompositeView;
         case 'ppr':  return DescriptionPprView;
         case 'data': return DescriptionDataView;
         default: return DescriptionTabView;

@@ -7,6 +7,7 @@ import configData from "../../config/config.json";
 import "./ProviderAccount.css";
 import UploadCompleted from "./uploadCompleted";
 import PropTypes from 'prop-types';
+import { BlueButton, BodyText, CancelButton, Column, RedText, Row, Style } from "../../common/styles";
 
 const ProviderEdit = (props) => {
 
@@ -53,20 +54,20 @@ const ProviderEdit = (props) => {
     return(
         <div className="provider-account-edit__flex layout">
           <div className="provider-account-edit__block9 layout">
-            <div className="provider-account-edit__flex1 layout">
-              <h4 className="provider-account-edit__highlights10 layout">
+            <Column margin='24px' gap='24px'>
+              <BodyText>
                 {props.t("account.edit.uploadMessage")}
-              </h4>
-              <div className="provider-account-edit__block10 layout" onClick={()=> fileRef.current.click()}>
+              </BodyText>
+              <Row gap="12px">
+                <BlueButton marginLeft="0" onClick={()=> fileRef.current.click()}>{props.t("account.edit.upload")}</BlueButton>
                 <input type="file" name="selfDescription" ref={fileRef} hidden onChange={onFileChange}/>
-                <h4 className="provider-account-edit__highlights1 layout">
-                  {props.t("account.edit.upload")}
-                </h4>
-              </div>
-            </div>
+                <Style marginTop="auto" marginBottom="auto">
+                  {file?.name || ''}
+                </Style>
+              </Row>
+            </Column>
           </div>
           <UploadCompleted showAlertMessage={showLoadCompleted} message={props.t("account.edit.uploadCompletedMessage")}/>
-          <div className="provider-account-edit__flex2 layout" onClick={()=>setOnRemove(true)}>
           <ActionCancelModal
                     header={props.t("account.edit.removeAccountHeader")} 
                     message={props.t("account.edit.removeAccountMessage")} 
@@ -74,26 +75,14 @@ const ProviderEdit = (props) => {
                     actionMessage={props.t("account.edit.remove")}
                     actionCallback={()=>deleteAccount()} 
                     cancelCallback={()=>setOnRemove(false)}/>
-            <h4 className="provider-account-edit__highlights9 layout">
-              {props.t("account.edit.removeAccount")}          
-            </h4>
-            <div className="provider-account-edit__flex2-spacer"></div>
-            <div className="provider-account-edit__flex2-item margin_left_auto">
-              <div className="provider-account-edit__block8 layout" onClick={()=>navigate("/account/provider/details")}>
-                <h4 className="provider-account-edit__highlights8 layout">
-                {props.t("account.edit.cancel")}
-                </h4>
-              </div>
-            </div>
-            <div className="provider-account-edit__flex2-spacer"></div>
-            <div className="provider-account-edit__flex2-item">
-              <div className="provider-account-edit__block7 layout" disabled={file===null} onClick={onSaveClick}>
-                <h4 className="provider-account-edit__highlights1 layout1">
-                  {props.t("account.edit.save")}
-                </h4>
-              </div>
-            </div>
-          </div>
+          <Row vertical="24px">
+            <RedText onClick={()=>setOnRemove(true)}>{props.t("account.edit.removeAccount")}</RedText>
+            <Style marginLeft='auto'>
+              <CancelButton onClick={()=>navigate("/account/provider/details")}>{props.t("account.edit.cancel")}</CancelButton>
+            </Style>
+              
+            <BlueButton disabled={file===null} onClick={onSaveClick}>{props.t("account.edit.save")}</BlueButton>
+          </Row>
         </div>
 
     );

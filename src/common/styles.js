@@ -186,6 +186,7 @@ export const Column = styled.div`
     height: ${props => props.height || 'auto'};
     align-items: ${props => props.alignItems || ''};
     justify-content: ${props => props.justifyContent || ''};
+    gap: ${props => props.gap || 'unset'};
 `
 export const WrapColumn = styled(Column)`
     flex-wrap: wrap`;

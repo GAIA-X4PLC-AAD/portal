@@ -31,7 +31,7 @@ const DataTile = ({ input, id, t }) => {
                     titleTrailerPadding="12px" viewLeadingPadding="24px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width}
                     shiftedBottomBorder={true}
                     borderBottom={false} />
-                <ExpandableView initiallyExpanded={false}
+                <ExpandableView hidden={true} initiallyExpanded={false}
                     view={PriceTab({ id, type: type })}
                     title={<>{padTitle({ _titleView: <>{t("service-tile.price")}</> })}</>}
                     titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width}

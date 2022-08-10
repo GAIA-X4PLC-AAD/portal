@@ -13,6 +13,7 @@ const ExpandableView = ({
     initiallyExpanded,
     view,
     title,
+    hidden = false,
     border = false,
     elevation = false,
     titleTrailerPadding = '30px',
@@ -32,7 +33,7 @@ const ExpandableView = ({
         if (isExpanded) return view;
     }
 
-    return <S.Block border={border} boxShadow={boxShadow} width={width}>
+    return <S.Block border={border} boxShadow={boxShadow} width={width} display={hidden?'none':''}>
 
         {/* TITLE */}
         <S.ToggleButton
@@ -63,6 +64,7 @@ ExpandableView.propTypes = {
     initiallyExpanded: PropTypes.bool.isRequired,
     title: PropTypes.element.isRequired,
     view: PropTypes.element.isRequired,
+    hidden: PropTypes.bool,
     border: PropTypes.bool,
     elevation: PropTypes.bool,
     titleTrailerPadding: PropTypes.string,
