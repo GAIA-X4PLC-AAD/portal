@@ -21,6 +21,7 @@ import FinishProvider from './finish_provider';
 export const CUSTOMER = 'user'
 export const ORGANIZATION = 'organization'
 import axios from "axios";
+import history from "../../common/history"
 
 const RequestVCView = ({ type, confirmationCode }) => {
     const {t} = useTranslation()
@@ -72,8 +73,8 @@ const EmailAlreadyConfirmedView = () =>{
                         <H4LightText>{t('onboarding.already_confirmed')}</H4LightText>
                         <HorizontalLine />
                         <Padding vertical='16px' />
-                           <BodyText>{t('onboarding.msg_already_confirmed')}</BodyText>
-                           <Padding vertical='32px'>
+                        <BodyText>{t('onboarding.msg_already_confirmed')}</BodyText>
+                        <Padding vertical='32px'>
                             <Row><OutlineButton onClick={() => navigate('/')}>{t('onboarding.go_home_button')}</OutlineButton></Row>
                         </Padding>
                     </Padding>
@@ -81,69 +82,70 @@ const EmailAlreadyConfirmedView = () =>{
             </Padding>
         </Style>
     </>
-}
-const EmailConfirmedError = (message)=>{
-    const navigate = useNavigate();
-    if (!message) return null;
-    return <>
-        <Style width='633px' height='246px'>
-            <Padding horizontal='20px'>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                    <Padding horizontal='24px'>
-                        <H4LightText>{t('onboarding.errorConfirmingEmail')}</H4LightText>
-                        <HorizontalLine />
-                        <Padding vertical='16px' />
-                           <BodyText>{message}</BodyText>
-                           <Padding vertical='32px'>
-                            <Row><OutlineButton onClick={() => navigate('/')}>{t('onboarding.go_home_button')}</OutlineButton></Row>
-                        </Padding>
-                    </Padding>
-                </Card>
-            </Padding>
-        </Style>
-    </>   
 }
 
 const EmailConfirmedView = ({ type, confirmationCode }) => {
-    const {t} = useTranslation()
+    const [returnedComponent, setReturnedComponent] = useState(<></>);
 
-    const isEmailConfirmedUrl = process.env.REACT_APP_EDGE_API_URI + `/onboarding/register/${type}/confirm_email/` + confirmationCode
-    const [{ data, error, isLoading }] = useResource(() => ({ url: isEmailConfirmedUrl, method: 'POST', data: {}, }), [])
+    const { t } = useTranslation()
+    const isEmailConfirmedUrl = process.env.REACT_APP_EDGE_API_URI + `/onboarding/register/${type}/confirm_email5/` + confirmationCode
 
-    const [shouldReturnVCView, setShouldReturnVCView] = useState(false);
+    useResource(
+        () => (
+            {
+                url: isEmailConfirmedUrl,
+                method: 'POST',
+                data: {},
+            }
+        ), [],
+        {
+            onCompleted: (data, response) => {
+                setReturnedComponent(
+                    <>
+                        <Style width='633px' height='246px'>
+                            <Padding horizontal='20px'>
+                                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                                    <Padding horizontal='24px'>
+                                        <H4LightText>{t('onboarding.thanks_for_confirming')}</H4LightText>
+                                        <BodyText>{t('onboarding.msg_thanks_for_confirming')}</BodyText>
+                                        <Padding vertical='32px'>
+                                            <Row><OutlineButton onClick={() => history.push('/')}>{t('form.submit')}</OutlineButton></Row>
+                                        </Padding>
+                                    </Padding>
+                                </Card>
+                            </Padding>
+                        </Style>
+                    </>
+                )
+            },
+            onError: (err) => {
+                const message = err?.message || err?.data?.message;
+                setReturnedComponent(
+                    <>
+                        <Style width='633px' height='246px'>
+                            <Padding horizontal='20px'>
+                                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                                    <Padding horizontal='24px'>
+                                        <H4LightText>{t('onboarding.errorConfirmingEmail')}</H4LightText>
+                                        <HorizontalLine />
+                                        <Padding vertical='16px' />
+                                        <BodyText>{message}</BodyText>
+                                        <Padding vertical='32px'>
+                                            <Row><OutlineButton onClick={() => history.push('/')}>{t('onboarding.go_home_button')}</OutlineButton></Row>
+                                        </Padding>
+                                    </Padding>
+                                </Card>
+                            </Padding>
+                        </Style>
+                    </>
+                )
+            }
+        },
+    )
 
-    const navigate = useNavigate();
-
-    const thanksForConfirmingView = <>
-        <Style width='633px' height='246px'>
-            <Padding horizontal='20px'>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                    <Padding horizontal='24px'>
-                        <H4LightText>{t('onboarding.thanks_for_confirming')}</H4LightText>
-                        <BodyText>{t('onboarding.msg_thanks_for_confirming')}</BodyText>
-                        <Padding vertical='32px'>
-                            <Row><OutlineButton onClick={() => navigate('/')}>{t('form.submit')}</OutlineButton></Row>
-                        </Padding>
-                    </Padding>
-                </Card>
-            </Padding>
-        </Style>
-    </>
-
-    useEffect(() => { }, [isLoading, error, data]);
-
-
-    let isError = error != undefined;
-    const isSuccess = !isLoading && error == undefined && !(data === undefined)
-
-    if (shouldReturnVCView) return <RequestVCView type={type} confirmationCode={confirmationCode} />
-
-    if (isSuccess) {
-        return thanksForConfirmingView
-    } else {        
-         return EmailConfirmedError(error?.data?.message);
-     }
+    return returnedComponent;
 }
+
 
 EmailConfirmedView.propTypes = {
     type: PropTypes.string.isRequired,
@@ -240,7 +242,7 @@ const OnboardingPage = () => {
 
     const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/'
     const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
-    
+
     const location = useLocation();
     const { userType, confirmationCode } = useParams();
 
@@ -311,7 +313,7 @@ const OnboardingPage = () => {
         if (activeStage == 1) {
             return customerOrProviderView()
         } else if (activeStage == 2) {
-            if (customerOrOrganization == ORGANIZATION) return <OrganizationDetailsView nextStage={() => { setActiveStage(3) }} didStage={()=> {setActiveStage(5)}}/>;
+            if (customerOrOrganization == ORGANIZATION) return <OrganizationDetailsView nextStage={() => { setActiveStage(3) }} didStage={() => { setActiveStage(5) }} />;
             else { return userFillDetailsView() }
         } else if (activeStage == 3) {
             return confirmationEmailView()
@@ -323,14 +325,14 @@ const OnboardingPage = () => {
             }
         }
         else if (activeStage == 5) {
-            return <DidOnboardingView userType={customerOrOrganization} nextStage={()=>{setActiveStage(6)}} />
-        } else if( activeStage == 6) {
-            if (customerOrOrganization == ORGANIZATION) return <VCProvider nextStage={() => { setActiveStage(7) }}/>;
-            else { return  <VCCustomer nextStage={() => { setActiveStage(7) }}/>; }
-        } else if (activeStage ===7) {
-            if (customerOrOrganization == ORGANIZATION) return <FinishProvider/>;
-            else { return  <FinishCustomer />; }
-           
+            return <DidOnboardingView userType={customerOrOrganization} nextStage={() => { setActiveStage(6) }} />
+        } else if (activeStage == 6) {
+            if (customerOrOrganization == ORGANIZATION) return <VCProvider nextStage={() => { setActiveStage(7) }} />;
+            else { return <VCCustomer nextStage={() => { setActiveStage(7) }} />; }
+        } else if (activeStage === 7) {
+            if (customerOrOrganization == ORGANIZATION) return <FinishProvider />;
+            else { return <FinishCustomer />; }
+
         }
         else return null;
 
@@ -369,8 +371,8 @@ const OnboardingPage = () => {
             <Style width='633px' height='246px'>
                 <Padding horizontal='20px'>
                     <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                       <H4LightText>{t('onboarding.UserOrganization_header')}</H4LightText>
-                        <HorizontalLine/>
+                        <H4LightText>{t('onboarding.UserOrganization_header')}</H4LightText>
+                        <HorizontalLine />
                         <Padding horizontal='24px'>
                             <Padding vertical='40px'>
                                 <Column>
@@ -495,7 +497,7 @@ const OnboardingPage = () => {
     const disableNextButton = () => {
         if (activeStage == 1) {
             return customerOrOrganization == null
-        } 
+        }
         return true
     }
 
