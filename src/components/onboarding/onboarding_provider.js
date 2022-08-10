@@ -24,7 +24,7 @@ const OrganizationDetailsView = ({nextStage, didStage}) => {
  const getValue = (target) => {
     switch (target.type) {
         case "checkbox": return target.checked;
-        case 'file': return target.files[0];
+        case 'file': return target.files;
         default: return target.value;
       }
  }
@@ -38,7 +38,7 @@ const OrganizationDetailsView = ({nextStage, didStage}) => {
 
     const onFormSubmit = () => {
         console.log(input.document);
-        if (!input.document) {
+        if (!input.documents) {
             setEMessage(t('onboarding.missing_file'));
         }  else if (formRef.current.reportValidity())
         {
@@ -46,7 +46,9 @@ const OrganizationDetailsView = ({nextStage, didStage}) => {
             formData.append('name', input.name);
             formData.append('email', input.email);
             formData.append('aisbl', input.aisbl||false);
-            formData.append('document', input.document);
+            for (let i = 0; i < input.documents.length; i++) {
+                formData.append(`documents`, input.documents[i])
+            }
              axios.post(URL, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -82,6 +84,11 @@ const OrganizationDetailsView = ({nextStage, didStage}) => {
         }
     }
 
+    const showFileName = (files) => {
+        if (!files || files.length === 0) return;
+        return files.length===1?input.documents[0]?.name:t('onboarding.selected_file',{files:input.documents.length });
+    }
+
     return <>
         <Style width='633px' height='246px'>
             <Padding horizontal='20px'>
@@ -93,13 +100,13 @@ const OrganizationDetailsView = ({nextStage, didStage}) => {
                              <form  ref={formRef} noValidate>
                             <Column>
                                 <BodyText>{t('onboarding.organization_body_text')}</BodyText>
-                                <input name='document' type="file" ref={fileRef} onChange={e=> onFormChanged(e)} hidden/>
+                                <input name='documents' type="file" multiple ref={fileRef} onChange={e=> onFormChanged(e)} hidden/>
                                 <Row alignItems='center'>
                                 <Padding vertical='16px' alignSelf='start' onClick={e=>fileRef.current.click()}>
                                     <OutlineButton>{t('onboarding.upload')}</OutlineButton>
                                 </Padding>
                                 <Padding vertical='16px' horizontal='16px'>
-                                    <BodySmallBoldText> {input.document?.name}</BodySmallBoldText>
+                                    <BodySmallBoldText> {showFileName(input.documents)}</BodySmallBoldText>
                                 </Padding>
                                 </Row>
                                 <Padding vertical='16px' />

@@ -141,7 +141,8 @@
         "authorization_fail_header": "Credentials are missing",
         "authorization_fail_message_user": "We couldn't find any authorized credentials.",
         "authorization_fail_message_organization": "We couldn't find any authorized credentials. Please contact your organization.",
-        "errorConfirmingEmail": "Error confirming email"
+        "errorConfirmingEmail": "Error confirming email",
+        "selected_file": "{files, plural, =1 {1 file} other {# files}}"
         },
     "form": {
         "registerDid":"Registration via DID",
