@@ -10,14 +10,7 @@ import { Center, Style, AnimatedVisibility, CircularLoader } from '../../common/
 
 
 function LoadingView({ url, successView, params, headers }) {
-
-
-    const axiosInstance = axios.create({
-        baseURL: url,
-        headers: headers
-    });
-
-    const [{ data, error, isLoading }] = useResource(() => ({ url: url, instance: axiosInstance }), []);
+    const [{ data, error, isLoading }] = useResource(() => ({ url: url, headers: headers}), []);
 
     useEffect(() => {
         // console.log(`LoadingView.useEffect, isLoading: ${isLoading}`)

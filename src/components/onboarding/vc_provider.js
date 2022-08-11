@@ -5,6 +5,7 @@ import {  useNavigate } from "react-router-dom";
 import Checkbox from "../../common/checkbox";
 import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Row, Style, TextInput, Image, BlueButton } from "../../common/styles";
 import LoadingView from "../loading_view/LoadingView";
+import {retrieveOnboardingJWT} from "../../common/auth";
 
 const VCProvider = ({nextStage}) => {
 
@@ -104,7 +105,11 @@ const VCProvider = ({nextStage}) => {
       
     }
 
-    return <LoadingView url={URL} successView={vcShow}/>
+    const headerAuth = {
+        'Authorization': 'Bearer ' + retrieveOnboardingJWT()
+    }
+
+    return <LoadingView url={URL} successView={vcShow} headers={headerAuth}/>
 }
 VCProvider.propTypes = {
     nextStage: PropTypes.func.isRequired

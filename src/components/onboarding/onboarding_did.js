@@ -7,6 +7,7 @@ import LoadingView from "../loading_view/LoadingView";
 import AuthPolling from "../login/AuthPolling";
 import { Modal } from 'react-responsive-modal';
 import { useTranslation } from "react-i18next";
+import {storeOnboardingJWT} from "../../common/auth"
 
 const DidOnboardingView = ({ userType, nextStage }) => {
 
@@ -17,8 +18,8 @@ const DidOnboardingView = ({ userType, nextStage }) => {
     const URL = process.env.REACT_APP_EDGE_API_URI + '/onboarding/qr';
 
 
-    const onAuthZSuccess = () => {
-        console.log('onAuthZSuccess');
+    const onAuthZSuccess = (data) => {
+        storeOnboardingJWT(data);
         setContinueButton(true);
     }
 

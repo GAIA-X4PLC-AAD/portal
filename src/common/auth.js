@@ -68,3 +68,17 @@ export function storeJWT(data) {
     localStorage.setItem("userJWT", JSON.stringify(data.access_token));
   }
 }
+
+export function storeOnboardingJWT(data) {
+  if (data && data.access_token) {
+    localStorage.setItem("onboardingJWT", data.access_token);
+  }
+}
+
+export function retrieveOnboardingJWT() {
+  return localStorage.getItem('onboardingJWT');
+}
+
+export function removeOnboardingJWT() {
+  return localStorage.removeItem('onboardingJWT');
+}
