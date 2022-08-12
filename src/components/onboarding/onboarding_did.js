@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
 
 import { Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, StyledModal, Circle, ButtonText, BodyText, FadingBackground, CancelButton, BlueButton, H4Text } from "../../common/styles";
@@ -7,7 +7,8 @@ import LoadingView from "../loading_view/LoadingView";
 import AuthPolling from "../login/AuthPolling";
 import { Modal } from 'react-responsive-modal';
 import { useTranslation } from "react-i18next";
-import {storeOnboardingJWT} from "../../common/auth"
+import { storeOnboardingJWT } from "../../common/auth"
+import history from "../../common/history";
 
 const DidOnboardingView = ({ userType, nextStage }) => {
 
@@ -21,6 +22,7 @@ const DidOnboardingView = ({ userType, nextStage }) => {
     const onAuthZSuccess = (data) => {
         storeOnboardingJWT(data);
         setContinueButton(true);
+        nextStage();
     }
 
     const onAuthZFailed = () => {
@@ -29,32 +31,53 @@ const DidOnboardingView = ({ userType, nextStage }) => {
     }
 
     const onAuthZWait = () => {
-        console.log('onAuthZWait');
     }
 
-    const AuthFail = () => {
+    // const AuthFail = () => {
 
-        if (!errorMessage || errorMessage === '') return null;
-        return (
-            <Modal>
-                <Padding vertical='16px'>
-                    <Column>
+    //     if (!errorMessage || errorMessage === '') return null;
+    //     return (
+    //         <Modal>
+    //             <Padding vertical='16px'>
+    //                 <Column>
+    //                     <Padding horizontal='24px'>
+    //                         <H4LightText>{t("onboarding.authorization_fail_header")}</H4LightText>
+    //                         <Padding vertical='36px' />
+    //                         <BodyText>
+    //                             {errorMessage}
+    //                         </BodyText>
+    //                         <Padding vertical='16px' />
+    //                         <BlueButton onClick={() => setErrorMessage('')}>
+    //                             {t('login.close')}
+    //                         </BlueButton>
+    //                     </Padding>
+    //                 </Column>
+    //             </Padding>
+    //         </Modal>
+    //     );
+    // }
+
+    const showErrorMessage = (headerText, bodyText) => {
+        return <>
+            <Style width='633px' height='246px'>
+                <Padding horizontal='20px'>
+                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
-                            <H4LightText>{t("onboarding.authorization_fail_header")}</H4LightText>
-                            <Padding vertical='36px' />
-                            <BodyText>
-                                {errorMessage}
-                            </BodyText>
-                            <Padding vertical='16px' />
-                            <BlueButton onClick={() => setErrorMessage('')}>
-                                {t('login.close')}
-                            </BlueButton>
+                            <H4LightText>{headerText}</H4LightText>
+                            <HorizontalLine />
+                            <Padding vertical='12px'>
+                                <BodyText>{bodyText}</BodyText>
+                            </Padding>
+                            <Padding vertical='28px'>
+                                <BlueButton onClick={e => history.push('/')} marginLeft="0">{t('onboarding.home_button')}</BlueButton>
+                            </Padding>
                         </Padding>
-                    </Column>
+                    </Card>
                 </Padding>
-            </Modal>
-        );
-    }
+            </Style>
+        </>
+    };
+
     function FancyModalButton() {
         const URL = process.env.REACT_APP_EDGE_API_URI + '/onboarding/idp';
 
@@ -66,7 +89,7 @@ const DidOnboardingView = ({ userType, nextStage }) => {
         function toggleModal(e) {
             setIsOpen(!isOpen);
         }
-    
+
         const dontHaveDidView = ({ data }) => {
             const BuildIdentifyServiceProvider = ({ idp }) => {
                 return (
@@ -136,46 +159,52 @@ const DidOnboardingView = ({ userType, nextStage }) => {
     }
 
     const verifyQrView = ({ data }) => {
-        if (!data) return null;
+        if (errorMessage) {
+            return showErrorMessage(t("onboarding.authorization_fail_header")   , errorMessage);
+        } else {
+            if (!data) return null;
 
-        return <>
-            {
-                <AuthPolling
-                    onAuthZFailed={onAuthZFailed}
-                    onAuthZSuccess={onAuthZSuccess}
-                    onAuthZWait={onAuthZWait}
-                    statusURL={data.pollUrl}
-                    continuePollingOnFailure={true}
-                />
-            }
-            {AuthFail()}
+            return <>
+                {
+                    <AuthPolling
+                        onAuthZFailed={onAuthZFailed}
+                        onAuthZSuccess={onAuthZSuccess}
+                        onAuthZWait={onAuthZWait}
+                        statusURL={data.pollUrl}
+                        continuePollingOnFailure={true}
+                    />
+                }
 
-            <Style width='633px' height='246px'>
-                <Padding horizontal='20px'>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                        <Padding horizontal='24px'>
-                            <H4LightText>{t(`onboarding.proof_onboarding_header_${userType}`)}</H4LightText>
-                            <HorizontalLine />
-                            <Column justifyContent='center' alignItems='center'>
-                                <Padding vertical='8px'>
-                                    <Image src={data.qrCodePath} width='200px' />
-                                </Padding>
-                                <Padding vertical='20px'>
-                                    <Row alignItems='space-between'>
-                                        <FancyModalButton />
-                                        <Padding horizontal='8px' />
-                                        <BlueButton disabled={!continue_button} onClick={nextStage}>{t('onboarding.continue_button')}</BlueButton>
-                                    </Row>
-                                </Padding>
-                                <Padding vertical='20px'></Padding>
-                            </Column>
-                        </Padding>
-                    </Card>
-                </Padding>
+                <Style width='633px' height='246px'>
+                    <Padding horizontal='20px'>
+                        <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                            <Padding horizontal='24px'>
+                                <H4LightText>{t(`onboarding.proof_onboarding_header_${userType}`)}</H4LightText>
+                                <HorizontalLine />
+                                <Column justifyContent='center' alignItems='center'>
+                                    <Padding vertical='8px'>
+                                        <Image src={data.qrCodePath} width='200px' />
+                                    </Padding>
+                                    <Padding vertical='20px'>
+                                        <Row alignItems='space-between'>
+                                            <FancyModalButton />
+                                            <Padding horizontal='8px' />
+                                            <BlueButton 
+                                                disabled={!continue_button} 
+                                                onClick={nextStage}
+                                                >{t('onboarding.continue_button')}</BlueButton>
+                                        </Row>
+                                    </Padding>
+                                    <Padding vertical='20px'></Padding>
+                                </Column>
+                            </Padding>
+                        </Card>
+                    </Padding>
 
-            </Style>
+                </Style>
 
-        </>
+            </>
+        }
     }
 
     return <LoadingView url={URL} successView={verifyQrView} />
