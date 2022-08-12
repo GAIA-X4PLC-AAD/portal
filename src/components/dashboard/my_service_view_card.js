@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import { AnimatedVisibility, CircularLoader, BodySmallBoldText, BodyText, ButtonText, CaptionText, Card, Circle, Column, H4LightText, HeaderTitle, HorizontalLine, Image, OutlineButton, Row, Style } from "../../common/styles";
@@ -13,16 +13,17 @@ import '@szhsin/react-menu/dist/index.css';
 
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import { BlueButton, CancelButton } from "../admin/style";
 
 const MyServiceViewCard = ({ index, data, itemType }) => {
 
-    const isActivated = data['is_activated']
+    const isActivated = data['is_activated'];
     const isOwn = data['is_own']
     const _name = data['name']
     const _status = data['status'] ?? 'deployed'
     const _id = data['id']
 
-    const { t, i18n } = useTranslation()
+    const { t, i18n } = useTranslation();
 
     const navigate = useNavigate()
 
@@ -49,37 +50,50 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     }
 
     const downloadLogs = () => {
-        navigate(`/lcm/${_id}/logs`)
+        axios.get(process.env.REACT_APP_EDGE_API_URI + `/lcm-service/${_id}/logs`, response => {
+            console.log('success', response);
+        }, error => {
+            console.log('error', error);
+        })
     }
-
 
     const buildDeleteDialog = ({ closeModal }) => {
 
         const [isLoading, setIsLoading] = useState(false);
+        const [successOrError, setSuccessOrError] = useState(null);
+        useEffect(() => {
+            console.log('useEffect triggered')
+        }, []);
 
         const deleteService = () => {
             setIsLoading(true)
             axios.delete(process.env.REACT_APP_EDGE_API_URI + `/lcm-service/service/${_id}`,).then((response) => {
-                setIsLoading(false)
+                setIsLoading(false);
+                setSuccessOrError(t('Successfully deleted service'));
             }, (error) => {
                 setIsLoading(false)
-                alert('Failed to validate service descriptor.')
+                setSuccessOrError(t('An error occurred while deleting service, please try again later'));
             });
 
         }
-
+        const close = () => {
+            setSuccessOrError(null);
+            closeModal();
+        }
 
         return <>
             <Style width='633px'>
                 <Padding horizontal='24px' vertical='12px'>
                     <H4LightText>You&#39;re about to delete a service</H4LightText>
                     <HorizontalLine />
-                    <BodyText>Are you sure you want to delete {_name}?</BodyText>
+                    <BodyText>
+                        {successOrError? t(successOrError) : t(`Are you sure you want to delete ${_name}?`)}
+                        </BodyText>
                     <Padding vertical='20px'>
                         <Row alignItems='center'>
-                            <OutlineButton onClick={() => deleteService()}>Delete</OutlineButton>
+                            <BlueButton onClick={() => deleteService()} disabled={isLoading || successOrError}>Delete</BlueButton>
                             <Padding paddingLeft='20px' />
-                            <OutlineButton onClick={closeModal}>Cancel</OutlineButton>
+                            <CancelButton onClick={close} disabled={isLoading}>Cancel</CancelButton>
                             {isLoading ? <Padding horizontal='16px'>
                                 <AnimatedVisibility visible={isLoading} data-tag='animated-visibility-loader'>
                                     <CircularLoader />
@@ -99,8 +113,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
         const onOpenModal = () => setOpenModal(true);
         const onCloseModal = () => setOpenModal(false);
 
-        if (_status == 'undeployed' || _status == 'undeploying' || _status == 'deploying') return <></>
-        if (!isActivated) return <></>
+        if ( _status == 'undeploying' || _status == 'deploying') return <></>
 
         return <>
             <Padding paddingRight='16px'>
@@ -121,6 +134,12 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     }
 
     const buildCard = () => {
+        const [activated, setActivated] = useState(isActivated);
+
+        const activateDeactivate = () => {
+            console.log(activated);
+            setActivated(!activated);
+        }
         return (
             <Style maxWidth='290px'>
                 <Padding paddingRight='12px'>
@@ -128,7 +147,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                         <Padding vertical='20px' horizontal='20px'>
                             <Column>
                                 {isOwn ? <Circle radius='10px' background='#0000' borderColor='#0000' /> :
-                                    (<>{isActivated ? <Circle radius='10px' background='#7fcdbb' borderColor='#0000' />
+                                    (<>{activated ? <Circle radius='10px' background='#7fcdbb' borderColor='#0000' />
                                         : <Circle radius='10px' background='#ef6548' borderColor='#0000' />}</>)}
 
                                 <Style minWidth='100%'>
@@ -157,9 +176,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                                 <Padding vertical>{!isOwn ? <>
                                     <Row>
                                         {buildManageButton()}
-                                        <ButtonText>{isActivated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText>
-
-
+                                        <ButtonText onClick={activateDeactivate}>{activated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText>
                                     </Row></> :
                                     <></>}
                                 </Padding>
