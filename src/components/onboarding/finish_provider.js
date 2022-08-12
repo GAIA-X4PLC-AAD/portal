@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { retrieveOnboardingJWT } from "../../common/auth";
+import { retrieveAndRemoveOnboardingJWT } from "../../common/auth";
 import { BodyText, Card, H4LightText, HorizontalLine, Padding, Style, TextInput } from "../../common/styles";
 import { BlueButton } from "../admin/style";
 const FinishProvider = () => {
@@ -21,7 +21,7 @@ const FinishProvider = () => {
                 URL,
                 undefined,
                 {
-                    headers: { 'Authorization': 'Bearer ' + retrieveOnboardingJWT() }
+                    headers: { 'Authorization': 'Bearer ' + retrieveAndRemoveOnboardingJWT() }
                 }
             ).then(() => {
                 navigate('/');

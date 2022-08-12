@@ -79,6 +79,12 @@ export function retrieveOnboardingJWT() {
   return localStorage.getItem('onboardingJWT');
 }
 
+export function retrieveAndRemoveOnboardingJWT() {
+  const v = retrieveOnboardingJWT();
+  removeOnboardingJWT();
+  return v;
+}
+
 export function removeOnboardingJWT() {
   return localStorage.removeItem('onboardingJWT');
 }

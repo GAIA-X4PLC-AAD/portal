@@ -23,10 +23,6 @@ const ProviderDetails = (props) => {
         return `${person?.name} ${person?.surname}`;
     }
 
-    const showAddress = (address) => {
-        return `${address?.street} ${address?.no} , (${address?.postalCode}) ${address?.city}  ${address?.country}  `;
-    }
-
     return (
                 <div className="provider-account-details_info layout">
                     <div className="provider-account-details_info-item">
@@ -87,7 +83,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                         <h5 className="provider-account-section1__highlights71 layout">
-                                            {showAddress(provider?.registeredAddress)}
+                                            {provider?.registeredAddress}
                                         </h5>
                                     </div>
                             </div>
