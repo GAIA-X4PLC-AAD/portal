@@ -233,6 +233,7 @@
     },
     "work-in-progress.message" : "Work in progress....",
     "service-tile": {
+        "tags": "TAGS",
         "details": "Details",
         "price": "Price",
         "screenshots": "Screenshots",
