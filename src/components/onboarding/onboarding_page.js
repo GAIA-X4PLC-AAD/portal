@@ -120,7 +120,7 @@ const EmailConfirmedView = ({ type, confirmationCode }) => {
                 )
             },
             onError: (err) => {
-                const message = err?.message || err?.data?.message;
+                const message = err?.data?.message || err?.message;
                 setReturnedComponent(
                     <>
                         <Style width='633px' height='246px'>

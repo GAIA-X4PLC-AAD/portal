@@ -49,7 +49,34 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     }
 
     const downloadLogs = () => {
-        navigate(`/lcm/${_id}/logs`)
+        axios.get(
+            process.env.REACT_APP_EDGE_API_URI + `/lcm-service/service/${_id}/logs`
+        ).then((response) => {
+            const blob = new Blob([JSON.stringify(response.data)], {
+                type: 'text/json'
+            })
+
+            const url = window.URL.createObjectURL(
+                blob,
+            );
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute(
+                'download',
+                `download_${_id}.log`,
+            );
+
+            // Append to html link element page
+            document.body.appendChild(link);
+
+            // Start download
+            link.click();
+
+            // Clean up and remove the link
+            link.parentNode.removeChild(link);
+        }, (error) => {
+            alert('Failed to download logs');
+        });
     }
 
 
