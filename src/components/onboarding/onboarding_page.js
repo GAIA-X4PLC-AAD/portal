@@ -450,26 +450,17 @@ const OnboardingPage = () => {
         };
 
         const registerUserApi = async () => {
-            // try {
             axios.post(registerUserUrl, userFormDetailsInput, {
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'Access-Control-Allow-Origin': '*'
                 }
             }).then(
-                response => {
+                () => {
                     setActiveStage(3);
-                    // return true;
                 },
                 error => {
                     setErrorMessage(error.response.data.message);
-                    // return false;
                 });
-            // if (_result.response) return true
-            // } catch (err) {
-            //     setErrorMessage(err.message)
-            // }
-            // return false
         }
 
         if (errorMessage) {
@@ -508,10 +499,6 @@ const OnboardingPage = () => {
                                                     <OutlineButton onClick={async () => {
                                                         if (validateUserFillDetailsForm()) {
                                                             registerUserApi()
-                                                            // const _result = await registerUserApi()
-                                                            // console.log(`nextStage, _result: ${_result}`)
-                                                            // if (_result) setActiveStage(3)
-                                                            // setActiveStage(3)
                                                         }
                                                     }}>{t('form.submit')}</OutlineButton>
                                                 </Row>

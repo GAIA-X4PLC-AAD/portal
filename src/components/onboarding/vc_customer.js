@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Style, TextInput, BlueButton } from "../../common/styles";
 import LoadingView from "../loading_view/LoadingView";
 import { Row } from "../admin/style";
+import {retrieveAndRemoveOnboardingJWT} from "../../common/auth";
 
 const VCCustomer = ({nextStage}) => {
 
@@ -77,16 +78,16 @@ const VCCustomer = ({nextStage}) => {
         </Style>
     </>
     }
-    const showErrorMessage = () => {
+    const showErrorMessage = (headerText, bodyText) => {
         return <>
         <Style width='633px' height='246px'>
             <Padding horizontal='20px'>
                 <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
-                        <H4LightText>{t('onboarding.vc_error_header')}</H4LightText>
+                        <H4LightText>{headerText}</H4LightText>
                         <HorizontalLine />
                         <Padding vertical='12px'>
-                           <BodyText>{t('onboarding.vc_error_message')}</BodyText>
+                           <BodyText>{bodyText}</BodyText>
                         </Padding>
                         <Padding vertical='28px'>
                             <BlueButton onClick={e=>navigate('/')} marginLeft="0">{t('onboarding.home_button')}</BlueButton>
@@ -99,21 +100,21 @@ const VCCustomer = ({nextStage}) => {
     };
 
     const vcShow = ({data}) => {
-
         if (!data) return null;
-        console.log(data);
-        const vc = data.vc;
-        const first_did = data.first_did;
 
+        const first_did = data.first_did;
         if (first_did) {
             return showDetails(data.vc);
         } else {
-            return showErrorMessage();
-        }
-      
+            return showErrorMessage(t('onboarding.vc_error_header'), t('onboarding.vc_error_message'));
+        }   
     }
 
-    return <LoadingView url={URL} successView={vcShow}/>
+    const headerAuth = {
+        'Authorization': 'Bearer ' + retrieveAndRemoveOnboardingJWT()
+    }
+
+    return <LoadingView url={URL} successView={vcShow} headers={headerAuth}/>
 }
 
 VCCustomer.propTypes = {

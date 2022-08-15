@@ -33,30 +33,6 @@ const DidOnboardingView = ({ userType, nextStage }) => {
     const onAuthZWait = () => {
     }
 
-    // const AuthFail = () => {
-
-    //     if (!errorMessage || errorMessage === '') return null;
-    //     return (
-    //         <Modal>
-    //             <Padding vertical='16px'>
-    //                 <Column>
-    //                     <Padding horizontal='24px'>
-    //                         <H4LightText>{t("onboarding.authorization_fail_header")}</H4LightText>
-    //                         <Padding vertical='36px' />
-    //                         <BodyText>
-    //                             {errorMessage}
-    //                         </BodyText>
-    //                         <Padding vertical='16px' />
-    //                         <BlueButton onClick={() => setErrorMessage('')}>
-    //                             {t('login.close')}
-    //                         </BlueButton>
-    //                     </Padding>
-    //                 </Column>
-    //             </Padding>
-    //         </Modal>
-    //     );
-    // }
-
     const showErrorMessage = (headerText, bodyText) => {
         return <>
             <Style width='633px' height='246px'>
