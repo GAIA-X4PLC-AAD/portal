@@ -48,6 +48,7 @@ const DashboardView = () => {
 
         const _myServicesUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/services`;
         const _myDatasetsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/datasets`;
+        const _mySpUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/sp`;
 
         return (
             <>
@@ -55,7 +56,7 @@ const DashboardView = () => {
                 {buildPlot1()}
                 {ServicesLoadingListView({ url: _myServicesUrl, title: t('dashboard.my_services'), type: 'services' })}
                 {ServicesLoadingListView({ url: _myDatasetsUrl, title: t('dashboard.my_data_sets'), type: 'data' })}
-                {ServicesLoadingListView({ url: _myDatasetsUrl, title: t('dashboard.solution_packages'), type: 'nodes' })}
+                {ServicesLoadingListView({ url: _mySpUrl, title: t('dashboard.solution_packages'), type: null })}
             </>
         );
     }

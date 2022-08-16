@@ -296,6 +296,18 @@ export const CaptionText = styled.div`
     color: ${props => props.color || '#000000'};
 `;
 
+export const CaptionTextLink = styled.a`
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+
+    text-decoration: underline;
+    color: ${props => props.color || '#000000'};
+`;
+
 export const Card = styled.div`
     box-sizing: border-box;
 

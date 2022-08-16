@@ -2,20 +2,23 @@ import React from "react";
 import PropTypes from 'prop-types';
 
 
-import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle } from "../../common/styles";
+import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, CaptionTextLink } from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
 import DashboardView from "./dashboard_view";
 import SideSectionsView from "./side_sections_view";
 import { useSelector } from "react-redux";
 import DateTimeCard from "./date_time_card";
+import { useNavigate } from "react-router-dom";
 
 
 const DashboardPage = () => {
 
+    const user = useSelector((state) => state.user)
+    const role = user.user.user_role
     const type = 'dashboard';
     const _leftPanelWidth = '225px'
+    const navigate = useNavigate();
 
-    const _isPr = useSelector((state) => true)
 
     const colItemView = ({ title, caption, subtitle, }) => {
         return <Column>
@@ -32,11 +35,18 @@ const DashboardPage = () => {
 
         const _welcomeView = <>
             <Row justifyContent='space-between' alignItems='center' data-tag='welcom-view'>
-                <Circle radius='50px'>JD</Circle>
+                <Circle radius='50px'>{user.user.first_name.substring(0,1) + user.user.family_name.substring(0,1)}</Circle>
                 <Padding horizontal='8px'>
-                    {colItemView({
-                        title: 'Welcome to Gaia-x, Jane Doe',
-                        subtitle: 'Registered as part of <Company GmbH>',
+                    {role==='gaiax-pcr'?
+                    colItemView({
+                        title: `Welcome to Gaia-x, ${user.user.first_name} ${user.user.family_name}`
+                    })
+                    :colItemView({
+                        title: `Welcome to Gaia-x, ${user.user.first_name} ${user.user.family_name}`,
+                        subtitle: <CaptionText> 
+                            {"Registered as part of "}
+                            <CaptionTextLink onClick={()=>{navigate('/account/provider/details')}}>{user.user.organization_name}</CaptionTextLink>
+                        </CaptionText>
                     })}
                 </Padding>
             </Row>
@@ -57,7 +67,7 @@ const DashboardPage = () => {
         </>
     }
 
-    return _isPr ? <Row>
+    return <Row>
 
         {/* SIDE BAR */}
         <Style minWidth={_leftPanelWidth}>
@@ -69,7 +79,7 @@ const DashboardPage = () => {
         <Style minWidth='900px'>
             <DashboardView type={type} />
         </Style>
-    </Row> : <>Unauthorized!</>;
+    </Row> ;
 
 }
 
