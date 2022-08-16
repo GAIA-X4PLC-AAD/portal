@@ -30,6 +30,7 @@ function UserAvatarButton({ onClicked }) {
   const _isDe = _lang.indexOf('de') == 0
 
   const _userName = useSelector((state) => state.user.user.first_name)
+  const _userLastName = useSelector((state) => state.user.user.family_name)
   const navigate = useNavigate();
 
   const _userRole = useSelector((state) => state.user.user.user_role)
@@ -47,7 +48,7 @@ function UserAvatarButton({ onClicked }) {
   const userButton = <Circle background='#ffffff' backgroundColor='#ffffff' borderColor='#E9E9E9'
     radius='41px'
     backgroundImage='/images/identicon.png' isButton borderThickness='1.36667px'>
-    <ButtonText>{_userName.substring(0, 2)}</ButtonText>
+    <ButtonText>{_userName[0] + _userLastName[0]}</ButtonText>
 
   </Circle>
 

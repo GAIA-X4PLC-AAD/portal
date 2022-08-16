@@ -5,6 +5,7 @@ import axios from "axios";
 import "./Account.css";
 import configData from "../../config/config.json";
 import PropTypes from 'prop-types';
+import {Circle, ButtonText} from "../../common/styles"
 
 const AccountPaneDetails = (props) => {
 
@@ -19,9 +20,16 @@ const AccountPaneDetails = (props) => {
         });
     }, []);
 
+    const userButton = <Circle background='#ffffff' backgroundColor='#ffffff' borderColor='#E9E9E9'
+        radius='141px'
+        backgroundImage='/images/identicon.png' isButton borderThickness='1.36667px'>
+        <ButtonText fontSize='30px'>{user?.first_name.substring(0, 1) + user?.last_name.substring(0, 1)}</ButtonText>
+    </Circle>
+
     return <div className="account-pane-details">
         <div className="account-pane-details-image">
-            <img src={user?.avatarImageLink} alt="User avatar image." width='143px' height='143px'/>
+            {userButton}
+            {/* <img src={user?.avatarImageLink} alt="User avatar image." width='143px' height='143px' /> */}
         </div>
         <div className="account-pane-details-body">
             <div className="account-pane-details-body-flex-col">

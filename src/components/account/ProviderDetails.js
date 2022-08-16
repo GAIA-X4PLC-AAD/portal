@@ -76,16 +76,7 @@ const ProviderDetails = (props) => {
                                     </h5>
                                 </div>
                             </div>
-                            <div className="provider-account-section1__block layout">
-                                <div className="provider-account-section1__small-text-body layout">
-                                     {props.t("account.details.registeredAddress")}
-                                </div>
-                                <div className="provider-account-section1__cover-block layout">
-                                        <h5 className="provider-account-section1__highlights71 layout">
-                                            {provider?.registeredAddress}
-                                        </h5>
-                                    </div>
-                            </div>
+                            
                             <div className="provider-account-section1__block layout">
                                 <div className="provider-account-section1__small-text-body layout">
                                     {props.t("account.details.website")}
@@ -105,6 +96,16 @@ const ProviderDetails = (props) => {
                                         {showPersonalInformation(provider?.individualContact)}
                                     </h5>
                                 </div>
+                            </div>
+                            <div className="provider-account-section1__block layout">
+                                <div className="provider-account-section1__small-text-body layout">
+                                     {props.t("account.details.registeredAddress")}
+                                </div>
+                                <div className="provider-account-section1__cover-block layout">
+                                        <h5 className="provider-account-section1__highlights71 layout">
+                                            {provider?.registeredAddress}
+                                        </h5>
+                                    </div>
                             </div>
                         </div>
                     </div>
@@ -184,6 +185,7 @@ const ProviderDetails = (props) => {
                                     </h5>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

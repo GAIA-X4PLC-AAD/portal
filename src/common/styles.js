@@ -335,7 +335,7 @@ export const ButtonText = styled.div`
     font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 700;
-    font-size: 14px;
+    font-size: ${props => props.fontSize || '14px'};
     line-height: 20px;
     display: flex;
     align-items: center;
