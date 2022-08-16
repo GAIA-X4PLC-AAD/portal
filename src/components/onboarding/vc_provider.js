@@ -49,16 +49,6 @@ const VCProvider = ({nextStage}) => {
                                     <Padding vertical='3px' />
                                     <TextInput type='text' value={vc.zip} readOnly/>
                                     <Padding vertical='12px' />
-                                    {/* <Row alignItems='center'>
-                                        <label>
-                                            <Checkbox name='aisbl'
-                                                checked={vc.aisbl||false} readOnly={true}/>
-                                        </label>
-                                        <Padding horizontal='4px' />
-                                        <BodyText>{t('onboarding.organization_aisbl')}</BodyText>
-                                        <Padding horizontal='7px' />
-                                        <Image objectFit='contain' src='/images/question-mark.svg' />
-                                    </Row> */}
                                     <Padding vertical='28px'>
                                         <BlueButton onClick={e=>nextStage()} marginLeft="0">{t('onboarding.continue_button')}</BlueButton>
                                     </Padding>
