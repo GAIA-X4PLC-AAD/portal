@@ -73,7 +73,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        {provider?.comercialRegister}
+                                        {provider?.commercialRegister}
                                     </h5>
                                 </div>
                             </div>

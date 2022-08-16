@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import axios from "axios";
 import { Block } from "../expandable/style";
 import { Padding } from "../discovery/tabs/style";
-import { useNavigate } from "react-router-dom";
+import { useLinkClickHandler, useNavigate } from "react-router-dom";
 
 import { Menu, MenuItem } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
@@ -14,6 +14,8 @@ import '@szhsin/react-menu/dist/index.css';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { BlueButton, CancelButton } from "../admin/style";
+import fileDownload from 'react-file-download';
+
 
 const MyServiceViewCard = ({ index, data, itemType }) => {
 
@@ -50,8 +52,11 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     }
 
     const downloadLogs = () => {
-        axios.get(process.env.REACT_APP_EDGE_API_URI + `/lcm-service/${_id}/logs`, response => {
-            console.log('success', response);
+        axios.get(process.env.REACT_APP_EDGE_API_URI + `/lcm-service/service/${_id}/logs`,   {
+        responseType: 'blob',
+      }).then(
+         response => {
+            fileDownload(response.data, `${_name}.log`);
         }, error => {
             console.log('error', error);
         })
