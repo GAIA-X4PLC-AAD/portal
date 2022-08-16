@@ -303,6 +303,7 @@ export const CaptionTextLink = styled.a`
     font-size: 12px;
     line-height: 16px;
     letter-spacing: 0.4px;
+    cursor: pointer;
 
     text-decoration: underline;
     color: ${props => props.color || '#000000'};

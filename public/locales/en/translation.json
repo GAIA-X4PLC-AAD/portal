@@ -39,7 +39,8 @@
             "edit": "Edit",
             "download-logs": "Download Logs",
             "delete": "Delete"
-        }
+        },
+        "welcome": "Welcome to GAIA-X"
     },
     "top-menu": {
         "help": "Help",

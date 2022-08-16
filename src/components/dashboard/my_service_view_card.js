@@ -14,7 +14,7 @@ import '@szhsin/react-menu/dist/index.css';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { BlueButton, CancelButton } from "../admin/style";
-import fileDownload from 'react-file-download';
+import fileDownload from 'js-file-download';
 
 
 const MyServiceViewCard = ({ index, data, itemType }) => {
@@ -25,7 +25,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     const _status = data['status'] ?? 'deployed'
     const _id = data['id']
 
-    const { t, i18n } = useTranslation();
+    const {t} = useTranslation();
 
     const navigate = useNavigate()
 
@@ -58,7 +58,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
          response => {
             fileDownload(response.data, `${_name}.log`);
         }, error => {
-            console.log('error', error);
+            console.error(error);
         })
     }
 
