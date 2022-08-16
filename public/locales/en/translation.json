@@ -323,7 +323,12 @@
             "dunsNumber": "D-U-N-S Number",
             "legalEntityIdentifier": "Legal Entity Identifier",
             "dataProviderOfficer": "Data Provider Officer",
-            "attributeOfVC": "Attribute of VC"
+            "attributeOfVC": "Attribute of VC",
+            "phone": "Phone",
+            "zip_code": "ZIP",
+            "country": "Country",
+            "city": "City",
+            "address": "Address"
         },
         "edit": {
             "uploadMessage": "Please upload your new self description.",
