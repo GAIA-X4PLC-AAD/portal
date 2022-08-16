@@ -15,7 +15,7 @@ const AccountPaneDetails = (props) => {
             console.log(response.data);
             setUser(response.data);
         }, (error) => {
-            alert('ko');
+            console.error(error);
         });
     }, []);
 

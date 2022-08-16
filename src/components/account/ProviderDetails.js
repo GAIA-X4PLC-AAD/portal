@@ -14,8 +14,7 @@ const ProviderDetails = (props) => {
         axios.get(process.env.REACT_APP_EDGE_API_URI + '/account/provider').then(   (response) => {
             setProvider(response.data);
     },(error)=> {
-          alert('ko');
-          console.log(error);
+          console.error(error);
     });
     },[]);
 
@@ -73,7 +72,7 @@ const ProviderDetails = (props) => {
                                 </div>
                                 <div className="provider-account-section1__cover-block layout">
                                     <h5 className="provider-account-section1__highlights71 layout">
-                                        {provider?.comercialRegister}
+                                        {provider?.commercialRegister}
                                     </h5>
                                 </div>
                             </div>
