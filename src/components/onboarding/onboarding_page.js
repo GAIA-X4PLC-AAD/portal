@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import {  useLocation, useNavigate, useParams } from "react-router-dom";
-import {  Column, Row, Style, Card, Circle, H4Text, BodyText, ButtonText, H4LightText, MasterButton, HorizontalLine, OutlineButton, TextInput, Image } from '../../common/styles';
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Column, Row, Style, Card, Circle, H4Text, BodyText, ButtonText, H4LightText, MasterButton, HorizontalLine, OutlineButton, TextInput, Image, BlueButton } from '../../common/styles';
+// import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Row, Style, TextInput, Image, BlueButton } from "../../common/styles";
 import { Padding } from '../discovery/tabs/style';
 import RadioButton from '../../common/radio';
 import { useResource } from '@axios-use/react';
@@ -24,7 +25,7 @@ import axios from "axios";
 import history from "../../common/history"
 
 const RequestVCView = ({ type, confirmationCode }) => {
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     const thanksForConfirmingVC = <>
         <Style width='633px' height='246px'>
@@ -61,8 +62,8 @@ RequestVCView.propTypes = {
     confirmationCode: PropTypes.string.isRequired,
 }
 
-const EmailAlreadyConfirmedView = () =>{
-    const {t} = useTranslation()
+const EmailAlreadyConfirmedView = () => {
+    const { t } = useTranslation()
     const navigate = useNavigate();
 
     return <>
@@ -119,7 +120,7 @@ const EmailConfirmedView = ({ type, confirmationCode }) => {
                 )
             },
             onError: (err) => {
-                const message = err?.message || err?.data?.message;
+                const message = err?.data?.message || err?.message;
                 setReturnedComponent(
                     <>
                         <Style width='633px' height='246px'>
@@ -179,7 +180,7 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
     console.log(`DontHaveDidView, data: ${data}`)
 
     useEffect(() => { }, [isLoading, error, data]);
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
 
     const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
@@ -411,86 +412,107 @@ const OnboardingPage = () => {
 
     const userFillDetailsView = () => {
         const [userFormDetailsInput, setInput] = useState({});
+        const [errorMessage, setErrorMessage] = useState("");
 
-        const getValue = (target) => {
-            switch (target.type) {
-                case 'checkbox': return target.checked;
-                case 'file': return target.files[0];
-                default: return target.value;
-            }
-        }
+        // const getValue = (target) => {
+        //     switch (target.type) {
+        //         case 'checkbox': return target.checked;
+        //         case 'file': return target.files[0];
+        //         default: return target.value;
+        //     }
+        // }
 
         const onFormChanged = (e) => {
             const key = e.target.name;
-            const value = getValue(e.target);
+            const value = e.target.value;
             setInput(values => ({ ...values, [key]: value }))
         }
 
+        const showErrorMessage = (headerText, bodyText) => {
+            return <>
+                <Style width='633px' height='246px'>
+                    <Padding horizontal='20px'>
+                        <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                            <Padding horizontal='24px'>
+                                <H4LightText>{headerText}</H4LightText>
+                                <HorizontalLine />
+                                <Padding vertical='12px'>
+                                    <BodyText>{bodyText}</BodyText>
+                                </Padding>
+                                <Padding vertical='28px'>
+                                    <BlueButton onClick={e => history.push('/')} marginLeft="0">{t('onboarding.home_button')}</BlueButton>
+                                </Padding>
+                            </Padding>
+                        </Card>
+                    </Padding>
+                </Style>
+            </>
+        };
+
         const registerUserApi = async () => {
-            try {
-                const _result = await axios.post(registerUserUrl, userFormDetailsInput, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Access-Control-Allow-Origin': '*'
-                    }
-                })
-                if (_result.response) return true
-            } catch (err) {
-                console.log(`registerUserApi, err: ${err}`)
-                if (err) alert(err.message)
-            }
-            return false
+            axios.post(registerUserUrl, userFormDetailsInput, {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            }).then(
+                () => {
+                    setActiveStage(3);
+                },
+                error => {
+                    setErrorMessage(error.response.data.message);
+                });
         }
 
-        return <>
-            <Style width='633px' height='246px'>
-                <Padding horizontal='20px'>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                        <Padding horizontal='24px'>
-                            <H4LightText>{t('onboarding.customer_details')}</H4LightText>
-                            <BodyText>{t('onboarding.customer_details_hint')}</BodyText>
-                            <HorizontalLine />
-                            <Padding vertical='12px'>
-                                <form ref={userFillDetailsFormRef} noValidate>
-                                    <Column>
-                                        <TextInput type='text' placeholder={t('form.lFirstName')} name='first_name' value={userFormDetailsInput.first_name || ''} onChange={(e) => onFormChanged(e)} required />
-                                        <Padding vertical='4px' />
-                                        <TextInput type='text' placeholder={t('form.lLastName')} name='last_name' value={userFormDetailsInput.last_name || ''} onChange={(e) => onFormChanged(e)} required />
-                                        <Padding vertical='16px' />
-                                        <TextInput type='text' placeholder={t('form.lEmail')} name='email' value={userFormDetailsInput.email || ''} onChange={(e) => onFormChanged(e)} required />
-                                        <Padding vertical='8px' />
-                                        <TextInput type='text' placeholder={t('form.lPhone')} name='phone' value={userFormDetailsInput.phone || ''} onChange={(e) => onFormChanged(e)} required />
-                                        <Padding vertical='8px' />
-                                        <TextInput type='text' placeholder={t('form.lCity')} name='city' value={userFormDetailsInput.city || ''} onChange={(e) => onFormChanged(e)} required />
-                                        <Padding vertical='8px' />
-                                        <TextInput type='text' placeholder={t('form.lCountry')} name='country' value={userFormDetailsInput.country || ''} onChange={(e) => onFormChanged(e)} required />
-                                        <Padding vertical='8px' />
-                                        <TextInput type='text' placeholder={t('form.lAddress')} name='address' value={userFormDetailsInput.address || ''} onChange={(e) => onFormChanged(e)} required />
-                                        <Padding vertical='8px' />
-                                        <TextInput type='text' placeholder={t('form.lZIP')} name='zip_code' value={userFormDetailsInput.zip_code || ''} onChange={(e) => onFormChanged(e)} required />
-                                        <Padding vertical='28px'>
-                                            <Row>
-                                                <OutlineButton onClick={e => setActiveStage(5)}>{t('form.registerDid')}</OutlineButton>
-                                                <Style flexGrow='1' />
-                                                <OutlineButton onClick={async () => {
-                                                    if (validateUserFillDetailsForm()) {
-                                                        const _result = await registerUserApi()
-                                                        // console.log(`nextStage, _result: ${_result}`)
-                                                        if (_result) setActiveStage(3)
-                                                        setActiveStage(3)
-                                                    }
-                                                }}>{t('form.submit')}</OutlineButton>
-                                            </Row>
-                                        </Padding>
-                                    </Column>
-                                </form>
+        if (errorMessage) {
+            return showErrorMessage(t("onboarding.errorHeader"), errorMessage);
+        } else {
+            return <>
+                <Style width='633px' height='246px'>
+                    <Padding horizontal='20px'>
+                        <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                            <Padding horizontal='24px'>
+                                <H4LightText>{t('onboarding.customer_details')}</H4LightText>
+                                <BodyText>{t('onboarding.customer_details_hint')}</BodyText>
+                                <HorizontalLine />
+                                <Padding vertical='12px'>
+                                    <form ref={userFillDetailsFormRef} noValidate>
+                                        <Column>
+                                            <TextInput type='text' placeholder={t('form.lFirstName')} name='first_name' value={userFormDetailsInput.first_name || ''} onChange={(e) => onFormChanged(e)} required />
+                                            <Padding vertical='4px' />
+                                            <TextInput type='text' placeholder={t('form.lLastName')} name='last_name' value={userFormDetailsInput.last_name || ''} onChange={(e) => onFormChanged(e)} required />
+                                            <Padding vertical='16px' />
+                                            <TextInput type='text' placeholder={t('form.lEmail')} name='email' value={userFormDetailsInput.email || ''} onChange={(e) => onFormChanged(e)} required />
+                                            <Padding vertical='8px' />
+                                            <TextInput type='text' placeholder={t('form.lPhone')} name='phone' value={userFormDetailsInput.phone || ''} onChange={(e) => onFormChanged(e)} required />
+                                            <Padding vertical='8px' />
+                                            <TextInput type='text' placeholder={t('form.lCity')} name='city' value={userFormDetailsInput.city || ''} onChange={(e) => onFormChanged(e)} required />
+                                            <Padding vertical='8px' />
+                                            <TextInput type='text' placeholder={t('form.lCountry')} name='country' value={userFormDetailsInput.country || ''} onChange={(e) => onFormChanged(e)} required />
+                                            <Padding vertical='8px' />
+                                            <TextInput type='text' placeholder={t('form.lAddress')} name='address' value={userFormDetailsInput.address || ''} onChange={(e) => onFormChanged(e)} required />
+                                            <Padding vertical='8px' />
+                                            <TextInput type='text' placeholder={t('form.lZIP')} name='zip_code' value={userFormDetailsInput.zip_code || ''} onChange={(e) => onFormChanged(e)} required />
+                                            <Padding vertical='28px'>
+                                                <Row>
+                                                    <OutlineButton onClick={e => setActiveStage(5)}>{t('form.registerDid')}</OutlineButton>
+                                                    <Style flexGrow='1' />
+                                                    <OutlineButton onClick={async () => {
+                                                        if (validateUserFillDetailsForm()) {
+                                                            registerUserApi()
+                                                        }
+                                                    }}>{t('form.submit')}</OutlineButton>
+                                                </Row>
+                                            </Padding>
+                                        </Column>
+                                    </form>
 
+                                </Padding>
                             </Padding>
-                        </Padding>
-                    </Card>
-                </Padding>
-            </Style>
-        </>
+                        </Card>
+                    </Padding>
+                </Style>
+            </>
+        }
     }
 
 
