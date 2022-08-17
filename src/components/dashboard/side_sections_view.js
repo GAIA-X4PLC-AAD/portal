@@ -8,6 +8,7 @@ import { Block } from "../expandable/style";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import NextPrevButtons from "../../common/vertical_steps/next_prev_buttons";
+import { useTranslation } from "react-i18next";
 
 
 const responsive = {
@@ -93,7 +94,7 @@ const sectionView = (props,) => {
           >
             {itemsViews2}
           </Carousel> :
-          <>Unset</>}
+          <></>}
       </Block>
     </>
   );
@@ -106,6 +107,7 @@ sectionView.propTypes = {
 
 
 const SideSectionsView = () => {
+  const {t} = useTranslation();
 
   const _transactionsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/transactions`;
   const _newsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/news/`;
@@ -115,12 +117,12 @@ const SideSectionsView = () => {
       <LoadingView
         url={_transactionsUrl}
         successView={sectionView}
-        params={{ 'title': 'My Transactions' }}
+        params={{ 'title': t('dashboard.my_transactions') }}
       />
       <LoadingView
         url={_newsUrl}
         successView={sectionView}
-        params={{ 'title': 'News' }}
+        params={{ 'title': t('dashboard.news') }}
       />
     </>
   )

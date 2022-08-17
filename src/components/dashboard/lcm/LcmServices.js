@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import { Tab } from "../../../common/tabs/tab";
 import "./lcm.css"
 import { HeaderTitle, BodyText, BlueButton, CancelButton, RedText } from "../../../common/styles";
+import { withTranslation } from "react-i18next";
+import { t } from "i18next";
 
 class LcmServices extends Component {
     constructor(props) {
@@ -70,41 +72,41 @@ class LcmServices extends Component {
 
         let back;
         if (index && index != 0) {
-            back = <NavLink to={"/lcm/" + id + "/" + (parseInt(index || 0) - 1)}><CancelButton>Back</CancelButton></NavLink>
+            back = <NavLink to={"/lcm/" + id + "/" + (parseInt(index || 0) - 1)}><CancelButton>{t('lcm.back_button')}</CancelButton></NavLink>
         }
 
         let next;
         if (index == this.props.lcm.services.length - 1) {
             if (this.state.currentIndex != index && !anythingSelected) {
-                next = <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>Next</BlueButton>
+                next = <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
             } else {
                 next = <NavLink to={"/lcm/" + id + "/final"}>
-                    <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>Next</BlueButton>
+                    <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
                 </NavLink>
             }
 
         } else {
             if (this.state.currentIndex != index && !anythingSelected) {
-                next = <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>Next</BlueButton>
+                next = <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
             } else {
                 next = <NavLink to={"/lcm/" + id + "/" + (parseInt(index || 0) + 1)}>
-                    <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>Next</BlueButton>
+                    <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
                 </NavLink>
             }
         }
 
         return <div>
             <div className="lcm-header-description">
-                <HeaderTitle>LCM</HeaderTitle>
-                <BodyText>Provide deployment settings </BodyText>
+                <HeaderTitle>{t('lcm.header')}</HeaderTitle>
+                <BodyText>{t('lcm.subtitle')} </BodyText>
             </div>
             <div className="lcm-header">
                 {header}<Tab index={this.props.lcm.services.length} currentIndex={0} />
             </div>
-            <BodyText className="lcm-service-description">Please select LCM Service for {selectedService.serviceName}</BodyText>
+            <BodyText className="lcm-service-description">{t('lcm.select_service',{service_name: selectedService.serviceName})}</BodyText>
             <table onChange={this.onChangeValue} className="lcm-attribute-table">
                 <thead>
-                    <tr><td></td><td>LCM Service</td><td>Description</td></tr>
+                    <tr><td></td><td>{t('lcm.service')}</td><td>{t('lcm.description')}</td></tr>
                 </thead>
                 <tbody>
                     {body}
@@ -122,15 +124,16 @@ LcmServices.propTypes = {
     lcm: PropTypes.any,
     lcmServicesLoaded: PropTypes.func,
     resetLcmServices: PropTypes.func,
-    selectLcmService: PropTypes.func
+    selectLcmService: PropTypes.func,
+    t: PropTypes.func
 }
 
 const mapStateToProps = state => {
     return { lcm: state.lcm };
 };
 
-const Wrap = (props) => {
+const Wrap = withTranslation() ((props) => {
     return <LcmServices {...props} params={useParams()} />
-}
+})
 
 export default connect(mapStateToProps, { lcmServicesLoaded, resetLcmServices, selectLcmService })(Wrap);

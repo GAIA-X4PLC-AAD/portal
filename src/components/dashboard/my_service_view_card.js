@@ -22,7 +22,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     const isActivated = data['is_activated'];
     const isOwn = data['is_own']
     const _name = data['name']
-    const _status = data['status'] ?? 'deployed'
+    const _status = data['status'] ?? 'undeployed'
     const _id = data['id']
 
     const {t} = useTranslation();
@@ -66,18 +66,16 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
 
         const [isLoading, setIsLoading] = useState(false);
         const [successOrError, setSuccessOrError] = useState(null);
-        useEffect(() => {
-            console.log('useEffect triggered')
-        }, []);
+
 
         const deleteService = () => {
             setIsLoading(true)
             axios.delete(process.env.REACT_APP_EDGE_API_URI + `/lcm-service/service/${_id}`,).then((response) => {
                 setIsLoading(false);
-                setSuccessOrError(t('Successfully deleted service'));
+                setSuccessOrError(t('dashboard.delete.successfull'));
             }, (error) => {
                 setIsLoading(false)
-                setSuccessOrError(t('An error occurred while deleting service, please try again later'));
+                setSuccessOrError(t('dashboard.delete.error'));
             });
 
         }
@@ -89,16 +87,16 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
         return <>
             <Style width='633px'>
                 <Padding horizontal='24px' vertical='12px'>
-                    <H4LightText>You&#39;re about to delete a service</H4LightText>
+                    <H4LightText>{t('dashboard.delete.title')}</H4LightText>
                     <HorizontalLine />
                     <BodyText>
-                        {successOrError? t(successOrError) : t(`Are you sure you want to delete ${_name}?`)}
+                        {successOrError? successOrError : t('dashboard.delete.message', {name: _name})}
                         </BodyText>
                     <Padding vertical='20px'>
                         <Row alignItems='center'>
-                            <BlueButton onClick={() => deleteService()} disabled={isLoading || successOrError}>Delete</BlueButton>
+                            <BlueButton onClick={() => deleteService()} disabled={isLoading || successOrError}>{t('dashboard.delete.delete_button')}</BlueButton>
                             <Padding paddingLeft='20px' />
-                            <CancelButton onClick={close} disabled={isLoading}>Cancel</CancelButton>
+                            <CancelButton onClick={close} disabled={isLoading}>{t('dashboard.delete.cancel_button')}</CancelButton>
                             {isLoading ? <Padding horizontal='16px'>
                                 <AnimatedVisibility visible={isLoading} data-tag='animated-visibility-loader'>
                                     <CircularLoader />
@@ -138,12 +136,24 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
 
     }
 
+    const getType = () => {
+        switch (itemType) {
+            case 'data': return 'datasets';
+            default: return itemType;
+        }
+    };
     const buildCard = () => {
         const [activated, setActivated] = useState(isActivated);
+        const type = getType();
 
         const activateDeactivate = () => {
-            console.log(activated);
-            setActivated(!activated);
+            axios.post(process.env.REACT_APP_EDGE_API_URI + `/dashboard/${type}/`, 
+            { id: _id, is_activated: !activated  }).then(
+                (response) => {
+                    setActivated(!activated);
+                }, (error) => {
+                    console.error(error);
+                });
         }
         return (
             <Style maxWidth='290px'>
@@ -170,7 +180,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                                         })}
                                     </Padding>
                                 </Row>
-                                {!isOwn ? <CaptionText>Status: {_status}</CaptionText> : <CaptionText>&#8203;</CaptionText>}
+                                {!isOwn ? <CaptionText>{t('dashboard.status', {status: _status})}</CaptionText> : <CaptionText>&#8203;</CaptionText>}
                                 <Style maxWidth='213px'>
                                     <Padding vertical='10px'>
                                         <CaptionText>{data['description']}</CaptionText>

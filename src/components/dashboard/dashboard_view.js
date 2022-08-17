@@ -56,7 +56,7 @@ const DashboardView = () => {
                 {buildPlot1()}
                 {ServicesLoadingListView({ url: _myServicesUrl, title: t('dashboard.my_services'), type: 'services' })}
                 {ServicesLoadingListView({ url: _myDatasetsUrl, title: t('dashboard.my_data_sets'), type: 'data' })}
-                {ServicesLoadingListView({ url: _mySpUrl, title: t('dashboard.solution_packages'), type: null })}
+                {ServicesLoadingListView({ url: _mySpUrl, title: t('dashboard.solution_packages'), type: 'sp' })}
             </>
         );
     }
@@ -74,8 +74,8 @@ const ServicesListView = (props,) => {
 
     useEffect(() => {
         if (props.data !== undefined) {
-            const _items = props.data['results']
-            setItems(_items)
+            const items = props.data['results']
+            setItems(items)
         }
 
     }, [props.data]);

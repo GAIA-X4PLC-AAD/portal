@@ -29,10 +29,13 @@
         "reporting": "Reporting",
         "my_services": "My Services",
         "my_data_sets": "My Data Sets",
+        "my_transactions": "My Transactions",
+        "news": "News",
         "solution_packages": "My Solution Packages",
         "activate": "Activate",
         "deactivate": "Deactivate",
         "edit": "Edit",
+        "status": "Status: {status}",
         "manage": {
             "manage": "Manage",
             "create": "Create",
@@ -40,7 +43,16 @@
             "download-logs": "Download Logs",
             "delete": "Delete"
         },
-        "welcome": "Welcome to GAIA-X"
+        "welcome": "Welcome to GAIA-X, {username}",
+        "organization_subtitle": "Registered as part of {organization}",
+        "delete" : {
+            "title": "You're about to delete a service",
+            "message": "Are you sure you want to delete {name}?",
+            "successfull": "Successfully deleted service",
+            "error":   "An error occurred while deleting service, please try again later",
+            "delete_button": "Delete",
+            "cancel_button": "Cancel"
+        }
     },
     "top-menu": {
         "help": "Help",
@@ -409,6 +421,19 @@
         "saveBookModalMessage-book": "Book solution package",
         "saveBookModalMessage-save": "Save solution package"
         
+    },
+    "lcm": {
+        "header": "LCM",
+        "subtitle": "Provide deployment settings",
+        "next_button": "Next",
+        "back_button": "Back",
+        "send_button": "Send",
+        "select_service": "Please select LCM Service for {service_name}",
+        "service": "LCM Service",
+        "description": "Description",
+        "upload_configuration": "Upload configuration",
+        "download_template": "Download template",
+        "final_description": "You can download template and upload configuration or complete form manually."
     }
 }
 
