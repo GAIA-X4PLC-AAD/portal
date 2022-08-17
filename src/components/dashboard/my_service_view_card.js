@@ -132,6 +132,8 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
             </Modal>
         </>;
     }
+
+    
     const manageButton = () => {
 
     }
@@ -155,6 +157,15 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                     console.error(error);
                 });
         }
+
+        const buildActivateDeactivateButton = () => {
+
+    
+            if ( (_status == 'undeployed' && activated) || !activated ) 
+                return   <ButtonText onClick={activateDeactivate}>{activated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText>
+            return <Style height='20px'/>;
+        }        
+
         return (
             <Style maxWidth='290px'>
                 <Padding paddingRight='12px'>
@@ -191,7 +202,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                                 <Padding vertical>{!isOwn ? <>
                                     <Row>
                                         {buildManageButton()}
-                                        <ButtonText onClick={activateDeactivate}>{activated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText>
+                                        {buildActivateDeactivateButton()}
                                     </Row></> :
                                     <></>}
                                 </Padding>
