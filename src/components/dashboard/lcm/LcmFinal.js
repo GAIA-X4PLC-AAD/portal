@@ -145,7 +145,9 @@ class LcmFinal extends Component {
         }
 
         this.props.lcm.services.forEach((service) => {
+            console.log(service);
             service.applicableLcm.forEach((lcm) => {
+                console.log(lcm);
                 if (lcm.selected) {
                     request.services.push({ lcmServiceId: lcm.id, serviceId: service.serviceName })
                 }
