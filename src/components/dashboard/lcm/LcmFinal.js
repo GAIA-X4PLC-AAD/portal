@@ -124,7 +124,7 @@ class LcmFinal extends Component {
             </div>
             <div className="lcm-link-bar">
                 <BlueUploadLabel id="lcm-upload"><input className="hidden" type="file" name="file" onChange={this.configurationUpload} />{t('lcm.upload_configuration')}</BlueUploadLabel>
-                <BlueTextClickable onClick={this.downloadTemplate}>{t('lcm.upload_template')}</BlueTextClickable>
+                <BlueTextClickable onClick={this.downloadTemplate}>{t('lcm.download_template')}</BlueTextClickable>
             </div>
 
             <div className="lcm-service-description">
