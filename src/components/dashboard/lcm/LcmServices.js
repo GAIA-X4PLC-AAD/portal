@@ -35,7 +35,7 @@ class LcmServices extends Component {
         this.setState({ selectedService: event.target.value, currentIndex: index })
 
         const selectedService = this.props.lcm.services[index || 0]
-        this.props.selectLcmService(selectedService.serviceName, event.target.value)
+        this.props.selectLcmService(selectedService.serviceId, event.target.value)
     }
 
     render() {

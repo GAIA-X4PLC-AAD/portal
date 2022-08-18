@@ -10,6 +10,31 @@ import { HeaderTitle, BodyText, BlueButton, CancelButton, BlueTextClickable, Blu
 import { withTranslation } from "react-i18next";
 import { t } from "i18next";
 
+const expectedServices = {
+    "services": [
+      {
+        "id": "503-1",
+        "name": "Ansible",
+        "fields": [
+          {"id": "field_1", "label": "lable_1"},
+          {"id": "field_2", "label": "lable_2" },
+          {"id": "field_3", "label": "lable_3"},
+          {"id": "field_4", "label": "lable_4"}
+        ]
+      },
+      {
+        "id": "503-2",
+        "name": "Helm",
+        "fields": [
+          {"id": "field_1", "label": "lable_1"},
+          {"id": "field_2", "label": "lable_2" },
+          {"id": "field_3", "label": "lable_3"},
+          {"id": "field_4", "label": "lable_4"}       
+        ]
+      }
+    ]
+  }
+
 class LcmFinal extends Component {
     constructor(props) {
         super(props);
@@ -23,7 +48,8 @@ class LcmFinal extends Component {
         if (id != idFromState) {
             const request = this._getServicesRequest();
             axios.post(process.env.REACT_APP_EDGE_API_URI + "/lcm-service/service/configuration", request).then((response) => {
-                this.setState({ services: response.data.services, id: id })
+                //this.setState({ services: response.data.services, id: id })
+                this.setState({ services: expectedServices.services, id: id })
             }, (error) => {
                 alert('Failed to load services.');
             });
@@ -32,8 +58,17 @@ class LcmFinal extends Component {
     }
 
     submitLcm = () => {
-        this.props.navigate("/dashboard");
-        this.props.resetLcmServices();
+        const request = {services: this.state.services};
+        console.log(request);
+        axios.post( process.env.REACT_APP_EDGE_API_URI + "/lcm-service/service/",  request).
+        then((response) => {
+            this.props.navigate("/dashboard");
+            this.props.resetLcmServices();
+        }, (error) => {
+            console.error(error);
+        });
+
+      
     }
 
     downloadTemplate = () => {
@@ -92,7 +127,18 @@ class LcmFinal extends Component {
         }
         reader.readAsText(file);
     }
-
+    onChangeValue = (event) => {
+        const serviceId = event.target.id.split("##")[0];
+        const fieldId = event.target.id.split("##")[1];
+        // Change the value of the service and field changed on FE.
+        const services = this.state.services.map (s => { 
+            // if id matches with serviceId, then made a map to change the value of the field. Else return the service untouched.
+            return s.id === serviceId ? {...s, fields: s.fields.map (f => { 
+                // if id matches with fieldId, then add the value. Else return the field untouched.
+                return f.id === fieldId? {...f, value: event.target.value}: f})} : s
+        });
+        this.setState({...this.state, services:services })
+    }
     render() {
         const { id } = this.props.params;
         const idFromState = this.props.lcm.id;
@@ -106,7 +152,9 @@ class LcmFinal extends Component {
         });
         const fields = this.state.services.map((service, i) => {
             const inputs = service.fields.map((field, i) => {
-                return <div key={i}><label htmlFor={service.serviceName + field.id}>{field.label}</label><TextInput id={service.serviceName + field.id} placeholder={"Enter " + field.label} /> </div>
+                return <div key={i}><label htmlFor={service.serviceName + field.id}>{field.label}</label>
+                    <TextInput id={service.id +"##"+ field.id} placeholder={"Enter " + field.label} onChange={this.onChangeValue} /> 
+                    </div>
             })
             return <div key={i}>
                 <BodySmallBoldText>{service.name}</BodySmallBoldText>
@@ -145,11 +193,9 @@ class LcmFinal extends Component {
         }
 
         this.props.lcm.services.forEach((service) => {
-            console.log(service);
             service.applicableLcm.forEach((lcm) => {
-                console.log(lcm);
                 if (lcm.selected) {
-                    request.services.push({ lcmServiceId: lcm.id, serviceId: service.serviceName })
+                    request.services.push({ lcmServiceId: lcm.id, serviceId: service.serviceId })
                 }
             });
         });

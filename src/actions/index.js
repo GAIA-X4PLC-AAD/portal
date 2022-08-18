@@ -60,8 +60,8 @@ export const resetLcmServices = () => {
     return { type: RESET_LCM_SERVICES }
 }
 
-export const selectLcmService = (serviceName, lcm) => {
-    return { type: LCM_SELECT_SERVICE, serviceName, lcm }
+export const selectLcmService = (serviceId, lcm) => {
+    return { type: LCM_SELECT_SERVICE, serviceId, lcm }
 }
 
 export const changeUserRole = (role) => {
