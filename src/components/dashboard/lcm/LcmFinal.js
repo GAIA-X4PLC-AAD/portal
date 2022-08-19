@@ -10,30 +10,6 @@ import { HeaderTitle, BodyText, BlueButton, CancelButton, BlueTextClickable, Blu
 import { withTranslation } from "react-i18next";
 import { t } from "i18next";
 
-const expectedServices = {
-    "services": [
-      {
-        "id": "503-1",
-        "name": "Ansible",
-        "fields": [
-          {"id": "field_1", "label": "lable_1"},
-          {"id": "field_2", "label": "lable_2" },
-          {"id": "field_3", "label": "lable_3"},
-          {"id": "field_4", "label": "lable_4"}
-        ]
-      },
-      {
-        "id": "503-2",
-        "name": "Helm",
-        "fields": [
-          {"id": "field_1", "label": "lable_1"},
-          {"id": "field_2", "label": "lable_2" },
-          {"id": "field_3", "label": "lable_3"},
-          {"id": "field_4", "label": "lable_4"}       
-        ]
-      }
-    ]
-  }
 
 class LcmFinal extends Component {
     constructor(props) {
@@ -48,8 +24,7 @@ class LcmFinal extends Component {
         if (id != idFromState) {
             const request = this._getServicesRequest();
             axios.post(process.env.REACT_APP_EDGE_API_URI + "/lcm-service/service/configuration", request).then((response) => {
-                //this.setState({ services: response.data.services, id: id })
-                this.setState({ services: expectedServices.services, id: id })
+                this.setState({ services: response.data.services, id: id })
             }, (error) => {
                 alert('Failed to load services.');
             });
