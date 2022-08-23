@@ -5,11 +5,11 @@ const INITIAL_STATE = {
     services: []
 };
 
-const selectLcmService = (currentState, serviceName, lcm) => {
+const selectLcmService = (currentState, serviceId, lcm) => {
     let services = []
     currentState.services.forEach((service) => {
-        if (service.serviceName === serviceName) {
-            let updatedService = { serviceName: service.serviceName, applicableLcm: [] }
+        if (service.serviceId === serviceId) {
+            let updatedService = { serviceId: service.serviceId, serviceName: service.serviceName, applicableLcm: [] }
             service.applicableLcm.forEach((lcmService) => {
                 if (lcmService.id === lcm) {
                     updatedService.applicableLcm.push({ ...lcmService, selected: true });
@@ -40,7 +40,7 @@ export default (state = INITIAL_STATE, action) => {
         case RESET_LCM_SERVICES:
             return { ...INITIAL_STATE };
         case LCM_SELECT_SERVICE:
-            return selectLcmService(state, action.serviceName, action.lcm);
+            return selectLcmService(state, action.serviceId, action.lcm);
         default:
             return updateState(state);
     }

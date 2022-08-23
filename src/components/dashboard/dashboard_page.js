@@ -36,6 +36,7 @@ const DashboardPage = () => {
 
 
     const sideBarView = () => {
+        const organization =  <CaptionTextLink onClick={() => { navigate('/account/provider/details') }}>{user.user.organization_name}</CaptionTextLink>
 
         const _welcomeView = <>
             <Row justifyContent='space-between' alignItems='center' data-tag='welcom-view'>
@@ -43,14 +44,11 @@ const DashboardPage = () => {
                 <Padding horizontal='8px'>
                     {role === 'gaiax-pcr' ?
                         colItemView({
-                            title: t("dashboard.welcome") + `, ${user.user.first_name} ${user.user.family_name}`
+                            title: t("dashboard.welcome", {username: `${user.user.first_name} ${user.user.family_name}`}) 
                         })
                         : colItemView({
-                            title: t("dashboard.welcome") + `, ${user.user.first_name} ${user.user.family_name}`,
-                            subtitle: <CaptionText>
-                                {"Registered as part of "}
-                                <CaptionTextLink onClick={() => { navigate('/account/provider/details') }}>{user.user.organization_name}</CaptionTextLink>
-                            </CaptionText>
+                            title: t("dashboard.welcome", {username: `${user.user.first_name} ${user.user.family_name}`}),
+                            subtitle: t("dashboard.organization_subtitle", {organization})
                         })}
                 </Padding>
             </Row>
