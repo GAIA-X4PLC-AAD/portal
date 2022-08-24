@@ -9,16 +9,18 @@ const DenyButton = ({id, searchRefresh})=>{
 
     const {t} = useTranslation();
     
-    const onDeny = ( id) => {
-        console.log(`onDeny ${id}`)
-        axios.delete(process.env.REACT_APP_EDGE_API_URI +`/management/requests/${id}`).then(   (response) => {
+    const onDeny = (id) => {
+        axios.post(
+            process.env.REACT_APP_EDGE_API_URI + `/admin/management/requests`,
+            {
+                id: `${id}`,
+                status: 'deny'
+            }
+        ).then((response) => {
             searchRefresh();
-            console.log(`deny ${id} sucess`);
-        },(error)=> {
-            console.log(`ERROR on deny ${id}`);
-            alert("ko");
-          console.log(error);
-        });     
+        }, (error) => {
+            console.error("Error occurred, can't deny ", error);
+        });
     }
     return (<CancelButton onClick={()=>onDeny(id)}>{t('admin.deny')}</CancelButton>);
 }

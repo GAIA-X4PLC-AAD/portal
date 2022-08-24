@@ -68,6 +68,7 @@ const KeyValueDetails = ({ id, url_prefix, searchRefresh }) => {
             </ElementGroup>
         );
     }
+
     const DenyApprovalButton = () => {
         if (!(searchRefresh)) return null;
         return (

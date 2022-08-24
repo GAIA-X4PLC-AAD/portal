@@ -5,22 +5,24 @@ import { BlueButton } from "../../style";
 import { useTranslation } from "react-i18next";
 
 
-const ApproveButton = ({id, searchRefresh})=>{
+const ApproveButton = ({ id, searchRefresh }) => {
 
-    const {t} = useTranslation();
+    const { t } = useTranslation();
 
-    const onApprove = ( id) => {
-        console.log(`onApprove ${id}`)
-        axios.post(process.env.REACT_APP_EDGE_API_URI +`/management/requests/${id}`).then(   (response) => {
+    const onApprove = (id) => {
+        axios.post(
+            process.env.REACT_APP_EDGE_API_URI + `/admin/management/requests`,
+            {
+                id: `${id}`,
+                status: 'accept'
+            }
+        ).then((response) => {
             searchRefresh();
-            console.log(`approved ${id} sucess`);
-        },(error)=> {
-            console.log(`ERROR on approved ${id}`);
-            alert("ko");
-          console.log(error);
-        });     
+        }, (error) => {
+            console.error("Error occurred, can't approve ", error);
+        });
     }
-    return (<BlueButton onClick={()=>onApprove(id)}>{t('admin.approve')}</BlueButton>);
+    return (<BlueButton onClick={() => onApprove(id)}>{t('admin.approve')}</BlueButton>);
 }
 ApproveButton.propTypes = {
     id: PropTypes.string,
