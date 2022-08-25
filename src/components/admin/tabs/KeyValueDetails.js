@@ -14,10 +14,6 @@ const KeyValueDetails = ({ id, url_prefix, searchRefresh }) => {
 
     const URL = `${url_prefix}/${id}/details`;
 
-    // const openLink = (url) => {
-    //     window.open(process.env.REACT_APP_EDGE_API_URI.replace('/api', '') + url, '_blank').focus();
-    // }
-
     const downloadFile = (url, filename) => {
         axios.get(process.env.REACT_APP_EDGE_API_URI.replace('/api', '') + url,   {
         responseType: 'blob',
