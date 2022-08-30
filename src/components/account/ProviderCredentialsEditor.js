@@ -22,7 +22,6 @@ const ProviderCredentialsEditor = (props) => {
 
     // Hard code
     const roles = [{name:"PPR_USER"}, {name:"PPR_EDITOR"}];
-    const providerId = 1;
 
     // used to store the intial status of the user
     const [loadUser, setLoadUser] = useState(props.loadUser);
@@ -53,7 +52,7 @@ const ProviderCredentialsEditor = (props) => {
     // Updates existing user
     const updateUser= () => {
         setReadOnly(true);
-        axios.put(process.env.REACT_APP_EDGE_API_URI+`/account/provider/${providerId}/users/${user.id}`, user).then(   (response) => {
+        axios.put(process.env.REACT_APP_EDGE_API_URI+`/account/provider/users/${user.id}`, user).then(   (response) => {
             setLoadUser(response.data);
             setUser(response.data);
             setSaving(false);
@@ -69,7 +68,7 @@ const ProviderCredentialsEditor = (props) => {
     // add new user
     const addNewUser= () => {
         setReadOnly(true);
-        axios.post(process.env.REACT_APP_EDGE_API_URI+`/account/provider/${providerId}/users`, user).then(   (response) => {
+        axios.post(process.env.REACT_APP_EDGE_API_URI+`/account/provider/users`, user).then(   (response) => {
             props.updateUser(response.data);           
         },(error)=> {
           console.log(error);
@@ -78,8 +77,8 @@ const ProviderCredentialsEditor = (props) => {
 
     }
     const deleteUser = () => {
-        axios.delete()
-        axios.delete(process.env.REACT_APP_EDGE_API_URI+`/account/provider/${providerId}/users/${loadUser.id}`).then(   (response) => {
+        // axios.delete()
+        axios.delete(process.env.REACT_APP_EDGE_API_URI+`/account/provider/users/${loadUser.id}`).then(   (response) => {
             props.deleteUser(loadUser);
         },(error)=> {
           console.log(error);

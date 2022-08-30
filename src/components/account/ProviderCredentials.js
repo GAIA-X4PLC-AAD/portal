@@ -13,15 +13,12 @@ const ProviderCredentials = (props) => {
 
     const { t, i18n }= useTranslation();
 
-    const providerId=1
-
     useEffect(()=>{
-        axios.get(process.env.REACT_APP_EDGE_API_URI+`/account/provider/${providerId}/users`).then(   (response) => {
+        axios.get(process.env.REACT_APP_EDGE_API_URI+`/account/provider/users`).then(   (response) => {
             console.log(response.data);
             setUsers(response.data);
     },(error)=> {
-          console.log(error);
-          alert('ko');
+          console.error(error);
     });
     },[]);
 
