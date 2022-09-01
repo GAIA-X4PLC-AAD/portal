@@ -15,7 +15,7 @@ import NP from "../../../common/vertical_steps/next_prev_buttons";
 
 const SearchContent = ({ type, onSelect, serviceId, slot }) => {
 
-    const addParams = serviceId || slot || '' != ''?`/${serviceId}/${slot}`:''; 
+    const addParams = serviceId || slot || '' != '' ? `/${serviceId}/${slot}` : '';
 
     const criteria = useSelector(state => state.searchCriteriaStore);
     const PROVIDER_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/pr/registrations/search?${criteria.parameters}`;
@@ -23,7 +23,7 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
     const SP_URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services${addParams}/search?${criteria.parameters}`;
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
     const [refresh, setRefresh] = useState(0);
-   
+
     const { t, i18n } = useTranslation();
 
     const searchRefresh = () => {
@@ -38,13 +38,13 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
         }
     }
 
-    const CarouselComp = ({data}) => {
+    const CarouselComp = ({ data }) => {
         // use state and useEffect are required in order to force carousel to re-render
         const [items, setItems] = useState([]);
-     
+
         useEffect(() => {
-            if(items.length === 0){
-                    setItems(data);
+            if (items.length === 0) {
+                setItems(data);
             }
         }, [data]);
 
@@ -71,17 +71,17 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
                 items: 1,
                 slidesToSlide: 1
             }
-        };    
+        };
         return (
-          <Carousel
+            <Carousel
                 arrows={false}
                 swipeable={false}
                 draggable={false}
                 responsive={responsive}
                 renderButtonGroupOutside={shouldDisplayNextPrev}
-                customButtonGroup={<NP bottom='470px'/>}
-                >
-                {items.map((item) => { return (<ServicePreview service={item} key={`${item['id']}`} onSelect={onSelect}/>)})}
+                customButtonGroup={<NP bottom='470px' />}
+            >
+                {items.map((item) => { return (<ServicePreview service={item} key={`${item['id']}`} onSelect={onSelect} />) })}
             </Carousel>
         );
     }
@@ -90,17 +90,17 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
     }
 
     const showCarousel = (items) => {
-         if (!items || !items.data || items.data.length === 0) return NoResults();
-        else { 
-             let _data = items.data
-             return (<CarouselComp data={_data}/>);
-     
+        if (!items || !items.data || items.data.length === 0) return NoResults();
+        else {
+            let _data = items.data
+            return (<CarouselComp data={_data} />);
+
         }
     }
     showCarousel.propTypes = {
         items: PropTypes.object
     }
-    
+
     const NoResults = () => {
         return (<>
             <Row margin="24px 0 0 0">
@@ -117,15 +117,19 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
     }
 
     const loadData = ({ data }) => {
-        return (<>
-            {showHeader(type)}
-            <SearchSort type={type} data={data}/>
-            {type==='solution_pkg'?showCarousel(data):showData(data)}
-            <Padding vertical='12px'>
-                <NextPrevButtons data={data} />
-            </Padding>
-        </>
-        );
+        if (data) {
+            return (<>
+                {showHeader(type)}
+                <SearchSort type={type} data={data} />
+                {type === 'solution_pkg' ? showCarousel(data) : showData(data)}
+                <Padding vertical='12px'>
+                    <NextPrevButtons data={data} />
+                </Padding>
+            </>
+            )
+        } else {
+            return null;
+        }
     }
 
     const getURL = (type) => {
