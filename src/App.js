@@ -117,9 +117,9 @@ const App = (props) => {
             <p>{t('footer_slogan_cap')}</p>
           </div>
           <div className='footer-content'>
-            2022 Deutsche Telekom IoT GmbH
+            <div></div>
             <div>
-              <a href='#'>{t('links.imprint')}</a>
+              <a href='https://www.eco.de/impressum/'>{t('links.imprint')}</a>
               <a href='#'>{t('links.privacy')}</a>
               <a href='#'>{t('links.policy')}</a>
               <a href='#'>{t('links.cookie_settings')}</a>
