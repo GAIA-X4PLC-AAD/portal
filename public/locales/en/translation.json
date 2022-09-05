@@ -236,6 +236,8 @@
         "loginButton": "Login"
     },
     "links": {
+        "legal_notice": "Legal Notice",
+        "legal_notice_link": "https://international.eco.de/legal-notice/",
         "imprint": "Imprint",
         "privacy": "Privacy",
         "policy": "Policy",

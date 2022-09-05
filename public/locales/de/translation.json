@@ -139,6 +139,8 @@
         "loginButton": "Login"
     },
     "links": {
+        "legal_notice": "Impressum",
+        "legal_notice_link": "https://www.eco.de/impressum/",
         "imprint": "Imprint",
         "privacy": "Privacy",
         "policy": "Policy",
