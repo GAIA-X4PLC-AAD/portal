@@ -48,7 +48,10 @@ const Article = ({ category, headerMessage, t }) => {
         }
 
         return (
-            <DataPreview data={parsed} key={`article_${article.title}`}
+            <DataPreview 
+            data={parsed} 
+            width="278px"
+            key={`article_${article.title}`}
             shouldShowDetailsButton={false}
                 margin="0px" marginRight='24px' displayLogo={false} />
         );
