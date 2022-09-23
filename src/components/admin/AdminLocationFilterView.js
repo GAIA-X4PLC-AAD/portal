@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import ExpandableView from "../expandable/ExpandableView";
 import * as S from './style';
-import { useDispatch } from "react-redux";
-import { updateFilterCriteria } from "../../actions";
 import { useTranslation } from "react-i18next";
 
 const AdminLocationFilterView = ({ data , header, onFormChanged}) => {
@@ -12,13 +10,16 @@ const AdminLocationFilterView = ({ data , header, onFormChanged}) => {
 
     const showItemsList = (name, items) => {
         return (
-            // returning as a single component, instead as an array (otherwise, will cause ExpandableView to its `view` to issue a console warning)
+            // returning as a single component, instead as an array (otherwFise, will cause ExpandableView to its `view` to issue a console warning)
             <>
                 {
                     (items.map((item) => {
                         return (
                             <S.Column key={item.name} >
-                                <S.CheckBox type="checkbox" name={name} value={item.loc_code} defaultChecked={false} onChange={onFormChanged} key={name} />
+                                <S.CheckBox type="checkbox" name={name} value={item.loc_code} defaultChecked={false} onChange={onFormChanged} 
+                                    key={name} 
+                                    data-tip={t('discovery.search.tooltip.category_item')}
+                                    />
                                 <S.CheckBoxText>{item.name}</S.CheckBoxText>
                                 <S.Rounded>{item.qty}</S.Rounded>
                             </S.Column>

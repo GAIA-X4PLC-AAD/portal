@@ -12,6 +12,7 @@ import SaveBookModal from "./SaveBookModal";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { VR_ROLE } from "../../common/auth";
+import ReactTooltip from "react-tooltip";
 
 const SolutionPackagingView = () => {
     
@@ -92,9 +93,10 @@ const SolutionPackagingView = () => {
     const showButtons = (data) => {
         return (
             <S.Row margin="32px;" gap='20px'>
-                <S.BlueButton onClick={onResetClick} >{t('solution_pkg.reset')}</S.BlueButton>
-                <S.BlueButton disabled={!isUserSignedIn} onClick={onSaveClick}>{t('solution_pkg.save')}</S.BlueButton>
-                <S.BlueButton disabled={!isUserSignedIn} onClick={onBookClick}>{t('solution_pkg.book')}</S.BlueButton>
+                <ReactTooltip effect='solid' />
+                <S.BlueButton onClick={onResetClick} data-tip={t('solution_pkg.tooltip.reset')}>{t('solution_pkg.reset')}</S.BlueButton>
+                <S.BlueButton disabled={!isUserSignedIn} onClick={onSaveClick} data-tip={t('solution_pkg.tooltip.save')}>{t('solution_pkg.save')}</S.BlueButton>
+                <S.BlueButton disabled={!isUserSignedIn} onClick={onBookClick} data-tip={t('solution_pkg.tooltip.book')}>{t('solution_pkg.book')}</S.BlueButton>
             </S.Row>
         );
     } 

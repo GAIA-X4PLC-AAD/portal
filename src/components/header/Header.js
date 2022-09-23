@@ -14,6 +14,7 @@ import CenterBar from "./CenterBar";
 
 import PropTypes from 'prop-types';
 import { Row } from "../../common/styles";
+import ReactTooltip from "react-tooltip";
 
 function Header(props) {
     const { t, } = useTranslation();
@@ -39,7 +40,8 @@ function Header(props) {
     return (
         <>
             <S.TopMenu >
-                <S.TopMenuLogo>
+                <ReactTooltip effect='solid' />
+                <S.TopMenuLogo data-tip={t('left-menu.tooltip.home')}>
                     <Link to="/">
                         <img src="/images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />
                     </Link>

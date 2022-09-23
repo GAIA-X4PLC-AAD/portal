@@ -5,6 +5,8 @@ import * as S from './style';
 import { useTranslation, withTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { updateFilterCriteria } from "../../../actions";
+import ReactTooltip from 'react-tooltip';
+
 
 const SearchFilterView = ({ data, }) => {
 
@@ -36,11 +38,16 @@ const SearchFilterView = ({ data, }) => {
         return (
             // returning as a single component, instead as an array (otherwise, will cause ExpandableView to its `view` to issue a console warning)
             <>
+                <ReactTooltip effect='solid' />
                 {
                     (items.map((item) => {
                         return (
                             <S.Column key={item.name} >
-                                <S.CheckBox type="checkbox" name={name} value={item.name} defaultChecked={false} onChange={onFormChanged} key={name} />
+                                <S.CheckBox type="checkbox" name={name} value={item.name} 
+                                    defaultChecked={false} onChange={onFormChanged} 
+                                    key={name} 
+                                    data-tip={t('discovery.search.tooltip.category_item')}
+                                    />
                                 <S.CheckBoxText>{item.name}</S.CheckBoxText>
                                 <S.Rounded>{item.qty}</S.Rounded>
                             </S.Column>

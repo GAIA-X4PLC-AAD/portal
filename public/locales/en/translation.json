@@ -23,7 +23,18 @@
         "german": "German",
         "close": "Close",
         "choose-language": "Language",
-        "select-system-language": "Please select a system language"  
+        "select-system-language": "Please select a system language",
+        "tooltip": {
+            "admin": "Go to admin",
+            "dashboard": "Go to Dashboard",
+            "home": "Go to home",
+            "services": "Go to service discovery",
+            "data": "Go to data discovery",
+            "provider": "Go to provider discovery",
+            "provide": "Provide Self-description for Service/Data/Node",
+            "change-language": "Change language"
+            
+        }  
     },
     "dashboard": {
         "reporting": "Reporting",
@@ -77,7 +88,13 @@
         "provider": "Provider",
         "storage": "Storage",
         "service": "Service",
-        "compute": "Compute"
+        "compute": "Compute",
+        "tooltip": {
+            "search_terms": "Enter search terms and hit Enter",
+            "search": "Search",
+            "advanced_search": "Search with suggestions",
+            "chip": "Build query with chips"
+        }
     },
 
     "message-bar": {
@@ -307,10 +324,14 @@
             "chip.filter.compute": "COMPUTE=",
             "noResults": "No results found",
             "noResultsMessage": "Sorry, we couldn’t find any matching results. Try broadening your filters",
-            "advance": "Advanced Search"
+            "advance": "Advanced Search",
+            "tooltip": {
+                "category_item": "Filter search results with this value"
+            }
         },
         "description": {
-            "build": "Build"
+            "build": "Build",
+            "tooltip.build": "Build a composite service"
         }
     },
     "account": {
@@ -396,7 +417,12 @@
         "sort-direction-DESC": "Sort: Z-A",
         "attachments": "Attachments",
         "approve": "Approve",
-        "deny": "Deny"
+        "deny": "Deny",
+        "tooltip": {
+            "deny": "Deny request and inform participant",
+            "approve": "Approve request and inform participant",
+            "download": "Download file"
+        }
     },
     "solution_pkg": {
         "solutionPackaging": "Solution Packaging",
@@ -421,7 +447,10 @@
         "lastUpdated": "LAST UPDATED",
         "enterNameMessage": "Please enter a name",
         "saveBookModalMessage-book": "Book solution package",
-        "saveBookModalMessage-save": "Save solution package"
+        "saveBookModalMessage-save": "Save solution package",
+        "tooltip.save": "Save solution package",
+        "tooltip.book": "Book solution package",
+        "tooltip.reset": "Reset solution package"
         
     },
     "lcm": {

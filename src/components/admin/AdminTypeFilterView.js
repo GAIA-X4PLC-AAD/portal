@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
 import ExpandableView from "../expandable/ExpandableView";
 import * as S from './style';
-import { useDispatch } from "react-redux";
-import { updateFilterCriteria } from "../../actions";
 import { useTranslation } from "react-i18next";
 
 const AdminTypeFilterView = ({ data , header, onFormChanged}) => {
@@ -18,7 +16,11 @@ const AdminTypeFilterView = ({ data , header, onFormChanged}) => {
                     (items.map((item) => {
                         return (
                             <S.Column key={item.name} >
-                                <S.CheckBox type="checkbox" name={name} value={item.name} defaultChecked={false} onChange={onFormChanged} key={name} />
+                                <S.CheckBox type="checkbox" name={name} value={item.name} 
+                                    defaultChecked={false} 
+                                    onChange={onFormChanged} key={name} 
+                                    data-tip={t('discovery.search.tooltip.category_item')}
+                                    />
                                 <S.CheckBoxText>{t(`admin.${item.name}`)}</S.CheckBoxText>
                                 <S.Rounded>{item.qty}</S.Rounded>
                             </S.Column>

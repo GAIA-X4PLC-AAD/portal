@@ -22,7 +22,11 @@ const ApproveButton = ({ id, searchRefresh }) => {
             console.error("Error occurred, can't approve ", error);
         });
     }
-    return (<BlueButton onClick={() => onApprove(id)}>{t('admin.approve')}</BlueButton>);
+    return (
+    <BlueButton onClick={() => onApprove(id)} data-tip={t('admin.tooltip.approve')}>
+            {t('admin.approve')}
+    </BlueButton>
+    );
 }
 ApproveButton.propTypes = {
     id: PropTypes.string,

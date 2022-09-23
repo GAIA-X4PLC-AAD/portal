@@ -10,6 +10,8 @@ import fileDownload from 'js-file-download';
 import axios from "axios";
 
 
+
+
 const KeyValueDetails = ({ id, url_prefix, searchRefresh }) => {
 
     const URL = `${url_prefix}/${id}/details`;
@@ -54,7 +56,10 @@ const KeyValueDetails = ({ id, url_prefix, searchRefresh }) => {
                     {attachments.map((attachment, i) => {
                         return (
                             <Style marginTop='8px' key={i}>
-                                <TagLink onClick={() => downloadFile(attachment.url, attachment.name)}>
+                                <TagLink 
+                                    onClick={() => downloadFile(attachment.url, attachment.name)}
+                                    data-tip={t('admin.tooltip.download')}
+                                    >
                                     {attachment.name}
                                 </TagLink>
                             </Style>
@@ -70,7 +75,7 @@ const KeyValueDetails = ({ id, url_prefix, searchRefresh }) => {
         return (
             <Row>
                 <Style marginRight="auto" marginTop="42px">
-                    <DenyButton id={id} searchRefresh={searchRefresh} />
+                    <DenyButton id={id} searchRefresh={searchRefresh}/>
                     <ApproveButton id={id} searchRefresh={searchRefresh} />
                 </Style>
             </Row>

@@ -12,8 +12,6 @@ import PropTypes from 'prop-types';
 import { Circle, Column, SliderBullet, H2Text, BodyText, Style } from "./common/styles";
 import { Padding } from "./components/discovery/tabs/style";
 import SearchTerm from "./components/discovery/search/SearchTerm";
-import { updateSearchType, updateSeartTypeWithTerm } from "./actions";
-// import { signInMenuQuit } from "./actions";
 
 const responsive = {
   superLargeDesktop: {
@@ -112,7 +110,10 @@ const Home = () => {
 
       <div className='search-container'>
         <Padding vertical='40px'>
-          <SearchTerm type='home' inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF' displayAsColumn={false}/>
+          <SearchTerm type='home' 
+                      inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF' 
+                      displayAsColumn={false} 
+                      />
         </Padding>
       </div>
     </>

@@ -22,7 +22,11 @@ const DenyButton = ({id, searchRefresh})=>{
             console.error("Error occurred, can't deny ", error);
         });
     }
-    return (<CancelButton onClick={()=>onDeny(id)}>{t('admin.deny')}</CancelButton>);
+    return (
+    <CancelButton onClick={()=>onDeny(id)}>
+        {t('admin.deny')}
+    </CancelButton>
+    );
 }
 DenyButton.propTypes = {
     id: PropTypes.string,
