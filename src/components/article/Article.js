@@ -1,6 +1,5 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import configData from "../../config/config.json";
 import axios from "axios";
 import './Article.css';
 import { withTranslation } from "react-i18next";

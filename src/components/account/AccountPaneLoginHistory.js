@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { withTranslation } from "react-i18next";
 import axios from "axios";
 import "./Account.css";
-import configData from "../../config/config.json";
 import PropTypes from 'prop-types';
 
 const AccountPaneLoginHistory = (props) => {

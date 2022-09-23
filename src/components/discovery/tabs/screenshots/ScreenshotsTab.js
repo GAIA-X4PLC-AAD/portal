@@ -4,7 +4,6 @@ import React, { useState, useRef, useEffect } from "react";
 import '../../../../common/styles';
 
 import PropTypes from 'prop-types';
-import configData from "../../../../config/config.json";
 import ScreenshotsTabView from "./ScreenshotsTabView";
 import LoadingView from "../../../loading_view/LoadingView";
 

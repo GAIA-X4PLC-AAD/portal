@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import configData from "../../config/config.json";
 import "./ProviderLoginHistory.css";
 import PropTypes from 'prop-types';
 

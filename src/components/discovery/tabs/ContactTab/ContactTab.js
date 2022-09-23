@@ -1,4 +1,3 @@
-import configData from "../../../../config/config.json";
 import React from "react";
 import PropTypes from 'prop-types';
 import LoadingView from "../../../loading_view/LoadingView";

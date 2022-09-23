@@ -2,7 +2,6 @@ import React, {  useState } from "react";
 import axios from "axios";
 import ActionCancelModal from "../../common/ActionCancelModal";
 import { useTranslation } from "react-i18next";
-import config from "../../config/config.json";
 import * as S from './ProviderCredentialStyle';
 
 import PropTypes from 'prop-types';
