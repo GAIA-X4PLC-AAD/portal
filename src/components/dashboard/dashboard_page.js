@@ -22,34 +22,35 @@ const DashboardPage = () => {
     const _leftPanelWidth = '225px'
     const navigate = useNavigate();
 
-
-
-    const colItemView = ({ title, caption, subtitle, }) => {
-        return <Column>
-            <Row justifyContent='space-between' alignItems='center'>
-                <BodySmallBoldText>{title}</BodySmallBoldText>
-                <CaptionText>{caption}</CaptionText>
-            </Row>
-            <CaptionText>{subtitle}</CaptionText>
-        </Column>
-    }
-
-
-    const sideBarView = () => {
-        const organization =  <CaptionTextLink onClick={() => { navigate('/account/provider/details') }}>{user.user.organization_name}</CaptionTextLink>
+    const SideBarView = () => {
+        const ProviderDetails = () => {
+            if(user.user.user_role === 'gaiax-ppr') {
+                return <>
+                    <Row>
+                    <CaptionText>{t("dashboard.organization_subtitle")}</CaptionText>
+                    </Row>
+                    <Row>
+                        <CaptionTextLink onClick={() => { navigate('/account/provider/details') }}>
+                            {user.user.organization_name}
+                        </CaptionTextLink>
+                    </Row>
+                </>
+            } else {
+                return null;
+            }
+        }
 
         const _welcomeView = <>
-            <Row justifyContent='space-between' alignItems='center' data-tag='welcom-view'>
+            <Row data-tag='welcome-view' width='225px'>
                 <Circle radius='50px'>{user.user.first_name[0] + user.user.family_name[0]}</Circle>
                 <Padding horizontal='8px'>
-                    {role === 'gaiax-pcr' ?
-                        colItemView({
-                            title: t("dashboard.welcome", {username: `${user.user.first_name} ${user.user.family_name}`}) 
-                        })
-                        : colItemView({
-                            title: t("dashboard.welcome", {username: `${user.user.first_name} ${user.user.family_name}`}),
-                            subtitle: t("dashboard.organization_subtitle", {organization})
-                        })}
+                    <Row>
+                        {t("dashboard.welcome")}
+                    </Row>
+                    <Row>
+                        {user.user.first_name} {user.user.family_name}
+                    </Row>
+                    <ProviderDetails />
                 </Padding>
             </Row>
         </>
@@ -65,7 +66,7 @@ const DashboardPage = () => {
 
         {/* SIDE BAR */}
         <Style minWidth={_leftPanelWidth}>
-            {sideBarView()}
+            <SideBarView />
         </Style>
 
         {/* BODY VIEW */}

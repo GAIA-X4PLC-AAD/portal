@@ -43,8 +43,8 @@
             "download-logs": "Download Logs",
             "delete": "Delete"
         },
-        "welcome": "Welcome to GAIA-X, {username}",
-        "organization_subtitle": "Registered as part of {organization}",
+        "welcome": "Welcome to GAIA-X,",
+        "organization_subtitle": "Registered as part of",
         "delete" : {
             "title": "You're about to delete a service",
             "message": "Are you sure you want to delete {name}?",
