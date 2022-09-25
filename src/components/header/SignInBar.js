@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next';
@@ -18,6 +18,8 @@ import { Padding } from '../discovery/tabs/style';
 import buildLanguageItemView from '../../common/language_item';
 import { PPR_ROLE, PCR_ROLE, FR_ROLE, VR_ROLE } from '../../common/auth';
 import { useLocation } from 'react-router-dom'
+import ReactTooltip from 'react-tooltip';
+
 
 
 // USER AVATAR
@@ -122,8 +124,20 @@ SignInButton.propTypes = {
 
 // REGISTER
 const RegisterButton = ({ onClicked }) => {
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  });
   const { t, } = useTranslation();
-  return <S.HeaderButton border={false} onClick={onClicked} id="top-menu-register">{t('top-menu.register')}</S.HeaderButton>
+  return <>
+    <ReactTooltip id="signInBarTp" />
+      <S.HeaderButton 
+        border={false} 
+        onClick={onClicked}
+        data-for="signInBarTp" data-tip={t('top-menu.tooltip.signup')}
+        id="top-menu-register">
+          {t('top-menu.register')}
+      </S.HeaderButton>
+    </>
 }
 
 RegisterButton.propTypes = {
