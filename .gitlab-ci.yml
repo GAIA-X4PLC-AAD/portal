@@ -76,5 +76,6 @@ Deploy to Demo:
   <<: *base_deploy
   environment:
     name: ecodemo
+#  when: manual
   variables:
     K8S_CONFIG: "${ECO_K8S}"
