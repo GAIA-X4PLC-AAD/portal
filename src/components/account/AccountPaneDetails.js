@@ -3,7 +3,6 @@ import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Account.css";
-import configData from "../../config/config.json";
 import PropTypes from 'prop-types';
 import {Circle, ButtonText} from "../../common/styles"
 

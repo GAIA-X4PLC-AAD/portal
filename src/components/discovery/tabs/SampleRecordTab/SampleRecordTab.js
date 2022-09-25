@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import LoadingView from "../../../loading_view/LoadingView";
-import configData from "../../../../config/config.json";
 import SampleRecordFactory from "./SampleRecordFactory";
 
 const SampleRecordTab = ( { id} ) => {

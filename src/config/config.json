@@ -1,9 +1,0 @@
-{
-    "uri_path": {
-        "mock_vc_user": "/auth/identity/mock_user",
-        "mock_vc_organization": "/auth/identity/mock_organization",
-        "auth_status_path": "/onboarding/auth/authstatus",
-        "user_did_register": "/onboarding/register/user/did_register",
-        "idp_list": "/ext/idplist"
-    }
-}

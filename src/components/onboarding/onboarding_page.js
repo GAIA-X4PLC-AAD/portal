@@ -154,24 +154,6 @@ EmailConfirmedView.propTypes = {
 }
 
 
-const QrLoadingView = () => {
-    const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
-    const [{ data, error, isLoading }] = useResource(() => ({ url: didRegisterUserUrl }), [])
-
-    useEffect(() => { }, [isLoading, error, data]);
-
-
-    let isError = error != undefined;
-
-    if (!isLoading && error == undefined && !(data === undefined)) {
-        return <Image src='/images/QRCode.png' width='200px' />
-    } else {
-        return <BodyText>Loading...</BodyText>
-    }
-
-}
-
-
 const DontHaveDidView = ({ dontHaveDidModal }) => {
 
     const onboardingIdpUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/idp'
@@ -242,7 +224,6 @@ const OnboardingPage = () => {
     const { t } = useTranslation();
 
     const registerUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/'
-    const didRegisterUserUrl = process.env.REACT_APP_EDGE_API_URI + '/onboarding/register/user/did_register'
 
     const location = useLocation();
     const { userType, confirmationCode } = useParams();

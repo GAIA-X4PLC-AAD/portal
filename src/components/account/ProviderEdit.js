@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ActionCancelModal from "../../common/ActionCancelModal";
-import configData from "../../config/config.json";
 import "./ProviderAccount.css";
 import UploadCompleted from "./uploadCompleted";
 import PropTypes from 'prop-types';

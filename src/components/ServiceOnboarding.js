@@ -1,4 +1,3 @@
-import configData from "../config/config.json";
 import axios from "axios";
 
 const validateUser = (user) => {

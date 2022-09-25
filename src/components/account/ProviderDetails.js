@@ -3,7 +3,6 @@ import { withTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./ProviderAccount.css";
-import configData from "../../config/config.json";
 import PropTypes from 'prop-types';
 
 const ProviderDetails = (props) => {

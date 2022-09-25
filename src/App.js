@@ -4,21 +4,11 @@ import WorkInProgress from './WorkInProgress';
 import { Link, BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './Home';
 
-import Register from './components/registration/Register';
-import RegisterUser from './components/registration/RegisterUser';
-import RegisterOrganization from './components/registration/RegisterOrganization';
-import RegisterMailSent from './components/registration/RegisterMailSent';
-import RegisterViaDID from './components/registration/RegisterViaDID';
-import RegisterViaDIDIdP from './components/registration/RegisterViaDIDIdP';
-import RegisterConfirmation from './components/registration/RegisterConfirmation';
 import LoginFail from './components/login/LoginFail';
-import RegisterUserViaDid from './components/registration/RegisterUserViaDid';
 import Login from './components/login/Login';
 import AccountHome from './components/account/AccountHome';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import RegisterDisplayVC from './components/registration/RegisterDisplayVC';
-import RegisterComplianceCheck from './components/registration/RegisterComplianceCheck';
 import ProvideOverview from './components/provide/ProvideOverview';
 
 import { createBrowserHistory } from "history";
@@ -69,15 +59,6 @@ const App = (props) => {
               <Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
               <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
-              <Route path="/register" element={ViewContainer(<Register />)} />
-              <Route path="/register/user" element={ViewContainer(<RegisterUser />)} />
-              <Route path="/register/user/viadid" element={ViewContainer(<RegisterUserViaDid />)} />
-              <Route path="/register/organization" element={ViewContainer(<RegisterOrganization />)} />
-              <Route path="/register/email" element={ViewContainer(<RegisterMailSent />)} />
-              <Route path="/register/did" element={ViewContainer(<RegisterViaDID />)} />
-              <Route path="/register/IdP" element={ViewContainer(<RegisterViaDIDIdP />)} />
-              <Route path="/register/displayVC" element={ViewContainer(<RegisterDisplayVC />)} />
-              <Route path="/register/compliance" element={ViewContainer(<RegisterComplianceCheck />)} />
               <Route path="/signin" element={ViewContainer(<Login />)} />
               <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />
               <Route path="/account/user/:tab" element={ViewContainer(<AccountHome />)} />

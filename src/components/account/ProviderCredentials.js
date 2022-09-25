@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProviderCredentialsEditor from "./ProviderCredentialsEditor";
 import { useTranslation } from "react-i18next";
-import config from '../../config/config.json';
 import * as S from './ProviderCredentialStyle';
 
 const ProviderCredentials = (props) => {

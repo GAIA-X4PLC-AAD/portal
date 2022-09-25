@@ -2,7 +2,6 @@ import React from "react";
 import DataPreview from "../dataPreview/DataPreview";
 import PropTypes from 'prop-types';
 import * as S from './style';
-import configData from "../../../../config/config.json";
 import LoadingView from "../../../loading_view/LoadingView";
 
 const ServicesTab = ({id}) => {
