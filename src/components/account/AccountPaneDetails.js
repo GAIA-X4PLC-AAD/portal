@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { withTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import "./Account.css";
 import PropTypes from 'prop-types';
