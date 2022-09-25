@@ -118,14 +118,15 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
 
     const loadData = ({ data }) => {
         if (data) {
-            return (<>
-                {showHeader(type)}
-                <SearchSort type={type} data={data} />
-                {type === 'solution_pkg' ? showCarousel(data) : showData(data)}
-                <Padding vertical='12px'>
-                    <NextPrevButtons data={data} />
-                </Padding>
-            </>
+            return (
+                <div style={{ marginLeft: '24px' }}>
+                    {showHeader(type)}
+                    <SearchSort type={type} data={data} />
+                    {type === 'solution_pkg' ? showCarousel(data) : showData(data)}
+                    <Padding vertical='12px'>
+                        <NextPrevButtons data={data} />
+                    </Padding>
+                </div>
             )
         } else {
             return null;
