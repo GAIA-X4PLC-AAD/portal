@@ -25,6 +25,7 @@ const ExpandableView = ({
     borderBottom=true,
     shiftedBottomBorder=false,
     boxShadow,
+    margin='12px 0px'
 }) => {
     const [isExpanded, setIsExpanded] = useState(initiallyExpanded);
 
@@ -33,7 +34,7 @@ const ExpandableView = ({
         if (isExpanded) return view;
     }
 
-    return <S.Block border={border} boxShadow={boxShadow} width={width} display={hidden?'none':''}>
+    return <S.Block margin={margin} border={border} boxShadow={boxShadow} width={width} display={hidden?'none':''}>
 
         {/* TITLE */}
         <S.ToggleButton
@@ -76,6 +77,7 @@ ExpandableView.propTypes = {
     maxWidth1: PropTypes.string,
     borderBottom: PropTypes.bool,
     shiftedBottomBorder: PropTypes.bool,
+    margin: PropTypes.string
 }
 
 export default ExpandableView

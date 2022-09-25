@@ -39,7 +39,7 @@ const SearchFilterView = ({ data, }) => {
                 {
                     (items.map((item) => {
                         return (
-                            <S.Column key={item.name} >
+                            <S.Column key={item.name} width="263px">
                                 <S.CheckBox type="checkbox" name={name} value={item.name} defaultChecked={false} onChange={onFormChanged} key={name} />
                                 <S.CheckBoxText>{item.name}</S.CheckBoxText>
                                 <S.Rounded>{item.qty}</S.Rounded>
@@ -57,6 +57,7 @@ const SearchFilterView = ({ data, }) => {
     const showCategories = (data) => {
         return (data.categories.map((cat, i) => {
             return <ExpandableView
+                margin={'8px 0px'}
                 initiallyExpanded={true}
                 border={true}
                 arrowColor={'#737373'}

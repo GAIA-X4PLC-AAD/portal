@@ -100,7 +100,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
             case 'home':
                 return '0 auto 0 auto';
             default:
-                return '0 0 0 auto';
+                return '0 0 0 20px';
         }
     }
 

@@ -25,7 +25,7 @@ const SearchView = ({type, onSelect, serviceId, slot}) => {
     return (
         <React.Fragment key={type}>
             <Row>
-                <Column width='345px'>
+                <Column>
                     <Style maxWidth='313px'>
                         <AdminHeader type={type} />
                     </Style>
