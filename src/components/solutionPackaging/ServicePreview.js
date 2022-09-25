@@ -19,8 +19,9 @@ const ServicePreview = ({ service , onSelect}) => {
         setDisplayModal(false);
     }
     return (
-        <SlotBox width='306px'>
-            <S.Column height="100%">
+        <>
+        <SlotBox width='306px' justifyContent="start">
+            <S.Column height="100%" justifyContent="start">
                 <S.Style marginBottom="auto" textAlign="left">
                     <S.Image src={service.img_preview_url} alt={service.name} width='281px' height='128px'/>
                     <S.H4Text>{service.name}</S.H4Text>
@@ -40,6 +41,7 @@ const ServicePreview = ({ service , onSelect}) => {
             </S.Column>
             {displayModal?<ServiceModalDetails service={service} closeModal={closeModal} onSelect={onSelectFunction}/>:null}
         </SlotBox>    
+        </>
     );
 }
 ServicePreview.propTypes = {

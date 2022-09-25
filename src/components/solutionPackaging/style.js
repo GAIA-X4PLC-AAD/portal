@@ -7,7 +7,7 @@ box-sizing: border-box;
 /* Auto layout */
 display: flex;
 flex-direction: column;
-justify-content: center;
+justify-content: ${props => (props.justifyContent ? props.justifyContent : 'center')};
 align-items: center;
 padding: 12px;
 gap: 10px;
