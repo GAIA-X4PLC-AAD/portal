@@ -209,7 +209,8 @@ body{
   width: 30%;
   margin-block-end: 1.67em;
   margin-block-end: 1.67em;
-  margin: auto
+  margin: auto;
+  text-align: center;
 }
 
 .tab-menu {
