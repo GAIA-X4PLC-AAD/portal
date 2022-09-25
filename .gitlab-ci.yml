@@ -61,12 +61,12 @@ docker-build:
     - helm upgrade --install gaia-x-${CI_PROJECT_NAME} deploy/helm/app --values deploy/helm/app/values.yaml -n gaia-x-portal --set image.repository="${REGISTRY_PATH}" --set image.name="${IMAGE_NAME}" --set image.tag=${TAG} --set fullnameOverride=${CI_PROJECT_NAME} --wait
 
 
-Deploy to Test:
-  <<: *base_deploy
-  environment:
-    name: az-test
-  variables:
-    K8S_CONFIG: "${AZ_KUBE_CONFIG}"
+#Deploy to Test:
+#  <<: *base_deploy
+#  environment:
+#    name: az-test
+#  variables:
+#    K8S_CONFIG: "${AZ_KUBE_CONFIG}"
 
 
 Deploy to Demo:
