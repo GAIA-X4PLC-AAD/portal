@@ -22,6 +22,7 @@ application-build:
   only:
     refs:
       - main
+      - newAlignment
   script:
     - npm install
     - npm run build
@@ -37,6 +38,7 @@ docker-build:
   only:
     refs:
       - main
+      - newAlignment
   script:
     - mkdir -p deploy/docker/output
     - mv build deploy/docker/output/build
@@ -54,6 +56,7 @@ docker-build:
   only:
     refs:
       - main
+      - newAlignment
   image: registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/demo/alpine/k8s:1.21.12
   script:
     - mkdir -p /root/.kube
