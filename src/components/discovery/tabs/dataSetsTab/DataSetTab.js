@@ -20,14 +20,13 @@ const DataSetTab = ({id}) => {
         }
         else {
             return (
-                <S.Columns>
+                <S.Columns justifyContent='start'>
                     {data2.map ((record,i) => {
                         let parsed = {headline: record.name, 
                             img_preview_url: record.img_preview_url , 
                             subline: providerLink(record), 
-                            description: record.description, 
-                            onDetailsClick:()=>{return;}}
-                        return <DataPreview data={parsed} key={i}/>
+                            description: record.description}
+                        return <DataPreview data={parsed} key={i} margin="0 10px 10px 0" marginRight="10px" />
                     })}
               </S.Columns>
     
