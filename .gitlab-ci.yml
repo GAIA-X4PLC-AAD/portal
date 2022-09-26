@@ -2,6 +2,7 @@ stages:
   - build
   - docker
   - deploy
+  - release
 
 variables:
     REGISTRY_PATH: ${CI_REGISTRY}/gaia-x/data-infrastructure-federation-services/por
@@ -20,9 +21,9 @@ application-build:
     paths:
       - build
   only:
-    refs:
-      - main
-      - newAlignment
+    - main
+    - /^release\/\d*[.]\d*[.]\d*$/
+    - tags
   script:
     - npm install
     - npm run build
@@ -36,9 +37,9 @@ docker-build:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [ "" ]
   only:
-    refs:
-      - main
-      - newAlignment
+    - main
+    - /^release\/\d*[.]\d*[.]\d*$/
+    - tags
   script:
     - mkdir -p deploy/docker/output
     - mv build deploy/docker/output/build
@@ -54,9 +55,9 @@ docker-build:
 .base_deploy: &base_deploy
   stage: deploy
   only:
-    refs:
-      - main
-      - newAlignment
+    - main
+    - /^release\/\d*[.]\d*[.]\d*$/
+    - tags
   image: registry.gitlab.com/gaia-x/data-infrastructure-federation-services/por/demo/alpine/k8s:1.21.12
   script:
     - mkdir -p /root/.kube
@@ -79,3 +80,15 @@ Deploy to Demo:
 #  when: manual
   variables:
     K8S_CONFIG: "${ECO_K8S}"
+
+
+release_job:
+  stage: release
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  rules:
+    - if: $CI_COMMIT_TAG                 # Run this job when a tag is created
+  script:
+    - echo "running release_job"
+  release:                               # See https://docs.gitlab.com/ee/ci/yaml/#release for available properties
+    tag_name: '$CI_COMMIT_TAG'
+    description: '$CI_COMMIT_TAG'
