@@ -62,7 +62,7 @@ const SearchFilterView = ({ data, }) => {
     const showCategories = (data) => {
         return (data.categories.map((cat, i) => {
             return <ExpandableView
-                margin={'8px 0px'}
+                margin={'1px 0px'}
                 initiallyExpanded={true}
                 border={true}
                 arrowColor={'#737373'}
