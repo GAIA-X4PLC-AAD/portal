@@ -453,7 +453,9 @@
         "saveBookModalMessage-save": "Save solution package",
         "tooltip.save": "Save solution package",
         "tooltip.book": "Book solution package",
-        "tooltip.reset": "Reset solution package"
+        "tooltip.reset": "Reset solution package",
+        "tooltip.add_service": "Add service to slot",
+        "tooltip.remove_service": "Remove from slot"
         
     },
     "lcm": {
