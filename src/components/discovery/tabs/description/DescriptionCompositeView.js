@@ -43,13 +43,12 @@ const DescriptionTabView = (props,) => {
               description: record.description,
               onDetailsClick: () => { return; }
             }
-            return <Style marginLeft={index == 0 ? '0px' : '10px'} marginTop={'36px'} key={record.id}>
+            return <Style marginRight={'10px'} marginTop={'36px'} key={record.id}>
               <DataPreview data={parsed} width='230px' minHeight='' shouldShowDetailsButton={false} />
             </Style>
           })
           }
         </Columns>
-
       </>
 
     );
@@ -63,11 +62,15 @@ const DescriptionTabView = (props,) => {
     if (props.params['type'] != 'composite-service') return null;
     return (
       <Style marginTop='auto' marginBottom='auto'>
-        <ReactTooltip effect='solid' />
-        <BlueButton marginLeft='0px' onClick={() => { navigate(`/sp/${details['id']}`) }} data-tip={t('discovery.description.tooltip.build')}>
-          {t('discovery.description.build')}
+        <BlueButton marginLeft='0px' 
+          onClick={() => { navigate(`/sp/${details['id']}`) }} 
+          data-tip={t('discovery.description.tooltip.build')}
+          data-for={`dcvBuild${details['id']}`}
+          >
+            <ReactTooltip id={`dcvBuild${details['id']}`} />
+            {t('discovery.description.build')}
         </BlueButton>
-    </Style>
+      </Style>
     );
 
   }

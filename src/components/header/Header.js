@@ -40,7 +40,7 @@ function Header(props) {
     return (
         <>
             <S.TopMenu >
-                <ReactTooltip effect='solid' />
+                <ReactTooltip />
                 <S.TopMenuLogo data-tip={t('left-menu.tooltip.home')}>
                     <Link to="/">
                         <img src="/images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />

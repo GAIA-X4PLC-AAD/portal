@@ -1,10 +1,15 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from 'prop-types';
 import * as S from "../../common/styles";
 import { useTranslation } from "react-i18next";
 import { AvailabeServices, SlotBox } from "./style";
+import ReactTooltip from "react-tooltip";
+
 
 const SlotDetails = ({service, onRemove, onAdd, selected}) => {
+    useEffect(() => {
+        ReactTooltip.rebuild();
+    });
 
     const {t} = useTranslation();
 
@@ -25,18 +30,28 @@ const SlotDetails = ({service, onRemove, onAdd, selected}) => {
         available_services: PropTypes.number
     }
     
+    const tpOverridePos = (props) => {
+        return {left: 20, top: props.top};
+    }
+
     const emptySlot = (service) => {
         return (
-            <S.Column>
-               <SlotBox selected={selected}>
-                <S.BlueLinkText onClick={onAdd}>
-                    <S.Style textAlign="left">
-                        {selected?t('solution_pkg.selectMessage'):t('solution_pkg.add')}
-                    </S.Style>                        
-                </S.BlueLinkText>
-                </SlotBox>
-                <Availabe available_services={service.available_services}/>
-            </S.Column>
+            <>
+                <S.Column>
+                <SlotBox selected={selected}>
+                    <S.BlueLinkText onClick={onAdd} >
+                        <S.Style textAlign="left" 
+                            data-tip={t('solution_pkg.tooltip.add_service')}
+                            data-for={`slotDetailsTp${service.slot_id}`}
+                            >
+                            <ReactTooltip id={`slotDetailsTp${service.slot_id}`} overridePosition={tpOverridePos} />
+                            {selected ? t('solution_pkg.selectMessage'):t('solution_pkg.add')}
+                        </S.Style>                        
+                    </S.BlueLinkText>
+                    </SlotBox>
+                    <Availabe available_services={service.available_services}/>
+                </S.Column>
+            </>
         );
     }
 
@@ -55,8 +70,13 @@ const SlotDetails = ({service, onRemove, onAdd, selected}) => {
                     </S.Style>
                     <S.Row margin="0 auto 0 0" onClick={onRemove}>
                         <S.BlueLinkText>
-                            <S.Style textAlign="left">
-                            {t('solution_pkg.remove')}
+                            <S.Style 
+                                textAlign="left"
+                                data-tip={t('solution_pkg.tooltip.remove_service')}
+                                data-for={`slotDetailsTp${service.slot_id}`}
+                                >
+                                <ReactTooltip id={`slotDetailsTp${service.slot_id}`} overridePosition={tpOverridePos} />
+                                {t('solution_pkg.remove')}
                             </S.Style>                        
                             
                         </S.BlueLinkText>
@@ -75,7 +95,9 @@ SlotDetails.propTypes = {
     service: PropTypes.object,
     onRemove: PropTypes.func,
     onAdd: PropTypes.func,
-    selected: PropTypes.bool
+    selected: PropTypes.bool,
+    left: PropTypes.number,
+    top: PropTypes.number,
 }
 
 export default SlotDetails;

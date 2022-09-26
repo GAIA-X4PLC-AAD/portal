@@ -84,7 +84,7 @@ export const Rows = styled.div`
     order: 0;
     flex-grow: 0;
     margin-top:12px;
-    width: ${props => props.width || 'auto'}
+    width: ${props => props.width || 'auto'};
 `;
 
 export const Button = styled(S.BlueButton)`

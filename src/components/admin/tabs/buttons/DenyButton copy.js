@@ -23,7 +23,8 @@ const DenyButton = ({id, searchRefresh})=>{
         });
     }
     return (
-    <CancelButton onClick={()=>onDeny(id)}>
+    <CancelButton onClick={()=>onDeny(id)} 
+        data-tip={t('admin.tooltip.deny')}>
         {t('admin.deny')}
     </CancelButton>
     );

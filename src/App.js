@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import WorkInProgress from './WorkInProgress';
-import { Link, BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
 
 import LoginFail from './components/login/LoginFail';

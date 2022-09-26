@@ -15,6 +15,7 @@ import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { BlueButton, CancelButton } from "../admin/style";
 import fileDownload from 'js-file-download';
+import ReactTooltip from 'react-tooltip';
 
 
 const MyServiceViewCard = ({ index, data, itemType }) => {
@@ -118,13 +119,27 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
 
         if ( _status == 'undeploying' || _status == 'deploying') return <></>
 
+        const tpOverridePos = (props) => {
+            return {left: 80, top: props.top};
+        }
+
         return <>
             <Padding paddingRight='16px'>
-                <Menu menuButton={<ButtonText onClick={() => manageButton()}>{t('dashboard.manage.manage')}</ButtonText>}>
-                    {_status == 'undeployed' ? <MenuItem onClick={() => create()}>{t('dashboard.manage.create')}</MenuItem> : ''}
-                    {_status == 'deployed' ? <MenuItem onClick={() => edit()}>{t('dashboard.manage.edit')}</MenuItem> : ''}
-                    {_status == 'deployed' ? <MenuItem onClick={() => downloadLogs()}>{t('dashboard.manage.download-logs')}</MenuItem> : ''}
-                    {_status == 'deployed' ? <MenuItem onClick={onOpenModal}>{t('dashboard.manage.delete')}</MenuItem> : ''}
+                <Menu 
+                    menuButton={
+                        <ButtonText 
+                            onClick={() => manageButton()}
+                            data-tip={t('dashboard.tooltip.manage')}
+                            data-for={`dashboard${_id}`}
+                            data-place="right"
+                        >
+                    <ReactTooltip id={`dashboard${_id}`} overridePosition={tpOverridePos} />
+                    {t('dashboard.manage.manage')}
+                </ButtonText>}>
+                {_status == 'undeployed' ? <MenuItem onClick={() => create()}>{t('dashboard.manage.create')}</MenuItem> : ''}
+                {_status == 'deployed' ? <MenuItem onClick={() => edit()}>{t('dashboard.manage.edit')}</MenuItem> : ''}
+                {_status == 'deployed' ? <MenuItem onClick={() => downloadLogs()}>{t('dashboard.manage.download-logs')}</MenuItem> : ''}
+                {_status == 'deployed' ? <MenuItem onClick={onOpenModal}>{t('dashboard.manage.delete')}</MenuItem> : ''}
                 </Menu>
             </Padding>
             <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
@@ -164,7 +179,12 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
             if ( (_status == 'undeployed' && activated) || !activated ) 
                 return   <ButtonText onClick={activateDeactivate}>{activated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText>
             return <Style height='20px'/>;
-        }        
+        }       
+        
+        const tpOverridePos = (props) => {
+            return {left: 50, top: props.top};
+        }
+
 
         return (
             <Style maxWidth='290px'>
@@ -198,7 +218,20 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                                     </Padding>
                                 </Style>
 
-                                <Padding vertical>{isOwn ? <ButtonText onClick={() => openSd()}>{t('dashboard.edit')}</ButtonText> : <></>}</Padding>
+                                <Padding vertical>
+                                    {isOwn ? 
+                                        <ButtonText 
+                                            onClick={() => openSd()}
+                                            data-tip={t('dashboard.tooltip.edit')}
+                                            data-for={`dashboardEdit${_id}`}
+                                            data-place="right"
+                                        >
+                                            <ReactTooltip id={`dashboardEdit${_id}`} overridePosition={tpOverridePos} />
+                                            {t('dashboard.edit')}
+                                        </ButtonText> 
+                                        : <></>
+                                    }
+                                    </Padding>
                                 <Padding vertical>{!isOwn ? <>
                                     <Row>
                                         {buildManageButton()}

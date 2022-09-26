@@ -21,18 +21,18 @@ const DataPreview = ({data, width, minHeight, shouldShowDetailsButton = true, ma
     }
 
     return (
-        <S.Preview width={width} minHeight={minHeight} margin={margin} marginRight={marginRight}>
-            <S.PreviewImage src={data.img_preview_url} alt='preview image'/>
-            <S.Columns>
-                {showLogo()}
-                <S.Rows width={displayLogo ? calcSizeWithLogo : ''}>
-                    <S.Headline>{data.headline}</S.Headline>
-                    <S.Subline>{data.subline}</S.Subline>
-                </S.Rows>
-            </S.Columns>
-            <S.Description>{data.description}</S.Description>
-            {shouldShowDetailsButton ? showDetailsButton() : <></>}
-        </S.Preview>
+            <S.Preview width={width} minHeight={minHeight} margin={margin} marginRight={marginRight}>
+                <S.PreviewImage src={data.img_preview_url} alt='preview image'/>
+                <S.Columns>
+                    {showLogo()}
+                    <S.Rows width={displayLogo ? calcSizeWithLogo() : ''}>
+                        <S.Headline>{data.headline}</S.Headline>
+                        <S.Subline>{data.subline}</S.Subline>
+                    </S.Rows>
+                </S.Columns>
+                <S.Description>{data.description}</S.Description>
+                {shouldShowDetailsButton ? showDetailsButton() : <></>}
+            </S.Preview>
 
     );
 

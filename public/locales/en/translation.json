@@ -26,11 +26,11 @@
         "select-system-language": "Please select a system language",
         "tooltip": {
             "admin": "Go to admin",
-            "dashboard": "Go to Dashboard",
+            "dashboard": "View Dashboard",
             "home": "Go to home",
-            "services": "Go to service discovery",
-            "data": "Go to data discovery",
-            "provider": "Go to provider discovery",
+            "services": "Discovery services in Federated Catalogue",
+            "data": "Discovery data in Federated Catalogue",
+            "provider": "Discovery providers in Federated Catalogue",
             "provide": "Provide Self-description for Service/Data/Node",
             "change-language": "Change language"
             
@@ -54,8 +54,8 @@
             "download-logs": "Download Logs",
             "delete": "Delete"
         },
-        "welcome": "Welcome to GAIA-X, {username}",
-        "organization_subtitle": "Registered as part of {organization}",
+        "welcome": "Welcome to GAIA-X,",
+        "organization_subtitle": "Registered as part of",
         "delete" : {
             "title": "You're about to delete a service",
             "message": "Are you sure you want to delete {name}?",
@@ -63,13 +63,20 @@
             "error":   "An error occurred while deleting service, please try again later",
             "delete_button": "Delete",
             "cancel_button": "Cancel"
+        },
+        "tooltip": {
+            "manage": "Manage your service (LCM)",
+            "edit": "Upload new SD"
         }
     },
     "top-menu": {
         "help": "Help",
         "signin": "Sign in",
         "signout": "Sign out",
-        "register": "Sign Up"
+        "register": "Sign Up",
+        "tooltip": {
+            "signup": "Proceed with onboarding"
+        }
     },
     "article": {
         "what-is-new": "What's new",
@@ -450,7 +457,9 @@
         "saveBookModalMessage-save": "Save solution package",
         "tooltip.save": "Save solution package",
         "tooltip.book": "Book solution package",
-        "tooltip.reset": "Reset solution package"
+        "tooltip.reset": "Reset solution package",
+        "tooltip.add_service": "Add service to slot",
+        "tooltip.remove_service": "Remove from slot"
         
     },
     "lcm": {

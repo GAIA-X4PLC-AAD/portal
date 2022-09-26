@@ -75,7 +75,7 @@ const KeyValueDetails = ({ id, url_prefix, searchRefresh }) => {
         return (
             <Row>
                 <Style marginRight="auto" marginTop="42px">
-                    <DenyButton id={id} searchRefresh={searchRefresh}/>
+                    <DenyButton id={id} searchRefresh={searchRefresh} />
                     <ApproveButton id={id} searchRefresh={searchRefresh} />
                 </Style>
             </Row>

@@ -14,14 +14,14 @@ const ServicesTab = ({id}) => {
     const showParsedServices = ({data}) => {
         const data2= data || [];
         return (
-            <S.Columns>
+            <S.Columns justifyContent='start'>
                 {data2.map (record => {
                     let parsed = {headline: record.name, 
                         img_preview_url: record.img_preview_url , 
                         subline: providerLink(record), 
                         description: record.description, 
                         onDetailsClick:()=>{return;}}
-                    return <DataPreview data={parsed} key={record.id}/>
+                    return <DataPreview data={parsed} key={record.id} margin="0 10px 10px 0" marginRight="10px" />
                     })
                 }
             </S.Columns>

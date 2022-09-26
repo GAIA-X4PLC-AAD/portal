@@ -93,10 +93,29 @@ const SolutionPackagingView = () => {
     const showButtons = (data) => {
         return (
             <S.Row margin="32px;" gap='20px'>
-                <ReactTooltip effect='solid' />
-                <S.BlueButton onClick={onResetClick} data-tip={t('solution_pkg.tooltip.reset')}>{t('solution_pkg.reset')}</S.BlueButton>
-                <S.BlueButton disabled={!isUserSignedIn} onClick={onSaveClick} data-tip={t('solution_pkg.tooltip.save')}>{t('solution_pkg.save')}</S.BlueButton>
-                <S.BlueButton disabled={!isUserSignedIn} onClick={onBookClick} data-tip={t('solution_pkg.tooltip.book')}>{t('solution_pkg.book')}</S.BlueButton>
+                <S.BlueButton 
+                    onClick={onResetClick} 
+                    data-tip={t('solution_pkg.tooltip.reset')}
+                    data-for="solutionPackagingViewTP"
+                >
+                        {t('solution_pkg.reset')}
+                </S.BlueButton>
+                <S.BlueButton 
+                    disabled={!isUserSignedIn} 
+                    onClick={onSaveClick} 
+                    data-tip={t('solution_pkg.tooltip.save')}
+                    data-for="solutionPackagingViewTP"
+                    >
+                        {t('solution_pkg.save')}
+                </S.BlueButton>
+                <S.BlueButton 
+                    disabled={!isUserSignedIn} 
+                    onClick={onBookClick} 
+                    data-tip={t('solution_pkg.tooltip.book')}
+                    data-for="solutionPackagingViewTP"
+                    >
+                        {t('solution_pkg.book')}
+                </S.BlueButton>
             </S.Row>
         );
     } 
@@ -249,8 +268,14 @@ const SolutionPackagingView = () => {
         setSlots(copy);
     }
 
+    useEffect(() => {
+        ReactTooltip.rebuild();
+    });
+
     if (!id) return null;
     return(
+        <>
+            <ReactTooltip id="solutionPackagingViewTP" />
             <S.Column>
                 <S.Style textAlign="left">
                     <S.H2Text>{t('solution_pkg.solutionPackaging')}</S.H2Text>
@@ -260,6 +285,7 @@ const SolutionPackagingView = () => {
                 {addItem>=0?<SearchView type="solution_pkg" onSelect={onSelect} serviceId={id} slot={addItem} key={`${id}-${addItem}`}/>:null}
                 {action? <SaveBookModal action={action} closeModal={()=>{setAction(null)}} onSaveBook={onSaveBookAction}/>:null}
             </S.Column>
+        </>
             );
 }
 

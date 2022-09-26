@@ -24,6 +24,10 @@ const SearchFilterView = ({ data, }) => {
         }
     }, [filters]);
 
+    useEffect(() => {
+        ReactTooltip.rebuild();
+    });
+
     // update state of current filters
     const onFormChanged = (a) => {
         if (a.target.checked === true) {
@@ -38,15 +42,16 @@ const SearchFilterView = ({ data, }) => {
         return (
             // returning as a single component, instead as an array (otherwise, will cause ExpandableView to its `view` to issue a console warning)
             <>
-                <ReactTooltip effect='solid' />
+                <ReactTooltip id="searchFilterViewTp" />
                 {
                     (items.map((item) => {
                         return (
-                            <S.Column key={item.name} >
+                            <S.Column key={item.name} width="263px">
                                 <S.CheckBox type="checkbox" name={name} value={item.name} 
                                     defaultChecked={false} onChange={onFormChanged} 
                                     key={name} 
                                     data-tip={t('discovery.search.tooltip.category_item')}
+                                    data-for="searchFilterViewTp"
                                     />
                                 <S.CheckBoxText>{item.name}</S.CheckBoxText>
                                 <S.Rounded>{item.qty}</S.Rounded>
@@ -64,6 +69,7 @@ const SearchFilterView = ({ data, }) => {
     const showCategories = (data) => {
         return (data.categories.map((cat, i) => {
             return <ExpandableView
+                margin={'8px 0px'}
                 initiallyExpanded={true}
                 border={true}
                 arrowColor={'#737373'}

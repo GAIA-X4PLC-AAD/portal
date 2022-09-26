@@ -19,7 +19,7 @@ export const Column = styled.div`
     margin-right: 12px;
     margin-top: 4px;
     margin-bottom: 4px;
-    width: 288px;
+    width: ${props => props.width || "auto"};
 `;
 
 export const CheckBox = styled.input`
@@ -59,7 +59,6 @@ export const Category=styled.div`
     color: #000000;
     margin:6px 12px;
     background: transparent;
-    width: 285px;
 `;
 
 export const Rounded=styled.div`

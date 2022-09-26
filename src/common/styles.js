@@ -623,7 +623,7 @@ ${(props) => {
     if (props.visible) {
       return css`
     opacity:1;
-    width:100%;
+    width: ${props => props.width || '100%'};
     height:100%; 
     margin-left: auto;
     margin-right: auto;

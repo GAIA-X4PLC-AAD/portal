@@ -47,7 +47,7 @@ const AdminManagementSearchFilter = ({type}) => {
 
     return (
     <>
-        <ReactTooltip effect='solid' />
+        <ReactTooltip effect='solid' id="adminMainTP"/>
         <ParticipantManagementSelector type={type}/>
         <LoadingView url={REQUEST_URL} successView={showRequestType}/>
         <LoadingView url={LOCATION_URL} successView={showLocation}/>

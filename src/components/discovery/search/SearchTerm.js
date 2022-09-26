@@ -83,6 +83,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
                     displayAbsolute={displayAbsolute} 
                     onClick={() => setAdvance(true)}
                     data-tip={t('home.tooltip.advanced_search')}
+                    data-for="searchTermTp"
                     >
                     {t("discovery.search.advance")}
             </S.AdvancedSearch>
@@ -101,6 +102,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
                             onClick={() => { addChipToSearch(chip) }} 
                             key={chip.label}
                             data-tip={t('home.tooltip.chip')}
+                            data-for="searchTermTp"
                             >{chip.label}
                         </S.AdvancedSearch>
                     ) 
@@ -128,13 +130,17 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
     const _searchViews =
         <>
             <Row position='relative'>
-                <ReactTooltip effect='solid' /> 
                 {displayAsColumn ? '' : <S.AdvancedSearchText color='white'>Search for lorem ipsum</S.AdvancedSearchText>}
                 <S.SearchTerm type="text" width={inputWidth} onKeyPress={onKeyPress} value={searchTerm} 
                     onChange={(e) => { setSearchTerm(e.target.value) }} 
                     data-tip={t('home.tooltip.search_terms')}
+                    data-for="searchTermTp"
                     />
-                <S.SearchPlusButton onClick={doSearch} data-tip={t('home.tooltip.search')}>
+                <S.SearchPlusButton 
+                    onClick={doSearch} 
+                    data-tip={t('home.tooltip.search')}
+                    data-for="searchTermTp"
+                    >
                     <Circle background={advancedSearchBgColor} radius='46px' borderRadius='4px' borderColor={advancedSearchBgColor}>
                         <S.SearchPlusImage />
                         </Circle>
@@ -152,10 +158,17 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
     const align = displayAsColumn ? 'end' : 'center';
     const width = displayAsColumn ? 'auto' : 'fit-content';
 
+    useEffect(() => {
+        ReactTooltip.rebuild();
+    });
+
     return (
-        <Column key={type} margin={searchMargin(type)} width={width} alignItems={align} justifyContent={justify}>
-            {_searchViews}
-        </Column>
+        <>
+            <ReactTooltip id="searchTermTp" />
+            <Column key={type} margin={searchMargin(type)} width={width} alignItems={align} justifyContent={justify}>
+                {_searchViews}
+            </Column>
+        </>
     );
 
 }

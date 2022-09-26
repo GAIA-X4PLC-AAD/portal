@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next';
@@ -14,14 +14,15 @@ import { Modal } from 'react-responsive-modal';
 import i18next from 'i18next';
 
 import * as S from './style';
-import { BodyText, ButtonText, DropDownArrowDownSmall, H4LightText, HorizontalLine, OutlineButton, Row, Tooltip } from '../../common/styles';
+import { BodyText, ButtonText, DropDownArrowDownSmall, H4LightText, HorizontalLine, OutlineButton, Row } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
 import buildLanguageItemView from '../../common/language_item';
 
 import { FR_ROLE, PPR_ROLE, PCR_ROLE, VR_ROLE } from '../../common/auth';
 
-import history from "../../common/history"
+import history from "../../common/history";
 import ReactTooltip from 'react-tooltip';
+
 
 
 const CenterBar = () => {
@@ -51,34 +52,92 @@ const CenterBar = () => {
   const onCloseModal = () => setOpenModal(false);
 
 
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  });
+
   return (
     <>
+      <ReactTooltip id="centerBarTooltip" /> 
       <S.TopMenuLinks>
 
-        <ReactTooltip effect='solid' />        
         {/* DASHBOARD: 0 */}
-        {(_isPpr || _isPcrUser || _isPcrOrg) ?
-          <ButtonText selected={location.pathname === '/dashboard'} color='#000000' onClick={() => { navigate('/dashboard'); }} data-tip={t('left-menu.tooltip.dashboard')}>{t('left-menu.dashboard')}</ButtonText> : ''}
+        {(_isPpr || _isPcrUser || _isPcrOrg) 
+          ?
+          <ButtonText 
+            selected={location.pathname === '/dashboard'} 
+            color='#000000' 
+            onClick={() => { navigate('/dashboard'); }} 
+            data-tip={t('left-menu.tooltip.dashboard')}
+            data-for="centerBarTooltip"
+          >
+            {t('left-menu.dashboard')}
+          </ButtonText> 
+          : ''
+        }
 
         {/* ADMIN: 1 */}
-        {_isFr ?
-          <ButtonText selected={location.pathname.includes('admin')} color='#000000' onClick={() => { navigate('/admin/participant'); }} data-tip={t('left-menu.tooltip.admin')}>{t('left-menu.admin')}</ButtonText> : ''}
+        {_isFr 
+          ?
+          <ButtonText 
+            selected={location.pathname.includes('admin')} 
+            color='#000000' 
+            onClick={() => { navigate('/admin/participant'); }} 
+            data-tip={t('left-menu.tooltip.admin')}
+            data-for="centerBarTooltip"
+            >
+              {t('left-menu.admin')}
+          </ButtonText> 
+          : ''
+        }
 
         {
           _isFr ? '' :
             <>
               {/* SERVICES: 2 */}
-              <ButtonText selected={location.pathname === '/services'} color='#000000' onClick={() => { navigate('/services'); }} data-tip={t('left-menu.tooltip.services')}>{t('left-menu.services')}</ButtonText>
+              <ButtonText selected={location.pathname === '/services'} 
+                color='#000000' 
+                onClick={() => { navigate('/services'); }} 
+                data-tip={t('left-menu.tooltip.services')}
+                data-for="centerBarTooltip"
+                >
+                  {t('left-menu.services')}
+              </ButtonText>
 
               {/* DATA: 3 */}
-              <ButtonText selected={location.pathname === '/data'} color='#000000' onClick={() => { navigate('/data'); }} data-tip={t('left-menu.tooltip.data')}>{t('left-menu.data')}</ButtonText>
+              <ButtonText selected={location.pathname === '/data'} 
+                color='#000000' 
+                onClick={() => { navigate('/data'); }} 
+                data-tip={t('left-menu.tooltip.data')}
+                data-for="centerBarTooltip"
+                >
+                  {t('left-menu.data')}
+              </ButtonText>
 
               {/* PROVIDER: 4 */}
-              <ButtonText selected={location.pathname === '/provider'} color='#000000' onClick={() => { navigate('/provider'); }} data-tip={t('left-menu.tooltip.provider')}>{t('left-menu.provider')}</ButtonText>
+              <ButtonText 
+                selected={location.pathname === '/provider'} 
+                color='#000000' 
+                onClick={() => { navigate('/provider'); }} 
+                data-tip={t('left-menu.tooltip.provider')}
+                data-for="centerBarTooltip"
+                >
+                  {t('left-menu.provider')}
+              </ButtonText>
 
               {/* PROVIDE: 5 */}
-              {_isPpr ?
-                <ButtonText selected={location.pathname.includes('/provide/')} color='#000000' onClick={() => { navigate('/provide/start'); }} data-tip={t('left-menu.tooltip.provide')}>{t('left-menu.provide')}</ButtonText> : ''}
+              {_isPpr 
+                ?
+                <ButtonText 
+                  selected={location.pathname.includes('/provide/')} 
+                  color='#000000' onClick={() => { navigate('/provide/start'); }} 
+                  data-tip={t('left-menu.tooltip.provide')}
+                  data-for="centerBarTooltip"
+                  >
+                    {t('left-menu.provide')}
+                </ButtonText>
+                 : ''
+              }
 
             </>
         }
@@ -90,7 +149,16 @@ const CenterBar = () => {
           <DropDownArrowDownSmall />
         </Row>
 
-        {(_userRole != VR_ROLE) ? <></> : <ButtonText color='#000000' onClick={onOpenModal} data-tip={t('left-menu.tooltip.change-language')}>{t('left-menu.change-language')}</ButtonText>}
+        {
+          (_userRole != VR_ROLE) 
+          ? <></> 
+          : <ButtonText color='#000000' onClick={onOpenModal} 
+              data-tip={t('left-menu.tooltip.change-language')}
+              data-for="centerBarTooltip"
+              >
+              {t('left-menu.change-language')}
+              </ButtonText>
+        }
 
         <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
           <H4LightText>{t('left-menu.choose-language')}</H4LightText>
