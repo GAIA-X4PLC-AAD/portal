@@ -127,13 +127,14 @@ const RegisterButton = ({ onClicked }) => {
   useEffect(() => {
     ReactTooltip.rebuild();
   });
+  
   const { t, } = useTranslation();
+  
   return <>
-    <ReactTooltip id="signInBarTp" />
       <S.HeaderButton 
         border={false} 
         onClick={onClicked}
-        data-for="signInBarTp" data-tip={t('top-menu.tooltip.signup')}
+        data-tip={t('top-menu.tooltip.signup')}
         id="top-menu-register">
           {t('top-menu.register')}
       </S.HeaderButton>

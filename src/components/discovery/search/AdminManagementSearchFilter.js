@@ -6,7 +6,6 @@ import AdminTypeFilterView from "../../admin/AdminTypeFilterView";
 import AdminLocationFilterView from "../../admin/AdminLocationFilterView";
 import { useDispatch } from "react-redux";
 import { updateFilterCriteria } from "../../../actions";
-import ReactTooltip from 'react-tooltip';
 
 
 const AdminManagementSearchFilter = ({type}) => {
@@ -47,7 +46,6 @@ const AdminManagementSearchFilter = ({type}) => {
 
     return (
     <>
-        <ReactTooltip effect='solid' id="adminMainTP"/>
         <ParticipantManagementSelector type={type}/>
         <LoadingView url={REQUEST_URL} successView={showRequestType}/>
         <LoadingView url={LOCATION_URL} successView={showLocation}/>

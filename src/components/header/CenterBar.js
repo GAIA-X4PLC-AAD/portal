@@ -58,7 +58,6 @@ const CenterBar = () => {
 
   return (
     <>
-      <ReactTooltip id="centerBarTooltip" /> 
       <S.TopMenuLinks>
 
         {/* DASHBOARD: 0 */}
@@ -69,7 +68,6 @@ const CenterBar = () => {
             color='#000000' 
             onClick={() => { navigate('/dashboard'); }} 
             data-tip={t('left-menu.tooltip.dashboard')}
-            data-for="centerBarTooltip"
           >
             {t('left-menu.dashboard')}
           </ButtonText> 
@@ -84,7 +82,6 @@ const CenterBar = () => {
             color='#000000' 
             onClick={() => { navigate('/admin/participant'); }} 
             data-tip={t('left-menu.tooltip.admin')}
-            data-for="centerBarTooltip"
             >
               {t('left-menu.admin')}
           </ButtonText> 
@@ -99,7 +96,6 @@ const CenterBar = () => {
                 color='#000000' 
                 onClick={() => { navigate('/services'); }} 
                 data-tip={t('left-menu.tooltip.services')}
-                data-for="centerBarTooltip"
                 >
                   {t('left-menu.services')}
               </ButtonText>
@@ -109,7 +105,6 @@ const CenterBar = () => {
                 color='#000000' 
                 onClick={() => { navigate('/data'); }} 
                 data-tip={t('left-menu.tooltip.data')}
-                data-for="centerBarTooltip"
                 >
                   {t('left-menu.data')}
               </ButtonText>
@@ -120,7 +115,6 @@ const CenterBar = () => {
                 color='#000000' 
                 onClick={() => { navigate('/provider'); }} 
                 data-tip={t('left-menu.tooltip.provider')}
-                data-for="centerBarTooltip"
                 >
                   {t('left-menu.provider')}
               </ButtonText>
@@ -132,7 +126,6 @@ const CenterBar = () => {
                   selected={location.pathname.includes('/provide/')} 
                   color='#000000' onClick={() => { navigate('/provide/start'); }} 
                   data-tip={t('left-menu.tooltip.provide')}
-                  data-for="centerBarTooltip"
                   >
                     {t('left-menu.provide')}
                 </ButtonText>
@@ -154,7 +147,6 @@ const CenterBar = () => {
           ? <></> 
           : <ButtonText color='#000000' onClick={onOpenModal} 
               data-tip={t('left-menu.tooltip.change-language')}
-              data-for="centerBarTooltip"
               >
               {t('left-menu.change-language')}
               </ButtonText>

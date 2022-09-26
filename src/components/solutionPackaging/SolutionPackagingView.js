@@ -96,7 +96,6 @@ const SolutionPackagingView = () => {
                 <S.BlueButton 
                     onClick={onResetClick} 
                     data-tip={t('solution_pkg.tooltip.reset')}
-                    data-for="solutionPackagingViewTP"
                 >
                         {t('solution_pkg.reset')}
                 </S.BlueButton>
@@ -104,7 +103,6 @@ const SolutionPackagingView = () => {
                     disabled={!isUserSignedIn} 
                     onClick={onSaveClick} 
                     data-tip={t('solution_pkg.tooltip.save')}
-                    data-for="solutionPackagingViewTP"
                     >
                         {t('solution_pkg.save')}
                 </S.BlueButton>
@@ -112,7 +110,6 @@ const SolutionPackagingView = () => {
                     disabled={!isUserSignedIn} 
                     onClick={onBookClick} 
                     data-tip={t('solution_pkg.tooltip.book')}
-                    data-for="solutionPackagingViewTP"
                     >
                         {t('solution_pkg.book')}
                 </S.BlueButton>
@@ -275,7 +272,6 @@ const SolutionPackagingView = () => {
     if (!id) return null;
     return(
         <>
-            <ReactTooltip id="solutionPackagingViewTP" />
             <S.Column>
                 <S.Style textAlign="left">
                     <S.H2Text>{t('solution_pkg.solutionPackaging')}</S.H2Text>

@@ -42,9 +42,7 @@ const SlotDetails = ({service, onRemove, onAdd, selected}) => {
                     <S.BlueLinkText onClick={onAdd} >
                         <S.Style textAlign="left" 
                             data-tip={t('solution_pkg.tooltip.add_service')}
-                            data-for={`slotDetailsTp${service.slot_id}`}
                             >
-                            <ReactTooltip id={`slotDetailsTp${service.slot_id}`} overridePosition={tpOverridePos} />
                             {selected ? t('solution_pkg.selectMessage'):t('solution_pkg.add')}
                         </S.Style>                        
                     </S.BlueLinkText>
@@ -73,9 +71,7 @@ const SlotDetails = ({service, onRemove, onAdd, selected}) => {
                             <S.Style 
                                 textAlign="left"
                                 data-tip={t('solution_pkg.tooltip.remove_service')}
-                                data-for={`slotDetailsTp${service.slot_id}`}
                                 >
-                                <ReactTooltip id={`slotDetailsTp${service.slot_id}`} overridePosition={tpOverridePos} />
                                 {t('solution_pkg.remove')}
                             </S.Style>                        
                             

@@ -65,9 +65,7 @@ const DescriptionTabView = (props,) => {
         <BlueButton marginLeft='0px' 
           onClick={() => { navigate(`/sp/${details['id']}`) }} 
           data-tip={t('discovery.description.tooltip.build')}
-          data-for={`dcvBuild${details['id']}`}
           >
-            <ReactTooltip id={`dcvBuild${details['id']}`} />
             {t('discovery.description.build')}
         </BlueButton>
       </Style>
@@ -81,6 +79,10 @@ const DescriptionTabView = (props,) => {
     }
 
   }, [props.data]);
+
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  });
 
   return (
     <>

@@ -20,6 +20,10 @@ import ReactTooltip from 'react-tooltip';
 
 const MyServiceViewCard = ({ index, data, itemType }) => {
 
+    useEffect(() => {
+        ReactTooltip.rebuild();
+    });
+
     const isActivated = data['is_activated'];
     const isOwn = data['is_own']
     const _name = data['name']
@@ -130,10 +134,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                         <ButtonText 
                             onClick={() => manageButton()}
                             data-tip={t('dashboard.tooltip.manage')}
-                            data-for={`dashboard${_id}`}
-                            data-place="right"
                         >
-                    <ReactTooltip id={`dashboard${_id}`} overridePosition={tpOverridePos} />
                     {t('dashboard.manage.manage')}
                 </ButtonText>}>
                 {_status == 'undeployed' ? <MenuItem onClick={() => create()}>{t('dashboard.manage.create')}</MenuItem> : ''}
@@ -223,10 +224,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                                         <ButtonText 
                                             onClick={() => openSd()}
                                             data-tip={t('dashboard.tooltip.edit')}
-                                            data-for={`dashboardEdit${_id}`}
-                                            data-place="right"
                                         >
-                                            <ReactTooltip id={`dashboardEdit${_id}`} overridePosition={tpOverridePos} />
                                             {t('dashboard.edit')}
                                         </ButtonText> 
                                         : <></>
