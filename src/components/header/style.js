@@ -9,7 +9,7 @@ export const TopMenu = styled.div`
 
 export const TopMenuLogo = styled.div`
   display: flex;
-  margin: auto 0;
+  margin: 4px 0;
 `;
 
 export const TopMenuLinks = styled.div`

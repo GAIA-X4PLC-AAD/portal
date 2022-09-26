@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 const ManagementHeader = ({participant}) => {
     const {t} = useTranslation();
     return (
-        <Row width="100%">
+        <Row width="633px">
             <Style maxWidth="120px" minWidth="120px">
                 <BodySmallBoldText>{participant.participant_name}</BodySmallBoldText>
             </Style>

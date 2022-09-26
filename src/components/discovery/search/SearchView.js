@@ -35,7 +35,11 @@ const SearchView = ({type, onSelect, serviceId, slot}) => {
 
                 </Column>
                 <Column maxWidth='100%'>
-                    <SearchTerm type={type} />
+                    {
+                        (type !== 'participant' && type != 'management') 
+                            ? <SearchTerm type={type} />
+                            : <></>
+                    }
 
                     <Padding horizontal='12px' />
                     <Style maxWidth='900px'>
