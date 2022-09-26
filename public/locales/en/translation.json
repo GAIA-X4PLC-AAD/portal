@@ -63,6 +63,10 @@
             "error":   "An error occurred while deleting service, please try again later",
             "delete_button": "Delete",
             "cancel_button": "Cancel"
+        },
+        "tooltip": {
+            "manage": "Manage your service (LCM)",
+            "edit": "Upload new SD"
         }
     },
     "top-menu": {
