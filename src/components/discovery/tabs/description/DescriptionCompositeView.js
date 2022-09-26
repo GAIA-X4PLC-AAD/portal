@@ -9,6 +9,7 @@ import { Columns } from "../dataPreview/style";
 import DataPreview from "../dataPreview/DataPreview";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import ReactTooltip from "react-tooltip";
 
 
 const DescriptionTabView = (props,) => {
@@ -61,10 +62,15 @@ const DescriptionTabView = (props,) => {
     if (props.params['type'] != 'composite-service') return null;
     return (
       <Style marginTop='auto' marginBottom='auto'>
-    <BlueButton marginLeft='0px' onClick={() => { navigate(`/sp/${details['id']}`) }}>
-       {t('discovery.description.build')}
-    </BlueButton>
-    </Style>
+        <BlueButton marginLeft='0px' 
+          onClick={() => { navigate(`/sp/${details['id']}`) }} 
+          data-tip={t('discovery.description.tooltip.build')}
+          data-for={`dcvBuild${details['id']}`}
+          >
+            <ReactTooltip id={`dcvBuild${details['id']}`} />
+            {t('discovery.description.build')}
+        </BlueButton>
+      </Style>
     );
 
   }
