@@ -23,7 +23,17 @@
         "german": "Deutsch",
         "close": "Schließen",
         "choose-language": "Sprache",
-        "select-system-language": "Bitte wählen Sie eine Systemsprache"  
+        "select-system-language": "Bitte wählen Sie eine Systemsprache",
+        "tooltip": {
+            "admin": "gehe zu admin",
+            "dashboard": "Dashboard anzeigen",
+            "home": "zur Startseite",
+            "services": "Discovery-Services im Verbundkatalog",
+            "data": "Ermittlungsdaten im Verbundkatalog",
+            "provider": "Ermittlungsanbieter im Verbundkatalog",
+            "provide": "Geben Sie eine Selbstbeschreibung für Dienst/Daten/Knoten an",
+            "change-language": "Sprache ändern"
+        }
     },
     "dashboard": {
         "reporting": "Reporting",
@@ -36,9 +46,13 @@
     },
     "top-menu": {
         "help": "Hilfe",
-        "signin": "Eintragen",
-        "signout": "Abmelden",
-        "register": "Register"
+        "signin": "Einloggen",
+        "signout": "Austragen",
+        "register": "Anmelden",
+        "tooltip": {
+            "signin": "Login mit QR-Code",
+            "signup": "Fahren Sie mit dem Onboarding fort"
+        }
     },
     "article": {
         "what-is-new": "Was gibt es Neues?",
@@ -124,7 +138,7 @@
         "ok": "Ok"
     },
     "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
-    "footer_slogan_cap": "ERLEBEN, WAS VERBINDET.",
+    "footer_slogan_cap": " ",
     "footer_business_only": "Gaia-X - For business customers only",
     "login": {
         "fail.header": "Login failed",
@@ -141,13 +155,13 @@
     "links": {
         "legal_notice": "Impressum",
         "legal_notice_link": "https://www.eco.de/impressum/",
-        "imprint": "Imprint",
-        "privacy": "Privacy",
-        "policy": "Policy",
-        "cookie_settings": "Cookie Settings",
-        "terms_and_conditions": "Terms & Conditions",
-        "contact": "Contact",
-        "help": "Help"
+        "imprint": "Impressum",
+        "privacy": "Privatsphäre",
+        "policy": "Politik",
+        "cookie_settings": "Cookie-Einstellungen",
+        "terms_and_conditions": "Terms & Bedingungen",
+        "contact": "Kontakt",
+        "help": "Hilfe"
     },
     "work-in-progress.message" : "Work in progress....",
     "service-tile": {
@@ -202,6 +216,10 @@
             "chip.filter.service": "SERVICE=",
             "chip.text.compute": "Compute",
             "chip.filter.compute": "COMPUTE="
+            "advance": "Derweiterte Suche heißen",
+            "tooltip": {
+                "category_item": "Filter search results with this value"
+            }
         }
     },
     "account": {
