@@ -216,7 +216,7 @@
             "chip.filter.service": "SERVICE=",
             "chip.text.compute": "Compute",
             "chip.filter.compute": "COMPUTE=",
-            "advance": "Derweiterte Suche heißen",
+            "advance": "Erweiterte Suche",
             "tooltip": {
                 "category_item": "Filter search results with this value"
             }
