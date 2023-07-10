@@ -38,3 +38,4 @@ yarn.lock
 package-lock.json
 deploy/docker/output/build/
 .vscode/launch.json
+/portal-frontend.iml
