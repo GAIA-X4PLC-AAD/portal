@@ -21,12 +21,22 @@ container:
       readiness:
         path: /
         port: 80
+        initialDelaySeconds: 0
+        failureThreshold: 5
+        periodSeconds: 15
+        successThreshold: 1
+        timeoutSeconds: 10
       liveness:
         path: /
         port: 80
       startup:
         path: /
         port: 80
+        initialDelaySeconds: 10
+        failureThreshold: 5
+        periodSeconds: 15
+        successThreshold: 1
+        timeoutSeconds: 10
 
 # Note: Each service ports definition must link to a container.main.ports definition
 service:
@@ -91,8 +101,8 @@ resources:
   #   cpu: 100m
   #   memory: 128Mi
    requests:
-     cpu: 50m
-     memory: 100M
+     cpu: 0.25
+     memory: 200M
 
 autoscaling:
   enabled: false

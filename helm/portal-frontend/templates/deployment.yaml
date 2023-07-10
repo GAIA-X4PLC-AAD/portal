@@ -40,6 +40,15 @@ spec:
               containerPort: {{ .port }}
               protocol: {{ .protocol | quote }}
             {{- end }}
+          startupProbe:
+            httpGet:
+              path: {{ .Values.container.main.probes.readiness.path }}
+              port: {{ .Values.container.main.probes.readiness.port }}
+            initialDelaySeconds: {{ .Values.container.main.probes.readiness.initialDelaySeconds  }}
+            failureThreshold: {{ .Values.container.main.probes.readiness.failureThreshold }}
+            periodSeconds: {{ .Values.container.main.probes.readiness.periodSeconds  }}
+            successThreshold: {{ .Values.container.main.probes.readiness.successThreshold  }}
+            timeoutSeconds: {{ .Values.container.main.probes.readiness.timeoutSeconds  }}
           livenessProbe:
             httpGet:
               path: {{ .Values.container.main.probes.liveness.path }}
@@ -48,6 +57,11 @@ spec:
             httpGet:
               path: {{ .Values.container.main.probes.readiness.path }}
               port: {{ .Values.container.main.probes.readiness.port }}
+            initialDelaySeconds: {{ .Values.container.main.probes.readiness.initialDelaySeconds  }}
+            failureThreshold: {{ .Values.container.main.probes.readiness.failureThreshold }}
+            periodSeconds: {{ .Values.container.main.probes.readiness.periodSeconds  }}
+            successThreshold: {{ .Values.container.main.probes.readiness.successThreshold  }}
+            timeoutSeconds: {{ .Values.container.main.probes.readiness.timeoutSeconds  }}
           env:
             {{- range $key, $value :=  .Values.container.main.env }}
             - name: {{ $key }}
