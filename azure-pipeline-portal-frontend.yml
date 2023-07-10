@@ -69,7 +69,6 @@ stages:
           - script: |
               npm install
               npm build
-            workingDirectory: implementation
             displayName: 'npm install and build'
 
           - task: Docker@2
