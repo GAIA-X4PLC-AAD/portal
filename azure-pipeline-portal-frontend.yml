@@ -158,7 +158,7 @@ stages:
                     arguments: '--atomic
                       --create-namespace
                       --set image.repository=$(acrName)/$(dockerImageName)
-                      --set image.tag=$(SetVariables.ArtifactVersion)
+                      --set image.tag=$(ArtifactVersion)
                       --set ingress.hosts[0].host=$(k8sIngressHost)
                       --set ingress.hosts[0].paths[0].path=$(k8sIngressPath)
                       --set ingress.hosts[0].paths[0].pathType=Prefix'
