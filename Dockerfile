@@ -9,5 +9,5 @@ COPY build ./
 # Use user id instead of user name to allow Kubernetes to check for non-root user
 USER 1000
 
-EXPOSE 3000
-CMD ["serve", "-l", "3000"]
+EXPOSE 80
+CMD ["serve", "-l", "80"]
