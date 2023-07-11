@@ -32,7 +32,7 @@ container:
       startup:
         path: /
         port: 8080
-        initialDelaySeconds: 10
+        initialDelaySeconds: 0
         failureThreshold: 5
         periodSeconds: 15
         successThreshold: 1
