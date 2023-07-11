@@ -14,13 +14,13 @@ container:
   main:
     ports:
       - name: http
-        port: 80
+        port: 8080
         protocol: TCP
     env: {}
     probes:
       readiness:
         path: /
-        port: 80
+        port: 8080
         initialDelaySeconds: 0
         failureThreshold: 5
         periodSeconds: 15
@@ -28,10 +28,10 @@ container:
         timeoutSeconds: 10
       liveness:
         path: /
-        port: 80
+        port: 8080
       startup:
         path: /
-        port: 80
+        port: 8080
         initialDelaySeconds: 10
         failureThreshold: 5
         periodSeconds: 15

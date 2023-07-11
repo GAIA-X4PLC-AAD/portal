@@ -4,10 +4,10 @@ ENV NODE_ENV=production
 
 WORKDIR $ARG_APP_HOME
 
-RUN npm install -g serve@13.0.2
+RUN npm install -g serve@14.2.0
 COPY build ./
 # Use user id instead of user name to allow Kubernetes to check for non-root user
 USER 1000
 
-EXPOSE 80
-CMD ["serve", "-l", "80"]
+EXPOSE 8080
+CMD ["serve", "-l", "8080"]
