@@ -36,18 +36,15 @@
     "react-responsive-carousel": "^3.2.23",
     "react-responsive-modal": "^6.2.0",
     "react-router-dom": "^6.2.2",
-    "react-scripts": "5.0.0",
     "react-tooltip": "^4.2.21",
     "redux-thunk": "^2.4.1",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-scripts eject",
-    "lint": "eslint src"
+    "start": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -68,9 +65,9 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-react-generate-property": "^1.1.2",
+    "@vitejs/plugin-react": "^4.0.4",
     "customize-cra": "^1.0.0",
     "eslint-plugin-react": "^7.29.4",
-    "react-app-rewired": "^2.2.1"
+    "vite": "^4.4.8"
   }
 }
