@@ -18,22 +18,22 @@ const Article = ({ category, headerMessage, t }) => {
         return (<a href={url} target="_blank" rel="noreferrer">{url}</a>);
     }
 
-    useEffect(() => {
-        const callGetArticleAPI = async () => {
-
-            const { data } = await axios.get(process.env.REACT_APP_EDGE_API_URI + '/articles/filter', {
-                params: { category: category }
-            });
-
-            setCallFlag(true);
-            setArticles(data);
-
-        };
-        // only tries to load articles the first time
-        if (!callFlag) {
-            callGetArticleAPI();
-        }
-    }, [articles, callFlag]);
+    // useEffect(() => {
+    //     const callGetArticleAPI = async () => {
+    //
+    //         const { data } = await axios.get(process.env.REACT_APP_EDGE_API_URI + '/articles/filter', {
+    //             params: { category: category }
+    //         });
+    //
+    //         setCallFlag(true);
+    //         setArticles(data);
+    //
+    //     };
+    //     // only tries to load articles the first time
+    //     if (!callFlag) {
+    //         callGetArticleAPI();
+    //     }
+    // }, [articles, callFlag]);
 
     // get first 3 rows
     const renderArticles = articles.filter((v, i) => { return i < 3 }).map((article) => {
@@ -47,8 +47,8 @@ const Article = ({ category, headerMessage, t }) => {
         }
 
         return (
-            <DataPreview 
-            data={parsed} 
+            <DataPreview
+            data={parsed}
             width="278px"
             key={`article_${article.title}`}
             shouldShowDetailsButton={false}

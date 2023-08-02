@@ -13,31 +13,31 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import history from "./common/history"
 
 
-axios.interceptors.request.use(function (config) {
-  const token = retrieveToken();
-
-  if (token) {
-    config.headers = {
-      ...config.headers,
-      authorization: `Bearer ${token}`,
-    };
-  }
-  return config;
-}, function (error) {
-  console.log("in axios interceptors request error")
-  return Promise.reject(error);
-});
-
-axios.interceptors.response.use(function (response) {
-  return response;
-}, function (error) {
-  if (401 === error.response.status || 403 === error.response.status) {
-    history.push("/signin")
-
-    return Promise.resolve();
-  }
-  return Promise.reject(error);
-});
+// axios.interceptors.request.use(function (config) {
+//   const token = retrieveToken();
+//
+//   if (token) {
+//     config.headers = {
+//       ...config.headers,
+//       authorization: `Bearer ${token}`,
+//     };
+//   }
+//   return config;
+// }, function (error) {
+//   console.log("in axios interceptors request error")
+//   return Promise.reject(error);
+// });
+//
+// axios.interceptors.response.use(function (response) {
+//   return response;
+// }, function (error) {
+//   if (401 === error.response.status || 403 === error.response.status) {
+//     history.push("/signin")
+//
+//     return Promise.resolve();
+//   }
+//   return Promise.reject(error);
+// });
 
 const saveToLocalStorage = (state) => {
   try {

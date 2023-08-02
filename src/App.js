@@ -98,9 +98,9 @@ const App = (props) => {
             <p>{t('footer_slogan_cap')}</p>
           </div>
           <div className='footer-content'>
-            <div>
-              <a href={t('links.legal_notice_link')}>{t('links.legal_notice')}</a>
-            </div>
+            {/*<div>*/}
+            {/*  <a href={t('links.legal_notice_link')}>{t('links.legal_notice')}</a>*/}
+            {/*</div>*/}
             <div>
               <a href='#'>{t('links.imprint')}</a>
               <a href='#'>{t('links.privacy')}</a>

@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 import SignInBar from './SignInBar'
 
+import './Header.css'
 import * as S from './style';
 import CenterBar from "./CenterBar";
 
@@ -44,12 +45,13 @@ function Header(props) {
                 <S.TopMenuLogo data-tip={t('left-menu.tooltip.home')}>
                     <Link to="/">
                         <img src="/images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />
+                        <img src="/images/logo_GXPLC.png" alt={t('left-menu.logo-alt-text')} height='60px' className="header-gxplc-img"/>
                     </Link>
                 </S.TopMenuLogo>
                 <CenterBar  />
-                <Row>
-                    <SignInBar handleSignOut={handleSignOut} handleSignIn={handleSignIn} handleRegister={handleRegister} />
-                </Row>
+                {/*<Row>*/}
+                {/*    <SignInBar handleSignOut={handleSignOut} handleSignIn={handleSignIn} handleRegister={handleRegister} />*/}
+                {/*</Row>*/}
 
             </S.TopMenu>
         </>

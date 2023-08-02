@@ -61,30 +61,30 @@ const CenterBar = () => {
       <S.TopMenuLinks>
 
         {/* DASHBOARD: 0 */}
-        {(_isPpr || _isPcrUser || _isPcrOrg) 
+        {(_isPpr || _isPcrUser || _isPcrOrg)
           ?
-          <ButtonText 
-            selected={location.pathname === '/dashboard'} 
-            color='#000000' 
-            onClick={() => { navigate('/dashboard'); }} 
+          <ButtonText
+            selected={location.pathname === '/dashboard'}
+            color='#000000'
+            onClick={() => { navigate('/dashboard'); }}
             data-tip={t('left-menu.tooltip.dashboard')}
           >
             {t('left-menu.dashboard')}
-          </ButtonText> 
+          </ButtonText>
           : ''
         }
 
         {/* ADMIN: 1 */}
-        {_isFr 
+        {_isFr
           ?
-          <ButtonText 
-            selected={location.pathname.includes('admin')} 
-            color='#000000' 
-            onClick={() => { navigate('/admin/participant'); }} 
+          <ButtonText
+            selected={location.pathname.includes('admin')}
+            color='#000000'
+            onClick={() => { navigate('/admin/participant'); }}
             data-tip={t('left-menu.tooltip.admin')}
             >
               {t('left-menu.admin')}
-          </ButtonText> 
+          </ButtonText>
           : ''
         }
 
@@ -92,45 +92,45 @@ const CenterBar = () => {
           _isFr ? '' :
             <>
               {/* SERVICES: 2 */}
-              <ButtonText selected={location.pathname === '/services'} 
-                color='#000000' 
-                onClick={() => { navigate('/services'); }} 
-                data-tip={t('left-menu.tooltip.services')}
-                >
-                  {t('left-menu.services')}
-              </ButtonText>
+              {/*<ButtonText selected={location.pathname === '/services'} */}
+              {/*  color='#000000' */}
+              {/*  onClick={() => { navigate('/services'); }} */}
+              {/*  data-tip={t('left-menu.tooltip.services')}*/}
+              {/*  >*/}
+              {/*    {t('left-menu.services')}*/}
+              {/*</ButtonText>*/}
 
               {/* DATA: 3 */}
-              <ButtonText selected={location.pathname === '/data'} 
-                color='#000000' 
-                onClick={() => { navigate('/data'); }} 
+              <ButtonText selected={location.pathname === '/data'}
+                color='#000000'
+                onClick={() => { navigate('/data'); }}
                 data-tip={t('left-menu.tooltip.data')}
                 >
                   {t('left-menu.data')}
               </ButtonText>
 
               {/* PROVIDER: 4 */}
-              <ButtonText 
-                selected={location.pathname === '/provider'} 
-                color='#000000' 
-                onClick={() => { navigate('/provider'); }} 
-                data-tip={t('left-menu.tooltip.provider')}
-                >
-                  {t('left-menu.provider')}
-              </ButtonText>
+              {/*<ButtonText*/}
+              {/*  selected={location.pathname === '/provider'}*/}
+              {/*  color='#000000'*/}
+              {/*  onClick={() => { navigate('/provider'); }}*/}
+              {/*  data-tip={t('left-menu.tooltip.provider')}*/}
+              {/*  >*/}
+              {/*    {t('left-menu.provider')}*/}
+              {/*</ButtonText>*/}
 
               {/* PROVIDE: 5 */}
-              {_isPpr 
-                ?
-                <ButtonText 
-                  selected={location.pathname.includes('/provide/')} 
-                  color='#000000' onClick={() => { navigate('/provide/start'); }} 
-                  data-tip={t('left-menu.tooltip.provide')}
-                  >
-                    {t('left-menu.provide')}
-                </ButtonText>
-                 : ''
-              }
+              {/*{_isPpr*/}
+              {/*  ?*/}
+              {/*  <ButtonText*/}
+              {/*    selected={location.pathname.includes('/provide/')}*/}
+              {/*    color='#000000' onClick={() => { navigate('/provide/start'); }}*/}
+              {/*    data-tip={t('left-menu.tooltip.provide')}*/}
+              {/*    >*/}
+              {/*      {t('left-menu.provide')}*/}
+              {/*  </ButtonText>*/}
+              {/*   : ''*/}
+              {/*}*/}
 
             </>
         }
@@ -143,9 +143,9 @@ const CenterBar = () => {
         </Row>
 
         {
-          (_userRole != VR_ROLE) 
-          ? <></> 
-          : <ButtonText color='#000000' onClick={onOpenModal} 
+          (_userRole != VR_ROLE)
+          ? <></>
+          : <ButtonText color='#000000' onClick={onOpenModal}
               data-tip={t('left-menu.tooltip.change-language')}
               >
               {t('left-menu.change-language')}
