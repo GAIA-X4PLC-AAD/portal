@@ -1,23 +1,23 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
 import Modal from '../Modal';
-import * as S from './ActionCancelModalStyle.js';
+import * as S from './ActionCancelModalStyle.jsx';
 import PropTypes from 'prop-types';
 
 
 const ActionCancelModal = (props) => {
-  
+
   const header = props.header?props.t(props.header):null;
   const message = props.message?props.t(props.message):null;
   const actionMessage = props.actionMessage?props.t(props.actionMessage):null;
-  
-  if (props.showAlertMessage===false) return null;  
+
+  if (props.showAlertMessage===false) return null;
   return (
     <Modal>
       <S.FlexColumn>
         <S.ActionCancelModalHeader>{header}</S.ActionCancelModalHeader>
-        <S.ModalMessage> 
-          {message}       
+        <S.ModalMessage>
+          {message}
         </S.ModalMessage>
         <S.ModalButtonsBar>
           <S.CancelButton onClick={()=> props.cancelCallback()}>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as S from '../../common/styles.js';
+import * as S from '../../common/styles.jsx';
 
 export const CredentialWrapper = styled.div`
     margin: 20px;
@@ -105,7 +105,7 @@ export const CredentialCancelButton = styled(S.CancelButton)`
     padding: 8px 16px;
     margin: 8px 16px;
 `;
-    
+
 export const CredentialRemove = styled(S.RedTextClickable)`
     text-align: left;
     margin-right: auto;

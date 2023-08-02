@@ -1,25 +1,25 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Modal from '../Modal';
-import * as S from './ActionCancelModalStyle.js';
+import * as S from './ActionCancelModalStyle.jsx';
 import PropTypes from 'prop-types';
 import { useTransition } from 'react';
 
 
 const ErrorModal = ({header, message}) => {
     const {t} = useTranslation();
-  
+
   const myHeader = header?t(header):null;
- 
+
   const [displayModal, setDisplayModal] = React.useState(true);
-  
-  if (displayModal===false) return null;  
+
+  if (displayModal===false) return null;
   return (
     <Modal>
       <S.FlexColumn>
         <S.ActionCancelModalHeader>{myHeader}</S.ActionCancelModalHeader>
-        <S.ModalMessage> 
-          {message}       
+        <S.ModalMessage>
+          {message}
         </S.ModalMessage>
         <S.ModalButtonsBar>
           <S.CancelButton onClick={()=> setDisplayModal(false)}>
