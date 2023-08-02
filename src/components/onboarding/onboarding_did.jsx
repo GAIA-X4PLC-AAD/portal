@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from 'prop-types';
 
-import { Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, StyledModal, Circle, ButtonText, BodyText, FadingBackground, CancelButton, BlueButton, H4Text } from "../../common/styles";
+import { Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, Circle, ButtonText, BodyText, CancelButton, BlueButton} from "../../common/styles";
 import { Padding } from "../discovery/tabs/style";
 import LoadingView from "../loading_view/LoadingView";
 import AuthPolling from "../login/AuthPolling";
@@ -165,8 +165,8 @@ const DidOnboardingView = ({ userType, nextStage }) => {
                                         <Row alignItems='space-between'>
                                             <FancyModalButton />
                                             <Padding horizontal='8px' />
-                                            <BlueButton 
-                                                disabled={!continue_button} 
+                                            <BlueButton
+                                                disabled={!continue_button}
                                                 onClick={nextStage}
                                                 >{t('onboarding.continue_button')}</BlueButton>
                                         </Row>

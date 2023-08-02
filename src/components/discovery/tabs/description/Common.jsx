@@ -5,7 +5,7 @@ import { Tag } from '../../../../common/styles';
 
 
 export const ShowElements = (elements) => {
-    if (elements === undefined || elements === []) return;
+    if (elements === undefined) return;
     return (
         elements.map((elem, i) => {return (<Tag key={i}>{elem}</Tag>)})
     );
@@ -36,7 +36,7 @@ export const ColumnItem = ({ title, subtitle }) => {
       </S.Padding>
     </>
   }
-  
+
   ColumnItem.propTypes = {
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.any.isRequired,

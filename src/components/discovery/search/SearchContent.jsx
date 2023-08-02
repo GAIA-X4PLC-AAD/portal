@@ -18,10 +18,14 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
     const addParams = serviceId || slot || '' != '' ? `/${serviceId}/${slot}` : '';
 
     const criteria = useSelector(state => state.searchCriteriaStore);
-    const PROVIDER_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/pr/registrations/search?${criteria.parameters}`;
-    const MANAGEMENT_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/management/requests/search?${criteria.parameters}`;
-    const SP_URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services${addParams}/search?${criteria.parameters}`;
-    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
+    // const PROVIDER_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/pr/registrations/search?${criteria.parameters}`;
+    const PROVIDER_URL = `/admin/pr/registrations/search?${criteria.parameters}`;
+    // const MANAGEMENT_URL = process.env.REACT_APP_EDGE_API_URI + `/admin/management/requests/search?${criteria.parameters}`;
+    const MANAGEMENT_URL = `/admin/management/requests/search?${criteria.parameters}`;
+    // const SP_URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services${addParams}/search?${criteria.parameters}`;
+    const SP_URL = `/discovery/services${addParams}/search?${criteria.parameters}`;
+    // const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/search?${criteria.parameters}`;
+    const URL = `/discovery/${type}/search?${criteria.parameters}`;
     const [refresh, setRefresh] = useState(0);
 
     const { t, i18n } = useTranslation();

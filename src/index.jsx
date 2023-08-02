@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom';
+import {createRoot} from 'react-dom/client';
+
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from 'react-redux';
 
@@ -68,13 +69,14 @@ store.subscribe(() => {
   saveToLocalStorage(store.getState());
 });
 
+const container = document.getElementById('root');
+const root = createRoot(container);
 
-ReactDOM.render(
+root.render(
   <Provider store={store}>
     <Suspense fallback="..... is loading" >
       <App />
     </Suspense>
 
   </Provider>,
-  document.getElementById('root')
 );

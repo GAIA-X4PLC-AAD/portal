@@ -6,6 +6,10 @@ export default defineConfig(() => {
         build: {
             outDir: 'build',
         },
-        plugins: [react()],
+        plugins: [
+            react({
+                include: "**/*.tsx, **/*.jsx",
+            })
+        ],
     };
 });

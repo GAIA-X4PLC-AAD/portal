@@ -559,18 +559,18 @@ export const H2Text = styled.div`
     /* color: white; */
 `;
 
-export const StyledModal = Modal.styled`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  opacity: ${(props) => props.opacity};
-  transition : all 0.3s ease-in-out;`;
-
-export const FadingBackground = styled(BaseModalBackground)`
-  opacity: ${(props) => props.opacity};
-  transition: all 0.3s ease-in-out;
-`;
+// export const StyledModal = Modal.styled`
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   background-color: white;
+//   opacity: ${(props) => props.opacity};
+//   transition : all 0.3s ease-in-out;`;
+//
+// export const FadingBackground = styled(BaseModalBackground)`
+//   opacity: ${(props) => props.opacity};
+//   transition: all 0.3s ease-in-out;
+// `;
 
 export const SliderBullet = styled.button`
     width: 18px;
