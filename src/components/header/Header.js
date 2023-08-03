@@ -44,8 +44,8 @@ function Header(props) {
                 <ReactTooltip />
                 <S.TopMenuLogo data-tip={t('left-menu.tooltip.home')}>
                     <Link to="/">
-                        <img src="/images/logo.svg" alt={t('left-menu.logo-alt-text')} height='60px' />
-                        <img src="/images/logo_GXPLC.png" alt={t('left-menu.logo-alt-text')} height='60px' className="header-gxplc-img"/>
+                            <img src="/images/logo.svg" alt={t('left-menu.logo-alt-text')} className="header-logo1"/>
+                            <img src="/images/logo-gaia-x-plc-aad.png" alt={t('left-menu.logo-alt-text')} className="header-logo2"/>
                     </Link>
                 </S.TopMenuLogo>
                 <CenterBar  />
