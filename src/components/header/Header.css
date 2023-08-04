@@ -1,6 +1,7 @@
-.header-logo1 {
-    padding-bottom: 12px;
+.header__logo1 {
+    width: 150px;
+    height: 84px;
 }
-.header-logo2 {
+.header__logo2 {
     padding-left: 20px;
 }

@@ -1,21 +1,27 @@
 import styled from 'styled-components';
 
+export const SubMenu = styled.div`
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    height: 12px;
+    background-color: #000094 !important;
+` ;
 export const TopMenu = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   margin: auto;
   width: var(--content-width);
+  padding-bottom: 10px;
 `;
 
 export const TopMenuLogo = styled.div`
   display: flex;
-  margin: 4px 0;
 `;
 
 export const TopMenuLinks = styled.div`
   display: flex;
   column-gap: 2em;
-  margin: auto 0;
+  margin-left: 50px;
 `;
 
 export const TopMenuLinkButton = styled.a`

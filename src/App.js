@@ -112,9 +112,9 @@ const App = (props) => {
             </div>
           </div>
         </div>
-        <div className='footer-bottom'>
-          <p>{t('footer_business_only')}</p>
-        </div>
+        {/*<div className='footer-bottom'>*/}
+        {/*  <p>{t('footer_business_only')}</p>*/}
+        {/*</div>*/}
       </div>
     </div>
 
