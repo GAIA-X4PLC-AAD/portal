@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from 'react-redux';
-
+import {DataProvider} from "./context/data.context";
 import './index.css';
 import App from './App';
 import './i18n';
@@ -71,10 +71,11 @@ store.subscribe(() => {
 
 ReactDOM.render(
   <Provider store={store}>
+    <DataProvider>
     <Suspense fallback="..... is loading" >
       <App />
     </Suspense>
-
+    </DataProvider>
   </Provider>,
   document.getElementById('root')
 );
