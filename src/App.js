@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import WorkInProgress from './WorkInProgress';
 import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
@@ -21,7 +21,7 @@ import SearchView from './components/discovery/search/SearchView';
 import DashboardPage from './components/dashboard/dashboard_page';
 import OnboardingPage from './components/onboarding/onboarding_page';
 import ProvideAttributes from './components/provide/ProvideAttributes';
-import { Column, Padding } from './common/styles';
+import {BlueButton, Column, Padding} from './common/styles';
 import Article from './components/article/Article';
 import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
 import ProvideSelection from './components/provide/ProvideSelection';
@@ -31,11 +31,35 @@ import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import history from "./common/history"
 import AboutPage from "./components/help/AboutPage"
 import SupportPage from "./components/help/SupportPage"
+import {ApiService} from "./services/ApiService";
+import DataList from "./components/discovery/dataList/DataList";
+import axios from "axios";
 
 
 const App = (props) => {
-  const { t, i18n } = useTranslation();
 
+  const [selfDescriptionData, setSelfDescriptionData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const { t, i18n } = useTranslation();
+  const getDataHandler = async () => {
+    setIsLoading(true);
+    const API_URL = "https://metadatasearch.gxfs.gx4fm.org/service-offerings?node_shape=http://semanticweb.org/metadatasurveyontology/SurveyResultDataOfferingShape"
+    const response = await axios.get(API_URL);
+    console.log("Response: ", response);
+    const data = response.data;
+    console.log("Response: ", data);
+    const transformedSelfDescriptionData = data.data.map(selfDescriptions => {
+      return {
+        id: selfDescriptions.survey_id,
+        title: selfDescriptions.survey_title,
+        description: selfDescriptions.survey_description
+      };
+    })
+    console.log("transformedSelfDescriptionData: ", transformedSelfDescriptionData);
+    setSelfDescriptionData(transformedSelfDescriptionData);
+    setIsLoading(false);
+  }
   const ViewContainer = (view) => {
     return <div className='body-container'>{view}</div>
   }
@@ -50,6 +74,10 @@ const App = (props) => {
             <Routes>
               <Route path="/" element={
                 <Column>
+                  <BlueButton onClick={getDataHandler}>Get Data</BlueButton>
+                  {!isLoading && selfDescriptionData.length > 0 && <DataList data={selfDescriptionData}></DataList>}
+                  {isLoading && selfDescriptionData.length === 0 && <p>No data found...</p>}
+                  {isLoading && <p>Loading...</p>}
                   <Home />
                   {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
                 </Column>

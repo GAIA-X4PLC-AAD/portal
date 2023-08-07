@@ -43,7 +43,7 @@ const DataTile = ({ input, id, t }) => {
                 <ExpandableView initiallyExpanded={false}
                     view={ContactTab({ id, type: type })}
                     title={<>{padTitle({ _titleView: <>{t("service-tile.contact")}</> })}</>}
-                    titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width} 
+                    titleTrailerPadding="12px" viewLeadingPadding="40px" titleLeadingPadding="40px" arrowColor="#B3B3B3" width={_width}
                     shiftedBottomBorder={false} borderBottom={false}/>
             </>
         )
@@ -55,29 +55,32 @@ const DataTile = ({ input, id, t }) => {
                 <Row alignItems='Center' justifyContent='start'>
                     <Padding horizontal='28px' vertical='24px'><CheckBox type="checkbox" /></Padding>
                     {/* LOGO */}
-                    <a href={"#" || input.services.ppr_url}>
-                        {/* <Image */}
-                        <Image src={input.logo} alt='Provider Logo' width='48px' height='48px' />
+                    <a href={"#"}>
+                        <Image src='/images/logo-placeholder.png' alt='Provider Logo' width='48px' height='48px' />
                     </a>
                     <Padding paddingLeft='62px' />
 
                     <Row alignItems='Center' justifyContent='space-between'>
                         {/* NAME */}
                         <Column>
-                            <S.DiscoveryTileFirstRow width={'152px'}>{input.name}</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.ppr_name}</S.DiscoveryTileSecondRow>
+                            <S.DiscoveryTileFirstRow width={'152px'}>ID</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.id}</S.DiscoveryTileSecondRow>
+                        </Column>
+                        {/* Title */}
+                        <Column>
+                            <S.DiscoveryTileFirstRow width={'152px'}>Title</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.title}</S.DiscoveryTileSecondRow>
                         </Column>
                         {/* SHORT DESCRIPTION */}
                         <Padding paddingLeft='60px' />
                         <Column>
                             <S.DiscoveryTileFirstRow width={'80px'}>{t("service-tile.header.sortDescription")}</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.short_description}</S.DiscoveryTileSecondRow>
+                            <S.DiscoveryTileSecondRow>{input.description}</S.DiscoveryTileSecondRow>
                         </Column>
                         <Padding paddingLeft='80px' />
                         {/* LOCATION */}
                         <Column>
                             <S.DiscoveryTileFirstRow width={'120px'}>{t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.location}</S.DiscoveryTileSecondRow>
                         </Column>
                     </Row>
                     {/* DETAILS */}
