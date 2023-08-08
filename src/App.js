@@ -34,6 +34,7 @@ import SupportPage from "./components/help/SupportPage"
 import {ApiService} from "./services/ApiService";
 import DataList from "./components/discovery/dataList/DataList";
 import axios from "axios";
+import {Footer} from "./components/footer/Footer";
 
 
 const App = (props) => {
@@ -53,7 +54,15 @@ const App = (props) => {
       return {
         id: selfDescriptions.survey_id,
         title: selfDescriptions.survey_title,
-        description: selfDescriptions.survey_description
+        description: selfDescriptions.survey_description,
+        claimsGraphUri: selfDescriptions.claimsGraphUri,
+        close_time: selfDescriptions.survey_close_time,
+        creation_time: selfDescriptions.survey_creation_time,
+        end_time: selfDescriptions.survey_end_time,
+        start_time: selfDescriptions.survey_start_time,
+        state: selfDescriptions.survey_state,
+        url: selfDescriptions.survey_url,
+        uri: selfDescriptions.uri
       };
     })
     console.log("transformedSelfDescriptionData: ", transformedSelfDescriptionData);
@@ -74,15 +83,19 @@ const App = (props) => {
             <Routes>
               <Route path="/" element={
                 <Column>
-                  <BlueButton onClick={getDataHandler}>Get Data</BlueButton>
-                  {!isLoading && selfDescriptionData.length > 0 && <DataList data={selfDescriptionData}></DataList>}
-                  {isLoading && selfDescriptionData.length === 0 && <p>No data found...</p>}
-                  {isLoading && <p>Loading...</p>}
                   <Home />
-                  {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
+                  {ViewContainer(<Article headerMessage="article.what-is-gaiax" category="ARTICLE" />)}
                 </Column>
               }
               />
+              <Route path="/search" element={
+                <div className='body-container'>
+                  <BlueButton onClick={getDataHandler}>Get Data</BlueButton>
+                  {!isLoading && selfDescriptionData.length > 0 && <DataList data={selfDescriptionData}></DataList>}
+                  {selfDescriptionData.length === 0 && <p>No data found...</p>}
+                  {isLoading && <p>Loading...</p>}
+                </div>
+              } />
               <Route path="/data" element={ViewContainer(<SearchView type="data" />)} />
               <Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
@@ -119,31 +132,7 @@ const App = (props) => {
         </HistoryRouter>
       </div>
 
-      <div className='footer-container'>
-        <div className='footer-flex-col'>
-          <div className='footer-banner'>
-            <img src='/images/logo_white.svg' height='50px' ></img>
-            <p>{t('footer_slogan_cap')}</p>
-          </div>
-          <div className='footer-content'>
-            {/*<div>*/}
-            {/*  <a href={t('links.legal_notice_link')}>{t('links.legal_notice')}</a>*/}
-            {/*</div>*/}
-            <div>
-              <a href='#'>{t('links.imprint')}</a>
-              <a href='#'>{t('links.privacy')}</a>
-              <a href='#'>{t('links.policy')}</a>
-              <a href='#'>{t('links.cookie_settings')}</a>
-              <a href='#'>{t('links.terms_and_conditions')}</a>
-              <a href='#'>{t('links.contact')}</a>
-              <a href='#'>{t('links.help')}</a>
-            </div>
-          </div>
-        </div>
-        {/*<div className='footer-bottom'>*/}
-        {/*  <p>{t('footer_business_only')}</p>*/}
-        {/*</div>*/}
-      </div>
+      <Footer />
     </div>
 
   );

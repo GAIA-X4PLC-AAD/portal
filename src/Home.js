@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import { Circle, Column, SliderBullet, H2Text, BodyText, Style } from "./common/styles";
 import { Padding } from "./components/discovery/tabs/style";
 import SearchTerm from "./components/discovery/search/SearchTerm";
+import {Link} from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -38,23 +39,26 @@ const Home = () => {
   const { t, i18n } = useTranslation();
 
   const buildSliderContent = ({ index = 0 }) => {
-    return <Column key = {`${index}`} justifyContent='center' alignItems='center'>
-      <H2Text color={'#fff'}>{t('article.what-is-new')} {index}</H2Text>
-      <Style maxWidth='600px'>
-        <BodyText color={'#fff'} textAlign='center'>{t('filler')}</BodyText>
-      </Style>
+      return <Column key = {`${index}`} justifyContent='center' alignItems='center'>
+        {/*<Link to="#">*/}
+        {/*  <img className='image-gallery-image' src="https://gaia-x.eu/wp-content/uploads/2023/08/sliding-banner_Roadshow-banner_Draft-V3_DESKTOP-MOBILE-V2_Roadshow-Banner_Desktop_V2.jpg" alt={t('left-menu.logo-alt-text')}/>*/}
+        {/*</Link>*/}
+        <H2Text color={'#fff'}>{t('article.what-is-new')} {index}</H2Text>
+        <Style maxWidth='600px'>
+          <BodyText color={'#fff'} textAlign='center'>{t('filler')}</BodyText>
+        </Style>
 
       <h4></h4>
-      <Padding vertical='20px' />
-    </Column>
-  }
+        <Padding vertical='20px' />
+      </Column>
+    }
 
   const slides = [
     buildSliderContent({ index: 1 }),
-    buildSliderContent({ index: 2 }),
-    buildSliderContent({ index: 3 }),
-    buildSliderContent({ index: 4 }),
-    buildSliderContent({ index: 5 }),
+    // buildSliderContent({ index: 2 }),
+    // buildSliderContent({ index: 3 }),
+    // buildSliderContent({ index: 4 }),
+    // buildSliderContent({ index: 5 }),
   ]
 
   const CustomDot = ({ onClick, ...rest }) => {
@@ -103,16 +107,14 @@ const Home = () => {
           <img key='i02' src='/images/gaia-x-logo-white.png' height='111px' width='200px'></img>
           <Padding key='i03' paddingTop='40px' />
           <Style key='i04' height='100%' width='100%'>{HomeSlider()}</Style>
-
-
         </Column>
       </div >
 
       <div className='search-container'>
         <Padding vertical='40px'>
-          <SearchTerm type='home' 
-                      inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF' 
-                      displayAsColumn={false} 
+          <SearchTerm type='home'
+                      inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF'
+                      displayAsColumn={false}
                       />
         </Padding>
       </div>

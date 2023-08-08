@@ -92,13 +92,21 @@ const CenterBar = () => {
           _isFr ? '' :
             <>
               {/* SERVICES: 2 */}
-              <ButtonText selected={location.pathname === '/services'}
+              <ButtonText selected={location.pathname === '/search'}
                 color='#000000'
-                onClick={() => { navigate('/services'); }}
-                data-tip={t('left-menu.tooltip.services')}
+                onClick={() => { navigate('/search'); }}
+                data-tip='Suche'
                 >
-                  {t('left-menu.services')}
+                {t('left-menu.search')}
               </ButtonText>
+              {/* SERVICES: 2 */}
+              {/*<ButtonText selected={location.pathname === '/services'}*/}
+              {/*  color='#000000'*/}
+              {/*  onClick={() => { navigate('/services'); }}*/}
+              {/*  data-tip={t('left-menu.tooltip.services')}*/}
+              {/*  >*/}
+              {/*    {t('left-menu.services')}*/}
+              {/*</ButtonText>*/}
 
               {/* DATA: 3 */}
               {/*<ButtonText selected={location.pathname === '/data'}*/}

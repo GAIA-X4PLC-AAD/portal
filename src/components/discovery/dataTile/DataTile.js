@@ -63,25 +63,32 @@ const DataTile = ({ input, id, t }) => {
                     <Row alignItems='Center' justifyContent='space-between'>
                         {/* NAME */}
                         <Column>
-                            <S.DiscoveryTileFirstRow width={'152px'}>ID</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileFirstRow width={'172px'}>ID</S.DiscoveryTileFirstRow>
                             <S.DiscoveryTileSecondRow>{input.id}</S.DiscoveryTileSecondRow>
                         </Column>
                         {/* Title */}
+                        <Padding paddingLeft='80px' />
                         <Column>
-                            <S.DiscoveryTileFirstRow width={'152px'}>Title</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileFirstRow width={'172px'}>Title</S.DiscoveryTileFirstRow>
                             <S.DiscoveryTileSecondRow>{input.title}</S.DiscoveryTileSecondRow>
                         </Column>
                         {/* SHORT DESCRIPTION */}
-                        <Padding paddingLeft='60px' />
+                        <Padding paddingLeft='80px' />
                         <Column>
-                            <S.DiscoveryTileFirstRow width={'80px'}>{t("service-tile.header.sortDescription")}</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileFirstRow width={'80px'}>Description</S.DiscoveryTileFirstRow>
                             <S.DiscoveryTileSecondRow>{input.description}</S.DiscoveryTileSecondRow>
                         </Column>
                         <Padding paddingLeft='80px' />
-                        {/* LOCATION */}
                         <Column>
-                            <S.DiscoveryTileFirstRow width={'120px'}>{t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileFirstRow width={'80px'}>Start time</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.start_time}</S.DiscoveryTileSecondRow>
                         </Column>
+                        <Padding paddingLeft='80px' />
+                        <Column>
+                            <S.DiscoveryTileFirstRow width={'172px'}>URI</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.uri}</S.DiscoveryTileSecondRow>
+                        </Column>
+                        <Padding paddingLeft='80px' />
                     </Row>
                     {/* DETAILS */}
                     <Style flexGrow='1'>
