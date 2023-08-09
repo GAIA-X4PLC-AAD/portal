@@ -24,16 +24,16 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
     const [searchTerm, setSearchTerm] = useState('');
     const [advance, setAdvance] = useState(false);
     const [chips, setChips] = useState([]);
-    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${API_TYPE(type)}/suggestions?searchTerm=${encodeURIComponent(searchTerm)}`;
+    // const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${API_TYPE(type)}/suggestions?searchTerm=${encodeURIComponent(searchTerm)}`;
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if (type != "management" && type != "participant") {
-            callApi();
-        }
-    }, [advance]);
+    // useEffect(() => {
+    //     if (type != "management" && type != "participant") {
+    //         callApi();
+    //     }
+    // }, [advance]);
 
     useEffect(() => {
         if (criteria.type === 'home') {
@@ -48,20 +48,20 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
                 if (searchTerm.includes(chip.term)) return true;
                 return false;
             }, false);
-            if (chipAdded || searchTerm === '') {
-                if (type != "management" && type != "participant") {
-                    callApi();
-                }
-            }
+            // if (chipAdded || searchTerm === '') {
+            //     if (type != "management" && type != "participant") {
+            //         callApi();
+            //     }
+            // }
         }
         , [searchTerm]);
 
 
-    const callApi = () => {
-        axios.get(URL).then(res => {
-            setChips(res.data.results);
-        });
-    }
+    // const callApi = () => {
+    //     axios.get(URL).then(res => {
+    //         setChips(res.data.results);
+    //     });
+    // }
     const doSearch = () => {
         if (type === 'home') {
             dispatch(updateSearchFromHome(searchTerm));
@@ -79,8 +79,8 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
         if (type === 'management' || type === 'participant') return null;
         if (advance === false) {
             return (
-            <S.AdvancedSearch color={advancedTextColor} 
-                    displayAbsolute={displayAbsolute} 
+            <S.AdvancedSearch color={advancedTextColor}
+                    displayAbsolute={displayAbsolute}
                     onClick={() => setAdvance(true)}
                     data-tip={t('home.tooltip.advanced_search')}
                     >
@@ -94,16 +94,16 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
         if (type === 'management' || type === 'participant') return null;
         if (advance === true) {
             return chips.map(
-                (chip) => { 
+                (chip) => {
                     return (
-                        <S.AdvancedSearch 
-                            color={advancedTextColor} 
-                            onClick={() => { addChipToSearch(chip) }} 
+                        <S.AdvancedSearch
+                            color={advancedTextColor}
+                            onClick={() => { addChipToSearch(chip) }}
                             key={chip.label}
                             data-tip={t('home.tooltip.chip')}
                             >{chip.label}
                         </S.AdvancedSearch>
-                    ) 
+                    )
                     }
             );
         }
@@ -129,12 +129,12 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
         <>
             <Row position='relative'>
                 {displayAsColumn ? '' : <S.AdvancedSearchText color='white'>Search for lorem ipsum</S.AdvancedSearchText>}
-                <S.SearchTerm type="text" width={inputWidth} onKeyPress={onKeyPress} value={searchTerm} 
-                    onChange={(e) => { setSearchTerm(e.target.value) }} 
+                <S.SearchTerm type="text" width={inputWidth} onKeyPress={onKeyPress} value={searchTerm}
+                    onChange={(e) => { setSearchTerm(e.target.value) }}
                     data-tip={t('home.tooltip.search_terms')}
                     />
-                <S.SearchPlusButton 
-                    onClick={doSearch} 
+                <S.SearchPlusButton
+                    onClick={doSearch}
                     data-tip={t('home.tooltip.search')}
                     >
                     <Circle background={advancedSearchBgColor} radius='46px' borderRadius='4px' borderColor={advancedSearchBgColor}>

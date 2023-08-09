@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const SubMenu = styled.div`
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    height: 12px;
+    background-color: #000094 !important;
+` ;
 export const TopMenu = styled.div`
   display: flex;
   justify-content: space-between;
@@ -33,12 +39,13 @@ export const HeaderButton = styled.button`
   border-radius: 4px 4px 4px 4px;
   background-color: #fff;
   color: #000094;
-  margin: 1.33em 0px;
+  margin: 50px 0 50px 0;
   /* margin-block-start: 1.33em;
   margin-block-end: 1.33em; */
   padding: 12px 20px;
   text-decoration: none;
   font-weight: 700;
+
 
 
   &:hover{
