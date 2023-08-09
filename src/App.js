@@ -33,7 +33,6 @@ import AboutPage from "./components/help/AboutPage"
 import SupportPage from "./components/help/SupportPage"
 import {ApiService} from "./services/ApiService";
 import DataList from "./components/discovery/dataList/DataList";
-import axios from "axios";
 import {Footer} from "./components/footer/Footer";
 
 
@@ -45,28 +44,7 @@ const App = (props) => {
   const { t, i18n } = useTranslation();
   const getDataHandler = async () => {
     setIsLoading(true);
-    const API_URL = "https://metadatasearch.gxfs.gx4fm.org/service-offerings?node_shape=http://semanticweb.org/metadatasurveyontology/SurveyResultDataOfferingShape"
-    const response = await axios.get(API_URL);
-    console.log("Response: ", response);
-    const data = response.data;
-    console.log("Response: ", data);
-    const transformedSelfDescriptionData = data.data.map(selfDescriptions => {
-      return {
-        id: selfDescriptions.survey_id,
-        title: selfDescriptions.survey_title,
-        description: selfDescriptions.survey_description,
-        claimsGraphUri: selfDescriptions.claimsGraphUri,
-        close_time: selfDescriptions.survey_close_time,
-        creation_time: selfDescriptions.survey_creation_time,
-        end_time: selfDescriptions.survey_end_time,
-        start_time: selfDescriptions.survey_start_time,
-        state: selfDescriptions.survey_state,
-        url: selfDescriptions.survey_url,
-        uri: selfDescriptions.uri
-      };
-    })
-    console.log("transformedSelfDescriptionData: ", transformedSelfDescriptionData);
-    setSelfDescriptionData(transformedSelfDescriptionData);
+    setSelfDescriptionData(await ApiService.getData());
     setIsLoading(false);
   }
   const ViewContainer = (view) => {
@@ -84,7 +62,7 @@ const App = (props) => {
               <Route path="/" element={
                 <Column>
                   <Home />
-                  {ViewContainer(<Article headerMessage="article.what-is-gaiax" category="ARTICLE" />)}
+                  {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
                 </Column>
               }
               />

@@ -53,42 +53,42 @@ const DataTile = ({ input, id, t }) => {
         return (
             <S.DiscoveryTile>
                 <Row alignItems='Center' justifyContent='start'>
-                    <Padding horizontal='28px' vertical='24px'><CheckBox type="checkbox" /></Padding>
+                    {/*<Padding horizontal='28px' vertical='24px'><CheckBox type="checkbox" /></Padding>*/}
                     {/* LOGO */}
-                    <a href={"#"}>
-                        <Image src='/images/logo-placeholder.png' alt='Provider Logo' width='48px' height='48px' />
-                    </a>
-                    <Padding paddingLeft='62px' />
-
-                    <Row alignItems='Center' justifyContent='space-between'>
-                        {/* NAME */}
+                    {/*<a href={"#"}>*/}
+                    {/*    <Image src='/images/logo-placeholder.png' alt='Provider Logo' width='48px' height='48px' />*/}
+                    {/*</a>*/}
+                    {/*<Padding paddingLeft='20px' />*/}
+                    <Padding horizontal='28px' vertical='24px'>
                         <Column>
-                            <S.DiscoveryTileFirstRow width={'172px'}>ID</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.id}</S.DiscoveryTileSecondRow>
-                        </Column>
-                        {/* Title */}
-                        <Padding paddingLeft='80px' />
-                        <Column>
-                            <S.DiscoveryTileFirstRow width={'172px'}>Title</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.title}</S.DiscoveryTileSecondRow>
-                        </Column>
-                        {/* SHORT DESCRIPTION */}
-                        <Padding paddingLeft='80px' />
-                        <Column>
-                            <S.DiscoveryTileFirstRow width={'80px'}>Description</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.description}</S.DiscoveryTileSecondRow>
-                        </Column>
-                        <Padding paddingLeft='80px' />
-                        <Column>
-                            <S.DiscoveryTileFirstRow width={'80px'}>Start time</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.start_time}</S.DiscoveryTileSecondRow>
-                        </Column>
-                        <Padding paddingLeft='80px' />
-                        <Column>
-                            <S.DiscoveryTileFirstRow width={'172px'}>URI</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileFirstRow width={'120px'}>URI</S.DiscoveryTileFirstRow>
                             <S.DiscoveryTileSecondRow>{input.uri}</S.DiscoveryTileSecondRow>
                         </Column>
-                        <Padding paddingLeft='80px' />
+                    </Padding>
+                    <Padding paddingLeft='80px' />
+
+                    <Row alignItems='Center' justifyContent='space-between'>
+                        <Column>
+                            <S.DiscoveryTileFirstRow width={'100px'}>Survey ID</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.id}</S.DiscoveryTileSecondRow>
+                        </Column>
+                        <Padding paddingLeft='20px' />
+                        <Column>
+                            <S.DiscoveryTileFirstRow width={'100px'}>Survey Title</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.title}</S.DiscoveryTileSecondRow>
+                        </Column>
+                        <Padding paddingLeft='20px' />
+                        <Column>
+                            <S.DiscoveryTileFirstRow width={'200px'}>Survey Description</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.description}</S.DiscoveryTileSecondRow>
+                        </Column>
+                        <Padding paddingLeft='20px' />
+                        <Column>
+                            <S.DiscoveryTileFirstRow width={'200px'}>Survey Start Time</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.start_time}</S.DiscoveryTileSecondRow>
+                        </Column>
+                        <Padding paddingLeft='20px' />
+
                     </Row>
                     {/* DETAILS */}
                     <Style flexGrow='1'>

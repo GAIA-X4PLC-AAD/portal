@@ -8,20 +8,20 @@ export const SubMenu = styled.div`
 ` ;
 export const TopMenu = styled.div`
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   margin: auto;
   width: var(--content-width);
-  padding-bottom: 10px;
 `;
 
 export const TopMenuLogo = styled.div`
   display: flex;
+  margin: 4px 0;
 `;
 
 export const TopMenuLinks = styled.div`
   display: flex;
   column-gap: 2em;
-  margin-left: 50px;
+  margin: auto 0;
 `;
 
 export const TopMenuLinkButton = styled.a`
@@ -39,12 +39,13 @@ export const HeaderButton = styled.button`
   border-radius: 4px 4px 4px 4px;
   background-color: #fff;
   color: #000094;
-  margin: 1.33em 0px;
+  margin: 50px 0 50px 0;
   /* margin-block-start: 1.33em;
   margin-block-end: 1.33em; */
   padding: 12px 20px;
   text-decoration: none;
   font-weight: 700;
+
 
 
   &:hover{
