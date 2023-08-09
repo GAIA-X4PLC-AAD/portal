@@ -88,7 +88,7 @@ const App = (props) => {
                 </Column>
               }
               />
-              <Route path="/search" element={
+              <Route path="/service-offerings" element={
                 <div className='body-container'>
                   <BlueButton onClick={getDataHandler}>Get Data</BlueButton>
                   {!isLoading && selfDescriptionData.length > 0 && <DataList data={selfDescriptionData}></DataList>}
@@ -96,8 +96,13 @@ const App = (props) => {
                   {isLoading && <p>Loading...</p>}
                 </div>
               } />
-              <Route path="/data" element={ViewContainer(<SearchView type="data" />)} />
-              <Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />
+
+
+              {/*<Route path="/data" element={ViewContainer(<SearchView type="data" />)} />*/}
+              <Route path="/resources" element={ViewContainer(<SearchView type="data" />)} />
+
+              <Route path="/participants" element={ViewContainer(<SearchView type="ppr" />)} />
+              {/*<Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />*/}
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
               <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
               <Route path="/signin" element={ViewContainer(<Login />)} />

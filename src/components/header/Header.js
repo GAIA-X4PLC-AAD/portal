@@ -50,7 +50,7 @@ function Header(props) {
                 </S.TopMenuLogo>
                 <CenterBar  />
                 <Row>
-                {/*    <SignInBar handleSignOut={handleSignOut} handleSignIn={handleSignIn} handleRegister={handleRegister} />*/}
+                    <SignInBar handleSignOut={handleSignOut} handleSignIn={handleSignIn} handleRegister={handleRegister} />
                 </Row>
 
             </S.TopMenu>

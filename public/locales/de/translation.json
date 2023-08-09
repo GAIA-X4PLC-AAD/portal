@@ -4,9 +4,9 @@
   },
   "left-menu": {
     "home": "Startseite",
-    "services": "Dienstleistungen",
-    "data": "Daten",
-    "provider": "Anbieter",
+    "service-offerings": "Service Offerings",
+    "resources": "Resources",
+    "participants": "Participants",
     "provide": "Bereitstellen",
     "help": "Hilfe",
     "search": "Suche",
@@ -32,7 +32,10 @@
       "data": "Ermittlungsdaten im Verbundkatalog",
       "provider": "Ermittlungsanbieter im Verbundkatalog",
       "provide": "Geben Sie eine Selbstbeschreibung für Dienst/Daten/Knoten an",
-      "change-language": "Sprache ändern"
+      "change-language": "Sprache ändern",
+      "service-offerings": "Service Offerings des Ecosystems",
+      "resources": "Resources des Ecosystems",
+      "participants": "Participants des Ecosystems"
     }
   },
   "dashboard": {

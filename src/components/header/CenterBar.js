@@ -92,53 +92,45 @@ const CenterBar = () => {
           _isFr ? '' :
             <>
               {/* SERVICES: 2 */}
-              <ButtonText selected={location.pathname === '/search'}
+              <ButtonText selected={location.pathname === '/service-offerings'}
                 color='#000000'
-                onClick={() => { navigate('/search'); }}
-                data-tip='Suche'
+                onClick={() => { navigate('/service-offerings'); }}
+                data-tip={t('left-menu.tooltip.service-offerings')}
                 >
-                {t('left-menu.search')}
+                  {t('left-menu.service-offerings')}
               </ButtonText>
-              {/* SERVICES: 2 */}
-              {/*<ButtonText selected={location.pathname === '/services'}*/}
-              {/*  color='#000000'*/}
-              {/*  onClick={() => { navigate('/services'); }}*/}
-              {/*  data-tip={t('left-menu.tooltip.services')}*/}
-              {/*  >*/}
-              {/*    {t('left-menu.services')}*/}
-              {/*</ButtonText>*/}
 
               {/* DATA: 3 */}
-              {/*<ButtonText selected={location.pathname === '/data'}*/}
-              {/*  color='#000000'*/}
-              {/*  onClick={() => { navigate('/data'); }}*/}
-              {/*  data-tip={t('left-menu.tooltip.data')}*/}
-              {/*  >*/}
-              {/*    {t('left-menu.data')}*/}
-              {/*</ButtonText>*/}
+              <ButtonText selected={location.pathname === '/resources'}
+                color='#000000'
+                onClick={() => { navigate('/resources'); }}
+                data-tip={t('left-menu.tooltip.resources')}
+                >
+                  {t('left-menu.resources')}
+              </ButtonText>
 
               {/* PROVIDER: 4 */}
-              {/*<ButtonText*/}
-              {/*  selected={location.pathname === '/provider'}*/}
-              {/*  color='#000000'*/}
-              {/*  onClick={() => { navigate('/provider'); }}*/}
-              {/*  data-tip={t('left-menu.tooltip.provider')}*/}
-              {/*  >*/}
-              {/*    {t('left-menu.provider')}*/}
-              {/*</ButtonText>*/}
+              <ButtonText
+                selected={location.pathname === '/participants'}
+                color='#000000'
+                onClick={() => { navigate('/participants'); }}
+                data-tip={t('left-menu.tooltip.participants')}
+                >
+                  {t('left-menu.participants')}
+              </ButtonText>
 
               {/* PROVIDE: 5 */}
-              {/*{_isPpr*/}
-              {/*  ?*/}
-              {/*  <ButtonText*/}
-              {/*    selected={location.pathname.includes('/provide/')}*/}
-              {/*    color='#000000' onClick={() => { navigate('/provide/start'); }}*/}
-              {/*    data-tip={t('left-menu.tooltip.provide')}*/}
-              {/*    >*/}
-              {/*      {t('left-menu.provide')}*/}
-              {/*  </ButtonText>*/}
-              {/*   : ''*/}
-              {/*}*/}
+              {_isPpr
+                ?
+                <ButtonText
+                  selected={location.pathname.includes('/provide/')}
+                  color='#000000' onClick={() => { navigate('/provide/start'); }}
+                  data-tip={t('left-menu.tooltip.provide')}
+                  >
+                    {t('left-menu.provide')}
+                </ButtonText>
+                 : ''
+              }
 
             </>
         }
