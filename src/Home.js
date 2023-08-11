@@ -101,15 +101,12 @@ const Home = () => {
       <div className='banner-container'>
         <Column alignItems='center' height='100px'>
           <Padding key='i01' paddingTop='140px' />
-          <img key='i02' src='/images/logos/plcaad_white.webp'></img>
+          <img key='i02' src='/images/logos/plcaad_white.webp' alt='PLC-AAD Logo'/>
           <Padding key='i03' paddingTop='40px' />
-          {/*<Style key='i04' height='100%' width='100%'>{HomeSlider()}</Style>*/}
-          <div>
-            <H2Text color={'#fff'}>{t('home.marketplace')}</H2Text>
-            <Style maxWidth='600px'>
-              <BodyText color={'#fff'} textAlign='center'>{t('home.marketplace_text')}</BodyText>
-            </Style>
-          </div>
+          <H2Text color={'#fff'}>{t('home.marketplace')}</H2Text>
+          <Style maxWidth='600px'>
+            <BodyText color={'#fff'} textAlign='center'>{t('home.marketplace_text')}</BodyText>
+          </Style>
         </Column>
       </div >
 

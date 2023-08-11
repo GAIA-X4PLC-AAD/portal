@@ -97,9 +97,10 @@ body{
 .banner-container {
   /* background-image: url('../public/images/backgrounds/banner_gradient.png'); */
   min-height: var(--banner-height);
-  background-image: url('../public/images/backgrounds/background2.png');
+  /*background-image: url('../public/images/backgrounds/background2.png');*/
   /* background-size: 100% auto; */
-  background-position: 50% 50%;
+  background: linear-gradient(110deg, rgb(185, 0, 255), 15%, rgb(0, 0, 148), 75%, rgb(70, 218, 255));
+  /*background-position: 50% 50%;*/
   position: relative;
   overflow: hidden;
 }

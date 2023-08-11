@@ -556,7 +556,7 @@ export const H2Text = styled.div`
     font-size: 36px;
     line-height: 48px;
     color: ${props => props.color || '#1C0E15' };
-    /* color: white; */
+    text-align:center;
 `;
 
 /* export const StyledModal = Modal.styled`

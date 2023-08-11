@@ -141,13 +141,13 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
                         <S.SearchPlusImage />
                         </Circle>
                 </S.SearchPlusButton>
-                {displayAsColumn ? '' : showAdvanceMessage(advance, !displayAsColumn)}
+                {/*{displayAsColumn ? '' : showAdvanceMessage(advance, !displayAsColumn)}*/}
             </Row>
-            <Row height='28px' justifyContent='left' alignItems='space-equally' alignSelf='end' >
-                {/* <Padding horizontal={displayAsColumn ? '0px' : '12px'}>{showAdvanceSearchChip(advance)}</Padding> */}
-                {displayAsColumn ? showAdvanceMessage(advance) : null}
-                {showAdvanceSearchChip(advance)}
-            </Row>
+            {/*<Row height='28px' justifyContent='left' alignItems='space-equally' alignSelf='end' >*/}
+            {/*    /!* <Padding horizontal={displayAsColumn ? '0px' : '12px'}>{showAdvanceSearchChip(advance)}</Padding> *!/*/}
+            {/*    {displayAsColumn ? showAdvanceMessage(advance) : null}*/}
+            {/*    {showAdvanceSearchChip(advance)}*/}
+            {/*</Row>*/}
         </>
 
     const justify = displayAsColumn ? 'left' : 'center';
