@@ -95,12 +95,9 @@ body{
 
 
 .banner-container {
-  /*
-  background-image: url('../public/images/banner_gradient.png');
-
-  */
+  /* background-image: url('../public/images/backgrounds/banner_gradient.png'); */
   min-height: var(--banner-height);
-  background-image: url('../public/images/Vector_2727\ 1_merged01.png');
+  background-image: url('../public/images/backgrounds/background1.png');
   /* background-size: 100% auto; */
   background-position: 50% 50%;
   position: relative;

@@ -56,7 +56,7 @@ const DataTile = ({ input, id, t }) => {
                     {/*<Padding horizontal='28px' vertical='24px'><CheckBox type="checkbox" /></Padding>*/}
                     {/* LOGO */}
                     {/*<a href={"#"}>*/}
-                    {/*    <Image src='/images/logo-placeholder.png' alt='Provider Logo' width='48px' height='48px' />*/}
+                    {/*    <Image src='/images/logos/placeholder.png' alt='Provider Logo' width='48px' height='48px' />*/}
                     {/*</a>*/}
                     {/*<Padding paddingLeft='20px' />*/}
                     <Padding horizontal='28px' vertical='24px'>

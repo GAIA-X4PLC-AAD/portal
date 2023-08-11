@@ -104,7 +104,7 @@ const Home = () => {
       <div className='banner-container'>
         <Column alignItems='center' height='100px'>
           <Padding key='i01' paddingTop='140px' />
-          <img key='i02' src='/images/gaia-x-logo-white.png' height='111px' width='200px'></img>
+          <img key='i02' src='/images/logos/gaiax_white.svg' height='111px' width='200px'></img>
           <Padding key='i03' paddingTop='40px' />
           <Style key='i04' height='100%' width='100%'>{HomeSlider()}</Style>
         </Column>

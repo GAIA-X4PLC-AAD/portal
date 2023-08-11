@@ -6,7 +6,7 @@ export const Footer = () => {
         <div className='footer-container'>
             <div className='footer-flex-col'>
                 <div className='footer-banner'>
-                    <img src='/images/logo_white.svg' height='50px' ></img>
+                    <img src='/images/logos/gaiax_white.svg' height='50px' ></img>
                     <p>{t('footer_slogan_cap')}</p>
                 </div>
                 <div className='footer-content'>

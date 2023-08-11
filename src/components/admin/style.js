@@ -96,13 +96,13 @@ margin-right: 8px;
 `;
 
 export const SearchPlusImage=styled.img`
-display:block;
-margin:auto;
-content: url('/images/plus-button.svg');
-width: 20px;
-height: 20px;
-background: #000094;
-object-fit:fill;`;
+  display: block;
+  margin: auto;
+  content: url('/images/icons/plus-button.svg');
+  width: 20px;
+  height: 20px;
+  background: #000094;
+  object-fit: fill;`;
 
 export const SearchPlusButton=styled.div`
 width: 48px;
@@ -132,7 +132,7 @@ export const AdvancedSearch = styled.div`
 export const AlertIcon=styled.img`
 display:block;
 margin:auto;
-content: url('/images/alertIcon.svg');
+content: url('/images/icons/alert.svg');
 width: 24px;
 height: 24px;
 background: transparent;
