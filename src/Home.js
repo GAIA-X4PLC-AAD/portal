@@ -40,12 +40,9 @@ const Home = () => {
 
   const buildSliderContent = ({ index = 0 }) => {
       return <Column key = {`${index}`} justifyContent='center' alignItems='center'>
-        {/*<Link to="#">*/}
-        {/*  <img className='image-gallery-image' src="https://gaia-x.eu/wp-content/uploads/2023/08/sliding-banner_Roadshow-banner_Draft-V3_DESKTOP-MOBILE-V2_Roadshow-Banner_Desktop_V2.jpg" alt={t('left-menu.logo-alt-text')}/>*/}
-        {/*</Link>*/}
-        <H2Text color={'#fff'}>{t('home.marketplace')} {index}</H2Text>
+      <H2Text color={'#fff'}>{t('article.what-is-new')} {index}</H2Text>
         <Style maxWidth='600px'>
-          <BodyText color={'#fff'} textAlign='center'>{t('home.marketplace_text')}</BodyText>
+        <BodyText color={'#fff'} textAlign='center'>{t('filler')}</BodyText>
         </Style>
 
       <h4></h4>
@@ -55,10 +52,10 @@ const Home = () => {
 
   const slides = [
     buildSliderContent({ index: 1 }),
-    // buildSliderContent({ index: 2 }),
-    // buildSliderContent({ index: 3 }),
-    // buildSliderContent({ index: 4 }),
-    // buildSliderContent({ index: 5 }),
+    buildSliderContent({ index: 2 }),
+    buildSliderContent({ index: 3 }),
+    buildSliderContent({ index: 4 }),
+    buildSliderContent({ index: 5 }),
   ]
 
   const CustomDot = ({ onClick, ...rest }) => {
@@ -106,7 +103,13 @@ const Home = () => {
           <Padding key='i01' paddingTop='140px' />
           <img key='i02' src='/images/logos/plcaad_white.webp'></img>
           <Padding key='i03' paddingTop='40px' />
-          <Style key='i04' height='100%' width='100%'>{HomeSlider()}</Style>
+          {/*<Style key='i04' height='100%' width='100%'>{HomeSlider()}</Style>*/}
+          <div>
+            <H2Text color={'#fff'}>{t('home.marketplace')}</H2Text>
+            <Style maxWidth='600px'>
+              <BodyText color={'#fff'} textAlign='center'>{t('home.marketplace_text')}</BodyText>
+            </Style>
+          </div>
         </Column>
       </div >
 
