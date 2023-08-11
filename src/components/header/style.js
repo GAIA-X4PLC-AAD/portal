@@ -15,7 +15,7 @@ export const TopMenu = styled.div`
 
 export const TopMenuLogo = styled.div`
   display: flex;
-  margin: 4px 0;
+  margin: 41px 0;
 `;
 
 export const TopMenuLinks = styled.div`
