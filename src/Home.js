@@ -43,9 +43,9 @@ const Home = () => {
         {/*<Link to="#">*/}
         {/*  <img className='image-gallery-image' src="https://gaia-x.eu/wp-content/uploads/2023/08/sliding-banner_Roadshow-banner_Draft-V3_DESKTOP-MOBILE-V2_Roadshow-Banner_Desktop_V2.jpg" alt={t('left-menu.logo-alt-text')}/>*/}
         {/*</Link>*/}
-        <H2Text color={'#fff'}>{t('article.what-is-new')} {index}</H2Text>
+        <H2Text color={'#fff'}>{t('home.marketplace')} {index}</H2Text>
         <Style maxWidth='600px'>
-          <BodyText color={'#fff'} textAlign='center'>{t('filler')}</BodyText>
+          <BodyText color={'#fff'} textAlign='center'>{t('home.marketplace_text')}</BodyText>
         </Style>
 
       <h4></h4>

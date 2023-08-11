@@ -128,7 +128,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
     const _searchViews =
         <>
             <Row position='relative'>
-                {displayAsColumn ? '' : <S.AdvancedSearchText color='white'>Search for lorem ipsum</S.AdvancedSearchText>}
+                {displayAsColumn ? '' : <S.AdvancedSearchText color='white'>{t('discovery.search.text')}</S.AdvancedSearchText>}
                 <S.SearchTerm type="text" width={inputWidth} onKeyPress={onKeyPress} value={searchTerm}
                     onChange={(e) => { setSearchTerm(e.target.value) }}
                     data-tip={t('home.tooltip.search_terms')}
