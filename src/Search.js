@@ -52,8 +52,8 @@ class Search extends Component {
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
                 <div className='searchBarComponent'>
                     <div className='searchInputField'>
-                        <input 
-                            type="text" 
+                        <input
+                            type="text"
                             id="searchElement"
                             placeholder={t('home.search_placeholder')}
                             onKeyDown={(e) => this.onKeyPressed(e)}
@@ -70,37 +70,36 @@ class Search extends Component {
                     className='button-16'
                     type="submit"
                     onClick={() => this.searchProcessing()}>
-                        {t('home.advanced')}
                 </button>
             </div>
             <div className='additionalSearchOptions'>
-                        <button 
+                        <button
                             className='button-17'
-                            type="submit" 
+                            type="submit"
                             onClick={() => this.updateText(" NOT=")}>
                                 {t('home.not')}
                         </button>
-                        <button 
+                        <button
                             className='button-17'
-                            type="submit" 
+                            type="submit"
                             onClick={() => this.updateText(" Provider=")}>
                                 {t('home.provider')}
                         </button>
-                        <button 
+                        <button
                             className='button-17'
-                            type="submit" 
+                            type="submit"
                             onClick={() => this.updateText(" Storage=")}>
                                 {t('home.storage')}
                         </button>
-                        <button 
+                        <button
                             className='button-17'
-                            type="submit" 
+                            type="submit"
                             onClick={() => this.updateText(" Service=")}>
                                 {t('home.service')}
                         </button>
-                        <button 
+                        <button
                             className='button-17'
-                            type="submit" 
+                            type="submit"
                             onClick={() => this.updateText(" Compute=")}>
                                 {t('home.compute')}
                         </button>

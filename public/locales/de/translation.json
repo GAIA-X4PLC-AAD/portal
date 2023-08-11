@@ -84,8 +84,8 @@
   "article": {
     "what-is-new": "Was gibt es Neues?",
     "what-is-new-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
-    "what-is-gaiax": "Was ist Gaia-X?",
-    "what-is-gaiax-message": "Gaia-X strebt nach Innovation durch digitale Souveränität. Das Ziel ist es, ein Ökosystem zu schaffen, in dem Daten in einer vertrauenswürdigen Umgebung gemeinsam genutzt und zur Verfügung gestellt werden. Die Intention ist es, den Nutzern die Kontrolle zurückgeben, indem sie die Hoheit über ihre Daten behalten. Das Ergebnis wird keine Cloud sein. Es ist ein föderiertes System, das viele Anbieter von Cloud-Diensten und Nutzer in einer transparenten Umgebung miteinander verbindet und die europäische Datenwirtschaft von morgen vorantreiben wird.\n\nGaia-X richtet sich an Unternehmen, insbesondere KMUs und Organisationen, die ihre vielfältigen Daten austauschen oder durch diese Mehrwerte schaffen und neue datengetriebene Geschäftsmodelle entwickeln wollen. Für die damit verbundenen Datentransfers stellt Gaia-X ein gemeinsames Regelwerk für Zugangs- und Transportprotokolle, Dienste und Richtlinien bereit. Diese folgen alle den Gaia-X Prinzipien Transparenz, Datensicherheit, Datenschutz, Interoperabilität und Skalierbarkeit.\n\nQuelle: https://www.gxfs.eu/de/gaia-x-und-gxfs/",
+    "what-is-gaiax": "Das Projekt Gaia-X 4 PLC AAD",
+    "what-is-gaiax-message": "Automobilhersteller (OEMs) und Zulieferer stehen vor großen Herausforderungen: Die Entwicklung automatisierter und vernetzter Fahrfunktionen wird durch die komplexe Kombination aus Soft- und Hardware und deren Absicherung immer aufwändiger. Daraus resultieren tiefe und breite Lieferketten, die es effizient und nachvollziehbar zu gestalten gilt. Zur Optimierung dieses Problems ist es notwendig, große Mengen an Daten aus verschiedenen Quellen zusammenzubringen.\nEinen Lösungsansatz bieten hier offene und verteilte Datenökosysteme, wie sie zum Beispiel im Rahmen von Gaia-X entstehen. Hier können gemeinschaftlich gestaltete Dienste geschaffen werden, die einen geregelten Austausch von Daten ermöglichen. Die Dienste bieten mit technischen Mitteln das notwendige Vertrauen und die Sicherheit.\nIm Projekt Gaia-X 4 PLC-AAD wird der gesamte Produktlebenszyklus, von der Entwicklung der Soft- und Hardwarefunktionen, über Produktion und Supply Chain bis hin zum operativen Betrieb im Feld betrachtet. Dazu werden notwendige Informationsmodelle, Datenarchitekturen, sowie dazu gehörende Prozesse und Rollen erarbeitet.\nExemplarisch für automatisierte Fahrfunktionen und deren Sensoren werden Testfelder und Testumgebungen in das Datenökosystem integriert. Über Schnittstellen wird die Anwendung auch in anderen Bereichen ermöglicht.",
     "details-button": "Einzelheiten"
   },
   "home": {
@@ -93,6 +93,8 @@
     "welcome.subtitle": "A federated Data Infrastructure for Europe",
     "search_placeholder": "Suche...",
     "advanced": "Fortgeschrittene",
+    "marketplace": "Daten- und Service-Marktplatz",
+    "marketplace_text": "Gaia-X kompatibler Marktplatz für Daten- und Dienste, basierend auf der XFSC Portal Komponente. Unterstützung der Absicherung autonomer Fahrfunktionen, verteilter Digitaler Zwillinge und Sensordaten.",
     "not": "Nicht",
     "provider": "Anbieter",
     "storage": "Lagerung",
@@ -245,7 +247,7 @@
     "lAddress": "Address"
   },
   "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
-  "footer_slogan_cap": " ",
+  "footer_slogan_cap": " powered by",
   "footer_business_only": "Gaia-X - For business customers only",
   "login": {
     "fail.header": "Login failed",
@@ -319,6 +321,7 @@
       "solution_pkg": "Select your service"
     },
     "search": {
+      "text": "Suche nach Daten oder Diensten",
       "filter": "Filter",
       "chip.text.not": "Not",
       "chip.filter.not": "NOT=",

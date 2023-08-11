@@ -128,7 +128,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
     const _searchViews =
         <>
             <Row position='relative'>
-                {displayAsColumn ? '' : <S.AdvancedSearchText color='white'>Search for lorem ipsum</S.AdvancedSearchText>}
+                {displayAsColumn ? '' : <S.AdvancedSearchText color='white'>{t('discovery.search.text')}</S.AdvancedSearchText>}
                 <S.SearchTerm type="text" width={inputWidth} onKeyPress={onKeyPress} value={searchTerm}
                     onChange={(e) => { setSearchTerm(e.target.value) }}
                     data-tip={t('home.tooltip.search_terms')}
@@ -141,13 +141,13 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
                         <S.SearchPlusImage />
                         </Circle>
                 </S.SearchPlusButton>
-                {displayAsColumn ? '' : showAdvanceMessage(advance, !displayAsColumn)}
+                {/*{displayAsColumn ? '' : showAdvanceMessage(advance, !displayAsColumn)}*/}
             </Row>
-            <Row height='28px' justifyContent='left' alignItems='space-equally' alignSelf='end' >
-                {/* <Padding horizontal={displayAsColumn ? '0px' : '12px'}>{showAdvanceSearchChip(advance)}</Padding> */}
-                {displayAsColumn ? showAdvanceMessage(advance) : null}
-                {showAdvanceSearchChip(advance)}
-            </Row>
+            {/*<Row height='28px' justifyContent='left' alignItems='space-equally' alignSelf='end' >*/}
+            {/*    /!* <Padding horizontal={displayAsColumn ? '0px' : '12px'}>{showAdvanceSearchChip(advance)}</Padding> *!/*/}
+            {/*    {displayAsColumn ? showAdvanceMessage(advance) : null}*/}
+            {/*    {showAdvanceSearchChip(advance)}*/}
+            {/*</Row>*/}
         </>
 
     const justify = displayAsColumn ? 'left' : 'center';
