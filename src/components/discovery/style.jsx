@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 
 export const DiscoveryTile = styled.div`
-    /* padding: 8px 0px; */
     display: flex;
     flex-direction: column;
     background: ${ props => props.isComposite ? 'url(/images/vertical_lines.png)' : ''};
     background-repeat: no-repeat;
-    width: 804px;
-    /* width: 95%; */
 `;
 
 export const DiscoveryTileHeader = styled.div`

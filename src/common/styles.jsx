@@ -86,38 +86,38 @@ display: inline-block;
 `;
 
 export const DropDownArrowUp = styled.div`
-    content: url('/images/DropDownArrowUp.svg');
-    margin: auto;
-    object-fit:none;
-    height:100%;
+  content: url('/images/icons/dropdown_arrow_up.svg');
+  margin: auto;
+  object-fit: none;
+  height: 100%;
 `;
 
 export const DropDownArrowDown = styled.div`
-    content: url('/images/DropDownArrowDown.svg');
-    margin: auto;
-    object-fit:none;
-    height:100%;
+  content: url('/images/icons/dropdown_arrow_down.svg');
+  margin: auto;
+  object-fit: none;
+  height: 100%;
 `;
 
 export const DropDownArrowDownSmall = styled.div`
-    content: url('/images/DropDownArrowDown.svg');
-    margin: auto;
-    object-fit:none;
+  content: url('/images/icons/dropdown_arrow_down.svg');
+  margin: auto;
+  object-fit: none;
 
-    transform: scale(0.5);
+  transform: scale(0.5);
 `;
 
 export const ArrowLeft = styled.div`
-    content: url('/images/DropDownArrowDown.svg');
-    transform: rotate(90deg);
-    /* filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%); */
+  content: url('/images/icons/dropdown_arrow_down.svg');
+  transform: rotate(90deg);
+  /* filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%); */
 `;
 
 export const ArrowRight = styled.div`
-    content: url('/images/DropDownArrowDown.svg');
+  content: url('/images/icons/dropdown_arrow_down.svg');
 
 
-    transform: rotate(270deg)
+  transform: rotate(270deg)
 `;
 
 export const RedTextClickable = styled.div`
@@ -556,7 +556,7 @@ export const H2Text = styled.div`
     font-size: 36px;
     line-height: 48px;
     color: ${props => props.color || '#1C0E15' };
-    /* color: white; */
+    text-align:center;
 `;
 
 // export const StyledModal = Modal.styled`

@@ -1,0 +1,57 @@
+.footer-container {
+    margin-top:auto;
+}
+
+.footer-flex-col {
+    display: flex;
+    flex-direction: column;
+    background-color: #000094;
+    color: white;
+}
+
+.footer-banner {
+    display: flex;
+    margin: 1% 10%;
+    border-bottom: 2px solid #ebebeb;
+    padding-bottom: 1%;
+
+}
+
+.footer-banner img {
+    padding-right:5px;
+}
+
+.footer-banner p {
+    padding-right:5px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 10% 1%;
+}
+
+.footer-content a {
+    margin: 0.3em;
+    text-decoration: none;
+    color: #fff;
+}
+
+.footer-content a:visited {
+    color: #fff;
+}
+
+.footer-bottom {
+    background-color: #0c1b5a;
+    color: white;
+    font: 15px/1.33 "TeleNeo", Helvetica, Arial, serif;
+    padding: 4px;
+}
+
+.footer-bottom p {
+    width: 30%;
+    margin-block-end: 1.67em;
+    margin-block-end: 1.67em;
+    margin: auto;
+    text-align: center;
+}

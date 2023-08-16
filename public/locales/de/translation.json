@@ -4,9 +4,9 @@
   },
   "left-menu": {
     "home": "Startseite",
-    "services": "Dienstleistungen",
-    "data": "Daten",
-    "provider": "Anbieter",
+    "service-offerings": "Service Offerings",
+    "resources": "Resources",
+    "participants": "Participants",
     "provide": "Bereitstellen",
     "help": "Hilfe",
     "search": "Suche",
@@ -32,7 +32,10 @@
       "data": "Ermittlungsdaten im Verbundkatalog",
       "provider": "Ermittlungsanbieter im Verbundkatalog",
       "provide": "Geben Sie eine Selbstbeschreibung für Dienst/Daten/Knoten an",
-      "change-language": "Sprache ändern"
+      "change-language": "Sprache ändern",
+      "service-offerings": "Service Offerings des Ecosystems",
+      "resources": "Resources des Ecosystems",
+      "participants": "Participants des Ecosystems"
     }
   },
   "dashboard": {
@@ -81,8 +84,8 @@
   "article": {
     "what-is-new": "Was gibt es Neues?",
     "what-is-new-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
-    "what-is-gaiax": "Was ist Gaia-X?",
-    "what-is-gaiax-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
+    "what-is-gaiax": "Das Projekt Gaia-X 4 PLC AAD",
+    "what-is-gaiax-message": "Automobilhersteller (OEMs) und Zulieferer stehen vor großen Herausforderungen: Die Entwicklung automatisierter und vernetzter Fahrfunktionen wird durch die komplexe Kombination aus Soft- und Hardware und deren Absicherung immer aufwändiger. Daraus resultieren tiefe und breite Lieferketten, die es effizient und nachvollziehbar zu gestalten gilt. Zur Optimierung dieses Problems ist es notwendig, große Mengen an Daten aus verschiedenen Quellen zusammenzubringen.\nEinen Lösungsansatz bieten hier offene und verteilte Datenökosysteme, wie sie zum Beispiel im Rahmen von Gaia-X entstehen. Hier können gemeinschaftlich gestaltete Dienste geschaffen werden, die einen geregelten Austausch von Daten ermöglichen. Die Dienste bieten mit technischen Mitteln das notwendige Vertrauen und die Sicherheit.\nIm Projekt Gaia-X 4 PLC-AAD wird der gesamte Produktlebenszyklus, von der Entwicklung der Soft- und Hardwarefunktionen, über Produktion und Supply Chain bis hin zum operativen Betrieb im Feld betrachtet. Dazu werden notwendige Informationsmodelle, Datenarchitekturen, sowie dazu gehörende Prozesse und Rollen erarbeitet.\nExemplarisch für automatisierte Fahrfunktionen und deren Sensoren werden Testfelder und Testumgebungen in das Datenökosystem integriert. Über Schnittstellen wird die Anwendung auch in anderen Bereichen ermöglicht.",
     "details-button": "Einzelheiten"
   },
   "home": {
@@ -90,6 +93,8 @@
     "welcome.subtitle": "A federated Data Infrastructure for Europe",
     "search_placeholder": "Suche...",
     "advanced": "Fortgeschrittene",
+    "marketplace": "Daten- und Service-Marktplatz",
+    "marketplace_text": "Gaia-X kompatibler Marktplatz für Daten- und Dienste, basierend auf der XFSC Portal Komponente. Unterstützung der Absicherung autonomer Fahrfunktionen, verteilter Digitaler Zwillinge und Sensordaten.",
     "not": "Nicht",
     "provider": "Anbieter",
     "storage": "Lagerung",
@@ -242,7 +247,7 @@
     "lAddress": "Address"
   },
   "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
-  "footer_slogan_cap": " ",
+  "footer_slogan_cap": " powered by",
   "footer_business_only": "Gaia-X - For business customers only",
   "login": {
     "fail.header": "Login failed",
@@ -316,6 +321,7 @@
       "solution_pkg": "Select your service"
     },
     "search": {
+      "text": "Suche nach Daten oder Diensten",
       "filter": "Filter",
       "chip.text.not": "Not",
       "chip.filter.not": "NOT=",

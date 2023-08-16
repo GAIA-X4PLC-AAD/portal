@@ -12,12 +12,12 @@ const NextPrevButtons = ({ next, previous, goToSlide, padding='32px', bottom='50
         <Style display='flex' position={position} justifyContent='end' bottom={bottom} top={top} right={right}>
             <Padding horizontal={padding}>
                 <ButtonText disabled={currentSlide === 0} onClick={() => previous()} >
-                    <Image src='/images/arrow_left.svg' alt="arrow-left" width='12px'
+                    <Image src='/images/icons/arrow_left.svg' alt="arrow-left" width='12px'
                         filter={currentSlide === 0 ? disabledColor : activeColor} />
                 </ButtonText></Padding>
             <Padding horizontal='4px'>
                 <ButtonText disabled={currentSlide + slidesToShow >= totalItems} onClick={() => next()} >
-                    <Image src='/images/arrow_right.svg' alt="arrow-right" width='12px'
+                    <Image src='/images/icons/arrow_right.svg' alt="arrow-right" width='12px'
                         filter={(currentSlide + slidesToShow) >= totalItems? disabledColor : activeColor}
                     />
                 </ButtonText></Padding>

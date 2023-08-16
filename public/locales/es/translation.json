@@ -23,7 +23,7 @@
         "german": "German",
         "close": "Cerrar",
         "choose-language": "Idioma",
-        "select-system-language": "Seleccione un idioma del sistema"  
+        "select-system-language": "Seleccione un idioma del sistema"
     },
     "dashboard": {
         "reporting": "Reporting",
@@ -47,7 +47,7 @@
         "what-is-gaiax-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
         "details-button": "Details"
     },
-       
+
     "home": {
         "welcome.title": "Welcome to GAIA-X",
         "welcome.subtitle": "A federated Data Infrastructure for Europe",
@@ -57,7 +57,9 @@
         "provider": "Proveedor",
         "storage": "Almacenamiento",
         "service": "Servicio",
-        "compute": "Compute"
+        "compute": "Compute",
+        "marketplace": "Mercado de datos y servicios",
+        "marketplace_text": "Mercado compatible con Gaia-X para datos y servicios, basado en el componente del portal XFSC. Soporte para asegurar funciones de conducción autónoma, gemelos digitales distribuidos y datos de sensores."
     },
 
     "message-bar": {
@@ -191,6 +193,7 @@
             "ppr": "Provider"
         },
         "search": {
+            "text": "Buscar datos o servicios",
             "filter": "Filter",
             "chip.text.not": "Not",
             "chip.filter.not": "NOT=",

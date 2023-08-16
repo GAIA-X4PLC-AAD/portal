@@ -21,7 +21,7 @@ import SearchView from './components/discovery/search/SearchView';
 import DashboardPage from './components/dashboard/dashboard_page';
 import OnboardingPage from './components/onboarding/onboarding_page';
 import ProvideAttributes from './components/provide/ProvideAttributes';
-import { Column, Padding } from './common/styles';
+import {BlueButton, Column, Padding} from './common/styles';
 import Article from './components/article/Article';
 import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
 import ProvideSelection from './components/provide/ProvideSelection';
@@ -31,9 +31,12 @@ import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import history from "./common/history"
 import AboutPage from "./components/help/AboutPage"
 import SupportPage from "./components/help/SupportPage"
+import {Footer} from "./components/footer/Footer";
+import ServiceOfferings from "./components/service-offerings/ServiceOfferings";
 
 
 const App = (props) => {
+
   const { t, i18n } = useTranslation();
 
   const ViewContainer = (view) => {
@@ -55,8 +58,12 @@ const App = (props) => {
                 </Column>
               }
               />
-              <Route path="/data" element={ViewContainer(<SearchView type="data" />)} />
-              <Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />
+              <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
+              {/*<Route path="/data" element={ViewContainer(<SearchView type="data" />)} />*/}
+              <Route path="/resources" element={ViewContainer(<SearchView type="data" />)} />
+
+              <Route path="/participants" element={ViewContainer(<SearchView type="ppr" />)} />
+              {/*<Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />*/}
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
               <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
               <Route path="/signin" element={ViewContainer(<Login />)} />
@@ -91,31 +98,7 @@ const App = (props) => {
         </HistoryRouter>
       </div>
 
-      <div className='footer-container'>
-        <div className='footer-flex-col'>
-          <div className='footer-banner'>
-            <img src='/images/logo_white.svg' height='50px' ></img>
-            <p>{t('footer_slogan_cap')}</p>
-          </div>
-          <div className='footer-content'>
-            {/*<div>*/}
-            {/*  <a href={t('links.legal_notice_link')}>{t('links.legal_notice')}</a>*/}
-            {/*</div>*/}
-            <div>
-              <a href='#'>{t('links.imprint')}</a>
-              <a href='#'>{t('links.privacy')}</a>
-              <a href='#'>{t('links.policy')}</a>
-              <a href='#'>{t('links.cookie_settings')}</a>
-              <a href='#'>{t('links.terms_and_conditions')}</a>
-              <a href='#'>{t('links.contact')}</a>
-              <a href='#'>{t('links.help')}</a>
-            </div>
-          </div>
-        </div>
-        <div className='footer-bottom'>
-          <p>{t('footer_business_only')}</p>
-        </div>
-      </div>
+      <Footer />
     </div>
 
   );

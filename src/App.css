@@ -26,9 +26,6 @@ body{
   min-height : calc(100vh - 10rem);
 }
 
-.footer-container {
-  margin-top:auto;
-}
 .home-screen {
   display: flex;
   flex-direction: column;
@@ -98,14 +95,12 @@ body{
 
 
 .banner-container {
-  /*
-  background-image: url('../public/images/banner_gradient.png');
-
-  */
+  /* background-image: url('../public/images/backgrounds/banner_gradient.png'); */
   min-height: var(--banner-height);
-  background-image: url('images/banner_bg.png');
+  /*background-image: url('../public/images/backgrounds/background2.png');*/
   /* background-size: 100% auto; */
-  background-position: 50% 50%;
+  background: linear-gradient(110deg, rgb(185, 0, 255), 15%, rgb(0, 0, 148), 75%, rgb(70, 218, 255));
+  /*background-position: 50% 50%;*/
   position: relative;
   overflow: hidden;
 }
@@ -159,58 +154,6 @@ body{
 .body-container {
   width: var(--content-width);
   margin: 1em auto;
-  min-height:640px;
-}
-
-
-
-.footer-flex-col {
-  display: flex;
-  flex-direction: column;
-  background-color: #000094;
-  color: white;
-}
-
-.footer-banner {
-  display: flex;
-  justify-content: space-between;
-  margin: 1% 10%;
-  border-bottom: 1px solid #737373;
-  padding-bottom: 1%;
-}
-
-.footer-banner img {
-}
-
-.footer-content {
-  display: flex;
-  justify-content: space-between;
-  margin: 2% 10%;
-}
-
-.footer-content a {
-  margin: 0.3em;
-  text-decoration: none;
-  color: #fff;
-}
-
-.footer-content a:visited {
-  color: #fff;
-}
-
-.footer-bottom {
-  background-color: #0c1b5a;
-  color: white;
-  font: 15px/1.33 "TeleNeo", Helvetica, Arial, serif;
-  padding: 4px;
-}
-
-.footer-bottom p {
-  width: 30%;
-  margin-block-end: 1.67em;
-  margin-block-end: 1.67em;
-  margin: auto;
-  text-align: center;
 }
 
 .tab-menu {

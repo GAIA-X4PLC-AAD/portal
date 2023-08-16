@@ -23,7 +23,9 @@
         "no-unused-vars": "off",
         "constructor-super": "warn",
         "valid-typeof": "warn",
-        "react/display-name": "off"
+        "react/display-name": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-react": "off"
     },
     "extends": [
         "eslint:recommended",

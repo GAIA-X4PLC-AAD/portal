@@ -20,8 +20,8 @@ const ExpandableView = ({
     titleLeadingPadding = '0px',
     viewLeadingPadding = '0px',
     arrowColor = '#000094',
-    width = 'fit-content',
-    maxWidth1='850px',
+    width = 'auto',
+    maxWidth1,
     borderBottom=true,
     shiftedBottomBorder=false,
     boxShadow,
@@ -47,7 +47,7 @@ const ExpandableView = ({
         </S.ToggleButton>
 
         {/* BODY */}
-        <Style borderBottom={borderBottom} shiftedBottomBorder={shiftedBottomBorder} 
+        <Style borderBottom={borderBottom} shiftedBottomBorder={shiftedBottomBorder}
                 overflow={'hidden'}>
             <Collapse isOpened={isExpanded}>
                 <Style

@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import { Circle, Column, SliderBullet, H2Text, BodyText, Style } from "./common/styles";
 import { Padding } from "./components/discovery/tabs/style";
 import SearchTerm from "./components/discovery/search/SearchTerm";
+import {Link} from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -38,16 +39,16 @@ const Home = () => {
   const { t, i18n } = useTranslation();
 
   const buildSliderContent = ({ index = 0 }) => {
-    return <Column key = {`${index}`} justifyContent='center' alignItems='center'>
+      return <Column key = {`${index}`} justifyContent='center' alignItems='center'>
       <H2Text color={'#fff'}>{t('article.what-is-new')} {index}</H2Text>
-      <Style maxWidth='600px'>
+        <Style maxWidth='600px'>
         <BodyText color={'#fff'} textAlign='center'>{t('filler')}</BodyText>
-      </Style>
+        </Style>
 
       <h4></h4>
-      <Padding vertical='20px' />
-    </Column>
-  }
+        <Padding vertical='20px' />
+      </Column>
+    }
 
   const slides = [
     buildSliderContent({ index: 1 }),
@@ -100,19 +101,20 @@ const Home = () => {
       <div className='banner-container'>
         <Column alignItems='center' height='100px'>
           <Padding key='i01' paddingTop='140px' />
-          <img key='i02' src='/images/gaia-x-logo-white.png' height='111px' width='200px'></img>
+          <img key='i02' src='/images/logos/plcaad_white.webp' alt='PLC-AAD Logo'/>
           <Padding key='i03' paddingTop='40px' />
-          <Style key='i04' height='100%' width='100%'>{HomeSlider()}</Style>
-
-
+          <H2Text color={'#fff'}>{t('home.marketplace')}</H2Text>
+          <Style maxWidth='600px'>
+            <BodyText color={'#fff'} textAlign='center'>{t('home.marketplace_text')}</BodyText>
+          </Style>
         </Column>
       </div >
 
       <div className='search-container'>
         <Padding vertical='40px'>
-          <SearchTerm type='home' 
-                      inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF' 
-                      displayAsColumn={false} 
+          <SearchTerm type='home'
+                      inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF'
+                      displayAsColumn={false}
                       />
         </Padding>
       </div>

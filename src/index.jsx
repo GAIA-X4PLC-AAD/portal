@@ -1,9 +1,7 @@
 import React, { Suspense } from 'react';
-import {createRoot} from 'react-dom/client';
-
+import { createRoot } from 'react-dom/client';
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from 'react-redux';
-
 import './index.css';
 import App from './App';
 import './i18n';
@@ -12,7 +10,6 @@ import axios from "axios"
 import { retrieveToken } from "./common/auth";
 import { Navigate, useNavigate } from 'react-router-dom';
 import history from "./common/history"
-
 
 // axios.interceptors.request.use(function (config) {
 //   const token = retrieveToken();
@@ -70,13 +67,12 @@ store.subscribe(() => {
 });
 
 const container = document.getElementById('root');
-const root = createRoot(container);
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
 
 root.render(
   <Provider store={store}>
     <Suspense fallback="..... is loading" >
       <App />
     </Suspense>
-
   </Provider>,
 );

@@ -95,6 +95,8 @@
     "storage": "Storage",
     "service": "Service",
     "compute": "Compute",
+    "marketplace": "Data and Services Marketplace",
+    "marketplace_text": "Gaia-X compatible marketplace for data and services, based on the XFSC portal component. Support for securing autonomous driving functions, distributed digital twins and sensor data.",
     "tooltip": {
       "search_terms": "Enter search terms and hit Enter",
       "search": "Search",
@@ -316,6 +318,7 @@
       "solution_pkg": "Select your service"
     },
     "search": {
+      "text": "Search for data and services",
       "filter": "Filter",
       "chip.text.not": "Not",
       "chip.filter.not": "NOT=",

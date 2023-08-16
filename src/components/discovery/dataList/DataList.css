@@ -1,0 +1,5 @@
+data-list {
+    width: var(--content-width);
+    margin: 1em auto;
+    min-height:640px;
+}
