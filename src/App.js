@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import WorkInProgress from './WorkInProgress';
 import { Route, Routes } from 'react-router-dom';
 import Home from './Home';
@@ -31,22 +31,14 @@ import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import history from "./common/history"
 import AboutPage from "./components/help/AboutPage"
 import SupportPage from "./components/help/SupportPage"
-import {ApiService} from "./services/ApiService";
-import DataList from "./components/discovery/dataList/DataList";
 import {Footer} from "./components/footer/Footer";
+import ServiceOfferings from "./components/service-offerings/ServiceOfferings";
 
 
 const App = (props) => {
 
-  const [selfDescriptionData, setSelfDescriptionData] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-
   const { t, i18n } = useTranslation();
-  const getDataHandler = async () => {
-    setIsLoading(true);
-    setSelfDescriptionData(await ApiService.getData());
-    setIsLoading(false);
-  }
+
   const ViewContainer = (view) => {
     return <div className='body-container'>{view}</div>
   }
@@ -66,16 +58,7 @@ const App = (props) => {
                 </Column>
               }
               />
-              <Route path="/service-offerings" element={
-                <div className='body-container'>
-                  <BlueButton onClick={getDataHandler}>Get Data</BlueButton>
-                  {!isLoading && selfDescriptionData.length > 0 && <DataList data={selfDescriptionData}></DataList>}
-                  {selfDescriptionData.length === 0 && <p>No data found...</p>}
-                  {isLoading && <p>Loading...</p>}
-                </div>
-              } />
-
-
+              <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
               {/*<Route path="/data" element={ViewContainer(<SearchView type="data" />)} />*/}
               <Route path="/resources" element={ViewContainer(<SearchView type="data" />)} />
 
