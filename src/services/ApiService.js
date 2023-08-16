@@ -14,17 +14,17 @@ export const ApiService = {
         console.log("Response: ", data);
         const transformedSelfDescriptionData = data.data.map(selfDescriptions => {
             return {
-                id: selfDescriptions.survey_id,
-                title: selfDescriptions.survey_title,
-                description: selfDescriptions.survey_description,
-                claimsGraphUri: selfDescriptions.claimsGraphUri,
-                close_time: selfDescriptions.survey_close_time,
-                creation_time: selfDescriptions.survey_creation_time,
-                end_time: selfDescriptions.survey_end_time,
-                start_time: selfDescriptions.survey_start_time,
-                state: selfDescriptions.survey_state,
-                url: selfDescriptions.survey_url,
-                uri: selfDescriptions.uri
+                survey_id: selfDescriptions.subjectClaims.survey_id,
+                survey_title: selfDescriptions.subjectClaims.survey_title,
+                survey_description: selfDescriptions.subjectClaims.survey_description,
+                claimsGraphUri: selfDescriptions.subjectClaims.claimsGraphUri,
+                survey_close_time: selfDescriptions.subjectClaims.survey_close_time,
+                survey_creation_time: selfDescriptions.subjectClaims.survey_creation_time,
+                survey_end_time: selfDescriptions.subjectClaims.survey_end_time,
+                survey_start_time: selfDescriptions.subjectClaims.survey_start_time,
+                survey_state: selfDescriptions.subjectClaims.survey_state,
+                survey_url: selfDescriptions.subjectClaims.survey_url,
+                id: selfDescriptions.subjectClaims.uri
             };
         })
         console.log("transformedSelfDescriptionData: ", transformedSelfDescriptionData);
