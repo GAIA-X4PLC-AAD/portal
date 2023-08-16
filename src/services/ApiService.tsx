@@ -1,9 +1,11 @@
+import {SelfDescription} from "../types/selfDescription.model";
+
 const API_URL = "https://metadatasearch.gxfs.gx4fm.org/service-offerings?node_shape=http://semanticweb.org/metadatasurveyontology/SurveyResultDataOfferingShape"
 const BASE_URL = 'https://metadatasearch.gxfs.gx4fm.org/service-offerings';
 const NODE_SHAPE = '?node_shape=http://semanticweb.org/metadatasurveyontology/SurveyResultDataOfferingShape';
 const FILTER_PROPERTY = '&filter_property=';
 const FILTER_TERM = '&filter_term=';
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 
 export const ApiService = {
     async getData() {
@@ -12,7 +14,7 @@ export const ApiService = {
         console.log("Response: ", response);
         const data = response.data;
         console.log("Response: ", data);
-        const transformedSelfDescriptionData = data.data.map(selfDescriptions => {
+        const transformedSelfDescriptionData = data.data.map((selfDescriptions : any) => {
             return {
                 survey_id: selfDescriptions.subjectClaims.survey_id,
                 survey_title: selfDescriptions.subjectClaims.survey_title,
@@ -31,23 +33,19 @@ export const ApiService = {
         return transformedSelfDescriptionData;
     },
 
-    async getParticipants() {
+    async getParticipants() : Promise<AxiosResponse< Array<Partial<SelfDescription>> >> {
         const API_URL = "https://metadatasearch.gxfs.gx4fm.org/participants"
         const response = await axios.get(API_URL);
-        console.log("Response: ", response);
-        const data = response.data;
-        console.log("Response: ", data);
-        const transformedParticipantsData = data.data.map(participants => {
-            return {
-                claimsGraphUri: participants.subjectClaims.claimsGraphUri,
-                legalName: participants.subjectClaims.legalName,
-                registrationNumber: participants.subjectClaims.registrationNumber,
-                uri: participants.subjectClaims.uri,
-                subjectTypes: participants.subjectTypes,
-
-            };
-        })
-        console.log("transformedParticipantsData: ", transformedParticipantsData);
-        return transformedParticipantsData;
+        return response.data;
+        // const transformedParticipantsData = data.data.map(participants => {
+        //     return {
+        //         claimsGraphUri: participants.subjectClaims.claimsGraphUri,
+        //         legalName: participants.subjectClaims.legalName,
+        //         registrationNumber: participants.subjectClaims.registrationNumber,
+        //         id: participants.subjectClaims.uri,
+        //         subjectTypes: participants.subjectTypes,
+        //     };
+        // })
+        // return transformedParticipantsData;
     },
 };

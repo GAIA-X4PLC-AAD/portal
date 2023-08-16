@@ -1,64 +1,98 @@
 {
   "data": [
     {
-      "claimsGraphUri": [
-        "did:example:survey_result_data_offering_e2wfc6zvq83y6ewrsn9vf8na1c"
+      "relatedSubjectsUris": [
+        "did:example:survey_service_offering_czys15sw59cdjn0c397wdk4arr"
       ],
-      "survey_close_time": "2023-07-27T13:44:56",
-      "survey_creation_time": "2023-07-27T13:44:18",
-      "survey_description": "test desc",
-      "survey_end_time": "2023-07-27T17:44:00",
-      "survey_id": "e2wfc6zvq83y6ewrsn9vf8na1c",
-      "survey_start_time": "2023-07-27T13:44:43",
-      "survey_state": "STOP",
-      "survey_title": "Live Test 27",
-      "survey_url": "web-mpc.gxfs.gx4fm.org/?session=e2wfc6zvq83y6ewrsn9vf8na1c",
-      "uri": "did:example:survey_result_data_offering_e2wfc6zvq83y6ewrsn9vf8na1c"
+      "subjectClaims": {
+        "claimsGraphUri": [
+          "did:example:survey_result_data_offering_czys15sw59cdjn0c397wdk4arr"
+        ],
+        "survey_close_time": "2023-07-26T15:06:12",
+        "survey_creation_time": "2023-07-26T15:05:35",
+        "survey_description": "test desc",
+        "survey_end_time": "2023-07-27T07:05:00",
+        "survey_id": "czys15sw59cdjn0c397wdk4arr",
+        "survey_start_time": "2023-07-26T15:06:04",
+        "survey_state": "STOP",
+        "survey_title": "Claims dir test",
+        "survey_url": "web-mpc.gxfs.gx4fm.org/?session=czys15sw59cdjn0c397wdk4arr",
+        "uri": "did:example:survey_result_data_offering_czys15sw59cdjn0c397wdk4arr"
+      },
+      "subjectProvider": null,
+      "subjectTypes": [
+        "SurveyResultDataOffering"
+      ]
     },
     {
-      "claimsGraphUri": [
-        "did:example:survey_result_data_offering_2wyzfrqhfh44f6n9hz9p53jfr4"
+      "relatedSubjectsUris": [
+        "did:example:survey_service_offering_e2wfc6zvq83y6ewrsn9vf8na1c"
       ],
-      "survey_close_time": "2023-07-12T11:20:23",
-      "survey_creation_time": "2023-07-12T11:20:08",
-      "survey_description": "test",
-      "survey_end_time": "2023-07-12T03:21:00",
-      "survey_id": "2wyzfrqhfh44f6n9hz9p53jfr4",
-      "survey_start_time": "2023-07-12T11:20:17",
-      "survey_state": "STOP",
-      "survey_title": "Test Title",
-      "survey_url": "web-mpc.gxfs.gx4fm.org/?session=2wyzfrqhfh44f6n9hz9p53jfr4",
-      "uri": "did:example:survey_result_data_offering_2wyzfrqhfh44f6n9hz9p53jfr4"
+      "subjectClaims": {
+        "claimsGraphUri": [
+          "did:example:survey_result_data_offering_e2wfc6zvq83y6ewrsn9vf8na1c"
+        ],
+        "survey_close_time": "2023-07-27T13:44:56",
+        "survey_creation_time": "2023-07-27T13:44:18",
+        "survey_description": "test desc",
+        "survey_end_time": "2023-07-27T17:44:00",
+        "survey_id": "e2wfc6zvq83y6ewrsn9vf8na1c",
+        "survey_start_time": "2023-07-27T13:44:43",
+        "survey_state": "STOP",
+        "survey_title": "Live Test 27",
+        "survey_url": "web-mpc.gxfs.gx4fm.org/?session=e2wfc6zvq83y6ewrsn9vf8na1c",
+        "uri": "did:example:survey_result_data_offering_e2wfc6zvq83y6ewrsn9vf8na1c"
+      },
+      "subjectProvider": null,
+      "subjectTypes": [
+        "SurveyResultDataOffering"
+      ]
     },
     {
-      "claimsGraphUri": [
-        "did:example:survey_result_data_offering_czys15sw59cdjn0c397wdk4arr"
-      ],
-      "survey_close_time": "2023-07-26T15:06:12",
-      "survey_creation_time": "2023-07-26T15:05:35",
-      "survey_description": "test desc",
-      "survey_end_time": "2023-07-27T07:05:00",
-      "survey_id": "czys15sw59cdjn0c397wdk4arr",
-      "survey_start_time": "2023-07-26T15:06:04",
-      "survey_state": "STOP",
-      "survey_title": "Claims dir test",
-      "survey_url": "web-mpc.gxfs.gx4fm.org/?session=czys15sw59cdjn0c397wdk4arr",
-      "uri": "did:example:survey_result_data_offering_czys15sw59cdjn0c397wdk4arr"
+      "relatedSubjectsUris": null,
+      "subjectClaims": {
+        "claimsGraphUri": [
+          "did:example:Survey123456789101112131415"
+        ],
+        "survey_close_time": "2023-06-14T07:31:35Z",
+        "survey_creation_time": "2023-06-13T07:30:41Z",
+        "survey_description": "Example description",
+        "survey_end_time": "2023-06-14T07:31:35Z",
+        "survey_id": "z0nakqby3jnkbg1123wm589ft0",
+        "survey_start_time": "2023-06-13T07:31:00Z",
+        "survey_state": "STOP",
+        "survey_title": "Beispieltitel",
+        "survey_url": "https://web-mpc.gxfs.gx4fm.org/",
+        "uri": "did:example:Survey123456789101112131415"
+      },
+      "subjectProvider": null,
+      "subjectTypes": [
+        "SurveyResultDataOffering"
+      ]
     },
     {
-      "claimsGraphUri": [
-        "did:example:Survey123456789101112131415"
+      "relatedSubjectsUris": [
+        "did:example:survey_service_offering_2wyzfrqhfh44f6n9hz9p53jfr4"
       ],
-      "survey_close_time": "2023-06-14T07:31:35Z",
-      "survey_creation_time": "2023-06-13T07:30:41Z",
-      "survey_description": "Example description",
-      "survey_end_time": "2023-06-14T07:31:35Z",
-      "survey_id": "z0nakqby3jnkbg1123wm589ft0",
-      "survey_start_time": "2023-06-13T07:31:00Z",
-      "survey_state": "STOP",
-      "survey_title": "Beispieltitel",
-      "survey_url": "https://web-mpc.gxfs.gx4fm.org/",
-      "uri": "did:example:Survey123456789101112131415"
+      "subjectClaims": {
+        "claimsGraphUri": [
+          "did:example:survey_result_data_offering_2wyzfrqhfh44f6n9hz9p53jfr4"
+        ],
+        "survey_close_time": "2023-07-12T11:20:23",
+        "survey_creation_time": "2023-07-12T11:20:08",
+        "survey_description": "test",
+        "survey_end_time": "2023-07-12T03:21:00",
+        "survey_id": "2wyzfrqhfh44f6n9hz9p53jfr4",
+        "survey_start_time": "2023-07-12T11:20:17",
+        "survey_state": "STOP",
+        "survey_title": "Test Title",
+        "survey_url": "web-mpc.gxfs.gx4fm.org/?session=2wyzfrqhfh44f6n9hz9p53jfr4",
+        "uri": "did:example:survey_result_data_offering_2wyzfrqhfh44f6n9hz9p53jfr4"
+      },
+      "subjectProvider": null,
+      "subjectTypes": [
+        "SurveyResultDataOffering"
+      ]
     }
   ]
 }
