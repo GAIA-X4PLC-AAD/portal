@@ -100,15 +100,6 @@ const CenterBar = () => {
                   {t('left-menu.service-offerings')}
               </ButtonText>
 
-              {/* DATA: 3 */}
-              <ButtonText selected={location.pathname === '/resources'}
-                color='#000000'
-                onClick={() => { navigate('/resources'); }}
-                data-tip={t('left-menu.tooltip.resources')}
-                >
-                  {t('left-menu.resources')}
-              </ButtonText>
-
               {/* PROVIDER: 4 */}
               <ButtonText
                 selected={location.pathname === '/participants'}
@@ -117,6 +108,15 @@ const CenterBar = () => {
                 data-tip={t('left-menu.tooltip.participants')}
                 >
                   {t('left-menu.participants')}
+              </ButtonText>
+
+              {/* DATA: 3 */}
+              <ButtonText selected={location.pathname === '/resources'}
+                          color='#000000'
+                          onClick={() => { navigate('/resources'); }}
+                          data-tip={t('left-menu.tooltip.resources')}
+              >
+                {t('left-menu.resources')}
               </ButtonText>
 
               {/* PROVIDE: 5 */}

@@ -5,7 +5,7 @@ import {DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
 import {useEffect, useState} from "react";
 import {SelfDescription} from "../../types/selfDescription.model";
 
-const columns: GridColDef[] = [
+const intColumns: GridColDef[] = [
   {
     field: 'id',
     headerName: 'ID',
@@ -14,23 +14,23 @@ const columns: GridColDef[] = [
   {
     field: 'sdId',
     headerName: 'Provider ID',
-    width: 350
+    width: 400
   },
   {
     field: 'subjectTypes',
     headerName: 'Types',
-    width: 150
+    width: 100
   },
   {
     field: 'legalName',
     headerName: 'Legal name',
-    width: 200,
+    width: 190,
     editable: true,
   },
   {
     field: 'claimsGraphUri',
     headerName: 'claimsGraphUri',
-    width: 300,
+    width: 270,
     editable: true,
   },
   {
@@ -41,55 +41,46 @@ const columns: GridColDef[] = [
   },
 ];
 
-// const rows = [
-//   {"id":1,"sd_id":"did:example:plc-aad/infineon","subjectTypes":["LegalPerson"],"legalName":"Infineon Technologies AG","claimsGraphUri":["did:web:compliance.lab.gaia-x.eu"],"registrationNumber":"DE812655055"},
-//   {"id":2,"sd_id":"https://w3id.org/gaia-x/gax-trust-framework#Provider1","subjectTypes":["LegalPerson"],"legalName":"Provider Name","claimsGraphUri":["http://gaiax.de"],"registrationNumber":"1234"}
-// ];
-
-const rows = [
-  {
-    id: 1,
-    sdId: "did:example:plc-aad/infineon",
-    subjectTypes: ["LegalPerson"],
-    legalName: "Infineon Technologies AG",
-    claimsGraphUri: ["did:web:compliance.lab.gaia-x.eu"],
-    registrationNumber: "DE812655055"
-  },
-  {
-    id: 2,
-    sdId: "https://w3id.org/gaia-x/gax-trust-framework#Provider1",
-    subjectTypes: ["LegalPerson"],
-    legalName: "Provider Name",
-    claimsGraphUri: ["http://gaiax.de"],
-    registrationNumber: "1234"
-  }
-];
-
-type selfDescriptionRow = SelfDescription & {
-  id : number
-}
+// type selfDescriptionRow = {
+//   id : number
+// } & SelfDescription
 const DataTable = (props: any) => {
   console.log('DataTable', props.data);
-  // const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([]);
+  // const [columns, setColumns] = useState<GridColDef[]>([]);
+  const [columns, setColumns] = useState(intColumns);
+  console.log('initRows', rows);
 
   useEffect(() => {
-    // createRows();
+    // createColumns();
+    createRows();
   }, [])
   const createRows = (): any => {
-    props.data.map((participant: any) => console.log(participant));
-    let row = props.data.map((participant: any, id: number) => (
-      {
+    const newRows = props.data.map((data: any, id: number) => ({
         id: id + 1,
-        sdId: participant.id,
-        subjectTypes: participant.subjectTypes,
-        legalName: participant.legalName,
-        claimsGraphUri: participant.claimsGraphUri,
-        registrationNumber: participant.registrationNumber
+        sdId: data.id,
+        subjectTypes: data.subjectTypes,
+        legalName: data.legalName,
+        claimsGraphUri: data.claimsGraphUri,
+        registrationNumber: data.registrationNumber
       })
     );
-    console.log("Row", row);
-    // setRows([...rows, row]);
+    setRows(rows.concat(newRows));
   }
+
+  const createColumns = (): any => {
+    const newColumns = props.data.map((data: any, id: number) => ({
+        id: id + 1,
+        sdId: data.id,
+        subjectTypes: data.subjectTypes,
+        legalName: data.legalName,
+        claimsGraphUri: data.claimsGraphUri,
+        registrationNumber: data.registrationNumber
+      })
+    );
+    setColumns(columns.concat(newColumns));
+  }
+
   return (
     <Box sx={{height: 400, width: '100%'}}>
       <DataGrid
@@ -103,7 +94,7 @@ const DataTable = (props: any) => {
           },
         }}
         pageSizeOptions={[5]}
-        checkboxSelection
+        // checkboxSelection
         disableRowSelectionOnClick
       />
     </Box>

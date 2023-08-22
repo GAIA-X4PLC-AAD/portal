@@ -33,19 +33,21 @@ export const ApiService = {
         return transformedSelfDescriptionData;
     },
 
-    async getParticipants() : Promise<AxiosResponse< Array<Partial<SelfDescription>> >> {
+    // async getParticipants() : Promise<AxiosResponse< Array<Partial<SelfDescription>> >> {
+    async getParticipants() : Promise<AxiosResponse< Array<Partial<any>> >> {
         const API_URL = "https://metadatasearch.gxfs.gx4fm.org/participants"
         const response = await axios.get(API_URL);
-        return response.data;
-        // const transformedParticipantsData = data.data.map(participants => {
-        //     return {
-        //         claimsGraphUri: participants.subjectClaims.claimsGraphUri,
-        //         legalName: participants.subjectClaims.legalName,
-        //         registrationNumber: participants.subjectClaims.registrationNumber,
-        //         id: participants.subjectClaims.uri,
-        //         subjectTypes: participants.subjectTypes,
-        //     };
-        // })
-        // return transformedParticipantsData;
+        // return response.json;
+        const transformedParticipantsData = response.data.data.map((participants : any) => {
+            return {
+                id: participants.subjectClaims.uri,
+                claimsGraphUri: participants.subjectClaims.claimsGraphUri,
+                legalName: participants.subjectClaims.legalName,
+                registrationNumber: participants.subjectClaims.registrationNumber,
+                subjectTypes: participants.subjectTypes,
+            };
+        })
+        console.log('transformedParticipantsData', transformedParticipantsData)
+        return transformedParticipantsData;
     },
 };

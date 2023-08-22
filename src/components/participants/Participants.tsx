@@ -8,7 +8,8 @@ import {GridColDef, GridValueGetterParams} from "@mui/x-data-grid";
 import {SelfDescription} from "../../types/selfDescription.model";
 
 const Participants = () => {
-  const [participantsData, setParticipantsData] = useState<SelfDescription[] | any>();
+  // const [participantsData, setParticipantsData] = useState<SelfDescription[] | any>();
+  const [participantsData, setParticipantsData] = useState<any>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

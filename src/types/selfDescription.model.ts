@@ -1,25 +1,14 @@
+import {Participants} from "./participants.model";
+import { ServiceOfferings } from "./serviceOfferings.model";
+
 export type SelfDescription = {
-  id: string,
-  subjectClaims: subjectClaims,
   subjectTypes: string,
+  subjectClaims: SubjectClaims,
   subjectProvider?: string,
-  relatedSubjectsUris: []
+  relatedSubjectsUris?: []
 }
 
-type subjectClaims = {
-  uri: string
+type SubjectClaims = {
+  id: string,
   claimsGraphUri: [],
-  legalName?: string,
-  legalForm?: string,
-  registrationNumber?: string,
-  survey_close_time?: string,
-  survey_creation_time?: string,
-  survey_description?: string,
-  survey_end_time?: string,
-  survey_id?: string,
-  survey_start_time?: string,
-  survey_state?: string,
-  survey_title?: string,
-  survey_url?: string,
-
-}
+} & Participants | ServiceOfferings
