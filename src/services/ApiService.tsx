@@ -1,9 +1,11 @@
+import {SelfDescription} from "../types/selfDescription.model";
+
 const API_URL = "https://metadatasearch.gxfs.gx4fm.org/service-offerings?node_shape=http://semanticweb.org/metadatasurveyontology/SurveyResultDataOfferingShape"
 const BASE_URL = 'https://metadatasearch.gxfs.gx4fm.org/service-offerings';
 const NODE_SHAPE = '?node_shape=http://semanticweb.org/metadatasurveyontology/SurveyResultDataOfferingShape';
 const FILTER_PROPERTY = '&filter_property=';
 const FILTER_TERM = '&filter_term=';
-import axios from 'axios';
+import axios, {AxiosResponse} from 'axios';
 
 export const ApiService = {
     async getData() {
@@ -12,7 +14,7 @@ export const ApiService = {
         console.log("Response: ", response);
         const data = response.data;
         console.log("Response: ", data);
-        const transformedSelfDescriptionData = data.data.map(selfDescriptions => {
+        const transformedSelfDescriptionData = data.data.map((selfDescriptions : any) => {
             return {
                 survey_id: selfDescriptions.subjectClaims.survey_id,
                 survey_title: selfDescriptions.subjectClaims.survey_title,
@@ -29,5 +31,23 @@ export const ApiService = {
         })
         console.log("transformedSelfDescriptionData: ", transformedSelfDescriptionData);
         return transformedSelfDescriptionData;
+    },
+
+    // async getParticipants() : Promise<AxiosResponse< Array<Partial<SelfDescription>> >> {
+    async getParticipants() : Promise<AxiosResponse< Array<Partial<any>> >> {
+        const API_URL = "https://metadatasearch.gxfs.gx4fm.org/participants"
+        const response = await axios.get(API_URL);
+        // return response.json;
+        const transformedParticipantsData = response.data.data.map((participants : any) => {
+            return {
+                id: participants.subjectClaims.uri,
+                claimsGraphUri: participants.subjectClaims.claimsGraphUri,
+                legalName: participants.subjectClaims.legalName,
+                registrationNumber: participants.subjectClaims.registrationNumber,
+                subjectTypes: participants.subjectTypes,
+            };
+        })
+        console.log('transformedParticipantsData', transformedParticipantsData)
+        return transformedParticipantsData;
     },
 };

@@ -1,38 +1,33 @@
 import './App.css';
 import React from 'react';
 import WorkInProgress from './WorkInProgress';
-import { Route, Routes } from 'react-router-dom';
+import {Route, Routes, unstable_HistoryRouter as HistoryRouter} from 'react-router-dom';
 import Home from './Home';
 
 import LoginFail from './components/login/LoginFail';
 import Login from './components/login/Login';
 import AccountHome from './components/account/AccountHome';
-import { useTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
 import ProvideOverview from './components/provide/ProvideOverview';
-
-import { createBrowserHistory } from "history";
 import Provider from './components/account/Provider';
-
-import PropTypes from 'prop-types';
 import Header from './components/header';
 import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
 import DashboardPage from './components/dashboard/dashboard_page';
 import OnboardingPage from './components/onboarding/onboarding_page';
 import ProvideAttributes from './components/provide/ProvideAttributes';
-import {BlueButton, Column, Padding} from './common/styles';
+import {Column, Padding} from './common/styles';
 import Article from './components/article/Article';
 import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
 import ProvideSelection from './components/provide/ProvideSelection';
 import LcmServices from './components/dashboard/lcm/LcmServices';
 import LcmFinal from './components/dashboard/lcm/LcmFinal';
-import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import history from "./common/history"
 import AboutPage from "./components/help/AboutPage"
 import SupportPage from "./components/help/SupportPage"
 import {Footer} from "./components/footer/Footer";
-import ServiceOfferings from "./components/service-offerings/ServiceOfferings";
+import ServiceOfferings from "./components/serviceOfferings/ServiceOfferings";
+import Participants from "./components/participants/Participants";
+import {useTranslation} from "react-i18next";
 
 
 const App = (props) => {
@@ -59,10 +54,10 @@ const App = (props) => {
               }
               />
               <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
+              <Route path="/participants" element={ViewContainer(<Participants />)} />
               {/*<Route path="/data" element={ViewContainer(<SearchView type="data" />)} />*/}
               <Route path="/resources" element={ViewContainer(<SearchView type="data" />)} />
 
-              <Route path="/participants" element={ViewContainer(<SearchView type="ppr" />)} />
               {/*<Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />*/}
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
               <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
@@ -97,7 +92,6 @@ const App = (props) => {
           </Column>
         </HistoryRouter>
       </div>
-
       <Footer />
     </div>
 
