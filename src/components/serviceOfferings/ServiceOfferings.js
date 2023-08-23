@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import DataList from "../discovery/dataList/DataList";
 import {ApiService} from "../../services/ApiService";
 import './ServiceOfferings.css';
+import {CarLoader} from "../carLoader/CarLoader";
 
 const ServiceOfferings = () => {
     const [selfDescriptionData, setSelfDescriptionData] = useState([]);
@@ -24,7 +25,7 @@ const ServiceOfferings = () => {
             </header>
             <div className='content'>
                 {!isLoading && selfDescriptionData.length > 0 && <DataList data={selfDescriptionData}></DataList>}
-                {isLoading && <p>Loading...</p>}
+                {isLoading && <CarLoader />}
             </div>
         </div>
     );

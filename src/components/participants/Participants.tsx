@@ -1,11 +1,8 @@
-import * as React from "react";
-import {useState, useEffect} from "react";
+import {useEffect, useState} from "react";
 import {ApiService} from "../../services/ApiService";
 import './Participants.css';
 import DataTable from "../dataTable/DataTable";
-// @ts-ignore
-import {GridColDef, GridValueGetterParams} from "@mui/x-data-grid";
-import {SelfDescription} from "../../types/selfDescription.model";
+import {CarLoader} from "../carLoader/CarLoader";
 
 const Participants = () => {
   // const [participantsData, setParticipantsData] = useState<SelfDescription[] | any>();
@@ -29,7 +26,7 @@ const Participants = () => {
       </header>
       <div className='content'>
         {!isLoading && <DataTable data={participantsData}></DataTable>}
-        {isLoading && <p>Loading...</p>}
+        {isLoading && <CarLoader />}
       </div>
     </div>
   );
