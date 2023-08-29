@@ -49,7 +49,7 @@ const App = (props) => {
               <Route path="/" element={
                 <Column>
                   <Home />
-                  {/*{ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}*/}
+                  {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
                 </Column>
               }
               />
