@@ -61,8 +61,8 @@ const DataTile = ({ input, id, t }) => {
                     {/*<Padding paddingLeft='20px' />*/}
                     <Padding horizontal='28px' vertical='24px'>
                         <Column>
-                            <S.DiscoveryTileFirstRow width={'120px'}>URI</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.uri}</S.DiscoveryTileSecondRow>
+                            <S.DiscoveryTileFirstRow width={'120px'}>ID</S.DiscoveryTileFirstRow>
+                            <S.DiscoveryTileSecondRow>{input.id}</S.DiscoveryTileSecondRow>
                         </Column>
                     </Padding>
                     <Padding paddingLeft='80px' />
@@ -70,22 +70,22 @@ const DataTile = ({ input, id, t }) => {
                     <Row alignItems='Center' justifyContent='space-between'>
                         <Column>
                             <S.DiscoveryTileFirstRow width={'100px'}>Survey ID</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.id}</S.DiscoveryTileSecondRow>
+                            <S.DiscoveryTileSecondRow>{input.survey_id}</S.DiscoveryTileSecondRow>
                         </Column>
                         <Padding paddingLeft='20px' />
                         <Column>
                             <S.DiscoveryTileFirstRow width={'100px'}>Survey Title</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.title}</S.DiscoveryTileSecondRow>
+                            <S.DiscoveryTileSecondRow>{input.survey_title}</S.DiscoveryTileSecondRow>
                         </Column>
                         <Padding paddingLeft='20px' />
                         <Column>
                             <S.DiscoveryTileFirstRow width={'200px'}>Survey Description</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.description}</S.DiscoveryTileSecondRow>
+                            <S.DiscoveryTileSecondRow>{input.survey_description}</S.DiscoveryTileSecondRow>
                         </Column>
                         <Padding paddingLeft='20px' />
                         <Column>
                             <S.DiscoveryTileFirstRow width={'200px'}>Survey Start Time</S.DiscoveryTileFirstRow>
-                            <S.DiscoveryTileSecondRow>{input.start_time}</S.DiscoveryTileSecondRow>
+                            <S.DiscoveryTileSecondRow>{input.survey_start_time}</S.DiscoveryTileSecondRow>
                         </Column>
                         <Padding paddingLeft='20px' />
 

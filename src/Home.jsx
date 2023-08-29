@@ -1,18 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux'
-import { useTranslation, withTranslation } from "react-i18next";
-import Search from "./Search";
-import Article from "./components/article/Article";
-
-import Carousel from "react-multi-carousel";
+import React from "react";
+import {useTranslation, withTranslation} from "react-i18next";
 import "react-multi-carousel/lib/styles.css";
-
-
 import PropTypes from 'prop-types';
-import { Circle, Column, SliderBullet, H2Text, BodyText, Style } from "./common/styles";
-import { Padding } from "./components/discovery/tabs/style";
+import {BodyText, Column, H2Text, Style} from "./common/styles";
+import {Padding} from "./components/discovery/tabs/style";
 import SearchTerm from "./components/discovery/search/SearchTerm";
-import {Link} from "react-router-dom";
 
 const responsive = {
   superLargeDesktop: {
@@ -38,62 +30,62 @@ const Home = () => {
 
   const { t, i18n } = useTranslation();
 
-  const buildSliderContent = ({ index = 0 }) => {
-      return <Column key = {`${index}`} justifyContent='center' alignItems='center'>
-      <H2Text color={'#fff'}>{t('article.what-is-new')} {index}</H2Text>
-        <Style maxWidth='600px'>
-        <BodyText color={'#fff'} textAlign='center'>{t('filler')}</BodyText>
-        </Style>
+  // const buildSliderContent = ({ index = 0 }) => {
+  //     return <Column key = {`${index}`} justifyContent='center' alignItems='center'>
+  //     <H2Text color={'#fff'}>{t('article.what-is-new')} {index}</H2Text>
+  //       <Style maxWidth='600px'>
+  //       <BodyText color={'#fff'} textAlign='center'>{t('filler')}</BodyText>
+  //       </Style>
+  //
+  //     <h4></h4>
+  //       <Padding vertical='20px' />
+  //     </Column>
+  //   }
+  //
+  // const slides = [
+  //   buildSliderContent({ index: 1 }),
+  //   buildSliderContent({ index: 2 }),
+  //   buildSliderContent({ index: 3 }),
+  //   buildSliderContent({ index: 4 }),
+  //   buildSliderContent({ index: 5 }),
+  // ]
 
-      <h4></h4>
-        <Padding vertical='20px' />
-      </Column>
-    }
+  // const CustomDot = ({ onClick, ...rest }) => {
+  //   const {
+  //     onMove,
+  //     index,
+  //     active,
+  //     carouselState: { currentSlide, deviceType }
+  //   } = rest;
+  //
+  //   const carouselItems = [
+  //     <SliderBullet key='sb01' isActive={active} onClick={() => onClick()} />,
+  //     <SliderBullet key='sb02' isActive={active} onClick={() => onClick()} />,
+  //     <SliderBullet key='sb04' isActive={active} onClick={() => onClick()} />,
+  //     <SliderBullet key='sb05' isActive={active} onClick={() => onClick()} />,
+  //     <SliderBullet key='sb06' isActive={active} onClick={() => onClick()} />,
+  //   ];
+  //   return <>
+  //     {React.Children.toArray(carouselItems)[index]}
+  //   </>;
+  // }
 
-  const slides = [
-    buildSliderContent({ index: 1 }),
-    buildSliderContent({ index: 2 }),
-    buildSliderContent({ index: 3 }),
-    buildSliderContent({ index: 4 }),
-    buildSliderContent({ index: 5 }),
-  ]
+  // CustomDot.propTypes = {
+  //   onClick: PropTypes.func
+  // }
 
-  const CustomDot = ({ onClick, ...rest }) => {
-    const {
-      onMove,
-      index,
-      active,
-      carouselState: { currentSlide, deviceType }
-    } = rest;
-
-    const carouselItems = [
-      <SliderBullet key='sb01' isActive={active} onClick={() => onClick()} />,
-      <SliderBullet key='sb02' isActive={active} onClick={() => onClick()} />,
-      <SliderBullet key='sb04' isActive={active} onClick={() => onClick()} />,
-      <SliderBullet key='sb05' isActive={active} onClick={() => onClick()} />,
-      <SliderBullet key='sb06' isActive={active} onClick={() => onClick()} />,
-    ];
-    return <>
-      {React.Children.toArray(carouselItems)[index]}
-    </>;
-  }
-
-  CustomDot.propTypes = {
-    onClick: PropTypes.func
-  }
-
-  const HomeSlider = () => {
-    return <Carousel
-      arrows={false}
-      swipeable={true}
-      draggable={true}
-      showDots
-      customDot={<CustomDot />}
-      responsive={responsive}
-    >
-      {slides}
-    </Carousel>
-  }
+  // const HomeSlider = () => {
+  //   return <Carousel
+  //     arrows={false}
+  //     swipeable={true}
+  //     draggable={true}
+  //     showDots
+  //     customDot={<CustomDot />}
+  //     responsive={responsive}
+  //   >
+  //     {slides}
+  //   </Carousel>
+  // }
 
 
   return (
@@ -101,9 +93,8 @@ const Home = () => {
       <div className='banner-container'>
         <Column alignItems='center' height='100px'>
           <Padding key='i01' paddingTop='140px' />
-          <img key='i02' src='/images/logos/plcaad_white.webp' alt='PLC-AAD Logo'/>
-          <Padding key='i03' paddingTop='40px' />
           <H2Text color={'#fff'}>{t('home.marketplace')}</H2Text>
+          <Padding key='i03' paddingTop='40px' />
           <Style maxWidth='600px'>
             <BodyText color={'#fff'} textAlign='center'>{t('home.marketplace_text')}</BodyText>
           </Style>

@@ -1,14 +1,20 @@
-import React, {useState} from "react";
-import {BlueButton} from "../../common/styles";
+import React, {useEffect, useState} from "react";
 import DataList from "../discovery/dataList/DataList";
 import {ApiService} from "../../services/ApiService";
 import './ServiceOfferings.css';
+import {CarLoader} from "../carLoader/CarLoader";
+
 const ServiceOfferings = () => {
     const [selfDescriptionData, setSelfDescriptionData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        getDataHandler()
+    }, [])
     const getDataHandler = async () => {
         setIsLoading(true);
         setSelfDescriptionData(await ApiService.getData());
+        console.log('selfDescriptionData: ', selfDescriptionData);
         setIsLoading(false);
     }
 
@@ -18,9 +24,8 @@ const ServiceOfferings = () => {
                 <h2>Service Offerings</h2>
             </header>
             <div className='content'>
-                <BlueButton onClick={getDataHandler}>Get Data</BlueButton>
                 {!isLoading && selfDescriptionData.length > 0 && <DataList data={selfDescriptionData}></DataList>}
-                {isLoading && <p>Loading...</p>}
+                {isLoading && <CarLoader />}
             </div>
         </div>
     );

@@ -153,7 +153,7 @@ body{
 
 .body-container {
   width: var(--content-width);
-  margin: 1em auto;
+  margin: 0 auto;
 }
 
 .tab-menu {

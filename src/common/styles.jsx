@@ -383,19 +383,12 @@ export const H4LightText = styled.div`
 
 
 export const BodyText = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 24px;
     letter-spacing: 0.25px;
-
-    /* identical to box height, or 133% */
-
-    letter-spacing: 0.25px;
-
-    /* greyscale/dark */
-
     text-align: ${props => props.textAlign || ''};
     color: ${props => props.color || '#4B4B4B'};
 `;

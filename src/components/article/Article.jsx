@@ -59,7 +59,8 @@ const Article = ({ category, headerMessage, t }) => {
     return (
         <div className="articles-layout">
             <H1Text>{t(headerMessage)}</H1Text>
-            <BodyText textAlign='start'>{t(`${headerMessage}-message`)}</BodyText>
+            <Padding key='i01' paddingTop='20px' />
+            <BodyText textAlign='justify'>{t(`${headerMessage}-message`)}</BodyText>
 
             <div className="articles-panel-layout">
                 {renderArticles}

@@ -65,7 +65,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
     const doSearch = () => {
         if (type === 'home') {
             dispatch(updateSearchFromHome(searchTerm));
-            navigate('/services');
+            navigate('/service-offerings');
         } else {
             dispatch(updateFilterCriteria({ searchTerms: searchTerm }))
         }

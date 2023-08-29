@@ -11,10 +11,8 @@
 
 .footer-banner {
     display: flex;
-    margin: 1% 10%;
+    margin: 0 10% 1%;
     border-bottom: 2px solid #ebebeb;
-    padding-bottom: 1%;
-
 }
 
 .footer-banner img {
@@ -22,7 +20,9 @@
 }
 
 .footer-banner p {
-    padding-right:5px;
+    padding-right:10px;
+    margin-top: 20px;
+    float:left;
 }
 
 .footer-content {
@@ -51,7 +51,11 @@
 .footer-bottom p {
     width: 30%;
     margin-block-end: 1.67em;
-    margin-block-end: 1.67em;
     margin: auto;
     text-align: center;
+}
+
+.footer-msg {
+    margin-left: 10px;
+    margin-top: 50px;
 }

@@ -20,7 +20,7 @@ i18n
     detection: options,
     useSuspense: false,
     wait: false,
-    debug: true,
+    debug: false, // true
     fallbackLng: 'en',
     preload: ['en', 'es', 'de'],
     defaultNS: ['translation'],
