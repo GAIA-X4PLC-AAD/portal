@@ -1,0 +1,13 @@
+.userInfo {
+    display: flex;
+}
+
+.userInfo2 {
+    display: inline-flex;
+    margin: 50px 20px;
+}
+
+.userInfo2 p {
+    padding-left: 10px;
+    margin-top: 10px;
+}
