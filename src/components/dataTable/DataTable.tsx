@@ -1,11 +1,9 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 // @ts-ignore
-import {DataGrid, GridColDef, GridValueGetterParams} from '@mui/x-data-grid';
+import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import {useEffect, useState} from "react";
-import {SelfDescription} from "../../types/selfDescription.model";
 
-const intColumns: GridColDef[] = [
+const participantColumns: GridColDef[] = [
   {
     field: 'id',
     headerName: 'ID',
@@ -41,43 +39,84 @@ const intColumns: GridColDef[] = [
   },
 ];
 
-// type selfDescriptionRow = {
-//   id : number
-// } & SelfDescription
+const serviceColumns: GridColDef[] = [
+  {
+    field: 'id',
+    headerName: 'ID',
+    width: 50
+  },
+  {
+    field: 'sdId',
+    headerName: 'Self Description ID',
+    width: 400
+  },
+  {
+    field: 'surveyID',
+    headerName: 'Survey ID',
+    width: 250
+  },
+  {
+    field: 'surveyTitle',
+    headerName: 'Survey Title',
+    width: 190,
+    editable: true,
+  },
+  {
+    field: 'surveyDescription',
+    headerName: 'Survey Description',
+    width: 270,
+    editable: true,
+  },
+  {
+    field: 'surveyStartTime',
+    headerName: 'Survey Start Time',
+    width: 200,
+    editable: true,
+  },
+];
+
 const DataTable = (props: any) => {
-  console.log('DataTable', props.data);
   const [rows, setRows] = useState([]);
-  // const [columns, setColumns] = useState<GridColDef[]>([]);
-  const [columns, setColumns] = useState(intColumns);
-  console.log('initRows', rows);
+  const [columns, setColumns] = useState<GridColDef[]>([]);
 
   useEffect(() => {
-    // createColumns();
+    createColumns();
     createRows();
   }, [])
   const createRows = (): any => {
-    const newRows = props.data.map((data: any, id: number) => ({
-        id: id + 1,
-        sdId: data.id,
-        subjectTypes: data.subjectTypes,
-        legalName: data.legalName,
-        claimsGraphUri: data.claimsGraphUri,
-        registrationNumber: data.registrationNumber
-      })
-    );
+    let newRows;
+    if (props.type === "service") {
+      newRows = props.data.map((data: any, id: number) => ({
+          id: id + 1,
+          sdId: data.id,
+          surveyID: data.survey_id,
+          surveyTitle: data.survey_title,
+          surveyDescription: data.survey_description,
+          surveyStartTime: data.survey_start_time
+        })
+      );
+    } else if (props.type === "participants") {
+      newRows = props.data.map((data: any, id: number) => ({
+          id: id + 1,
+          sdId: data.id,
+          subjectTypes: data.subjectTypes,
+          legalName: data.legalName,
+          claimsGraphUri: data.claimsGraphUri,
+          registrationNumber: data.registrationNumber
+        })
+      );
+    }
+
     setRows(rows.concat(newRows));
   }
 
   const createColumns = (): any => {
-    const newColumns = props.data.map((data: any, id: number) => ({
-        id: id + 1,
-        sdId: data.id,
-        subjectTypes: data.subjectTypes,
-        legalName: data.legalName,
-        claimsGraphUri: data.claimsGraphUri,
-        registrationNumber: data.registrationNumber
-      })
-    );
+    let newColumns;
+    if (props.type === "service") {
+      newColumns = serviceColumns;
+    } else if (props.type === "participants") {
+      newColumns = participantColumns;
+    }
     setColumns(columns.concat(newColumns));
   }
 

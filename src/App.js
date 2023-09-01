@@ -28,6 +28,7 @@ import {Footer} from "./components/footer/Footer";
 import ServiceOfferings from "./components/serviceOfferings/ServiceOfferings";
 import Participants from "./components/participants/Participants";
 import {useTranslation} from "react-i18next";
+import Resources from "./components/resources/Resources";
 
 
 const App = (props) => {
@@ -56,7 +57,7 @@ const App = (props) => {
               <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
               <Route path="/participants" element={ViewContainer(<Participants />)} />
               {/*<Route path="/data" element={ViewContainer(<SearchView type="data" />)} />*/}
-              <Route path="/resources" element={ViewContainer(<SearchView type="data" />)} />
+              <Route path="/resources" element={ViewContainer(<Resources />)} />
 
               {/*<Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />*/}
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
