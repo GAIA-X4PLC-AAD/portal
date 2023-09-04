@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import DataList from "../discovery/dataList/DataList";
 import {ApiService} from "../../services/ApiService";
 import './ServiceOfferings.css';
 import {CarLoader} from "../carLoader/CarLoader";
+import DataTable from "../dataTable/DataTable";
 
 const ServiceOfferings = () => {
     const [selfDescriptionData, setSelfDescriptionData] = useState([]);
@@ -14,7 +14,6 @@ const ServiceOfferings = () => {
     const getDataHandler = async () => {
         setIsLoading(true);
         setSelfDescriptionData(await ApiService.getData());
-        console.log('selfDescriptionData: ', selfDescriptionData);
         setIsLoading(false);
     }
 
@@ -24,7 +23,7 @@ const ServiceOfferings = () => {
                 <h2>Service Offerings</h2>
             </header>
             <div className='content'>
-                {!isLoading && selfDescriptionData.length > 0 && <DataList data={selfDescriptionData}></DataList>}
+                {!isLoading && selfDescriptionData.length > 0 && <DataTable data={selfDescriptionData} type={"service"} />}
                 {isLoading && <CarLoader />}
             </div>
         </div>

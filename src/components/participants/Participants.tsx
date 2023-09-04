@@ -25,7 +25,7 @@ const Participants = () => {
         <h2>Participants</h2>
       </header>
       <div className='content'>
-        {!isLoading && <DataTable data={participantsData}></DataTable>}
+        {!isLoading && <DataTable data={participantsData} type={"participants"}></DataTable>}
         {isLoading && <CarLoader />}
       </div>
     </div>
