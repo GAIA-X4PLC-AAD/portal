@@ -7,13 +7,13 @@ import * as S from "../header/style";
 
 const UserInfo = () => {
   const authContext = useContext(AuthContext);
-
+  console.log("Admin", authContext.hasRole("portal-admin") );
   return (
     <div className="userInfo">
       <div className="userInfo2">
         <Avatar sx={{bgcolor: deepPurple[500]}}>{authContext.username.charAt(0)}</Avatar>
-        {authContext.hasRole("user") && <p>User</p>}
-        {authContext.hasRole("admin") && <p>Admin</p>}
+        {authContext.hasRole("portal-user") && <p>User</p>}
+        {authContext.hasRole("portal-admin") && <p>Admin</p>}
       </div>
       <S.HeaderButton border={true} onClick={authContext.logout} id="top-menu-signin">
         Logout

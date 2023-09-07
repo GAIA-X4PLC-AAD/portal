@@ -1,14 +1,24 @@
 import Keycloak, {KeycloakConfig, KeycloakInitOptions} from "keycloak-js";
 import React, {createContext, useEffect, useState} from "react";
 import axios from "axios";
+import {AuthContextValues} from "./AuthContextValues";
+
+const realm: string = process.env.REACT_APP_REALM_NAME ? process.env.REACT_APP_REALM_NAME : "";
+const clientID: string = process.env.REACT_APP_CLIENT_ID ? process.env.REACT_APP_CLIENT_ID : "";
+const url: string = process.env.REACT_APP_FEDERATED_CATALOGUE_API_URL ? process.env.REACT_APP_FEDERATED_CATALOGUE_API_URL : "";
+
+console.log("realm", realm);
+console.log("clientID", clientID);
+console.log("url", url);
+console.log("EDGE", process.env.REACT_APP_EDGE_API_URI);
 
 /**
  * KeycloakConfig configures the connection to the Keycloak server.
  */
 const keycloakConfig: KeycloakConfig = {
-  realm: "react-example",
-  clientId: "webapp",
-  url: "http://localhost:8180/auth",
+  realm: realm,
+  clientId: clientID,
+  url: url,
 };
 
 /**
@@ -23,37 +33,17 @@ const keycloakInitOptions: KeycloakInitOptions = {
 const keycloak = new Keycloak(keycloakConfig);
 
 /**
- * AuthContextValues defines the structure for the default values of the {@link AuthContext}.
- */
-interface AuthContextValues {
-  /**
-   * Whether or not a user is currently authenticated
-   */
-  isAuthenticated: boolean;
-  /**
-   * The name of the authenticated user
-   */
-  username: string;
-  /**
-   * Function to initiate the logout
-   */
-  logout: () => void;
-  login: () => void;
-  /**
-   * Check if the user has the given role
-   */
-  hasRole: (role: string) => boolean;
-}
-
-/**
  * Default values for the {@link AuthContext}
  */
 const defaultAuthContextValues: AuthContextValues = {
   isAuthenticated: false,
   username: "",
-  logout: () => {},
-  login: () => {},
+  logout: () => {
+  },
+  login: () => {
+  },
   hasRole: (role) => false,
+  getConfig: () => null,
 };
 
 /**
@@ -86,13 +76,7 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
   const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
   // Local state that will contain the users name once it is loaded
   const [username, setUsername] = useState<string>("");
-
-  // useEffect(() => {
-  //   axios.interceptors.request.use((config) => {
-  //     config.headers["Authorization"] = `Bearer ${keycloak.token}`;
-  //     return config;
-  //   });
-  // }, []);
+  const [token, setToken] = useState<string>("");
 
   useEffect(() => {
     /**
@@ -110,8 +94,9 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
         console.log("error trying to load the user profile");
       }
     }
-    async function getToken() {
-      axios.interceptors.response.use(
+
+    async function refreshToken() {
+     axios.interceptors.response.use(
         // No special handling of responses needed. We return it as it comes in.
         (response) => {
           return response;
@@ -129,7 +114,7 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
               // Was refreshing the access token successfully?
               if (result) {
                 // Repeat the request
-                return await axios({ ...error.config });
+                return await axios({...error.config});
               } else {
                 // If the access token could not be refreshed we reject the promise and the code responsible for the request has to handle it.
                 throw new Error("Unauthorized");
@@ -144,10 +129,22 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
         },
       );
     }
+
+    async function loadToken() {
+      try {
+        const token = await keycloak.token;
+        if (token) {
+          setToken(token);
+        }
+      } catch {
+        console.log("error trying to load the token");
+      }
+    }
+
     // Only load the profile if a user is authenticated
     if (isAuthenticated) {
       loadProfile();
-      console.log("token:", getToken());
+      loadToken();
     }
   }, [isAuthenticated])
 
@@ -174,7 +171,7 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
           console.log(
             "user is not yet authenticated. forwarding user to login."
           );
-          await keycloak.login({ redirectUri: `http://localhost:3000/home` });
+          await keycloak.login({redirectUri: `http://localhost:3000/home`});
         }
         // If we get here the user is authenticated and we can update the state accordingly
         console.log("user already authenticated");
@@ -185,12 +182,16 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
       }
     }
 
-    if(!isAuthenticated){
+    if (!isAuthenticated) {
       initializeKeycloak();
     }
     console.log("IsAuthenticated?", isAuthenticated);
 
-    axios.interceptors.request.use((config) => {
+
+  }
+
+  async function getConfig()  {
+    return axios.interceptors.request.use((config) => {
       config.headers["Authorization"] = `Bearer ${keycloak.token}`;
       return config;
     });
@@ -205,10 +206,8 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
     return keycloak.hasRealmRole(role);
   };
 
-  // const values = useMemo(() => ({ isAuthenticated, username, logout, login, hasRole }), []);
-
   return (
-    <AuthContext.Provider value={{ isAuthenticated, username, logout, login, hasRole }}>
+    <AuthContext.Provider value={{isAuthenticated, username, logout, login, hasRole, getConfig}}>
       {props.children}
     </AuthContext.Provider>
   );

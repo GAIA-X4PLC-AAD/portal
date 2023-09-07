@@ -1,4 +1,6 @@
 import axios, {AxiosResponse} from 'axios';
+import {AuthContext} from "../context/AuthContextProvider";
+import {useContext} from "react";
 
 export const ApiService = {
     async getData() {
@@ -34,5 +36,12 @@ export const ApiService = {
                 subjectTypes: participants.subjectTypes,
             };
         });
+    },
+
+    async getShaclShapesFromCatalogue() : Promise<AxiosResponse> {
+        const endpoint = "/schemas/latest?type=SHAPE";
+        const response = await axios.get(process.env.REACT_APP_FEDERATED_CATALOGUE_API_URL + endpoint);
+        console.log("Shacl?", response.data)
+        return response.data;
     },
 };
