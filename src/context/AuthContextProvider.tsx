@@ -1,7 +1,6 @@
 import Keycloak, {KeycloakConfig, KeycloakInitOptions} from "keycloak-js";
 import React, {createContext, useEffect, useState} from "react";
 import axios from "axios";
-import {AuthContextValues} from "./AuthContextValues";
 
 const realm: string = process.env.REACT_APP_REALM_NAME ? process.env.REACT_APP_REALM_NAME : "";
 const clientID: string = process.env.REACT_APP_CLIENT_ID ? process.env.REACT_APP_CLIENT_ID : "";
@@ -31,6 +30,31 @@ const keycloakInitOptions: KeycloakInitOptions = {
 
 // Create the Keycloak client instance
 const keycloak = new Keycloak(keycloakConfig);
+
+/**
+ * AuthContextValues defines the structure for the default values of the {@link AuthContext}.
+ */
+interface AuthContextValues {
+  /**
+   * Whether or not a user is currently authenticated
+   */
+  isAuthenticated: boolean;
+  /**
+   * The name of the authenticated user
+   */
+  username: string;
+  /**
+   * Function to initiate the logout
+   */
+  logout: () => void;
+  login: () => void;
+  /**
+   * Check if the user has the given role
+   */
+  hasRole: (role: string) => boolean;
+
+  getConfig: () => Promise<number> | null;
+}
 
 /**
  * Default values for the {@link AuthContext}
@@ -191,10 +215,12 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
   }
 
   async function getConfig()  {
-    return axios.interceptors.request.use((config) => {
+    const config = axios.interceptors.request.use((config) => {
       config.headers["Authorization"] = `Bearer ${keycloak.token}`;
       return config;
     });
+    console.log("Config", config)
+    return config;
   }
 
   /**
