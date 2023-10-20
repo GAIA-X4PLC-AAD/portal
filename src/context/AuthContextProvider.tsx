@@ -2,22 +2,29 @@ import Keycloak, {KeycloakConfig, KeycloakInitOptions} from "keycloak-js";
 import React, {createContext, useEffect, useState} from "react";
 import axios from "axios";
 
-const realm: string = process.env.REACT_APP_REALM_NAME ? process.env.REACT_APP_REALM_NAME : "";
-const clientID: string = process.env.REACT_APP_CLIENT_ID ? process.env.REACT_APP_CLIENT_ID : "";
-const url: string = process.env.REACT_APP_FEDERATED_CATALOGUE_API_URL ? process.env.REACT_APP_FEDERATED_CATALOGUE_API_URL : "";
+// const realm: string = process.env.REACT_APP_REALM_NAME ? process.env.REACT_APP_REALM_NAME : "";
+// const clientID: string = process.env.REACT_APP_CLIENT_ID ? process.env.REACT_APP_CLIENT_ID : "";
+// const url: string = process.env.REACT_APP_FEDERATED_CATALOGUE_API_URL ? process.env.REACT_APP_FEDERATED_CATALOGUE_API_URL : "";
+//
+// console.log("realm", realm);
+// console.log("clientID", clientID);
+// console.log("url", url);
+// console.log("EDGE", process.env.REACT_APP_EDGE_API_URI);
 
-console.log("realm", realm);
-console.log("clientID", clientID);
-console.log("url", url);
-console.log("EDGE", process.env.REACT_APP_EDGE_API_URI);
+// /**
+//  * KeycloakConfig configures the connection to the Keycloak server.
+//  */
+// const keycloakConfig: KeycloakConfig = {
+//   realm: realm,
+//   clientId: clientID,
+//   url: url,
+// };
 
-/**
- * KeycloakConfig configures the connection to the Keycloak server.
- */
 const keycloakConfig: KeycloakConfig = {
-  realm: realm,
-  clientId: clientID,
-  url: url,
+  realm: "gaia-x",
+  clientId: "federated-catalogue",
+  // url: "https://fc-keycloak.gxfs.gx4fm.org/",
+  url: "http://localhost:8280",
 };
 
 /**
@@ -26,6 +33,9 @@ const keycloakConfig: KeycloakConfig = {
 const keycloakInitOptions: KeycloakInitOptions = {
   // Configure that Keycloak will check if a user is already authenticated (when opening the app or reloading the page). If not authenticated the user will be send to the login form. If already authenticated the webapp will open.
   onLoad: "login-required",
+  // flow:"implicit",
+  // flow: 'standard',
+  // pkceMethod: 'S256'
 };
 
 // Create the Keycloak client instance
@@ -195,7 +205,8 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
         }
         // If we get here the user is authenticated and we can update the state accordingly
         console.log("user already authenticated");
-        setAuthenticated(isAuthenticatedResponse);
+        setAuthenticated(true);
+        // setAuthenticated(isAuthenticatedResponse);
       } catch {
         console.log("error initializing Keycloak");
         setAuthenticated(false);
