@@ -66,6 +66,7 @@ const CenterBar = () => {
           <ButtonText
             selected={location.pathname === '/dashboard'}
             color='#000000'
+            fontSize='16px'
             onClick={() => { navigate('/dashboard'); }}
             data-tip={t('left-menu.tooltip.dashboard')}
           >
@@ -79,7 +80,8 @@ const CenterBar = () => {
           ?
           <ButtonText
             selected={location.pathname.includes('admin')}
-            color='#000000'
+            color='#000094'
+            fontSize='16px'
             onClick={() => { navigate('/admin/participant'); }}
             data-tip={t('left-menu.tooltip.admin')}
             >
@@ -93,7 +95,8 @@ const CenterBar = () => {
             <>
               {/* SERVICES: 2 */}
               <ButtonText selected={location.pathname === '/service-offerings'}
-                color='#000000'
+                color='#000094'
+                fontSize='16px'
                 onClick={() => { navigate('/service-offerings'); }}
                 data-tip={t('left-menu.tooltip.service-offerings')}
                 >
@@ -103,7 +106,8 @@ const CenterBar = () => {
               {/* PROVIDER: 4 */}
               <ButtonText
                 selected={location.pathname === '/participants'}
-                color='#000000'
+                color='#000094'
+                fontSize='16px'
                 onClick={() => { navigate('/participants'); }}
                 data-tip={t('left-menu.tooltip.participants')}
                 >
@@ -111,10 +115,12 @@ const CenterBar = () => {
               </ButtonText>
 
               {/* DATA: 3 */}
-              <ButtonText selected={location.pathname === '/resources'}
-                          color='#000000'
-                          onClick={() => { navigate('/resources'); }}
-                          data-tip={t('left-menu.tooltip.resources')}
+              <ButtonText
+                selected={location.pathname === '/resources'}
+                color='#000094'
+                fontSize='16px'
+                onClick={() => { navigate('/resources'); }}
+                data-tip={t('left-menu.tooltip.resources')}
               >
                 {t('left-menu.resources')}
               </ButtonText>
@@ -124,7 +130,9 @@ const CenterBar = () => {
                 ?
                 <ButtonText
                   selected={location.pathname.includes('/provide/')}
-                  color='#000000' onClick={() => { navigate('/provide/start'); }}
+                  color='#000094'
+                  fontSize='16px'
+                  onClick={() => { navigate('/provide/start'); }}
                   data-tip={t('left-menu.tooltip.provide')}
                   >
                     {t('left-menu.provide')}
@@ -135,7 +143,7 @@ const CenterBar = () => {
             </>
         }
         <Row>
-          <Menu menuButton={<ButtonText color='#000000'>{t('left-menu.help')}</ButtonText>} menuClassName="szh-menu">
+          <Menu menuButton={<ButtonText color='#000094' fontSize='16px'>{t('left-menu.help')}</ButtonText>} menuClassName="szh-menu">
             <MenuItem onClick={() => history.push('/help/about')}>{t('left-menu.about')}</MenuItem>
             <MenuItem onClick={() => history.push('/help/support')}>{t('left-menu.support')}</MenuItem>
           </Menu>
@@ -145,11 +153,14 @@ const CenterBar = () => {
         {
           (_userRole != VR_ROLE)
           ? <></>
-          : <ButtonText color='#000000' onClick={onOpenModal}
+          : <ButtonText
+              color='#000094'
+              fontSize='16px'
+              onClick={onOpenModal}
               data-tip={t('left-menu.tooltip.change-language')}
-              >
+            >
               {t('left-menu.change-language')}
-              </ButtonText>
+            </ButtonText>
         }
 
         <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
