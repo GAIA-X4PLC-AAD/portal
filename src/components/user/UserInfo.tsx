@@ -7,7 +7,6 @@ import * as S from "../header/style";
 
 const UserInfo = () => {
   const authContext = useContext(AuthContext);
-  console.log("Admin", authContext.hasRole("portal-admin") );
   return (
     <div className="userInfo">
       <div className="userInfo2">

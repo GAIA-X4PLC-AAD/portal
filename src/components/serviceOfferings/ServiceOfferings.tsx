@@ -11,7 +11,6 @@ const ServiceOfferings = () => {
   const authContext = useContext(AuthContext);
   if(authContext.isAuthenticated){
     const config = authContext.getConfig;
-    console.log(config);
   }
 
   useEffect(() => {
@@ -24,7 +23,7 @@ const ServiceOfferings = () => {
   }
 
   const getData = async () => {
-    const data = await ApiService.getShaclShapesFromCatalogue();
+    const data = await ApiService.getShaclShapesFromCatalogue(authContext);
     console.log("Data: ", data);
   }
 

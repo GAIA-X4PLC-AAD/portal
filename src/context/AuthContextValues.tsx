@@ -28,4 +28,6 @@ export interface AuthContextValues {
   hasRole: (role: string) => boolean;
 
   getConfig: () => Promise<number> | null;
+
+  token: string;
 }
