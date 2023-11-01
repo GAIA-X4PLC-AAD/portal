@@ -1,0 +1,135 @@
+[
+  {
+    "@id": "http: //semanticweb.org/metadatasurveyontology/SurveyResultDataOfferingShape",
+    "http: //www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+      {
+        "@id": "http: //www.w3.org/ns/shacl#NodeShape"
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#property": [
+      {
+        "@id": "_:ub2bL500C25"
+      },
+      {
+        "@id": "_:ub2bL516C25"
+      },
+      {
+        "@id": "_:ub2bL508C25"
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#targetClass": [
+      {
+        "@id": "http: //semanticweb.org/metadatasurveyontology/SurveyResultDataOffering"
+      }
+    ]
+  },
+  {
+    "@id": "_:ub2bL500C25",
+    "http: //www.w3.org/2004/02/skos/core#example": [
+      {
+        "@value": "'Date 1'"
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#datatype": [
+      {
+        "@id": "http: //www.w3.org/2001/XMLSchema#dateTime"
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#description": [
+      {
+        "@value": "When the survey was started."
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#message": [
+      {
+        "@value": "Missing survey start time."
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#minCount": [
+      {
+        "@value": 1
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#name": [
+      {
+        "@value": "Survey start time"
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#path": [
+      {
+        "@id": "http: //semanticweb.org/metadatasurveyontology/survey_start_time"
+      }
+    ]
+  },
+  {
+    "@id": "_:ub2bL516C25",
+    "http: //www.w3.org/ns/shacl#description": [
+      {
+        "@value": "Accompanied survey service offering."
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#message": [
+      {
+        "@value": "Missing assigned survey service offering."
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#minCount": [
+      {
+        "@value": 1
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#name": [
+      {
+        "@value": "Survey service offering"
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#nodeKind": [
+      {
+        "@id": "http: //www.w3.org/ns/shacl#IRI"
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#path": [
+      {
+        "@id": "http: //semanticweb.org/metadatasurveyontology/belongs_to"
+      }
+    ]
+  },
+  {
+    "@id": "_:ub2bL508C25",
+    "http: //www.w3.org/2004/02/skos/core#example": [
+      {
+        "@value": "'Date 1'"
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#datatype": [
+      {
+        "@id": "http: //www.w3.org/2001/XMLSchema#dateTime"
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#description": [
+      {
+        "@value": "When the survey was closed."
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#message": [
+      {
+        "@value": "Missing survey close time."
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#minCount": [
+      {
+        "@value": 1
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#name": [
+      {
+        "@value": "Survey close time"
+      }
+    ],
+    "http: //www.w3.org/ns/shacl#path": [
+      {
+        "@id": "http: //semanticweb.org/metadatasurveyontology/survey_close_time"
+      }
+    ]
+  },
+]

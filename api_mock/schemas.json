@@ -1,0 +1,17 @@
+{
+  "ontologies": [
+    "https://w3id.org/gaia-x/core#",
+    "https://example.org/V1-0-0/plc/",
+    "http://example.org/example/",
+    "http://www.fhg-ipk.semantics.org/ontologies/konierik/SensorMaster",
+    "http://semanticweb.org/metadatasurveyontology",
+    "https://w3id.org/gaia-x/gax-trust-framework#"
+  ],
+  "shapes": [
+    "115de3eb9ceef112c9b444d5973ce1b12156f8bf1077fb1bc5d7ca0bda64ca2d",
+    "4d48efc95d8e28bb49ed913b2c1247f9a07efaea9ea7a899468151590f61085c",
+    "bdb413b65ee2d464065de8a4471ae46419c6f1218d7c4a4033b1499143c630dd",
+    "a04e3a5500c98340e305c8292c69c7904acb32bb4777bb4d268149d40ad75667"
+  ],
+  "vocabularies": null
+}
