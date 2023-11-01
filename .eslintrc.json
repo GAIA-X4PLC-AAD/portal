@@ -8,14 +8,15 @@
     },
     "parserOptions": {
         "ecmaFeatures": {
-            "jsx": true
+            "jsx": true  // Allows for the parsing of JSX
         },
-        "sourceType": "module"
+        "sourceType": "module" // Allows for the use of imports
     },
     "plugins": [
         "react"
     ],
     "rules": {
+        // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
         "no-const-assign": "warn",
         "no-this-before-super": "warn",
         "no-undef": "warn",
@@ -28,7 +29,7 @@
         "react/jsx-uses-react": "off"
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
+        "eslint:recommended", // Uses the recommended rules from the eslint
+        "plugin:react/recommended" // Uses the recommended rules from @eslint-plugin-react
     ]
 }

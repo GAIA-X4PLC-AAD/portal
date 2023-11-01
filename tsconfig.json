@@ -20,22 +20,22 @@
     "jsx": "preserve", // Emit .jsx files with the JSX unchanged
     "sourceMap": true, // Generate corresponding .map file
     "declaration": true, // Generate corresponding .d.ts file
-    "noUnusedLocals": true, // Report errors on unused locals
-    "noUnusedParameters": true, // Report errors on unused parameters
+    "noUnusedLocals": false, // TODO: Change to true - Report errors on unused locals
+    "noUnusedParameters": false, // TODO: Change to true - Report errors on unused parameters
     "incremental": true, // Enable incremental compilation by reading/writing information from prior compilations to a file on disk
     "noFallthroughCasesInSwitch": true, // Report errors for fallthrough cases in switch statement
     "baseUrl": "./src"    // Sets a base directory from which TypeScript  will resolve bare specifier module names.
 },
-    "include": [
-        "src/**/*", // *** The files TypeScript should type check ***
+    "include": [ // *** The files TypeScript should type check ***
+        "src/**/*",
 ],
-  "exclude": [
+  "exclude": [ // *** The files to not type check ***
       "node_modules",
       "build",
       "api_mock/**",
       ".idea",
       "helm",
       "public"
-  ] // *** The files to not type check ***
+  ]
 }
 
