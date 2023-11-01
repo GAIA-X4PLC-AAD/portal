@@ -2,6 +2,7 @@ import Keycloak, {KeycloakConfig, KeycloakInitOptions} from "keycloak-js";
 import React, {createContext, useEffect, useState} from "react";
 import axios from "axios";
 import {AuthContextValues} from "./AuthContextValues";
+import {retrieveToken} from "../common/auth";
 
 // const realm: string = process.env.REACT_APP_REALM_NAME ? process.env.REACT_APP_REALM_NAME : "";
 // const clientID: string = process.env.REACT_APP_CLIENT_ID ? process.env.REACT_APP_CLIENT_ID : "";
@@ -145,6 +146,22 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
         const token = await keycloak.token;
         if (token) {
           setToken(token);
+                    // axios.create({
+          //   headers: {
+          //     options: {
+          //       'Authorization': `Bearer ${token}`,
+          //       'Access-Control-Allow-Origin': '*',
+          //       'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
+          //     }
+          //   }
+          // });
+
+          // axios.interceptors.request.use((config) => {
+          //   config.headers["Authorization"] = `Bearer ${keycloak.token}`;
+          //   config.headers["Access-Control-Allow-Origin"] = "*";
+          //   return config;
+          // });
+
         }
       } catch {
         console.log("error trying to load the token");
@@ -179,8 +196,7 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
         }
         // If we get here the user is authenticated and we can update the state accordingly
         console.log("user already authenticated");
-        setAuthenticated(true);
-        // setAuthenticated(isAuthenticatedResponse);
+        setAuthenticated(isAuthenticatedResponse);
       } catch {
         console.log("error initializing Keycloak");
         setAuthenticated(false);
@@ -195,9 +211,26 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
   async function getConfig() {
     return axios.interceptors.request.use((config) => {
       config.headers["Authorization"] = `Bearer ${keycloak.token}`;
+      config.headers["Access-Control-Allow-Origin"] = "*";
       return config;
     });
+    // axios.interceptors.request.use(function (config) {
+    //   const token = retrieveToken();
+    //
+    //   if (token) {
+    //     // @ts-ignore
+    //     config.headers = {
+    //       ...config.headers,
+    //       authorization: `Bearer ${token}`,
+    //     };
+    //   }
+    //   return config;
+    // }, function (error) {
+    //   console.log("in axios interceptors request error")
+    //   return Promise.reject(error);
+    // });
   }
+
 
   /**
    * Check if the user has the given role

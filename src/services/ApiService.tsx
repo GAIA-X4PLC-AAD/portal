@@ -1,11 +1,9 @@
-import {AxiosResponse} from 'axios';
+import axios, {AxiosResponse} from 'axios';
 import {AuthContext} from "../context/AuthContextProvider";
 import {useContext} from "react";
 import {AuthContextValues} from "../context/AuthContextValues";
-import axios from 'axios';
 
 export const ApiService = {
-
     async getData() {
         const API_URL = "https://metadatasearch.gxfs.gx4fm.org/service-offerings?node_shape=http://semanticweb.org/metadatasurveyontology/SurveyResultDataOfferingShape"
         const response = await axios.get(API_URL);
@@ -41,17 +39,45 @@ export const ApiService = {
         });
     },
 
-    async getShaclShapesFromCatalogue(authContext: AuthContextValues) : Promise<AxiosResponse> {
+    async getShaclShapesFromCatalogue(authContext: AuthContextValues){
+
         const endpoint = "https://fc-server.gxfs.gx4fm.org/schemas/latest?type=ontology";
-
         console.log('token', authContext.token)
-
         const headers = {
-            'Content-Type': 'text/plain'
+            'Authorization': `Bearer ${authContext.token}`,
+            'Access-Control-Allow-Origin': '*',
+            // 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
         };
-        // @ts-ignore
-        const response = await axios.get(endpoint);
-        console.log("Shacl?", response.data)
-        return response.data;
+
+        try {
+            // // @ts-ignore
+            // axios.options(endpoint, {headers}).then(response => {
+            //     console.log('options here');
+            //     // @ts-ignore
+            //     return axios({
+            //         method: 'GET',
+            //         url: endpoint,
+            //         headers: {
+            //             'Authorization': `Bearer ${authContext.token}`,
+            //             'Access-Control-Allow-Origin': '*',
+            //         }
+            //     }}).then(responseFromGet => {
+            //         console.log('responseFromGet', responseFromGet.data());
+            // });
+
+
+            // @ts-ignore
+            axios.options(endpoint, {headers}).then(response => {
+                  // @ts-ignore
+                return axios.get(endpoint, {headers})
+              }).then(response => {
+                  console.log(response.data);
+              }).catch(error => {
+                  console.error('Fehler:', error);
+              });
+
+        } catch (error) {
+            console.error('Fehler:', error);
+        }
     },
 };
