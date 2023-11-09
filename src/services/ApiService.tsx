@@ -1,4 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
+import {readFileAsync} from "../common/readFile";
 
 export const ApiService = {
     async getData() {
@@ -22,7 +23,7 @@ export const ApiService = {
         });
     },
 
-    async getParticipants() : Promise<AxiosResponse< Array<Partial<any>> >> {
+    async getParticipants(): Promise<AxiosResponse<Array<Partial<any>>>> {
         const API_URL = "https://metadatasearch.gxfs.gx4fm.org/participants"
         const response = await axios.get(API_URL);
         return response.data.data.map((participants: any) => {
@@ -35,4 +36,20 @@ export const ApiService = {
             };
         });
     },
+
+    getShaclShapes(): string {
+        // Usage example
+        const filePath = '../../api_mock/short_shapes.ttl';
+        // const filePath = '../../api_mock/shapes.ttl';
+        readFileAsync(filePath)
+          .then((fileContent) => {
+              console.log('File content:', fileContent);
+              return fileContent;
+          })
+          .catch((err) => {
+              console.error('Error reading file:', err);
+          });
+
+        return '';
+    }
 };

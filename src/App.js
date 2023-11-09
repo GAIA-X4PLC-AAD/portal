@@ -29,6 +29,7 @@ import ServiceOfferings from "./components/serviceOfferings/ServiceOfferings";
 import Participants from "./components/participants/Participants";
 import {useTranslation} from "react-i18next";
 import Resources from "./components/resources/Resources";
+import {RDFParser} from "./services/RDFParser";
 
 
 const App = (props) => {
@@ -51,6 +52,7 @@ const App = (props) => {
                 <Column>
                   <Home />
                   {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
+                  {RDFParser.parseShapesFromRdfResponse()}
                 </Column>
               }
               />
