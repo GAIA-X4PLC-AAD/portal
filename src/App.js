@@ -56,6 +56,7 @@ const App = (props) => {
                 </Column>
               }
               />
+              <Route path="/home" element={ViewContainer(<Home />)} />
               <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
               <Route path="/participants" element={ViewContainer(<Participants />)} />
               {/*<Route path="/data" element={ViewContainer(<SearchView type="data" />)} />*/}
@@ -64,7 +65,8 @@ const App = (props) => {
               {/*<Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />*/}
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
               <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
-              <Route path="/signin" element={ViewContainer(<Login />)} />
+              {/*<Route path="/signin" element={ViewContainer(<LoginHome />)} />*/}
+              {/*<Route path="/signin" element={ViewContainer(<Login />)} />*/}
               <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />
               <Route path="/account/user/:tab" element={ViewContainer(<AccountHome />)} />
               <Route path="/account/provider/:tab" element={ViewContainer(<Provider />)} />

@@ -11,11 +11,12 @@ export const TopMenu = styled.div`
   justify-content: space-between;
   margin: auto;
   width: var(--content-width);
+  height: 96px;
 `;
 
 export const TopMenuLogo = styled.div`
   display: flex;
-  margin: 41px 0;
+  margin: 20px;
 `;
 
 export const TopMenuLinks = styled.div`
@@ -39,7 +40,7 @@ export const HeaderButton = styled.button`
   border-radius: 4px 4px 4px 4px;
   background-color: #fff;
   color: #000094;
-  margin: 50px 0 50px 0;
+  margin: 25px 0;
   /* margin-block-start: 1.33em;
   margin-block-end: 1.33em; */
   padding: 12px 20px;

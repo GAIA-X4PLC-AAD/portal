@@ -36,10 +36,10 @@ function UserAvatarButton({ onClicked }) {
   const navigate = useNavigate();
 
   const _userRole = useSelector((state) => state.user.user.user_role)
-  const _isPpr = _userRole == PPR_ROLE 
-  const _isPcrUser = _userRole == PCR_ROLE 
-  const _isPcrOrg = _userRole == PPR_ROLE 
-  const _isFr = _userRole == FR_ROLE 
+  const _isPpr = _userRole == PPR_ROLE
+  const _isPcrUser = _userRole == PCR_ROLE
+  const _isPcrOrg = _userRole == PPR_ROLE
+  const _isFr = _userRole == FR_ROLE
 
   // language modal
   const [openModal, setOpenModal] = useState(false);
@@ -57,7 +57,7 @@ function UserAvatarButton({ onClicked }) {
   return <Menu menuButton={userButton}>
     { (_isPcrOrg || _isPpr) ? <MenuItem onClick={() => navigate('/account/provider/details')}>{t('left-menu.user-info')}</MenuItem> : '' }
     {  _isPcrUser  ? <MenuItem onClick={() => navigate('/account/user/details')}>{t('left-menu.user-info')}</MenuItem> : '' }
-    
+
 
     <MenuItem onClick={onOpenModal} >
       {t('left-menu.change-language')}
@@ -127,12 +127,12 @@ const RegisterButton = ({ onClicked }) => {
   useEffect(() => {
     ReactTooltip.rebuild();
   });
-  
+
   const { t, } = useTranslation();
-  
+
   return <>
-      <S.HeaderButton 
-        border={false} 
+      <S.HeaderButton
+        border={false}
         onClick={onClicked}
         data-tip={t('top-menu.tooltip.signup')}
         id="top-menu-register">
@@ -159,7 +159,7 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
   const signedOutButtons =
     <>
       <SignInButton onClicked={handleSignIn} data-cy='dateInput' />
-      <RegisterButton onClicked={handleRegister} />
+      {/*<RegisterButton onClicked={handleRegister} />*/}
     </>;
 
   if (location.pathname === "/signin") { return (<></>); }

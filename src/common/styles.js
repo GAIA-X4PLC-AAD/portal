@@ -311,7 +311,6 @@ export const CaptionTextLink = styled.a`
 
 export const Card = styled.div`
     box-sizing: border-box;
-
     background: ${props => props.background || '#E9E9E9'};
     /* Background/Lighter Grey */
     border: 1px solid  ${props => props.borderColor || '#818C99'};
@@ -344,10 +343,10 @@ export const Circle = styled.div`
 `
 
 export const ButtonText = styled.div`
-    border-bottom: ${props => props.selected ? '4px solid #000094' : '4px solid #0000'}; 
+    border-bottom: ${props => props.selected ? '2px solid #000094' : '2px solid #0000'}; 
     font-family: 'Titillium Web';
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     font-size: ${props => props.fontSize || '14px'};
     line-height: 20px;
     display: flex;
