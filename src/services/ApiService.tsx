@@ -1,6 +1,4 @@
 import axios, {AxiosResponse} from 'axios';
-import {AuthContext} from "../context/AuthContextProvider";
-import {useContext} from "react";
 import {AuthContextValues} from "../context/AuthContextValues";
 
 export const ApiService = {
@@ -25,59 +23,41 @@ export const ApiService = {
         });
     },
 
-    async getParticipants() : Promise<AxiosResponse< Array<Partial<any>> >> {
-        const API_URL = "https://metadatasearch.gxfs.gx4fm.org/participants"
-        const response = await axios.get(API_URL);
-        return response.data.data.map((participants: any) => {
-            return {
-                id: participants.subjectClaims.uri,
-                claimsGraphUri: participants.subjectClaims.claimsGraphUri,
-                legalName: participants.subjectClaims.legalName,
-                registrationNumber: participants.subjectClaims.registrationNumber,
-                subjectTypes: participants.subjectTypes,
-            };
-        });
+    async getSurveyResultDataOfferingShape() {
+        return '';
     },
 
-    async getShaclShapesFromCatalogue(authContext: AuthContextValues){
+    // async getParticipants() : Promise<AxiosResponse< Array<Partial<any>> >> {
+    //     const API_URL = "https://metadatasearch.gxfs.gx4fm.org/participants"
+    //     const response = await axios.get(API_URL);
+    //     return response.data.data.map((participants: any) => {
+    //         return {
+    //             id: participants.subjectClaims.uri,
+    //             claimsGraphUri: participants.subjectClaims.claimsGraphUri,
+    //             legalName: participants.subjectClaims.legalName,
+    //             registrationNumber: participants.subjectClaims.registrationNumber,
+    //             subjectTypes: participants.subjectTypes,
+    //         };
+    //     });
+    // },
 
-        const endpoint = "https://fc-server.gxfs.gx4fm.org/schemas/latest?type=ontology";
-        console.log('token', authContext.token)
+    async getParticipants() {
+        return '';
+    },
+
+    async getShaclShapesFromCatalogue(authContext: AuthContextValues) : Promise<AxiosResponse<any, any>> {
+        const endpoint = "https://fc-server.gxfs.gx4fm.org/schemas/latest?type=shape";
         const headers = {
             'Authorization': `Bearer ${authContext.token}`,
             'Access-Control-Allow-Origin': '*',
-            // 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
         };
 
-        try {
-            // // @ts-ignore
-            // axios.options(endpoint, {headers}).then(response => {
-            //     console.log('options here');
-            //     // @ts-ignore
-            //     return axios({
-            //         method: 'GET',
-            //         url: endpoint,
-            //         headers: {
-            //             'Authorization': `Bearer ${authContext.token}`,
-            //             'Access-Control-Allow-Origin': '*',
-            //         }
-            //     }}).then(responseFromGet => {
-            //         console.log('responseFromGet', responseFromGet.data());
-            // });
-
-
-            // @ts-ignore
-            axios.options(endpoint, {headers}).then(response => {
-                  // @ts-ignore
-                return axios.get(endpoint, {headers})
-              }).then(response => {
-                  console.log(response.data);
-              }).catch(error => {
-                  console.error('Fehler:', error);
-              });
-
-        } catch (error) {
-            console.error('Fehler:', error);
-        }
+      return axios.options(endpoint, {headers}).then(response => {
+            return axios.get(endpoint, {headers})
+          }).then(response => {
+            return response.data;
+          }).catch(error => {
+            console.error('Error:', error);
+          });
     },
 };

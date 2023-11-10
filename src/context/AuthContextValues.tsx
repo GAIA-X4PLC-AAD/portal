@@ -1,3 +1,5 @@
+import {KeycloakInstance} from "keycloak-js";
+
 /**
  * AuthContextValues defines the structure for the default values of the {@link AuthContext}.
  */
@@ -10,7 +12,7 @@ export interface AuthContextValues {
   /**
    * The name of the authenticated user
    */
-  username: string;
+  username?: string;
 
   /**
    * Function to initiate the logout

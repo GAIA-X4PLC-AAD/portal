@@ -9,20 +9,22 @@ const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const authContext = useContext(AuthContext);
-  if(authContext.isAuthenticated){
+  const isAuthenticated = authContext.isAuthenticated;
+  if(isAuthenticated){
     const config = authContext.getConfig;
   }
 
   useEffect(() => {
+    getShaclShapes();
     getDataHandler()
-  }, [])
+  }, [isAuthenticated])
   const getDataHandler = async () => {
     setIsLoading(true);
     setSelfDescriptionData(await ApiService.getData());
     setIsLoading(false);
   }
 
-  const getData = async () => {
+  const getShaclShapes = async () => {
     const data = await ApiService.getShaclShapesFromCatalogue(authContext);
     console.log("Data: ", data);
   }
@@ -32,7 +34,6 @@ const ServiceOfferings = () => {
       <header>
         <h2>Service Offerings</h2>
       </header>
-      <button onClick={getData}>Hello!</button>
       {
         authContext.isAuthenticated &&
           <div className='content'>

@@ -26,7 +26,6 @@ const keycloakConfig: KeycloakConfig = {
   realm: "gaia-x",
   clientId: "portal",
   url: "https://fc-keycloak.gxfs.gx4fm.org/",
-  // url: "http://localhost:8280",
 };
 
 /**
@@ -47,7 +46,6 @@ const keycloak = new Keycloak(keycloakConfig);
  */
 const defaultAuthContextValues: AuthContextValues = {
   isAuthenticated: false,
-  username: "",
   logout: () => {
   },
   login: () => {
@@ -67,11 +65,13 @@ export const AuthContext = createContext<AuthContextValues>(
 /**
  * The props that must be passed to create the {@link AuthContextProvider}.
  */
+// eslint-disable-next-line 
 interface AuthContextProviderProps {
   /**
    * The elements wrapped by the auth context.
    */
-  children: JSX.Element;
+  // eslint-disable-next-line
+  children: React.JSX.Element;
 }
 
 
@@ -83,92 +83,21 @@ interface AuthContextProviderProps {
 const AuthContextProvider = (props: AuthContextProviderProps) => {
   // Create the local state in which we will keep track if a user is authenticated
   const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
-  // Local state that will contain the users name once it is loaded
-  const [username, setUsername] = useState<string>("");
   const [token, setToken] = useState<string>("");
 
   useEffect(() => {
-    /**
-     * Load the profile for of the user from Keycloak
-     */
-    async function loadProfile() {
-      try {
-        const profile = await keycloak.loadUserProfile();
-        console.log('Profile', profile);
-        if (profile.firstName) {
-          setUsername(profile.firstName);
-        } else if (profile.username) {
-          setUsername(profile.username);
-        }
-      } catch {
-        setUsername("Fail");
-        console.log("error trying to load the user profile");
-      }
-    }
-
-    async function refreshToken() {
-      axios.interceptors.response.use(
-        // No special handling of responses needed. We return it as it comes in.
-        (response) => {
-          return response;
-        },
-        // This object is not null if an error occurred
-        async (error) => {
-          if (error.response === undefined) {
-            throw error;
-          }
-          // Check if it is a 401 Unauthorized error
-          if (error.response.status === 401) {
-            try {
-              // Try to refresh the access token
-              const result = await keycloak.updateToken(5);
-              // Was refreshing the access token successfully?
-              if (result) {
-                // Repeat the request
-                return await axios({...error.config});
-              } else {
-                // If the access token could not be refreshed we reject the promise and the code responsible for the request has to handle it.
-                throw new Error("Unauthorized");
-              }
-            } catch (error) {
-              keycloak.logout();
-              throw error;
-            }
-          }
-          // No special treatment of any other error
-          throw error;
-        },
-      );
-    }
-
     async function loadToken() {
       try {
         const token = await keycloak.token;
         if (token) {
           setToken(token);
-                    // axios.create({
-          //   headers: {
-          //     options: {
-          //       'Authorization': `Bearer ${token}`,
-          //       'Access-Control-Allow-Origin': '*',
-          //       'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
-          //     }
-          //   }
-          // });
-
-          // axios.interceptors.request.use((config) => {
-          //   config.headers["Authorization"] = `Bearer ${keycloak.token}`;
-          //   config.headers["Access-Control-Allow-Origin"] = "*";
-          //   return config;
-          // });
-
         }
       } catch {
         console.log("error trying to load the token");
       }
     }
+
     if(isAuthenticated){
-      loadProfile();
       loadToken();
     }
   }, [isAuthenticated])
@@ -185,7 +114,7 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
      * Initialize the Keycloak instance
      */
     async function initializeKeycloak() {
-      console.log("initialize Keycloak");
+    console.log("initialize Keycloak");
       try {
         const isAuthenticatedResponse = await keycloak.init(keycloakInitOptions);
 
@@ -196,7 +125,7 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
         }
         // If we get here the user is authenticated and we can update the state accordingly
         console.log("user already authenticated");
-        setAuthenticated(isAuthenticatedResponse);
+        setAuthenticated(true);
       } catch {
         console.log("error initializing Keycloak");
         setAuthenticated(false);
@@ -214,21 +143,6 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
       config.headers["Access-Control-Allow-Origin"] = "*";
       return config;
     });
-    // axios.interceptors.request.use(function (config) {
-    //   const token = retrieveToken();
-    //
-    //   if (token) {
-    //     // @ts-ignore
-    //     config.headers = {
-    //       ...config.headers,
-    //       authorization: `Bearer ${token}`,
-    //     };
-    //   }
-    //   return config;
-    // }, function (error) {
-    //   console.log("in axios interceptors request error")
-    //   return Promise.reject(error);
-    // });
   }
 
 
@@ -242,7 +156,7 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{isAuthenticated, username, logout, login, hasRole, getConfig, token}}>
+    <AuthContext.Provider value={{isAuthenticated, logout, login, hasRole, getConfig, token}}>
       {props.children}
     </AuthContext.Provider>
   );
