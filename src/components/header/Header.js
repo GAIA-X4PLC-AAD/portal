@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { signOut } from "../../actions";
+import {signIn, signOut} from "../../actions";
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next';
 import SignInBar from './SignInBar'
@@ -8,10 +8,10 @@ import SignInBar from './SignInBar'
 import * as S from './style';
 import CenterBar from "./CenterBar";
 import PropTypes from 'prop-types';
-import { Row } from "../../common/styles";
+import {BlueButton, Row} from "../../common/styles";
 import ReactTooltip from "react-tooltip";
-import {SubMenu} from "./style";
-
+import {AuthContext} from "../../context/AuthContextProvider";
+import UserInfo from "../user/UserInfo";
 function Header(props) {
     const { t, } = useTranslation();
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ function Header(props) {
     };
 
     const handleSignIn = () => {
-        // dispatch(signIn())
+        dispatch(signIn())
         navigate('/signin')
     };
 
@@ -32,7 +32,7 @@ function Header(props) {
         navigate('/onboarding')
     };
 
-
+    const authContext = useContext(AuthContext);
     return (
         <>
             <S.SubMenu />
@@ -45,7 +45,13 @@ function Header(props) {
                 </S.TopMenuLogo>
                 <CenterBar  />
                 <Row>
-                    <SignInBar handleSignOut={handleSignOut} handleSignIn={handleSignIn} handleRegister={handleRegister} />
+                    { !authContext.isAuthenticated &&
+                        <S.HeaderButton border={true} onClick={authContext.login} id="top-menu-signin">
+                            {t('top-menu.signin')}
+                        </S.HeaderButton>
+                    }
+                    { authContext.isAuthenticated && <UserInfo></UserInfo> }
+                    {/*<SignInBar handleSignOut={handleSignOut} handleSignIn={handleSignIn} handleRegister={handleRegister} />*/}
                 </Row>
 
             </S.TopMenu>

@@ -1,15 +1,16 @@
-import React, { Suspense } from 'react';
-import { createRoot } from 'react-dom/client';
-import { configureStore } from "@reduxjs/toolkit";
-import { Provider } from 'react-redux';
+import React from 'react';
+import {createRoot} from 'react-dom/client';
+import {configureStore} from "@reduxjs/toolkit";
+import {Provider} from 'react-redux';
 import './index.css';
 import App from './App';
 import './i18n';
 import reducers from './reducers';
 import axios from "axios"
-import { retrieveToken } from "./common/auth";
-import { Navigate, useNavigate } from 'react-router-dom';
+import {retrieveToken} from "./common/auth";
+import {Navigate, useNavigate} from 'react-router-dom';
 import history from "./common/history"
+import AuthContextProvider from "./context/AuthContextProvider";
 
 // axios.interceptors.request.use(function (config) {
 //   const token = retrieveToken();
@@ -70,9 +71,9 @@ const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 
 root.render(
-  <Provider store={store}>
-    <Suspense fallback="..... is loading" >
-      <App />
-    </Suspense>
-  </Provider>,
+        <Provider store={store}>
+            <AuthContextProvider>
+                <App/>
+            </AuthContextProvider>
+        </Provider>
 );
