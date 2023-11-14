@@ -6,6 +6,7 @@ import DataTable from "../dataTable/DataTable";
 import {AuthContext} from "../../context/AuthContextProvider";
 import {RDFParser} from "../../services/RDFParser";
 import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
+import {Padding} from "../discovery/tabs/style";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
@@ -65,6 +66,7 @@ const ServiceOfferings = () => {
                     ))}
                   </Select>
               </FormControl>
+              <Padding key='i03' paddingTop='20px' />
             <div>
               {!isLoading && selfDescriptionData.length > 0 && <DataTable data={selfDescriptionData} type={"service"}/>}
               {isLoading && <CarLoader/>}
