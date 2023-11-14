@@ -24,6 +24,10 @@ export const ApiService = {
         });
     },
 
+    async getSelfDescriptions(){
+      return '';
+    },
+
     async getSurveyResultDataOfferingShape() {
         return '';
     },
@@ -61,20 +65,4 @@ export const ApiService = {
             console.error('Error:', error);
           });
     },
-
-    getShaclShapes(): string {
-        // Usage example
-        const filePath = '../../api_mock/short_shapes.ttl';
-        // const filePath = '../../api_mock/shapes.ttl';
-        // readFileAsync(filePath)
-        //   .then((fileContent) => {
-        //       console.log('File content:', fileContent);
-        //       return fileContent;
-        //   })
-        //   .catch((err) => {
-        //       console.error('Error reading file:', err);
-        //   });
-
-        return '';
-    }
 };

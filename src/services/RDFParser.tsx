@@ -1,25 +1,18 @@
-import {ApiService} from "./ApiService";
 import * as $rdf from 'rdflib';
-import {Namespace} from "rdflib";
-import {AuthContextValues} from "../context/AuthContextValues";
+
 export const RDFParser = {
 
-  parseShapesFromRdfResponse(authContext: AuthContextValues) {
+  parseShapesFromRdfResponse(data: any) {
     // Step 1: Get response as string
     // PYTHON:  shacl_shape_string = response.text
-    const shaclShapes = ApiService.getShaclShapesFromCatalogue(authContext);
 
     // Step 2: Create a rdf graph
     // PYTHON:  shacl_shape_rdf_graph = Graph().parse(data=shacl_shape_string, format="turtle")
     const store = $rdf.graph();
     const baseUriNode = 'http://example.org/example/';  // Create a base URI node
-    console.log('ShaclShapes', shaclShapes);
-    const turtleData = String(shaclShapes);
+    const turtleData = String(data);
     console.log('Turtle', turtleData);
     const contentType = 'text/turtle';
-
-
-    // const doc = $rdf.sym('https://example.com/alice/card.ttl');
 
     // Parse Turtle data
     try {
@@ -39,14 +32,14 @@ export const RDFParser = {
 
     // Step 4:  Retrieve specific triples by shape.
     // PYTHON: for subject, _, _ in shacl_shape_rdf_graph.triples((None, rdf.type, sh.NodeShape)):
-    const shapes: any = [];
+    let shapes: Array<string> = [];
     const triples = store.match(null, predicateNode, objectNode);
     triples.forEach((triple) => {
       console.log(`Triple: ${triple.subject.value} ${triple.predicate.value} ${triple.object.value}`);
-      shapes.append(triple);
+      shapes.push(triple.subject.value);
     });
     console.log('My shapes', shapes);
     // PYTHON:   return shapes, shacl_shape_rdf_graph
-
-  }
+    return shapes;
+  },
 }
