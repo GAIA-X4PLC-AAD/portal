@@ -5,7 +5,7 @@ import {CarLoader} from "../carLoader/CarLoader";
 import DataTable from "../dataTable/DataTable";
 import {AuthContext} from "../../context/AuthContextProvider";
 import {RDFParser} from "../../services/RDFParser";
-import {FormControl, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent, useTheme} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
