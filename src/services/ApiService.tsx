@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
-import {readFileAsync} from "../common/readFile";
+// import {readFileAsync} from "../common/readFile";
 import {AuthContextValues} from "../context/AuthContextValues";
 
 export const ApiService = {
@@ -66,14 +66,14 @@ export const ApiService = {
         // Usage example
         const filePath = '../../api_mock/short_shapes.ttl';
         // const filePath = '../../api_mock/shapes.ttl';
-        readFileAsync(filePath)
-          .then((fileContent) => {
-              console.log('File content:', fileContent);
-              return fileContent;
-          })
-          .catch((err) => {
-              console.error('Error reading file:', err);
-          });
+        // readFileAsync(filePath)
+        //   .then((fileContent) => {
+        //       console.log('File content:', fileContent);
+        //       return fileContent;
+        //   })
+        //   .catch((err) => {
+        //       console.error('Error reading file:', err);
+        //   });
 
         return '';
     }

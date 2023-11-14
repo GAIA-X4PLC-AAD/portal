@@ -4,6 +4,7 @@ import './ServiceOfferings.css';
 import {CarLoader} from "../carLoader/CarLoader";
 import DataTable from "../dataTable/DataTable";
 import {AuthContext} from "../../context/AuthContextProvider";
+import {RDFParser} from "../../services/RDFParser";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
@@ -27,6 +28,7 @@ const ServiceOfferings = () => {
   const getShaclShapes = async () => {
     const data = await ApiService.getShaclShapesFromCatalogue(authContext);
     console.log("Data: ", data);
+    RDFParser.parseShapesFromRdfResponse(authContext);
   }
 
   return (
