@@ -8,5 +8,6 @@ module.exports = {
         alias: {
             '@mui/styled-engine': '@mui/styled-engine-sc'
         },
+        fallback: { "url": require.resolve("url/") }
     },
 };

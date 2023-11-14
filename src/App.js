@@ -30,7 +30,6 @@ import Participants from "./components/participants/Participants";
 import {useTranslation} from "react-i18next";
 import Resources from "./components/resources/Resources";
 
-
 const App = (props) => {
 
   const { t, i18n } = useTranslation();
@@ -50,10 +49,7 @@ const App = (props) => {
               <Route path="/" element={
                 <Column>
                   <Home />
-                  {ViewContainer(
-                      <Padding vertical='120px'>
-                        <Article headerMessage="article.what-is-gaiax" category="ARTICLE" />
-                      </Padding>)}
+                  {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
                 </Column>
               }
               />

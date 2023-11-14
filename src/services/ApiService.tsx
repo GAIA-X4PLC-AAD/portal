@@ -23,6 +23,10 @@ export const ApiService = {
         });
     },
 
+    async getSelfDescriptions(){
+      return '';
+    },
+
     async getSurveyResultDataOfferingShape() {
         return '';
     },
