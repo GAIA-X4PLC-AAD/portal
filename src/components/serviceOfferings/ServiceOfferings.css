@@ -15,3 +15,13 @@ h2 {
 .carLoader {
     margin: 0;
 }
+
+.newCarLoader {
+    display: flex;
+    justify-content: center;
+}
+
+.car {
+    width: 100px;
+    height: 100px;
+}
