@@ -1,37 +1,33 @@
 import * as $rdf from 'rdflib';
 
-
 export const trimShapes = (shape: string) => {
+  let trimmedShape = '';
   if(shape.includes('#')){
-    return shape.substring(shape.indexOf("#") + 1);
+    trimmedShape = shape.substring(shape.indexOf("#") + 1);
   } else if(shape.includes('/')){
-
+    // Find the index of the last occurrence of "/"
+    const index = shape.lastIndexOf("/");
+    // If "/" is found, create a new string starting from the last occurrence of "/"
+    trimmedShape = index !== -1 ? shape.substring(index + 1) : shape;
   }
-
+  return trimmedShape;
 };
 export const RDFParser = {
 
-  parseShapesFromRdfResponse(data: any) {
-    // Step 1: Get response as string
-    // PYTHON:  shacl_shape_string = response.text
-
-    // Step 2: Create a rdf graph
-    // PYTHON:  shacl_shape_rdf_graph = Graph().parse(data=shacl_shape_string, format="turtle")
+  parseShapesFromRdfResponse(rdfData: any) {
+    // Step 1: Create a rdf graph
     const store = $rdf.graph();
-    const baseUriNode = 'http://example.org/example/';  // Create a base URI node
-    const turtleData = String(data);
+    const baseUriNode = 'https://w3id.org/gaia-x/core#';  // Create a base URI node
+    const turtleData = String(rdfData);
     const contentType = 'text/turtle';
-
-    // Parse Turtle data
+    // Step 2: Parse Turtle data
     try {
       $rdf.parse(turtleData, store, baseUriNode, contentType);
     } catch (error) {
-      console.warn('Error parsing Turtle data:', error);
+      console.info('Error parsing Turtle data:', error);
     }
 
-    // Step 3: Create Namespaces / NamedNode
-    // PYTHON:  sh = Namespace("http://www.w3.org/ns/shacl#")
-    // PYTHON:  rdf = Namespace("http://www.w3.org/1999/02/22-rdf-syntax-ns#")
+    // Step 3: Create NamedNodes
     const predicateURI = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'; // Replace with your predicate URI
     const predicateNode = $rdf.sym(predicateURI);
 
@@ -39,21 +35,17 @@ export const RDFParser = {
     const objectNode = $rdf.sym(objectURI);
 
     // Step 4:  Retrieve specific triples by shape.
-    // PYTHON: for subject, _, _ in shacl_shape_rdf_graph.triples((None, rdf.type, sh.NodeShape)):
     let shapes: Array<string> = [];
     const triples = store.match(null, predicateNode, objectNode);
 
     triples.forEach((triple) => {
       // console.log(`Triple: ${triple.subject.value} ${triple.predicate.value} ${triple.object.value}`);
       const shape = triple.subject.value;
-      let trimmedShape = '';
-      trimmedShape = trimShapes(shape);
-      shapes.push(trimmedShape);
+      shapes.push(trimShapes(shape));
+
     });
-    // PYTHON:   return shapes, shacl_shape_rdf_graph
     return shapes;
   },
-
 }
 
 
