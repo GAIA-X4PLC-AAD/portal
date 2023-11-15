@@ -1,5 +1,14 @@
 import * as $rdf from 'rdflib';
 
+
+export const trimShapes = (shape: string) => {
+  if(shape.includes('#')){
+    return shape.substring(shape.indexOf("#") + 1);
+  } else if(shape.includes('/')){
+
+  }
+
+};
 export const RDFParser = {
 
   parseShapesFromRdfResponse(data: any) {
@@ -33,11 +42,19 @@ export const RDFParser = {
     // PYTHON: for subject, _, _ in shacl_shape_rdf_graph.triples((None, rdf.type, sh.NodeShape)):
     let shapes: Array<string> = [];
     const triples = store.match(null, predicateNode, objectNode);
+
     triples.forEach((triple) => {
       // console.log(`Triple: ${triple.subject.value} ${triple.predicate.value} ${triple.object.value}`);
-      shapes.push(triple.subject.value);
+      const shape = triple.subject.value;
+      let trimmedShape = '';
+      trimmedShape = trimShapes(shape);
+      shapes.push(trimmedShape);
     });
     // PYTHON:   return shapes, shacl_shape_rdf_graph
     return shapes;
   },
+
 }
+
+
+

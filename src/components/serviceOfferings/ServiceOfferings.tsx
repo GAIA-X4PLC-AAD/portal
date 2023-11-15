@@ -3,7 +3,7 @@ import {ApiService} from "../../services/ApiService";
 import './ServiceOfferings.css';
 import DataTable from "../dataTable/DataTable";
 import {AuthContext} from "../../context/AuthContextProvider";
-import {RDFParser} from "../../services/RDFParser";
+import {RDFParser} from "../../utils/RDFParser";
 import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import {Padding} from "../discovery/tabs/style";
 // @ts-ignore
@@ -45,12 +45,12 @@ const ServiceOfferings = () => {
         authContext.isAuthenticated &&
           <div className='content'>
               <FormControl fullWidth>
-                  <InputLabel id="shape-label">Shacl Shapes</InputLabel>
+                  <InputLabel id="shape-label">Select Shape</InputLabel>
                   <Select
                       labelId="shape-label"
                       id="shape-select"
                       value={shaclShape}
-                      label="Shacl Shapes"
+                      label="SHACL Shape"
                       onChange={handleChange}
                   >
                     {shapes.map((shape) => (
