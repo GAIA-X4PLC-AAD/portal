@@ -1,12 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
 import {ApiService} from "../../services/ApiService";
 import './ServiceOfferings.css';
-import {CarLoader} from "../carLoader/CarLoader";
 import DataTable from "../dataTable/DataTable";
 import {AuthContext} from "../../context/AuthContextProvider";
-import {RDFParser} from "../../services/RDFParser";
+import {RDFParser} from "../../utils/RDFParser";
 import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
 import {Padding} from "../discovery/tabs/style";
+// @ts-ignore
+import car from "../../assets/auto.gif";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
@@ -19,10 +20,6 @@ const ServiceOfferings = () => {
   const handleChange = (event: SelectChangeEvent) => {
     setShaclShape(event.target.value);
   };
-
-  if(isAuthenticated){
-    const config = authContext.getConfig;
-  }
 
   useEffect(() => {
     getShaclShapes();
@@ -48,12 +45,12 @@ const ServiceOfferings = () => {
         authContext.isAuthenticated &&
           <div className='content'>
               <FormControl fullWidth>
-                  <InputLabel id="shape-label">Shacl Shapes</InputLabel>
+                  <InputLabel id="shape-label">Select Shape</InputLabel>
                   <Select
                       labelId="shape-label"
                       id="shape-select"
                       value={shaclShape}
-                      label="Shacl Shapes"
+                      label="SHACL Shape"
                       onChange={handleChange}
                   >
                     {shapes.map((shape) => (
@@ -69,7 +66,11 @@ const ServiceOfferings = () => {
               <Padding key='i03' paddingTop='20px' />
             <div>
               {!isLoading && selfDescriptionData.length > 0 && <DataTable data={selfDescriptionData} type={"service"}/>}
-              {isLoading && <CarLoader/>}
+              {isLoading &&
+                  <div className='newCarLoader'>
+                    <img src={car} alt="loading..."  className='car'/>
+                  </div>
+              }
             </div>
 
           </div>
