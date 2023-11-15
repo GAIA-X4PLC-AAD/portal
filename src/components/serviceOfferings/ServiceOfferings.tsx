@@ -4,7 +4,7 @@ import './ServiceOfferings.css';
 import DataTable from "../dataTable/DataTable";
 import {AuthContext} from "../../context/AuthContextProvider";
 import {RDFParser} from "../../utils/RDFParser";
-import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
+import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 import {Padding} from "../discovery/tabs/style";
 // @ts-ignore
 import car from "../../assets/auto.gif";
@@ -16,9 +16,15 @@ const ServiceOfferings = () => {
   const isAuthenticated = authContext.isAuthenticated;
   const [shaclShape, setShaclShape] = useState('');
   const [shapes, setShapes] = useState<string[]>([]);
+  const [isShapeSelected, setIsShapeSelected] = useState(false);
+  const [isDomainSelected, setIsDomainSelected] = useState(false);
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleShapeChange = (event: SelectChangeEvent) => {
     setShaclShape(event.target.value);
+    setIsShapeSelected(true);
+  };
+  const handleDomainChange = (event: SelectChangeEvent) => {
+    setIsDomainSelected(true);
   };
 
   useEffect(() => {
@@ -44,14 +50,14 @@ const ServiceOfferings = () => {
       {
         authContext.isAuthenticated &&
           <div className='content'>
-              <FormControl fullWidth>
+              <FormControl sx={{minWidth: 200 }}>
                   <InputLabel id="shape-label">Select Shape</InputLabel>
                   <Select
                       labelId="shape-label"
                       id="shape-select"
                       value={shaclShape}
                       label="SHACL Shape"
-                      onChange={handleChange}
+                      onChange={handleShapeChange}
                   >
                     {shapes.map((shape) => (
                       <MenuItem
@@ -63,7 +69,34 @@ const ServiceOfferings = () => {
                     ))}
                   </Select>
               </FormControl>
+            { isShapeSelected &&
+                <FormControl sx={{marginX: 1, minWidth: 200 }}>
+                  <InputLabel id="domain-label">Domain</InputLabel>
+                  <Select
+                      labelId="domain-label"
+                      id="domain-select"
+                      value={shaclShape}
+                      label="Domain"
+                      onChange={handleDomainChange}
+                  >
+                    {shapes.map((shape) => (
+                      <MenuItem
+                        key={shape}
+                        value={shape}
+                      >
+                        {shape}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+            }
+            { isDomainSelected &&
+              <FormControl sx={{ minWidth: 200 }}>
+                <TextField id="outlined-basic" label="Keyword" variant="outlined" />
+              </FormControl>
+            }
               <Padding key='i03' paddingTop='20px' />
+
             <div>
               {!isLoading && selfDescriptionData.length > 0 && <DataTable data={selfDescriptionData} type={"service"}/>}
               {isLoading &&
@@ -72,7 +105,6 @@ const ServiceOfferings = () => {
                   </div>
               }
             </div>
-
           </div>
       }
       {

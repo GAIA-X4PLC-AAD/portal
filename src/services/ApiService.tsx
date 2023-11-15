@@ -27,8 +27,29 @@ export const ApiService = {
       return '';
     },
 
-    async getSurveyResultDataOfferingShape() {
-        return '';
+    async getSelfDescriptionsForShape(authContext: AuthContextValues) {
+
+        const searchTerm = ''; // String of the keyword you want to search for
+        const searchDomain = ''; // String of the domain you want to search in/the property you want to search for
+        const targetClass = ''; // String of the type of data you want to search for (@type specification in Self Description)
+
+        const searchQuery = "MATCH (n:ScenarioDataResource) WHERE toLower(n.ownerName) CONTAINS toLower('s') RETURN properties(n)";
+        const requestBody = {"statement": searchQuery};
+
+        const endpoint = "https://fc-server.gxfs.gx4fm.org/query";
+        const headers = {
+            'Authorization': `Bearer ${authContext.token}`,
+            'Access-Control-Allow-Origin': '*',
+        };
+
+        return axios.options(endpoint, {headers}).then(response => {
+            return axios.post(endpoint, requestBody, {headers});
+        }).then(response => {
+            console.log('Post Response', response.data);
+            return response.data;
+        }).catch(error => {
+            console.error('Error:', error);
+        });
     },
 
     // async getParticipants() : Promise<AxiosResponse< Array<Partial<any>> >> {
