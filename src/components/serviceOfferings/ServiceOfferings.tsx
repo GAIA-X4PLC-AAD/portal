@@ -4,26 +4,35 @@ import './ServiceOfferings.css';
 import DataTable from "../dataTable/DataTable";
 import {AuthContext} from "../../context/AuthContextProvider";
 import {RDFParser} from "../../utils/RDFParser";
-import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
+import {Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 import {Padding} from "../discovery/tabs/style";
+// import SendIcon from '@mui/icons-material/Send';
+
 // @ts-ignore
-import car from "../../assets/auto.gif";
+import car from "../../assets/car.gif";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const authContext = useContext(AuthContext);
   const isAuthenticated = authContext.isAuthenticated;
-  const [shaclShape, setShaclShape] = useState('');
+  const [selectedShape, setSelectedShape] = useState('');
   const [shapes, setShapes] = useState<string[]>([]);
   const [isShapeSelected, setIsShapeSelected] = useState(false);
+
   const [isDomainSelected, setIsDomainSelected] = useState(false);
+  const [selectedDomain, setSelectedDomain] = useState('');
+  const [domains, setDomains] = useState<string[]>([]);
+
+  const [selectedTerm, setSelectedTerm] = useState('');
 
   const handleShapeChange = (event: SelectChangeEvent) => {
-    setShaclShape(event.target.value);
+    setSelectedShape(event.target.value);
     setIsShapeSelected(true);
+    getDomains();
   };
   const handleDomainChange = (event: SelectChangeEvent) => {
+    setSelectedDomain(event.target.value);
     setIsDomainSelected(true);
   };
 
@@ -37,9 +46,25 @@ const ServiceOfferings = () => {
     setIsLoading(false);
   }
 
-  const getShaclShapes = async () => {
+  const getDomains = async () => {
+    setIsLoading(true);
     const data = await ApiService.getShaclShapesFromCatalogue(authContext);
-    setShapes(RDFParser.parseShapesFromRdfResponse(data));
+    setDomains(RDFParser.parseShapesFromRdfResponse(data,'domains'));
+    setIsLoading(false);
+  }
+
+  const getShaclShapes = async () => {
+    setIsLoading(true);
+    const data = await ApiService.getShaclShapesFromCatalogue(authContext);
+    setShapes(RDFParser.parseShapesFromRdfResponse(data,'shapes'));
+    setIsLoading(false);
+  }
+
+  async function handleSearch() {
+    setIsLoading(true);
+    const targetClass = selectedShape.replace('Shape','')
+    await ApiService.getSelfDescriptionsForShape(authContext, targetClass);
+    setIsLoading(false);
   }
 
   return (
@@ -55,7 +80,7 @@ const ServiceOfferings = () => {
                   <Select
                       labelId="shape-label"
                       id="shape-select"
-                      value={shaclShape}
+                      value={selectedShape}
                       label="SHACL Shape"
                       onChange={handleShapeChange}
                   >
@@ -75,16 +100,16 @@ const ServiceOfferings = () => {
                   <Select
                       labelId="domain-label"
                       id="domain-select"
-                      value={shaclShape}
+                      value={selectedDomain}
                       label="Domain"
                       onChange={handleDomainChange}
                   >
-                    {shapes.map((shape) => (
+                    {domains.map((domain) => (
                       <MenuItem
-                        key={shape}
-                        value={shape}
+                        key={domain}
+                        value={domain}
                       >
-                        {shape}
+                        {domain}
                       </MenuItem>
                     ))}
                   </Select>
@@ -95,8 +120,13 @@ const ServiceOfferings = () => {
                 <TextField id="outlined-basic" label="Keyword" variant="outlined" />
               </FormControl>
             }
-              <Padding key='i03' paddingTop='20px' />
+            <div className='button'>
+              { isShapeSelected &&
+                  <Button variant="contained" onClick={handleSearch} size="large">Search</Button>
+                  }
+            </div>
 
+            <Padding key='i01' paddingTop='20px' />
             <div>
               {!isLoading && selfDescriptionData.length > 0 && <DataTable data={selfDescriptionData} type={"service"}/>}
               {isLoading &&

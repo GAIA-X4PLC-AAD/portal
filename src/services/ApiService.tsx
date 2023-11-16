@@ -27,13 +27,24 @@ export const ApiService = {
       return '';
     },
 
-    async getSelfDescriptionsForShape(authContext: AuthContextValues) {
+    /**
+     *
+     * @param authContext
+     * @param targetClass String of the type of data you want to search for (@type specification in Self Description)
+     * @param searchDomain String of the domain you want to search in/the property you want to search for
+     * @param searchTerm String of the keyword you want to search for
+     */
+    async getSelfDescriptionsForShape(authContext: AuthContextValues, targetClass: string, searchDomain?: string, searchTerm?: string) {
+        let searchQuery = '';
+        console.log('TargetClass:', targetClass);
+        if(isEmpty(searchDomain) && isEmpty(searchTerm)) {
+            // const searchQuery = "MATCH (n:ScenarioDataResource) WHERE toLower(n.ownerName) CONTAINS toLower('s') RETURN properties(n)";
+            searchQuery = "MATCH (n:" + targetClass + ") RETURN properties(n)";
+            console.log('Here');
+        } else {
+            searchQuery = "MATCH (n:" + targetClass + ") WHERE toLower(n." + searchDomain + ") CONTAINS toLower('"+ searchTerm + "') RETURN properties(n)";
+        }
 
-        const searchTerm = ''; // String of the keyword you want to search for
-        const searchDomain = ''; // String of the domain you want to search in/the property you want to search for
-        const targetClass = ''; // String of the type of data you want to search for (@type specification in Self Description)
-
-        const searchQuery = "MATCH (n:ScenarioDataResource) WHERE toLower(n.ownerName) CONTAINS toLower('s') RETURN properties(n)";
         const requestBody = {"statement": searchQuery};
 
         const endpoint = "https://fc-server.gxfs.gx4fm.org/query";
@@ -86,3 +97,7 @@ export const ApiService = {
           });
     },
 };
+
+const isEmpty = (value: string | undefined) => {
+    return (value == null || (value.trim().length === 0));
+}
