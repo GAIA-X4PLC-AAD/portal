@@ -17,7 +17,6 @@ const Participants = () => {
 
   const fetchParticipantsHandler = async () => {
     setIsLoading(true);
-    await ApiService.getSelfDescriptionsForShape(authContext);
     // setParticipantsData(await ApiService.getParticipants());
     setIsLoading(false);
   }
