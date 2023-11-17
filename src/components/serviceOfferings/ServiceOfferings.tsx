@@ -10,6 +10,7 @@ import {Padding} from "../discovery/tabs/style";
 
 // @ts-ignore
 import car from "../../assets/car.gif";
+import {mapSelfDescriptions} from "../../utils/dataMapper";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
@@ -42,7 +43,7 @@ const ServiceOfferings = () => {
   }, [isAuthenticated])
   const getDataHandler = async () => {
     setIsLoading(true);
-    setSelfDescriptionData(await ApiService.getData());
+    // setSelfDescriptionData(await ApiService.getData());
     setIsLoading(false);
   }
 
@@ -63,7 +64,10 @@ const ServiceOfferings = () => {
   async function handleSearch() {
     setIsLoading(true);
     const targetClass = selectedShape.replace('Shape','')
-    await ApiService.getSelfDescriptionsForShape(authContext, targetClass);
+    const selfDescriptions = await ApiService.getSelfDescriptionsForShape(authContext, targetClass);
+    const map = mapSelfDescriptions(selfDescriptions);
+    console.log('Map:', map);
+    setSelfDescriptionData(map);
     setIsLoading(false);
   }
 
