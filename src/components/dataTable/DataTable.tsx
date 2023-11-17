@@ -48,28 +48,48 @@ const serviceColumns: GridColDef[] = [
   {
     field: 'sdId',
     headerName: 'Self Description ID',
-    width: 400
+    width: 500
   },
-  {
-    field: 'surveyID',
-    headerName: 'Survey ID',
-    width: 250
-  },
-  {
-    field: 'surveyTitle',
-    headerName: 'Survey Title',
-    width: 190,
-    editable: true,
-  },
-  {
-    field: 'surveyDescription',
-    headerName: 'Survey Description',
-    width: 270,
-    editable: true,
-  },
+  // {
+  //   field: 'surveyID',
+  //   headerName: 'Survey ID',
+  //   width: 250
+  // },
+  // {
+  //   field: 'surveyTitle',
+  //   headerName: 'Survey Title',
+  //   width: 190,
+  //   editable: true,
+  // },
+  // {
+  //   field: 'surveyDescription',
+  //   headerName: 'Survey Description',
+  //   width: 270,
+  //   editable: true,
+  // },
   {
     field: 'surveyStartTime',
     headerName: 'Survey Start Time',
+    width: 200,
+    editable: true,
+  },  {
+    field: 'surveyCloseTime',
+    headerName: 'Survey Close Time',
+    width: 200,
+    editable: true,
+  },  {
+    field: 'claimsGraphUri',
+    headerName: 'Claims Graph URI',
+    width: 200,
+    editable: true,
+  },  {
+    field: 'edcEndpoint',
+    headerName: 'EDC Endpoint',
+    width: 200,
+    editable: true,
+  },  {
+    field: 'contractId',
+    headerName: 'Contract ID',
     width: 200,
     editable: true,
   },
@@ -86,13 +106,18 @@ const DataTable = (props: any) => {
   const createRows = (): any => {
     let newRows;
     if (props.type === "service") {
+      console.log('Data: ', props.data);
       newRows = props.data.map((data: any, id: number) => ({
           id: id + 1,
           sdId: data.id,
-          surveyID: data.survey_id,
-          surveyTitle: data.survey_title,
-          surveyDescription: data.survey_description,
-          surveyStartTime: data.survey_start_time
+          // surveyID: data.survey_id,
+          // surveyTitle: data.survey_title,
+          // surveyDescription: data.survey_description,
+          surveyStartTime: data.survey_start_time,
+          surveyCloseTime: data.survey_close_time,
+          edcEndpoint: data.edcEndpoint,
+          contractId: data.contractId,
+          claimsGraphUri: data.claimsGraphUri,
         })
       );
     } else if (props.type === "participants") {
