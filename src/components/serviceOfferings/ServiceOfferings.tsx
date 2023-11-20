@@ -7,13 +7,13 @@ import {RDFParser} from "../../utils/RDFParser";
 import {Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 import {Padding} from "../discovery/tabs/style";
 // import SendIcon from '@mui/icons-material/Send';
-
 // @ts-ignore
 import car from "../../assets/car.gif";
 import {mapSelfDescriptions} from "../../utils/dataMapper";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
+  const [rdfData, setRdfData] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const authContext = useContext(AuthContext);
   const isAuthenticated = authContext.isAuthenticated;
@@ -21,42 +21,41 @@ const ServiceOfferings = () => {
   const [shapes, setShapes] = useState<string[]>([]);
   const [isShapeSelected, setIsShapeSelected] = useState(false);
 
-  const [isDomainSelected, setIsDomainSelected] = useState(false);
-  const [selectedDomain, setSelectedDomain] = useState('');
-  const [domains, setDomains] = useState<string[]>([]);
+  const [isPropertySelected, setIsPropertySelected] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState('');
+  const [properties, setProperties] = useState<string[]>([]);
 
   const [selectedTerm, setSelectedTerm] = useState('');
 
   const handleShapeChange = (event: SelectChangeEvent) => {
+    console.log('handleShapeChange');
     setSelectedShape(event.target.value);
     setIsShapeSelected(true);
-    getDomains();
   };
-  const handleDomainChange = (event: SelectChangeEvent) => {
-    setSelectedDomain(event.target.value);
-    setIsDomainSelected(true);
+  const handlePropertyChange = (event: SelectChangeEvent) => {
+    setSelectedProperty(event.target.value);
+    setIsPropertySelected(true);
   };
 
   useEffect(() => {
-    getShaclShapes();
-    getDataHandler()
-  }, [isAuthenticated])
-  const getDataHandler = async () => {
-    setIsLoading(true);
-    // setSelfDescriptionData(await ApiService.getData());
-    setIsLoading(false);
-  }
+    console.log('getProperties');
+    getProperties();
+  }, [isShapeSelected])
 
-  const getDomains = async () => {
+  useEffect(() => {
+    getShaclShapes();
+  }, [isAuthenticated])
+
+  const getProperties = async () => {
     setIsLoading(true);
-    const data = await ApiService.getShaclShapesFromCatalogue(authContext);
-    setDomains(RDFParser.parseShapesFromRdfResponse(data,'domains'));
+    setProperties(RDFParser.parseShapesFromRdfResponse(rdfData,'properties'));
     setIsLoading(false);
   }
 
   const getShaclShapes = async () => {
     setIsLoading(true);
     const data = await ApiService.getShaclShapesFromCatalogue(authContext);
+    setRdfData(data);
     setShapes(RDFParser.parseShapesFromRdfResponse(data,'shapes'));
     setIsLoading(false);
   }
@@ -100,26 +99,26 @@ const ServiceOfferings = () => {
               </FormControl>
             { isShapeSelected &&
                 <FormControl sx={{marginX: 1, minWidth: 200 }}>
-                  <InputLabel id="domain-label">Domain</InputLabel>
+                  <InputLabel id="property-label">Property</InputLabel>
                   <Select
-                      labelId="domain-label"
-                      id="domain-select"
-                      value={selectedDomain}
-                      label="Domain"
-                      onChange={handleDomainChange}
+                      labelId="property-label"
+                      id="property-select"
+                      value={selectedProperty}
+                      label="Property"
+                      onChange={handlePropertyChange}
                   >
-                    {domains.map((domain) => (
+                    {properties.map((property) => (
                       <MenuItem
-                        key={domain}
-                        value={domain}
+                        key={property}
+                        value={property}
                       >
-                        {domain}
+                        {property}
                       </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
             }
-            { isDomainSelected &&
+            { isPropertySelected &&
               <FormControl sx={{ minWidth: 200 }}>
                 <TextField id="outlined-basic" label="Keyword" variant="outlined" />
               </FormControl>

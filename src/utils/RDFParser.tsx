@@ -19,6 +19,7 @@ export const RDFParser = {
     const store = $rdf.graph();
     const baseUriNode = 'https://w3id.org/gaia-x/core#';  // Create a base URI node //TODO:Throws error by parsing
     const turtleData = String(rdfData);
+
     const contentType = 'text/turtle';
     // Step 2: Parse Turtle data
     try {
@@ -30,8 +31,8 @@ export const RDFParser = {
     let items: Array<string> = [];
     if(option === 'shapes') {
       items = this.parseNodeShapes(store);
-    } else if(option === 'domains'){
-      items = parseAttributes(store);
+    } else if(option === 'property'){
+      items = parseProperties(store, '');
     }
     return items;
   },
@@ -53,17 +54,50 @@ export const RDFParser = {
     triples.forEach((triple) => {
       // console.log(`Triple: ${triple.subject.value} ${triple.predicate.value} ${triple.object.value}`);
       const shape = triple.subject.value;
+      console.log('shape: ', shape);
       shapes.push(trimShapes(shape));
     });
     return shapes;
   },
 }
 
-const parseAttributes = (rdfData: any) : string[] => {
-  return getShapeDomains();
-}
-const getShapeDomains = () : string[] => {
-  return ['Survey start time', 'Survey close time', 'Survey service offering' ];
-}
+const parseProperties = (store: any, selectedShape: string | undefined) : string[] => {
+  let properties: string[] = [];
+  // Step 3: Create NamedNodes
+  console.log('selectedShape', selectedShape)
+    console.log('here')
+    const subjectURI = 'http://semanticweb.org/metadatasurveyontology/SurveyResultDataOfferingShape';
+    const subjectNode = $rdf.sym(subjectURI);
+    const predicateURI = 'http://www.w3.org/ns/shacl#property'; // Replace with your predicate URI
+    const predicateNode = $rdf.sym(predicateURI);
+    console.log('subjectNode', subjectNode)
+    console.log('predicateNode', predicateNode)
+    const blankNode = store.match(subjectNode, predicateNode, null);
 
+    console.log('triples',blankNode)
 
+    // Check if a blank node was found
+    if (blankNode && blankNode.termType === 'BlankNode') {
+      const newpredicateURI = 'http://www.w3.org/ns/shacl#path'; // Replace with your predicate URI
+      const newpredicateNode = $rdf.sym(newpredicateURI);
+      // Iterate over triples with the blank node as the subject
+      const triples = store.match(blankNode, null, null);
+      // @ts-ignore
+      triples.forEach((triple) => {
+        console.log(`Subject: ${triple.subject.value}`);
+        console.log(`Predicate: ${triple.predicate.value}`);
+        console.log(`Object: ${triple.object.value}`);
+        properties.push(triple.object.value);
+      });
+    } else {
+      console.log('Blank node not found or not of type BlankNode.');
+    }
+    // // Step 4:  Retrieve specific triples by domain.
+    // // @ts-ignore
+    // triples.forEach((triple) => {
+    //   const property = triple.object.value;
+    //   // @ts-ignore
+    //     properties.push(property);
+    // });
+  return properties;
+}

@@ -1,28 +1,8 @@
 import axios, {AxiosResponse} from 'axios';
 import {AuthContextValues} from "../context/AuthContextValues";
+import {isEmpty} from "../utils/helpers";
 
 export const ApiService = {
-    async getData() {
-        const API_URL = "https://metadatasearch.gxfs.gx4fm.org/service-offerings?node_shape=http://semanticweb.org/metadatasurveyontology/SurveyResultDataOfferingShape"
-        const response = await axios.get(API_URL);
-        const data = response.data;
-        return data.data.map((selfDescription: any) => {
-            return {
-                survey_id: selfDescription.subjectClaims.survey_id,
-                survey_title: selfDescription.subjectClaims.survey_title,
-                survey_description: selfDescription.subjectClaims.survey_description,
-                claimsGraphUri: selfDescription.subjectClaims.claimsGraphUri,
-                survey_close_time: selfDescription.subjectClaims.survey_close_time,
-                survey_creation_time: selfDescription.subjectClaims.survey_creation_time,
-                survey_end_time: selfDescription.subjectClaims.survey_end_time,
-                survey_start_time: selfDescription.subjectClaims.survey_start_time,
-                survey_state: selfDescription.subjectClaims.survey_state,
-                survey_url: selfDescription.subjectClaims.survey_url,
-                id: selfDescription.subjectClaims.uri
-            };
-        });
-    },
-
     /**
      *
      * @param authContext
@@ -55,24 +35,6 @@ export const ApiService = {
         });
     },
 
-    // async getParticipants() : Promise<AxiosResponse< Array<Partial<any>> >> {
-    //     const API_URL = "https://metadatasearch.gxfs.gx4fm.org/participants"
-    //     const response = await axios.get(API_URL);
-    //     return response.data.data.map((participants: any) => {
-    //         return {
-    //             id: participants.subjectClaims.uri,
-    //             claimsGraphUri: participants.subjectClaims.claimsGraphUri,
-    //             legalName: participants.subjectClaims.legalName,
-    //             registrationNumber: participants.subjectClaims.registrationNumber,
-    //             subjectTypes: participants.subjectTypes,
-    //         };
-    //     });
-    // },
-
-    async getParticipants() {
-        return '';
-    },
-
     async getShaclShapesFromCatalogue(authContext: AuthContextValues) : Promise<AxiosResponse<any, any>> {
         const endpoint = "https://fc-server.gxfs.gx4fm.org/schemas/latest?type=shape";
         const headers = {
@@ -89,7 +51,3 @@ export const ApiService = {
           });
     },
 };
-
-const isEmpty = (value: string | undefined) => {
-    return (value == null || (value.trim().length === 0));
-}
