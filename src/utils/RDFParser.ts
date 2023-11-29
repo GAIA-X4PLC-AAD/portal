@@ -26,7 +26,7 @@ export const RDFParser = {
     try {
       $rdf.parse(turtleData, store, baseUriNode, contentType);
     } catch (error) {
-      console.info('Error parsing Turtle data:', error);
+      // console.info('Error parsing Turtle data:', error);
     }
 
     let items: ShaclShape[] = [];
