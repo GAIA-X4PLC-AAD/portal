@@ -3,7 +3,7 @@ import {ApiService} from "../../services/ApiService";
 import './ServiceOfferings.css';
 import DataTable from "../dataTable/DataTable";
 import {AuthContext} from "../../context/AuthContextProvider";
-import {RDFParser, trimShapes} from "../../utils/RDFParser";
+import {RDFParser} from "../../utils/RDFParser";
 import {Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 import {Padding} from "../discovery/tabs/style";
 // import SendIcon from '@mui/icons-material/Send';
@@ -11,6 +11,7 @@ import {Padding} from "../discovery/tabs/style";
 import car from "../../assets/car.gif";
 import {mapSelfDescriptions} from "../../utils/dataMapper";
 import {ShaclShape} from "../../types/shaclShape.model";
+import {getShapeProperties} from "../../utils/shapeHelpers";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
@@ -50,19 +51,7 @@ const ServiceOfferings = () => {
 
   useEffect(() => {
       setIsLoading(true);
-      let propertyList : string[] = [];
-      if(selectedShape && selectedShape.properties){
-        selectedShape.properties.forEach((property) => {
-          if(property.name && !propertyList.includes(property.name)){
-            propertyList.push(property.name);
-          } else if(property.path && !propertyList.includes(property.path)){
-            propertyList.push(property.path);
-          }
-        });
-      setProperties(propertyList);
-      setIsLoading(false);
-    }
-
+      setProperties(getShapeProperties(selectedShape));
   }, [selectedShape])
 
   useEffect(() => {
