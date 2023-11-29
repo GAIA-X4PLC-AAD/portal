@@ -50,12 +50,11 @@ const ServiceOfferings = () => {
   };
 
   useEffect(() => {
-      setIsLoading(true);
       setProperties(getShapeProperties(selectedShape));
   }, [selectedShape])
 
   useEffect(() => {
-    setIsLoading(false);
+    setIsLoading(true);
     const getShaclShapes = async () => {
       const data = await ApiService.getShaclShapesFromCatalogue(authContext);
       setShapes(RDFParser.parseShapesFromRdfResponse(data));
