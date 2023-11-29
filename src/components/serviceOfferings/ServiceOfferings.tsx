@@ -14,7 +14,6 @@ import {ShaclShape} from "../../types/shaclShape.model";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
-  const [rdfData, setRdfData] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const authContext = useContext(AuthContext);
   const isAuthenticated = authContext.isAuthenticated;
@@ -50,40 +49,31 @@ const ServiceOfferings = () => {
   };
 
   useEffect(() => {
-    console.log('getProperties', isShapeSelected);
-    getProperties();
-  }, [isShapeSelected])
+      setIsLoading(true);
+      let propertyList : string[] = [];
+      if(selectedShape && selectedShape.properties){
+        selectedShape.properties.forEach((property) => {
+          if(property.name && !propertyList.includes(property.name)){
+            propertyList.push(property.name);
+          } else if(property.path && !propertyList.includes(property.path)){
+            propertyList.push(property.path);
+          }
+        });
+      setProperties(propertyList);
+      setIsLoading(false);
+    }
+
+  }, [selectedShape])
 
   useEffect(() => {
-    getShaclShapes();
-  }, [isAuthenticated])
-
-  const getProperties = async () => {
-    setIsLoading(true);
-    console.log('inside getProperties', isShapeSelected)
-    let arrayWithShaclShapeWithProperties = RDFParser.parseShapesFromRdfResponse(rdfData,'properties', selectedShape);
-    let selectedShapeWithProps = arrayWithShaclShapeWithProperties[0];
-    if(selectedShapeWithProps && selectedShapeWithProps.properties){
-      let propertyList : string[] = [];
-      selectedShapeWithProps.properties.forEach((property) => {
-        if(property.name) {
-          propertyList.push(property.name);
-        } else if(property.path) {
-          propertyList.push(property.path);
-        }
-      });
-      setProperties(propertyList);
+    setIsLoading(false);
+    const getShaclShapes = async () => {
+      const data = await ApiService.getShaclShapesFromCatalogue(authContext);
+      setShapes(RDFParser.parseShapesFromRdfResponse(data));
     }
+    getShaclShapes();
     setIsLoading(false);
-  }
-
-  const getShaclShapes = async () => {
-    setIsLoading(true);
-    const data = await ApiService.getShaclShapesFromCatalogue(authContext);
-    setRdfData(data);
-    setShapes(RDFParser.parseShapesFromRdfResponse(data,'shapes'));
-    setIsLoading(false);
-  }
+  }, [isAuthenticated])
 
   async function handleSearch() {
     setIsLoading(true);

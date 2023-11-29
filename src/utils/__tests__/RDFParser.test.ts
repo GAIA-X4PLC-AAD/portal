@@ -32,7 +32,11 @@ describe('RDF Parser', () => {
       // When
       const result = RDFParser.parseShapesFromRdfResponse(rdfData);
       // Then
-      expect(result).toStrictEqual(expectedShapes);
+      let resultList : string[] = [];
+      result.forEach(result => {
+        resultList.push(result.short_shape);
+      });
+      expect(resultList).toStrictEqual(expectedShapes);
     });
   });
 });
