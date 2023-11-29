@@ -9,7 +9,6 @@ describe('ReadFile', () => {
       // When
       const result = await readFile(filePath);
       // Then
-      console.log(result);
       expect(result).toEqual(expectedString);
     });
 });

@@ -3,13 +3,14 @@ import {ApiService} from "../../services/ApiService";
 import './ServiceOfferings.css';
 import DataTable from "../dataTable/DataTable";
 import {AuthContext} from "../../context/AuthContextProvider";
-import {RDFParser} from "../../utils/RDFParser";
+import {RDFParser, trimShapes} from "../../utils/RDFParser";
 import {Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 import {Padding} from "../discovery/tabs/style";
 // import SendIcon from '@mui/icons-material/Send';
 // @ts-ignore
 import car from "../../assets/car.gif";
 import {mapSelfDescriptions} from "../../utils/dataMapper";
+import {ShaclShape} from "../../types/shaclShape.model";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
@@ -17,8 +18,15 @@ const ServiceOfferings = () => {
   const [isLoading, setIsLoading] = useState(false);
   const authContext = useContext(AuthContext);
   const isAuthenticated = authContext.isAuthenticated;
-  const [selectedShape, setSelectedShape] = useState('');
-  const [shapes, setShapes] = useState<string[]>([]);
+
+  const initShape: ShaclShape = {
+    shape: '',
+    short_shape: '',
+    properties: [],
+  };
+
+  const [selectedShape, setSelectedShape] = useState<ShaclShape>(initShape);
+  const [shapes, setShapes] = useState<ShaclShape[]>([]);
   const [isShapeSelected, setIsShapeSelected] = useState(false);
 
   const [isPropertySelected, setIsPropertySelected] = useState(false);
@@ -28,8 +36,12 @@ const ServiceOfferings = () => {
   const [selectedTerm, setSelectedTerm] = useState('');
 
   const handleShapeChange = (event: SelectChangeEvent) => {
-    console.log('handleShapeChange');
-    setSelectedShape(event.target.value);
+    let uiSelectedShape = event.target.value;
+    shapes.forEach(shape => {
+      if(shape.short_shape === uiSelectedShape){
+        setSelectedShape(shape);
+      }
+    });
     setIsShapeSelected(true);
   };
   const handlePropertyChange = (event: SelectChangeEvent) => {
@@ -38,7 +50,7 @@ const ServiceOfferings = () => {
   };
 
   useEffect(() => {
-    console.log('getProperties');
+    console.log('getProperties', isShapeSelected);
     getProperties();
   }, [isShapeSelected])
 
@@ -48,7 +60,20 @@ const ServiceOfferings = () => {
 
   const getProperties = async () => {
     setIsLoading(true);
-    setProperties(RDFParser.parseShapesFromRdfResponse(rdfData,'properties'));
+    console.log('inside getProperties', isShapeSelected)
+    let arrayWithShaclShapeWithProperties = RDFParser.parseShapesFromRdfResponse(rdfData,'properties', selectedShape);
+    let selectedShapeWithProps = arrayWithShaclShapeWithProperties[0];
+    if(selectedShapeWithProps && selectedShapeWithProps.properties){
+      let propertyList : string[] = [];
+      selectedShapeWithProps.properties.forEach((property) => {
+        if(property.name) {
+          propertyList.push(property.name);
+        } else if(property.path) {
+          propertyList.push(property.path);
+        }
+      });
+      setProperties(propertyList);
+    }
     setIsLoading(false);
   }
 
@@ -62,7 +87,7 @@ const ServiceOfferings = () => {
 
   async function handleSearch() {
     setIsLoading(true);
-    const targetClass = selectedShape.replace('Shape','')
+    const targetClass = selectedShape.shape.replace('Shape','')
     const selfDescriptions = await ApiService.getSelfDescriptionsForShape(authContext, targetClass);
     const map = mapSelfDescriptions(selfDescriptions);
     console.log('Map:', map);
@@ -83,16 +108,16 @@ const ServiceOfferings = () => {
                   <Select
                       labelId="shape-label"
                       id="shape-select"
-                      value={selectedShape}
+                      value={selectedShape.short_shape}
                       label="SHACL Shape"
                       onChange={handleShapeChange}
                   >
                     {shapes.map((shape) => (
                       <MenuItem
-                        key={shape}
-                        value={shape}
+                        key={shape.short_shape}
+                        value={shape.short_shape}
                       >
-                        {shape}
+                        {shape.short_shape}
                       </MenuItem>
                     ))}
                   </Select>
