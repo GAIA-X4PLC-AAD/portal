@@ -7,15 +7,15 @@ export const ApiService = {
      *
      * @param authContext
      * @param targetClass String of the type of data you want to search for (@type specification in Self Description)
-     * @param searchDomain String of the domain you want to search in/the property you want to search for
+     * @param searchProperty String of the domain you want to search in/the property you want to search for
      * @param searchTerm String of the keyword you want to search for
      */
-    async getSelfDescriptionsForShape(authContext: AuthContextValues, targetClass: string, searchDomain?: string, searchTerm?: string) : Promise<AxiosResponse<any, any>> {
+    async getSelfDescriptionsForShape(authContext: AuthContextValues, targetClass: string, searchProperty?: string, searchTerm?: string) : Promise<AxiosResponse<any, any>> {
         let searchQuery = '';
-        if(isEmpty(searchDomain) && isEmpty(searchTerm)) {
+        if(isEmpty(searchProperty) && isEmpty(searchTerm)) {
             searchQuery = "MATCH (n:" + targetClass + ") RETURN properties(n)";
         } else {
-            searchQuery = "MATCH (n:" + targetClass + ") WHERE toLower(n." + searchDomain + ") CONTAINS toLower('"+ searchTerm + "') RETURN properties(n)";
+            searchQuery = "MATCH (n:" + targetClass + ") WHERE toLower(n." + searchProperty + ") CONTAINS toLower('"+ searchTerm + "') RETURN properties(n)";
         }
 
         const requestBody = {"statement": searchQuery};

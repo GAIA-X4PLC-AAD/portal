@@ -65,7 +65,7 @@ const ServiceOfferings = () => {
 
   async function handleSearch() {
     setIsLoading(true);
-    const targetClass = selectedShape.shape.replace('Shape','')
+    const targetClass = selectedShape.short_shape.replace('Shape','')
     const selfDescriptions = await ApiService.getSelfDescriptionsForShape(authContext, targetClass);
     const map = mapSelfDescriptions(selfDescriptions);
     console.log('Map:', map);
