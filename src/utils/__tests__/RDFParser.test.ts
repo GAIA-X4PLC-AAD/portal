@@ -1,28 +1,8 @@
-import {trimShapes, RDFParser} from "../RDFParser";
+import {RDFParser} from "../RDFParser";
 import {describe, expect, it} from "@jest/globals";
 import {readFile} from "../readFile";
 
 describe('RDF Parser', () => {
-
-  describe('_ trim function for shapes', () => {
-    it('_ should trim a given shape which contains #', async () => {
-      // Given
-      const shape = 'https://w3id.org/gaia-x/validation#DataConnectorShape';
-      // When
-      const result = trimShapes(shape)
-      // Then
-      expect(result).toBe('DataConnectorShape');
-    });
-
-    it('_ should trim a given shape which contains /', async () => {
-      // Given
-      const shape = 'https://semanticweb.org/metadatasurveyontology/SurveyResultDataOffering';
-      // When
-      const result = trimShapes(shape)
-      // Then
-      expect(result).toBe('SurveyResultDataOffering');
-    });
-  });
 
   describe('_  parse data from rdf', () => {
     it('_ should parse shapes from rdf data', async () => {
@@ -32,7 +12,11 @@ describe('RDF Parser', () => {
       // When
       const result = RDFParser.parseShapesFromRdfResponse(rdfData);
       // Then
-      expect(result).toStrictEqual(expectedShapes);
+      let resultList : string[] = [];
+      result.forEach(result => {
+        resultList.push(result.short_shape);
+      });
+      expect(resultList).toStrictEqual(expectedShapes);
     });
   });
 });

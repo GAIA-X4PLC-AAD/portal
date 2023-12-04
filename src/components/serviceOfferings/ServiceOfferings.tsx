@@ -4,36 +4,73 @@ import './ServiceOfferings.css';
 import DataTable from "../dataTable/DataTable";
 import {AuthContext} from "../../context/AuthContextProvider";
 import {RDFParser} from "../../utils/RDFParser";
-import {FormControl, InputLabel, MenuItem, Select, SelectChangeEvent} from "@mui/material";
+import {Button, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, TextField} from "@mui/material";
 import {Padding} from "../discovery/tabs/style";
+// import SendIcon from '@mui/icons-material/Send';
 // @ts-ignore
-import car from "../../assets/auto.gif";
+import car from "../../assets/car.gif";
+import {mapSelfDescriptions} from "../../utils/dataMapper";
+import {ShaclShape} from "../../types/shaclShape.model";
+import {getShapeProperties} from "../../utils/shapeHelpers";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const authContext = useContext(AuthContext);
   const isAuthenticated = authContext.isAuthenticated;
-  const [shaclShape, setShaclShape] = useState('');
-  const [shapes, setShapes] = useState<string[]>([]);
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setShaclShape(event.target.value);
+  const initShape: ShaclShape = {
+    shape: '',
+    short_shape: '',
+    properties: [],
+  };
+
+  const [selectedShape, setSelectedShape] = useState<ShaclShape>(initShape);
+  const [shapes, setShapes] = useState<ShaclShape[]>([]);
+  const [isShapeSelected, setIsShapeSelected] = useState(false);
+
+  const [isPropertySelected, setIsPropertySelected] = useState(false);
+  const [selectedProperty, setSelectedProperty] = useState('');
+  const [properties, setProperties] = useState<string[]>([]);
+
+  const [selectedTerm, setSelectedTerm] = useState('');
+
+  const handleShapeChange = (event: SelectChangeEvent) => {
+    let uiSelectedShape = event.target.value;
+    shapes.forEach(shape => {
+      if(shape.short_shape === uiSelectedShape){
+        setSelectedShape(shape);
+      }
+    });
+    setIsShapeSelected(true);
+  };
+  const handlePropertyChange = (event: SelectChangeEvent) => {
+    setSelectedProperty(event.target.value);
+    setIsPropertySelected(true);
   };
 
   useEffect(() => {
-    getShaclShapes();
-    getDataHandler()
-  }, [isAuthenticated])
-  const getDataHandler = async () => {
-    setIsLoading(true);
-    setSelfDescriptionData(await ApiService.getData());
-    setIsLoading(false);
-  }
+      setProperties(getShapeProperties(selectedShape));
+  }, [selectedShape])
 
-  const getShaclShapes = async () => {
-    const data = await ApiService.getShaclShapesFromCatalogue(authContext);
-    setShapes(RDFParser.parseShapesFromRdfResponse(data));
+  useEffect(() => {
+    setIsLoading(true);
+    const getShaclShapes = async () => {
+      const data = await ApiService.getShaclShapesFromCatalogue(authContext);
+      setShapes(RDFParser.parseShapesFromRdfResponse(data));
+    }
+    getShaclShapes();
+    setIsLoading(false);
+  }, [isAuthenticated])
+
+  async function handleSearch() {
+    setIsLoading(true);
+    const targetClass = selectedShape.short_shape.replace('Shape','')
+    const selfDescriptions = await ApiService.getSelfDescriptionsForShape(authContext, targetClass);
+    const map = mapSelfDescriptions(selfDescriptions);
+    console.log('Map:', map);
+    setSelfDescriptionData(map);
+    setIsLoading(false);
   }
 
   return (
@@ -44,26 +81,58 @@ const ServiceOfferings = () => {
       {
         authContext.isAuthenticated &&
           <div className='content'>
-              <FormControl fullWidth>
+              <FormControl sx={{minWidth: 200 }}>
                   <InputLabel id="shape-label">Select Shape</InputLabel>
                   <Select
                       labelId="shape-label"
                       id="shape-select"
-                      value={shaclShape}
+                      value={selectedShape.short_shape}
                       label="SHACL Shape"
-                      onChange={handleChange}
+                      onChange={handleShapeChange}
                   >
                     {shapes.map((shape) => (
                       <MenuItem
-                        key={shape}
-                        value={shape}
+                        key={shape.short_shape}
+                        value={shape.short_shape}
                       >
-                        {shape}
+                        {shape.short_shape}
                       </MenuItem>
                     ))}
                   </Select>
               </FormControl>
-              <Padding key='i03' paddingTop='20px' />
+            { isShapeSelected &&
+                <FormControl sx={{marginX: 1, minWidth: 200 }}>
+                  <InputLabel id="property-label">Property</InputLabel>
+                  <Select
+                      labelId="property-label"
+                      id="property-select"
+                      value={selectedProperty}
+                      label="Property"
+                      onChange={handlePropertyChange}
+                  >
+                    {properties.map((property) => (
+                      <MenuItem
+                        key={property}
+                        value={property}
+                      >
+                        {property}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
+            }
+            { isPropertySelected &&
+              <FormControl sx={{ minWidth: 200 }}>
+                <TextField id="outlined-basic" label="Keyword" variant="outlined" />
+              </FormControl>
+            }
+            <div className='button'>
+              { isShapeSelected &&
+                  <Button variant="contained" onClick={handleSearch} size="large">Search</Button>
+                  }
+            </div>
+
+            <Padding key='i01' paddingTop='20px' />
             <div>
               {!isLoading && selfDescriptionData.length > 0 && <DataTable data={selfDescriptionData} type={"service"}/>}
               {isLoading &&
@@ -72,7 +141,6 @@ const ServiceOfferings = () => {
                   </div>
               }
             </div>
-
           </div>
       }
       {

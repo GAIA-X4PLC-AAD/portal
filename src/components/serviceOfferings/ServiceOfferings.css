@@ -25,3 +25,9 @@ h2 {
     width: 100px;
     height: 100px;
 }
+
+.button {
+    display: inline-block;
+    margin-top:5px;
+    margin-left:10px;
+}
