@@ -11,6 +11,8 @@ export const RDFParser = {
     const baseUriNode = 'https://w3id.org/gaia-x/core#';  // Create a base URI node //TODO:Throws error by parsing
     const turtleData = String(rdfData);
     const contentType = 'text/turtle';
+    console.log('turtleData', turtleData);
+    // console.log('Store before', store);
     // Step 2: Parse Turtle data
     try {
       $rdf.parse(turtleData, store, baseUriNode, contentType);

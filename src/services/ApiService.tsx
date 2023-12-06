@@ -45,7 +45,8 @@ export const ApiService = {
       return axios.options(endpoint, {headers}).then(response => {
             return axios.get(endpoint, {headers})
           }).then(response => {
-            return response.data;
+          console.log('Shape Response from FC:', response.data);
+          return response.data;
           }).catch(error => {
             console.error('Error:', error);
           });
