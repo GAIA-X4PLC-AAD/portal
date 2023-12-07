@@ -28,7 +28,7 @@
     "npm": "^9.8.1",
     "plotly.js": "^2.12.1",
     "prop-types": "^15.8.1",
-    "rdflib": "^2.2.32",
+    "rdf": "^4.1.1",
     "react": "^18.2.0",
     "react-collapse": "^5.1.1",
     "react-dom": "^18.2.0",
