@@ -1,22 +1,24 @@
-import * as $rdf from 'rdflib';
 import {ShaclShape} from "../types/shaclShape.model";
 import {ShapeProperty} from "../types/shapeProperty.model";
 import {trimShapes} from "./shapeHelpers";
+import rdf from "rdf";
 
 export const RDFParser = {
 
   parseShapesFromRdfResponse(rdfData: any): ShaclShape[] {
     // Step 1: Create a rdf graph
-    const store = $rdf.graph();
+    const rdf = require('rdf');
+    let store = new rdf.Graph();
     const baseUriNode = 'https://w3id.org/gaia-x/core#';  // Create a base URI node //TODO:Throws error by parsing
     const turtleData = String(rdfData);
     const contentType = 'text/turtle';
     // Step 2: Parse Turtle data
     try {
-      $rdf.parse(turtleData, store, baseUriNode, contentType);
+      store = rdf.TurtleParser.parse(turtleData, baseUriNode, null);
+      console.log(store.graph.toArray().join("\n"));
     } catch (error) {
       //TODO:Throws error by parsing
-      // console.info('Error parsing Turtle data:', error);
+      console.info('Error parsing Turtle data:', error);
     }
 
     let items: ShaclShape[] = [];
@@ -28,12 +30,15 @@ export const RDFParser = {
     let shapes: Array<ShaclShape> = [];
 
     // Create NamedNodes
+    const rdf = require('rdf');
+    const { NamedNode, BlankNode, Literal } = rdf;
     const predicateURI = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'; // Replace with your predicate URI
-    const predicateNode = $rdf.sym(predicateURI);
+    const predicateNode = new NamedNode(predicateURI);
     const objectURI = 'http://www.w3.org/ns/shacl#NodeShape'; // Replace with your object URI
-    const objectNode = $rdf.sym(objectURI);
+    const objectNode = new NamedNode(objectURI);
 
-    const triples = store.match(null, predicateNode, objectNode);
+    const triples = store.graph.match(null, predicateNode, objectNode);
+    console.log(triples.toArray().length)
 
     // Retrieve specific triples by shape.
     // @ts-ignore
@@ -54,25 +59,32 @@ export const RDFParser = {
   },
 }
 
-const parseProperties = (store: $rdf.Store, selectedShape: string): ShapeProperty[] | undefined => {
+const parseProperties = (store: any, selectedShape: string): ShapeProperty[] | undefined => {
   let properties: ShapeProperty[] = [];
   // Create NamedNodes
-  const subjectNode = $rdf.sym(selectedShape);
+  const rdf = require('rdf');
+  const subjectNode = new rdf.NamedNode(selectedShape);
   const predicateURI = 'http://www.w3.org/ns/shacl#property';
-  const predicateNode = $rdf.sym(predicateURI);
-  const propertyTriples = store.match(subjectNode, predicateNode);
+  const predicateNode = new rdf.NamedNode(predicateURI);
+  const propertyTriples = store.graph.match(subjectNode, predicateNode, null);
+  console.log(propertyTriples);
 
   // Retrieve specific property triples
   propertyTriples.forEach((triple: any) => {
-    const propertyPathPredicateNode = $rdf.sym('http://www.w3.org/ns/shacl#path');
-    const propertyPath = store.anyValue(triple.object, propertyPathPredicateNode);
+    const propertyPathPredicateNode = new rdf.NamedNode('http://www.w3.org/ns/shacl#path');
+    const foaf = rdf.ns('http://www.w3.org/ns/shacl');
+    const namespace = rdf.ns('http://www.w3.org/ns');
+    const propertyPath = store.graph.match(triple.subject, propertyPathPredicateNode, triple.object);
 
-    const propertyNamePredicateNode = $rdf.sym('http://www.w3.org/ns/shacl#name');
-    const propertyName = store.anyValue(triple.object, propertyNamePredicateNode);
+    console.log(propertyPath.object);
+    const propertyNamePredicateNode = new rdf.NamedNode('http://www.w3.org/ns/shacl#name');
+    const propertyName = store.graph.match(triple.subject, propertyNamePredicateNode, triple.object);
 
-    const propertyDescriptionPredicateNode = $rdf.sym('http://www.w3.org/ns/shacl#description');
-    const propertyDescription = store.anyValue(triple.object, propertyDescriptionPredicateNode);
+    console.log(propertyName);
+    const propertyDescriptionPredicateNode = new rdf.NamedNode('http://www.w3.org/ns/shacl#description');
+    const propertyDescription = store.graph.match(triple.subject, propertyDescriptionPredicateNode, triple.object);
 
+    console.log(propertyDescription)
     let property: ShapeProperty = {
       path: '',
     };

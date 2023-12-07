@@ -38,7 +38,7 @@ const ServiceOfferings = () => {
   const handleShapeChange = (event: SelectChangeEvent) => {
     let uiSelectedShape = event.target.value;
     shapes.forEach(shape => {
-      if(shape.short_shape === uiSelectedShape){
+      if(shape.shape === uiSelectedShape){
         setSelectedShape(shape);
       }
     });
@@ -86,16 +86,16 @@ const ServiceOfferings = () => {
                   <Select
                       labelId="shape-label"
                       id="shape-select"
-                      value={selectedShape.short_shape}
+                      value={selectedShape.shape}
                       label="SHACL Shape"
                       onChange={handleShapeChange}
                   >
                     {shapes.map((shape) => (
                       <MenuItem
-                        key={shape.short_shape}
-                        value={shape.short_shape}
+                        key={shape.shape}
+                        value={shape.shape}
                       >
-                        {shape.short_shape}
+                        {shape.shape}
                       </MenuItem>
                     ))}
                   </Select>
