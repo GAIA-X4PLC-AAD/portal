@@ -1,7 +1,6 @@
 import {ShaclShape} from "../types/shaclShape.model";
 import {ShapeProperty} from "../types/shapeProperty.model";
 import {trimShapes} from "./shapeHelpers";
-import rdf from "rdf";
 
 export const RDFParser = {
 
