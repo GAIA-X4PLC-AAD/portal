@@ -10,11 +10,10 @@ export const RDFParser = {
     let store = new rdf.Graph();
     const baseUriNode = 'https://w3id.org/gaia-x/core#';  // Create a base URI node //TODO:Throws error by parsing
     const turtleData = String(rdfData);
-    const contentType = 'text/turtle';
     // Step 2: Parse Turtle data
     try {
       store = rdf.TurtleParser.parse(turtleData, baseUriNode, null);
-      console.log(store.graph.toArray().join("\n"));
+      console.log("All the things: ", store);
     } catch (error) {
       //TODO:Throws error by parsing
       console.info('Error parsing Turtle data:', error);
@@ -37,11 +36,12 @@ export const RDFParser = {
     const objectNode = new NamedNode(objectURI);
 
     const triples = store.graph.match(null, predicateNode, objectNode);
-    console.log(triples.toArray().length)
+    console.log("Node Shape Triples: ", triples);
 
     // Retrieve specific triples by shape.
     // @ts-ignore
     triples.forEach((triple) => {
+      console.log("Node Shape Triple: ", triple)
       let shape = triple.subject.value;
       let short_shape = trimShapes(shape);
       let properties = parseProperties(store, shape);
@@ -65,37 +65,47 @@ const parseProperties = (store: any, selectedShape: string): ShapeProperty[] | u
   const subjectNode = new rdf.NamedNode(selectedShape);
   const predicateURI = 'http://www.w3.org/ns/shacl#property';
   const predicateNode = new rdf.NamedNode(predicateURI);
-  const propertyTriples = store.graph.match(subjectNode, predicateNode, null);
-  console.log(propertyTriples);
 
-  // Retrieve specific property triples
-  propertyTriples.forEach((triple: any) => {
-    const propertyPathPredicateNode = new rdf.NamedNode('http://www.w3.org/ns/shacl#path');
-    const foaf = rdf.ns('http://www.w3.org/ns/shacl');
-    const namespace = rdf.ns('http://www.w3.org/ns');
-    const propertyPath = store.graph.match(triple.subject, propertyPathPredicateNode, triple.object);
+  const propertyObjects = store.graph.match(subjectNode, predicateNode, null);
+  console.log("Check property object: ", propertyObjects);
 
-    console.log(propertyPath.object);
-    const propertyNamePredicateNode = new rdf.NamedNode('http://www.w3.org/ns/shacl#name');
-    const propertyName = store.graph.match(triple.subject, propertyNamePredicateNode, triple.object);
+  const pathURI = 'http://www.w3.org/ns/shacl#path';
+  const pathNode = new rdf.NamedNode(pathURI);
 
-    console.log(propertyName);
-    const propertyDescriptionPredicateNode = new rdf.NamedNode('http://www.w3.org/ns/shacl#description');
-    const propertyDescription = store.graph.match(triple.subject, propertyDescriptionPredicateNode, triple.object);
+  const nameURI = 'http://www.w3.org/ns/shacl#name';
+  const nameNode = new rdf.NamedNode(nameURI);
 
-    console.log(propertyDescription)
-    let property: ShapeProperty = {
+  const descriptionURI = 'http://www.w3.org/ns/shacl#description';
+  const descriptionNode = new rdf.NamedNode(descriptionURI);
+
+  propertyObjects.forEach((property: any) => {
+    const propertyPath = store.graph.reference(property.object).rel(pathNode).one().toString();
+    let propertyName = store.graph.reference(property.object).rel(nameNode).one();
+    if (propertyName != null) {
+      propertyName = propertyName.toString();
+    }
+    let propertyDescription = store.graph.reference(property.object).rel(descriptionNode).one();
+    if (propertyDescription != null) {
+      propertyDescription = propertyDescription.toString();
+    }
+
+    console.log("Property path: ", propertyPath);
+    console.log("Property name: ", propertyName);
+    console.log("Property description: ", propertyDescription);
+
+    let shapeProperty: ShapeProperty = {
       path: '',
     };
 
     // @ts-ignore
-    property.path = propertyPath;
+    shapeProperty.path = propertyPath;
     // @ts-ignore
-    property.name = propertyName;
+    shapeProperty.name = propertyName;
     // @ts-ignore
-    property.description = propertyDescription;
+    shapeProperty.description = propertyDescription;
 
-    properties.push(property);
-  });
+    properties.push(shapeProperty);
+  })
+
   return properties;
 }
