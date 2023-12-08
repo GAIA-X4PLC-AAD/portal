@@ -11,7 +11,7 @@ import {Padding} from "../discovery/tabs/style";
 import car from "../../assets/car.gif";
 import {mapSelfDescriptions} from "../../utils/dataMapper";
 import {ShaclShape} from "../../types/shaclShape.model";
-import {getShapeProperties} from "../../utils/shapeHelpers";
+import {getShapeProperties, trimShapes} from "../../utils/shapeHelpers";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState([]);
@@ -65,7 +65,8 @@ const ServiceOfferings = () => {
 
   async function handleSearch() {
     setIsLoading(true);
-    const targetClass = selectedShape.short_shape.replace('Shape','')
+    let short_shape = trimShapes(selectedShape.shape);
+    const targetClass = short_shape.replace('Shape','')
     const selfDescriptions = await ApiService.getSelfDescriptionsForShape(authContext, targetClass);
     const map = mapSelfDescriptions(selfDescriptions);
     console.log('Map:', map);

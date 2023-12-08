@@ -68,13 +68,13 @@ const serviceColumns: GridColDef[] = [
   //   editable: true,
   // },
   {
-    field: 'surveyStartTime',
-    headerName: 'Survey Start Time',
+    field: 'surveyCreationTime',
+    headerName: 'Survey Creation Time',
     width: 200,
     editable: true,
   },  {
-    field: 'surveyCloseTime',
-    headerName: 'Survey Close Time',
+    field: 'surveyEndTime',
+    headerName: 'Survey End Time',
     width: 200,
     editable: true,
   },  {
@@ -113,8 +113,8 @@ const DataTable = (props: any) => {
           // surveyID: data.survey_id,
           // surveyTitle: data.survey_title,
           // surveyDescription: data.survey_description,
-          surveyStartTime: data.survey_start_time,
-          surveyCloseTime: data.survey_close_time,
+          surveyCreationTime: data.survey_creation_time,
+          surveyEndTime: data.survey_end_time,
           edcEndpoint: data.edcEndpoint,
           contractId: data.contractId,
           claimsGraphUri: data.claimsGraphUri,
