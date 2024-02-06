@@ -9,26 +9,10 @@
     color: white;
 }
 
-.footer-banner {
-    display: flex;
-    margin: 0 10% 1%;
-    border-bottom: 2px solid #ebebeb;
-}
-
-.footer-banner img {
-    padding-right:5px;
-}
-
-.footer-banner p {
-    padding-right:10px;
-    margin-top: 20px;
-    float:left;
-}
-
 .footer-content {
     display: flex;
     justify-content: space-between;
-    margin: 0 10% 1%;
+    margin: 1% 10% 1%;
 }
 
 .footer-content a {
@@ -53,9 +37,4 @@
     margin-block-end: 1.67em;
     margin: auto;
     text-align: center;
-}
-
-.footer-msg {
-    margin-left: 10px;
-    margin-top: 50px;
 }
