@@ -66,3 +66,8 @@ export const SimpleButton = styled.button`
 };
 `
 
+export const Gaiax4FutureMobilityLogo = styled.img`
+    
+    max-width: 100%;
+    max-height: 100%;
+`

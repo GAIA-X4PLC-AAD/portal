@@ -12,6 +12,7 @@ import {BlueButton, Row} from "../../common/styles";
 import ReactTooltip from "react-tooltip";
 import {AuthContext} from "../../context/AuthContextProvider";
 import UserInfo from "../user/UserInfo";
+import {Gaiax4FutureMobilityLogo} from "./style";
 function Header(props) {
     const { t, } = useTranslation();
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ function Header(props) {
                 <ReactTooltip />
                 <S.TopMenuLogo data-tip={t('left-menu.tooltip.home')}>
                     <Link to="/">
-                            <img src="/images/logos/plcaad.webp" alt={t('left-menu.logo-alt-text')} />
+                            <Gaiax4FutureMobilityLogo src="/images/logos/Gaia_X_4_future_mobility.jpg" alt={t('left-menu.logo-alt-text')} />
                     </Link>
                 </S.TopMenuLogo>
                 <CenterBar  />
