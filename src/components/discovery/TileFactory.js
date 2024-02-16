@@ -1,10 +1,10 @@
-import DataTile from "./dataTile/DataTile";
-import PprTile from "./pprTile/PprTile";
-import ServiceTile from "./servicetile/ServiceTile";
+import DataTile from "./dataTile/DataTile.js";
+import PprTile from "./pprTile/PprTile.js";
+import ServiceTile from "./servicetile/ServiceTile.js";
 import PropTypes from 'prop-types';
-import CompositeServiceTile from "./servicetile/CompositeServiceTile";
-import AdminManagementTile from "../admin/tiles/AdminManagementTile";
-import AdminParticipantTile from "../admin/tiles/AdminParticipantTile";
+import CompositeServiceTile from "./servicetile/CompositeServiceTile.js";
+import AdminManagementTile from "../admin/tiles/AdminManagementTile.js";
+import AdminParticipantTile from "../admin/tiles/AdminParticipantTile.js";
 
 const TileFactory = ({data, id, searchRefresh}) => {
     const type = data?.type;

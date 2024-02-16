@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import LoadingView from "../../../loading_view/LoadingView";
-import SampleRecordFactory from "./SampleRecordFactory";
+import LoadingView from "../../../loading_view/LoadingView.js";
+import SampleRecordFactory from "./SampleRecordFactory.js";
 
 const SampleRecordTab = ( { id} ) => {
 

@@ -1,8 +1,8 @@
 import React, {  useState } from "react";
 import axios from "axios";
-import ActionCancelModal from "../../common/ActionCancelModal";
+import ActionCancelModal from "../../common/ActionCancelModal.js";
 import { useTranslation } from "react-i18next";
-import * as S from './ProviderCredentialStyle';
+import * as S from './ProviderCredentialStyle.js';
 
 import PropTypes from 'prop-types';
 

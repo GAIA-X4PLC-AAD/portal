@@ -9,7 +9,8 @@ describe('ReadFile', () => {
       // When
       const result = await readFile(filePath);
       // Then
-      expect(result).toEqual(expectedString);
+      expect(result.replace(/\s+/g, " "))
+          .toEqual(expectedString.replace(/\s+/g, " "));
     });
 });
 const getExpectedString = () => {

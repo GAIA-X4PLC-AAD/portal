@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import axios from "axios";
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
-import { setDescriptorFile } from '../../actions';
+import { setDescriptorFile } from '../../actions/index.js';
 import PropTypes from 'prop-types';
 import "./Provide.css"
-import { HeaderTitle, BodyText, BodySmallBoldText, BlueButton, BlueUploadLabel, CancelButton } from "../../common/styles";
-import { toTypeLabel } from "./ProvideUtil"
+import { HeaderTitle, BodyText, BodySmallBoldText, BlueButton, BlueUploadLabel, CancelButton } from "../../common/styles.js";
+import { toTypeLabel } from "./ProvideUtil.js"
 
 class ProvideOverview extends Component {
 

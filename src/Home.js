@@ -2,9 +2,9 @@ import React from "react";
 import {useTranslation, withTranslation} from "react-i18next";
 import "react-multi-carousel/lib/styles.css";
 import PropTypes from 'prop-types';
-import {BodyText, Column, H2Text, Style} from "./common/styles";
-import {Padding} from "./components/discovery/tabs/style";
-import SearchTerm from "./components/discovery/search/SearchTerm";
+import {BodyText, Column, H2Text, Style} from "./common/styles.js";
+import {Padding} from "./components/discovery/tabs/style.js";
+import SearchTerm from "./components/discovery/search/SearchTerm.js";
 
 const responsive = {
   superLargeDesktop: {
@@ -31,10 +31,10 @@ const Home = () => {
   const { t, i18n } = useTranslation();
 
   // const buildSliderContent = ({ index = 0 }) => {
-  //     return <Column key = {`${index}`} justifyContent='center' alignItems='center'>
+  //     return <Column key = {`${index}`} justifyContent='center' $alignItems='center'>
   //     <H2Text color={'#fff'}>{t('article.what-is-new')} {index}</H2Text>
   //       <Style maxWidth='600px'>
-  //       <BodyText color={'#fff'} textAlign='center'>{t('filler')}</BodyText>
+  //       <BodyText color={'#fff'} $textAlign='center'>{t('filler')}</BodyText>
   //       </Style>
   //
   //     <h4></h4>
@@ -91,18 +91,18 @@ const Home = () => {
   return (
     <>
       <div className='banner-container'>
-        <Column alignItems='center' height='100px'>
-          <Padding key='i01' paddingTop='140px' />
-          <H2Text color={'#fff'}>{t('home.marketplace')}</H2Text>
-          <Padding key='i03' paddingTop='40px' />
-          <Style maxWidth='600px'>
-            <BodyText color={'#fff'} textAlign='center'>{t('home.marketplace_text')}</BodyText>
+        <Column $alignItems='center' $height='100px'>
+          <Padding key='i01' $paddingTop='140px' />
+          <H2Text $color={'#fff'}>{t('home.marketplace')}</H2Text>
+          <Padding key='i03' $paddingTop='40px' />
+          <Style $justifyContent="justify" $marginLeft="2em" $marginRight="2em">
+            <BodyText $color={'#fff'} $textAlign='center'>{t('home.marketplace_text')}</BodyText>
           </Style>
         </Column>
       </div >
 
       <div className='search-container'>
-        <Padding vertical='40px'>
+        <Padding $vertical='40px'>
           <SearchTerm type='home'
                       inputWidth="320px" advancedTextColor="#fff" advancedSearchBgColor='#8D8DFF'
                       displayAsColumn={false}

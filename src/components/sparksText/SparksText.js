@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import createTextSparks from "./sparky";
+import createTextSparks from "./sparky.js";
 import "./SparksText.css";
 
 export const SparksText = () => {

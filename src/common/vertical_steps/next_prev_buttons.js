@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Padding } from "../../components/discovery/tabs/style";
-import { ButtonText, Image, Style } from "../styles";
+import { Padding } from "../../components/discovery/tabs/style.js";
+import { ButtonText, Image, Style } from "../styles.js";
 import PropTypes from 'prop-types';
 
 const NextPrevButtons = ({ next, previous, goToSlide, padding='32px', bottom='500px', right='', top='', position='relative', ...rest }) => {
@@ -9,15 +9,15 @@ const NextPrevButtons = ({ next, previous, goToSlide, padding='32px', bottom='50
     const { carouselState: { currentSlide, slidesToShow, totalItems } } = rest;
 
     return (
-        <Style display='flex' position={position} justifyContent='end' bottom={bottom} top={top} right={right}>
-            <Padding horizontal={padding}>
-                <ButtonText disabled={currentSlide === 0} onClick={() => previous()} >
-                    <Image src='/images/icons/arrow_left.svg' alt="arrow-left" width='12px'
+        <Style $display='flex' $position={position} $justifyContent='end' bottom={bottom} top={top} right={right}>
+            <Padding $horizontal={padding}>
+                <ButtonText $disabled={currentSlide === 0} onClick={() => previous()} >
+                    <Image src='/images/icons/arrow_left.svg' alt="arrow-left" $width='12px'
                         filter={currentSlide === 0 ? disabledColor : activeColor} />
                 </ButtonText></Padding>
-            <Padding horizontal='4px'>
-                <ButtonText disabled={currentSlide + slidesToShow >= totalItems} onClick={() => next()} >
-                    <Image src='/images/icons/arrow_right.svg' alt="arrow-right" width='12px'
+            <Padding $horizontal='4px'>
+                <ButtonText $disabled={currentSlide + slidesToShow >= totalItems} onClick={() => next()} >
+                    <Image src='/images/icons/arrow_right.svg' alt="arrow-right" $width='12px'
                         filter={(currentSlide + slidesToShow) >= totalItems? disabledColor : activeColor}
                     />
                 </ButtonText></Padding>

@@ -2,11 +2,11 @@ import axios from "axios";
 import React, { useRef, useState } from "react";
 import { withTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import ActionCancelModal from "../../common/ActionCancelModal";
+import ActionCancelModal from "../../common/ActionCancelModal.js";
 import "./ProviderAccount.css";
-import UploadCompleted from "./uploadCompleted";
+import UploadCompleted from "./uploadCompleted.js";
 import PropTypes from 'prop-types';
-import { BlueButton, BodyText, CancelButton, Column, RedText, Row, Style } from "../../common/styles";
+import { BlueButton, BodyText, CancelButton, Column, RedText, Row, Style } from "../../common/styles.js";
 
 const ProviderEdit = (props) => {
 
@@ -53,14 +53,14 @@ const ProviderEdit = (props) => {
     return(
         <div className="provider-account-edit__flex layout">
           <div className="provider-account-edit__block9 layout">
-            <Column margin='24px' gap='24px'>
+            <Column $margin='24px' $gap='24px'>
               <BodyText>
                 {props.t("account.edit.uploadMessage")}
               </BodyText>
-              <Row gap="12px">
-                <BlueButton marginLeft="0" onClick={()=> fileRef.current.click()}>{props.t("account.edit.upload")}</BlueButton>
+              <Row $gap="12px">
+                <BlueButton $marginLeft="0" onClick={()=> fileRef.current.click()}>{props.t("account.edit.upload")}</BlueButton>
                 <input type="file" name="selfDescription" ref={fileRef} hidden onChange={onFileChange}/>
-                <Style marginTop="auto" marginBottom="auto">
+                <Style $marginTop="auto" $marginBottom="auto">
                   {file?.name || ''}
                 </Style>
               </Row>
@@ -74,9 +74,9 @@ const ProviderEdit = (props) => {
                     actionMessage={props.t("account.edit.remove")}
                     actionCallback={()=>deleteAccount()} 
                     cancelCallback={()=>setOnRemove(false)}/>
-          <Row vertical="24px">
+          <Row $vertical="24px">
             <RedText onClick={()=>setOnRemove(true)}>{props.t("account.edit.removeAccount")}</RedText>
-            <Style marginLeft='auto'>
+            <Style $marginLeft='auto'>
               <CancelButton onClick={()=>navigate("/account/provider/details")}>{props.t("account.edit.cancel")}</CancelButton>
             </Style>
               

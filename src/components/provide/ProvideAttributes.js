@@ -3,13 +3,13 @@ import { NavLink } from "react-router-dom";
 import { useNavigate, useParams, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { resetDescriptorFile } from '../../actions';
+import { resetDescriptorFile } from '../../actions/index.js';
 import axios from "axios";
 import "./Provide.css"
-import { HeaderTitle, BodyText, BlueButton, CancelButton, RedText } from "../../common/styles";
-import { ToggleSwitch } from "../../common/toggle/ToggleSwitch"
-import { toTypeLabel } from "./ProvideUtil"
-import {Tab} from "../../common/tabs/tab";
+import { HeaderTitle, BodyText, BlueButton, CancelButton, RedText } from "../../common/styles.js";
+import { ToggleSwitch } from "../../common/toggle/ToggleSwitch.js"
+import { toTypeLabel } from "./ProvideUtil.js"
+import {Tab} from "../../common/tabs/tab.js";
 
 class ProvideAttributes extends Component {
     constructor(props) {

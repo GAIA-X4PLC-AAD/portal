@@ -1,8 +1,8 @@
 import React from "react";
-import ExpandableView from "../../expandable/ExpandableView";
+import ExpandableView from "../../expandable/ExpandableView.js";
 import PropTypes from 'prop-types';
-import ManagementHeader from "../tabs/ManagementHeader";
-import KeyValueDetails from "../tabs/KeyValueDetails";
+import ManagementHeader from "../tabs/ManagementHeader.js";
+import KeyValueDetails from "../tabs/KeyValueDetails.js";
 import { useResource } from "@axios-use/react";
 
 

@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import React from "react";
 import PropTypes from 'prop-types';
-import { BodyBoldText, BodySmallBoldText, BodySmallText, Card, Circle, Column, Padding, Row, Style } from "../../common/styles";
-import { CUSTOMER } from "./onboarding_page";
+import { BodyBoldText, BodySmallBoldText, BodySmallText, Card, Circle, Column, Padding, Row, Style } from "../../common/styles.js";
+import { CUSTOMER } from "./onboarding_page.js";
 
 const StepsPane = ({ type, currentStage }) => {
 
@@ -11,12 +11,12 @@ const StepsPane = ({ type, currentStage }) => {
 
     const buildStepCardView = ({ stage, title, subtitle, isActive }) => {
         return (
-            <Padding vertical='12px' paddingTop={stage == 1 ? '0px' : ''}>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px ${isActive ? '3' : '2'}px 4px 0px rgb(29 36 48 / ${isActive ? '25' : '12'}%)`}>
-                    <Padding vertical='12px' horizontal='10px'>
-                        <Row alignItems='center'>
-                            <Circle radius='44px' background={(isActive ) ? '#000094' : '#E9E9E9'} borderColor='#0'>
-                                <BodySmallBoldText color={isActive ? '#fff' : '#2A2A2A'}>{stage}</BodySmallBoldText>
+            <Padding $vertical='12px' $paddingTop={stage == 1 ? '0px' : ''}>
+                <Card $background='#fff' $borderColor='#0' $boxShadow={`0px ${isActive ? '3' : '2'}px 4px 0px rgb(29 36 48 / ${isActive ? '25' : '12'}%)`}>
+                    <Padding $vertical='12px' $horizontal='10px'>
+                        <Row $alignItems='center'>
+                            <Circle $radius='44px' $background={(isActive ) ? '#000094' : '#E9E9E9'} $borderColor='#0'>
+                                <BodySmallBoldText $color={isActive ? '#fff' : '#2A2A2A'}>{stage}</BodySmallBoldText>
                             </Circle>
                             <Padding horizontal='20px'>
                                 <Column>
@@ -24,8 +24,8 @@ const StepsPane = ({ type, currentStage }) => {
                                     <BodySmallText>{subtitle}</BodySmallText>
                                 </Column>
                             </Padding>
-                            <Style flexGrow='1'></Style>
-                            <Circle radius='8px' background={isActive  || (stage < currentStage) ? '#6BB324' : '#E9E9E9'} borderColor='#0' />
+                            <Style $flexGrow='1'></Style>
+                            <Circle $radius='8px' $background={isActive  || (stage < currentStage) ? '#6BB324' : '#E9E9E9'} $borderColor='#0' />
                         </Row>
                     </Padding>
                 </Card>

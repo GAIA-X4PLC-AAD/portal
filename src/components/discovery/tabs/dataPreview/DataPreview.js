@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from './style';
+import * as S from './style.js';
 import PropTypes from 'prop-types';
 
 const DataPreview = ({data, width, minHeight, shouldShowDetailsButton = true, margin = '0', marginRight='0px', displayLogo=true}) => {

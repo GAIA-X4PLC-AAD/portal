@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import ExpandableView from "../expandable/ExpandableView";
-import * as S from './style';
+import ExpandableView from "../expandable/ExpandableView.js";
+import * as S from './style.js';
 import { useTranslation } from "react-i18next";
 
 const AdminLocationFilterView = ({ data , header, onFormChanged}) => {

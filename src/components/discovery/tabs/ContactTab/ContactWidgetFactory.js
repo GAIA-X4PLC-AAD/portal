@@ -1,4 +1,4 @@
-import * as S from "./ContactWidgetFactoryStyle";
+import * as S from "./ContactWidgetFactoryStyle.js";
 import React from "react";
 import { withTranslation } from "react-i18next";
 import PropTypes from 'prop-types';

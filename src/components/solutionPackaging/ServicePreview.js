@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { SlotBox } from "./style";
-import * as S from "../../common/styles";
+import { SlotBox } from "./style.js";
+import * as S from "../../common/styles.js";
 import PropTypes from "prop-types";
-import ServiceModalDetails from "./ServiceModalDetails";
+import ServiceModalDetails from "./ServiceModalDetails.js";
 
 const ServicePreview = ({ service , onSelect}) => {
     const { t } = useTranslation();
@@ -22,10 +22,10 @@ const ServicePreview = ({ service , onSelect}) => {
         <>
         <SlotBox width='306px' justifyContent="start">
             <S.Column height="100%" justifyContent="start">
-                <S.Style marginBottom="auto" textAlign="left">
+                <S.Style marginBottom="auto" $textAlign="left">
                     <S.Image src={service.img_preview_url} alt={service.name} width='281px' height='128px'/>
                     <S.H4Text>{service.name}</S.H4Text>
-                    <S.BlueLinkText><S.Style textAlign="left" onClick={()=>{openLink(service.ppr_url)}}>{service.ppr_name}</S.Style></S.BlueLinkText>
+                    <S.BlueLinkText><S.Style $textAlign="left" onClick={()=>{openLink(service.ppr_url)}}>{service.ppr_name}</S.Style></S.BlueLinkText>
                     <S.Style marginTop="10px">
                         <S.BodySmallText>{service.description}</S.BodySmallText>
                     </S.Style>

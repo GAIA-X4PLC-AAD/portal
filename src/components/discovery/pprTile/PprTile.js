@@ -1,22 +1,22 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import "../servicetile/ServiceTile.css";
-import * as S from '../style';
+import * as S from '../style.js';
 import PropTypes from 'prop-types';
-import ExpandableView from "../../expandable/ExpandableView";
-import ContactTab from "../tabs/ContactTab/ContactTab";
-import DescriptionTab from "../tabs/description/DescriptionTab";
-import ServicesTab from "../tabs/servicesTab/ServicesTab";
-import DataSetTab from "../tabs/dataSetsTab/DataSetTab";
-import { CheckBox } from "../search/style";
-import { Column, Image, Padding, Row, Style } from "../../../common/styles";
+import ExpandableView from "../../expandable/ExpandableView.js";
+import ContactTab from "../tabs/ContactTab/ContactTab.js";
+import DescriptionTab from "../tabs/description/DescriptionTab.js";
+import ServicesTab from "../tabs/servicesTab/ServicesTab.js";
+import DataSetTab from "../tabs/dataSetsTab/DataSetTab.js";
+import { CheckBox } from "../search/style.js";
+import { Column, Image, Padding, Row, Style } from "../../../common/styles.js";
 
 const PprTile = ({ id, input, t }) => {
     const type = "ppr";
 
 
     const padTitle = ({ _titleView }) => {
-        return <Padding paddingTop='18px' paddingBottom='8px'>
+        return <Padding $paddingTop='18px' $paddingBottom='8px'>
             {_titleView}
         </Padding>
     }
@@ -53,30 +53,30 @@ const PprTile = ({ id, input, t }) => {
     const showTileHeader = () => {
         return (
             <S.DiscoveryTile>
-                <Row alignItems='Center' justifyContent='start'>
-                    <Padding horizontal='28px' vertical='24px'><CheckBox type="checkbox" /></Padding>
+                <Row $alignItems='Center' $justifyContent='start'>
+                    <Padding $horizontal='28px' $vertical='24px'><CheckBox type="checkbox" /></Padding>
                     {/* LOGO */}
                     <a href={"#" || input.services.ppr_url}>
                         {/* <Image */}
-                        <Image src={input.logo} alt='Provider Logo' width='48px' height='48px' />
+                        <Image src={input.logo} alt='Provider Logo' $width='48px' $height='48px' />
                     </a>
-                    <Padding paddingLeft='62px' />
-                    <Row alignItems='Center' justifyContent='space-between'>
+                    <Padding $paddingLeft='62px' />
+                    <Row $alignItems='Center' $justifyContent='space-between'>
                         {/* NAME */}
                         <S.DiscoveryTileFirstRow width={'140px'}>{input.name}</S.DiscoveryTileFirstRow>
                         {/* SUSTAINABILITY */}
-                        <Padding paddingLeft='60px' />
+                        <Padding $paddingLeft='60px' />
                         <Column>
                             <S.DiscoveryTileFirstRow width={'80px'}>{t("service-tile.header.sustainability")}</S.DiscoveryTileFirstRow>
                             <S.DiscoveryTileSecondRow>{input.sustainability}</S.DiscoveryTileSecondRow>
                         </Column>
-                        <Padding paddingLeft='20px' />
+                        <Padding $paddingLeft='20px' />
                         {/* AVAILABILITY */}
                         <Column>
                             <S.DiscoveryTileFirstRow width={'80px'}>{t("service-tile.header.availability")}</S.DiscoveryTileFirstRow>
                             <S.DiscoveryTileSecondRow>{input.availability}</S.DiscoveryTileSecondRow>
                         </Column>
-                        <Padding paddingLeft='20px' />
+                        <Padding $paddingLeft='20px' />
                         {/* LOCATION */}
                         <Column>
                             <S.DiscoveryTileFirstRow width={'80px'}>{t("service-tile.header.location")}</S.DiscoveryTileFirstRow>
@@ -85,14 +85,14 @@ const PprTile = ({ id, input, t }) => {
                     </Row>
 
                     {/* DETAILS */}
-                    <Style flexGrow='1'>
+                    <Style $flexGrow='1'>
 
                     </Style>
 
                     <S.DiscoveryDetailsButton>
                         {t("service-tile.details")}
                     </S.DiscoveryDetailsButton>
-                    <Padding paddingLeft='20px' />
+                    <Padding $paddingLeft='20px' />
                 </Row>
 
             </S.DiscoveryTile>

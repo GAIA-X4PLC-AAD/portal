@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { BodyText, Row, Style } from '../../common/styles';
-import { SelectedTab, SeparatorLine } from './style';
+import { BodyText, Row, Style } from '../../common/styles.js';
+import { SelectedTab, SeparatorLine } from './style.js';
 
 const TabView = ({labels, views}) => {
 
@@ -17,7 +17,7 @@ const TabView = ({labels, views}) => {
     const showLabels = () => {
         return labels.map((label, index) => {
             return (
-                <Style marginTop='24px' marginRight='28px' marginLeft='28px' marginBottom='12px' key={index}>
+                <Style $marginTop='24px' $marginRight='28px' $marginLeft='28px' $marginBottom='12px' key={index}>
                 <BodyText key={index} className="tab-label" onClick={() => setSelected(index)}>
                     {label}
                 </BodyText>
@@ -35,12 +35,12 @@ const TabView = ({labels, views}) => {
     }
 
     return (
-       <Style width='864px;' marginBottom='24px'>
+       <Style $width='864px;' $marginBottom='24px'>
             <Row>
                 {showLabels()}
             </Row>
             <SeparatorLine/>
-            <Style paddingLeft='28px' paddingRight='28px' MarginBottom='24px'>
+            <Style $paddingLeft='28px' $paddingRight='28px' $marginBottom='24px'>
                 {showViews(selected)}
             </Style>
        </Style>

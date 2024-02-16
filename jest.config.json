@@ -1,0 +1,25 @@
+{
+    "extensionsToTreatAsEsm": [".ts"],
+    "verbose": true,
+    "preset": "ts-jest",
+    "setupFilesAfterEnv": ["<rootDir>src/setupTests.ts"],
+    "moduleFileExtensions": ["js", "jsx", "ts", "tsx"],
+    "moduleDirectories": ["node_modules", "src"],
+    "moduleNameMapper": {
+        "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+            "<rootDir>/src/__mocks__/fileMock.ts",
+        "\\.(css|less|scss)$": "identity-obj-proxy"
+    },
+    "transform": {
+        "\\.[jt]sx?$": "babel-jest"
+    },
+    "collectCoverageFrom": ["**/*.{ts,tsx,js,jsx}", "!**/*.d.ts", "!**/node_modules/**", "!**/vendor/**"],
+    "coverageThreshold": {
+        "global": {
+            "branches": 80,
+            "functions": 80,
+            "lines": 80,
+            "statements": 80
+        }
+    }
+}

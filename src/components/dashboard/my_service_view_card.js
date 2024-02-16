@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { AnimatedVisibility, CircularLoader, BodySmallBoldText, BodyText, ButtonText, CaptionText, Card, Circle, Column, H4LightText, HeaderTitle, HorizontalLine, Image, OutlineButton, Row, Style } from "../../common/styles";
+import { AnimatedVisibility, CircularLoader, BodySmallBoldText, BodyText, ButtonText, CaptionText, Card, Circle, Column, H4LightText, HeaderTitle, HorizontalLine, Image, OutlineButton, Row, Style } from "../../common/styles.js";
 import PropTypes from 'prop-types';
 import axios from "axios";
-import { Block } from "../expandable/style";
-import { Padding } from "../discovery/tabs/style";
+import { Block } from "../expandable/style.js";
+import { Padding } from "../discovery/tabs/style.js";
 import { useLinkClickHandler, useNavigate } from "react-router-dom";
 
 import { Menu, MenuItem } from '@szhsin/react-menu';
@@ -13,16 +13,12 @@ import '@szhsin/react-menu/dist/index.css';
 
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
-import { BlueButton, CancelButton } from "../admin/style";
+import { BlueButton, CancelButton } from "../admin/style.js";
 import fileDownload from 'js-file-download';
-import ReactTooltip from 'react-tooltip';
+import {Tooltip} from "react-tooltip";
 
 
 const MyServiceViewCard = ({ index, data, itemType }) => {
-
-    useEffect(() => {
-        ReactTooltip.rebuild();
-    });
 
     const isActivated = data['is_activated'];
     const isOwn = data['is_own']
@@ -36,7 +32,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
 
     const colItem = ({ title, caption, subtitle, }) => {
         return <Column>
-            <Row justifyContent='space-between' alignItems='center'>
+            <Row justifyContent='space-between' $alignItems='center'>
                 <BodySmallBoldText>{title}</BodySmallBoldText>
                 <CaptionText>{caption}</CaptionText>
             </Row>
@@ -90,20 +86,20 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
         }
 
         return <>
-            <Style width='633px'>
-                <Padding horizontal='24px' vertical='12px'>
+            <Style $width='633px'>
+                <Padding $horizontal='24px' $vertical='12px'>
                     <H4LightText>{t('dashboard.delete.title')}</H4LightText>
                     <HorizontalLine />
                     <BodyText>
                         {successOrError? successOrError : t('dashboard.delete.message', {name: _name})}
                         </BodyText>
-                    <Padding vertical='20px'>
-                        <Row alignItems='center'>
+                    <Padding $vertical='20px'>
+                        <Row $alignItems='center'>
                             <BlueButton onClick={() => deleteService()} disabled={isLoading || successOrError}>{t('dashboard.delete.delete_button')}</BlueButton>
-                            <Padding paddingLeft='20px' />
+                            <Padding $paddingLeft='20px' />
                             <CancelButton onClick={close} disabled={isLoading}>{t('dashboard.delete.cancel_button')}</CancelButton>
-                            {isLoading ? <Padding horizontal='16px'>
-                                <AnimatedVisibility visible={isLoading} data-tag='animated-visibility-loader'>
+                            {isLoading ? <Padding $horizontal='16px'>
+                                <AnimatedVisibility $visible={isLoading} data-tag='animated-visibility-loader'>
                                     <CircularLoader />
                                 </AnimatedVisibility>
                             </Padding> : ''}
@@ -128,12 +124,13 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
         }
 
         return <>
-            <Padding paddingRight='16px'>
+            <Padding $paddingRight='16px'>
                 <Menu 
                     menuButton={
                         <ButtonText 
                             onClick={() => manageButton()}
-                            data-tip={t('dashboard.tooltip.manage')}
+                            data-tooltip-id="dashboard.tooltip.manage"
+                            data-tooltip-content={t('dashboard.tooltip.manage')}
                         >
                     {t('dashboard.manage.manage')}
                 </ButtonText>}>
@@ -142,6 +139,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                 {_status == 'deployed' ? <MenuItem onClick={() => downloadLogs()}>{t('dashboard.manage.download-logs')}</MenuItem> : ''}
                 {_status == 'deployed' ? <MenuItem onClick={onOpenModal}>{t('dashboard.manage.delete')}</MenuItem> : ''}
                 </Menu>
+                <Tooltip id="dashboard.tooltip.manage"/>
             </Padding>
             <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
                 {buildDeleteDialog({ closeModal: onCloseModal })}
@@ -179,7 +177,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     
             if ( (_status == 'undeployed' && activated) || !activated ) 
                 return   <ButtonText onClick={activateDeactivate}>{activated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText>
-            return <Style height='20px'/>;
+            return <Style $height='20px'/>;
         }       
         
         const tpOverridePos = (props) => {
@@ -188,24 +186,24 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
 
 
         return (
-            <Style maxWidth='290px'>
-                <Padding paddingRight='12px'>
-                    <Block border={true} borderBottom={true}>
-                        <Padding vertical='20px' horizontal='20px'>
+            <Style $maxWidth='290px'>
+                <Padding $paddingRight='12px'>
+                    <Block $border={true} $borderBottom={true}>
+                        <Padding $vertical='20px' $horizontal='20px'>
                             <Column>
-                                {isOwn ? <Circle radius='10px' background='#0000' borderColor='#0000' /> :
-                                    (<>{activated ? <Circle radius='10px' background='#7fcdbb' borderColor='#0000' />
-                                        : <Circle radius='10px' background='#ef6548' borderColor='#0000' />}</>)}
+                                {isOwn ? <Circle $radius='10px' $background='#0000' $borderColor='#0000' /> :
+                                    (<>{activated ? <Circle $radius='10px' $background='#7fcdbb' $borderColor='#0000' />
+                                        : <Circle $radius='10px' $background='#ef6548' $borderColor='#0000' />}</>)}
 
-                                <Style minWidth='100%'>
-                                    <Padding vertical='18px'>
+                                <Style $minWidth='100%'>
+                                    <Padding $vertical='18px'>
                                         {/* <Style height='160px' backgroundColor='#fafafa'/> */}
-                                        <Image src={data['preview_img']} alt="Logo" width='240px' height='200px' />
+                                        <Image src={data['preview_img']} alt="Logo" $width='240px' $height='200px' />
                                     </Padding>
                                 </Style>
-                                <Row justifyContent='start' alignItems='center'>
-                                    <Image src={data['logo']} alt="Logo" width='50px' height='50px' />
-                                    <Padding horizontal='8px'>
+                                <Row $justifyContent='start' $alignItems='center'>
+                                    <Image src={data['logo']} alt="Logo" $width='50px' $height='50px' />
+                                    <Padding $horizontal='8px'>
                                         {colItem({
                                             title: data['name'],
                                             subtitle: 'provider_url',
@@ -213,24 +211,29 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                                     </Padding>
                                 </Row>
                                 {!isOwn ? <CaptionText>{t('dashboard.status', {status: _status})}</CaptionText> : <CaptionText>&#8203;</CaptionText>}
-                                <Style maxWidth='213px'>
-                                    <Padding vertical='10px'>
+                                <Style $maxWidth='213px'>
+                                    <Padding $vertical='10px'>
                                         <CaptionText>{data['description']}</CaptionText>
                                     </Padding>
                                 </Style>
 
-                                <Padding vertical>
-                                    {isOwn ? 
-                                        <ButtonText 
-                                            onClick={() => openSd()}
-                                            data-tip={t('dashboard.tooltip.edit')}
-                                        >
-                                            {t('dashboard.edit')}
-                                        </ButtonText> 
+                                <Padding $vertical>
+                                    {isOwn ?
+                                        <>
+                                            <ButtonText
+                                                onClick={() => openSd()}
+                                                data-tooltip-id="dashboard.tooltip.edit"
+                                                data-tooltip-content={t('dashboard.tooltip.edit')}
+                                            >
+                                                {t('dashboard.edit')}
+                                            </ButtonText>
+                                            <Tooltip id="dashboard.tooltip.edit" />
+                                        </>
+
                                         : <></>
                                     }
                                     </Padding>
-                                <Padding vertical>{!isOwn ? <>
+                                <Padding $vertical>{!isOwn ? <>
                                     <Row>
                                         {buildManageButton()}
                                         {buildActivateDeactivateButton()}

@@ -2,8 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector, } from "react-redux";
 import PropTypes from 'prop-types';
 import ReactPaginate from 'react-paginate';
-import { updatePageNumber } from "../../../actions";
-import { ArrowLeft, ArrowRight } from '../../../common/styles';
+import { updatePageNumber } from "../../../actions/index.js";
+import { ArrowLeft, ArrowRight } from '../../../common/styles.js';
 
 
 const NextPrevButtons = ({ data }) => {

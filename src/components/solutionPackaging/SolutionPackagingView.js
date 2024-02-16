@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Carousel from "react-multi-carousel";
 import { useNavigate, useParams } from "react-router-dom";
-import * as S from "../../common/styles";
-import SearchView from "../discovery/search/SearchView";
-import LoadingView from "../loading_view/LoadingView";
-import SlotDetails from "./SlotDetails";
-import NP from "../../common/vertical_steps/next_prev_buttons";
+import * as S from "../../common/styles.js";
+import SearchView from "../discovery/search/SearchView.js";
+import LoadingView from "../loading_view/LoadingView.js";
+import SlotDetails from "./SlotDetails.js";
+import NP from "../../common/vertical_steps/next_prev_buttons.js";
 import PropTypes from 'prop-types';
-import SaveBookModal from "./SaveBookModal";
+import SaveBookModal from "./SaveBookModal.js";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import { VR_ROLE } from "../../common/auth";
-import ReactTooltip from "react-tooltip";
+import { VR_ROLE } from "../../common/auth.js";
+import {Tooltip} from "react-tooltip";
+
 
 const SolutionPackagingView = () => {
     
@@ -94,25 +95,31 @@ const SolutionPackagingView = () => {
         return (
             <S.Row margin="32px;" gap='20px'>
                 <S.BlueButton 
-                    onClick={onResetClick} 
-                    data-tip={t('solution_pkg.tooltip.reset')}
+                    onClick={onResetClick}
+                    data-tooltip-id="solution_pkg.tooltip.reset"
+                    data-tooltip-content={t('solution_pkg.tooltip.reset')}
                 >
                         {t('solution_pkg.reset')}
                 </S.BlueButton>
+                <Tooltip id="solution_pkg.tooltip.reset" />
                 <S.BlueButton 
                     disabled={!isUserSignedIn} 
-                    onClick={onSaveClick} 
-                    data-tip={t('solution_pkg.tooltip.save')}
+                    onClick={onSaveClick}
+                    data-tooltip-id="solution_pkg.tooltip.save"
+                    data-tooltip-content={t('solution_pkg.tooltip.save')}
                     >
                         {t('solution_pkg.save')}
                 </S.BlueButton>
+                <Tooltip id="solution_pkg.tooltip.save" />
                 <S.BlueButton 
                     disabled={!isUserSignedIn} 
-                    onClick={onBookClick} 
-                    data-tip={t('solution_pkg.tooltip.book')}
+                    onClick={onBookClick}
+                    data-tooltip-id="solution_pkg.tooltip.book"
+                    data-tooltip-content={t('solution_pkg.tooltip.book')}
                     >
                         {t('solution_pkg.book')}
                 </S.BlueButton>
+                <Tooltip id="solution_pkg.tooltip.book" />
             </S.Row>
         );
     } 
@@ -206,54 +213,53 @@ const SolutionPackagingView = () => {
     }
 
     const showDetails = (data) => {
-        return (<>
-        <S.Row margin='37px 0 0 0'>
-            <S.Style marginRight='101px'>
-                <S.Image src={data.img_preview_url} alt={data.name} width='307px' height='310px' objectFit='cover' objectPossition='0 0'/>
-            </S.Style>
-            <S.Column >
-                <S.Row>
-                    <S.Image src={data.logo} alt="Provider Logo" width='42px' height='42px' />
-                    <S.Style marginTop='auto' marginBottom='auto' marginLeft='24px'>
-                        <S.BodyText>{data.name}</S.BodyText>
-                    </S.Style>
-                </S.Row>
-                <S.Style textAlign="left" marginTop='36px'>
-                    <S.BodyBoldText>{t('solution_pkg.description')}</S.BodyBoldText>
-                    <S.Style marginTop='14px'>
-                    <S.BodyText>{data.description}</S.BodyText>
-                    </S.Style>
+        return (<S.Row margin='37px 0 0 0'>
+                <S.Style marginRight='101px'>
+                    <S.Image src={data.img_preview_url} alt={data.name} width='307px' height='310px' objectFit='cover'
+                             objectPossition='0 0'/>
                 </S.Style>
-                <S.Row margin='auto 0 0 0' gap="24px">
-                    <S.Column> 
-                        <S.Style marginBottom='8px'>
-                            <S.CaptionText color="#B2B2B2">{t('solution_pkg.features')}</S.CaptionText>
+                <S.Column>
+                    <S.Row>
+                        <S.Image src={data.logo} alt="Provider Logo" width='42px' height='42px'/>
+                        <S.Style marginTop='auto' marginBottom='auto' marginLeft='24px'>
+                            <S.BodyText>{data.name}</S.BodyText>
                         </S.Style>
-                        <S.BodySmallText>{data.features}</S.BodySmallText>
-                    </S.Column>
-                    <S.Column> 
-                        <S.Style marginBottom='8px'>
-                        <S.CaptionText color="#B2B2B2">{t('solution_pkg.stack')}</S.CaptionText>
+                    </S.Row>
+                    <S.Style $textAlign="left" marginTop='36px'>
+                        <S.BodyBoldText>{t('solution_pkg.description')}</S.BodyBoldText>
+                        <S.Style marginTop='14px'>
+                            <S.BodyText>{data.description}</S.BodyText>
                         </S.Style>
-                        <S.BodySmallText>{data.stack}</S.BodySmallText>
-                    </S.Column>
-                    <S.Column> 
-                        <S.Style marginBottom='8px'>
-                            <S.CaptionText color="#B2B2B2">{t('solution_pkg.location')}</S.CaptionText>
-                        </S.Style>
-                        <S.BodySmallText>{data.location}</S.BodySmallText>
-                    </S.Column>
-                    <S.Column> 
-                        <S.Style marginBottom='8px'>
-                            <S.CaptionText color="#B2B2B2">{t('solution_pkg.lastUpdated')}</S.CaptionText>
-                        </S.Style>
-                        <S.BodySmallText>{data.last_updated}</S.BodySmallText>
-                    </S.Column>
-                    
-                </S.Row>
-            </S.Column>
-        </S.Row>
-                    </>
+                    </S.Style>
+                    <S.Row margin='auto 0 0 0' gap="24px">
+                        <S.Column>
+                            <S.Style marginBottom='8px'>
+                                <S.CaptionText color="#B2B2B2">{t('solution_pkg.features')}</S.CaptionText>
+                            </S.Style>
+                            <S.BodySmallText>{data.features}</S.BodySmallText>
+                        </S.Column>
+                        <S.Column>
+                            <S.Style marginBottom='8px'>
+                                <S.CaptionText color="#B2B2B2">{t('solution_pkg.stack')}</S.CaptionText>
+                            </S.Style>
+                            <S.BodySmallText>{data.stack}</S.BodySmallText>
+                        </S.Column>
+                        <S.Column>
+                            <S.Style marginBottom='8px'>
+                                <S.CaptionText color="#B2B2B2">{t('solution_pkg.location')}</S.CaptionText>
+                            </S.Style>
+                            <S.BodySmallText>{data.location}</S.BodySmallText>
+                        </S.Column>
+                        <S.Column>
+                            <S.Style marginBottom='8px'>
+                                <S.CaptionText color="#B2B2B2">{t('solution_pkg.lastUpdated')}</S.CaptionText>
+                            </S.Style>
+                            <S.BodySmallText>{data.last_updated}</S.BodySmallText>
+                        </S.Column>
+
+                    </S.Row>
+                </S.Column>
+            </S.Row>
         )
 
     }
@@ -265,23 +271,20 @@ const SolutionPackagingView = () => {
         setSlots(copy);
     }
 
-    useEffect(() => {
-        ReactTooltip.rebuild();
-    });
-
     if (!id) return null;
     return(
-        <>
-            <S.Column>
-                <S.Style textAlign="left">
-                    <S.H2Text>{t('solution_pkg.solutionPackaging')}</S.H2Text>
-                    <S.BodyText>{t('solution_pkg.solutionPackagingSubtitle')}</S.BodyText>
-                </S.Style>
-                <LoadingView url={URL} successView={successView}/>
-                {addItem>=0?<SearchView type="solution_pkg" onSelect={onSelect} serviceId={id} slot={addItem} key={`${id}-${addItem}`}/>:null}
-                {action? <SaveBookModal action={action} closeModal={()=>{setAction(null)}} onSaveBook={onSaveBookAction}/>:null}
-            </S.Column>
-        </>
+        <S.Column>
+            <S.Style $textAlign="left">
+                <S.H2Text>{t('solution_pkg.solutionPackaging')}</S.H2Text>
+                <S.BodyText>{t('solution_pkg.solutionPackagingSubtitle')}</S.BodyText>
+            </S.Style>
+            <LoadingView url={URL} successView={successView}/>
+            {addItem >= 0 ? <SearchView type="solution_pkg" onSelect={onSelect} serviceId={id} slot={addItem}
+                                        key={`${id}-${addItem}`}/> : null}
+            {action ? <SaveBookModal action={action} closeModal={() => {
+                setAction(null)
+            }} onSaveBook={onSaveBookAction}/> : null}
+        </S.Column>
             );
 }
 

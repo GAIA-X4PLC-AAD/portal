@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as S from '../../common/styles';
+import * as S from '../../common/styles.js';
 
 export const Column = styled.div`
     font-family: 'Titillium Web';

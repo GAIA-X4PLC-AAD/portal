@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../../Modal';
-import * as S from '../discovery/style';
+import Modal from '../../Modal.js';
+import * as S from '../discovery/style.js';
 import { useTranslation } from 'react-i18next';
-import { BlueButton, CancelButton, Column, Padding, Row} from '../../common/styles';
-import { ActionCancelModalHeader, ModalMessage } from '../../common/ActionCancelModalStyle';
-import { BookSaveInput } from './style';
+import { BlueButton, CancelButton, Column, Padding, Row} from '../../common/styles.js';
+import { ActionCancelModalHeader, ModalMessage } from '../../common/ActionCancelModalStyle.js';
+import { BookSaveInput } from './style.js';
 
 
 const SaveBookModal = ({action, closeModal, onSaveBook}) => {
@@ -15,9 +15,9 @@ const SaveBookModal = ({action, closeModal, onSaveBook}) => {
 
      return (   
         <Modal width='fit-content'>
-            <Column margin="0px 0px 0px 0px">
+            <Column $margin="0px 0px 0px 0px">
                 <ActionCancelModalHeader>
-                    <Padding paddingLeft='24px' paddingTop='16px' paddingRight='300px'>
+                    <Padding $paddingLeft='24px' $paddingTop='16px' $paddingRight='300px'>
                         {t(`solution_pkg.saveBookModalMessage-${action}`)}
                     </Padding>
                 </ActionCancelModalHeader>
@@ -28,7 +28,7 @@ const SaveBookModal = ({action, closeModal, onSaveBook}) => {
                 </ModalMessage>
                 <BookSaveInput value={name} onChange={(e)=>setName(e.target.value)} /> 
                 
-                <Row margin='24px 24px 24px 10px'>
+                <Row $margin='24px 24px 24px 10px'>
                     <CancelButton onClick={closeModal}>{t('solution_pkg.cancel')}</CancelButton>
                     <BlueButton disabled={name===''} onClick={()=>{onSaveBook(name, action)}}>{t(`solution_pkg.${action}`)}</BlueButton>
                 </Row>

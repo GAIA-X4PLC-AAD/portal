@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import AdminManagementSearchFilter from './AdminManagementSearchFilter';
-import AdminParticipantSearchFilter from './AdminParticipantSearchFilter';
-import DiscoverySearchFilter from './DiscoverySearchFilter';
+import AdminManagementSearchFilter from './AdminManagementSearchFilter.js';
+import AdminParticipantSearchFilter from './AdminParticipantSearchFilter.js';
+import DiscoverySearchFilter from './DiscoverySearchFilter.js';
 
 const SearchFilterFactory = ({type,serviceId, slot}) => {
     

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import * as S from '../../../../common/styles';
+import * as S from '../../../../common/styles.js';
 
 export const Preview = styled.div`
     display: flex;

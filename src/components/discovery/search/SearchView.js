@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import PropTypes from 'prop-types';
-import SearchFilterFactory from "./SearchFilterFactory";
-import { Row, Style, Column } from "../../../common/styles";
-import { Padding } from "../tabs/style";
-import SearchContent from "./SearchContent";
-import SearchTerm from "./SearchTerm";
+import SearchFilterFactory from "./SearchFilterFactory.js";
+import { Row, Style, Column } from "../../../common/styles.js";
+import { Padding } from "../tabs/style.js";
+import SearchContent from "./SearchContent.js";
+import SearchTerm from "./SearchTerm.js";
 import { useDispatch, useSelector } from "react-redux";
-import { updateSearchType, updateSeartTypeWithTerm } from "../../../actions";
-import AdminHeader from "../../admin/AdminHeader";
+import { updateSearchType, updateSeartTypeWithTerm } from "../../../actions/index.js";
+import AdminHeader from "../../admin/AdminHeader.js";
 
 
 const SearchView = ({type, onSelect, serviceId, slot}) => {
@@ -26,10 +26,10 @@ const SearchView = ({type, onSelect, serviceId, slot}) => {
         <React.Fragment key={type}>
             <Row>
                 <Column>
-                    <Style maxWidth='313px'>
+                    <Style $maxWidth='313px'>
                         <AdminHeader type={type} />
                     </Style>
-                    <Style maxWidth='313px'>
+                    <Style $maxWidth='313px'>
                         <SearchFilterFactory type={type} serviceId={serviceId} slot={slot}/>
                     </Style>
 
@@ -41,8 +41,8 @@ const SearchView = ({type, onSelect, serviceId, slot}) => {
                             : <></>
                     }
 
-                    <Padding horizontal='12px' />
-                    <Style maxWidth='900px'>
+                    <Padding $horizontal='12px' />
+                    <Style $maxWidth='900px'>
                         <SearchContent type={type} serviceId={serviceId} slot={slot} onSelect={onSelect} />
                     </Style>
 

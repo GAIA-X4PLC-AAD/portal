@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ProviderCredentialsEditor from "./ProviderCredentialsEditor";
+import ProviderCredentialsEditor from "./ProviderCredentialsEditor.js";
 import { useTranslation } from "react-i18next";
-import * as S from './ProviderCredentialStyle';
+import * as S from './ProviderCredentialStyle.js';
 
 const ProviderCredentials = (props) => {
 

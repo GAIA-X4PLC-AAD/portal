@@ -36,7 +36,7 @@ export const TopMenuSignIn = styled.a`
 `;
 
 export const HeaderButton = styled.button`
-  border: ${props => props.border ? '2px solid #000094' : '2px solid #ffff'};
+  border: ${props => props.$border ? '2px solid #000094' : '2px solid #ffff'};
   border-radius: 4px 4px 4px 4px;
   background-color: #fff;
   color: #000094;

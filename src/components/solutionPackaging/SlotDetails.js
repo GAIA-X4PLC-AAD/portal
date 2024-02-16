@@ -1,16 +1,12 @@
 import React, {useEffect} from "react";
 import PropTypes from 'prop-types';
-import * as S from "../../common/styles";
+import * as S from "../../common/styles.js";
 import { useTranslation } from "react-i18next";
-import { AvailabeServices, SlotBox } from "./style";
-import ReactTooltip from "react-tooltip";
+import { AvailabeServices, SlotBox } from "./style.js";
+import {Tooltip} from "react-tooltip";
 
 
 const SlotDetails = ({service, onRemove, onAdd, selected}) => {
-    useEffect(() => {
-        ReactTooltip.rebuild();
-    });
-
     const {t} = useTranslation();
 
     const openLink =  (url) => {
@@ -36,20 +32,20 @@ const SlotDetails = ({service, onRemove, onAdd, selected}) => {
 
     const emptySlot = (service) => {
         return (
-            <>
-                <S.Column>
+            <S.Column>
                 <SlotBox selected={selected}>
-                    <S.BlueLinkText onClick={onAdd} >
-                        <S.Style textAlign="left" 
-                            data-tip={t('solution_pkg.tooltip.add_service')}
-                            >
-                            {selected ? t('solution_pkg.selectMessage'):t('solution_pkg.add')}
-                        </S.Style>                        
+                    <S.BlueLinkText onClick={onAdd}>
+                        <S.Style $textAlign="left"
+                                 data-tooltip-id="solution_pkg.tooltip.add_service"
+                                 data-tooltip-content={t('solution_pkg.tooltip.add_service')}
+                        >
+                            {selected ? t('solution_pkg.selectMessage') : t('solution_pkg.add')}
+                        </S.Style>
                     </S.BlueLinkText>
-                    </SlotBox>
-                    <Availabe available_services={service.available_services}/>
-                </S.Column>
-            </>
+                    <Tooltip id="solution_pkg.tooltip.add_service" />
+                </SlotBox>
+                <Availabe available_services={service.available_services}/>
+            </S.Column>
         );
     }
 
@@ -58,10 +54,10 @@ const SlotDetails = ({service, onRemove, onAdd, selected}) => {
         <S.Column>
             <SlotBox selected={selected}>
                 <S.Column height="100%">
-                    <S.Style marginBottom="auto" textAlign="left">
+                    <S.Style marginBottom="auto" $textAlign="left">
                         <S.Image src={service.img_preview_url} alt={service.name} width='201px' height='134px'/>
                         <S.H4Text>{service.name}</S.H4Text>
-                        <S.BlueLinkText><S.Style textAlign="left" overflowWrap='anywhere' onClick={()=>{openLink(service.ppr_url)}}>{service.ppr_url}</S.Style></S.BlueLinkText>
+                        <S.BlueLinkText><S.Style $textAlign="left" overflowWrap='anywhere' onClick={()=>{openLink(service.ppr_url)}}>{service.ppr_url}</S.Style></S.BlueLinkText>
                         <S.Style marginTop="10px">
                             <S.BodySmallText>{service.description}</S.BodySmallText>
                         </S.Style>
@@ -69,13 +65,14 @@ const SlotDetails = ({service, onRemove, onAdd, selected}) => {
                     <S.Row margin="0 auto 0 0" onClick={onRemove}>
                         <S.BlueLinkText>
                             <S.Style 
-                                textAlign="left"
-                                data-tip={t('solution_pkg.tooltip.remove_service')}
+                                $textAlign="left"
+                                data-tooltip-id="solution_pkg.tooltip.remove-service"
+                                data-tooltip-content={t('solution_pkg.tooltip.remove_service')}
                                 >
                                 {t('solution_pkg.remove')}
-                            </S.Style>                        
-                            
+                            </S.Style>
                         </S.BlueLinkText>
+                        <Tooltip id="solution_pkg.tooltip.remove-service" />
                         <S.Style marginLeft ="15px">
                             <S.Image src='/images/X_image.svg' />    
                         </S.Style>                       

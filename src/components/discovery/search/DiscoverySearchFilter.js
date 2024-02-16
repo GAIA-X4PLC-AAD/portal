@@ -1,7 +1,7 @@
 import React from "react";
-import LoadingView from "../../loading_view/LoadingView";
+import LoadingView from "../../loading_view/LoadingView.js";
 import PropTypes from 'prop-types';
-import SearchFilterView from "./SearchFilterView";
+import SearchFilterView from "./SearchFilterView.js";
 
 const DiscoverySearchFilter = ({type, serviceId, slot}) => {
 

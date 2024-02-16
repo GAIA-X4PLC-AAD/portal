@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import LoadingView from "../../loading_view/LoadingView";
+import LoadingView from "../../loading_view/LoadingView.js";
 import PropTypes from 'prop-types';
-import ParticipantManagementSelector from "../../admin/ParticipantManagementSelector";
-import AdminTypeFilterView from "../../admin/AdminTypeFilterView";
-import AdminLocationFilterView from "../../admin/AdminLocationFilterView";
+import ParticipantManagementSelector from "../../admin/ParticipantManagementSelector.js";
+import AdminTypeFilterView from "../../admin/AdminTypeFilterView.js";
+import AdminLocationFilterView from "../../admin/AdminLocationFilterView.js";
 import { useDispatch } from "react-redux";
-import { updateFilterCriteria } from "../../../actions";
+import { updateFilterCriteria } from "../../../actions/index.js";
 
 const AdminParticipantSearchFilter = ({type}) => {
     

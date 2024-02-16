@@ -37,7 +37,7 @@ export const BlueButton = styled.button`
     background-color: #fff;
     padding: 0.3em 2em;
     cursor: pointer;
-    margin-left:${props => props.marginLeft || '1em'};
+    margin-left:${props => props.$marginLeft || '1em'};
     :disabled {
         cursor:default;
         pointer-events: none;
@@ -53,7 +53,7 @@ export const BlueButton = styled.button`
     background-color: #fff;
     padding: 0.3em 2em;
     cursor: pointer;
-    margin-left:${props => props.marginLeft || '1em'};
+    margin-left:${props => props.$marginLeft || '1em'};
     margin-top:15px;
     min-width: 65px;
     text-align: center;
@@ -164,15 +164,15 @@ export const Center = styled.div`
 export const Row = styled.div`
     display: flex;
     flex-direction: row;
-    padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
-    margin: ${props => props.margin || '0'};
-    width: ${props => props.width || 'auto'};
-    height: ${props => props.height || 'auto'};
-    justify-content: ${props => props.justifyContent || ''};
-    align-items: ${props => props.alignItems || ''};
-    align-self: ${props => props.alignSelf || ''};
-    gap: ${props => props.gap || 'unset'};
-    position: ${props => props.position || 'unset'};
+    padding: ${props => props.$vertical || '0px'} ${props => props.$horizontal || '0px'};
+    margin: ${props => props.$margin || '0'};
+    width: ${props => props.$width || 'auto'};
+    height: ${props => props.$height || 'auto'};
+    justify-content: ${props => props.$justifyContent || ''};
+    align-items: ${props => props.$alignItems || ''};
+    align-self: ${props => props.$alignSelf || ''};
+    gap: ${props => props.$gap || 'unset'};
+    position: ${props => props.$position || 'unset'};
 `
 export const WrapRow = styled(Row)`
     flex-wrap: wrap`;
@@ -180,53 +180,53 @@ export const WrapRow = styled(Row)`
 export const Column = styled.div`
     display: flex;
     flex-direction: column;
-    padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
-    margin: ${props => props.margin || '0'};
-    width: ${props => props.width || 'auto'};
-    height: ${props => props.height || 'auto'};
-    align-items: ${props => props.alignItems || ''};
-    justify-content: ${props => props.justifyContent || ''};
-    gap: ${props => props.gap || 'unset'};
+    padding: ${props => props.$vertical || '0px'} ${props => props.$horizontal || '0px'};
+    margin: ${props => props.$margin || '0'};
+    width: ${props => props.$width || 'auto'};
+    height: ${props => props.$height || 'auto'};
+    align-items: ${props => props.$$alignItems || ''};
+    justify-content: ${props => props.$justifyContent || ''};
+    gap: ${props => props.$gap || 'unset'};
 `
 export const WrapColumn = styled(Column)`
     flex-wrap: wrap`;
 
 export const Style = styled.div`
-    border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
-    border-bottom: ${props => props.borderBottom ? `1px solid #E9E9E9` : ''};
-    border-bottom: ${props => props.shiftedBottomBorder ? `1px solid white` : ''};
-    overflow: ${props => props.overflow || ''};;
-    box-shadow: ${props => props.shiftedBottomBorder ? '40px 1px 0px 0px #e9e9e9' : ''};
+    border-top: ${props => props.$borderTop ? '1px solid #E9E9E9' : ''};
+    border-bottom: ${props => props.$borderBottom ? `1px solid #E9E9E9` : ''};
+    border-bottom: ${props => props.$shiftedBottomBorder ? `1px solid white` : ''};
+    overflow: ${props => props.$overflow || ''};;
+    box-shadow: ${props => props.$shiftedBottomBorder ? '40px 1px 0px 0px #e9e9e9' : ''};
     /* clip-path: inset(-1px -2px 0px 0px); */
-    flex-grow: ${props => props.flexGrow || 0};
-    justify-content: ${props => props.justifyContent || ''};
-    display: ${props => props.display || ''};
-    position: ${props => props.position || ''};
-    left: ${props => props.left || ''};
-    right: ${props => props.right || ''};
-    top: ${props => props.top || ''};
-    bottom: ${props => props.bottom || ''};
+    flex-grow: ${props => props.$flexGrow || 0};
+    justify-content: ${props => props.$justifyContent || ''};
+    display: ${props => props.$display || ''};
+    position: ${props => props.$position || ''};
+    left: ${props => props.$left || ''};
+    right: ${props => props.$right || ''};
+    top: ${props => props.$top || ''};
+    bottom: ${props => props.$bottom || ''};
     text-align: start;
-    padding-top: ${props => props.paddingTop || '0px'};
-    padding-left: ${props => props.paddingLeft || '0px'};
-    padding-right: ${props => props.paddingRight || '0px'};
-    vertical-align: ${props => props.verticalAlign || 'unset'};
-    object-fit: ${props => props.objectFit || ''};
-    max-width: ${props => props.maxWidth || ''};
-    min-width: ${props => props.minWidth || ''};
-    min-height: ${props => props.minHeight || ''};
-    height: ${props => props.height || ''};
-    width: ${props => props.width || ''};
-    margin-left: ${props => props.marginLeft || '0px'};
-    margin-right: ${props => props.marginRight || '0px'};
-    margin-bottom: ${props => props.marginBottom || '0px'};
-    margin-top: ${props => props.marginTop || '0px'};
-    z-index: ${props => props.zIndex || 'auto'};
-    background-color: ${props => props.backgroundColor || ''};
-    text-align: ${props => props.textAlign || ''};
-    overflow-wrap: ${props => props.overflowWrap || ''};
-    /* filter: ${props => props.elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
-    border-radius: ${props => props.borderRadius || ''};
+    padding-top: ${props => props.$paddingTop || '0px'};
+    padding-left: ${props => props.$paddingLeft || '0px'};
+    padding-right: ${props => props.$paddingRight || '0px'};
+    vertical-align: ${props => props.$verticalAlign || 'unset'};
+    object-fit: ${props => props.$objectFit || ''};
+    max-width: ${props => props.$maxWidth || ''};
+    min-width: ${props => props.$minWidth || ''};
+    min-height: ${props => props.$minHeight || ''};
+    height: ${props => props.$height || ''};
+    width: ${props => props.$width || ''};
+    margin-left: ${props => props.$marginLeft || '0px'};
+    margin-right: ${props => props.$marginRight || '0px'};
+    margin-bottom: ${props => props.$marginBottom || '0px'};
+    margin-top: ${props => props.$marginTop || '0px'};
+    z-index: ${props => props.$zIndex || 'auto'};
+    background-color: ${props => props.$backgroundColor || ''};
+    text-align: ${props => props.$textAlign || ''};
+    overflow-wrap: ${props => props.$overflowWrap || ''};
+    /* filter: ${props => props.$elevation ? 'drop-shadow(0px 2px 4px rgba(29, 36, 48, 0.12))' : 'unset'}; */
+    border-radius: ${props => props.$borderRadius || ''};
 `
 
 export const HeaderTitle = styled.div`
@@ -243,14 +243,14 @@ export const HeaderTitle = styled.div`
 export const Image = styled.img`
   display: inline-block;
   vertical-align: middle;
-  width: ${props => props.width || ''};
-  height: ${props => props.height || ''};
-  object-fit: ${props => props.objectFit || 'cover'};
-  object-position: ${props => props.objectPosition || '50% 50%'};
+  width: ${props => props.$width || ''};
+  height: ${props => props.$height || ''};
+  object-fit: ${props => props.$objectFit || 'cover'};
+  object-position: ${props => props.$objectPosition || '50% 50%'};
 
-  max-width: ${props => props.maxWidth || ''};
-  min-width: ${props => props.minWidth || ''};
-  filter: ${props => props.filter || ''};;
+  max-width: ${props => props.$maxWidth || ''};
+  min-width: ${props => props.$minWidth || ''};
+  filter: ${props => props.$filter || ''};;
 `;
 
 
@@ -262,7 +262,7 @@ font-size: 15px;
 line-height: 20px;
 /* identical to box height, or 133% */
 letter-spacing: 0.25px;
-color: ${props => props.color || '#000000'};
+color: ${props => props.$color || '#000000'};
 `;
 
 export const CaptionTeleNeoText = styled.div`
@@ -282,7 +282,7 @@ font-weight: 400;
 font-size: 15px;
 line-height: 20px;
 letter-spacing: 0.25px;
-color: ${props => props.color || '#000000'};
+color: ${props => props.$color || '#000000'};
 `;
 
 export const CaptionText = styled.div`
@@ -293,7 +293,7 @@ export const CaptionText = styled.div`
     line-height: 16px;
 
     letter-spacing: 0.4px;
-    color: ${props => props.color || '#000000'};
+    color: ${props => props.$color || '#000000'};
 `;
 
 export const CaptionTextLink = styled.a`
@@ -306,18 +306,18 @@ export const CaptionTextLink = styled.a`
     cursor: pointer;
 
     text-decoration: underline;
-    color: ${props => props.color || '#000000'};
+    color: ${props => props.$color || '#000000'};
 `;
 
 export const Card = styled.div`
     box-sizing: border-box;
-    background: ${props => props.background || '#E9E9E9'};
+    background: ${props => props.$background || '#E9E9E9'};
     /* Background/Lighter Grey */
-    border: 1px solid  ${props => props.borderColor || '#818C99'};
+    border: 1px solid  ${props => props.$borderColor || '#818C99'};
     border-radius: 4px;
-    box-shadow: ${props => props.boxShadow || ''};
+    box-shadow: ${props => props.$boxShadow || ''};
     :hover{
-        background: ${props => props.hoverBackground ||  props.background || '#E9E9E9'};  
+        background: ${props => props.$hoverBackground ||  props.$background || '#E9E9E9'};  
     }
 `
 
@@ -327,33 +327,33 @@ export const Circle = styled.div`
     display: flex;
     align-content: center;
     align-items: center;
-    width: ${props => props.radius || '50px'};
-    min-width: ${props => props.radius || '50px'};
-    height: ${props => props.radius || '50px'};
-    cursor: ${props => props.isButton ? 'pointer' : ''};
+    width: ${props => props.$radius || '50px'};
+    min-width: ${props => props.$radius || '50px'};
+    height: ${props => props.$radius || '50px'};
+    cursor: ${props => props.$isButton ? 'pointer' : ''};
     justify-content: center;
-    background-color: ${props => props.backgroundColor || '#F9F9F9'};
+    background-color: ${props => props.$backgroundColor || '#F9F9F9'};
     /* clip-path: circle(); */
-    background: ${props => props.background || '#F9F9F9'};
+    background: ${props => props.$background || '#F9F9F9'};
 
-    border: ${props => props.borderThickness || '1px'} solid ${props => props.borderColor || '#E9E9E9'};
-    border-radius: ${props => props.borderRadius || '50%' } ;
-    background-image: url(${props => props.backgroundImage || ''});
+    border: ${props => props.$borderThickness || '1px'} solid ${props => props.$borderColor || '#E9E9E9'};
+    border-radius: ${props => props.$borderRadius || '50%' } ;
+    background-image: url(${props => props.$backgroundImage || ''});
     background-size: contain;
 `
 
 export const ButtonText = styled.div`
-    border-bottom: ${props => props.selected ? '2px solid #000094' : '2px solid #0000'}; 
+    border-bottom: ${props => props.$selected ? '2px solid #000094' : '2px solid #0000'}; 
     font-family: 'Titillium Web';
     font-style: normal;
     font-weight: 600;
-    font-size: ${props => props.fontSize || '14px'};
+    font-size: ${props => props.$fontSize || '14px'};
     line-height: 20px;
     display: flex;
     align-items: center;
     letter-spacing: 0.25px;
     cursor: pointer;
-    color: ${props => props.disabled ? '#bababa' : (props.color || '#000094')};
+    color: ${props => props.$disabled ? '#bababa' : (props.$color || '#000094')};
 `
 
 export const H4Text = styled.div`
@@ -388,8 +388,8 @@ export const BodyText = styled.div`
     font-size: 18px;
     line-height: 24px;
     letter-spacing: 0.25px;
-    text-align: ${props => props.textAlign || ''};
-    color: ${props => props.color || '#4B4B4B'};
+    text-align: ${props => props.$textAlign || ''};
+    color: ${props => props.$color || '#4B4B4B'};
 `;
 
 export const Tag = styled.div`
@@ -459,7 +459,7 @@ export const MasterButton = styled.div`
     /* Background/Primary */
 
     /* background: #000094; */
-    background: ${props => props.disabled ? '#E8E8E8' : '#000094'};
+    background: ${props => props.$disabled ? '#E8E8E8' : '#000094'};
     border-radius: 4px;
 
     /* Button */
@@ -474,13 +474,13 @@ export const MasterButton = styled.div`
     align-items: center;
     text-align: center;
     letter-spacing: 0.25px;
-    color: ${props => props.disabled ? '#1C0E15' : '#FFFFFF'};
+    color: ${props => props.$disabled ? '#1C0E15' : '#FFFFFF'};
 `
 
 export const HorizontalLine = styled.div`
     height: 1px;
     border: 0;
-    border-top: 1px solid ${props => props.color || '#E8E8E8'};
+    border-top: 1px solid ${props => props.$color || '#E8E8E8'};
     margin: 1em 0;
     padding: 0;
 `
@@ -498,8 +498,8 @@ export const OutlineButton = styled.div`
     /* height: 33px; */
 
     /* Background/Primary */
-    background: ${props => props.disabled ? '#E8E8E8' : ''};
-    border: 2px solid ${props => props.disabled ? '#E8E8E8' : '#000094'};
+    background: ${props => props.$disabled ? '#E8E8E8' : ''};
+    border: 2px solid ${props => props.$disabled ? '#E8E8E8' : '#000094'};
     border-radius: 4px;
     font-family: 'Titillium Web';
     font-style: normal;
@@ -515,7 +515,7 @@ export const OutlineButton = styled.div`
     align-self: center;
     /* Background/Primary */
     cursor: pointer;
-    color: ${props => props.disabled ? '#1C0E15' : '#000094'}
+    color: ${props => props.$disabled ? '#1C0E15' : '#000094'}
 `;
 
 export const TextInput = styled.input`
@@ -547,7 +547,7 @@ export const H2Text = styled.div`
     font-weight: 700;
     font-size: 36px;
     line-height: 48px;
-    color: ${props => props.color || '#1C0E15' };
+    color: ${props => props.$color || '#1C0E15' };
     text-align:center;
 `;
 
@@ -556,11 +556,11 @@ export const H2Text = styled.div`
   align-items: center;
   justify-content: center;
   background-color: white;
-  opacity: ${(props) => props.opacity};
+  opacity: ${(props) => props.$opacity};
   transition : all 0.3s ease-in-out;`; */
 
 /* export const FadingBackground = styled(BaseModalBackground)`
-  opacity: ${(props) => props.opacity};
+  opacity: ${(props) => props.$opacity};
   transition: all 0.3s ease-in-out;
 `; */
 
@@ -569,7 +569,7 @@ export const SliderBullet = styled.button`
     height: 5px;
     border: 0px solid #0000;
     background-color: #fff;
-    background: ${(props) => props.isActive ? '#8D8DFF' : '#FFFFFF'};
+    background: ${(props) => props.$isActive ? '#8D8DFF' : '#FFFFFF'};
     /* padding: 0px 4px; */
     margin: 0px 4px;
     border-radius: 4px;
@@ -588,12 +588,12 @@ export const SliderBullet = styled.button`
 ` */
 
 export const Padding = styled.div`
-  padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
-  padding-top: ${props => props.paddingTop || ''};
-  padding-bottom: ${props => props.paddingBottom || ''};
-  padding-left: ${props => props.paddingLeft || ''};
-  padding-right: ${props => props.paddingRight || ''};
-  align-self: ${props => props.alignSelf || ''};
+  padding: ${props => props.$vertical || '0px'} ${props => props.$horizontal || '0px'};
+  padding-top: ${props => props.$paddingTop || ''};
+  padding-bottom: ${props => props.$paddingBottom || ''};
+  padding-left: ${props => props.$paddingLeft || ''};
+  padding-right: ${props => props.$paddingRight || ''};
+  align-self: ${props => props.$alignSelf || ''};
 `
 
 export const H1Text = styled.div`
@@ -612,10 +612,10 @@ export const H1Text = styled.div`
 
 export const AnimatedVisibility = styled.div`
 ${(props) => {
-    if (props.visible) {
+    if (props.$visible) {
       return css`
     opacity:1;
-    width: ${props => props.width || '100%'};
+    width: ${props => props.$width || '100%'};
     height:100%; 
     margin-left: auto;
     margin-right: auto;

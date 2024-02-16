@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { useParams, NavLink, Navigate } from 'react-router-dom';
 import axios from "axios";
-import { lcmServicesLoaded, resetLcmServices, selectLcmService } from "../../../actions";
+import { lcmServicesLoaded, resetLcmServices, selectLcmService } from "../../../actions/index.js";
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Tab } from "../../../common/tabs/tab";
+import { Tab } from "../../../common/tabs/tab.js";
 import "./lcm.css"
-import { HeaderTitle, BodyText, BlueButton, CancelButton, RedText } from "../../../common/styles";
+import { HeaderTitle, BodyText, BlueButton, CancelButton, RedText } from "../../../common/styles.js";
 import { withTranslation } from "react-i18next";
 import { t } from "i18next";
 

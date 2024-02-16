@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from 'prop-types';
-import ExpandableView from "../../expandable/ExpandableView";
-import * as S from './style';
+import ExpandableView from "../../expandable/ExpandableView.js";
+import * as S from './style.js';
 import { useTranslation, withTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { updateFilterCriteria } from "../../../actions";
+import { updateFilterCriteria } from "../../../actions/index.js";
 
 
 const SearchFilterView = ({ data, }) => {

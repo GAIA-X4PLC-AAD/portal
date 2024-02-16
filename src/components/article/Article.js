@@ -4,8 +4,8 @@ import axios from "axios";
 import './Article.css';
 import { withTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
-import DataPreview from "../discovery/tabs/dataPreview/DataPreview";
-import { Padding, H1Text, BodyText } from "../../common/styles";
+import DataPreview from "../discovery/tabs/dataPreview/DataPreview.js";
+import { Padding, H1Text, BodyText } from "../../common/styles.js";
 
 const Article = ({ category, headerMessage, t }) => {
     const [callFlag, setCallFlag] = useState(false);
@@ -59,8 +59,8 @@ const Article = ({ category, headerMessage, t }) => {
     return (
         <div className="articles-layout">
             <H1Text>{t(headerMessage)}</H1Text>
-            <Padding key='i01' paddingTop='20px' />
-            <BodyText textAlign='justify'>{t(`${headerMessage}-message`)}</BodyText>
+            <Padding key='i01' $paddingTop='20px' />
+            <BodyText $textAlign='justify'>{t(`${headerMessage}-message`)}</BodyText>
 
             <div className="articles-panel-layout">
                 {renderArticles}

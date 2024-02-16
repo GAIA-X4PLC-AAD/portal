@@ -3,14 +3,14 @@ import {createRoot} from 'react-dom/client';
 import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from 'react-redux';
 import './index.css';
-import App from './App';
-import './i18n';
-import reducers from './reducers';
+import App from './App.js';
+import './i18n.js';
+import reducers from './reducers/userReducer.js';
 import axios from "axios"
-import {retrieveToken} from "./common/auth";
+import {retrieveToken} from "./common/auth.js";
 import {Navigate, useNavigate} from 'react-router-dom';
-import history from "./common/history"
-import AuthContextProvider from "./context/AuthContextProvider";
+import history from "./common/history.js"
+import AuthContextProvider from "./context/AuthContextProvider.tsx";
 
 // axios.interceptors.request.use(function (config) {
 //   const token = retrieveToken();

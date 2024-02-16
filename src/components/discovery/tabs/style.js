@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css } from 'styled-components'
 
 
 export const TopMenu = styled.div`
@@ -41,13 +41,12 @@ export const HeaderButton = styled.button`
   font-weight: 700;
 `
 
-
 export const Padding = styled.div`
-  padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
-  padding-top: ${props => props.paddingTop || ''};
-  padding-left: ${props => props.paddingLeft || ''};
-  padding-right: ${props => props.paddingRight || ''};
-  align-self: ${props => props.alignSelf || ''};
+  padding: ${props => props.$vertical || '0px'} ${props => props.$horizontal || '0px'};
+  padding-top: ${props => props.$paddingTop || ''};
+  padding-left: ${props => props.$paddingLeft || ''};
+  padding-right: ${props => props.$paddingRight || ''};
+  align-self: ${props => props.$alignSelf || ''};
 `
 
 export const ExpandedContainer = styled.section`

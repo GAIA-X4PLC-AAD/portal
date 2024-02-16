@@ -1,6 +1,6 @@
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import Modal from '../../Modal';
+import Modal from '../../Modal.js';
 import './Login_fail.css';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';

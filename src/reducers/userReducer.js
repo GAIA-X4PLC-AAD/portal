@@ -1,5 +1,5 @@
-import { SIGN_IN, SIGN_OUT } from "../actions/types";
-import { userData, removeJWT } from "../common/auth";
+import { SIGN_IN, SIGN_OUT } from "../actions/types.js";
+import { userData, removeJWT } from "../common/auth.js";
 
 const INITIAL_STATE = {
     ...userData()

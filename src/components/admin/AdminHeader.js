@@ -1,5 +1,5 @@
 import React from "react";
-import { Column, HeaderTitle } from "../../common/styles";
+import { Column, HeaderTitle } from "../../common/styles.js";
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
 

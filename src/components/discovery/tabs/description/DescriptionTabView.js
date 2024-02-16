@@ -1,12 +1,10 @@
-
 import React, { useState, useEffect } from "react";
-
-import * as S from '../style';
+import * as S from '../style.js';
 import PropTypes from 'prop-types';
-import { ColumnItem } from "./Common";
-import { Image, Column, Style, Tag, Padding, BlueButton } from "../../../../common/styles";
-import { Columns } from "../dataPreview/style";
-import DataPreview from "../dataPreview/DataPreview";
+import { ColumnItem } from "./Common.js";
+import { Image, Column, Style, Tag, Padding, BlueButton } from "../../../../common/styles.js";
+import { Columns } from "../dataPreview/style.js";
+import DataPreview from "../dataPreview/DataPreview.js";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -42,7 +40,7 @@ const DescriptionTabView = (props,) => {
               description: record.description,
               onDetailsClick: () => { return; }
             }
-            return <Style marginLeft={index == 0 ? '0px' : '10px'} marginTop={'36px'} key={record.id}>
+            return <Style $marginLeft={index == 0 ? '0px' : '10px'} $marginTop={'36px'} key={record.id}>
               <DataPreview data={parsed} width='230px' minHeight='' shouldShowDetailsButton={false} />
             </Style>
           })
@@ -61,8 +59,8 @@ const DescriptionTabView = (props,) => {
   const showBuildButton = () => {
     if (props.params['type'] != 'composite-service') return null;
     return (
-      <Style marginTop='auto' marginBottom='auto'>
-    <BlueButton marginLeft='0px' onClick={() => { navigate(`/sp/${details['id']}`) }}>
+      <Style $marginTop='auto' $marginBottom='auto'>
+    <BlueButton $marginLeft='0px' onClick={() => { navigate(`/sp/${details['id']}`) }}>
        {t('discovery.description.build')}
     </BlueButton>
     </Style>
@@ -79,10 +77,10 @@ const DescriptionTabView = (props,) => {
 
   return (
     <>
-      <Padding paddingTop='16px' paddingBottom='26px'>
+      <Padding $paddingTop='16px' $paddingBottom='26px'>
         <Column>
           <S.ExpandedContainer>
-            <Image src={`${details['img_preview_url']}`} width='279px' height='328px' />
+            <Image src={`${details['img_preview_url']}`} $width='279px' $height='328px' />
             <S.VerticalContainer horizontal='8px'>
               <S.Padding horizontal='8px'>
                 <S.Title>{`${details['name']}`}</S.Title>

@@ -1,4 +1,4 @@
-import * as S from "./style";
+import * as S from "./style.js";
 import React from "react";
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
