@@ -1,12 +1,9 @@
 import axios from "axios";
 import React, { useEffect } from 'react';
-
-// import * as S from './style';
+// import * as S from './style.js';
 import PropTypes from 'prop-types';
-
 import { useResource } from "@axios-use/react";
-
-import { Center, Style, AnimatedVisibility, CircularLoader } from '../../common/styles';
+import { Center, Style, AnimatedVisibility, CircularLoader } from '../../common/styles.js';
 
 
 function LoadingView({ url, successView, params, headers }) {
@@ -21,19 +18,19 @@ function LoadingView({ url, successView, params, headers }) {
     return (
         <>
             <Center>
-                <Style zIndex={-1}>
-                    <AnimatedVisibility visible={isLoading} data-tag='animated-visibility-loader'>
+                <Style $zIndex={-1}>
+                    <AnimatedVisibility $visible={isLoading} data-tag='animated-visibility-loader'>
                         <CircularLoader />
                     </AnimatedVisibility>
                 </Style>
 
-                <Style zIndex={-1}>
-                    <AnimatedVisibility visible={isError} data-tag='animated-visibility-error'>
+                <Style $zIndex={-1}>
+                    <AnimatedVisibility $visible={isError} data-tag='animated-visibility-error'>
                         <p>Error Loading Content!</p>
                     </AnimatedVisibility>
                 </Style>
 
-                <AnimatedVisibility visible={!isLoading && error == undefined && !(data === undefined)} data-tag='animated-visibility-success'>
+                <AnimatedVisibility $visible={!isLoading && error == undefined && !(data === undefined)} data-tag='animated-visibility-success'>
                     {successView({ data: data, params: params })}
                 </AnimatedVisibility>
             </Center>

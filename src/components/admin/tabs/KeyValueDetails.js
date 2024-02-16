@@ -1,11 +1,11 @@
 import React from "react";
-import { BodySmallText, CaptionTeleNeoText, Column, Style, TagLink, WrapRow } from "../../../common/styles";
-import LoadingView from "../../loading_view/LoadingView";
+import { BodySmallText, CaptionTeleNeoText, Column, Style, TagLink, WrapRow } from "../../../common/styles.js";
+import LoadingView from "../../loading_view/LoadingView.js";
 import PropTypes from 'prop-types';
-import { CaptionText, DetailsContainer, ElementGroup, Row } from "../style";
+import { CaptionText, DetailsContainer, ElementGroup, Row } from "../style.js";
 import { useTranslation } from "react-i18next";
-import ApproveButton from "./buttons/ApproveButton";
-import DenyButton from "./buttons/DenyButton copy";
+import ApproveButton from "./buttons/ApproveButton.js";
+import DenyButton from "./buttons/DenyButton copy.js";
 import fileDownload from 'js-file-download';
 import axios from "axios";
 
@@ -42,7 +42,7 @@ const KeyValueDetails = ({ id, url_prefix, searchRefresh }) => {
             return (
                 <ElementGroup key={i}>
                     <CaptionTeleNeoText>{item.name}</CaptionTeleNeoText>
-                    <BodySmallText color='#1C0E15'>{item.value}</BodySmallText>
+                    <BodySmallText $color='#1C0E15'>{item.value}</BodySmallText>
                 </ElementGroup>)
         }));
     }
@@ -55,7 +55,7 @@ const KeyValueDetails = ({ id, url_prefix, searchRefresh }) => {
                 <WrapRow>
                     {attachments.map((attachment, i) => {
                         return (
-                            <Style marginTop='8px' key={i}>
+                            <Style $marginTop='8px' key={i}>
                                 <TagLink 
                                     onClick={() => downloadFile(attachment.url, attachment.name)}
                                     data-tip={t('admin.tooltip.download')}
@@ -74,7 +74,7 @@ const KeyValueDetails = ({ id, url_prefix, searchRefresh }) => {
         if (!(searchRefresh)) return null;
         return (
             <Row>
-                <Style marginRight="auto" marginTop="42px">
+                <Style $marginRight="auto" $marginTop="42px">
                     <DenyButton id={id} searchRefresh={searchRefresh} />
                     <ApproveButton id={id} searchRefresh={searchRefresh} />
                 </Style>

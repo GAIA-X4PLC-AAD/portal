@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 
-import * as S from '../style';
+import * as S from '../style.js';
 import PropTypes from 'prop-types';
-import LoadingView from "../../../loading_view/LoadingView";
-import DescriptionTabView from "./DescriptionTabView";
-import DescriptionCompositeView from "./DescriptionCompositeView";
-import DescriptionPprView from "./DescriptionPprView";
-import DescriptionDataView from "./DescriptionDataView";
+import LoadingView from "../../../loading_view/LoadingView.js";
+import DescriptionTabView from "./DescriptionTabView.js";
+import DescriptionCompositeView from "./DescriptionCompositeView.js";
+import DescriptionPprView from "./DescriptionPprView.js";
+import DescriptionDataView from "./DescriptionDataView.js";
 
 
 const DescriptionTab = ({ id, type }) => {

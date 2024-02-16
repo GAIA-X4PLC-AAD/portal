@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types';
-
-
-import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, CaptionTextLink } from "../../common/styles";
-import { Padding } from "../discovery/tabs/style";
-import DashboardView from "./dashboard_view";
-import SideSectionsView from "./side_sections_view";
+import { BodySmallBoldText, Column, Row, Style, CaptionText, Card, Circle, CaptionTextLink } from "../../common/styles.js";
+import { Padding } from "../discovery/tabs/style.js";
+import DashboardView from "./dashboard_view.js";
+import SideSectionsView from "./side_sections_view.js";
 import { useSelector } from "react-redux";
-import DateTimeCard from "./date_time_card";
+import DateTimeCard from "./date_time_card.js";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
@@ -41,9 +39,9 @@ const DashboardPage = () => {
         }
 
         const _welcomeView = <>
-            <Row data-tag='welcome-view' width='225px'>
-                <Circle radius='50px'>{user.user.first_name[0] + user.user.family_name[0]}</Circle>
-                <Padding horizontal='8px'>
+            <Row data-tag='welcome-view' $width='225px'>
+                <Circle $radius='50px'>{user.user.first_name[0] + user.user.family_name[0]}</Circle>
+                <Padding $horizontal='8px'>
                     <Row>
                         {t("dashboard.welcome")}
                     </Row>
@@ -65,13 +63,13 @@ const DashboardPage = () => {
     return <Row>
 
         {/* SIDE BAR */}
-        <Style minWidth={_leftPanelWidth}>
+        <Style $minWidth={_leftPanelWidth}>
             <SideBarView />
         </Style>
 
         {/* BODY VIEW */}
-        <Padding horizontal='12px' />
-        <Style minWidth='900px'>
+        <Padding $horizontal='12px' />
+        <Style $minWidth='900px'>
             <DashboardView type={type} />
         </Style>
     </Row>;

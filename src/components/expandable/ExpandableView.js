@@ -1,12 +1,9 @@
-
 import React, { useState } from 'react';
-
-import * as S from './style';
+import * as S from './style.js';
 import PropTypes from 'prop-types';
-
 import { Collapse } from 'react-collapse';
-import Down from './down';
-import { Style } from '../../common/styles';
+import Down from './down.js';
+import { Style } from '../../common/styles.js';
 
 
 const ExpandableView = ({
@@ -39,16 +36,16 @@ const ExpandableView = ({
         {/* TITLE */}
         <S.ToggleButton
             onClick={() => { setIsExpanded(!isExpanded) }}
-            noBorder={border}
-            background={elevation}>
-            <Style flexGrow={1} paddingLeft={titleLeadingPadding}>{title}</Style>
+            $noBorder={border}
+            $background={elevation}>
+            <Style $flexGrow={1} $paddingLeft={titleLeadingPadding}>{title}</Style>
             {/* {title} */}
             <Down isOpen={isExpanded} paddingRight={titleTrailerPadding} arrowColor={arrowColor} />
         </S.ToggleButton>
 
         {/* BODY */}
-        <Style borderBottom={borderBottom} shiftedBottomBorder={shiftedBottomBorder}
-                overflow={'hidden'}>
+        <Style $borderBottom={borderBottom} $shiftedBottomBorder={shiftedBottomBorder}
+               $overflow={'hidden'}>
             <Collapse isOpened={isExpanded}>
                 <Style
                     maxWidth={maxWidth1}

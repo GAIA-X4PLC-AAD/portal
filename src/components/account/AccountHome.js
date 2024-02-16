@@ -3,8 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
 import "./Account.css";
-import AccountPaneDetails from "./AccountPaneDetails";
-import AccountPaneLoginHistory from "./AccountPaneLoginHistory";
+import AccountPaneDetails from "./AccountPaneDetails.js";
+import AccountPaneLoginHistory from "./AccountPaneLoginHistory.js";
 
 const AccountHome = (props) => {
     const {tab} = useParams();

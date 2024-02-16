@@ -132,7 +132,7 @@ const ServiceOfferings = () => {
                   }
             </div>
 
-            <Padding key='i01' paddingTop='20px' />
+            <Padding key='i01' $paddingTop="20px" />
             <div>
               {!isLoading && selfDescriptionData.length > 0 && <DataTable data={selfDescriptionData} type={"service"}/>}
               {isLoading &&

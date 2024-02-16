@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ButtonText, H4Text, HeaderTitle, Image, Row, Style } from "../../common/styles";
+import { ButtonText, H4Text, HeaderTitle, Image, Row, Style } from "../../common/styles.js";
 import PropTypes from 'prop-types';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 import Plot from 'react-plotly.js';
-import MyServiceViewCard from "./my_service_view_card";
-import { Padding } from "../discovery/tabs/style";
-import LoadingView from "../loading_view/LoadingView";
-import NextPrevButtons from "../../common/vertical_steps/next_prev_buttons";
+import MyServiceViewCard from "./my_service_view_card.js";
+import { Padding } from "../discovery/tabs/style.js";
+import LoadingView from "../loading_view/LoadingView.js";
+import NextPrevButtons from "../../common/vertical_steps/next_prev_buttons.js";
 
 
 const responsive = {

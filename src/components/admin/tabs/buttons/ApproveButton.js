@@ -1,17 +1,12 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import PropTypes from 'prop-types';
-import { BlueButton } from "../../style";
+import { BlueButton } from "../../style.js";
 import { useTranslation } from "react-i18next";
-import ReactTooltip from 'react-tooltip';
-
+import {Tooltip} from "react-tooltip";
 
 
 const ApproveButton = ({ id, searchRefresh }) => {
-
-    useEffect(() => {
-        ReactTooltip.rebuild();
-    });
 
     const { t } = useTranslation();
 
@@ -29,9 +24,15 @@ const ApproveButton = ({ id, searchRefresh }) => {
         });
     }
     return (
-    <BlueButton onClick={() => onApprove(id)} data-tip={t('admin.tooltip.approve')}>
-            {t('admin.approve')}
-    </BlueButton>
+        <>
+            <BlueButton onClick={() => onApprove(id)}
+                        data-tooltip-id="admin.tooltip.approve"
+                        data-tooltip-content={t('admin.tooltip.approve')}>
+                {t('admin.approve')}
+            </BlueButton>
+            <Tooltip id="admin.tooltip.approve" />
+        </>
+
     );
 }
 ApproveButton.propTypes = {

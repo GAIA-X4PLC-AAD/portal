@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
-
-import { Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, StyledModal, Circle, ButtonText, BodyText, FadingBackground, CancelButton, BlueButton, H4Text } from "../../common/styles";
-import { Padding } from "../discovery/tabs/style";
-import LoadingView from "../loading_view/LoadingView";
-import AuthPolling from "../login/AuthPolling";
+import { Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, StyledModal, Circle, ButtonText, BodyText, FadingBackground, CancelButton, BlueButton, H4Text } from "../../common/styles.js";
+import { Padding } from "../discovery/tabs/style.js";
+import LoadingView from "../loading_view/LoadingView.js";
+import AuthPolling from "../login/AuthPolling.js";
 import { Modal } from 'react-responsive-modal';
 import { useTranslation } from "react-i18next";
-import { storeOnboardingJWT } from "../../common/auth"
-import history from "../../common/history";
+import { storeOnboardingJWT } from "../../common/auth.js"
+import history from "../../common/history.js";
 
 const DidOnboardingView = ({ userType, nextStage }) => {
 
@@ -35,9 +34,9 @@ const DidOnboardingView = ({ userType, nextStage }) => {
 
     const showErrorMessage = (headerText, bodyText) => {
         return <>
-            <Style width='633px' height='246px'>
-                <Padding horizontal='20px'>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+            <Style $width='633px' $height='246px'>
+                <Padding $horizontal='20px'>
+                    <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
                             <H4LightText>{headerText}</H4LightText>
                             <HorizontalLine />
@@ -45,7 +44,7 @@ const DidOnboardingView = ({ userType, nextStage }) => {
                                 <BodyText>{bodyText}</BodyText>
                             </Padding>
                             <Padding vertical='28px'>
-                                <BlueButton onClick={e => history.push('/')} marginLeft="0">{t('onboarding.home_button')}</BlueButton>
+                                <BlueButton onClick={e => history.push('/')} $marginLeft="0">{t('onboarding.home_button')}</BlueButton>
                             </Padding>
                         </Padding>
                     </Card>
@@ -70,15 +69,15 @@ const DidOnboardingView = ({ userType, nextStage }) => {
             const BuildIdentifyServiceProvider = ({ idp }) => {
                 return (
                     <Padding vertical='8px'>
-                        <Card background='#fff' hoverBackground='#46DAFF1F' borderColor='#E9E9E9'>
+                        <Card $background='#fff' $hoverBackground='#46DAFF1F' $borderColor='#E9E9E9'>
                             <Padding vertical='4px' horizontal='16px'>
                                 <Row>
-                                    <Circle radius='56px' borderColor='#0' background='#C4C4C4'>
-                                        <Image src={idp.logoUrl} alt={idp.name} width='56px' height='56px' /></Circle>
+                                    <Circle $radius='56px' $borderColor='#0' $background='#C4C4C4'>
+                                        <Image src={idp.logoUrl} alt={idp.name} $width='56px' $height='56px' /></Circle>
                                     <Padding paddingLeft='16px' />
-                                    <ButtonText color='#000000'>{idp.name}</ButtonText>
-                                    <Style flexGrow='1' />
-                                    <ButtonText color='#00A2E4' onClick={() => { window.open(idp.link, '_blank').focus() }}>{t('onboarding.not_did_modal_link')}</ButtonText>
+                                    <ButtonText $color='#000000'>{idp.name}</ButtonText>
+                                    <Style $flexGrow='1' />
+                                    <ButtonText $color='#00A2E4' onClick={() => { window.open(idp.link, '_blank').focus() }}>{t('onboarding.not_did_modal_link')}</ButtonText>
                                 </Row>
                             </Padding>
                         </Card>
@@ -93,15 +92,15 @@ const DidOnboardingView = ({ userType, nextStage }) => {
             if (!data) return null;
             else
                 return <>
-                    <Style width='633px'>
+                    <Style $width='633px'>
                         <Padding>
-                            <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                            <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                                 <Padding horizontal='24px' vertical='12px'>
                                     <H4LightText>{t('onboarding.not_did_modal_header')}</H4LightText>
                                     <BodyText>{t('onboarding.not_did_modal_body')}</BodyText>
                                     <HorizontalLine />
                                     {data.map((idp, i) => { return <BuildIdentifyServiceProvider idp={idp} key={i} /> })}
-                                    <Padding paddingTop='32px'>
+                                    <Padding $paddingTop='32px'>
                                         <Row><OutlineButton onClick={onCloseModal}>{t('onboarding.close')}</OutlineButton></Row>
                                     </Padding>
                                 </Padding>
@@ -151,18 +150,18 @@ const DidOnboardingView = ({ userType, nextStage }) => {
                     />
                 }
 
-                <Style width='633px' height='246px'>
+                <Style $width='633px' $height='246px'>
                     <Padding horizontal='20px'>
-                        <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                             <Padding horizontal='24px'>
                                 <H4LightText>{t(`onboarding.proof_onboarding_header_${userType}`)}</H4LightText>
                                 <HorizontalLine />
-                                <Column justifyContent='center' alignItems='center'>
+                                <Column $justifyContent='center' $alignItems='center'>
                                     <Padding vertical='8px'>
-                                        <Image src={data.qrCodePath} width='200px' />
+                                        <Image src={data.qrCodePath} $width='200px' />
                                     </Padding>
                                     <Padding vertical='20px'>
-                                        <Row alignItems='space-between'>
+                                        <Row $alignItems='space-between'>
                                             <FancyModalButton />
                                             <Padding horizontal='8px' />
                                             <BlueButton 

@@ -2,10 +2,10 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { useTranslation } from "react-i18next";
 import {  useNavigate } from "react-router-dom";
-import Checkbox from "../../common/checkbox";
-import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Row, Style, TextInput, Image, BlueButton } from "../../common/styles";
-import LoadingView from "../loading_view/LoadingView";
-import {retrieveOnboardingJWT} from "../../common/auth";
+import Checkbox from "../../common/checkbox.jsx";
+import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Row, Style, TextInput, Image, BlueButton } from "../../common/styles.js";
+import LoadingView from "../loading_view/LoadingView.js";
+import {retrieveOnboardingJWT} from "../../common/auth.js";
 
 const VCProvider = ({nextStage}) => {
 
@@ -16,10 +16,10 @@ const VCProvider = ({nextStage}) => {
 
     const showOrganizationDetails = (vc) => {
         return <>
-        <Style width='633px' height='246px'>
-            <Padding horizontal='20px'>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
-                    <Padding horizontal='24px'>
+        <Style $width='633px' $height='246px'>
+            <Padding $horizontal='20px'>
+                <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Padding $horizontal='24px'>
                         <H4LightText>{t('onboarding.organization_details')}</H4LightText>
                         <BodyText>{t('onboarding.organization_details_subtext')}</BodyText>
                         <HorizontalLine />
@@ -50,7 +50,7 @@ const VCProvider = ({nextStage}) => {
                                     <TextInput type='text' value={vc.zip} readOnly/>
                                     <Padding vertical='12px' />
                                     <Padding vertical='28px'>
-                                        <BlueButton onClick={e=>nextStage()} marginLeft="0">{t('onboarding.continue_button')}</BlueButton>
+                                        <BlueButton onClick={e=>nextStage()} $marginLeft="0">{t('onboarding.continue_button')}</BlueButton>
                                     </Padding>
                                 </Column>
                         </Padding>
@@ -63,9 +63,9 @@ const VCProvider = ({nextStage}) => {
     
     const showErrorMessage = (headerText, bodyText) => {
         return <>
-        <Style width='633px' height='246px'>
+        <Style $width='633px' $height='246px'>
             <Padding horizontal='20px'>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
                         <H4LightText>{headerText}</H4LightText>
                         <HorizontalLine />
@@ -73,7 +73,7 @@ const VCProvider = ({nextStage}) => {
                            <BodyText>{bodyText}</BodyText>
                         </Padding>
                         <Padding vertical='28px'>
-                            <BlueButton onClick={e=>navigate('/')} marginLeft="0">{t('onboarding.home_button')}</BlueButton>
+                            <BlueButton onClick={e=>navigate('/')} $marginLeft="0">{t('onboarding.home_button')}</BlueButton>
                         </Padding>
                     </Padding>
                 </Card>

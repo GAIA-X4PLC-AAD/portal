@@ -1,8 +1,8 @@
 import React from "react";
-import DataPreview from "../dataPreview/DataPreview";
+import DataPreview from "../dataPreview/DataPreview.js";
 import PropTypes from 'prop-types';
-import * as S from './style';
-import LoadingView from "../../../loading_view/LoadingView";
+import * as S from './style.js';
+import LoadingView from "../../../loading_view/LoadingView.js";
 
 const ServicesTab = ({id}) => {
     const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/ppr/${id}/services/`;

@@ -1,12 +1,11 @@
 import axios from "axios";
 import React, {useEffect, useState} from "react";
 import PropTypes from 'prop-types';
-
-import Checkbox from "../../common/checkbox";
-import {  Column, Row, Style, Card, BodyText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, BodySmallBoldText } from "../../common/styles";
-import { Padding } from "../discovery/tabs/style";
+import Checkbox from "../../common/checkbox.jsx";
+import {  Column, Row, Style, Card, BodyText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, BodySmallBoldText } from "../../common/styles.js";
+import { Padding } from "../discovery/tabs/style.js";
 import { useTranslation } from "react-i18next";
-import Modal from "../../Modal";
+import Modal from "../../Modal.js";
 
 const OrganizationDetailsView = ({nextStage, didStage}) => {
 
@@ -90,9 +89,9 @@ const OrganizationDetailsView = ({nextStage, didStage}) => {
     }
 
     return <>
-        <Style width='633px' height='246px'>
-            <Padding horizontal='20px'>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+        <Style $width='633px' $height='246px'>
+            <Padding $horizontal='20px'>
+                <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
                         <H4LightText>{t('onboarding.organization_headline')}</H4LightText>
                         <HorizontalLine />
@@ -101,7 +100,7 @@ const OrganizationDetailsView = ({nextStage, didStage}) => {
                             <Column>
                                 <BodyText>{t('onboarding.organization_body_text')}</BodyText>
                                 <input name='documents' type="file" multiple ref={fileRef} onChange={e=> onFormChanged(e)} hidden/>
-                                <Row alignItems='center'>
+                                <Row $alignItems='center'>
                                 <Padding vertical='16px' alignSelf='start' onClick={e=>fileRef.current.click()}>
                                     <OutlineButton>{t('onboarding.upload')}</OutlineButton>
                                 </Padding>
@@ -115,7 +114,7 @@ const OrganizationDetailsView = ({nextStage, didStage}) => {
                                 <TextInput name='email' type="email" value={input.email||''} placeholder={t('onboarding.email_placeholder')}  onChange={(e)=>onFormChanged(e)} required/>
                                 <Padding vertical='8px' />
                                 {/* Checkbox */}
-                                <Row alignItems='center'>
+                                <Row $alignItems='center'>
                                     <label>
                                         <Checkbox name='aisbl'
                                             checked={input.aisbl||false}
@@ -125,7 +124,7 @@ const OrganizationDetailsView = ({nextStage, didStage}) => {
                                     <Padding horizontal='4px' />
                                     <BodyText>{t('onboarding.organization_aisbl')}</BodyText>
                                     <Padding horizontal='7px' />
-                                    <Image objectFit='contain' src='/images/question-mark.svg' />
+                                    <Image $objectFit='contain' src='/images/question-mark.svg' />
                                 </Row>
 
                                 <Padding vertical='28px'>

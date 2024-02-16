@@ -1,11 +1,11 @@
 import React from "react";
 import cx from "classnames";
 import PropTypes from 'prop-types';
-import { Arrow } from "./style";
+import { Arrow } from "./style.js";
 
 const Down = ({ isOpen, paddingRight, arrowColor }) => {
   return (
-    <Arrow paddingRight={paddingRight}>
+    <Arrow $paddingRight={paddingRight}>
       <svg
         className={cx("rotate", { "down": isOpen })}
         width="16"

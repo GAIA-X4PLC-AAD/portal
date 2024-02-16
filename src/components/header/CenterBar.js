@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 
 import { Menu, MenuItem } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
@@ -10,19 +9,16 @@ import '@szhsin/react-menu/dist/index.css';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
-
 import i18next from 'i18next';
+import * as S from './style.js';
+import { BodyText, ButtonText, DropDownArrowDownSmall, H4LightText, HorizontalLine, OutlineButton, Row } from '../../common/styles.js';
+import { Padding } from '../discovery/tabs/style.js';
+import buildLanguageItemView from '../../common/language_item.js';
 
-import * as S from './style';
-import { BodyText, ButtonText, DropDownArrowDownSmall, H4LightText, HorizontalLine, OutlineButton, Row } from '../../common/styles';
-import { Padding } from '../discovery/tabs/style';
-import buildLanguageItemView from '../../common/language_item';
+import { FR_ROLE, PPR_ROLE, PCR_ROLE, VR_ROLE } from '../../common/auth.js';
 
-import { FR_ROLE, PPR_ROLE, PCR_ROLE, VR_ROLE } from '../../common/auth';
-
-import history from "../../common/history";
-import ReactTooltip from 'react-tooltip';
-
+import history from "../../common/history.js";
+import {Tooltip} from "react-tooltip";
 
 
 const CenterBar = () => {
@@ -51,136 +47,168 @@ const CenterBar = () => {
   const onOpenModal = () => setOpenModal(true);
   const onCloseModal = () => setOpenModal(false);
 
-
-  useEffect(() => {
-    ReactTooltip.rebuild();
-  });
-
   return (
-    <>
       <S.TopMenuLinks>
 
         {/* DASHBOARD: 0 */}
         {(_isPpr || _isPcrUser || _isPcrOrg)
-          ?
-          <ButtonText
-            selected={location.pathname === '/dashboard'}
-            color='#000000'
-            fontSize='16px'
-            onClick={() => { navigate('/dashboard'); }}
-            data-tip={t('left-menu.tooltip.dashboard')}
-          >
-            {t('left-menu.dashboard')}
-          </ButtonText>
-          : ''
+            ?
+            <>
+              <ButtonText
+                  $selected={location.pathname === '/dashboard'}
+                  $color='#000000'
+                  $fontSize='16px'
+                  onClick={() => {
+                    navigate('/dashboard');
+                  }}
+                  data-tooltip-id={'left-menu.tooltip.dashboard'}
+                  data-tooltip-content={t('left-menu.tooltip.dashboard')}
+              >
+                {t('left-menu.dashboard')}
+              </ButtonText>
+              <Tooltip id={'left-menu.tooltip.dashboard'} />
+            </>
+            : ''
         }
 
         {/* ADMIN: 1 */}
         {_isFr
-          ?
-          <ButtonText
-            selected={location.pathname.includes('admin')}
-            color='#000094'
-            fontSize='16px'
-            onClick={() => { navigate('/admin/participant'); }}
-            data-tip={t('left-menu.tooltip.admin')}
-            >
-              {t('left-menu.admin')}
-          </ButtonText>
-          : ''
+            ?
+            <>
+              <ButtonText
+                  $selected={location.pathname.includes('admin')}
+                  $color='#000094'
+                  $fontSize='16px'
+                  onClick={() => {
+                    navigate('/admin/participant');
+                  }}
+                  data-tooltip-id={'left-menu.tooltip.admin'}
+                  data-tooltip-content={t('left-menu.tooltip.admin')}
+              >
+                {t('left-menu.admin')}
+              </ButtonText>
+              <Tooltip id={'left-menu.tooltip.admin'} />
+            </>
+
+            : ''
         }
 
         {
           _isFr ? '' :
-            <>
-              {/* SERVICES: 2 */}
-              <ButtonText selected={location.pathname === '/service-offerings'}
-                color='#000094'
-                fontSize='16px'
-                onClick={() => { navigate('/service-offerings'); }}
-                data-tip={t('left-menu.tooltip.service-offerings')}
+              <>
+                {/* SERVICES: 2 */}
+                <ButtonText
+                    $selected={location.pathname === '/service-offerings'}
+                    $color='#000094'
+                    $fontSize='16px'
+                    onClick={() => {
+                      navigate('/service-offerings');
+                    }}
+                    data-tooltip-id={'left-menu.tooltip.service-offerings'}
+                    data-tooltip-content={t('left-menu.tooltip.service-offerings')}
                 >
                   {t('left-menu.service-offerings')}
-              </ButtonText>
+                </ButtonText>
 
-              {/* PROVIDER: 4 */}
-              <ButtonText
-                selected={location.pathname === '/participants'}
-                color='#000094'
-                fontSize='16px'
-                onClick={() => { navigate('/participants'); }}
-                data-tip={t('left-menu.tooltip.participants')}
+                <Tooltip id={'left-menu.tooltip.service-offerings'} place="top" />
+
+                {/* PROVIDER: 4 */}
+                <ButtonText
+                    $selected={location.pathname === '/participants'}
+                    $color='#000094'
+                    $fontSize='16px'
+                    onClick={() => {
+                      navigate('/participants');
+                    }}
+                    data-tooltip-id={'left-menu.tooltip.participants'}
+                    data-tooltip-content={t('left-menu.tooltip.participants')}
                 >
                   {t('left-menu.participants')}
-              </ButtonText>
-
-              {/* DATA: 3 */}
-              <ButtonText
-                selected={location.pathname === '/resources'}
-                color='#000094'
-                fontSize='16px'
-                onClick={() => { navigate('/resources'); }}
-                data-tip={t('left-menu.tooltip.resources')}
-              >
-                {t('left-menu.resources')}
-              </ButtonText>
-
-              {/* PROVIDE: 5 */}
-              {_isPpr
-                ?
-                <ButtonText
-                  selected={location.pathname.includes('/provide/')}
-                  color='#000094'
-                  fontSize='16px'
-                  onClick={() => { navigate('/provide/start'); }}
-                  data-tip={t('left-menu.tooltip.provide')}
-                  >
-                    {t('left-menu.provide')}
                 </ButtonText>
-                 : ''
-              }
+                <Tooltip id={'left-menu.tooltip.participants'} />
 
-            </>
+                {/* DATA: 3 */}
+                <ButtonText
+                    $selected={location.pathname === '/resources'}
+                    $color='#000094'
+                    $fontSize='16px'
+                    onClick={() => {
+                      navigate('/resources');
+                    }}
+                    data-tooltip-id={'left-menu.tooltip.resources'}
+                    data-tooltip-content={t('left-menu.tooltip.resources')}
+                >
+                  {t('left-menu.resources')}
+                </ButtonText>
+                <Tooltip id={'left-menu.tooltip.resources'} />
+
+                {/* PROVIDE: 5 */}
+                {_isPpr
+                    ?
+                    <>
+                      <ButtonText
+                          $selected={location.pathname.includes('/provide/')}
+                          $color='#000094'
+                          $fontSize='16px'
+                          onClick={() => {
+                            navigate('/provide/start');
+                          }}
+                          data-tooltip-id={'left-menu.tooltip.provide'}
+                          data-tooltip-content={t('left-menu.tooltip.provide')}
+                      >
+                        {t('left-menu.provide')}
+                      </ButtonText>
+                      <Tooltip id={'left-menu.tooltip.provide'} place="top" />
+                    </>
+                    : ''
+                }
+
+              </>
         }
         <Row>
-          <Menu menuButton={<ButtonText color='#000094' fontSize='16px'>{t('left-menu.help')}</ButtonText>} menuClassName="szh-menu">
+          <Menu menuButton={<ButtonText $color='#000094' $fontSize='16px'>{t('left-menu.help')}</ButtonText>}
+                menuClassName="szh-menu">
             <MenuItem onClick={() => history.push('/help/about')}>{t('left-menu.about')}</MenuItem>
             <MenuItem onClick={() => history.push('/help/support')}>{t('left-menu.support')}</MenuItem>
           </Menu>
-          <DropDownArrowDownSmall />
+          <DropDownArrowDownSmall/>
         </Row>
 
         {
           (_userRole != VR_ROLE)
-          ? <></>
-          : <ButtonText
-              color='#000094'
-              fontSize='16px'
-              onClick={onOpenModal}
-              data-tip={t('left-menu.tooltip.change-language')}
-            >
-              {t('left-menu.change-language')}
-            </ButtonText>
+              ? <></>
+              :
+              <>
+                <ButtonText
+                    $color='#000094'
+                    $fontSize='16px'
+                    onClick={onOpenModal}
+                    data-tooltip-id={'left-menu.tooltip.change-language'}
+                    data-tooltip-content={t('left-menu.tooltip.change-language')}
+                >
+                  {t('left-menu.change-language')}
+                </ButtonText>
+                <Tooltip id={'left-menu.tooltip.change-language'} />
+              </>
         }
 
         <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
           <H4LightText>{t('left-menu.choose-language')}</H4LightText>
           <BodyText>{t('left-menu.select-system-language')}</BodyText>
-          <HorizontalLine />
+          <HorizontalLine/>
 
-          <Padding vertical='20px' horizontal='40px'>
-            {buildLanguageItemView({ background: _isEn ? '#46DAFF1F' : '#fff', name: 'English', code: 'en' })}
-            {buildLanguageItemView({ background: _isEs ? '#46DAFF1F' : '#fff', name: 'Spanish', code: 'es' })}
-            {buildLanguageItemView({ background: _isDe ? '#46DAFF1F' : '#fff', name: 'German', code: 'de' })}
+          <Padding $vertical='20px' $horizontal='40px'>
+            {buildLanguageItemView({background: _isEn ? '#46DAFF1F' : '#fff', name: 'English', code: 'en'})}
+            {buildLanguageItemView({background: _isEs ? '#46DAFF1F' : '#fff', name: 'Spanish', code: 'es'})}
+            {buildLanguageItemView({background: _isDe ? '#46DAFF1F' : '#fff', name: 'German', code: 'de'})}
 
-            <Padding paddingTop='30px' />
+            <Padding $paddingTop='30px' />
             <Row><OutlineButton onClick={onCloseModal}>{t('left-menu.close')}</OutlineButton></Row>
           </Padding>
 
         </Modal>
 
       </S.TopMenuLinks>
-    </>
   )
 }
 

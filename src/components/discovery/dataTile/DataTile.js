@@ -1,23 +1,23 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
-import ExpandableView from "../../expandable/ExpandableView";
+import ExpandableView from "../../expandable/ExpandableView.js";
 import "../servicetile/ServiceTile.css";
-import * as S from '../style';
+import * as S from '../style.js';
 import PropTypes from 'prop-types';
 
-import ContactTab from "../tabs/ContactTab/ContactTab";
-import PriceTab from "../tabs/priceTab/PriceTab";
-import DescriptionTab from "../tabs/description/DescriptionTab";
-import SampleRecordTab from "../tabs/SampleRecordTab/SampleRecordTab";
-import { CheckBox } from "../search/style";
-import { Column, Image, Padding, Row, Style } from "../../../common/styles";
+import ContactTab from "../tabs/ContactTab/ContactTab.js";
+import PriceTab from "../tabs/priceTab/PriceTab.js";
+import DescriptionTab from "../tabs/description/DescriptionTab.js";
+import SampleRecordTab from "../tabs/SampleRecordTab/SampleRecordTab.js";
+import { CheckBox } from "../search/style.js";
+import { Column, Image, Padding, Row, Style } from "../../../common/styles.js";
 
 const DataTile = ({ input, id, t }) => {
 
     const type = "data";
 
     const padTitle = ({ _titleView }) => {
-        return <Padding paddingTop='18px' paddingBottom='8px'>
+        return <Padding $paddingTop='18px' $paddingBottom='8px'>
             {_titleView}
         </Padding>
     }
@@ -52,53 +52,53 @@ const DataTile = ({ input, id, t }) => {
     const showTileHeader = () => {
         return (
             <S.DiscoveryTile>
-                <Row alignItems='Center' justifyContent='start'>
+                <Row $alignItems='Center' $justifyContent='start'>
                     {/*<Padding horizontal='28px' vertical='24px'><CheckBox type="checkbox" /></Padding>*/}
                     {/* LOGO */}
                     {/*<a href={"#"}>*/}
                     {/*    <Image src='/images/logos/placeholder.png' alt='Provider Logo' width='48px' height='48px' />*/}
                     {/*</a>*/}
                     {/*<Padding paddingLeft='20px' />*/}
-                    <Padding horizontal='28px' vertical='24px'>
+                    <Padding $horizontal='28px' $vertical='24px'>
                         <Column>
                             <S.DiscoveryTileFirstRow width={'120px'}>ID</S.DiscoveryTileFirstRow>
                             <S.DiscoveryTileSecondRow>{input.id}</S.DiscoveryTileSecondRow>
                         </Column>
                     </Padding>
-                    <Padding paddingLeft='80px' />
+                    <Padding $paddingLeft='80px' />
 
-                    <Row alignItems='Center' justifyContent='space-between'>
+                    <Row $alignItems='Center' $justifyContent='space-between'>
                         <Column>
                             <S.DiscoveryTileFirstRow width={'100px'}>Survey ID</S.DiscoveryTileFirstRow>
                             <S.DiscoveryTileSecondRow>{input.survey_id}</S.DiscoveryTileSecondRow>
                         </Column>
-                        <Padding paddingLeft='20px' />
+                        <Padding $paddingLeft='20px' />
                         <Column>
                             <S.DiscoveryTileFirstRow width={'100px'}>Survey Title</S.DiscoveryTileFirstRow>
                             <S.DiscoveryTileSecondRow>{input.survey_title}</S.DiscoveryTileSecondRow>
                         </Column>
-                        <Padding paddingLeft='20px' />
+                        <Padding $paddingLeft='20px' />
                         <Column>
                             <S.DiscoveryTileFirstRow width={'200px'}>Survey Description</S.DiscoveryTileFirstRow>
                             <S.DiscoveryTileSecondRow>{input.survey_description}</S.DiscoveryTileSecondRow>
                         </Column>
-                        <Padding paddingLeft='20px' />
+                        <Padding $paddingLeft='20px' />
                         <Column>
                             <S.DiscoveryTileFirstRow width={'200px'}>Survey Start Time</S.DiscoveryTileFirstRow>
                             <S.DiscoveryTileSecondRow>{input.survey_start_time}</S.DiscoveryTileSecondRow>
                         </Column>
-                        <Padding paddingLeft='20px' />
+                        <Padding $paddingLeft='20px' />
 
                     </Row>
                     {/* DETAILS */}
-                    <Style flexGrow='1'>
+                    <Style $flexGrow='1'>
 
                     </Style>
 
                     <S.DiscoveryDetailsButton>
                         {t("service-tile.details")}
                     </S.DiscoveryDetailsButton>
-                    <Padding paddingLeft='20px' />
+                    <Padding $paddingLeft='20px' />
 
                 </Row>
 

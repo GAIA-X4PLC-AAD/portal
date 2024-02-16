@@ -2,10 +2,10 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import "./ProviderAccount.css"
-import ProviderCredentials from "./ProviderCredentials";
-import ProviderDetails from "./ProviderDetails";
-import ProviderEdit from "./ProviderEdit";
-import ProviderLoginHistory from "./ProviderLoginHistory";
+import ProviderCredentials from "./ProviderCredentials.js";
+import ProviderDetails from "./ProviderDetails.js";
+import ProviderEdit from "./ProviderEdit.js";
+import ProviderLoginHistory from "./ProviderLoginHistory.js";
 import PropTypes from 'prop-types';
 
 const Provider = (props) => {

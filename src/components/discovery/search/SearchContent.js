@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import LoadingView from "../../loading_view/LoadingView";
+import LoadingView from "../../loading_view/LoadingView.js";
 import PropTypes from 'prop-types';
-import TileFactory from "../TileFactory";
-import { HeaderTitle, Row, Column, Style, Padding } from "../../../common/styles";
+import TileFactory from "../TileFactory.js";
+import { HeaderTitle, Row, Column, Style, Padding } from "../../../common/styles.js";
 import { useTranslation } from "react-i18next";
-import * as S from "./style";
-import SearchSort from "./SearchSort";
-import ServicePreview from "../../solutionPackaging/ServicePreview";
+import * as S from "./style.js";
+import SearchSort from "./SearchSort.js";
+import ServicePreview from "../../solutionPackaging/ServicePreview.js";
 import Carousel from "react-multi-carousel";
-import NextPrevButtons from "./NexPrevButtons";
-import NP from "../../../common/vertical_steps/next_prev_buttons";
+import NextPrevButtons from "./NexPrevButtons.js";
+import NP from "../../../common/vertical_steps/next_prev_buttons.js";
 
 
 const SearchContent = ({ type, onSelect, serviceId, slot }) => {
@@ -103,7 +103,7 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
 
     const NoResults = () => {
         return (<>
-            <Row margin="24px 0 0 0">
+            <Row $margin="24px 0 0 0">
                 <Column><S.AlertIcon /></Column>
                 <Column><S.ErrorHeader>{t('discovery.search.noResults')}</S.ErrorHeader></Column>
             </Row>
@@ -123,7 +123,7 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
                     {showHeader(type)}
                     <SearchSort type={type} data={data} />
                     {type === 'solution_pkg' ? showCarousel(data) : showData(data)}
-                    <Padding vertical='12px'>
+                    <Padding $vertical='12px'>
                         <NextPrevButtons data={data} />
                     </Padding>
                 </div>

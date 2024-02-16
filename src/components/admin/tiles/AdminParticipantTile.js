@@ -1,8 +1,8 @@
 import React from "react";
-import ExpandableView from "../../expandable/ExpandableView";
+import ExpandableView from "../../expandable/ExpandableView.js";
 import PropTypes from 'prop-types';
-import ParticipantHeader from "../tabs/ParticipantHeader";
-import KeyValueDetails from "../tabs/KeyValueDetails";
+import ParticipantHeader from "../tabs/ParticipantHeader.js";
+import KeyValueDetails from "../tabs/KeyValueDetails.js";
 
 
 const AdminParticipantTile = ({ input }) => {

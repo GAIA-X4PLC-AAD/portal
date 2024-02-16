@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { retrieveAndRemoveOnboardingJWT } from "../../common/auth";
-import { BodyText, Card, H4LightText, HorizontalLine, Padding, Style, TextInput } from "../../common/styles";
-import { BlueButton } from "../admin/style";
+import { retrieveAndRemoveOnboardingJWT } from "../../common/auth.js";
+import { BodyText, Card, H4LightText, HorizontalLine, Padding, Style, TextInput } from "../../common/styles.js";
+import { BlueButton } from "../admin/style.js";
 const FinishProvider = () => {
 
     const { t } = useTranslation();
@@ -34,9 +34,9 @@ const FinishProvider = () => {
     }
 
     return <>
-        <Style width='633px' height='246px'>
-            <Padding horizontal='20px'>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+        <Style $width='633px' $height='246px'>
+            <Padding $horizontal='20px'>
+                <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
                         <H4LightText>{t('onboarding.user_onboarding_complete_header')}</H4LightText>
                         <HorizontalLine />
@@ -49,7 +49,7 @@ const FinishProvider = () => {
                         </Padding>
 
                         <Padding vertical='28px'>
-                            <BlueButton onClick={onFormSubmit} marginLeft="0">{t('onboarding.finish_button')}</BlueButton>
+                            <BlueButton onClick={onFormSubmit} $marginLeft="0">{t('onboarding.finish_button')}</BlueButton>
                         </Padding>
                     </Padding>
                 </Card>

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { withTranslation } from "react-i18next";
-import * as S from "./styles";
+import * as S from "./styles.js";
 
 const SampleRecordFactory = ({data, t}) => {
 

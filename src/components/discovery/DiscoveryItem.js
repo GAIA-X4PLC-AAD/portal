@@ -1,5 +1,5 @@
 import React from "react";
-import TileFactory from "./TileFactory";
+import TileFactory from "./TileFactory.js";
 import PropTypes from 'prop-types';
 import { useParams } from "react-router-dom";
 

@@ -1,34 +1,34 @@
 import './App.css';
 import React from 'react';
-import WorkInProgress from './WorkInProgress';
+import WorkInProgress from './WorkInProgress.js';
 import {Route, Routes, unstable_HistoryRouter as HistoryRouter} from 'react-router-dom';
-import Home from './Home';
+import Home from './Home.js';
 
-import LoginFail from './components/login/LoginFail';
-import Login from './components/login/Login';
-import AccountHome from './components/account/AccountHome';
-import ProvideOverview from './components/provide/ProvideOverview';
-import Provider from './components/account/Provider';
-import Header from './components/header';
-import DiscoveryItem from './components/discovery/DiscoveryItem';
-import SearchView from './components/discovery/search/SearchView';
-import DashboardPage from './components/dashboard/dashboard_page';
-import OnboardingPage from './components/onboarding/onboarding_page';
-import ProvideAttributes from './components/provide/ProvideAttributes';
-import {Column, Padding} from './common/styles';
-import Article from './components/article/Article';
-import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
-import ProvideSelection from './components/provide/ProvideSelection';
-import LcmServices from './components/dashboard/lcm/LcmServices';
-import LcmFinal from './components/dashboard/lcm/LcmFinal';
-import history from "./common/history"
-import AboutPage from "./components/help/AboutPage"
-import SupportPage from "./components/help/SupportPage"
-import {Footer} from "./components/footer/Footer";
-import ServiceOfferings from "./components/serviceOfferings/ServiceOfferings";
-import Participants from "./components/participants/Participants";
+import LoginFail from './components/login/LoginFail.js';
+import Login from './components/login/Login.js';
+import AccountHome from './components/account/AccountHome.js';
+import ProvideOverview from './components/provide/ProvideOverview.js';
+import Provider from './components/account/Provider.js';
+import Header from './components/header/Header.js';
+import DiscoveryItem from './components/discovery/DiscoveryItem.js';
+import SearchView from './components/discovery/search/SearchView.js';
+import DashboardPage from './components/dashboard/dashboard_page.js';
+import OnboardingPage from './components/onboarding/onboarding_page.js';
+import ProvideAttributes from './components/provide/ProvideAttributes.js';
+import {Column, Padding} from './common/styles.js';
+import Article from './components/article/Article.js';
+import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView.js';
+import ProvideSelection from './components/provide/ProvideSelection.js';
+import LcmServices from './components/dashboard/lcm/LcmServices.js';
+import LcmFinal from './components/dashboard/lcm/LcmFinal.js';
+import history from "./common/history.js"
+import AboutPage from "./components/help/AboutPage.js"
+import SupportPage from "./components/help/SupportPage.js"
+import {Footer} from "./components/footer/Footer.tsx";
+import ServiceOfferings from "./components/serviceOfferings/ServiceOfferings.tsx";
+import Participants from "./components/participants/Participants.tsx";
 import {useTranslation} from "react-i18next";
-import Resources from "./components/resources/Resources";
+import Resources from "./components/resources/Resources.tsx";
 
 const App = (props) => {
 
@@ -49,7 +49,7 @@ const App = (props) => {
               <Route path="/" element={
                 <Column>
                   <Home />
-                  {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
+                  {ViewContainer(<Padding $vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
                 </Column>
               }
               />

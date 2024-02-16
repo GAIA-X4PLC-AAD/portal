@@ -1,8 +1,8 @@
 import React from "react";
-import * as S from '../style';
+import * as S from '../style.js';
 import PropTypes from 'prop-types';
 import { withTranslation } from "react-i18next";
-import { ColumnItem, ShowElements, ShowLocation } from "./Common";
+import { ColumnItem, ShowElements, ShowLocation } from "./Common.js";
 
 const DescriptionDataView = ({t, data}) => {
     const description = data ;

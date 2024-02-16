@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import PropTypes from 'prop-types';
-import { CancelButton } from "../../style";
+import { CancelButton } from "../../style.js";
 import { useTranslation } from "react-i18next";
 
 

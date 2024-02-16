@@ -1,5 +1,5 @@
 import axios from "axios";
-import jwt_decode from "jwt-decode"
+import {jwtDecode} from "jwt-decode";
 
 export const VR_ROLE = 'gaiax-vr'; // default role
 export const PPR_ROLE = 'gaiax-ppr';
@@ -10,7 +10,7 @@ export const FR_ROLE = 'gaiax-fr';
 export function userData() {
   const token = retrieveToken();
   if (token) {
-    var dToken = jwt_decode(token);
+    let dToken = jwtDecode(token, { header: true });
 
     return {
       user: {
@@ -39,7 +39,7 @@ export function userData() {
 }
 
 function retrieveRole(dToken) {
-  var roles = dToken.realm_access.roles;
+  let roles = dToken.realm_access.roles;
   
   if (roles.includes("gaiax-fr")) {
     return FR_ROLE;

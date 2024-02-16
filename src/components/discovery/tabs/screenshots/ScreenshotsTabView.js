@@ -1,10 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-
-
 import ImageGallery from 'react-image-gallery';
-
-import { Center, Image, Row, Style } from "../../../../common/styles";
-
+import { Center, Image, Row, Style } from "../../../../common/styles.js";
 import PropTypes from 'prop-types';
 
 
@@ -33,7 +29,7 @@ const ScreenshotsTabView = (props,) => {
   })
 
   return (
-    <Style maxWidth='760px'>
+    <Style $maxWidth='760px'>
       <ImageGallery items={_images}
         showFullscreenButton={false}
         showBullets={true}

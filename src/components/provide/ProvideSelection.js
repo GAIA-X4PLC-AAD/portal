@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from 'react-redux';
-import { resetDescriptorFile } from '../../actions';
+import { resetDescriptorFile } from '../../actions/index.js';
 import PropTypes from 'prop-types';
 import "./ProvideSelection.css"
-import { HeaderTitle, BodySmallText, BodyText, BodyBoldText, BlueButton, BlueUploadLabel, CancelButton } from "../../common/styles";
+import { HeaderTitle, BodySmallText, BodyText, BodyBoldText, BlueButton, BlueUploadLabel, CancelButton } from "../../common/styles.js";
 
 
 class ProvideSelection extends Component {

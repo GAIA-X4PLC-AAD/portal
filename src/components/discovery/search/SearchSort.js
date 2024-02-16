@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { BlueLinkText, Style } from '../../../common/styles';
+import { BlueLinkText, Style } from '../../../common/styles.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { updateFilterCriteria } from '../../../actions';
-import { FloatRight } from './style';
+import { updateFilterCriteria } from '../../../actions/index.js';
+import { FloatRight } from './style.js';
 
 const SearchSort = ({type, data}) => {
 
@@ -39,7 +39,7 @@ const SearchSort = ({type, data}) => {
     // do not show sort when there is no data
     if (!data || !data.data || data.data.length === 0) return null;
     return (
-        <Style marginLeft='auto' marginRight='0' maxWidth='fit-content' key={type} height='8px'>
+        <Style $marginLeft='auto' $marginRight='0' $maxWidth='fit-content' key={type} $height='8px'>
                 <FloatRight>
                     <BlueLinkText onClick={changeSortDirection}>{t(`admin.sort-direction-${direction}`)} </BlueLinkText>
                 </FloatRight>

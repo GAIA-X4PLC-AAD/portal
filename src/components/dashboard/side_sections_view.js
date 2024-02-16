@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 
 import PropTypes from 'prop-types';
-import LoadingView from "../loading_view/LoadingView";
-import { Style, BodySmallBoldText, Column, Row, CaptionText } from "../../common/styles";
-import { Padding } from "../discovery/tabs/style";
-import { Block } from "../expandable/style";
+import LoadingView from "../loading_view/LoadingView.js";
+import { Style, BodySmallBoldText, Column, Row, CaptionText } from "../../common/styles.js";
+import { Padding } from "../discovery/tabs/style.js";
+import { Block } from "../expandable/style.js";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import NextPrevButtons from "../../common/vertical_steps/next_prev_buttons";
+import NextPrevButtons from "../../common/vertical_steps/next_prev_buttons.js";
 import { useTranslation } from "react-i18next";
 
 
@@ -37,7 +37,7 @@ const _maxItemsPerPage = 10
 
 const colItemView = ({ title, caption, subtitle, }) => {
   return <Column>
-    <Row justifyContent='space-between' alignItems='center'>
+    <Row $justifyContent='space-between' $alignItems='center'>
       <BodySmallBoldText>{title}</BodySmallBoldText>
       <CaptionText>{caption}</CaptionText>
     </Row>
@@ -58,8 +58,8 @@ const sectionView = (props,) => {
   }, [props.data]);
 
   const sectionItemsViews = sectionItems?.map((element, _index) => {
-    return <Style key={`${element['title']}${_index}`} minWidth={_leftPanelWidth}>
-      <Padding vertical='8px' horizontal='8px'>
+    return <Style key={`${element['title']}${_index}`} $minWidth={_leftPanelWidth}>
+      <Padding $vertical='8px' $horizontal='8px'>
         {colItemView({ title: element['title'], subtitle: element['subtitle'], caption: element['date'] })}
       </Padding>
     </Style>;
@@ -81,7 +81,7 @@ const sectionView = (props,) => {
   return (
     <>
       <BodySmallBoldText>{`${props.params['title']} (${sectionItemsViews.length})`}</BodySmallBoldText>
-      <Block border={true} borderBottom={true} position='relative'>
+      <Block $border={true} $borderBottom={true} $position='relative'>
         {(sectionItems !== undefined || sectionItems != null) ?
           <Carousel
             arrows={false}

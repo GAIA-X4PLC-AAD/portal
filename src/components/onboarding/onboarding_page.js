@@ -1,36 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Column, Row, Style, Card, Circle, H4Text, BodyText, ButtonText, H4LightText, MasterButton, HorizontalLine, OutlineButton, TextInput, Image, BlueButton } from '../../common/styles';
-// import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Row, Style, TextInput, Image, BlueButton } from "../../common/styles";
-import { Padding } from '../discovery/tabs/style';
-import RadioButton from '../../common/radio';
+import { Column, Row, Style, Card, Circle, H4Text, BodyText, ButtonText, H4LightText, MasterButton, HorizontalLine, OutlineButton, TextInput, Image, BlueButton } from '../../common/styles.js';
+// import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Row, Style, TextInput, Image, BlueButton } from "../../common/styles.js";
+import { Padding } from '../discovery/tabs/style.js';
+import RadioButton from '../../common/radio.jsx';
 import { useResource } from '@axios-use/react';
 
-import OrganizationDetailsView from './onboarding_provider';
+import OrganizationDetailsView from './onboarding_provider.js';
 
-import StepsPane from "./steps_pane";
-import VCCustomer from './vc_customer';
+import StepsPane from "./steps_pane.js";
+import VCCustomer from './vc_customer.js';
 
 import { useTranslation } from 'react-i18next';
 import { t } from 'i18next';
-import DidOnboardingView from './onboarding_did';
-import VCProvider from './vc_provider';
-import FinishCustomer from './finish_customer';
-import FinishProvider from './finish_provider';
+import DidOnboardingView from './onboarding_did.js';
+import VCProvider from './vc_provider.js';
+import FinishCustomer from './finish_customer.js';
+import FinishProvider from './finish_provider.js';
 
 export const CUSTOMER = 'user'
 export const ORGANIZATION = 'organization'
 import axios from "axios";
-import history from "../../common/history"
+import history from "../../common/history.js"
 
 const RequestVCView = ({ type, confirmationCode }) => {
     const { t } = useTranslation()
 
     const thanksForConfirmingVC = <>
-        <Style width='633px' height='246px'>
-            <Padding horizontal='20px'>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+        <Style $width='633px' $height='246px'>
+            <Padding $horizontal='20px'>
+                <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
                         <H4LightText>{t('onboarding.vs_confirmation')}</H4LightText>
                         <BodyText>{t('onboarding.msg_vs_confirmation')}</BodyText>
@@ -67,9 +67,9 @@ const EmailAlreadyConfirmedView = () => {
     const navigate = useNavigate();
 
     return <>
-        <Style width='633px' height='246px'>
+        <Style $width='633px' $height='246px'>
             <Padding horizontal='20px'>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px'>
                         <H4LightText>{t('onboarding.already_confirmed')}</H4LightText>
                         <HorizontalLine />
@@ -103,9 +103,9 @@ const EmailConfirmedView = ({ type, confirmationCode }) => {
             onCompleted: (data, response) => {
                 setReturnedComponent(
                     <>
-                        <Style width='633px' height='246px'>
+                        <Style $width='633px' $height='246px'>
                             <Padding horizontal='20px'>
-                                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                                <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                                     <Padding horizontal='24px'>
                                         <H4LightText>{t('onboarding.thanks_for_confirming')}</H4LightText>
                                         <BodyText>{t('onboarding.msg_thanks_for_confirming')}</BodyText>
@@ -123,9 +123,9 @@ const EmailConfirmedView = ({ type, confirmationCode }) => {
                 const message = err?.data?.message || err?.message;
                 setReturnedComponent(
                     <>
-                        <Style width='633px' height='246px'>
+                        <Style $width='633px' $height='246px'>
                             <Padding horizontal='20px'>
-                                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                                <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                                     <Padding horizontal='24px'>
                                         <H4LightText>{t('onboarding.errorConfirmingEmail')}</H4LightText>
                                         <HorizontalLine />
@@ -168,14 +168,14 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
     const buildIdentifyServiceProvider = ({ background = '#fff' }) => {
         return (
             <Padding vertical='8px'>
-                <Card background={background} borderColor='#E9E9E9'>
+                <Card $background={background} $borderColor='#E9E9E9'>
                     <Padding vertical='4px' horizontal='16px'>
                         <Row>
-                            <Circle radius='56px' borderColor='#0' background='#C4C4C4'>LOGO</Circle>
+                            <Circle $radius='56px' $borderColor='#0' $background='#C4C4C4'>LOGO</Circle>
                             <Padding paddingLeft='16px' />
-                            <ButtonText color='#000000'>Identify Service Provider 1</ButtonText>
-                            <Style flexGrow='1' />
-                            <ButtonText color='#00A2E4'>Link</ButtonText>
+                            <ButtonText $color='#000000'>Identify Service Provider 1</ButtonText>
+                            <Style $flexGrow='1' />
+                            <ButtonText $color='#00A2E4'>Link</ButtonText>
                         </Row>
                     </Padding>
                 </Card>
@@ -191,9 +191,9 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
 
 
     return <>
-        <Style width='633px'>
+        <Style $width='633px'>
             <Padding>
-                <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                     <Padding horizontal='24px' vertical='12px'>
                         <H4LightText>{t('form.regViaDIDIdPHeading')}</H4LightText>
                         <BodyText>{t('form.regViaDIDIdPSelect')}</BodyText>
@@ -203,7 +203,7 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
                         {buildIdentifyServiceProvider({ background: '#fff' })}
                         {buildIdentifyServiceProvider({ background: '#fff' })}
 
-                        <Padding paddingTop='32px'>
+                        <Padding $paddingTop='32px'>
                             <Row><OutlineButton onClick={() => dontHaveDidModal()}>{t('login.close')}</OutlineButton></Row>
                         </Padding>
                     </Padding>
@@ -324,7 +324,7 @@ const OnboardingPage = () => {
     const welcomingMessage = () => {
         return (
             <>
-                <Column alignItems='start'>
+                <Column $alignItems='start'>
                     <H4Text>{t('onboarding.welcome_to_gaiax')}</H4Text>
                     <BodyText>{t('onboarding.msg_create_your_account')}</BodyText>
                 </Column>
@@ -341,8 +341,8 @@ const OnboardingPage = () => {
             <>
                 <StepsPane type={customerOrOrganization} currentStage={activeStage} />
                 <Row>
-                    <Padding vertical='32px'>{!isPreviousDisabled && <MasterButton disabled={isPreviousDisabled} onClick={() => previousStage()}>{t('form.prev')}</MasterButton>}</Padding>
-                    <Padding vertical='32px'>{!isNextDisabled && <MasterButton ref={nextButtonRef} disabled={isNextDisabled} onClick={() => nextStage()}>{t('form.next')}</MasterButton>}</Padding>
+                    <Padding vertical='32px'>{!isPreviousDisabled && <MasterButton $disabled={isPreviousDisabled} onClick={() => previousStage()}>{t('form.prev')}</MasterButton>}</Padding>
+                    <Padding vertical='32px'>{!isNextDisabled && <MasterButton ref={nextButtonRef} $disabled={isNextDisabled} onClick={() => nextStage()}>{t('form.next')}</MasterButton>}</Padding>
                 </Row>
             </>
         )
@@ -350,9 +350,9 @@ const OnboardingPage = () => {
 
     const customerOrProviderView = () => {
         return <>
-            <Style width='633px' height='246px'>
+            <Style $width='633px' $height='246px'>
                 <Padding horizontal='20px'>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <H4LightText>{t('onboarding.UserOrganization_header')}</H4LightText>
                         <HorizontalLine />
                         <Padding horizontal='24px'>
@@ -372,9 +372,9 @@ const OnboardingPage = () => {
 
     const confirmationEmailView = () => {
         return <>
-            <Style width='633px' height='246px'>
+            <Style $width='633px' $height='246px'>
                 <Padding horizontal='20px'>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
                             <H4LightText>{t('onboarding.almost_done')}</H4LightText>
                             <BodyText>{t('onboarding.check_email')}</BodyText>
@@ -411,9 +411,9 @@ const OnboardingPage = () => {
 
         const showErrorMessage = (headerText, bodyText) => {
             return <>
-                <Style width='633px' height='246px'>
+                <Style $width='633px' $height='246px'>
                     <Padding horizontal='20px'>
-                        <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                             <Padding horizontal='24px'>
                                 <H4LightText>{headerText}</H4LightText>
                                 <HorizontalLine />
@@ -421,7 +421,7 @@ const OnboardingPage = () => {
                                     <BodyText>{bodyText}</BodyText>
                                 </Padding>
                                 <Padding vertical='28px'>
-                                    <BlueButton onClick={e => history.push('/')} marginLeft="0">{t('onboarding.home_button')}</BlueButton>
+                                    <BlueButton onClick={e => history.push('/')} $marginLeft="0">{t('onboarding.home_button')}</BlueButton>
                                 </Padding>
                             </Padding>
                         </Card>
@@ -448,9 +448,9 @@ const OnboardingPage = () => {
             return showErrorMessage(t("onboarding.errorHeader"), errorMessage);
         } else {
             return <>
-                <Style width='633px' height='246px'>
+                <Style $width='633px' $height='246px'>
                     <Padding horizontal='20px'>
-                        <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                        <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                             <Padding horizontal='24px'>
                                 <H4LightText>{t('onboarding.customer_details')}</H4LightText>
                                 <BodyText>{t('onboarding.customer_details_hint')}</BodyText>
@@ -476,7 +476,7 @@ const OnboardingPage = () => {
                                             <Padding vertical='28px'>
                                                 <Row>
                                                     <OutlineButton onClick={e => setActiveStage(5)}>{t('form.registerDid')}</OutlineButton>
-                                                    <Style flexGrow='1' />
+                                                    <Style $flexGrow='1' />
                                                     <OutlineButton onClick={async () => {
                                                         if (validateUserFillDetailsForm()) {
                                                             registerUserApi()
@@ -513,12 +513,12 @@ const OnboardingPage = () => {
 
     const complienceCheckMessageView = () => {
         return <>
-            <Style width='633px' height='246px'>
+            <Style $width='633px' $height='246px'>
                 <Padding horizontal='20px'>
-                    <Card background='#fff' borderColor='#0' boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
+                    <Card $background='#fff' $borderColor='#0' $boxShadow={`0px 2px 4px 0px rgb(29 36 48 / 12%)`}>
                         <Padding horizontal='24px'>
                             <H4LightText>Complience Check</H4LightText>
-                            <BodyText color='#818C99'>Your onboarding request will be checked by the AISBL. This may take  some time. Please enter your email address to recieve status updates of your onboarding. </BodyText>
+                            <BodyText $color='#818C99'>Your onboarding request will be checked by the AISBL. This may take  some time. Please enter your email address to recieve status updates of your onboarding. </BodyText>
                             <HorizontalLine />
                             <Padding vertical='8px' />
                             <TextInput type='text' placeholder='Email' />
@@ -537,7 +537,7 @@ const OnboardingPage = () => {
                 {welcomingMessage()}
                 <Padding vertical='64px'>
                     <Row>
-                        <Style width='307px'>{stepsPane({ activeStage: activeStage, isNextDisabled: disableNextButton(), isPreviousDisabled: disablePreviousButton() })}</Style>
+                        <Style $width='307px'>{stepsPane({ activeStage: activeStage, isNextDisabled: disableNextButton(), isPreviousDisabled: disablePreviousButton() })}</Style>
                         <CurrentStageView />
                     </Row>
                 </Padding>

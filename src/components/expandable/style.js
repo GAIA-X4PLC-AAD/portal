@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 
 export const AnimatedVisibility = styled.div`
 ${(props) => {
-    if (props.visible) {
+    if (props.$visible) {
       return css`
     opacity:1;
     width:100%;
@@ -40,36 +40,36 @@ export const CircularLoader = styled.div`
 
 export const Block = styled.div`
   /* border: 1px solid #ccc; */
-  margin: ${props => props.margin ? props.margin: '12px 0px'};
+  margin: ${props => props.$margin ? props.$margin: '12px 0px'};
 
-  width: ${props => props.width ? props.width: '100%'};
-  border-top: ${props => props.border ? '1px solid #E9E9E9' : ''};
-  border-left: ${props => props.border ? '1px solid #E9E9E9' : ''};
-  border-right: ${props => props.border ? '1px solid #E9E9E9' : ''};
-  border-bottom: ${props => props.borderBottom ? '1px solid #E9E9E9' : ''};
-  box-shadow: ${props => props.boxShadow};
+  width: ${props => props.$width ? props.$width: '100%'};
+  border-top: ${props => props.$border ? '1px solid #E9E9E9' : ''};
+  border-left: ${props => props.$border ? '1px solid #E9E9E9' : ''};
+  border-right: ${props => props.$border ? '1px solid #E9E9E9' : ''};
+  border-bottom: ${props => props.$borderBottom ? '1px solid #E9E9E9' : ''};
+  box-shadow: ${props => props.$boxShadow};
   border-radius: 4px;
-  position: ${props => props.position || ''};
-  display: ${props => props.display || ''};
+  position: ${props => props.$position || ''};
+  display: ${props => props.$display || ''};
   @apply py-0;
 `
 
 export const ToggleButton = styled.div`
   font-size: 15px;
-  background: ${props => props.background ? '#F9F9F9' : ''};
-  /* border-bottom: ${props => props.noBorder ? '' : '1px solid #E9E9E9'}; */
-  /* border-bottom: ${props => props.border ? '1px solid #E9E9E9' : ''}; */
+  background: ${props => props.$background ? '#F9F9F9' : ''};
+  /* border-bottom: ${props => props.$noBorder ? '' : '1px solid #E9E9E9'}; */
+  /* border-bottom: ${props => props.$border ? '1px solid #E9E9E9' : ''}; */
   border-radius: 4px;
   box-shadow: none;
   /* padding: 8px 0px; */
-  /* padding: ${props => props.horizontalPadding || '20px'}; */
-  /* margin: 0px ${props => props.horizontalPadding || '0px'}; */
+  /* padding: ${props => props.$horizontalPadding || '20px'}; */
+  /* margin: 0px ${props => props.$horizontalPadding || '0px'}; */
   cursor: pointer;
   display: flex;
   /* justify-content: space-between; */
 `
 export const Arrow = styled.div`
-  padding-right: ${props => props.paddingRight || '5px'};
+  padding-right: ${props => props.$paddingRight || '5px'};
   align-self: center;
   display: flex;
 `;

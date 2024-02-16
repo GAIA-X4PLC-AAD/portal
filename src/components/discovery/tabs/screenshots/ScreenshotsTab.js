@@ -1,11 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-
-
-import '../../../../common/styles';
-
+import '../../../../common/styles.js';
 import PropTypes from 'prop-types';
-import ScreenshotsTabView from "./ScreenshotsTabView";
-import LoadingView from "../../../loading_view/LoadingView";
+import ScreenshotsTabView from "./ScreenshotsTabView.js";
+import LoadingView from "../../../loading_view/LoadingView.js";
 
 
 const ScreenshotsTab = ({ serviceId },) => {

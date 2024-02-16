@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import LoadingView from "../../../loading_view/LoadingView";
-import ContactWidgetFactory from "./ContactWidgetFactory";
+import LoadingView from "../../../loading_view/LoadingView.js";
+import ContactWidgetFactory from "./ContactWidgetFactory.js";
 
 const ContactTab = ( { id, type } ) => {
 

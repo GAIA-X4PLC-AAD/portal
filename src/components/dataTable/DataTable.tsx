@@ -136,13 +136,8 @@ const DataTable = (props: any) => {
   }
 
   const createColumns = (): any => {
-    let newColumns;
-    if (props.type === "service") {
-      newColumns = serviceColumns;
-    } else if (props.type === "participants") {
-      newColumns = participantColumns;
-    }
-    setColumns(columns.concat(newColumns));
+    props.type === "service" ?
+        setColumns(columns.concat(serviceColumns)) : setColumns(columns.concat(participantColumns));
   }
 
   return (

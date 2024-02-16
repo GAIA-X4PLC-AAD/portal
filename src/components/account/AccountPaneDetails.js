@@ -3,7 +3,7 @@ import { withTranslation } from "react-i18next";
 import axios from "axios";
 import "./Account.css";
 import PropTypes from 'prop-types';
-import {Circle, ButtonText} from "../../common/styles"
+import {Circle, ButtonText} from "../../common/styles.js"
 
 const AccountPaneDetails = (props) => {
 
@@ -18,10 +18,10 @@ const AccountPaneDetails = (props) => {
         });
     }, []);
 
-    const userButton = <Circle background='#ffffff' backgroundColor='#ffffff' borderColor='#E9E9E9'
-        radius='141px'
-        backgroundImage='/images/identicon.png' isButton borderThickness='1.36667px'>
-        <ButtonText fontSize='30px'>{user?.first_name.substring(0, 1) + user?.last_name.substring(0, 1)}</ButtonText>
+    const userButton = <Circle $background='#ffffff' $backgroundColor='#ffffff' $borderColor='#E9E9E9'
+                               $radius='141px'
+                               $backgroundImage='/images/identicon.png' $isButton $borderThickness='1.36667px'>
+        <ButtonText $fontSize='30px'>{user?.first_name.substring(0, 1) + user?.last_name.substring(0, 1)}</ButtonText>
     </Circle>
 
     return <div className="account-pane-details">

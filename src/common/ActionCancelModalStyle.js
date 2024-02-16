@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as S from './styles';
+import * as S from './styles.js';
 
 export const ActionCancelModalHeader = styled.div`
 border-bottom: 1px solid #737373;

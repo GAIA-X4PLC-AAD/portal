@@ -3,22 +3,21 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next';
 
-import * as S from './style';
+import * as S from './style.js';
 
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
-import { BodyBoldText, BodyText, ButtonText, Circle, DropDownArrowUp, H4LightText, HorizontalLine, OutlineButton, Row } from '../../common/styles';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { BodyBoldText, BodyText, ButtonText, Circle, DropDownArrowUp, H4LightText, HorizontalLine, OutlineButton, Row } from '../../common/styles.js';
 
 import { Menu, MenuItem, MenuButton, SubMenu, MenuDivider } from '@szhsin/react-menu';
 import '@szhsin/react-menu/dist/index.css';
 
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
-import { Padding } from '../discovery/tabs/style';
-import buildLanguageItemView from '../../common/language_item';
-import { PPR_ROLE, PCR_ROLE, FR_ROLE, VR_ROLE } from '../../common/auth';
-import { useLocation } from 'react-router-dom'
-import ReactTooltip from 'react-tooltip';
+import { Padding } from '../discovery/tabs/style.js';
+import buildLanguageItemView from '../../common/language_item.js';
+import { PPR_ROLE, PCR_ROLE, FR_ROLE, VR_ROLE } from '../../common/auth.js';
+import {Tooltip} from "react-tooltip";
 
 
 
@@ -47,9 +46,9 @@ function UserAvatarButton({ onClicked }) {
   const onOpenModal = () => setOpenModal(true);
   const onCloseModal = () => setOpenModal(false);
 
-  const userButton = <Circle background='#ffffff' backgroundColor='#ffffff' borderColor='#E9E9E9'
-    radius='41px'
-    backgroundImage='/images/identicon.png' isButton borderThickness='1.36667px'>
+  const userButton = <Circle $background='#ffffff' $backgroundColor='#ffffff' $borderColor='#E9E9E9'
+                             $radius='41px'
+                             $backgroundImage='/images/identicon.png' $isButton $borderThickness='1.36667px'>
     <ButtonText>{_userName[0] + _userLastName[0]}</ButtonText>
 
   </Circle>
@@ -70,12 +69,12 @@ function UserAvatarButton({ onClicked }) {
       <BodyText>{t('left-menu.select-system-language')}</BodyText>
       <HorizontalLine />
 
-      <Padding vertical='20px' horizontal='40px'>
+      <Padding $vertical='20px' $horizontal='40px'>
         {buildLanguageItemView({ background: _isEn ? '#46DAFF1F' : '#fff', name: 'English', code: 'en' })}
         {buildLanguageItemView({ background: _isEs ? '#46DAFF1F' : '#fff', name: 'Spanish', code: 'es' })}
         {buildLanguageItemView({ background: _isDe ? '#46DAFF1F' : '#fff', name: 'German', code: 'de' })}
         {/* {buildIdentifyServiceProvider({ background: '#fff', name: 'Deutsch', code: 'de' })} */}
-        <Padding paddingTop='30px' />
+        <Padding $paddingTop='30px' />
         <Row><OutlineButton onClick={onCloseModal}>{t('left-menu.close')}</OutlineButton></Row>
       </Padding>
     </Modal>
@@ -124,21 +123,19 @@ SignInButton.propTypes = {
 
 // REGISTER
 const RegisterButton = ({ onClicked }) => {
-  useEffect(() => {
-    ReactTooltip.rebuild();
-  });
-
   const { t, } = useTranslation();
 
   return <>
       <S.HeaderButton
         border={false}
         onClick={onClicked}
-        data-tip={t('top-menu.tooltip.signup')}
+        data-tooltip-id="top-menu.tooltip.signup"
+        data-tooltip-content={t('top-menu.tooltip.signup')}
         id="top-menu-register">
-          {t('top-menu.register')}
-      </S.HeaderButton>
-    </>
+      {t('top-menu.register')}
+    </S.HeaderButton>
+    <Tooltip id="top-menu.tooltip.signup" />
+  </>
 }
 
 RegisterButton.propTypes = {
@@ -150,11 +147,9 @@ const SignInBar = ({ handleSignIn, handleSignOut, handleRegister }) => {
   const location = useLocation();
 
   const signedInButtons =
-    <>
-      <Row alignItems='center'>
-        <UserAvatarButton onClicked={handleSignOut} />
-      </Row>
-    </>;
+      <Row $alignItems='center'>
+        <UserAvatarButton onClicked={handleSignOut}/>
+      </Row>;
 
   const signedOutButtons =
     <>

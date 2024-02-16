@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from '../../Modal';
-import * as S from '../discovery/style';
+import Modal from '../../Modal.js';
+import * as S from '../discovery/style.js';
 import { useTranslation } from 'react-i18next';
-import Checkbox from '../../common/checkbox';
-import { BlueButton, CancelButton, Column, Image, Row, Style } from '../../common/styles';
-import DescriptionTab from '../discovery/tabs/description/DescriptionTab';
-import PriceTab from '../discovery/tabs/priceTab/PriceTab';
-import ScreenshotsTab from '../discovery/tabs/screenshots/ScreenshotsTab';
-import ContactTab from '../discovery/tabs/ContactTab/ContactTab';
-import TabView from '../tab/TabView';
+import Checkbox from '../../common/checkbox.jsx';
+import { BlueButton, CancelButton, Column, Image, Row, Style } from '../../common/styles.js';
+import DescriptionTab from '../discovery/tabs/description/DescriptionTab.js';
+import PriceTab from '../discovery/tabs/priceTab/PriceTab.js';
+import ScreenshotsTab from '../discovery/tabs/screenshots/ScreenshotsTab.js';
+import ContactTab from '../discovery/tabs/ContactTab/ContactTab.js';
+import TabView from '../tab/TabView.js';
 
 const ServiceModalDetails = ({service, closeModal, onSelect}) => {
 
@@ -26,8 +26,8 @@ const ServiceModalDetails = ({service, closeModal, onSelect}) => {
 
                 <S.DiscoveryTileHeader>
                     <Checkbox type="checkbox" />            
-                        <Image src={service.logo} alt="Provider Logo" width='48px' height='48px' />
-                    <Style flexGrow='0'>
+                        <Image src={service.logo} alt="Provider Logo" $width='48px' $height='48px' />
+                    <Style $flexGrow='0'>
                         <S.DiscoveryTileFirstRow width={'140px'}>{service.name}</S.DiscoveryTileFirstRow>
                         <S.DiscoveryTileSecondRow onClick={()=>openLink(service.ppr_url)}>{service.ppr_name}</S.DiscoveryTileSecondRow>
                     </Style>
@@ -60,10 +60,10 @@ const ServiceModalDetails = ({service, closeModal, onSelect}) => {
                       ContactTab({ id: service.id, type: 'services' })];
     return (   
         <Modal width='fit-content'>
-            <Column margin="8px 0px 0px 0px">
+            <Column $margin="8px 0px 0px 0px">
                 {showTileHeader()}
                 <TabView labels={tabLabels} views={tabViews} width='864px;'/>
-                <Row margin='24px 24px 24px 10px'>
+                <Row $margin='24px 24px 24px 10px'>
                     <CancelButton onClick={closeModal}>{t('solution_pkg.cancel')}</CancelButton>
                     <BlueButton onClick={()=>{onSelect(service)}}>{t('solution_pkg.select')}</BlueButton>
                 </Row>

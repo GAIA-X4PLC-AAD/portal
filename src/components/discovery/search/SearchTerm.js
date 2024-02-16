@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateFilterCriteria, updateSearchFromHome } from "../../../actions";
-import * as S from "./style";
-import { Circle, Column, Row } from "../../../common/styles";
+import { updateFilterCriteria, updateSearchFromHome } from "../../../actions/index.js";
+import * as S from "./style.js";
+import { Circle, Column, Row } from "../../../common/styles.js";
 import { withTranslation } from "react-i18next";
 import PropTypes from 'prop-types';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import ReactTooltip from 'react-tooltip';
+import {Tooltip} from "react-tooltip";
+
 
 const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#000094', advancedSearchBgColor = '#000094', displayAsColumn = true }) => {
 
@@ -79,13 +80,18 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
         if (type === 'management' || type === 'participant') return null;
         if (advance === false) {
             return (
-            <S.AdvancedSearch color={advancedTextColor}
-                    displayAbsolute={displayAbsolute}
-                    onClick={() => setAdvance(true)}
-                    data-tip={t('home.tooltip.advanced_search')}
+                <>
+                    <S.AdvancedSearch color={advancedTextColor}
+                                      displayAbsolute={displayAbsolute}
+                                      onClick={() => setAdvance(true)}
+                                      data-tooltip-id="home.tooltip.advanced_search"
+                                      data-tooltip-content={t('home.tooltip.advanced_search')}
                     >
-                    {t("discovery.search.advance")}
-            </S.AdvancedSearch>
+                        {t("discovery.search.advance")}
+                    </S.AdvancedSearch>
+                    <Tooltip id="home.tooltip.advanced_search" />
+                </>
+
             );
         }
     }
@@ -96,13 +102,17 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
             return chips.map(
                 (chip) => {
                     return (
-                        <S.AdvancedSearch
-                            color={advancedTextColor}
-                            onClick={() => { addChipToSearch(chip) }}
-                            key={chip.label}
-                            data-tip={t('home.tooltip.chip')}
+                        <>
+                            <S.AdvancedSearch
+                                color={advancedTextColor}
+                                onClick={() => { addChipToSearch(chip) }}
+                                key={chip.label}
+                                data-tooltip-id="home.tooltip.chip"
+                                data-tooltip-content={t('home.tooltip.chip')}
                             >{chip.label}
-                        </S.AdvancedSearch>
+                            </S.AdvancedSearch>
+                            <Tooltip id="home.tooltip.chip" />
+                        </>
                     )
                     }
             );
@@ -127,23 +137,27 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
 
     const _searchViews =
         <>
-            <Row position='relative'>
+            <Row $position='relative'>
                 {displayAsColumn ? '' : <S.AdvancedSearchText color='white'>{t('discovery.search.text')}</S.AdvancedSearchText>}
                 <S.SearchTerm type="text" width={inputWidth} onKeyPress={onKeyPress} value={searchTerm}
                     onChange={(e) => { setSearchTerm(e.target.value) }}
-                    data-tip={t('home.tooltip.search_terms')}
+                              data-tooltip-id="home.tooltip.search_terms"
+                              data-tooltip-content={t('home.tooltip.search_terms')}
                     />
+                <Tooltip id="home.tooltip.search_terms" />
                 <S.SearchPlusButton
                     onClick={doSearch}
-                    data-tip={t('home.tooltip.search')}
+                    data-tooltip-id="home.tooltip.search"
+                    data-tooltip-content={t('home.tooltip.search')}
                     >
-                    <Circle background={advancedSearchBgColor} radius='46px' borderRadius='4px' borderColor={advancedSearchBgColor}>
+                    <Circle $background={advancedSearchBgColor} $radius='46px' $borderRadius='4px' $borderColor={advancedSearchBgColor}>
                         <S.SearchPlusImage />
                         </Circle>
                 </S.SearchPlusButton>
+                <Tooltip id="home.tooltip.search" />
                 {/*{displayAsColumn ? '' : showAdvanceMessage(advance, !displayAsColumn)}*/}
             </Row>
-            {/*<Row height='28px' justifyContent='left' alignItems='space-equally' alignSelf='end' >*/}
+            {/*<Row height='28px' justifyContent='left' $alignItems='space-equally' alignSelf='end' >*/}
             {/*    /!* <Padding horizontal={displayAsColumn ? '0px' : '12px'}>{showAdvanceSearchChip(advance)}</Padding> *!/*/}
             {/*    {displayAsColumn ? showAdvanceMessage(advance) : null}*/}
             {/*    {showAdvanceSearchChip(advance)}*/}
@@ -154,16 +168,10 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
     const align = displayAsColumn ? 'end' : 'center';
     const width = displayAsColumn ? 'auto' : 'fit-content';
 
-    useEffect(() => {
-        ReactTooltip.rebuild();
-    });
-
     return (
-        <>
-            <Column key={type} margin={searchMargin(type)} width={width} alignItems={align} justifyContent={justify}>
-                {_searchViews}
-            </Column>
-        </>
+        <Column key={type} $margin={searchMargin(type)} $width={width} $alignItems={align} $justifyContent={justify}>
+            {_searchViews}
+        </Column>
     );
 
 }

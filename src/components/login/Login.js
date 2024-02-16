@@ -2,16 +2,16 @@ import React, { Component } from "react";
 import { connect, useDispatch, useSelector } from "react-redux";
 import { compose } from 'redux';
 import "./Login.css";
-import { signIn } from "../../actions";
+import { signIn } from "../../actions/index.js";
 import { Link, useNavigate } from "react-router-dom";
 import { withTranslation } from "react-i18next";
-import LoginFail from "./LoginFail";
-import AuthPolling from "./AuthPolling";
+import LoginFail from "./LoginFail.js";
+import AuthPolling from "./AuthPolling.js";
 import axios from "axios";
 import PropTypes from 'prop-types';
-import { Column, OutlineButton, Padding, Row } from "../../common/styles";
+import { Column, OutlineButton, Padding, Row } from "../../common/styles.js";
 import { t } from "i18next";
-import { FR_ROLE, PPR_ROLE, PCR_ROLE, VR_ROLE, userData, storeJWT } from '../../common/auth';
+import { FR_ROLE, PPR_ROLE, PCR_ROLE, VR_ROLE, userData, storeJWT } from '../../common/auth.js';
 
 export const withNavigation = (Component) => {
   return props => <Component {...props} navigate={useNavigate()} />;
