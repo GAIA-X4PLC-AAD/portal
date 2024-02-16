@@ -15,7 +15,7 @@ const UserInfo = () => {
         {authContext.hasRole("portal-user") && <p>User</p>}
         {authContext.hasRole("portal-admin") && <p>Admin</p>}
       </div>
-      <HeaderButton onClick={authContext.logout} id="top-menu-signin">
+      <HeaderButton $border={true} onClick={authContext.logout} id="top-menu-signin">
         Logout
       </HeaderButton>
     </div>
