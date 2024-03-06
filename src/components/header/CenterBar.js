@@ -1,46 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux'
+import ReactTooltip from 'react-tooltip';
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
-
 import { Menu, MenuItem } from '@szhsin/react-menu';
-import '@szhsin/react-menu/dist/index.css';
-
-import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 
-
-import i18next from 'i18next';
-
-import * as S from './style';
+import buildLanguageItemView from '../../common/language_item';
+import history from "../../common/history";
 import { BodyText, ButtonText, DropDownArrowDownSmall, H4LightText, HorizontalLine, OutlineButton, Row } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
-import buildLanguageItemView from '../../common/language_item';
-
 import { FR_ROLE, PPR_ROLE, PCR_ROLE, VR_ROLE } from '../../common/auth';
 
-import history from "../../common/history";
-import ReactTooltip from 'react-tooltip';
-
-
+import * as S from './style';
+import '@szhsin/react-menu/dist/index.css';
+import 'react-responsive-modal/styles.css';
 
 const CenterBar = () => {
-
   const navigate = useNavigate();
   const location = useLocation();
   const { t, i18n } = useTranslation();
   const _lang = i18n['language']
-
-  const _isEn = _lang.indexOf('en') == 0
-  const _isEs = _lang.indexOf('es') == 0
-  const _isDe = _lang.indexOf('de') == 0
+  const _isEn = _lang.startsWith('en')
+  const _isEs = _lang.startsWith('es')
+  const _isDe = _lang.startsWith('de')
 
   const _userRole = useSelector((state) => state.user.user.user_role)
-
   const _isPpr = _userRole == PPR_ROLE
-  const _isVr = _userRole == VR_ROLE
-
   const _isPcrUser = _userRole == PCR_ROLE
   const _isPcrOrg = _userRole == PPR_ROLE
   const _isFr = _userRole == FR_ROLE
@@ -57,8 +43,7 @@ const CenterBar = () => {
   });
 
   return (
-    <>
-      <S.TopMenuLinks>
+    <S.TopMenuLinks>
 
         {/* DASHBOARD: 0 */}
         {(_isPpr || _isPcrUser || _isPcrOrg)
@@ -100,7 +85,7 @@ const CenterBar = () => {
                 onClick={() => { navigate('/service-offerings'); }}
                 data-tip={t('left-menu.tooltip.service-offerings')}
                 >
-                  {t('left-menu.service-offerings')}
+                  {t('left-menu.tooltip.service-offerings')}
               </ButtonText>
 
               {/* PROVIDER: 4 */}
@@ -111,7 +96,7 @@ const CenterBar = () => {
                 onClick={() => { navigate('/participants'); }}
                 data-tip={t('left-menu.tooltip.participants')}
                 >
-                  {t('left-menu.participants')}
+                  {t('left-menu.tooltip.participants')}
               </ButtonText>
 
               {/* DATA: 3 */}
@@ -122,7 +107,7 @@ const CenterBar = () => {
                 onClick={() => { navigate('/resources'); }}
                 data-tip={t('left-menu.tooltip.resources')}
               >
-                {t('left-menu.resources')}
+                {t('left-menu.tooltip.resources')}
               </ButtonText>
 
               {/* PROVIDE: 5 */}
@@ -180,7 +165,6 @@ const CenterBar = () => {
         </Modal>
 
       </S.TopMenuLinks>
-    </>
   )
 }
 
