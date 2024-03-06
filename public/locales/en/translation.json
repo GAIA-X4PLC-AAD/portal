@@ -32,7 +32,10 @@
       "data": "Discovery data in Federated Catalogue",
       "provider": "Discovery providers in Federated Catalogue",
       "provide": "Provide Self-description for Service/Data/Node",
-      "change-language": "Change language"
+      "change-language": "Change language",
+      "resources": "Resources",
+      "service-offerings": "Service Offerings",
+      "participants": "Participants"
     }
   },
   "dashboard": {
