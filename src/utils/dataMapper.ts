@@ -1,33 +1,39 @@
-interface ResponseData {
-  totalCount: number;
-  items: {
-    "properties(n)": {
-      "claimsGraphUri": string[],
-      "survey_start_time": string,
-      "contract_id": string,
-      "survey_close_time": string,
-      "uri": string,
-      "edc_endpoint": string
+export interface SelfDescriptionInput {
+  items: Array<{
+    'properties(n)': {
+      survey_id: string;
+      claimsGraphUri: string;
+      survey_url: string;
+      survey_title: string;
+      survey_description: string;
+      survey_creation_time: string;
+      survey_end_time: string;
+      uri: string;
     };
-  }[];
+  }>;
 }
 
-export function mapSelfDescriptions(selfDescriptions: any) {
-  return selfDescriptions.items.map((selfDescription: any) => {
-    return {
-      // survey_id: selfDescription.properties.subjectClaims.survey_id,
-      // survey_title: selfDescription.subjectClaims.survey_title,
-      // survey_description: selfDescription.subjectClaims.survey_description,
-      claimsGraphUri: selfDescription["properties(n)"].claimsGraphUri,
-      survey_close_time: selfDescription["properties(n)"].survey_close_time,
-      // survey_creation_time: selfDescription.subjectClaims.survey_creation_time,
-      // survey_end_time: selfDescription.subjectClaims.survey_end_time,
-      survey_start_time: selfDescription["properties(n)"].survey_start_time,
-      // survey_state: selfDescription.subjectClaims.survey_state,
-      // survey_url: selfDescription.subjectClaims.survey_url,
-      id: selfDescription["properties(n)"].uri,
-      edcEndpoint: selfDescription["properties(n)"].edc_endpoint,
-      contractId: selfDescription["properties(n)"].contract_id
-    };
-  });
+export interface SelfDescription {
+  survey_id: string;
+  claimsGraphUri: string;
+  survey_url: string;
+  survey_title: string;
+  survey_description: string;
+  survey_creation_time: string;
+  survey_end_time: string;
+  uri: string;
+}
+
+export function mapSelfDescriptions(selfDescriptions: SelfDescriptionInput): SelfDescription[] {
+  console.log('From mapper: ', selfDescriptions);
+  return selfDescriptions.items.map(({ 'properties(n)': p }) => ({
+    survey_id: p.survey_id,
+    claimsGraphUri: p.claimsGraphUri,
+    survey_url: p.survey_url,
+    survey_title: p.survey_title,
+    survey_description: p.survey_description,
+    survey_creation_time: p.survey_creation_time,
+    survey_end_time: p.survey_end_time,
+    uri: p.uri,
+  }));
 }

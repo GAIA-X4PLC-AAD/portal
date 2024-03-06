@@ -1,39 +1,39 @@
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 // @ts-ignore
-import {DataGrid, GridColDef} from '@mui/x-data-grid';
-import {useEffect, useState} from "react";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useEffect, useState } from "react";
 
 const participantColumns: GridColDef[] = [
   {
-    field: 'id',
-    headerName: 'ID',
-    width: 50
+    field: "id",
+    headerName: "ID",
+    width: 50,
   },
   {
-    field: 'sdId',
-    headerName: 'Provider ID',
-    width: 400
+    field: "sdId",
+    headerName: "Provider ID",
+    width: 400,
   },
   {
-    field: 'subjectTypes',
-    headerName: 'Types',
-    width: 100
+    field: "subjectTypes",
+    headerName: "Types",
+    width: 100,
   },
   {
-    field: 'legalName',
-    headerName: 'Legal name',
+    field: "legalName",
+    headerName: "Legal name",
     width: 190,
     editable: true,
   },
   {
-    field: 'claimsGraphUri',
-    headerName: 'claimsGraphUri',
+    field: "claimsGraphUri",
+    headerName: "claimsGraphUri",
     width: 270,
     editable: true,
   },
   {
-    field: 'registrationNumber',
-    headerName: 'registrationNumber',
+    field: "registrationNumber",
+    headerName: "registrationNumber",
     width: 150,
     editable: true,
   },
@@ -41,55 +41,47 @@ const participantColumns: GridColDef[] = [
 
 const serviceColumns: GridColDef[] = [
   {
-    field: 'id',
-    headerName: 'ID',
-    width: 50
+    field: "survey_id",
+    headerName: "ID",
+    width: 50,
   },
   {
-    field: 'sdId',
-    headerName: 'Self Description ID',
-    width: 500
+    field: "claimsGraphUri",
+    headerName: "Claims Graph Uri",
+    width: 200,
   },
-  // {
-  //   field: 'surveyID',
-  //   headerName: 'Survey ID',
-  //   width: 250
-  // },
-  // {
-  //   field: 'surveyTitle',
-  //   headerName: 'Survey Title',
-  //   width: 190,
-  //   editable: true,
-  // },
-  // {
-  //   field: 'surveyDescription',
-  //   headerName: 'Survey Description',
-  //   width: 270,
-  //   editable: true,
-  // },
   {
-    field: 'surveyStartTime',
-    headerName: 'Survey Start Time',
+    field: "survey_url",
+    headerName: "Survey Url",
+    width: 500,
+  },
+  {
+    field: "survey_title",
+    headerName: "Survey Title",
     width: 200,
     editable: true,
-  },  {
-    field: 'surveyCloseTime',
-    headerName: 'Survey Close Time',
+  },
+  {
+    field: "survey_description",
+    headerName: "Survey Description",
     width: 200,
     editable: true,
-  },  {
-    field: 'claimsGraphUri',
-    headerName: 'Claims Graph URI',
+  },
+  {
+    field: "survey_creation_time",
+    headerName: "Survey Creation Time",
     width: 200,
     editable: true,
-  },  {
-    field: 'edcEndpoint',
-    headerName: 'EDC Endpoint',
+  },
+  {
+    field: "survey_end_time",
+    headerName: "Survey End Time",
     width: 200,
     editable: true,
-  },  {
-    field: 'contractId',
-    headerName: 'Contract ID',
+  },
+  {
+    field: "uri",
+    headerName: "Url",
     width: 200,
     editable: true,
   },
@@ -102,51 +94,48 @@ const DataTable = (props: any) => {
   useEffect(() => {
     createColumns();
     createRows();
-  }, [])
+  }, []);
+
   const createRows = (): any => {
     let newRows;
     if (props.type === "service") {
-      console.log('Data: ', props.data);
       newRows = props.data.map((data: any, id: number) => ({
-          id: id + 1,
-          sdId: data.id,
-          // surveyID: data.survey_id,
-          // surveyTitle: data.survey_title,
-          // surveyDescription: data.survey_description,
-          surveyStartTime: data.survey_start_time,
-          surveyCloseTime: data.survey_close_time,
-          edcEndpoint: data.edcEndpoint,
-          contractId: data.contractId,
-          claimsGraphUri: data.claimsGraphUri,
-        })
-      );
+        id: id + 1,
+        survey_id: data.id,
+        claimsGraphUri: data.claimsGraphUri,
+        survey_url: data.survey_url,
+        survey_title: data.survey_title,
+        survey_description: data.survey_description,
+        survey_creation_time: data.survey_creation_time,
+        survey_end_time: data.survey_end_time,
+        uri: data.uri,
+      }));
     } else if (props.type === "participants") {
       newRows = props.data.map((data: any, id: number) => ({
-          id: id + 1,
-          sdId: data.id,
-          subjectTypes: data.subjectTypes,
-          legalName: data.legalName,
-          claimsGraphUri: data.claimsGraphUri,
-          registrationNumber: data.registrationNumber
-        })
-      );
+        id: id + 1,
+        sdId: data.id,
+        subjectTypes: data.subjectTypes,
+        legalName: data.legalName,
+        claimsGraphUri: data.claimsGraphUri,
+        registrationNumber: data.registrationNumber,
+      }));
     }
 
     setRows(rows.concat(newRows));
-  }
+  };
 
   const createColumns = (): any => {
-    let newColumns;
+    let newColumns: GridColDef[] = [];
     if (props.type === "service") {
       newColumns = serviceColumns;
     } else if (props.type === "participants") {
       newColumns = participantColumns;
     }
     setColumns(columns.concat(newColumns));
-  }
+  };
 
   return (
-    <Box sx={{height: 400, width: '100%'}}>
+    <Box sx={{ height: 400, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -163,6 +152,6 @@ const DataTable = (props: any) => {
       />
     </Box>
   );
-}
+};
 
 export default DataTable;
