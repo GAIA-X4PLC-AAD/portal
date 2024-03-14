@@ -1,0 +1,63 @@
+.card {
+    position: relative;
+    width: 70%;
+    min-height: 15vh;
+    max-height: 20vh;
+    border-radius: 10px;
+    box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    margin: 25px 25px 25px 0px;
+}
+
+.button {
+    display: flex;
+    width: inherit;
+    height: inherit;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.button button {
+    height: 2vh;
+    margin: 20px;
+}
+
+.label {
+    min-width: 20%;
+    height: inherit;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000094;
+}
+
+.label h1 {
+    color: white;
+    font-size: 30px;
+}
+
+.label p {
+    color: white;
+    font-size: 15px;
+    font-weight: 300;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    width: 100%;
+}
+
+.content h1 {
+    color: black;
+    font-size: 30px;
+}
+
+.content p {
+    color: #666666;
+}

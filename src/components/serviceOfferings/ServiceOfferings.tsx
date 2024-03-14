@@ -9,7 +9,6 @@ import {
   TextField,
 } from "@mui/material";
 
-import DataTable from "../dataTable/DataTable";
 import { ApiService } from "../../services/ApiService";
 import { AuthContext } from "../../context/AuthContextProvider";
 import { RDFParser } from "../../utils/RDFParser";
@@ -17,6 +16,7 @@ import { Padding } from "../discovery/tabs/style";
 // import SendIcon from '@mui/icons-material/Send';
 // @ts-ignore
 import car from "../../assets/car.gif";
+import SelfDescriptionCard from "components/cards/SelfDescriptionCard";
 import { SelfDescription, mapSelfDescriptions } from "../../utils/dataMapper";
 import { ShaclShape } from "../../types/shaclShape.model";
 import { getShapeProperties } from "../../utils/shapeHelpers";
@@ -40,24 +40,9 @@ const ServiceOfferings = () => {
   const [selectedShape, setSelectedShape] = useState<ShaclShape>(initShape);
   const [shapes, setShapes] = useState<ShaclShape[]>([]);
   const [isShapeSelected, setIsShapeSelected] = useState(false);
-
   const [isPropertySelected, setIsPropertySelected] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState("");
   const [properties, setProperties] = useState<string[]>([]);
-
-  const handleShapeChange = (event: SelectChangeEvent) => {
-    let uiSelectedShape = event.target.value;
-    shapes.forEach((shape) => {
-      if (shape.short_shape === uiSelectedShape) {
-        setSelectedShape(shape);
-      }
-    });
-    setIsShapeSelected(true);
-  };
-  const handlePropertyChange = (event: SelectChangeEvent) => {
-    setSelectedProperty(event.target.value);
-    setIsPropertySelected(true);
-  };
 
   useEffect(() => {
     setProperties(getShapeProperties(selectedShape));
@@ -90,6 +75,21 @@ const ServiceOfferings = () => {
 
     fetchAndSetSelfDescriptions();
   }, []);
+
+  const handleShapeChange = (event: SelectChangeEvent) => {
+    let uiSelectedShape = event.target.value;
+    shapes.forEach((shape) => {
+      if (shape.short_shape === uiSelectedShape) {
+        setSelectedShape(shape);
+      }
+    });
+    setIsShapeSelected(true);
+  };
+
+  const handlePropertyChange = (event: SelectChangeEvent) => {
+    setSelectedProperty(event.target.value);
+    setIsPropertySelected(true);
+  };
 
   async function handleSearch() {
     setIsLoading(true);
@@ -164,9 +164,19 @@ const ServiceOfferings = () => {
 
           <Padding key="i01" paddingTop="20px" />
           <div>
-            {!isLoading && selfDescriptionData.length > 0 && (
-              <DataTable data={selfDescriptionData} type={"service"} />
-            )}
+            {!isLoading &&
+              selfDescriptionData.length > 0 &&
+              selfDescriptionData.map((selfDescription, index) => {
+                return (
+                  <SelfDescriptionCard
+                    key={selfDescription.name}
+                    label={selfDescription.label}
+                    isGaiaXComlpiant={true}
+                    name={selfDescription.name}
+                    description={selfDescription.uri}
+                  />
+                );
+              })}
             {isLoading && (
               <div className="newCarLoader">
                 <img src={car} alt="loading..." className="car" />

@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 
-import DataTable from "components/dataTable/DataTable";
+import SelfDescriptionCard from "components/cards/SelfDescriptionCard";
 import { ApiService } from "services/ApiService";
 import { AuthContext } from "context/AuthContextProvider";
 import { mapSelfDescriptions } from "utils/dataMapper";
+
 // import SendIcon from '@mui/icons-material/Send';
 // @ts-ignore
 import car from "../../assets/car.gif";
-
 import "./Resources.css";
 
 const Resources = () => {
@@ -42,9 +42,20 @@ const Resources = () => {
       {authContext.isAuthenticated && (
         <div className="content">
           <div>
-            {!isLoading && selfDescriptionData.length > 0 && (
-              <DataTable data={selfDescriptionData} type={"service"} />
-            )}
+            {!isLoading &&
+              selfDescriptionData.length > 0 &&
+              selfDescriptionData.map((selfDescription, index) => {
+                return (
+                  <SelfDescriptionCard
+                    // This key definition via index is just temprorary, until we have a specific structure for our Resource JSON
+                    key={index}
+                    label="Type/Label"
+                    isGaiaXComlpiant={true}
+                    name="Name"
+                    description="Some description for Resources..."
+                  />
+                );
+              })}
             {isLoading && (
               <div className="newCarLoader">
                 <img src={car} alt="loading..." className="car" />
