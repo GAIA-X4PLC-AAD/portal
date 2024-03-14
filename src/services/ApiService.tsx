@@ -61,7 +61,7 @@ export const ApiService = {
       "Access-Control-Allow-Origin": "*",
     };
     const requestBody = {
-      statement: `MATCH (n:ServiceOffering) RETURN properties(n) LIMIT 100`,
+      statement: `MATCH (n:ServiceOffering) RETURN properties(n), labels(n) LIMIT 100`,
     };
 
     // Perform POST request
@@ -88,7 +88,7 @@ export const ApiService = {
       "Access-Control-Allow-Origin": "*",
     };
     const requestBody = {
-      statement: `MATCH (n:Resource) RETURN properties(n), labels(n) LIMIT 100`,
+      statement: `MATCH (n:DataResource) RETURN properties(n), labels(n) LIMIT 100`,
     };
 
     // Perform POST request
