@@ -29,7 +29,7 @@ export default function SelfDescriptionCard({
         <h1>{name}</h1>
         <p>{description}</p>
         <div className={styles.button}>
-          <GaiaXButton label="More Details" />
+          <GaiaXButton label="More Details" handleOnClick={() => {}} />
         </div>
       </div>
     </div>
