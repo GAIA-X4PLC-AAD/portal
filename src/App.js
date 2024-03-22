@@ -1,49 +1,45 @@
-import './App.css';
 import React from 'react';
-import WorkInProgress from './WorkInProgress';
 import {Route, Routes, unstable_HistoryRouter as HistoryRouter} from 'react-router-dom';
-import Home from './Home';
 
-import LoginFail from './components/login/LoginFail';
-import Login from './components/login/Login';
+import AboutPage from "./components/help/AboutPage"
 import AccountHome from './components/account/AccountHome';
+import Article from './components/article/Article';
+import DiscoveryItem from './components/discovery/DiscoveryItem';
+import Home from './Home';
+import LoginFail from './components/login/LoginFail';
+import WorkInProgress from './WorkInProgress';
 import ProvideOverview from './components/provide/ProvideOverview';
 import Provider from './components/account/Provider';
-import Header from './components/header';
-import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
 import DashboardPage from './components/dashboard/dashboard_page';
 import OnboardingPage from './components/onboarding/onboarding_page';
-import ProvideAttributes from './components/provide/ProvideAttributes';
-import {Column, Padding} from './common/styles';
-import Article from './components/article/Article';
+import ServiceOfferings from "./components/serviceOfferings/ServiceOfferings";
+import Participants from "./components/participants/Participants";
+import Resources from "./components/resources/Resources";
+import Navbar from 'components/navbar/Navbar';
 import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
+import ProvideAttributes from './components/provide/ProvideAttributes';
 import ProvideSelection from './components/provide/ProvideSelection';
 import LcmServices from './components/dashboard/lcm/LcmServices';
 import LcmFinal from './components/dashboard/lcm/LcmFinal';
 import history from "./common/history"
-import AboutPage from "./components/help/AboutPage"
 import SupportPage from "./components/help/SupportPage"
+import {Column, Padding} from './common/styles';
 import {Footer} from "./components/footer/Footer";
-import ServiceOfferings from "./components/serviceOfferings/ServiceOfferings";
-import Participants from "./components/participants/Participants";
-import {useTranslation} from "react-i18next";
-import Resources from "./components/resources/Resources";
+
+import './App.css';
 
 const App = (props) => {
-
-  const { t, i18n } = useTranslation();
 
   const ViewContainer = (view) => {
     return <div className='body-container'>{view}</div>
   }
 
   return (
-
-    <div className=''>
+    <div className='App'>
       <div className='main-content'>
         <HistoryRouter history={history}>
-          <Header />
+          <Navbar />
           <Column>
             <Routes>
               <Route path="/" element={
@@ -56,14 +52,9 @@ const App = (props) => {
               <Route path="/home" element={ViewContainer(<Home />)} />
               <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
               <Route path="/participants" element={ViewContainer(<Participants />)} />
-              {/*<Route path="/data" element={ViewContainer(<SearchView type="data" />)} />*/}
               <Route path="/resources" element={ViewContainer(<Resources />)} />
-
-              {/*<Route path="/provider" element={ViewContainer(<SearchView type="ppr" />)} />*/}
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
               <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
-              {/*<Route path="/signin" element={ViewContainer(<LoginHome />)} />*/}
-              {/*<Route path="/signin" element={ViewContainer(<Login />)} />*/}
               <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />
               <Route path="/account/user/:tab" element={ViewContainer(<AccountHome />)} />
               <Route path="/account/provider/:tab" element={ViewContainer(<Provider />)} />
@@ -87,16 +78,14 @@ const App = (props) => {
               <Route path="/lcm/:id" element={ViewContainer(<LcmServices />)} />
               <Route path="/lcm/:id/final" element={ViewContainer(<LcmFinal />)} />
               <Route path="/lcm/:id/:index" element={ViewContainer(<LcmServices />)} />
-              <Route path="/help/about" element={ViewContainer(<AboutPage />)} />
-              <Route path="/help/support" element={ViewContainer(<SupportPage />)} />
-
+              <Route path="/about" element={ViewContainer(<AboutPage />)} />
+              <Route path="/support" element={ViewContainer(<SupportPage />)} />
             </Routes>
           </Column>
         </HistoryRouter>
       </div>
       <Footer />
     </div>
-
   );
 }
 

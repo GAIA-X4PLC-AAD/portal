@@ -17,11 +17,6 @@
     justify-content: flex-end;
 }
 
-.button button {
-    height: 2vh;
-    margin: 20px;
-}
-
 .label {
     min-width: 20%;
     height: inherit;

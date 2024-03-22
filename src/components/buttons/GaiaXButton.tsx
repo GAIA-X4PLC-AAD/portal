@@ -1,9 +1,17 @@
 import styles from "./GaiaXButton.module.css";
 
-interface IGayaXButton {
+interface IGaiaXButton {
   label: string;
+  handleOnClick: () => void;
 }
 
-export default function GaiaXButton({ label }: Readonly<IGayaXButton>) {
-  return <button className={styles.button}>{label}</button>;
+export default function GaiaXButton({
+  label,
+  handleOnClick,
+}: Readonly<IGaiaXButton>) {
+  return (
+    <button className={styles.button} onClick={handleOnClick}>
+      {label}
+    </button>
+  );
 }
