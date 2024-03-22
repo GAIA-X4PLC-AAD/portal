@@ -1,10 +1,10 @@
 // LanguageModal.js
-import React, { useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 
 import GaiaXButton from "components/buttons/GaiaXButton";
 
-import styles from "./LanguageModal.module.css"; // Create and import your styles
+import styles from "./LanguageModal.module.css";
 
 interface ILanguageModal {
   isOpen: boolean;
@@ -19,25 +19,25 @@ const LanguageModal = ({ isOpen, onClose, changeLanguage }: ILanguageModal) => {
 
   return (
     <div className={styles.modal}>
-      <div className={styles.modalContent}>
+      <div className={styles["modal-content"]}>
         <h1>{t("left-menu.choose-language")}</h1>
         <p>{t("left-menu.select-system-language")}</p>
-        <ul className={styles.languageList}>
+        <ul className={styles["language-list"]}>
           <li
             onClick={() => changeLanguage("en")}
-            className={styles.languageItem}
+            className={styles["language-item"]}
           >
             {t("left-menu.english")}
           </li>
           <li
             onClick={() => changeLanguage("de")}
-            className={styles.languageItem}
+            className={styles["language-item"]}
           >
             {t("left-menu.german")}
           </li>
           <li
             onClick={() => changeLanguage("es")}
-            className={styles.languageItem}
+            className={styles["language-item"]}
           >
             {t("left-menu.spanish")}
           </li>

@@ -1,32 +1,33 @@
-import './App.css';
 import React from 'react';
-import WorkInProgress from './WorkInProgress';
 import {Route, Routes, unstable_HistoryRouter as HistoryRouter} from 'react-router-dom';
-import Home from './Home';
 
-import LoginFail from './components/login/LoginFail';
+import AboutPage from "./components/help/AboutPage"
 import AccountHome from './components/account/AccountHome';
+import Article from './components/article/Article';
+import DiscoveryItem from './components/discovery/DiscoveryItem';
+import Home from './Home';
+import LoginFail from './components/login/LoginFail';
+import WorkInProgress from './WorkInProgress';
 import ProvideOverview from './components/provide/ProvideOverview';
 import Provider from './components/account/Provider';
-import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
 import DashboardPage from './components/dashboard/dashboard_page';
 import OnboardingPage from './components/onboarding/onboarding_page';
-import ProvideAttributes from './components/provide/ProvideAttributes';
-import {Column, Padding} from './common/styles';
-import Article from './components/article/Article';
-import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
-import ProvideSelection from './components/provide/ProvideSelection';
-import LcmServices from './components/dashboard/lcm/LcmServices';
-import LcmFinal from './components/dashboard/lcm/LcmFinal';
-import history from "./common/history"
-import AboutPage from "./components/help/AboutPage"
-import SupportPage from "./components/help/SupportPage"
-import {Footer} from "./components/footer/Footer";
 import ServiceOfferings from "./components/serviceOfferings/ServiceOfferings";
 import Participants from "./components/participants/Participants";
 import Resources from "./components/resources/Resources";
 import Navbar from 'components/navbar/Navbar';
+import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
+import ProvideAttributes from './components/provide/ProvideAttributes';
+import ProvideSelection from './components/provide/ProvideSelection';
+import LcmServices from './components/dashboard/lcm/LcmServices';
+import LcmFinal from './components/dashboard/lcm/LcmFinal';
+import history from "./common/history"
+import SupportPage from "./components/help/SupportPage"
+import {Column, Padding} from './common/styles';
+import {Footer} from "./components/footer/Footer";
+
+import './App.css';
 
 const App = (props) => {
 
