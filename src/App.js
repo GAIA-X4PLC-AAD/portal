@@ -82,9 +82,9 @@ const App = (props) => {
               <Route path="/support" element={ViewContainer(<SupportPage />)} />
             </Routes>
           </Column>
+          <Footer />
         </HistoryRouter>
       </div>
-      <Footer />
     </div>
   );
 }
