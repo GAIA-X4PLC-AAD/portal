@@ -3,6 +3,7 @@
     font: 700 14px/1.33 "Titillium Web", Helvetica, Arial, serif;
     display: flex;
     flex-direction: column;
+    height: 100vh;
     margin: 0px;
 }
 
@@ -18,12 +19,12 @@ body {
     font: 700 14px/1.33 "Titillium Web", Helvetica, Arial, serif;
     margin: 0px;
     padding: 0;
-    height: 100%;
-    height: 100vh;
 }
 
 .main-content {
     min-height: calc(100vh - 10rem);
+    min-height: 100vh;
+    flex: 1;
 }
 
 .home-screen {
@@ -34,9 +35,6 @@ body {
 .home-top-border {
     background-color: #000094;
     height: 3px;
-}
-
-.top-menu-container {
 }
 
 .top-menu {
@@ -96,12 +94,8 @@ body {
 
 
 .banner-container {
-    /* background-image: url('../public/images/backgrounds/banner_gradient.png'); */
     min-height: var(--banner-height);
-    /*background-image: url('../public/images/backgrounds/background2.png');*/
-    /* background-size: 100% auto; */
     background: linear-gradient(110deg, rgb(185, 0, 255), 15%, rgb(0, 0, 148), 75%, rgb(70, 218, 255));
-    /*background-position: 50% 50%;*/
     position: relative;
     overflow: hidden;
 }
@@ -112,14 +106,10 @@ body {
     top: 0px;
     left: 0px;
     height: var(--banner-height);
-    width: auto; /* adjust */
+    width: auto;
 }
 
 .banner-content {
-    /*  background-image: url('./assets/banner.png');*/
-    /*
-    position: relative;
-    */
     color: #fff;
     display: flex;
     flex-direction: column;
@@ -130,9 +120,6 @@ body {
 
 .banner-logo {
     margin: 2em 0;
-}
-
-.banner-slider {
 }
 
 .search-container {
@@ -155,6 +142,7 @@ body {
 .body-container {
     width: var(--content-width);
     margin: 0 auto;
+    flex: 1;
 }
 
 .tab-menu {
@@ -168,8 +156,6 @@ body {
     color: red;
 }
 
-.tab-pane {
-}
 
 .rotate {
     -moz-transition: all 200ms linear;
@@ -203,22 +189,6 @@ ul.inline {
     -webkit-margin-end: 0px;
     -webkit-padding-start: 0px;
 }
-
-/* ul.inline,
-li {
-  display: inline-block;
-  margin-left: 0;
-  padding: 10px;
-  width: 80px;
-  text-align: center;
-  border-bottom: 2px solid #eee;
-  transition: all 0.5s;
-  cursor: pointer;
-  color: #545B65;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 24px;
-} */
 
 ul.inline,
 li.selected {
@@ -1108,12 +1078,6 @@ input.app-interval-input {
     outline: none;
 }
 
-/* .custom-dot--active {
-  transform: scale(1.3);
-  outline: auto;
-} */
-
-
 .pagination {
     display: flex;
     justify-content: space-between;
@@ -1163,7 +1127,6 @@ input.app-interval-input {
 }
 
 .pagination__link--disabled a {
-    /* filter: invert(74%) sepia(0%) saturate(1%) hue-rotate(3deg) brightness(96%) contrast(95%); */
     cursor: none;
     pointer-events: none;
     opacity: 0.1;
