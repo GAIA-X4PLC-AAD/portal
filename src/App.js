@@ -5,7 +5,7 @@ import AboutPage from "./components/help/AboutPage"
 import AccountHome from './components/account/AccountHome';
 import Article from './components/article/Article';
 import DiscoveryItem from './components/discovery/DiscoveryItem';
-import Home from './Home';
+// import Home from './Home';
 import LoginFail from './components/login/LoginFail';
 import WorkInProgress from './WorkInProgress';
 import ProvideOverview from './components/provide/ProvideOverview';
@@ -26,6 +26,7 @@ import history from "./common/history"
 import SupportPage from "./components/help/SupportPage"
 import {Column, Padding} from './common/styles';
 import {Footer} from "./components/footer/Footer";
+import Home from './pages/home/Home';
 
 import './App.css';
 
@@ -44,8 +45,8 @@ const App = (props) => {
             <Routes>
               <Route path="/" element={
                 <Column>
+                  {/* <Home /> */}
                   <Home />
-                  {ViewContainer(<Padding vertical='120px'><Article headerMessage="article.what-is-gaiax" category="ARTICLE" /></Padding>)}
                 </Column>
               }
               />
@@ -82,9 +83,9 @@ const App = (props) => {
               <Route path="/support" element={ViewContainer(<SupportPage />)} />
             </Routes>
           </Column>
-          <Footer />
         </HistoryRouter>
       </div>
+      <Footer />
     </div>
   );
 }

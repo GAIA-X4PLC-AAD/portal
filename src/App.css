@@ -3,7 +3,7 @@
     font: 700 14px/1.33 "Titillium Web", Helvetica, Arial, serif;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0px;
 }
 
@@ -11,7 +11,7 @@
     --width-menu: 150px;
     --height-menu: 50px;
     --banner-height: 600px;
-    --content-width: 80%;
+    --content-width: 90%;
     --content-height: 40%;
 }
 
@@ -23,7 +23,6 @@ body {
 
 .main-content {
     min-height: calc(100vh - 10rem);
-    min-height: 100vh;
     flex: 1;
 }
 

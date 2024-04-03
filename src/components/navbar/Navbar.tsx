@@ -3,12 +3,12 @@ import { useTranslation } from "react-i18next";
 import { Link, NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 
-import { Gaiax4FutureMobilityLogo } from "./style";
 import { useNavbar } from "hooks/useNavbar";
 import { AuthContext } from "context/AuthContextProvider";
 import GaiaXButton from "components/buttons/GaiaXButton";
 import LanguageModal from "components/modals/LanguageModal";
 
+import gaiaLogo from "../../assets/images/PLC-AAD-Logo.png";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
@@ -25,13 +25,14 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <div className={styles.logo}>
         <Link to="/">
-          <Gaiax4FutureMobilityLogo
-            src="/images/logos/Gaia_X_4_future_mobility.jpg"
-            alt={t("left-menu.logo-alt-text")}
+          <img
+            src={gaiaLogo}
+            alt="Gaia-X Logo"
+            style={{ width: "300px", height: "50px" }}
           />
         </Link>
       </div>
-      {navbarAssets && (
+      {authContext.isAuthenticated && (
         <ul className={styles["navigation-items"]}>
           {navbarAssets.map((asset, index) => (
             <li key={index} className={styles["navigation-item"]}>
