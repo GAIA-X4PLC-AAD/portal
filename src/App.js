@@ -43,7 +43,6 @@ const App = (props) => {
             <Routes>
               <Route path="/" element={
                 <Column>
-                  {/* <Home /> */}
                   <Home />
                 </Column>
               }
