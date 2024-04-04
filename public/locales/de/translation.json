@@ -84,15 +84,24 @@
   "article": {
     "what-is-new": "Was gibt es Neues?",
     "what-is-new-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
-    "what-is-gaiax": "Das Projekt Gaia-X 4 Future Mobility",
+    "what-is-gaiax": "Was ist Gaia-X 4 PLC-AAD?",
     "what-is-gaiax-message-introduction-section": "Willkommen bei der Gaia-X 4 Future Mobility Projektfamilie. Wir beschäftigen uns mit der Gaia-X-basierten Entwicklung und Umsetzung zukünftiger Mobilitätsanwendungen. Dazu zählen Anwendungen und Dienste für die Fertigung und den Betrieb, aber auch für das übergeordnete Mobilitätssystem, wie z.B. das Parkraummanagement oder die Straßenzustandsüberwachung.",
     "what-is-gaiax-message-main-section": "Zusammen bauen wir ein offenes und dezentrales Daten- und Dienste-Ökosystem auf, in dem skalierbare Anwendungen und notwendige Services und Daten sicher zur Verfügung gestellt werden. Damit sprechen wir IT-Provider, Entwickler und Nutzergruppen, wie Städte, Kommunen und die Industrie an.",
     "what-is-gaiax-message-ending-section": "Gaia-X 4 Future Mobility umfasst aktuell sechs vom BMWK (Bundesministerium für Wirtschaft und Klimaschutz) geförderte Projekte: Gaia-X 4 KI, Gaia-X 4 AMS, Gaia-X 4 ROMS, Gaia-X 4 PLC-AAD, Gaia-X 4 moveID sowie Gaia-X 4 AGEDA. Gemeinsam schaffen wir mit dieser Projektfamilie eine digitale Grundlage für Systeminnovationen im Bereich der Mobilität. Ziel ist, diese Grundlage und die Anwendungen über die Projektlaufzeit hinaus weiterzuführen und auf andere Domänen zu transferieren.",
-    "details-button": "Einzelheiten"
+    "details-button": "Einzelheiten",
+    "how-to-start": "Wie fängt man an?",
+    "how-to-start-guidelines": {
+        "guideline1": "Kassendatenangebote der teilnehmenden Unternehmen",
+        "guideline2": "Machen Sie Ihre eigenen Daten und Dienste bereit für vernetzte Marktplätze",
+        "guideline3": "Definieren Sie Ihre Nutzungsrichtlinien und Vertragsdefinitionen für die Datenfreigabe",
+        "guideline4": "Beteiligte technische Komponenten",
+        "guideline5": "Nehmen Sie Kontakt mit der Community auf und bitten Sie um Unterstützung"
+      }
   },
   "home": {
     "welcome.title": "Welcome to GAIA-X",
     "welcome.subtitle": "A federated Data Infrastructure for Europe",
+    "header.title": "Daten und Service Marktplatz",
     "search_placeholder": "Suche...",
     "advanced": "Fortgeschrittene",
     "marketplace": "Daten- und Service-Marktplatz",

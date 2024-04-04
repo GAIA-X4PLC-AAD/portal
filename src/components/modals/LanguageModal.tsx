@@ -35,12 +35,6 @@ const LanguageModal = ({ isOpen, onClose, changeLanguage }: ILanguageModal) => {
           >
             {t("left-menu.german")}
           </li>
-          <li
-            onClick={() => changeLanguage("es")}
-            className={styles["language-item"]}
-          >
-            {t("left-menu.spanish")}
-          </li>
           <GaiaXButton label={t("left-menu.close")} handleOnClick={onClose} />
         </ul>
       </div>

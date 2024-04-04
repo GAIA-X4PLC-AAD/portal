@@ -84,15 +84,24 @@
   "article": {
     "what-is-new": "What's new",
     "what-is-new-message": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
-    "what-is-gaiax": "What is Gaia-X 4 Future Mobility?",
+    "what-is-gaiax": "What is Gaia-X 4 PLC-AAD?",
     "what-is-gaiax-message-introduction-section": "Welcome to the Gaia-X 4 Future Mobility project family. We develop and implement future mobility applications based on Gaia-X. This includes applications and services for manufacturing and operations, but also for the overall mobility system, such as parking management or road condition monitoring.",
     "what-is-gaiax-message-main-section": "Together, we build an open and decentralized data and services ecosystem in which scalable applications and necessary services and data are securely provided. We are addressing IT providers and developers as well as user groups such as cities, municipalities and industrial companies.",
     "what-is-gaiax-message-ending-section": "Gaia-X 4 Future Mobility currently comprises of six projects funded by the BMWK (German Federal Ministry of Economics and Climate Protection): Gaia-X 4 AI, Gaia-X 4 AMS, Gaia-X 4 ROMS, Gaia-X 4 PLC-AAD, Gaia-X 4 moveID and Gaia-X 4 AGEDA. As a project family we create the digital foundation for system innovation in the mobility sector. We are aiming to continue the groundwork and the applications beyond the projects’ duration and to transfer them to other domains.",
-    "details-button": "Details"
+    "details-button": "Details",
+    "how-to-start": "How to start?",
+    "how-to-start-guidelines": {
+        "guideline1": "Checkout data offerings from participating companies",
+        "guideline2": "Get your own data and services ready for connected marketplaces",
+        "guideline3": "Define your usage policies and contract definitions for data sharing",
+        "guideline4": "Involved technical components",
+        "guideline5": "Get in touch with the community and ask for support"
+      }
   },
   "home": {
     "welcome.title": "Welcome to GAIA-X",
     "welcome.subtitle": "A federated Data Infrastructure for Europe",
+    "header.title": "Data & Service Marketplace",
     "search_placeholder": "Search...",
     "advanced": "Advanced",
     "not": "Not",
