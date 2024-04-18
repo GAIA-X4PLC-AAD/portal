@@ -78,6 +78,40 @@ export const ApiService = {
       });
   },
 
+  async getOneSelfDescriptions(
+    authContext: AuthContextValues,
+    claimsGraphUri: string | undefined
+  ): Promise<any> {
+    if (!claimsGraphUri) {
+      // Handle the case where claimsGraphUri is not provided
+      console.error("No claimsGraphUri provided");
+      throw new Error("No claimsGraphUri provided"); // Or return a custom error object
+    }
+
+    const endpoint = "https://fc-server.gxfs.gx4fm.org/query";
+    const headers = {
+      Authorization: `Bearer ${authContext.token}`,
+      "Access-Control-Allow-Origin": "*",
+    };
+    const requestBody = {
+      statement: `MATCH (n:HDMap) WHERE '${claimsGraphUri.replace(
+        /'/g,
+        "\\'"
+      )}' IN n.claimsGraphUri RETURN properties(n), labels(n) LIMIT 1`,
+    };
+
+    try {
+      await axios.options(endpoint, { headers });
+      const response = await axios.post(endpoint, requestBody, { headers });
+      console.log("This is ONE Service Offering: ", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching self descriptions:", error);
+      // Handle the error appropriately
+      throw error; // Re-throw the error if you want to handle it in the calling function
+    }
+  },
+
   // Returns every Resource available
   async getAllResources(
     authContext: AuthContextValues
@@ -88,7 +122,7 @@ export const ApiService = {
       "Access-Control-Allow-Origin": "*",
     };
     const requestBody = {
-      statement: `MATCH (n:DataResource) RETURN properties(n), labels(n) LIMIT 100`,
+      statement: `MATCH (n:HDMap) RETURN properties(n), labels(n)`,
     };
 
     // Perform POST request

@@ -1,4 +1,21 @@
 .title {
     font-size: xx-large;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
+
+@media (max-width: 1700px) {
+    .title {
+      font-size: x-large;
+    }
+  }
+  
+@media (max-width: 1300px) {
+    .title {
+      font-size: 20px;
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .title {
+      font-size: small;
+    }
+  }

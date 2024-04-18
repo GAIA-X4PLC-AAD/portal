@@ -3,16 +3,17 @@ import { useContext, useEffect, useState } from "react";
 import SelfDescriptionCard from "components/cards/SelfDescriptionCard";
 import { ApiService } from "services/ApiService";
 import { AuthContext } from "context/AuthContextProvider";
-import { mapSelfDescriptions } from "utils/dataMapper";
+import { Resource, mapResources } from "utils/dataMapper";
 
 // import SendIcon from '@mui/icons-material/Send';
 // @ts-ignore
 import car from "../../assets/car.gif";
-import "./Resources.css";
+import styles from "./Resources.module.css";
+import Title from "components/Title/Title";
 
 const Resources = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [selfDescriptionData, setSelfDescriptionData] = useState([]);
+  const [resourceData, setResourceData] = useState<Resource[]>([]);
 
   const authContext = useContext(AuthContext);
 
@@ -22,8 +23,8 @@ const Resources = () => {
       try {
         const response = await ApiService.getAllResources(authContext);
         console.log("My fetched data: ", response);
-        const map = mapSelfDescriptions(response);
-        setSelfDescriptionData(map);
+        const map = mapResources(response);
+        setResourceData(map);
       } catch (error) {
         console.error("Error fetching self descriptions:", error);
       } finally {
@@ -36,23 +37,25 @@ const Resources = () => {
 
   return (
     <div>
-      <header>
-        <h2>Resources</h2>
+      <header className={styles["header-container"]}>
+        <div className={styles["header-title"]}>
+          <Title>Resources</Title>
+        </div>
       </header>
       {authContext.isAuthenticated && (
-        <div className="content">
+        <div className={styles.content}>
           <div>
             {!isLoading &&
-              selfDescriptionData.length > 0 &&
-              selfDescriptionData.map((selfDescription, index) => {
+              resourceData.length > 0 &&
+              resourceData.map((resource) => {
                 return (
                   <SelfDescriptionCard
-                    // This key definition via index is just temprorary, until we have a specific structure for our Resource JSON
-                    key={index}
-                    label="Type/Label"
+                    key={resource.name}
+                    label={resource.label}
                     isGaiaXComlpiant={true}
-                    name="Name"
-                    description="Some description for Resources..."
+                    name={resource.name}
+                    description={resource.description}
+                    selfDescription={resource}
                   />
                 );
               })}

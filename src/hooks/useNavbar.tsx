@@ -4,14 +4,15 @@ export const useNavbar = () => {
   const { t } = useTranslation();
 
   const navbarAssets = [
-    {
-      path: "/service-offerings",
-      navigationItemName: t("left-menu.tooltip.service-offerings"),
-    },
-    {
-      path: "/participants",
-      navigationItemName: t("left-menu.tooltip.participants"),
-    },
+    // These were commented out for the Hannover Fair - they will be added back later
+    // {
+    //   path: "/service-offerings",
+    //   navigationItemName: t("left-menu.tooltip.service-offerings"),
+    // },
+    // {
+    //   path: "/participants",
+    //   navigationItemName: t("left-menu.tooltip.participants"),
+    // },
     {
       path: "/resources",
       navigationItemName: t("left-menu.tooltip.resources"),
