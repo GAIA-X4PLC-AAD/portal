@@ -17,7 +17,7 @@ import { Padding } from "../discovery/tabs/style";
 // @ts-ignore
 import car from "../../assets/car.gif";
 import SelfDescriptionCard from "components/cards/SelfDescriptionCard";
-import { SelfDescription, mapSelfDescriptions } from "../../utils/dataMapper";
+import { ServiceOffering, mapServiceOfferings } from "../../utils/dataMapper";
 import { ShaclShape } from "../../types/shaclShape.model";
 import { getShapeProperties } from "../../utils/shapeHelpers";
 
@@ -25,7 +25,7 @@ import "./ServiceOfferings.css";
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState<
-    SelfDescription[]
+    ServiceOffering[]
   >([]);
   const [isLoading, setIsLoading] = useState(false);
   const authContext = useContext(AuthContext);
@@ -64,7 +64,7 @@ const ServiceOfferings = () => {
       try {
         const response = await ApiService.getAllSelfDescriptions(authContext);
         console.log("My fetched data: ", response);
-        const map = mapSelfDescriptions(response);
+        const map = mapServiceOfferings(response);
         setSelfDescriptionData(map);
       } catch (error) {
         console.error("Error fetching self descriptions:", error);
@@ -98,7 +98,7 @@ const ServiceOfferings = () => {
       authContext,
       targetClass
     );
-    const map = mapSelfDescriptions(selfDescriptions.data);
+    const map = mapServiceOfferings(selfDescriptions.data);
     console.log("Map:", map);
     setSelfDescriptionData(map);
     setIsLoading(false);
@@ -166,14 +166,15 @@ const ServiceOfferings = () => {
           <div>
             {!isLoading &&
               selfDescriptionData.length > 0 &&
-              selfDescriptionData.map((selfDescription, index) => {
+              selfDescriptionData.map((selfDescription) => {
                 return (
                   <SelfDescriptionCard
                     key={selfDescription.name}
                     label={selfDescription.label}
                     isGaiaXComlpiant={true}
                     name={selfDescription.name}
-                    description={selfDescription.uri}
+                    description={selfDescription.description}
+                    selfDescription={selfDescription}
                   />
                 );
               })}

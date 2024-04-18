@@ -23,6 +23,7 @@ import LcmFinal from './components/dashboard/lcm/LcmFinal';
 import history from "./common/history"
 import SupportPage from "./components/help/SupportPage"
 import Home from './pages/home/Home';
+import DetailsPage from 'pages/details/DetailsPage';
 import {Column} from './common/styles';
 import {Footer} from "./components/footer/Footer";
 
@@ -51,6 +52,7 @@ const App = (props) => {
               <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
               <Route path="/participants" element={ViewContainer(<Participants />)} />
               <Route path="/resources" element={ViewContainer(<Resources />)} />
+              <Route path="/details/:resourceId" element={ViewContainer(<DetailsPage />)} />
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
               <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
               <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />

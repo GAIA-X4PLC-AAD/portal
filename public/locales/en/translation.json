@@ -490,6 +490,14 @@
     "upload_configuration": "Upload configuration",
     "download_template": "Download template",
     "final_description": "You can download template and upload configuration or complete form manually."
+  },
+  "details": {
+    "sidebar-button-label": "Contact or buy",
+    "contact-or-buy-button-notification": "Data was transfered"
+  },
+  "resources": {
+    "is-gaia-x-compliant": "Gaia-X compliant",
+    "not-gaia-x-compliant": "Not Gaia-X compliant"
   }
 }
 

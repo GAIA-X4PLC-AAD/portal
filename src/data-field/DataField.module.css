@@ -1,0 +1,29 @@
+.data-field-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90%; 
+    overflow: hidden;
+  }
+  
+  .label {
+    font-weight: bold;
+    white-space: nowrap;
+    margin-right: 5px;
+    flex-shrink: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .content {
+    font-weight: lighter;
+    overflow-wrap: break-word; 
+    word-break: break-word;
+    flex-grow: 1;
+    max-width: calc(100% - 5px);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    justify-content: start;
+    min-width: 0;
+  }

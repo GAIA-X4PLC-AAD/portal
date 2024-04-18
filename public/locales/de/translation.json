@@ -74,7 +74,7 @@
   "top-menu": {
     "help": "Hilfe",
     "signin": "Einloggen",
-    "signout": "Austragen",
+    "signout": "Abmelden",
     "register": "Anmelden",
     "tooltip": {
       "signin": "Login mit QR-Code",
@@ -490,6 +490,14 @@
     "upload_configuration": "Upload configuration",
     "download_template": "Download template",
     "final_description": "You can download template and upload configuration or complete form manually."
+  },
+  "details": {
+    "sidebar-button-label": "Kontaktieren oder kaufen",
+    "contact-or-buy-button-notification": "Daten wurden übertragen"
+  },
+  "resources": {
+    "is-gaia-x-compliant": "Gaia-X konform",
+    "not-gaia-x-compliant": "Nicht Gaia-X konform"
   }
 }
 

@@ -1,17 +1,15 @@
 .card {
-    width: 70%;
+    width: 100%;
     min-height: 15vh;
-    max-height: 20vh;
     border-radius: 10px;
     box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.25);
     display: flex;
     margin: 25px 25px 25px 0px;
+    background-color: white;
 }
 
 .button {
     display: flex;
-    width: inherit;
-    height: inherit;
     align-items: flex-end;
     justify-content: flex-end;
 }
@@ -29,7 +27,6 @@
 
 .label h1 {
     color: white;
-    font-size: 30px;
 }
 
 .label p {
@@ -44,6 +41,7 @@
     display: flex;
     flex-direction: column;
     padding-left: 15px;
+    padding-right: 15px;
     width: 100%;
 }
 

@@ -19,6 +19,7 @@ body {
     font: 700 14px/1.33 "Titillium Web", Helvetica, Arial, serif;
     margin: 0px;
     padding: 0;
+    background-color: #EFEFEF;
 }
 
 .main-content {
@@ -396,11 +397,6 @@ input.app-interval-input {
     text-align: center;
     font-weight: 300;
     margin: 0;
-}
-
-.gallery-demo-subheader {
-    padding: 30px 0 20px;
-    text-align: center;
 }
 
 .gallery-container {
