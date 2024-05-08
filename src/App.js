@@ -28,6 +28,7 @@ import {Column} from './common/styles';
 import {Footer} from "./components/footer/Footer";
 
 import './App.css';
+import ShapesAndOntologies from "./components/shapesAndOntologies/ShapesAndOntologies";
 
 const App = (props) => {
 
@@ -79,6 +80,7 @@ const App = (props) => {
               <Route path="/lcm/:id/final" element={ViewContainer(<LcmFinal />)} />
               <Route path="/lcm/:id/:index" element={ViewContainer(<LcmServices />)} />
               <Route path="/about" element={ViewContainer(<AboutPage />)} />
+              <Route path="/shapesAndOntologies" element={ViewContainer(<ShapesAndOntologies />)} />
               <Route path="/support" element={ViewContainer(<SupportPage />)} />
             </Routes>
           </Column>

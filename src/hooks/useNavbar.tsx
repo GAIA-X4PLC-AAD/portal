@@ -22,6 +22,10 @@ export const useNavbar = () => {
       navigationItemName: t("left-menu.about"),
     },
     {
+      path: "/shapesAndOntologies",
+      navigationItemName: t("left-menu.shapesAndOntologies"),
+    },
+    {
       path: "/support",
       navigationItemName: t("left-menu.support"),
     },
