@@ -2,41 +2,14 @@ import React from 'react';
 import {createRoot} from 'react-dom/client';
 import {configureStore} from "@reduxjs/toolkit";
 import {Provider} from 'react-redux';
-import './index.css';
-import App from './App';
-import './i18n';
-import reducers from './reducers';
-import axios from "axios"
-import {retrieveToken} from "./common/auth";
-import {Navigate, useNavigate} from 'react-router-dom';
-import history from "./common/history"
-import AuthContextProvider from "./context/AuthContextProvider";
 
-// axios.interceptors.request.use(function (config) {
-//   const token = retrieveToken();
-//
-//   if (token) {
-//     config.headers = {
-//       ...config.headers,
-//       authorization: `Bearer ${token}`,
-//     };
-//   }
-//   return config;
-// }, function (error) {
-//   console.log("in axios interceptors request error")
-//   return Promise.reject(error);
-// });
-//
-// axios.interceptors.response.use(function (response) {
-//   return response;
-// }, function (error) {
-//   if (401 === error.response.status || 403 === error.response.status) {
-//     history.push("/signin")
-//
-//     return Promise.resolve();
-//   }
-//   return Promise.reject(error);
-// });
+import './i18n';
+import App from './App';
+import reducers from './reducers';
+import AuthContextProvider from "./context/AuthContextProvider";
+import {ResourceFilterProvider} from "./context/ResourceFilterContext";
+
+import './index.css';
 
 const saveToLocalStorage = (state) => {
   try {
@@ -73,7 +46,9 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 root.render(
         <Provider store={store}>
             <AuthContextProvider>
+              <ResourceFilterProvider>
                 <App/>
+                </ResourceFilterProvider>
             </AuthContextProvider>
         </Provider>
 );

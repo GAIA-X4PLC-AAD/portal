@@ -56,7 +56,7 @@ export default function SelfDescriptionCard({
         )}
       </div>
       <div className={styles.content}>
-        <h1>{name}</h1>
+        <Title>{name}</Title>
         <p>{description}</p>
         <div className={styles.button}>
           <GaiaXButton

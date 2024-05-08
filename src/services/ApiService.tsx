@@ -122,7 +122,7 @@ export const ApiService = {
       "Access-Control-Allow-Origin": "*",
     };
     const requestBody = {
-      statement: `MATCH (n:HDMap) RETURN properties(n), labels(n)`,
+      statement: `MATCH (n) WHERE (n:HDMap OR n:EnvironmentModel OR n:Scenario) RETURN properties(n), labels(n)`,
     };
 
     // Perform POST request
@@ -162,3 +162,6 @@ export const ApiService = {
       });
   },
 };
+function useContext(AuthContext: any): { token: any } {
+  throw new Error("Function not implemented.");
+}
