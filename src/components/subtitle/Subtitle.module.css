@@ -1,5 +1,6 @@
 .subtitle {
-    font-size: x-large;
+    font-size: large;
+    font-weight: lighter;
     color: black;
     padding: 0;
 }

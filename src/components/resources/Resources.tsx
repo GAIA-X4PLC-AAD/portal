@@ -8,15 +8,22 @@ import { Resource, mapResources } from "utils/dataMapper";
 // import SendIcon from '@mui/icons-material/Send';
 // @ts-ignore
 import car from "../../assets/car.gif";
-import styles from "./Resources.module.css";
 import Title from "components/Title/Title";
+import Filter from "components/filter/Filter";
+import { useFilters } from "context/ResourceFilterContext";
+import { useFilter } from "hooks/useFilter";
+
+import styles from "./Resources.module.css";
 
 const Resources = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [resourceData, setResourceData] = useState<Resource[]>([]);
-
   const authContext = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
 
+  const [resourceData, setResourceData] = useState<Resource[]>([]);
+  const { filters } = useFilters();
+  const { fetchFilteredData } = useFilter();
+
+  // Fetch all resources on component mount
   useEffect(() => {
     const fetchAndSetSelfDescriptions = async () => {
       setIsLoading(true);
@@ -35,6 +42,20 @@ const Resources = () => {
     fetchAndSetSelfDescriptions();
   }, []);
 
+  // Fetch filtered resources based on the filters
+  useEffect(() => {
+    setIsLoading(true);
+    fetchFilteredData()
+      .then((data) => {
+        const map = mapResources(data);
+        setResourceData(map);
+      })
+      .catch((error) => {
+        console.error("Error in fetching data:", error);
+      });
+    setIsLoading(false);
+  }, [filters]);
+
   return (
     <div>
       <header className={styles["header-container"]}>
@@ -42,31 +63,34 @@ const Resources = () => {
           <Title>Resources</Title>
         </div>
       </header>
-      {authContext.isAuthenticated && (
-        <div className={styles.content}>
-          <div>
-            {!isLoading &&
-              resourceData.length > 0 &&
-              resourceData.map((resource) => {
-                return (
-                  <SelfDescriptionCard
-                    key={resource.name}
-                    label={resource.label}
-                    isGaiaXComlpiant={true}
-                    name={resource.name}
-                    description={resource.description}
-                    selfDescription={resource}
-                  />
-                );
-              })}
-            {isLoading && (
-              <div className="newCarLoader">
-                <img src={car} alt="loading..." className="car" />
-              </div>
-            )}
+      <div className={styles["resource-content-container"]}>
+        <Filter />
+        {authContext.isAuthenticated && (
+          <div className={styles.content}>
+            <div>
+              {!isLoading &&
+                resourceData.length > 0 &&
+                resourceData.map((resource) => {
+                  return (
+                    <SelfDescriptionCard
+                      key={resource.name}
+                      label={resource.label}
+                      isGaiaXComlpiant={true}
+                      name={resource.name}
+                      description={resource.description}
+                      selfDescription={resource}
+                    />
+                  );
+                })}
+              {isLoading && (
+                <div className="newCarLoader">
+                  <img src={car} alt="loading..." className="car" />
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
       {!authContext.isAuthenticated && <p>You are not authenticated!</p>}
     </div>
   );
