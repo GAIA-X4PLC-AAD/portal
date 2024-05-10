@@ -1,56 +1,13 @@
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContextProvider"; // Update this path as needed
-import { useFilters } from "../context/ResourceFilterContext"; // Update this path as needed
+import { useFilters } from "../context/ResourceFilterContext";
+import {resourceFilters} from "./filterAssets";
 
-export const useFilter = () => {
+export const useResourceFilter = () => {
   const { filters } = useFilters();
   const { token } = useContext(AuthContext);
-
-  const typeAssets = [
-    {
-      checkboxName: "hdMap",
-      label: "HD Map",
-    },
-    {
-      checkboxName: "scenario",
-      label: "Scenario",
-    },
-    {
-      checkboxName: "environmentModel",
-      label: "Environment Model",
-    },
-  ];
-
-  const formatAssets = [
-    {
-      checkboxName: "openDrive",
-      label: "Opendrive",
-    },
-    {
-      checkboxName: "fbx",
-      label: "FBX",
-    },
-    {
-      checkboxName: "openScenario",
-      label: "OpenSCENARIO",
-    },
-  ];
-
-  const vendorAssets = [
-    {
-      checkboxName: "threeDMapping",
-      label: "3D Mapping",
-    },
-    {
-      checkboxName: "trainGraphics",
-      label: "TrainGraphics",
-    },
-    {
-      checkboxName: "dlr",
-      label: "DLR",
-    },
-  ];
+  const { typeAssets, formatAssets, vendorAssets } = resourceFilters;
 
   const fetchFilteredData = async () => {
     const endpoint = "https://fc-server.gxfs.gx4fm.org/query";

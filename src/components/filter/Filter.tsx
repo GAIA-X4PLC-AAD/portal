@@ -1,22 +1,25 @@
-import React from "react";
-
+import { FC } from "react";
 import Title from "components/Title/Title";
-import { useFilter } from "hooks/useFilter";
-import { useFilters } from "context/ResourceFilterContext";
-
 import styles from "./Filter.module.css";
 import { FilterSection } from "./FilterSection";
+import { Asset } from "../../hooks/filterAssets";
 
-export default function Filter() {
-  const { typeAssets, formatAssets, vendorAssets } = useFilter();
-  const { toggleResourceFilter } = useFilters();
+interface FilterProps {
+    typeAssets: Asset[];
+    formatAssets: Asset[];
+    vendorAssets: Asset[];
+    toggleFilter: (filterName: string) => void;
+}
 
+const Filter: FC<FilterProps> = ({ typeAssets, formatAssets, vendorAssets, toggleFilter }) => {
   return (
     <div className={styles.filterContainer}>
       <Title>Filter</Title>
-      <FilterSection subtitle="Type" assets={typeAssets} toggleResourceFilter={toggleResourceFilter} />
-      <FilterSection subtitle="Format" assets={formatAssets} toggleResourceFilter={toggleResourceFilter} />
-      <FilterSection subtitle="Vendor" assets={vendorAssets} toggleResourceFilter={toggleResourceFilter} />
+      <FilterSection subtitle="Type" assets={typeAssets} toggleFilter={toggleFilter} />
+      <FilterSection subtitle="Format" assets={formatAssets} toggleFilter={toggleFilter} />
+      <FilterSection subtitle="Vendor" assets={vendorAssets} toggleFilter={toggleFilter} />
     </div>
   );
 }
+
+export default Filter;

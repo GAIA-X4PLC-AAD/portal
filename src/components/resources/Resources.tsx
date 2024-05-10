@@ -11,7 +11,7 @@ import car from "../../assets/car.gif";
 import Title from "components/Title/Title";
 import Filter from "components/filter/Filter";
 import { useFilters } from "context/ResourceFilterContext";
-import { useFilter } from "hooks/useFilter";
+import { useResourceFilter } from "hooks/useResourceFilter";
 
 import styles from "./Resources.module.css";
 
@@ -21,7 +21,8 @@ const Resources = () => {
 
   const [resourceData, setResourceData] = useState<Resource[]>([]);
   const { filters } = useFilters();
-  const { fetchFilteredData } = useFilter();
+  const { typeAssets, formatAssets, vendorAssets, fetchFilteredData } = useResourceFilter();
+  const { toggleResourceFilter } = useFilters();
 
   // Fetch all resources on component mount
   useEffect(() => {
@@ -64,7 +65,12 @@ const Resources = () => {
         </div>
       </header>
       <div className={styles["resource-content-container"]}>
-        <Filter />
+        <Filter
+            typeAssets={typeAssets}
+            formatAssets={formatAssets}
+            vendorAssets={vendorAssets}
+            toggleFilter={toggleResourceFilter}
+        />
         {authContext.isAuthenticated && (
           <div className={styles.content}>
             <div>

@@ -1,9 +1,15 @@
-import React from "react";
+import { FC } from "react";
 import Subtitle from "../subtitle/Subtitle";
 import styles from "./Filter.module.css";
-import { ResourceFilterState } from "../../context/ResourceFilterContext";
+import { Asset } from "../../hooks/filterAssets";
 
-export const FilterSection: React.FC<{ subtitle: string, assets: any[], toggleResourceFilter: any }> = ({ subtitle, assets, toggleResourceFilter }) => {
+interface FilterSectionProps {
+    subtitle: string;
+    assets: Asset[];
+    toggleFilter: (filterName: string) => void;
+}
+
+export const FilterSection: FC<FilterSectionProps> = ({subtitle, assets , toggleFilter}) => {
     return (
         <>
             <Subtitle>{subtitle}</Subtitle>
@@ -14,11 +20,7 @@ export const FilterSection: React.FC<{ subtitle: string, assets: any[], toggleRe
                             type="checkbox"
                             className={styles.checkbox}
                             name={item.checkboxName}
-                            onChange={() =>
-                                toggleResourceFilter(
-                                    item.checkboxName as keyof ResourceFilterState
-                                )
-                            }
+                            onChange={() => toggleFilter(item.checkboxName)}
                         />
                         {item.label}
                     </label>
