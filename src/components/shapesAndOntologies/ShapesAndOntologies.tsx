@@ -1,13 +1,14 @@
 import styles from "./ShapesAndOntologies.module.css";
 import Title from "../Title/Title";
-import {useTranslation} from "react-i18next";
-import {useContext, useState} from "react";
-import {AuthContext} from "../../context/AuthContextProvider";
+import { useTranslation } from "react-i18next";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthContextProvider";
+import car from "../../assets/car.gif";
 
 const ShapesAndOntologies = () => {
     const { t } = useTranslation();
     const authContext = useContext(AuthContext);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     return (
         <div>
@@ -20,7 +21,11 @@ const ShapesAndOntologies = () => {
                 {authContext.isAuthenticated && (
                     <div className={styles.content}>
                         <div>
-                            {!isLoading && <p>Loading...</p>}
+                            {isLoading && (
+                                <div className="newCarLoader">
+                                    <img src={car} alt="loading..." className="car" />
+                                </div>
+                            )}
                         </div>
                     </div>
                     )}
