@@ -1,19 +1,18 @@
 import GaiaXButton from "components/buttons/GaiaXButton";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { t } from "i18next";
 
 import Title from "components/Title/Title";
-import { ServiceOffering, Resource } from "utils/dataMapper";
+import {ServiceOffering, Resource, Ontology} from "utils/dataMapper";
 
 import styles from "./SelfDescriptionCard.module.css";
 
 interface ISelfDescriptionCard {
   label: string;
-  isGaiaXComlpiant: boolean;
+  isGaiaXComlpiant?: boolean;
   name: string;
   description: string;
-  selfDescription: ServiceOffering | Resource;
+  selfDescription: ServiceOffering | Resource | Ontology;
 }
 
 export default function SelfDescriptionCard({
@@ -49,10 +48,12 @@ export default function SelfDescriptionCard({
     <div className={styles.card}>
       <div className={styles.label}>
         <Title>{label}</Title>
-        {isGaiaXComlpiant ? (
-          <p>{t("resources.is-gaia-x-compliant")}</p>
-        ) : (
-          <p>{t("resources.not-gaia-x-compliant")}</p>
+        {isGaiaXComlpiant === undefined ? null : (
+            isGaiaXComlpiant ? (
+                <p>{t("resources.is-gaia-x-compliant")}</p>
+            ) : (
+                <p>{t("resources.not-gaia-x-compliant")}</p>
+            )
         )}
       </div>
       <div className={styles.content}>
