@@ -499,6 +499,10 @@
   "resources": {
     "is-gaia-x-compliant": "Gaia-X compliant",
     "not-gaia-x-compliant": "Not Gaia-X compliant"
+  },
+  "ontologies": {
+    "title": "Ontology",
+    "titles": "Ontologies"
   }
 }
 
