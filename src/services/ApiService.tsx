@@ -13,7 +13,7 @@ const serverUrl: string = "https://fc-server.gxfs.gx4fm.org";
 const queryEndpoint: string = serverUrl + "/query";
 
 const encodeString = (uri: string): string => {
-  return uri.startsWith("https://") ? encodeURIComponent(uri) : uri;
+  return uri.startsWith("http") ? encodeURIComponent(uri) : uri;
 }
 
 export const ApiService = {
@@ -184,7 +184,7 @@ export const ApiService = {
         id: string
   ): Promise<AxiosResponse<any, any>> {
     const encodedUrl = encodeString(id);
-    const endpoint = serverUrl + "/schemas" + encodedUrl;
+    const endpoint = serverUrl + "/schemas/" + encodedUrl;
     const headers = getHeaders(authContext);
 
     return axios
