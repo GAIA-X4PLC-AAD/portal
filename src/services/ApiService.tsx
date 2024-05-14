@@ -2,6 +2,20 @@ import axios, { AxiosResponse } from "axios";
 import { AuthContextValues } from "../context/AuthContextValues";
 import { isEmpty } from "../utils/helpers";
 
+const getHeaders = (authContext: AuthContextValues) => {
+  return {
+    Authorization: `Bearer ${authContext.token}`,
+    "Access-Control-Allow-Origin": "*",
+  };
+}
+
+const serverUrl: string = "https://fc-server.gxfs.gx4fm.org";
+const queryEndpoint: string = serverUrl + "/query";
+
+const encodeString = (uri: string): string => {
+  return uri.startsWith("https://") ? encodeURIComponent(uri) : uri;
+}
+
 export const ApiService = {
   /**
    *
@@ -31,11 +45,8 @@ export const ApiService = {
     }
 
     const requestBody = { statement: searchQuery };
-    const endpoint = "https://fc-server.gxfs.gx4fm.org/query";
-    const headers = {
-      Authorization: `Bearer ${authContext.token}`,
-      "Access-Control-Allow-Origin": "*",
-    };
+    const endpoint = queryEndpoint;
+    const headers = getHeaders(authContext);
 
     return axios
       .options(endpoint, { headers })
@@ -55,11 +66,8 @@ export const ApiService = {
   async getAllSelfDescriptions(
     authContext: AuthContextValues
   ): Promise<AxiosResponse<any, any>> {
-    const endpoint = "https://fc-server.gxfs.gx4fm.org/query";
-    const headers = {
-      Authorization: `Bearer ${authContext.token}`,
-      "Access-Control-Allow-Origin": "*",
-    };
+    const endpoint = queryEndpoint;
+    const headers = getHeaders(authContext);
     const requestBody = {
       statement: `MATCH (n:ServiceOffering) RETURN properties(n), labels(n) LIMIT 100`,
     };
@@ -88,11 +96,8 @@ export const ApiService = {
       throw new Error("No claimsGraphUri provided"); // Or return a custom error object
     }
 
-    const endpoint = "https://fc-server.gxfs.gx4fm.org/query";
-    const headers = {
-      Authorization: `Bearer ${authContext.token}`,
-      "Access-Control-Allow-Origin": "*",
-    };
+    const endpoint = queryEndpoint;
+    const headers = getHeaders(authContext);
     const requestBody = {
       statement: `MATCH (n:HDMap) WHERE '${claimsGraphUri.replace(
         /'/g,
@@ -116,11 +121,8 @@ export const ApiService = {
   async getAllResources(
     authContext: AuthContextValues
   ): Promise<AxiosResponse<any, any>> {
-    const endpoint = "https://fc-server.gxfs.gx4fm.org/query";
-    const headers = {
-      Authorization: `Bearer ${authContext.token}`,
-      "Access-Control-Allow-Origin": "*",
-    };
+    const endpoint = queryEndpoint;
+    const headers = getHeaders(authContext);
     const requestBody = {
       statement: `MATCH (n) WHERE (n:HDMap OR n:EnvironmentModel OR n:Scenario) RETURN properties(n), labels(n)`,
     };
@@ -142,12 +144,8 @@ export const ApiService = {
   async getShaclShapesFromCatalogue(
     authContext: AuthContextValues
   ): Promise<AxiosResponse<any, any>> {
-    const endpoint =
-      "https://fc-server.gxfs.gx4fm.org/schemas/latest?type=shape";
-    const headers = {
-      Authorization: `Bearer ${authContext.token}`,
-      "Access-Control-Allow-Origin": "*",
-    };
+    const endpoint = serverUrl + "/schemas/latest?type=shape";
+    const headers = getHeaders(authContext);
 
     return axios
       .options(endpoint, { headers })
@@ -161,7 +159,48 @@ export const ApiService = {
         console.error("Error:", error);
       });
   },
+
+  async getAllSchemas(
+      authContext: AuthContextValues
+  ): Promise<AxiosResponse<any, any>> {
+    const endpoint = serverUrl + "/schemas";
+    const headers = getHeaders(authContext);
+
+    return axios
+        .options(endpoint, { headers })
+        .then(() => {
+          return axios.get(endpoint, { headers });
+        })
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+  },
+
+  async getSchemaWithId(
+      authContext: AuthContextValues,
+        id: string
+  ): Promise<AxiosResponse<any, any>> {
+    const encodedUrl = encodeString(id);
+    const endpoint = serverUrl + "/schemas" + encodedUrl;
+    const headers = getHeaders(authContext);
+
+    return axios
+        .options(endpoint, { headers })
+        .then(() => {
+          return axios.get(endpoint, { headers });
+        })
+        .then((response) => {
+          return response.data;
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+  },
 };
+
 function useContext(AuthContext: any): { token: any } {
   throw new Error("Function not implemented.");
 }
