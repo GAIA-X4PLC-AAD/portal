@@ -10,13 +10,16 @@ import { Resource, mapResources } from "utils/dataMapper";
 import car from "../../assets/car.gif";
 import Title from "components/Title/Title";
 import Filter from "components/filter/Filter";
+import Text from "components/Text/Text";
 import { useFilters } from "context/ResourceFilterContext";
 import { useFilter } from "hooks/useFilter";
+import { useTranslation } from "react-i18next";
 
 import styles from "./Resources.module.css";
 
 const Resources = () => {
   const authContext = useContext(AuthContext);
+  const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
   const [resourceData, setResourceData] = useState<Resource[]>([]);
@@ -68,8 +71,12 @@ const Resources = () => {
         {authContext.isAuthenticated && (
           <div className={styles.content}>
             <div>
-              {!isLoading &&
-                resourceData.length > 0 &&
+              {isLoading && (
+                <div className="newCarLoader">
+                  <img src={car} alt="loading..." className="car" />
+                </div>
+              )}
+              {!isLoading && resourceData.length > 0 ? (
                 resourceData.map((resource) => {
                   return (
                     <SelfDescriptionCard
@@ -81,17 +88,17 @@ const Resources = () => {
                       selfDescription={resource}
                     />
                   );
-                })}
-              {isLoading && (
-                <div className="newCarLoader">
-                  <img src={car} alt="loading..." className="car" />
-                </div>
+                })
+              ) : (
+                <Text>{t("resources.no-offerings-available")}</Text>
               )}
             </div>
           </div>
         )}
       </div>
-      {!authContext.isAuthenticated && <p>You are not authenticated!</p>}
+      {!authContext.isAuthenticated && (
+        <p>{t("resources.not-authenticated")}</p>
+      )}
     </div>
   );
 };

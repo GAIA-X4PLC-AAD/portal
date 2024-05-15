@@ -24,6 +24,7 @@ import history from "./common/history"
 import SupportPage from "./components/help/SupportPage"
 import Home from './pages/home/Home';
 import DetailsPage from 'pages/details/DetailsPage';
+import ProtectedRoute from 'components/protectedRoute/ProtectedRoute';
 import {Column} from './common/styles';
 import {Footer} from "./components/footer/Footer";
 
@@ -51,7 +52,10 @@ const App = (props) => {
               <Route path="/home" element={ViewContainer(<Home />)} />
               <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
               <Route path="/participants" element={ViewContainer(<Participants />)} />
-              <Route path="/resources" element={ViewContainer(<Resources />)} />
+              <Route path="/resources" element={ViewContainer(
+              <ProtectedRoute>
+                <Resources />
+              </ProtectedRoute>)} />
               <Route path="/details/:resourceId" element={ViewContainer(<DetailsPage />)} />
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
               <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
@@ -78,8 +82,14 @@ const App = (props) => {
               <Route path="/lcm/:id" element={ViewContainer(<LcmServices />)} />
               <Route path="/lcm/:id/final" element={ViewContainer(<LcmFinal />)} />
               <Route path="/lcm/:id/:index" element={ViewContainer(<LcmServices />)} />
-              <Route path="/about" element={ViewContainer(<AboutPage />)} />
-              <Route path="/support" element={ViewContainer(<SupportPage />)} />
+              <Route path="/about" element={ViewContainer(
+              <ProtectedRoute>
+                <AboutPage />
+              </ProtectedRoute>)} />
+              <Route path="/support" element={ViewContainer(
+              <ProtectedRoute>
+                <SupportPage />
+              </ProtectedRoute>)} />
             </Routes>
           </Column>
         </HistoryRouter>
