@@ -500,7 +500,9 @@
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X konform",
-    "not-gaia-x-compliant": "Nicht Gaia-X konform"
+    "not-gaia-x-compliant": "Nicht Gaia-X konform",
+    "no-offerings-available": "Keine Angebote verfügbar",
+    "not-authenticated": "Nicht berechtigt"
   },
   "ontologies": {
     "title": "Ontologie",
