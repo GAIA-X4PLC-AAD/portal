@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import { ChangeEvent, FC, useState } from "react";
 import styles from "./SearchBar.module.css";
 
 interface SearchBarProps {
@@ -9,7 +9,7 @@ interface SearchBarProps {
 const SearchBar: FC<SearchBarProps> = ({placeholder, onSearch }) => {
     const [query, setQuery] = useState('');
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const newQuery = e.target.value;
         setQuery(newQuery);
         onSearch(newQuery);
@@ -25,7 +25,6 @@ const SearchBar: FC<SearchBarProps> = ({placeholder, onSearch }) => {
                 onChange={handleChange}
             />
         </div>
-
     )
 }
 

@@ -18,6 +18,7 @@ const ShapesAndOntologies = () => {
     const [originalOntologies, setOriginalOntologies] = useState<Ontology[]>([]);
     const [filteredOntologies, setFilteredOntologies] = useState<Ontology[]>([]);
 
+    // todo im not completely satified with the way i fetch the ontologies. Would it be better to have the fetching logic in a separate file?
     const fetchOntologies = async (authContext: AuthContextValues) => {
         const response = await ApiService.getAllSchemas(authContext);
         const ontologiesStringArray = mapShapesAndOntologies(response);
@@ -43,13 +44,16 @@ const ShapesAndOntologies = () => {
         loadOntologies();
     }, []);
 
-    const handleSearch = (query) => {
+    // todo To stringify the whole object is a very simple solution. Would it be better to iterate over the variables of the ontology, also separate over the classes and contributors?
+    const handleSearch = (query: string) => {
         if (query === '') {
             setFilteredOntologies(originalOntologies);
         } else {
-            const filtered = originalOntologies.filter(ontology =>
-                ontology.label.toLowerCase().includes(query.toLowerCase())
-            );
+            const lowerCaseQuery = query.toLowerCase();
+            const filtered = originalOntologies.filter(ontology => {
+                const ontologyString = JSON.stringify(ontology).toLowerCase();
+                return ontologyString.includes(lowerCaseQuery);
+            });
             setFilteredOntologies(filtered);
         }
     };
