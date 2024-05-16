@@ -502,7 +502,9 @@
   },
   "ontologies": {
     "title": "Ontologie",
-    "titles": "Ontologien"
+    "titles": "Ontologien",
+    "noOntologiesAvailable": "Keine Ontologien gefunden",
+    "searchBarText": "Suchen Sie nach speziellen Shapes oder Ontologien"
   }
 }
 

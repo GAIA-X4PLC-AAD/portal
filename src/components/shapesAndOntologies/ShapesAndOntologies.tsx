@@ -8,12 +8,15 @@ import { ApiService } from "../../services/ApiService";
 import { mapOntologies, mapShapesAndOntologies, Ontology } from "../../utils/dataMapper";
 import SelfDescriptionCard from "../cards/SelfDescriptionCard";
 import { AuthContextValues } from "../../context/AuthContextValues";
+import Text from "../Text/Text";
+import SearchBar from "../searchBar/SearchBar";
 
 const ShapesAndOntologies = () => {
     const { t } = useTranslation();
     const authContext = useContext(AuthContext);
     const [isLoading, setIsLoading] = useState(false);
-    const [ontologies, setOntologies] = useState<Ontology[]>([]);
+    const [originalOntologies, setOriginalOntologies] = useState<Ontology[]>([]);
+    const [filteredOntologies, setFilteredOntologies] = useState<Ontology[]>([]);
 
     const fetchOntologies = async (authContext: AuthContextValues) => {
         const response = await ApiService.getAllSchemas(authContext);
@@ -28,7 +31,8 @@ const ShapesAndOntologies = () => {
             try {
                 const ontologyPromises = await fetchOntologies(authContext);
                 const ontologiesDetailed = mapOntologies(ontologyPromises);
-                setOntologies(ontologiesDetailed);
+                setOriginalOntologies(ontologiesDetailed);
+                setFilteredOntologies(ontologiesDetailed);
             } catch (error) {
                 console.error("Error fetching self descriptions:", error);
             } finally {
@@ -38,6 +42,17 @@ const ShapesAndOntologies = () => {
 
         loadOntologies();
     }, []);
+
+    const handleSearch = (query) => {
+        if (query === '') {
+            setFilteredOntologies(originalOntologies);
+        } else {
+            const filtered = originalOntologies.filter(ontology =>
+                ontology.label.toLowerCase().includes(query.toLowerCase())
+            );
+            setFilteredOntologies(filtered);
+        }
+    };
 
     return (
         <div>
@@ -50,19 +65,24 @@ const ShapesAndOntologies = () => {
                 {authContext.isAuthenticated && (
                     <div className={styles.content}>
                         <div>
-                            {!isLoading && ontologies.length > 0 ? (
-                                ontologies.map((ontology, index) => (
-                                    <SelfDescriptionCard
-                                        key={index}
-                                        label={t("ontologies.title")}
-                                        name={ontology.base}
-                                        description={<> {"Label: " + ontology.label} <br /> {"Version: " + ontology.version} <br /> {"Contributor: " + ontology.contributors.join(", ")} </>}                                        selfDescription={ontology}
-                                    />
-                                ))
-                            ) : (
+                            <SearchBar placeholder={t("ontologies.searchBarText")} onSearch={handleSearch} />
+                            {isLoading ? (
                                 <div className="newCarLoader">
                                     <img src={car} alt="loading..." className="car"/>
                                 </div>
+                            ) : (
+                                filteredOntologies.length > 0 ? (
+                                    filteredOntologies.map((ontology, index) => (
+                                        <SelfDescriptionCard
+                                            key={index}
+                                            label={t("ontologies.title")}
+                                            name={ontology.base}
+                                            description={<> {"Label: " + ontology.label} <br /> {"Version: " + ontology.version} <br /> {"Contributor: " + ontology.contributors.join(", ")} </>}                                        selfDescription={ontology}
+                                        />
+                                    ))
+                                ) : (
+                                    <Text>{t("ontologies.noOntologiesAvailable")}</Text>
+                                )
                             )}
                         </div>
                     </div>
