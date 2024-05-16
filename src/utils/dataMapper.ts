@@ -166,7 +166,5 @@ const parseOntology = (data: string): Ontology => {
   }
   ontologyToReturn.classes = classes;
 
-  console.log('Parsed ontology: ', ontologyToReturn);
-
   return ontologyToReturn;
 }

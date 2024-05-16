@@ -18,7 +18,7 @@ const ShapesAndOntologies = () => {
     const [originalOntologies, setOriginalOntologies] = useState<Ontology[]>([]);
     const [filteredOntologies, setFilteredOntologies] = useState<Ontology[]>([]);
 
-    // todo im not completely satified with the way i fetch the ontologies. Would it be better to have the fetching logic in a separate file?
+    // todo im not completely satisfied with the way i fetch the ontologies. Would it be better to have the fetching logic in a separate file?
     const fetchOntologies = async (authContext: AuthContextValues) => {
         const response = await ApiService.getAllSchemas(authContext);
         const ontologiesStringArray = mapShapesAndOntologies(response);
@@ -81,7 +81,8 @@ const ShapesAndOntologies = () => {
                                             key={index}
                                             label={t("ontologies.title")}
                                             name={ontology.base}
-                                            description={<> {"Label: " + ontology.label} <br /> {"Version: " + ontology.version} <br /> {"Contributor: " + ontology.contributors.join(", ")} </>}                                        selfDescription={ontology}
+                                            description={ontology.label}
+                                            selfDescription={ontology}
                                         />
                                     ))
                                 ) : (
