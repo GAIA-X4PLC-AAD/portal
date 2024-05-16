@@ -19,8 +19,8 @@
     "about": "About",
     "support": "Support",
     "english": "English",
-    "spanish": "Spanish",
-    "german": "German",
+    "spanish": "Español",
+    "german": "Deutsch",
     "close": "Close",
     "choose-language": "Language",
     "shapesAndOntologies": "Shapes & Ontologies",
@@ -495,7 +495,8 @@
   },
   "details": {
     "sidebar-button-label": "Contact or buy",
-    "contact-or-buy-button-notification": "Data was transfered"
+    "contact-or-buy-button-notification": "Data was transfered",
+    "moreDetails": "More Details"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X compliant",

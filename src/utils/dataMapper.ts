@@ -105,6 +105,7 @@ export const mapOntologies = (response: []): Ontology[] => {
   });
 }
 
+// todo needs to adapt to standardised structure of ontologies. This standardised structure is not yet in place
 const parseOntology = (data: string): Ontology => {
   const ontologyToReturn: Ontology = {
     base: "",

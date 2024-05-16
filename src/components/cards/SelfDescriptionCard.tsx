@@ -61,7 +61,7 @@ export default function SelfDescriptionCard({
         <p>{description}</p>
         <div className={styles.button}>
           <GaiaXButton
-            label="More Details"
+            label={t("details.moreDetails")}
             handleOnClick={handleNavigationToDetailsPage}
           />
         </div>

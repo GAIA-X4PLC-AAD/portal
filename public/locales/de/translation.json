@@ -5,8 +5,8 @@
   "left-menu": {
     "home": "Startseite",
     "service-offerings": "Service Offerings",
-    "resources": "Resources",
-    "participants": "Participants",
+    "resources": "Ressourcen",
+    "participants": "Teilnehmer",
     "provide": "Bereitstellen",
     "help": "Hilfe",
     "search": "Suche",
@@ -19,7 +19,7 @@
     "about": "Über",
     "support": "Unterstützung",
     "english": "English",
-    "spanish": "Spanisch",
+    "spanish": "Español",
     "german": "Deutsch",
     "close": "Schließen",
     "choose-language": "Sprache",
@@ -495,7 +495,8 @@
   },
   "details": {
     "sidebar-button-label": "Kontaktieren oder kaufen",
-    "contact-or-buy-button-notification": "Daten wurden übertragen"
+    "contact-or-buy-button-notification": "Daten wurden übertragen",
+    "moreDetails": "Mehr Details"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X konform",
