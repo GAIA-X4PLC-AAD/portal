@@ -62,7 +62,7 @@ const ShapesAndOntologies = () => {
         <div>
             <header className={styles["header-container"]}>
                 <div className={styles["header-title"]}>
-                    <Title>{t("left-menu.shapesAndOntologies")}</Title>
+                    <Title>{t("left-menu.shapesAndOntologies")}({filteredOntologies.length} {t("dashboard.results")})</Title>
                 </div>
             </header>
             <div className={styles["shapesAndOntologies-content-container"]}>

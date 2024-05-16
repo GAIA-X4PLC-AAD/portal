@@ -50,6 +50,7 @@
     "deactivate": "Deactivate",
     "edit": "Edit",
     "status": "Status: {status}",
+    "results": "Ergebnisse",
     "manage": {
       "manage": "Manage",
       "create": "Create",
