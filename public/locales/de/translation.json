@@ -19,7 +19,6 @@
     "about": "Über",
     "support": "Unterstützung",
     "english": "English",
-    "spanish": "Español",
     "german": "Deutsch",
     "close": "Schließen",
     "choose-language": "Sprache",
@@ -502,7 +501,8 @@
     "is-gaia-x-compliant": "Gaia-X konform",
     "not-gaia-x-compliant": "Nicht Gaia-X konform",
     "no-offerings-available": "Keine Angebote verfügbar",
-    "not-authenticated": "Nicht berechtigt"
+    "not-authenticated": "Nicht berechtigt",
+    "searchBarText": "Suchen Sie nach speziellen Ressourcen oder Angeboten"
   },
   "ontologies": {
     "title": "Ontologie",
@@ -511,4 +511,3 @@
     "searchBarText": "Suchen Sie nach speziellen Shapes oder Ontologien"
   }
 }
-
