@@ -1,8 +1,10 @@
-import axios from "axios";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContextProvider"; // Update this path as needed
-import { useFilters } from "../context/ResourceFilterContext";
-import {resourceFilters} from "./filterAssets";
+import axios from 'axios';
+import { useContext } from 'react';
+
+import { AuthContext } from '../context/AuthContextProvider'; // Update this path as needed
+import { useFilters } from '../context/ResourceFilterContext';
+
+import { resourceFilters } from './filterAssets';
 
 export const useResourceFilter = () => {
   const { filters } = useFilters();
@@ -10,16 +12,16 @@ export const useResourceFilter = () => {
   const { typeAssets, formatAssets, vendorAssets } = resourceFilters;
 
   const fetchFilteredData = async () => {
-    const endpoint = "https://fc-server.gxfs.gx4fm.org/query";
+    const endpoint = 'https://fc-server.gxfs.gx4fm.org/query';
     const headers = {
       Authorization: `Bearer ${token}`,
-      "Access-Control-Allow-Origin": "*",
+      'Access-Control-Allow-Origin': '*',
     };
 
     // Constructing parts of the query based on filter toggles
     const typeConditions = typeAssets
       .filter((asset) => filters[asset.checkboxName as keyof typeof filters])
-      .map((asset) => `(n:${asset.label.replace(/\s+/g, "")})`);
+      .map((asset) => `(n:${asset.label.replace(/\s+/g, '')})`);
 
     const formatConditions = formatAssets
       .filter((asset) => filters[asset.checkboxName as keyof typeof filters])
@@ -32,29 +34,29 @@ export const useResourceFilter = () => {
     // Check if any filters are active
     const isAnyFilterActive = Object.values(filters).some((value) => value);
 
-    let query = "";
+    let query = '';
     if (isAnyFilterActive) {
       const conditions = [
         ...typeConditions,
         ...formatConditions,
         ...vendorConditions,
-      ].join(" OR ");
-      const whereClause = conditions.length > 0 ? ` WHERE ${conditions}` : "";
+      ].join(' OR ');
+      const whereClause = conditions.length > 0 ? ` WHERE ${conditions}` : '';
       query = `MATCH (n)${whereClause} RETURN properties(n), labels(n)`;
     } else {
       query =
-        "MATCH (n) WHERE (n:HDMap OR n:EnvironmentModel OR n:Scenario) RETURN properties(n), labels(n)";
+        'MATCH (n) WHERE (n:HDMap OR n:EnvironmentModel OR n:Scenario) RETURN properties(n), labels(n)';
     }
 
     const requestBody = { statement: query };
 
-    console.log("My request body: ", requestBody);
+    console.log('My request body: ', requestBody);
 
     try {
       const response = await axios.post(endpoint, requestBody, { headers });
       return response.data;
     } catch (error) {
-      console.error("Error fetching resources:", error);
+      console.error('Error fetching resources:', error);
       throw error;
     }
   };

@@ -1,11 +1,10 @@
-import GaiaXButton from "components/buttons/GaiaXButton";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import Title from 'components/Title/Title';
+import GaiaXButton from 'components/buttons/GaiaXButton';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { ServiceOffering, Resource, Ontology } from 'utils/dataMapper';
 
-import Title from "components/Title/Title";
-import {ServiceOffering, Resource, Ontology} from "utils/dataMapper";
-
-import styles from "./SelfDescriptionCard.module.css";
+import styles from './SelfDescriptionCard.module.css';
 
 interface ISelfDescriptionCard {
   label: string;
@@ -39,7 +38,7 @@ export default function SelfDescriptionCard({
       navigate(`/details/${encodedUri}`);
     } else {
       // Handle the case where claimsGraphUri is not available or not in expected format
-      console.error("Invalid claimsGraphUri:", selfDescription.claimsGraphUri);
+      console.error('Invalid claimsGraphUri:', selfDescription.claimsGraphUri);
       // You might want to show a user-friendly message or navigate to an error page
     }
   };
@@ -49,11 +48,11 @@ export default function SelfDescriptionCard({
       <div className={styles.label}>
         <Title>{label}</Title>
         {isGaiaXComlpiant === undefined ? null : (
-            isGaiaXComlpiant ? (
-                <p>{t("resources.is-gaia-x-compliant")}</p>
-            ) : (
-                <p>{t("resources.not-gaia-x-compliant")}</p>
-            )
+          isGaiaXComlpiant ? (
+            <p>{t('resources.is-gaia-x-compliant')}</p>
+          ) : (
+            <p>{t('resources.not-gaia-x-compliant')}</p>
+          )
         )}
       </div>
       <div className={styles.content}>
@@ -61,7 +60,7 @@ export default function SelfDescriptionCard({
         <p>{description}</p>
         <div className={styles.button}>
           <GaiaXButton
-            label={t("details.moreDetails")}
+            label={t('details.moreDetails')}
             handleOnClick={handleNavigationToDetailsPage}
           />
         </div>

@@ -1,22 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import SelfDescriptionCard from "components/cards/SelfDescriptionCard";
-import { ApiService } from "services/ApiService";
-import { AuthContext } from "context/AuthContextProvider";
-import { Resource, mapResources } from "utils/dataMapper";
+import car from '../../assets/car.gif';
+import { AuthContext } from '../../context/AuthContextProvider';
+import { useFilters } from '../../context/ResourceFilterContext';
+import { useResourceFilter } from '../../hooks/useResourceFilter';
+import { ApiService } from '../../services/ApiService';
+import { Resource, mapResources } from '../../utils/dataMapper';
+import Text from '../Text/Text';
+import Title from '../Title/Title';
+import SelfDescriptionCard from '../cards/SelfDescriptionCard';
+import Filter from '../filter/Filter';
+import SearchBar from '../searchBar/SearchBar';
 
-// import SendIcon from '@mui/icons-material/Send';
-// @ts-ignore
-import car from "../../assets/car.gif";
-import Title from "components/Title/Title";
-import Filter from "components/filter/Filter";
-import Text from "components/Text/Text";
-import { useFilters } from "context/ResourceFilterContext";
-import { useTranslation } from "react-i18next";
-import { useResourceFilter } from "hooks/useResourceFilter";
-
-import styles from "./Resources.module.css";
-import SearchBar from "../searchBar/SearchBar";
+import styles from './Resources.module.css';
 
 const Resources = () => {
   const authContext = useContext(AuthContext);
@@ -35,12 +32,12 @@ const Resources = () => {
       setIsLoading(true);
       try {
         const response = await ApiService.getAllResources(authContext);
-        console.log("My fetched data: ", response);
+        console.log('My fetched data: ', response);
         const map = mapResources(response);
         setResourceData(map);
         setFilteredResourceData(map);
       } catch (error) {
-        console.error("Error fetching self descriptions:", error);
+        console.error('Error fetching self descriptions:', error);
       } finally {
         setIsLoading(false);
       }
@@ -58,7 +55,7 @@ const Resources = () => {
         setResourceData(map);
       })
       .catch((error) => {
-        console.error("Error in fetching data:", error);
+        console.error('Error in fetching data:', error);
       });
     setIsLoading(false);
   }, [filters]);
@@ -79,51 +76,51 @@ const Resources = () => {
   // todo As a result of the generalisation of the filter component and the transferred filter function "toggleFilter", type safety is no longer provided here. See error in line 73 (Type string is not assignable to type) and toggleResourceFilter. How can type safety be ensured here if different filter methods (for example, in future toggleOntologyFilter) can be passed?
   return (
     <div>
-      <header className={styles["header-container"]}>
-        <div className={styles["header-title"]}>
-          <Title>{t("left-menu.resources")}({filteredResourceData.length} {t("dashboard.results")})</Title>
+      <header className={styles['header-container']}>
+        <div className={styles['header-title']}>
+          <Title>{t('left-menu.resources')}({filteredResourceData.length} {t('dashboard.results')})</Title>
         </div>
       </header>
-      <div className={styles["resource-content-container"]}>
+      <div className={styles['resource-content-container']}>
         <Filter
-            typeAssets={typeAssets}
-            formatAssets={formatAssets}
-            vendorAssets={vendorAssets}
-            toggleFilter={toggleResourceFilter}
+          typeAssets={typeAssets}
+          formatAssets={formatAssets}
+          vendorAssets={vendorAssets}
+          toggleFilter={toggleResourceFilter}
         />
         {authContext.isAuthenticated && (
-            <div className={styles.content}>
-              <div>
-                <SearchBar placeholder={t("resources.searchBarText")} onSearch={handleSearch}/>
-              </div>
-              <div>
-                {isLoading && (
-                    <div className="newCarLoader">
-                      <img src={car} alt="loading..." className="car"/>
-                    </div>
-                )}
-                {!isLoading && filteredResourceData.length > 0 ? (
-                    filteredResourceData.map((resource) => {
-                      return (
-                          <SelfDescriptionCard
-                              key={resource.name}
-                              label={resource.label}
-                              isGaiaXComlpiant={true}
-                              name={resource.name}
-                              description={resource.description}
-                              selfDescription={resource}
-                          />
-                      );
-                    })
-                ) : (
-                    <Text>{t("resources.no-offerings-available")}</Text>
-                )}
-              </div>
+          <div className={styles.content}>
+            <div>
+              <SearchBar placeholder={t('resources.searchBarText')} onSearch={handleSearch}/>
             </div>
+            <div>
+              {isLoading && (
+                <div className="newCarLoader">
+                  <img src={car} alt="loading..." className="car"/>
+                </div>
+              )}
+              {!isLoading && filteredResourceData.length > 0 ? (
+                filteredResourceData.map((resource) => {
+                  return (
+                    <SelfDescriptionCard
+                      key={resource.name}
+                      label={resource.label}
+                      isGaiaXComlpiant={true}
+                      name={resource.name}
+                      description={resource.description}
+                      selfDescription={resource}
+                    />
+                  );
+                })
+              ) : (
+                <Text>{t('resources.no-offerings-available')}</Text>
+              )}
+            </div>
+          </div>
         )}
       </div>
       {!authContext.isAuthenticated && (
-          <p>{t("resources.not-authenticated")}</p>
+        <p>{t('resources.not-authenticated')}</p>
       )}
     </div>
   );

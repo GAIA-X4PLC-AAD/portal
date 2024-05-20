@@ -1,35 +1,35 @@
 import React from 'react';
-import {Route, Routes, unstable_HistoryRouter as HistoryRouter} from 'react-router-dom';
+import { Route, Routes, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 
-import AboutPage from "./components/help/AboutPage"
-import AccountHome from './components/account/AccountHome';
-import DiscoveryItem from './components/discovery/DiscoveryItem';
-import LoginFail from './components/login/LoginFail';
 import WorkInProgress from './WorkInProgress';
-import ProvideOverview from './components/provide/ProvideOverview';
+import history from './common/history'
+import { Column } from './common/styles';
+import AccountHome from './components/account/AccountHome';
 import Provider from './components/account/Provider';
-import SearchView from './components/discovery/search/SearchView';
 import DashboardPage from './components/dashboard/dashboard_page';
-import OnboardingPage from './components/onboarding/onboarding_page';
-import ServiceOfferings from "./components/serviceOfferings/ServiceOfferings";
-import Participants from "./components/participants/Participants";
-import Resources from "./components/resources/Resources";
-import Navbar from 'components/navbar/Navbar';
-import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
-import ProvideAttributes from './components/provide/ProvideAttributes';
-import ProvideSelection from './components/provide/ProvideSelection';
-import LcmServices from './components/dashboard/lcm/LcmServices';
 import LcmFinal from './components/dashboard/lcm/LcmFinal';
-import history from "./common/history"
-import SupportPage from "./components/help/SupportPage"
+import LcmServices from './components/dashboard/lcm/LcmServices';
+import DiscoveryItem from './components/discovery/DiscoveryItem';
+import SearchView from './components/discovery/search/SearchView';
+import { Footer } from './components/footer/Footer';
+import AboutPage from './components/help/AboutPage'
+import SupportPage from './components/help/SupportPage'
+import LoginFail from './components/login/LoginFail';
+import Navbar from './components/navbar/Navbar';
+import OnboardingPage from './components/onboarding/onboarding_page';
+import Participants from './components/participants/Participants';
+import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
+import ProvideAttributes from './components/provide/ProvideAttributes';
+import ProvideOverview from './components/provide/ProvideOverview';
+import ProvideSelection from './components/provide/ProvideSelection';
+import Resources from './components/resources/Resources';
+import ServiceOfferings from './components/serviceOfferings/ServiceOfferings';
+import ShapesAndOntologies from './components/shapesAndOntologies/ShapesAndOntologies';
+import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
+import DetailsPage from './pages/details/DetailsPage';
 import Home from './pages/home/Home';
-import DetailsPage from 'pages/details/DetailsPage';
-import ProtectedRoute from 'components/protectedRoute/ProtectedRoute';
-import {Column} from './common/styles';
-import {Footer} from "./components/footer/Footer";
 
 import './App.css';
-import ShapesAndOntologies from "./components/shapesAndOntologies/ShapesAndOntologies";
 
 const App = (props) => {
 
@@ -54,9 +54,9 @@ const App = (props) => {
               <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
               <Route path="/participants" element={ViewContainer(<Participants />)} />
               <Route path="/resources" element={ViewContainer(
-              <ProtectedRoute>
-                <Resources />
-              </ProtectedRoute>)} />
+                <ProtectedRoute>
+                  <Resources />
+                </ProtectedRoute>)} />
               <Route path="/details/:resourceId" element={ViewContainer(<DetailsPage />)} />
               <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
               <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
@@ -84,17 +84,17 @@ const App = (props) => {
               <Route path="/lcm/:id/final" element={ViewContainer(<LcmFinal />)} />
               <Route path="/lcm/:id/:index" element={ViewContainer(<LcmServices />)} />
               <Route path="/about" element={ViewContainer(
-              <ProtectedRoute>
-                <AboutPage />
-              </ProtectedRoute>)} />
+                <ProtectedRoute>
+                  <AboutPage />
+                </ProtectedRoute>)} />
               <Route path="/support" element={ViewContainer(
-              <ProtectedRoute>
-                <SupportPage />
-              </ProtectedRoute>)} />
+                <ProtectedRoute>
+                  <SupportPage />
+                </ProtectedRoute>)} />
               <Route path="/shapesAndOntologies" element={ViewContainer(
-              <ProtectedRoute>
-               <ShapesAndOntologies />
-              </ProtectedRoute>)} />
+                <ProtectedRoute>
+                  <ShapesAndOntologies />
+                </ProtectedRoute>)} />
             </Routes>
           </Column>
         </HistoryRouter>
@@ -105,5 +105,4 @@ const App = (props) => {
 }
 
 export default App;
-
 

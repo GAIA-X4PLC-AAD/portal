@@ -1,19 +1,20 @@
-import axios, { AxiosResponse } from "axios";
-import { AuthContextValues } from "../context/AuthContextValues";
-import { isEmpty } from "../utils/helpers";
+import axios, { AxiosResponse } from 'axios';
+
+import { AuthContextValues } from '../context/AuthContextValues';
+import { isEmpty } from '../utils/helpers';
 
 const getHeaders = (authContext: AuthContextValues) => {
   return {
     Authorization: `Bearer ${authContext.token}`,
-    "Access-Control-Allow-Origin": "*",
+    'Access-Control-Allow-Origin': '*',
   };
 }
 
-const serverUrl: string = "https://fc-server.gxfs.gx4fm.org";
-const queryEndpoint: string = serverUrl + "/query";
+const serverUrl: string = 'https://fc-server.gxfs.gx4fm.org';
+const queryEndpoint: string = serverUrl + '/query';
 
 const encodeString = (uri: string): string => {
-  return uri.startsWith("http") ? encodeURIComponent(uri) : uri;
+  return uri.startsWith('http') ? encodeURIComponent(uri) : uri;
 }
 
 export const ApiService = {
@@ -30,18 +31,18 @@ export const ApiService = {
     searchProperty?: string,
     searchTerm?: string
   ): Promise<AxiosResponse<any, any>> {
-    let searchQuery = "";
+    let searchQuery = '';
     if (isEmpty(searchProperty) && isEmpty(searchTerm)) {
-      searchQuery = "MATCH (n:" + targetClass + ") RETURN properties(n)";
+      searchQuery = 'MATCH (n:' + targetClass + ') RETURN properties(n)';
     } else {
       searchQuery =
-        "MATCH (n:" +
+        'MATCH (n:' +
         targetClass +
-        ") WHERE toLower(n." +
+        ') WHERE toLower(n.' +
         searchProperty +
-        ") CONTAINS toLower('" +
+        ') CONTAINS toLower(\'' +
         searchTerm +
-        "') RETURN properties(n)";
+        '\') RETURN properties(n)';
     }
 
     const requestBody = { statement: searchQuery };
@@ -54,11 +55,11 @@ export const ApiService = {
         return axios.post(endpoint, requestBody, { headers });
       })
       .then((response) => {
-        console.log("Post Response", response.data);
+        console.log('Post Response', response.data);
         return response.data;
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error('Error:', error);
       });
   },
 
@@ -69,7 +70,7 @@ export const ApiService = {
     const endpoint = queryEndpoint;
     const headers = getHeaders(authContext);
     const requestBody = {
-      statement: `MATCH (n:ServiceOffering) RETURN properties(n), labels(n) LIMIT 100`,
+      statement: 'MATCH (n:ServiceOffering) RETURN properties(n), labels(n) LIMIT 100',
     };
 
     // Perform POST request
@@ -82,7 +83,7 @@ export const ApiService = {
         return response.data;
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error('Error:', error);
       });
   },
 
@@ -92,8 +93,8 @@ export const ApiService = {
   ): Promise<any> {
     if (!claimsGraphUri) {
       // Handle the case where claimsGraphUri is not provided
-      console.error("No claimsGraphUri provided");
-      throw new Error("No claimsGraphUri provided"); // Or return a custom error object
+      console.error('No claimsGraphUri provided');
+      throw new Error('No claimsGraphUri provided'); // Or return a custom error object
     }
 
     const endpoint = queryEndpoint;
@@ -101,17 +102,17 @@ export const ApiService = {
     const requestBody = {
       statement: `MATCH (n:HDMap) WHERE '${claimsGraphUri.replace(
         /'/g,
-        "\\'"
+        '\\\''
       )}' IN n.claimsGraphUri RETURN properties(n), labels(n) LIMIT 1`,
     };
 
     try {
       await axios.options(endpoint, { headers });
       const response = await axios.post(endpoint, requestBody, { headers });
-      console.log("This is ONE Service Offering: ", response.data);
+      console.log('This is ONE Service Offering: ', response.data);
       return response.data;
     } catch (error) {
-      console.error("Error fetching self descriptions:", error);
+      console.error('Error fetching self descriptions:', error);
       // Handle the error appropriately
       throw error; // Re-throw the error if you want to handle it in the calling function
     }
@@ -124,7 +125,7 @@ export const ApiService = {
     const endpoint = queryEndpoint;
     const headers = getHeaders(authContext);
     const requestBody = {
-      statement: `MATCH (n) WHERE (n:HDMap OR n:EnvironmentModel OR n:Scenario) RETURN properties(n), labels(n)`,
+      statement: 'MATCH (n) WHERE (n:HDMap OR n:EnvironmentModel OR n:Scenario) RETURN properties(n), labels(n)',
     };
 
     // Perform POST request
@@ -137,14 +138,14 @@ export const ApiService = {
         return response.data;
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error('Error:', error);
       });
   },
 
   async getShaclShapesFromCatalogue(
     authContext: AuthContextValues
   ): Promise<AxiosResponse<any, any>> {
-    const endpoint = serverUrl + "/schemas/latest?type=shape";
+    const endpoint = serverUrl + '/schemas/latest?type=shape';
     const headers = getHeaders(authContext);
 
     return axios
@@ -156,51 +157,51 @@ export const ApiService = {
         return response.data;
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error('Error:', error);
       });
   },
 
   async getAllSchemas(
-      authContext: AuthContextValues
+    authContext: AuthContextValues
   ): Promise<AxiosResponse<any, any>> {
-    const endpoint = serverUrl + "/schemas";
+    const endpoint = serverUrl + '/schemas';
     const headers = getHeaders(authContext);
 
     return axios
-        .options(endpoint, { headers })
-        .then(() => {
-          return axios.get(endpoint, { headers });
-        })
-        .then((response) => {
-          return response.data;
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      .options(endpoint, { headers })
+      .then(() => {
+        return axios.get(endpoint, { headers });
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   },
 
   async getSchemaWithId(
-      authContext: AuthContextValues,
-        id: string
+    authContext: AuthContextValues,
+    id: string
   ): Promise<AxiosResponse<any, any>> {
     const encodedUrl = encodeString(id);
-    const endpoint = serverUrl + "/schemas/" + encodedUrl;
+    const endpoint = serverUrl + '/schemas/' + encodedUrl;
     const headers = getHeaders(authContext);
 
     return axios
-        .options(endpoint, { headers })
-        .then(() => {
-          return axios.get(endpoint, { headers });
-        })
-        .then((response) => {
-          return response.data;
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
+      .options(endpoint, { headers })
+      .then(() => {
+        return axios.get(endpoint, { headers });
+      })
+      .then((response) => {
+        return response.data;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   },
 };
 
 function useContext(AuthContext: any): { token: any } {
-  throw new Error("Function not implemented.");
+  throw new Error('Function not implemented.');
 }

@@ -108,15 +108,15 @@ export const mapOntologies = (response: []): Ontology[] => {
 // todo needs to adapt to standardised structure of ontologies. This standardised structure is not yet in place
 const parseOntology = (data: string): Ontology => {
   const ontologyToReturn: Ontology = {
-    base: "",
+    base: '',
     contributors: [],
-    label: "",
-    version: "",
+    label: '',
+    version: '',
     classes: []
   };
 
   const baseMatch = data.match(/@base\s+<([^>]+)>/);
-  ontologyToReturn.base = baseMatch ? baseMatch[1] : "No base found";
+  ontologyToReturn.base = baseMatch ? baseMatch[1] : 'No base found';
 
   const contributorsMatch = data.match(/contributor\s+"([^"]+)"(\s*,\s*"([^"]+)")*(\s*;\s*)?/);
   if (contributorsMatch) {
@@ -136,10 +136,10 @@ const parseOntology = (data: string): Ontology => {
   }
 
   const labelMatch = data.match(/rdfs:label\s+"([^"]+)"/);
-  ontologyToReturn.label = labelMatch ? labelMatch[1] : "No label found";
+  ontologyToReturn.label = labelMatch ? labelMatch[1] : 'No label found';
 
   const versionMatch = data.match(/owl:versionInfo\s+([\d.]+)/);
-  ontologyToReturn.version = versionMatch ? versionMatch[1] : "No version found";
+  ontologyToReturn.version = versionMatch ? versionMatch[1] : 'No version found';
 
   const classes: Class[] = [];
   const classMatches = data.match(/<([^>]+)>\s+a\s+rdfs:Class\s*;/g);
@@ -147,14 +147,14 @@ const parseOntology = (data: string): Ontology => {
     classMatches.forEach(classMatch => {
       const classObj: Class = {
         name: '',
-        label: "",
+        label: '',
         subClasses: []
       };
       const className = classMatch.match(/<([^>]+)>/)[1];
       classObj.name = className;
 
       const labelMatch = data.match(new RegExp(`<${className}>\\s+a\\s+rdfs:Class\\s*;\\s+rdfs:label\\s+"([^"]+)"`));
-      classObj.label = labelMatch ? labelMatch[1] : "No label found";
+      classObj.label = labelMatch ? labelMatch[1] : 'No label found';
 
       const subClassOfMatches = data.match(new RegExp(`<${className}>\\s+a\\s+rdfs:Class\\s*;[^]+?rdfs:subClassOf\\s+([^;]+)`, 'g'));
       if (subClassOfMatches) {

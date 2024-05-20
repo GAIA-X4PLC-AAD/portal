@@ -1,8 +1,10 @@
-import { FC } from "react";
-import Title from "components/Title/Title";
-import styles from "./Filter.module.css";
-import { FilterSection } from "./FilterSection";
-import { Asset } from "../../hooks/filterAssets";
+import { FC } from 'react';
+
+import { Asset } from '../../hooks/filterAssets';
+import Title from '../Title/Title';
+
+import styles from './Filter.module.css';
+import { FilterSection } from './FilterSection';
 
 interface FilterProps {
     typeAssets: Asset[];
