@@ -53,6 +53,7 @@ const Resources = () => {
       .then((data) => {
         const map = mapResources(data);
         setResourceData(map);
+        setFilteredResourceData(map);
       })
       .catch((error) => {
         console.error('Error in fetching data:', error);
