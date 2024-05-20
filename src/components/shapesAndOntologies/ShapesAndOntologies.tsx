@@ -3,9 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
 import { AuthContext } from '../../context/AuthContextProvider';
-import { AuthContextValues } from '../../context/AuthContextValues';
-import { ApiService } from '../../services/ApiService';
-import { mapOntologies, mapShapesAndOntologies, Ontology } from '../../utils/dataMapper';
+import { fetchOntologies, mapOntologies, Ontology } from '../../utils/dataMapper';
 import Text from '../Text/Text';
 import Title from '../Title/Title';
 import SelfDescriptionCard from '../cards/SelfDescriptionCard';
@@ -20,20 +18,11 @@ const ShapesAndOntologies = () => {
   const [originalOntologies, setOriginalOntologies] = useState<Ontology[]>([]);
   const [filteredOntologies, setFilteredOntologies] = useState<Ontology[]>([]);
 
-  // todo im not completely satisfied with the way i fetch the ontologies. Would it be better to have the fetching logic in a separate file?
-  const fetchOntologies = async (authContext: AuthContextValues) => {
-    const response = await ApiService.getAllSchemas(authContext);
-    const ontologiesStringArray = mapShapesAndOntologies(response);
-    const promises = ontologiesStringArray.map((item) => ApiService.getSchemaWithId(authContext, item));
-    return await Promise.all(promises);
-  };
-
   useEffect(() => {
     const loadOntologies = async () => {
       setIsLoading(true);
       try {
-        const ontologyPromises = await fetchOntologies(authContext);
-        const ontologiesDetailed = mapOntologies(ontologyPromises);
+        const ontologiesDetailed = await fetchOntologies(authContext).then(mapOntologies);
         setOriginalOntologies(ontologiesDetailed);
         setFilteredOntologies(ontologiesDetailed);
       } catch (error) {
@@ -46,7 +35,6 @@ const ShapesAndOntologies = () => {
     loadOntologies();
   }, []);
 
-  // todo To stringify the whole object is a very simple solution. Would it be better to iterate over the variables of the ontology, also separate over the classes and contributors?
   const handleSearch = (query: string) => {
     if (query === '') {
       setFilteredOntologies(originalOntologies);

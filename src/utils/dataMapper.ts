@@ -1,6 +1,9 @@
 // This Interface is termporary, due to how we recieve data at the moment.
 
 // Interfaces and Mappers for Service Offerings
+import { AuthContextValues } from '../context/AuthContextValues';
+import { ApiService } from '../services/ApiService';
+
 export interface ServiceOfferingInput {
   items: Array<{
     'labels(n)': {
@@ -99,13 +102,19 @@ export const  mapShapesAndOntologies = (response: ShapesAndOntologiesInput): str
   return response.ontologies.map((ontology) => ontology);
 }
 
+export const fetchOntologies = async (authContext: AuthContextValues) => {
+  const response = await ApiService.getAllSchemas(authContext);
+  const ontologiesStringArray = mapShapesAndOntologies(response);
+  const promises = ontologiesStringArray.map((item) => ApiService.getSchemaWithId(authContext, item));
+  return await Promise.all(promises);
+};
+
 export const mapOntologies = (response: []): Ontology[] => {
   return response.map((item) => {
     return parseOntology(item);
   });
 }
 
-// todo needs to adapt to standardised structure of ontologies. This standardised structure is not yet in place
 const parseOntology = (data: string): Ontology => {
   const ontologyToReturn: Ontology = {
     base: '',
