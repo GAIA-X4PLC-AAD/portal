@@ -1,10 +1,8 @@
 import i18n from 'i18next';
-import ICU from "i18next-icu";
-
-
-import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
+import ICU from 'i18next-icu';
+import { initReactI18next } from 'react-i18next';
 
 const options = {
   order: ['querystring', 'navigator'],
@@ -22,10 +20,10 @@ i18n
     wait: false,
     debug: false, // true
     fallbackLng: 'en',
-    preload: ['en', 'es', 'de'],
+    preload: ['en', 'de'],
     defaultNS: ['translation'],
     backend: {
-        loadPath: '/locales/{{lng}}/{{ns}}.json'
+      loadPath: '/locales/{{lng}}/{{ns}}.json'
     },
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
