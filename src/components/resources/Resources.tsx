@@ -74,7 +74,6 @@ const Resources = () => {
     }
   };
 
-  // todo As a result of the generalisation of the filter component and the transferred filter function "toggleFilter", type safety is no longer provided here. See error in line 73 (Type string is not assignable to type) and toggleResourceFilter. How can type safety be ensured here if different filter methods (for example, in future toggleOntologyFilter) can be passed?
   return (
     <div>
       <header className={styles['header-container']}>

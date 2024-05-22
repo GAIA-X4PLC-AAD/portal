@@ -6,14 +6,14 @@ import Title from '../Title/Title';
 import styles from './Filter.module.css';
 import { FilterSection } from './FilterSection';
 
-interface FilterProps {
+interface IFilter {
     typeAssets: Asset[];
     formatAssets: Asset[];
     vendorAssets: Asset[];
     toggleFilter: (filterName: string) => void;
 }
 
-const Filter: FC<FilterProps> = ({ typeAssets, formatAssets, vendorAssets, toggleFilter }) => {
+const Filter: FC<IFilter> = ({ typeAssets, formatAssets, vendorAssets, toggleFilter }) => {
   return (
     <div className={styles.filterContainer}>
       <Title>Filter</Title>

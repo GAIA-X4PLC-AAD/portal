@@ -5,13 +5,13 @@ import Subtitle from '../subtitle/Subtitle';
 
 import styles from './Filter.module.css';
 
-interface FilterSectionProps {
+interface IFilterSection {
     subtitle: string;
     assets: Asset[];
     toggleFilter: (filterName: string) => void;
 }
 
-export const FilterSection: FC<FilterSectionProps> = ({ subtitle, assets , toggleFilter }) => {
+export const FilterSection: FC<IFilterSection> = ({ subtitle, assets , toggleFilter }) => {
   return (
     <>
       <Subtitle>{subtitle}</Subtitle>
