@@ -1,5 +1,5 @@
-import Title from 'components/Title/Title';
 import GaiaXButton from 'components/buttons/GaiaXButton';
+import Title from 'components/Title/Title';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { ServiceOffering, Resource, Ontology } from 'utils/dataMapper';

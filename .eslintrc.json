@@ -30,11 +30,18 @@
         "react/react-in-jsx-scope": "off",
         "react/jsx-uses-react": "off",
         "import/order": ["error", {
+            "pathGroups": [
+                {
+                    "pattern": "/**",
+                    "group": "internal",
+                    "position": "after"
+                }
+            ],
             "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
             "newlines-between": "always",
             "alphabetize": {
                 "order": "asc",
-                "caseInsensitive": false
+                "caseInsensitive": true
             }
         }],
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1, "maxBOF": 0 }],

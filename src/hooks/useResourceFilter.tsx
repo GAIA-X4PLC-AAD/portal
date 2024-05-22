@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useContext } from 'react';
 
-import { AuthContext } from '../context/AuthContextProvider'; // Update this path as needed
-import { useFilters } from '../context/ResourceFilterContext';
+import { AuthContext } from '/context/AuthContextProvider'; // Update this path as needed
+import { useFilters } from '/context/ResourceFilterContext';
 
 import { resourceFilters } from './filterAssets';
 

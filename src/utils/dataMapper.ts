@@ -1,8 +1,8 @@
 // This Interface is termporary, due to how we recieve data at the moment.
 
 // Interfaces and Mappers for Service Offerings
-import { AuthContextValues } from '../context/AuthContextValues';
-import { ApiService } from '../services/ApiService';
+import { AuthContextValues } from '/context/AuthContextValues';
+import { ApiService } from '/services/ApiService';
 
 export interface ServiceOfferingInput {
   items: Array<{

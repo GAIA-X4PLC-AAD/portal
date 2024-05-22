@@ -1,9 +1,10 @@
 import React from 'react';
 import { Route, Routes, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 
-import WorkInProgress from './WorkInProgress';
+import { Column } from '/common/styles';
+import { Footer } from '/components/footer/Footer';
+
 import history from './common/history'
-import { Column } from './common/styles';
 import AccountHome from './components/account/AccountHome';
 import Provider from './components/account/Provider';
 import DashboardPage from './components/dashboard/dashboard_page';
@@ -11,7 +12,6 @@ import LcmFinal from './components/dashboard/lcm/LcmFinal';
 import LcmServices from './components/dashboard/lcm/LcmServices';
 import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
-import { Footer } from './components/footer/Footer';
 import AboutPage from './components/help/AboutPage'
 import SupportPage from './components/help/SupportPage'
 import LoginFail from './components/login/LoginFail';
@@ -28,6 +28,7 @@ import ShapesAndOntologies from './components/shapesAndOntologies/ShapesAndOntol
 import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
 import DetailsPage from './pages/details/DetailsPage';
 import Home from './pages/home/Home';
+import WorkInProgress from './WorkInProgress';
 
 import './App.css';
 

@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import car from '../../assets/car.gif';
-import { AuthContext } from '../../context/AuthContextProvider';
-import { fetchOntologies, mapOntologies, Ontology } from '../../utils/dataMapper';
-import Text from '../Text/Text';
-import Title from '../Title/Title';
-import SelfDescriptionCard from '../cards/SelfDescriptionCard';
-import SearchBar from '../searchBar/SearchBar';
+import car from '/assets/car.gif';
+import SelfDescriptionCard from '/components/cards/SelfDescriptionCard';
+import SearchBar from '/components/searchBar/SearchBar';
+import Text from '/components/Text/Text';
+import Title from '/components/Title/Title';
+import { AuthContext } from '/context/AuthContextProvider';
+import { fetchOntologies, mapOntologies, Ontology } from '/utils/dataMapper';
 
 import styles from './ShapesAndOntologies.module.css';
 
@@ -52,8 +52,7 @@ const ShapesAndOntologies = () => {
     <div>
       <header className={styles['header-container']}>
         <div className={styles['header-title']}>
-          <Title>{t('left-menu.shapesAndOntologies')}({filteredOntologies.length} {t('dashboard.results')})</Title>
-        </div>
+          <Title>{`${t('left-menu.shapesAndOntologies')} (${filteredOntologies.length} ${t('dashboard.results')})`}</Title>        </div>
       </header>
       <div className={styles['shapesAndOntologies-content-container']}>
         {authContext.isAuthenticated && (

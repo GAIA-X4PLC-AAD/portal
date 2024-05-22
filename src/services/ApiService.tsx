@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { AuthContextValues } from '../context/AuthContextValues';
-import { isEmpty } from '../utils/helpers';
+import { AuthContextValues } from '/context/AuthContextValues';
+import { isEmpty } from '/utils/helpers';
 
 const getHeaders = (authContext: AuthContextValues) => {
   return {
