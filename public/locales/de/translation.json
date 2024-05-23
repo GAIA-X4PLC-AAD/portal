@@ -5,8 +5,8 @@
   "left-menu": {
     "home": "Startseite",
     "service-offerings": "Service Offerings",
-    "resources": "Resources",
-    "participants": "Participants",
+    "resources": "Ressourcen",
+    "participants": "Teilnehmer",
     "provide": "Bereitstellen",
     "help": "Hilfe",
     "search": "Suche",
@@ -18,11 +18,11 @@
     "change-language": "Sprache",
     "about": "Über",
     "support": "Unterstützung",
-    "english": "English",
-    "spanish": "Spanisch",
+    "english": "Englisch",
     "german": "Deutsch",
     "close": "Schließen",
     "choose-language": "Sprache",
+    "shapesAndOntologies": "Shapes & Ontologien",
     "select-system-language": "Bitte wählen Sie eine Systemsprache",
     "tooltip": {
       "admin": "gehe zu admin",
@@ -49,6 +49,7 @@
     "deactivate": "Deactivate",
     "edit": "Edit",
     "status": "Status: {status}",
+    "results": "Ergebnisse",
     "manage": {
       "manage": "Manage",
       "create": "Create",
@@ -493,13 +494,20 @@
   },
   "details": {
     "sidebar-button-label": "Kontaktieren oder kaufen",
-    "contact-or-buy-button-notification": "Daten wurden übertragen"
+    "contact-or-buy-button-notification": "Daten wurden übertragen",
+    "moreDetails": "Mehr Details"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X konform",
     "not-gaia-x-compliant": "Nicht Gaia-X konform",
     "no-offerings-available": "Keine Angebote verfügbar",
-    "not-authenticated": "Nicht berechtigt"
+    "not-authenticated": "Nicht berechtigt",
+    "searchBarText": "Suchen Sie nach speziellen Ressourcen oder Angeboten"
+  },
+  "ontologies": {
+    "title": "Ontologie",
+    "titles": "Ontologien",
+    "noOntologiesAvailable": "Keine Ontologien gefunden",
+    "searchBarText": "Suchen Sie nach speziellen Shapes oder Ontologien"
   }
 }
-

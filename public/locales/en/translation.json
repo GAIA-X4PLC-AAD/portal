@@ -4,6 +4,8 @@
   },
   "left-menu": {
     "home": "Home",
+    "resources": "Resources",
+    "service-offerings": "Service Offerings",
     "services": "Services",
     "data": "Data",
     "provider": "Provider",
@@ -19,10 +21,10 @@
     "about": "About",
     "support": "Support",
     "english": "English",
-    "spanish": "Spanish",
     "german": "German",
     "close": "Close",
     "choose-language": "Language",
+    "shapesAndOntologies": "Shapes & Ontologies",
     "select-system-language": "Please select a system language",
     "tooltip": {
       "admin": "Go to admin",
@@ -49,6 +51,7 @@
     "deactivate": "Deactivate",
     "edit": "Edit",
     "status": "Status: {status}",
+    "results": "results",
     "manage": {
       "manage": "Manage",
       "create": "Create",
@@ -493,13 +496,20 @@
   },
   "details": {
     "sidebar-button-label": "Contact or buy",
-    "contact-or-buy-button-notification": "Data was transfered"
+    "contact-or-buy-button-notification": "Data was transfered",
+    "moreDetails": "More Details"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X compliant",
     "not-gaia-x-compliant": "Not Gaia-X compliant",
     "no-offerings-available": "No offerings available",
-    "not-authenticated": "Not authenticated"
+    "not-authenticated": "Not authenticated",
+    "searchBarText": "Search for special Resources or Service Offerings"
+  },
+  "ontologies": {
+    "title": "Ontology",
+    "titles": "Ontologies",
+    "noOntologiesAvailable": "No ontologies available",
+    "searchBarText": "Search for special shapes or ontologies"
   }
 }
-

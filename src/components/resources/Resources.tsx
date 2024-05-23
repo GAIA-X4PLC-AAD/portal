@@ -1,21 +1,19 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import SelfDescriptionCard from "components/cards/SelfDescriptionCard";
-import { ApiService } from "services/ApiService";
-import { AuthContext } from "context/AuthContextProvider";
-import { Resource, mapResources } from "utils/dataMapper";
+import car from '../../assets/car.gif';
+import { AuthContext } from '../../context/AuthContextProvider';
+import { useFilters } from '../../context/ResourceFilterContext';
+import { useResourceFilter } from '../../hooks/useResourceFilter';
+import { ApiService } from '../../services/ApiService';
+import { Resource, mapResources } from '../../utils/dataMapper';
+import Text from '../Text/Text';
+import Title from '../Title/Title';
+import SelfDescriptionCard from '../cards/SelfDescriptionCard';
+import Filter from '../filter/Filter';
+import SearchBar from '../searchBar/SearchBar';
 
-// import SendIcon from '@mui/icons-material/Send';
-// @ts-ignore
-import car from "../../assets/car.gif";
-import Title from "components/Title/Title";
-import Filter from "components/filter/Filter";
-import Text from "components/Text/Text";
-import { useFilters } from "context/ResourceFilterContext";
-import { useFilter } from "hooks/useFilter";
-import { useTranslation } from "react-i18next";
-
-import styles from "./Resources.module.css";
+import styles from './Resources.module.css';
 
 const Resources = () => {
   const authContext = useContext(AuthContext);
@@ -23,8 +21,10 @@ const Resources = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [resourceData, setResourceData] = useState<Resource[]>([]);
+  const [filteredResourceData, setFilteredResourceData] = useState<Resource[]>([]);
   const { filters } = useFilters();
-  const { fetchFilteredData } = useFilter();
+  const { typeAssets, formatAssets, vendorAssets, fetchFilteredData } = useResourceFilter();
+  const { toggleResourceFilter } = useFilters();
 
   // Fetch all resources on component mount
   useEffect(() => {
@@ -32,11 +32,12 @@ const Resources = () => {
       setIsLoading(true);
       try {
         const response = await ApiService.getAllResources(authContext);
-        console.log("My fetched data: ", response);
+        console.log('My fetched data: ', response);
         const map = mapResources(response);
         setResourceData(map);
+        setFilteredResourceData(map);
       } catch (error) {
-        console.error("Error fetching self descriptions:", error);
+        console.error('Error fetching self descriptions:', error);
       } finally {
         setIsLoading(false);
       }
@@ -52,32 +53,54 @@ const Resources = () => {
       .then((data) => {
         const map = mapResources(data);
         setResourceData(map);
+        setFilteredResourceData(map);
       })
       .catch((error) => {
-        console.error("Error in fetching data:", error);
+        console.error('Error in fetching data:', error);
       });
     setIsLoading(false);
   }, [filters]);
 
+  const handleSearch = (query: string) => {
+    if (query === '') {
+      setFilteredResourceData(resourceData);
+    } else {
+      const lowerCaseQuery = query.toLowerCase();
+      const filtered = resourceData.filter(resource => {
+        const resourceString = JSON.stringify(resource).toLowerCase();
+        return resourceString.includes(lowerCaseQuery);
+      });
+      setFilteredResourceData(filtered);
+    }
+  };
+
   return (
     <div>
-      <header className={styles["header-container"]}>
-        <div className={styles["header-title"]}>
-          <Title>Resources</Title>
+      <header className={styles['header-container']}>
+        <div className={styles['header-title']}>
+          <Title>{t('left-menu.resources')}({filteredResourceData.length} {t('dashboard.results')})</Title>
         </div>
       </header>
-      <div className={styles["resource-content-container"]}>
-        <Filter />
+      <div className={styles['resource-content-container']}>
+        <Filter
+          typeAssets={typeAssets}
+          formatAssets={formatAssets}
+          vendorAssets={vendorAssets}
+          toggleFilter={toggleResourceFilter}
+        />
         {authContext.isAuthenticated && (
           <div className={styles.content}>
             <div>
+              <SearchBar placeholder={t('resources.searchBarText')} onSearch={handleSearch}/>
+            </div>
+            <div>
               {isLoading && (
                 <div className="newCarLoader">
-                  <img src={car} alt="loading..." className="car" />
+                  <img src={car} alt="loading..." className="car"/>
                 </div>
               )}
-              {!isLoading && resourceData.length > 0 ? (
-                resourceData.map((resource) => {
+              {!isLoading && filteredResourceData.length > 0 ? (
+                filteredResourceData.map((resource) => {
                   return (
                     <SelfDescriptionCard
                       key={resource.name}
@@ -90,14 +113,14 @@ const Resources = () => {
                   );
                 })
               ) : (
-                <Text>{t("resources.no-offerings-available")}</Text>
+                <Text>{t('resources.no-offerings-available')}</Text>
               )}
             </div>
           </div>
         )}
       </div>
       {!authContext.isAuthenticated && (
-        <p>{t("resources.not-authenticated")}</p>
+        <p>{t('resources.not-authenticated')}</p>
       )}
     </div>
   );

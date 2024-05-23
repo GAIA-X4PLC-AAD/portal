@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 export interface ResourceFilterState {
   hdMap: boolean;
@@ -7,6 +7,9 @@ export interface ResourceFilterState {
   openDrive: boolean;
   fbx: boolean;
   openScenario: boolean;
+  threeDMapping: boolean;
+  trainGraphics: boolean;
+  dlr: boolean;
 }
 
 interface ResourceFilterContextType {
@@ -23,6 +26,9 @@ const defaultFilterState: ResourceFilterContextType = {
     openDrive: false,
     fbx: false,
     openScenario: false,
+    threeDMapping: false,
+    trainGraphics: false,
+    dlr: false,
   },
   toggleResourceFilter: () => {},
 };
@@ -39,14 +45,9 @@ interface ResourceFilterProviderProps {
 export const ResourceFilterProvider: React.FC<ResourceFilterProviderProps> = ({
   children,
 }) => {
-  const [filters, setFilters] = useState<ResourceFilterState>({
-    hdMap: false,
-    scenario: false,
-    environmentModel: false,
-    openDrive: false,
-    fbx: false,
-    openScenario: false,
-  });
+  const [filters, setFilters] = useState<ResourceFilterState>(
+    defaultFilterState.filters
+  );
 
   const toggleResourceFilter = (filterName: keyof ResourceFilterState) => {
     setFilters((prevFilters) => ({

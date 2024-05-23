@@ -1,13 +1,14 @@
 .filterContainer {
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 4px;
+    border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     width: 250px;
-    margin: 25px 25px 25px 0px;
+    margin: 25px 25px 25px 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    max-height: 600px;
   }
   
   .checkboxContainer {
