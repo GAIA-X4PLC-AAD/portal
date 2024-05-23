@@ -1,0 +1,19 @@
+.header-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    width: 100vw;
+    height:100px;
+    background-image: linear-gradient(to right, #060190, #A01441);
+    margin-left: calc(-50vw + 50%);
+    color: white;
+}
+
+.header-title {
+    color: white;
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}

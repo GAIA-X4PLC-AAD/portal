@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 export const useNavbar = () => {
   const { t } = useTranslation();
@@ -14,20 +14,24 @@ export const useNavbar = () => {
     //   navigationItemName: t("left-menu.tooltip.participants"),
     // },
     {
-      path: "/resources",
-      navigationItemName: t("left-menu.tooltip.resources"),
+      path: '/resources',
+      navigationItemName: t('left-menu.tooltip.resources'),
     },
     {
-      path: "/about",
-      navigationItemName: t("left-menu.about"),
+      path: '/about',
+      navigationItemName: t('left-menu.about'),
     },
     {
-      path: "/shapesAndOntologies",
-      navigationItemName: t("left-menu.shapesAndOntologies"),
+      path: '/shapesAndOntologies',
+      navigationItemName: t('left-menu.shapesAndOntologies'),
     },
     {
-      path: "/support",
-      navigationItemName: t("left-menu.support"),
+      path: '/support',
+      navigationItemName: t('left-menu.support'),
+    },
+    {
+      path: '/ontologiesDetailsPage',
+      navigationItemName: 'ontologiesDetailsPage',
     },
   ];
 
