@@ -55,8 +55,6 @@ describe('ontologyMapper test', () => {
         _predicate: { id: 'http://www.w3.org/2000/01/rdf-schema#subClassOf' },
         _object: { id: '"subClass1"' },
       },
-
-
       {
         _subject: { id: 'subject4' },
         _predicate: { id: 'http://www.w3.org/2000/01/rdf-schema#label' },
