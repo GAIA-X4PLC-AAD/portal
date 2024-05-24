@@ -2,7 +2,7 @@ import { describe, expect, it } from '@jest/globals';
 
 import { createOntologyObject, Ontology } from './ontologyMapper';
 
-describe('createOntologyObject', () => {
+describe('ontologyMapper test', () => {
   it('should create an ontology object from rdf data', () => {
     const rdfData = [
       {
