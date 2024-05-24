@@ -1,6 +1,5 @@
-import { ReactNode, useContext } from "react";
-
-import { AuthContext } from "context/AuthContextProvider";
+import { AuthContext } from 'context/AuthContextProvider';
+import { ReactNode, useContext } from 'react';
 
 interface IProtectedRoute {
   children: ReactNode;

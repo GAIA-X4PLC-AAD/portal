@@ -1,23 +1,24 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { withTranslation } from 'react-i18next';
-import Modal from '../Modal';
-import * as S from './ActionCancelModalStyle.js';
-import PropTypes from 'prop-types';
 
+import Modal from '../Modal';
+
+import * as S from './ActionCancelModalStyle.js';
 
 const ActionCancelModal = (props) => {
-  
+
   const header = props.header?props.t(props.header):null;
   const message = props.message?props.t(props.message):null;
   const actionMessage = props.actionMessage?props.t(props.actionMessage):null;
-  
-  if (props.showAlertMessage===false) return null;  
+
+  if (props.showAlertMessage===false) {return null;}
   return (
     <Modal>
       <S.FlexColumn>
         <S.ActionCancelModalHeader>{header}</S.ActionCancelModalHeader>
-        <S.ModalMessage> 
-          {message}       
+        <S.ModalMessage>
+          {message}
         </S.ModalMessage>
         <S.ModalButtonsBar>
           <S.CancelButton onClick={()=> props.cancelCallback()}>
@@ -40,6 +41,6 @@ ActionCancelModal.propTypes = {
   actionMessage: PropTypes.string,
   message: PropTypes.string,
   header: PropTypes.string,
-  }
+}
 
 export default withTranslation() (ActionCancelModal);

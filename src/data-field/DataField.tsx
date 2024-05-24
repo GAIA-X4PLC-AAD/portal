@@ -1,4 +1,4 @@
-import styles from "./DataField.module.css";
+import styles from './DataField.module.css';
 
 interface IDataField {
   label: string;
@@ -7,7 +7,7 @@ interface IDataField {
 
 export default function DataField({ label, content }: Readonly<IDataField>) {
   return (
-    <div className={styles["data-field-container"]}>
+    <div className={styles['data-field-container']}>
       <p className={styles.label}>{label}: </p>
       <p className={styles.content}>{content}</p>
     </div>

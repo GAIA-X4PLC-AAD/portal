@@ -1,45 +1,47 @@
-import React from "react";
-import DataPreview from "../dataPreview/DataPreview";
 import PropTypes from 'prop-types';
+import React from 'react';
+
+import LoadingView from '../../../loading_view/LoadingView';
+import DataPreview from '../dataPreview/DataPreview';
+
 import * as S from './style';
-import LoadingView from "../../../loading_view/LoadingView";
 
-const ServicesTab = ({id}) => {
-    const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/ppr/${id}/services/`;
+const ServicesTab = ({ id }) => {
+  const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/ppr/${id}/services/`;
 
-    const providerLink = (data) => {
-        return (<a href={data.ppr_url} target="_blank" rel="noreferrer">{data.ppr_name}</a>);
-    }
+  const providerLink = (data) => {
+    return (<a href={data.ppr_url} target="_blank" rel="noreferrer">{data.ppr_name}</a>);
+  }
 
-    const showParsedServices = ({data}) => {
-        const data2= data || [];
-        return (
-            <S.Columns justifyContent='start'>
-                {data2.map (record => {
-                    let parsed = {headline: record.name, 
-                        img_preview_url: record.img_preview_url , 
-                        subline: providerLink(record), 
-                        description: record.description, 
-                        onDetailsClick:()=>{return;}}
-                    return <DataPreview data={parsed} key={record.id} margin="0 10px 10px 0" marginRight="10px" />
-                    })
-                }
-            </S.Columns>
-        );
-    }
-    showParsedServices.propTypes = {
-        data: PropTypes.array
-    };
-
-    return  (
-        <LoadingView
-        url={URL}
-        successView={showParsedServices}/>
+  const showParsedServices = ({ data }) => {
+    const data2= data || [];
+    return (
+      <S.Columns justifyContent='start'>
+        {data2.map (record => {
+          let parsed = { headline: record.name,
+            img_preview_url: record.img_preview_url ,
+            subline: providerLink(record),
+            description: record.description,
+            onDetailsClick:()=>{return;} }
+          return <DataPreview data={parsed} key={record.id} margin="0 10px 10px 0" marginRight="10px" />
+        })
+        }
+      </S.Columns>
     );
+  }
+  showParsedServices.propTypes = {
+    data: PropTypes.array
+  };
+
+  return  (
+    <LoadingView
+      url={URL}
+      successView={showParsedServices}/>
+  );
 }
 
 ServicesTab.propTypes = {
-    id: PropTypes.string
+  id: PropTypes.string
 };
 
 export default ServicesTab;

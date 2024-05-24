@@ -1,14 +1,15 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
+
 // import signinReducer from "./signinReducer";
-import userReducer from "./userReducer";
-import searchCriteriaStore from "./SearchCriteriaStore";
-import serviceDescriptorReducer from "./serviceDescriptorReducer";
-import lcmReducer from "./lcmReducer";
+import searchCriteriaStore from './SearchCriteriaStore';
+import lcmReducer from './lcmReducer';
+import serviceDescriptorReducer from './serviceDescriptorReducer';
+import userReducer from './userReducer';
 
 export default combineReducers({
-    // signin: signinReducer,
-    user: userReducer,
-    searchCriteriaStore: searchCriteriaStore,
-    serviceDescriptor: serviceDescriptorReducer,
-    lcm: lcmReducer
+  // signin: signinReducer,
+  user: userReducer,
+  searchCriteriaStore: searchCriteriaStore,
+  serviceDescriptor: serviceDescriptorReducer,
+  lcm: lcmReducer
 });

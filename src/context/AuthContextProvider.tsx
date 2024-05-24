@@ -1,8 +1,8 @@
-import Keycloak, {KeycloakConfig, KeycloakInitOptions} from "keycloak-js";
-import React, {createContext, useEffect, useState} from "react";
-import axios from "axios";
-import {AuthContextValues} from "./AuthContextValues";
-import {retrieveToken} from "../common/auth";
+import axios from 'axios';
+import Keycloak, { KeycloakConfig, KeycloakInitOptions } from 'keycloak-js';
+import { createContext, useEffect, useState } from 'react';
+
+import { AuthContextValues } from './AuthContextValues';
 
 // const realm: string = process.env.REACT_APP_REALM_NAME ? process.env.REACT_APP_REALM_NAME : "";
 // const clientID: string = process.env.REACT_APP_CLIENT_ID ? process.env.REACT_APP_CLIENT_ID : "";
@@ -23,9 +23,9 @@ import {retrieveToken} from "../common/auth";
 // };
 
 const keycloakConfig: KeycloakConfig = {
-  realm: "gaia-x",
-  clientId: "portal",
-  url: "https://fc-keycloak.gxfs.gx4fm.org/",
+  realm: 'gaia-x',
+  clientId: 'portal',
+  url: 'https://fc-keycloak.gxfs.gx4fm.org/',
 };
 
 /**
@@ -33,7 +33,7 @@ const keycloakConfig: KeycloakConfig = {
  */
 const keycloakInitOptions: KeycloakInitOptions = {
   // Configure that Keycloak will check if a user is already authenticated (when opening the app or reloading the page). If not authenticated the user will be send to the login form. If already authenticated the webapp will open.
-  onLoad: "login-required",
+  onLoad: 'login-required',
   checkLoginIframe: false,
   pkceMethod: 'S256'
 };
@@ -52,7 +52,7 @@ const defaultAuthContextValues: AuthContextValues = {
   },
   hasRole: (role) => false,
   getConfig: () => null,
-  token: "",
+  token: '',
 };
 
 /**
@@ -65,7 +65,7 @@ export const AuthContext = createContext<AuthContextValues>(
 /**
  * The props that must be passed to create the {@link AuthContextProvider}.
  */
-// eslint-disable-next-line 
+// eslint-disable-next-line
 interface AuthContextProviderProps {
   /**
    * The elements wrapped by the auth context.
@@ -73,7 +73,6 @@ interface AuthContextProviderProps {
   // eslint-disable-next-line
   children: React.JSX.Element;
 }
-
 
 /**
  * AuthContextProvider is responsible for managing the authentication state of the current user.
@@ -83,7 +82,7 @@ interface AuthContextProviderProps {
 const AuthContextProvider = (props: AuthContextProviderProps) => {
   // Create the local state in which we will keep track if a user is authenticated
   const [isAuthenticated, setAuthenticated] = useState<boolean>(false);
-  const [token, setToken] = useState<string>("");
+  const [token, setToken] = useState<string>('');
 
   useEffect(() => {
     async function loadToken() {
@@ -93,11 +92,11 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
           setToken(token);
         }
       } catch {
-        console.log("error trying to load the token");
+        console.log('error trying to load the token');
       }
     }
 
-    if(isAuthenticated){
+    if (isAuthenticated){
       loadToken();
     }
   }, [isAuthenticated])
@@ -114,20 +113,20 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
      * Initialize the Keycloak instance
      */
     async function initializeKeycloak() {
-    console.log("initialize Keycloak");
+      console.log('initialize Keycloak');
       try {
         const isAuthenticatedResponse = await keycloak.init(keycloakInitOptions);
 
         // If the authentication was not successfully the user is send back to the Keycloak login form
         if (!isAuthenticatedResponse) {
-          console.log("user is not yet authenticated. forwarding user to login.");
+          console.log('user is not yet authenticated. forwarding user to login.');
           await keycloak.login();
         }
         // If we get here the user is authenticated and we can update the state accordingly
-        console.log("user already authenticated");
+        console.log('user already authenticated');
         setAuthenticated(true);
       } catch {
-        console.log("error initializing Keycloak");
+        console.log('error initializing Keycloak');
         setAuthenticated(false);
       }
     }
@@ -139,12 +138,11 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
 
   async function getConfig() {
     return axios.interceptors.request.use((config) => {
-      config.headers["Authorization"] = `Bearer ${keycloak.token}`;
-      config.headers["Access-Control-Allow-Origin"] = "*";
+      config.headers['Authorization'] = `Bearer ${keycloak.token}`;
+      config.headers['Access-Control-Allow-Origin'] = '*';
       return config;
     });
   }
-
 
   /**
    * Check if the user has the given role
@@ -156,7 +154,7 @@ const AuthContextProvider = (props: AuthContextProviderProps) => {
   };
 
   return (
-    <AuthContext.Provider value={{isAuthenticated, logout, login, hasRole, getConfig, token}}>
+    <AuthContext.Provider value={{ isAuthenticated, logout, login, hasRole, getConfig, token }}>
       {props.children}
     </AuthContext.Provider>
   );

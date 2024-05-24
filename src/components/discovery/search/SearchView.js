@@ -1,64 +1,64 @@
-import React, { useEffect } from "react";
 import PropTypes from 'prop-types';
-import SearchFilterFactory from "./SearchFilterFactory";
-import { Row, Style, Column } from "../../../common/styles";
-import { Padding } from "../tabs/style";
-import SearchContent from "./SearchContent";
-import SearchTerm from "./SearchTerm";
-import { useDispatch, useSelector } from "react-redux";
-import { updateSearchType, updateSeartTypeWithTerm } from "../../../actions";
-import AdminHeader from "../../admin/AdminHeader";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { updateSearchType, updateSeartTypeWithTerm } from '../../../actions';
+import { Row, Style, Column } from '../../../common/styles';
+import AdminHeader from '../../admin/AdminHeader';
+import { Padding } from '../tabs/style';
 
-const SearchView = ({type, onSelect, serviceId, slot}) => {
-    
+import SearchContent from './SearchContent';
+import SearchFilterFactory from './SearchFilterFactory';
+import SearchTerm from './SearchTerm';
 
-    const store = useSelector(state => state.searchCriteriaStore);
-    const dispatch = useDispatch();
+const SearchView = ({ type, onSelect, serviceId, slot }) => {
 
-    useEffect(() => {
-        if (store.type !== "home")
-            dispatch(updateSearchType(type));
-        else dispatch(updateSeartTypeWithTerm(type, store.searchTerms));
-    }, [type]);
+  const store = useSelector(state => state.searchCriteriaStore);
+  const dispatch = useDispatch();
 
-    return (
-        <React.Fragment key={type}>
-            <Row>
-                <Column>
-                    <Style maxWidth='313px'>
-                        <AdminHeader type={type} />
-                    </Style>
-                    <Style maxWidth='313px'>
-                        <SearchFilterFactory type={type} serviceId={serviceId} slot={slot}/>
-                    </Style>
+  useEffect(() => {
+    if (store.type !== 'home')
+    {dispatch(updateSearchType(type));}
+    else {dispatch(updateSeartTypeWithTerm(type, store.searchTerms));}
+  }, [type]);
 
-                </Column>
-                <Column maxWidth='100%'>
-                    {
-                        (type !== 'participant' && type != 'management') 
-                            ? <SearchTerm type={type} />
-                            : <></>
-                    }
+  return (
+    <React.Fragment key={type}>
+      <Row>
+        <Column>
+          <Style maxWidth='313px'>
+            <AdminHeader type={type} />
+          </Style>
+          <Style maxWidth='313px'>
+            <SearchFilterFactory type={type} serviceId={serviceId} slot={slot}/>
+          </Style>
 
-                    <Padding horizontal='12px' />
-                    <Style maxWidth='900px'>
-                        <SearchContent type={type} serviceId={serviceId} slot={slot} onSelect={onSelect} />
-                    </Style>
+        </Column>
+        <Column maxWidth='100%'>
+          {
+            (type !== 'participant' && type != 'management')
+              ? <SearchTerm type={type} />
+              : <></>
+          }
 
-                </Column>
-            </Row>
-        </React.Fragment>
+          <Padding horizontal='12px' />
+          <Style maxWidth='900px'>
+            <SearchContent type={type} serviceId={serviceId} slot={slot} onSelect={onSelect} />
+          </Style>
 
-    );
+        </Column>
+      </Row>
+    </React.Fragment>
+
+  );
 
 }
 
 SearchView.propTypes = {
-    type: PropTypes.string,
-    onSelect: PropTypes.func,
-    serviceId: PropTypes.string,
-    slot: PropTypes.number
+  type: PropTypes.string,
+  onSelect: PropTypes.func,
+  serviceId: PropTypes.string,
+  slot: PropTypes.number
 }
 
 export default SearchView;

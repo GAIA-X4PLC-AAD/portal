@@ -1,12 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
-
-
+import React, { useState, useEffect } from "react";
+import PropTypes from 'prop-types';
 import ImageGallery from 'react-image-gallery';
 
-import { Center, Image, Row, Style } from "../../../../common/styles";
-
-import PropTypes from 'prop-types';
-
+import { Style } from "../../../../common/styles";
 
 const ScreenshotsTabView = (props,) => {
   const [slideImages, setSlideImages] = useState([]);

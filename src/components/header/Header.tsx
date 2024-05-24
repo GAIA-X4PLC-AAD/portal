@@ -1,9 +1,8 @@
-import { FunctionComponent } from "react";
+import Text from 'components/Text/Text';
+import Title from 'components/Title/Title';
+import { FunctionComponent } from 'react';
 
-import Title from "components/Title/Title";
-import Text from "components/Text/Text";
-
-import styles from "./Header.module.css";
+import styles from './Header.module.css';
 
 interface IHeader {
   title: string;
@@ -13,11 +12,11 @@ interface IHeader {
 
 export default function Header({ title, content, Image }: Readonly<IHeader>) {
   return (
-    <div className={styles["header-container"]}>
-      <div className={styles["header-image"]}>
+    <div className={styles['header-container']}>
+      <div className={styles['header-image']}>
         <Image />
       </div>
-      <div className={styles["header-content"]}>
+      <div className={styles['header-content']}>
         <Title>{title}</Title>
         <Text>{content}</Text>
       </div>

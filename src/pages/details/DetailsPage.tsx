@@ -1,13 +1,12 @@
-import DetailsCard from "components/cards/DetailsCard";
-import { AuthContext } from "context/AuthContextProvider";
-import { useContext, useEffect, useState } from "react";
-import { ApiService } from "services/ApiService";
+import DetailsCard from 'components/cards/DetailsCard';
+import MapCard from 'components/cards/MapCard';
+import SidebarCard from 'components/cards/SidebarCard';
+import { AuthContext } from 'context/AuthContextProvider';
+import { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { ApiService } from 'services/ApiService';
 
-import MapCard from "components/cards/MapCard";
-import SidebarCard from "components/cards/SidebarCard";
-import { useParams } from "react-router-dom";
-
-import styles from "./DetailsPage.module.css";
+import styles from './DetailsPage.module.css';
 
 export default function DetailsPage() {
   const authContext = useContext(AuthContext);
@@ -21,12 +20,12 @@ export default function DetailsPage() {
           authContext,
           resourceId
         );
-        console.log("My fetched data: ", response);
+        console.log('My fetched data: ', response);
         if (response) {
           setSelfDescriptionData(response);
         }
       } catch (error) {
-        console.error("Error fetching self descriptions:", error);
+        console.error('Error fetching self descriptions:', error);
       }
     };
 
@@ -36,7 +35,7 @@ export default function DetailsPage() {
   }, []);
 
   return (
-    <div className={styles["details-page-container"]}>
+    <div className={styles['details-page-container']}>
       <div>
         <DetailsCard cardData={selfDescriptionData} />
       </div>

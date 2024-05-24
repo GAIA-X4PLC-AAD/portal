@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+
 import * as S from '../../common/styles';
 
 export const Column = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -43,13 +44,13 @@ export const Filters = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0px 0px 12px;
+    padding: 0 0 12px;
     gap: 12px;
     width: 312px;
 `;
 
 export const Category=styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -80,12 +81,12 @@ export const FilterHeader=styled.div`
 export const SearchTerm=styled.input`
 width: 800px;
 height: 48px;
-right: 0%;
+right: 0;
 background: #F8F8F8;
 border: 1px solid #E9E9E9;
 border-radius: 4px;
 
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 400;
 font-size: 24px;
@@ -117,7 +118,7 @@ export const Button = S.BlueButton;
 export const AdvancedSearch = styled.div`
     padding-top: 8px;
     margin-left:auto;
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -139,7 +140,7 @@ background: transparent;
 object-fit:fill;`;
 
 export const ErrorHeader=styled.div`
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 700;
 font-size: 18px;
@@ -152,7 +153,7 @@ margin-left: 10.25px;
 export const ErrorMessage=styled.div`
 text-align: left;
 margin-top: 12px;
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 400;
 font-size: 18px;

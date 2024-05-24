@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import * as S from '../../../../common/styles';
 
 export const Preview = styled.div`
@@ -53,7 +54,7 @@ export const Subline = styled.div`
 export const Description = styled.div`
     margin-top:10px;
     margin-bottom:10px;
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;

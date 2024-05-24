@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import * as S from '../../common/styles.js';
 
 export const CredentialWrapper = styled.div`
@@ -13,7 +14,7 @@ export const FlexTable = styled.div`
 `;
 
 export const FlexHeader = styled(FlexTable)`
-font-family: 'TeleNeo';
+font-family: 'TeleNeo',serif;
 font-style: normal;
 font-weight: 400;
 font-size: 12px;
@@ -21,7 +22,7 @@ line-height: 16px;
 `;
 
 export const FlexCell = styled(FlexTable)`
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 400;
 font-size: 15px;
@@ -29,7 +30,6 @@ line-height: 20px;
 letter-spacing: 0.25px;
 color: #1C0E15;
 `;
-
 
 export const FlexRow = styled.div`
     flex:1;
@@ -46,7 +46,7 @@ export const CredentialEditWrap = styled.div`
     flex-flow: row wrap;
     transition: 0.5s;
 
-    font-family: 'TeleNeo';
+    font-family: 'TeleNeo',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -61,13 +61,13 @@ export const CredentialEditColumn = styled.div`
     flex-flow: column wrap;
     flex:1;
     text-align: left;
-    margin: 10px 0px 10px 0px;
+    margin: 10px 0 10px 0;
 `;
 
 export const CredentialEditColumnInput= styled.input`
     width: 90%;
     
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -84,12 +84,12 @@ export const CredentialEditRow = styled.div`
 
 export const CredentialEditRowInput=styled.input`
 width: 95%;
-margin: 0px 0px 10px 0px;
+margin: 0 0 10px 0;
 `;
 
 export const CredentialEditRowSelect=styled.select`
     width: 96%;
-    margin: 0px 0px 10px 0px;
+    margin: 0 0 10px 0;
 `;
 
 export const CredentialEditButton=styled(S.BlueButton)`
@@ -105,7 +105,7 @@ export const CredentialCancelButton = styled(S.CancelButton)`
     padding: 8px 16px;
     margin: 8px 16px;
 `;
-    
+
 export const CredentialRemove = styled(S.RedTextClickable)`
     text-align: left;
     margin-right: auto;

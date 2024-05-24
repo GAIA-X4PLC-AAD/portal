@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+
 import * as S from '../../../../common/styles';
 
 export const PriceName = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -17,7 +18,7 @@ export const PriceName = styled.div`
 `;
 
 export const PricePrice = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -27,7 +28,7 @@ export const PricePrice = styled.div`
     flex: none;
     order: 1;
     flex-grow: 0;
-    margin: 0px 0px;
+    margin: 0 0;
 `;
 
 export const Price = styled.div`

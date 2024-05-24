@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 
-
 export const TopMenu = styled.div`
   display: flex;
   justify-content: space-between;
@@ -41,7 +40,6 @@ export const HeaderButton = styled.button`
   font-weight: 700;
 `
 
-
 export const Padding = styled.div`
   padding: ${props => props.vertical || '0px'} ${props => props.horizontal || '0px'};
   padding-top: ${props => props.paddingTop || ''};
@@ -59,23 +57,23 @@ export const ExpandedContainer = styled.section`
 
 export const AnimatedVisibility = styled.div`
 ${(props) => {
-  if (props.visible) {
-    return css`
+    if (props.visible) {
+      return css`
     opacity:1;
     width:100%;
     height:100%;
     transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
   `;
-  } else {
-    return css`
+    } else {
+      return css`
     opacity:0;
     width:0;
     height:0;
     transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
   `;
-  }
+    }
 
-}}
+  }}
 `
 
 export const Center = styled.div`
@@ -120,27 +118,26 @@ export const HorizontalContainer = styled.div`
   width: 100%;
 `;
 
-
 export const Title = styled.p`
   /* Body Bold */
-  font-family: "Titillium Web";
+  font-family: "Titillium Web",serif;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
-  margin: 0px;
+  margin: 0;
   /* identical to box height, or 133% */
 
   color: #262626;
 `;
 
 export const Body = styled.p`
-  font-family: 'Titillium Web';
+  font-family: 'Titillium Web',serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
-  margin-top: 0px;
-  margin-bottom: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
   max-width: ${props => props.maxWidth || ''};
   /* or 133% */
   color: #262626;
@@ -148,14 +145,14 @@ export const Body = styled.p`
 
 export const Subtitle = styled.p`
 /* Caption */
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 400;
 font-size: 12px;
 line-height: 16px;
-margin-top: 0px;
+margin-top: 0;
 max-width: ${props => props.maxWidth || ''};
-margin-bottom: 0px;
+margin-bottom: 0;
 /* identical to box height, or 133% */
 display: flex;
 align-items: center;
@@ -168,6 +165,6 @@ color: #B2B2B2;
 export const FlagImg = styled.img`
   width: 19px;
   height: 19px;
-  padding: 0px 2px;
+  padding: 0 2px;
 `;
 

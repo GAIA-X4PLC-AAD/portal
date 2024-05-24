@@ -1,6 +1,4 @@
-
-import styled, { css } from 'styled-components';
-
+import styled from 'styled-components';
 
 export const SlotBox = styled.div`
 box-sizing: border-box;
@@ -36,12 +34,12 @@ width: fit-content;
 export const BookSaveInput = styled.input`
 height: 36px;
 width: 446px;
-margin: 0px 24px;
+margin: 0 24px;
 background: #FFFFFF;
 border: 1px solid #E8E8E8;
 border-radius: 4px;
 
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 400;
 font-size: 15px;

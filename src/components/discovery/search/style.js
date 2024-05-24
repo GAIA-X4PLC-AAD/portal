@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+
 import * as S from '../../../common/styles';
 
 export const Column = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -19,7 +20,7 @@ export const Column = styled.div`
     margin-right: 12px;
     margin-top: 4px;
     margin-bottom: 4px;
-    width: ${props => props.width || "auto"};
+    width: ${props => props.width || 'auto'};
 `;
 
 export const CheckBox = styled.input`
@@ -44,13 +45,13 @@ export const Filters = styled.div`
     flex-direction: column;
     align-items: center;
     margin-top: 8px;
-    padding: 0px 0px 12px;
+    padding: 0 0 12px;
     gap: 12px;
     width: 312px;
 `;
 
 export const Category=styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -80,12 +81,12 @@ export const FilterHeader=styled.div`
 
 export const SearchTerm=styled.input`
 width: ${props => props.width || '800px'};
-right: 0%;
+right: 0;
 background: #F8F8F8;
 border: 1px solid #E9E9E9;
 border-radius: 4px;
 
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 400;
 font-size: 24px;
@@ -118,7 +119,7 @@ export const AdvancedSearch = styled.div`
     padding-top: 8px;
     /* margin-left:auto; */
     margin-left: 12px;
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -135,7 +136,7 @@ export const AdvancedSearch = styled.div`
 `;
 
 export const AdvancedSearchText = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     margin: auto 12px;
     font-weight: 700;
@@ -155,7 +156,7 @@ background: transparent;
 object-fit:fill;`;
 
 export const ErrorHeader=styled.div`
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 700;
 font-size: 18px;
@@ -168,7 +169,7 @@ margin-left: 10.25px;
 export const ErrorMessage=styled.div`
 text-align: left;
 margin-top: 12px;
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 400;
 font-size: 18px;

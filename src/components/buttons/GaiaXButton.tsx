@@ -1,4 +1,4 @@
-import styles from "./GaiaXButton.module.css";
+import styles from './GaiaXButton.module.css';
 
 interface IGaiaXButton {
   label: string;
