@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
 import { AuthContext } from '../../context/AuthContextProvider';
-import { fetchOntologies, mapOntologies, Ontology } from '../../utils/dataMapper';
+import { createAllOntologyObjects, fetchOntologies, parseOntologies } from '../../utils/ontologyMapper';
 import Text from '../Text/Text';
 import Title from '../Title/Title';
 import SelfDescriptionCard from '../cards/SelfDescriptionCard';
@@ -22,9 +22,13 @@ const ShapesAndOntologies = () => {
     const loadOntologies = async () => {
       setIsLoading(true);
       try {
-        const ontologiesDetailed = await fetchOntologies(authContext).then(mapOntologies);
-        setOriginalOntologies(ontologiesDetailed);
-        setFilteredOntologies(ontologiesDetailed);
+        const fetchedOntologies = await fetchOntologies(authContext)
+          .then(parseOntologies)
+          .then(createAllOntologyObjects);
+
+        console.log('fetchedOntologies:', fetchedOntologies);
+        setOriginalOntologies(fetchedOntologies);
+        setFilteredOntologies(fetchedOntologies);
       } catch (error) {
         console.error('Error fetching self descriptions:', error);
       } finally {
@@ -70,8 +74,8 @@ const ShapesAndOntologies = () => {
                     <SelfDescriptionCard
                       key={index}
                       label={t('ontologies.title')}
-                      name={ontology.base}
-                      description={ontology.label}
+                      name={ontology.subject}
+                      description={ontology.description}
                       selfDescription={ontology}
                     />
                   ))
