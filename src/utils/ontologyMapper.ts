@@ -39,7 +39,7 @@ export const parseOntologies = (response: []): any[] => {
     const parser = new N3.Parser();
     const parsedItems: any[] = [];
     parser.parse(item,
-      (error, quad, prefixes) => {
+      (error, quad) => {
         if (quad) {
           parsedItems.push(quad);
         }
@@ -95,7 +95,7 @@ export const createOntologyObject = (data: any[]): Ontology => {
 
       switch (predicateId) {
       case 'http://www.w3.org/2000/01/rdf-schema#label':
-        shapeMap[subjectId].label = objectId.replace(/(^"|"$)/g, '').split('@')[0];
+        shapeMap[subjectId].label = objectId.replace(/(^"|"$)/g, '').split('"@')[0];
         break;
       case 'http://www.w3.org/2000/01/rdf-schema#comment':
         shapeMap[subjectId].comment = objectId.replace(/(^"|"$)/g, '');

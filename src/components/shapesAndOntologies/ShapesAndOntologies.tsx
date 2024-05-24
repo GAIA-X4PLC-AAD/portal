@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
 import { AuthContext } from '../../context/AuthContextProvider';
-import { createAllOntologyObjects, fetchOntologies, parseOntologies } from '../../utils/ontologyMapper';
+import { createAllOntologyObjects, fetchOntologies, Ontology, parseOntologies } from '../../utils/ontologyMapper';
 import Text from '../Text/Text';
 import Title from '../Title/Title';
 import SelfDescriptionCard from '../cards/SelfDescriptionCard';
