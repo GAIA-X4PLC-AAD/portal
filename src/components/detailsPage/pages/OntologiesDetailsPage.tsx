@@ -1,13 +1,15 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Class, Ontology } from '../../../utils/dataMapper';
+import { Ontology, Shape } from '../../../utils/ontologyMapper';
+import Header from '../../header/Header';
 import DetailActions from '../components/actions/DetailActions';
 import DetailsMainContent from '../components/mainContent/DetailsMainContent';
+import MainContentOntology from '../components/mainContent/ontology/MainContentOntology';
 import DetailSuitableOfferings from '../components/suitableOfferings/DetailSuitableOfferings';
+import DetailsContent from '../layout/content/DetailsContent';
 import DetailsPage from '../layout/mainPage/DetailsPage';
 import DetailsSidebar from '../layout/sidebar/DetailsSidebar';
-import DetailsTitle from '../title/DetailsTitle';
 
 interface IOntologiesDetailsPage {
     ontology: Ontology;
@@ -16,37 +18,38 @@ interface IOntologiesDetailsPage {
 const OntologiesDetailsPage: FC = () => {
   const { t } = useTranslation();
 
-  const shapey1: Class = {
-    name: 'name',
+  const shapey1: Shape = {
+    comment: 'comment',
     label: 'label',
     subClasses: []
   };
 
-  const shapey2: Class = {
-    name: 'name',
+  const shapey2: Shape = {
+    comment: 'comment',
     label: 'label',
     subClasses: []
   };
 
   const ontologyey: Ontology = {
-    base: 'https://base.com/',
+    subject: 'https://base.com/',
     contributors: ['contributor1', 'contributor2'],
-    label: 'label',
+    description: 'label',
     version: 'version',
-    classes: [shapey1, shapey2],
-    claimsGraphUri: 'claimsGraphUri'
+    shapes: [shapey1, shapey2],
   }
 
   return (
     <DetailsPage>
-      <DetailsTitle title={t('left-menu.shapesAndOntologies') + ' \u2192 ' + ontologyey.base} />
-      <DetailsMainContent>
-        <div>content</div>
-      </DetailsMainContent>
-      <DetailsSidebar>
-        <DetailSuitableOfferings title={'lala'} />
-        <DetailActions title={'lulu'} />
-      </DetailsSidebar>
+      <Header title={t('left-menu.shapesAndOntologies') + ' \u2192 ' + ontologyey.subject} />
+      <DetailsContent>
+        <DetailsMainContent>
+          <MainContentOntology ontology={ontologyey} />
+        </DetailsMainContent>
+        <DetailsSidebar>
+          <DetailSuitableOfferings title={'lala'} />
+          <DetailActions title={'lulu'} />
+        </DetailsSidebar>
+      </DetailsContent>
     </DetailsPage>
   );
 }

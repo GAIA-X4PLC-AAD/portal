@@ -70,7 +70,12 @@
     "tooltip": {
       "manage": "Manage your service (LCM)",
       "edit": "Upload new SD"
-    }
+    },
+    "suitable-offerings": "Passende Angebote",
+    "actions": "Aktionen",
+    "offered-by": "Angeboten von",
+    "suitable-data-offerings": "Passende Datenangebote",
+    "map": "Karte"
   },
   "top-menu": {
     "help": "Hilfe",

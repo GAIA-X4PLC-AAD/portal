@@ -72,7 +72,12 @@
     "tooltip": {
       "manage": "Manage your service (LCM)",
       "edit": "Upload new SD"
-    }
+    },
+    "suitable-offerings": "Suitable offerings",
+    "actions": "Actions",
+    "offered-by": "Offered by",
+    "suitable-data-offerings": "Suitable data offerings",
+    "map": "Map"
   },
   "top-menu": {
     "help": "Help",
