@@ -5,8 +5,8 @@ import car from '../../assets/car.gif';
 import { AuthContext } from '../../context/AuthContextProvider';
 import { fetchOntologies, mapOntologies, Ontology } from '../../utils/dataMapper';
 import Text from '../Text/Text';
-import Title from '../Title/Title';
 import SelfDescriptionCard from '../cards/SelfDescriptionCard';
+import Header from '../header/Header';
 import SearchBar from '../searchBar/SearchBar';
 
 import styles from './ShapesAndOntologies.module.css';
@@ -50,11 +50,7 @@ const ShapesAndOntologies = () => {
 
   return (
     <div>
-      <header className={styles['header-container']}>
-        <div className={styles['header-title']}>
-          <Title>{t('left-menu.shapesAndOntologies')}({filteredOntologies.length} {t('dashboard.results')})</Title>
-        </div>
-      </header>
+      <Header title={`${t('left-menu.shapesAndOntologies')}(${filteredOntologies.length}) ${t('dashboard.results')})`}/>
       <div className={styles['shapesAndOntologies-content-container']}>
         {authContext.isAuthenticated && (
           <div className={styles.content}>

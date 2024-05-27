@@ -1,26 +1,23 @@
-import { FunctionComponent } from "react";
+import { FC } from 'react';
 
-import Title from "components/Title/Title";
-import Text from "components/Text/Text";
+import Title from '../Title/Title';
 
-import styles from "./Header.module.css";
+import styles from './Header.module.css';
 
 interface IHeader {
-  title: string;
-  content: string;
-  Image: FunctionComponent;
+    title: string;
 }
 
-export default function Header({ title, content, Image }: Readonly<IHeader>) {
+const Header: FC<IHeader> = ({ title }) => {
   return (
-    <div className={styles["header-container"]}>
-      <div className={styles["header-image"]}>
-        <Image />
-      </div>
-      <div className={styles["header-content"]}>
-        <Title>{title}</Title>
-        <Text>{content}</Text>
-      </div>
+    <div className={styles['container']}>
+      <header className={styles['header-container']}>
+        <div className={styles['header-title']}>
+          <Title>{title}</Title>
+        </div>
+      </header>
     </div>
   );
-}
+};
+
+export default Header;
