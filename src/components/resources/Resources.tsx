@@ -109,7 +109,7 @@ const Resources = () => {
                   );
                 })
               ) : (
-                <Text>{t('resources.no-offerings-available')}</Text>
+                <Text>{t('dashboard.no-offerings-available')}</Text>
               )}
             </div>
           </div>

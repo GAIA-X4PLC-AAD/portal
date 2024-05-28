@@ -72,6 +72,7 @@
       "edit": "Upload new SD"
     },
     "suitable-offerings": "Passende Angebote",
+    "no-offerings-available": "Keine Angebote verfügbar",
     "actions": "Aktionen",
     "offered-by": "Angeboten von",
     "suitable-data-offerings": "Passende Datenangebote",
@@ -507,7 +508,6 @@
   "resources": {
     "is-gaia-x-compliant": "Gaia-X konform",
     "not-gaia-x-compliant": "Nicht Gaia-X konform",
-    "no-offerings-available": "Keine Angebote verfügbar",
     "not-authenticated": "Nicht berechtigt",
     "search-bar-text": "Suchen Sie nach speziellen Ressourcen oder Angeboten"
   },
