@@ -38,7 +38,8 @@ const OntologiesDetailsPage: FC = () => {
     version: 'version',
     shapes: [shapey1, shapey2],
     graphLink: 'http://owlgred.lumii.lv/online_visualization/',
-    downloadLink: 'https://www.google.de'
+    downloadLink: 'https://www.google.de',
+    linksForOfferings: ['https://www.google.de', 'https://www.google.de']
   }
 
   return (
@@ -49,7 +50,7 @@ const OntologiesDetailsPage: FC = () => {
           <MainContentOntology ontology={ontologyey} />
         </DetailsMainContent>
         <DetailsSidebar>
-          <DetailSuitableOfferings title={'lala'} />
+          <DetailSuitableOfferings linksForOfferings={ontologyey.linksForOfferings} />
           <DetailActions graphLink={ontologyey.graphLink} downloadLink={ontologyey.downloadLink}/>
         </DetailsSidebar>
       </DetailsContent>

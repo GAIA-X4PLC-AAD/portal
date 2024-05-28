@@ -18,6 +18,7 @@ export interface Ontology {
     claimsGraphUri?: string;
     graphLink?: string;
     downloadLink?: string;
+    linksForOfferings?: string[];
 }
 
 export interface ShapesAndOntologiesInput {
