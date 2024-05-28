@@ -1,4 +1,4 @@
-import styles from "./Text.module.css";
+import styles from './Text.module.css';
 
 interface IText {
   children: string;

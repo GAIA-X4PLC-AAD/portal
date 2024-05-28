@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Ontology } from '../../../../../utils/ontologyMapper';
 import Title from '../../../../Title/Title';
@@ -10,9 +11,11 @@ interface IMainContentOntology {
 }
 
 const MainContentOntology: FC<IMainContentOntology> = ({ ontology }) => {
+  const { t } = useTranslation();
+
   return (
     <div className={styles['container']}>
-      <Title>Ontology</Title>
+      <Title>{t('ontologies.title')}</Title>
     </div>
   );
 };

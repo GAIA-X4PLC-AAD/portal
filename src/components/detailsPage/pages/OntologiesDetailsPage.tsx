@@ -33,7 +33,7 @@ const OntologiesDetailsPage: FC = () => {
   const ontologyey: Ontology = {
     subject: 'https://base.com/',
     contributors: ['contributor1', 'contributor2'],
-    description: 'label',
+    description: 'description',
     version: 'version',
     shapes: [shapey1, shapey2],
   }
