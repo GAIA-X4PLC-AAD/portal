@@ -500,7 +500,9 @@
   "details": {
     "sidebar-button-label": "Kontaktieren oder kaufen",
     "contact-or-buy-button-notification": "Daten wurden übertragen",
-    "moreDetails": "Mehr Details"
+    "more-details": "Mehr Details",
+    "view-graph": "Graph anzeigen",
+    "download-files": "Dateien herunterladen"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X konform",

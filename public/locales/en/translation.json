@@ -502,7 +502,9 @@
   "details": {
     "sidebar-button-label": "Contact or buy",
     "contact-or-buy-button-notification": "Data was transfered",
-    "moreDetails": "More Details"
+    "more-details": "More Details",
+    "view-graph": "View Graph",
+    "download-files": "Download Files"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X compliant",
