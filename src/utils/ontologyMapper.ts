@@ -15,6 +15,9 @@ export interface Ontology {
     description: string;
     version: string;
     shapes: Shape[];
+    claimsGraphUri?: string;
+    graphLink?: string;
+    downloadLink?: string;
 }
 
 export interface ShapesAndOntologiesInput {

@@ -2,7 +2,9 @@ import Title from 'components/Title/Title';
 import GaiaXButton from 'components/buttons/GaiaXButton';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { ServiceOffering, Resource, Ontology } from 'utils/dataMapper';
+import { ServiceOffering, Resource } from 'utils/dataMapper';
+
+import { Ontology } from '../../utils/ontologyMapper';
 
 import styles from './SelfDescriptionCard.module.css';
 

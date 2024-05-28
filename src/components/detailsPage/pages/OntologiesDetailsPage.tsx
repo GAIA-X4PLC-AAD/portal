@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Ontology, Shape } from '../../../utils/ontologyMapper';
+import { ARROW_RIGHT } from '../../../utils/symbols';
 import Header from '../../header/Header';
 import DetailActions from '../components/actions/DetailActions';
 import DetailsMainContent from '../components/mainContent/DetailsMainContent';
@@ -36,18 +37,20 @@ const OntologiesDetailsPage: FC = () => {
     description: 'description',
     version: 'version',
     shapes: [shapey1, shapey2],
+    graphLink: 'http://owlgred.lumii.lv/online_visualization/',
+    downloadLink: 'https://www.google.de'
   }
 
   return (
     <DetailsPage>
-      <Header title={t('left-menu.shapesAndOntologies') + ' \u2192 ' + ontologyey.subject} />
+      <Header title={t('left-menu.shapesAndOntologies') + ' ' + ARROW_RIGHT + ' ' + ontologyey.subject} />
       <DetailsContent>
         <DetailsMainContent>
           <MainContentOntology ontology={ontologyey} />
         </DetailsMainContent>
         <DetailsSidebar>
           <DetailSuitableOfferings title={'lala'} />
-          <DetailActions title={'lulu'} />
+          <DetailActions graphLink={ontologyey.graphLink} downloadLink={ontologyey.downloadLink}/>
         </DetailsSidebar>
       </DetailsContent>
     </DetailsPage>
