@@ -54,7 +54,7 @@ const ShapesAndOntologies = () => {
 
   return (
     <div>
-      <Header title={`${t('left-menu.shapesAndOntologies')}(${filteredOntologies.length}) ${t('dashboard.results')})`}/>
+      <Header title={`${t('left-menu.shapesAndOntologies')}(${filteredOntologies.length} ${t('dashboard.results')})`}/>
       <div className={styles['shapesAndOntologies-content-container']}>
         {authContext.isAuthenticated && (
           <div className={styles.content}>

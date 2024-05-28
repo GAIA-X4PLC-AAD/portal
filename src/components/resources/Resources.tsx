@@ -76,7 +76,7 @@ const Resources = () => {
 
   return (
     <div>
-      <Header title={`${t('left-menu.resources')}(${filteredResourceData.length}) ${t('dashboard.results')}`}/>
+      <Header title={`${t('left-menu.resources')}(${filteredResourceData.length} ${t('dashboard.results')}`}/>
       <div className={styles['resource-content-container']}>
         <Filter
           typeAssets={typeAssets}
