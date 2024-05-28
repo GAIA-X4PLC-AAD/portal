@@ -19,6 +19,7 @@ export interface Ontology {
     graphLink?: string;
     downloadLink?: string;
     linksForOfferings?: string[];
+    relatedOntologies?: Ontology[];
 }
 
 export interface ShapesAndOntologiesInput {

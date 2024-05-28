@@ -501,6 +501,7 @@
     "final_description": "You can download template and upload configuration or complete form manually."
   },
   "details": {
+    "title": "Details",
     "sidebar-button-label": "Contact or buy",
     "contact-or-buy-button-notification": "Data was transfered",
     "more-details": "More Details",
@@ -523,6 +524,7 @@
   "shapes": {
     "title": "Shape",
     "titles": "Shapes",
-    "no-shapes-available": "No shapes available"
+    "no-shapes-available": "No shapes available",
+    "related-shapes": "Related Shapes"
   }
 }

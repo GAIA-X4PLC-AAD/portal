@@ -1,9 +1,13 @@
-import styles from "./Title.module.css";
+import { FC } from 'react';
+
+import styles from './Title.module.css';
 
 interface ITitle {
   children: string;
 }
 
-export default function Title({ children }: Readonly<ITitle>) {
+const Title: FC<ITitle> = ({ children }) => {
   return <h1 className={styles.title}>{children}</h1>;
-}
+};
+
+export default Title;

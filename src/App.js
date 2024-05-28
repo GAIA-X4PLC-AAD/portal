@@ -9,7 +9,8 @@ import Provider from './components/account/Provider';
 import DashboardPage from './components/dashboard/dashboard_page';
 import LcmFinal from './components/dashboard/lcm/LcmFinal';
 import LcmServices from './components/dashboard/lcm/LcmServices';
-import OntologiesDetailsPage from './components/detailsPage/pages/OntologiesDetailsPage';
+import OntologiesDetailsPage from './components/detailsPage/pages/ontologies/OntologiesDetailsPage';
+import { testOntology } from './components/detailsPage/provisionalData';
 import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
 import { Footer } from './components/footer/Footer';
@@ -96,7 +97,7 @@ const App = (props) => {
                 <ProtectedRoute>
                   <ShapesAndOntologies />
                 </ProtectedRoute>)} />
-              <Route path="/ontologiesDetailsPage" element={ViewContainer(<OntologiesDetailsPage />)} />
+              <Route path="/ontologiesDetailsPage" element={ViewContainer(<OntologiesDetailsPage ontology={testOntology}/>)} />
             </Routes>
           </Column>
         </HistoryRouter>
