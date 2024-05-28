@@ -509,12 +509,18 @@
     "not-gaia-x-compliant": "Not Gaia-X compliant",
     "no-offerings-available": "No offerings available",
     "not-authenticated": "Not authenticated",
-    "searchBarText": "Search for special Resources or Service Offerings"
+    "search-bar-text": "Search for special Resources or Service Offerings"
   },
   "ontologies": {
     "title": "Ontology",
     "titles": "Ontologies",
-    "noOntologiesAvailable": "No ontologies available",
-    "searchBarText": "Search for special shapes or ontologies"
+    "no-ontologies-available": "No ontologies available",
+    "search-bar-text": "Search for special shapes or ontologies",
+    "related-ontologies": "Related Ontologies"
+  },
+  "shapes": {
+    "title": "Shape",
+    "titles": "Shapes",
+    "no-shapes-available": "No shapes available"
   }
 }

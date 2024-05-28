@@ -59,7 +59,7 @@ const ShapesAndOntologies = () => {
         {authContext.isAuthenticated && (
           <div className={styles.content}>
             <div>
-              <SearchBar placeholder={t('ontologies.searchBarText')} onSearch={handleSearch} />
+              <SearchBar placeholder={t('ontologies.search-bar-text')} onSearch={handleSearch} />
               {isLoading ? (
                 <div className="newCarLoader">
                   <img src={car} alt="loading..." className="car"/>

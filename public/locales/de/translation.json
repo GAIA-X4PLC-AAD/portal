@@ -507,12 +507,18 @@
     "not-gaia-x-compliant": "Nicht Gaia-X konform",
     "no-offerings-available": "Keine Angebote verfügbar",
     "not-authenticated": "Nicht berechtigt",
-    "searchBarText": "Suchen Sie nach speziellen Ressourcen oder Angeboten"
+    "search-bar-text": "Suchen Sie nach speziellen Ressourcen oder Angeboten"
   },
   "ontologies": {
     "title": "Ontologie",
     "titles": "Ontologien",
-    "noOntologiesAvailable": "Keine Ontologien gefunden",
-    "searchBarText": "Suchen Sie nach speziellen Shapes oder Ontologien"
+    "no-ontologies-available": "Keine Ontologien gefunden",
+    "search-bar-text": "Suchen Sie nach speziellen Shapes oder Ontologien",
+    "related-ontologies": "Verwandte Ontologien"
+  },
+  "shapes": {
+    "title": "Shape",
+    "titles": "Shapes",
+    "no-shapes-available": "Keine Shapes gefunden"
   }
 }

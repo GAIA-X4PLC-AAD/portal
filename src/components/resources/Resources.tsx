@@ -87,7 +87,7 @@ const Resources = () => {
         {authContext.isAuthenticated && (
           <div className={styles.content}>
             <div>
-              <SearchBar placeholder={t('resources.searchBarText')} onSearch={handleSearch}/>
+              <SearchBar placeholder={t('resources.search-bar-text')} onSearch={handleSearch}/>
             </div>
             <div>
               {isLoading && (
