@@ -1,22 +1,21 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { AuthContext } from '../../../../context/AuthContextProvider';
+import { handleRDfDownload } from '../../../../services/SchemaApiService';
+import { Ontology } from '../../../../types/shapesAndOntologies.model';
 import Title from '../../../Title/Title';
 import GaiaXButton from '../../../buttons/GaiaXButton';
 
 import styles from './DetailActions.module.css';
 
 interface IDetailActions {
-    graphLink: string;
-    downloadLink: string;
+    ontology: Ontology;
 }
 
-const DetailActions: FC<IDetailActions> = ({ graphLink, downloadLink }) => {
+const DetailActions: FC<IDetailActions> = ({ ontology }) => {
   const { t } = useTranslation();
-
-  const visitWebsite = (url: string) => {
-    return () => window.open(url, '_blank');
-  }
+  const authContext = useContext(AuthContext);
 
   return (
     <div className={styles['container']}>
@@ -24,8 +23,8 @@ const DetailActions: FC<IDetailActions> = ({ graphLink, downloadLink }) => {
         <Title>{t('dashboard.actions')}</Title>
       </div>
       <div className={styles['buttons']}>
-        <GaiaXButton label={t('details.view-graph')} handleOnClick={visitWebsite(graphLink)} width={'100%'}/>
-        <GaiaXButton label={t('details.download-files')} handleOnClick={visitWebsite(downloadLink)} width={'100%'}/>
+        <GaiaXButton label={t('details.view-graph')} handleOnClick={() => {}} width={'100%'}/>
+        <GaiaXButton label={t('details.download-file')} handleOnClick={() => handleRDfDownload(authContext, ontology.subject)} width={'100%'}/>
       </div>
     </div>
   );

@@ -29,7 +29,7 @@ const OntologiesDetailsPage: FC<IOntologiesDetailsPage> = ({ ontology }) => {
         </DetailsMainContent>
         <DetailsSidebar>
           <DetailSuitableOfferings linksForOfferings={ontology.linksForOfferings} />
-          <DetailActions graphLink={ontology.graphLink} downloadLink={ontology.downloadLink}/>
+          <DetailActions ontology={ontology} />
         </DetailsSidebar>
       </DetailsContent>
     </DetailsPage>

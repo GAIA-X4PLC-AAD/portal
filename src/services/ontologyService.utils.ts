@@ -101,3 +101,17 @@ export const createOntologyObject = (data: any[]): Ontology => {
     shapes,
   };
 };
+
+export const downloadTurtleFile = (id: string, response: AxiosResponse<any, any>) => {
+  const filename = id + '.ttl';
+  const element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+};

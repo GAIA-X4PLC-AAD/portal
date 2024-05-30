@@ -1,4 +1,4 @@
-import { Ontology, Shape } from '../../utils/ontologyMapper';
+import { Ontology, Shape } from '../../types/shapesAndOntologies.model';
 
 export const testShape1: Shape = {
   comment: 'comment',
@@ -25,7 +25,7 @@ export const testOntology2: Ontology = {
 };
 
 export const testOntology: Ontology = {
-  subject: 'https://base.com/',
+  subject: 'https://example.org/V1-0-0/plc/',
   contributors: ['contributor1', 'contributor2'],
   description: 'description',
   version: 'version',

@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { AuthContextValues } from '../context/AuthContextValues';
 import { Ontology } from '../types/shapesAndOntologies.model';
 
-import { fetchOntologies } from './ontologyService.utils';
+import { downloadTurtleFile, fetchOntologies } from './ontologyService.utils';
 
 const getHeaders = (authContext: AuthContextValues) => {
   return {
@@ -60,10 +60,14 @@ const getSchemaById = (
 
 export const getAllOntologies = async (authContext: AuthContextValues): Promise<Ontology[]> => {
   const response = await getAllSchemas(authContext);
-  console.log('response:', response)
   return fetchOntologies(authContext, response);
 };
 
 export const getSchemasByIds = (authContext: AuthContextValues, ids: string[]):  Promise<AxiosResponse<any, any>>[] => {
   return ids.map((id) => getSchemaById(authContext, id));
 };
+
+export const handleRDfDownload = async (authContext: AuthContextValues, id: string) => {
+  const response = await getSchemaById(authContext, id);
+  downloadTurtleFile(id, response);
+}
