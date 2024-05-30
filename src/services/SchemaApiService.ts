@@ -37,7 +37,7 @@ const getAllSchemas = (
     });
 };
 
-const getSchemaWithId = (
+const getSchemaById = (
   authContext: AuthContextValues,
   id: string
 ): Promise<AxiosResponse<any, any>> => {
@@ -65,5 +65,5 @@ export const getAllOntologies = async (authContext: AuthContextValues): Promise<
 };
 
 export const getSchemasByIds = (authContext: AuthContextValues, ids: string[]):  Promise<AxiosResponse<any, any>>[] => {
-  return ids.map((id) => getSchemaWithId(authContext, id));
+  return ids.map((id) => getSchemaById(authContext, id));
 };
