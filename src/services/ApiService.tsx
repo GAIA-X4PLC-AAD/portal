@@ -13,10 +13,6 @@ const getHeaders = (authContext: AuthContextValues) => {
 const serverUrl: string = 'https://fc-server.gxfs.gx4fm.org';
 const queryEndpoint: string = serverUrl + '/query';
 
-const encodeString = (uri: string): string => {
-  return uri.startsWith('http') ? encodeURIComponent(uri) : uri;
-}
-
 export const ApiService = {
   /**
    *
@@ -146,46 +142,6 @@ export const ApiService = {
     authContext: AuthContextValues
   ): Promise<AxiosResponse<any, any>> {
     const endpoint = serverUrl + '/schemas/latest?type=shape';
-    const headers = getHeaders(authContext);
-
-    return axios
-      .options(endpoint, { headers })
-      .then(() => {
-        return axios.get(endpoint, { headers });
-      })
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  },
-
-  async getAllSchemas(
-    authContext: AuthContextValues
-  ): Promise<AxiosResponse<any, any>> {
-    const endpoint = serverUrl + '/schemas';
-    const headers = getHeaders(authContext);
-
-    return axios
-      .options(endpoint, { headers })
-      .then(() => {
-        return axios.get(endpoint, { headers });
-      })
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  },
-
-  async getSchemaWithId(
-    authContext: AuthContextValues,
-    id: string
-  ): Promise<AxiosResponse<any, any>> {
-    const encodedUrl = encodeString(id);
-    const endpoint = serverUrl + '/schemas/' + encodedUrl;
     const headers = getHeaders(authContext);
 
     return axios

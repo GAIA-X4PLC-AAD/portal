@@ -1,45 +1,24 @@
+import { AxiosResponse } from 'axios';
 import * as N3 from 'n3';
 
 import { AuthContextValues } from '../context/AuthContextValues';
-import { ApiService } from '../services/ApiService';
+import { Ontology, Shape, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
 
-export interface Shape {
-    label: string;
-    comment: string;
-    subClasses: string[];
+import { getSchemasByIds } from './SchemaApiService';
+
+export const fetchOntologies = async (authContext: AuthContextValues, response: AxiosResponse<any, any>) => {
+  const ontologiesStringArray = mapShapesAndOntologies(response);
+  const promises = getSchemasByIds(authContext, ontologiesStringArray);
+  const promiseAll = await Promise.all(promises);
+  const parsedOntologies = await parseOntologies(promiseAll);
+  return createAllOntologyObjects(parsedOntologies);
 }
 
-export interface Ontology {
-    subject: string;
-    contributors: string[];
-    description: string;
-    version: string;
-    shapes: Shape[];
-    claimsGraphUri?: string;
-    graphLink?: string;
-    downloadLink?: string;
-    linksForOfferings?: string[];
-    relatedOntologies?: Ontology[];
-}
-
-export interface ShapesAndOntologiesInput {
-    ontologies: string[];
-    shapes: string[];
-    vocabularies: string[];
-}
-
-export const  mapShapesAndOntologies = (response: ShapesAndOntologiesInput): string[] => {
+export const mapShapesAndOntologies = (response: ShapesAndOntologiesInput): string[] => {
   return response.ontologies.map((ontology) => ontology);
 }
 
-export const fetchOntologies = async (authContext: AuthContextValues) => {
-  const response = await ApiService.getAllSchemas(authContext);
-  const ontologiesStringArray = mapShapesAndOntologies(response);
-  const promises = ontologiesStringArray.map((item) => ApiService.getSchemaWithId(authContext, item));
-  return await Promise.all(promises);
-};
-
-export const parseOntologies = (response: []): any[] => {
+export const parseOntologies = (response: string[]): any[] => {
   return response.map((item) => {
     const parser = new N3.Parser();
     const parsedItems: any[] = [];

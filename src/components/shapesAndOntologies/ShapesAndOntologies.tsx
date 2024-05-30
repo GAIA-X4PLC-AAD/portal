@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
 import { AuthContext } from '../../context/AuthContextProvider';
-import { createAllOntologyObjects, fetchOntologies, Ontology, parseOntologies } from '../../utils/ontologyMapper';
+import { getAllOntologies } from '../../services/SchemaApiService';
+import { Ontology } from '../../types/shapesAndOntologies.model';
 import Text from '../Text/Text';
 import SelfDescriptionCard from '../cards/SelfDescriptionCard';
 import Header from '../header/Header';
@@ -22,9 +23,7 @@ const ShapesAndOntologies = () => {
     const loadOntologies = async () => {
       setIsLoading(true);
       try {
-        const fetchedOntologies = await fetchOntologies(authContext)
-          .then(parseOntologies)
-          .then(createAllOntologyObjects);
+        const fetchedOntologies = await getAllOntologies(authContext);
 
         console.log('fetchedOntologies:', fetchedOntologies);
         setOriginalOntologies(fetchedOntologies);
@@ -76,7 +75,7 @@ const ShapesAndOntologies = () => {
                     />
                   ))
                 ) : (
-                  <Text>{t('ontologies.noOntologiesAvailable')}</Text>
+                  <Text>{t('ontologies.no-ontologies-available')}</Text>
                 )
               )}
             </div>
