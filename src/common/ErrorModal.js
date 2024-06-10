@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '../Modal';
@@ -10,7 +11,7 @@ const ErrorModal = ({ header, message }) => {
 
   const myHeader = header?t(header):null;
 
-  const [displayModal, setDisplayModal] = React.useState(true);
+  const [displayModal, setDisplayModal] = useState(true);
 
   if (displayModal===false) {return null;}
   return (

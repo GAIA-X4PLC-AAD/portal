@@ -1,5 +1,5 @@
-import Keycloak, { KeycloakConfig, KeycloakInitOptions } from "keycloak-js";
 import React, { createContext, useEffect, useState, useMemo } from "react";
+import Keycloak, { KeycloakConfig, KeycloakInitOptions } from "keycloak-js";
 
 const keycloakConfig: KeycloakConfig = {
   realm: "gaia-x",

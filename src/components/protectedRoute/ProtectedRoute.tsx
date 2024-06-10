@@ -1,6 +1,6 @@
-import { ReactNode, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "context/AuthContextProvider";
+import { AuthContext } from 'context/AuthContextProvider';
+import { ReactNode, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface IProtectedRoute {
   children: ReactNode;
@@ -12,7 +12,7 @@ export default function ProtectedRoute({ children }: IProtectedRoute) {
 
   useEffect(() => {
     if (!authContext.isAuthenticated) {
-      navigate("/"); // Redirect to home page
+      navigate('/'); // Redirect to home page
     }
   }, [authContext.isAuthenticated, navigate]);
 
