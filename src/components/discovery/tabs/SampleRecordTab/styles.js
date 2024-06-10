@@ -6,7 +6,7 @@ export const Sample = styled.div`
 
 export const Description = styled.div`
 width: 516px;
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 400;
 font-size: 18px;
@@ -17,7 +17,7 @@ color: #262626;`;
 export const Link = styled.a`
 text-decoration: none;
 margin-top:12px;
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 700;
 font-size: 18px;
@@ -26,7 +26,7 @@ letter-spacing: 0.25px;
 color: #000094;
 &:visited{
     text-decoration: none;
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -41,7 +41,7 @@ color: #000094;
 
 export const Header = styled.div`
     margin-top:36px;
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;

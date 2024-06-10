@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+
 import * as S from './styles';
 
 export const ActionCancelModalHeader = styled.div`

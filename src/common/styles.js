@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 import 'react-responsive-modal/styles.css';
-import { Modal } from 'react-responsive-modal';
 
 export const CancelButton = styled.button`
     border: 2px solid #e8e8e8;
@@ -27,7 +26,6 @@ export const CancelButtonSmall = styled.button`
     margin-top:15px;
 `;
 
-
 export const BlueButton = styled.button`
     border: 2px solid #000094;
     border-radius: 4px 4px 4px 4px;
@@ -44,7 +42,7 @@ export const BlueButton = styled.button`
         opacity: 0.3; 
     }
     `;
-    export const BlueButtonSmall = styled.button`
+export const BlueButtonSmall = styled.button`
     border: 2px solid #000094;
     border-radius: 4px 4px 4px 4px;
     font: 700 14px/1.11 "Titillium Web", Helvetica, Arial, serif;
@@ -121,7 +119,7 @@ export const ArrowRight = styled.div`
 `;
 
 export const RedTextClickable = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -132,7 +130,7 @@ export const RedTextClickable = styled.div`
 `;
 
 export const RedText = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -142,7 +140,7 @@ export const RedText = styled.div`
 `;
 
 export const BlueTextClickable = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -193,8 +191,8 @@ export const WrapColumn = styled(Column)`
 
 export const Style = styled.div`
     border-top: ${props => props.borderTop ? '1px solid #E9E9E9' : ''};
-    border-bottom: ${props => props.borderBottom ? `1px solid #E9E9E9` : ''};
-    border-bottom: ${props => props.shiftedBottomBorder ? `1px solid white` : ''};
+    border-bottom: ${props => props.borderBottom ? '1px solid #E9E9E9' : ''};
+    border-bottom: ${props => props.shiftedBottomBorder ? '1px solid white' : ''};
     overflow: ${props => props.overflow || ''};;
     box-shadow: ${props => props.shiftedBottomBorder ? '40px 1px 0px 0px #e9e9e9' : ''};
     /* clip-path: inset(-1px -2px 0px 0px); */
@@ -239,7 +237,6 @@ export const HeaderTitle = styled.div`
     text-align: left;
 `;
 
-
 export const Image = styled.img`
   display: inline-block;
   vertical-align: middle;
@@ -253,9 +250,8 @@ export const Image = styled.img`
   filter: ${props => props.filter || ''};;
 `;
 
-
 export const BodySmallBoldText = styled.div`
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 700;
 font-size: 15px;
@@ -266,7 +262,7 @@ color: ${props => props.color || '#000000'};
 `;
 
 export const CaptionTeleNeoText = styled.div`
-font-family: 'TeleNeo';
+font-family: 'TeleNeo',serif;
 font-style: normal;
 font-weight: 400;
 font-size: 12px;
@@ -276,7 +272,7 @@ color: #4B4B4B;
 `;
 //#1C0E15;;
 export const BodySmallText = styled.div`
-font-family: 'Titillium Web';
+font-family: 'Titillium Web',serif;
 font-style: normal;
 font-weight: 400;
 font-size: 15px;
@@ -286,7 +282,7 @@ color: ${props => props.color || '#000000'};
 `;
 
 export const CaptionText = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -297,7 +293,7 @@ export const CaptionText = styled.div`
 `;
 
 export const CaptionTextLink = styled.a`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -357,7 +353,7 @@ export const ButtonText = styled.div`
 `
 
 export const H4Text = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 24px;
@@ -369,7 +365,7 @@ export const H4Text = styled.div`
 `
 
 export const H4LightText = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -379,7 +375,6 @@ export const H4LightText = styled.div`
 
     color: #1C0E15;
 `
-
 
 export const BodyText = styled.div`
     font-family: 'Titillium Web',serif;
@@ -396,12 +391,12 @@ export const Tag = styled.div`
   /* Tag */
   padding: 2px 12px;
   gap: 10px;
-  margin: 0px 8px;
+  margin: 0 8px;
   /* Background/Primary */
   background: #000094;
   border-radius: 12px;
   /* Caption */
-  font-family: 'Titillium Web';
+  font-family: 'Titillium Web',serif;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -412,7 +407,7 @@ export const TagLink = styled(Tag)`
     cursor: pointer;`;
 
 export const BlueLinkText = styled.div`
-    font-family: Titillium Web;
+    font-family: Titillium Web,serif;
     font-size: 18px;
     font-weight: 700;
     line-height: 20px;
@@ -426,7 +421,7 @@ export const BlueLinkText = styled.div`
 
 export const BodyBoldText = styled.div`
 /* Body Bold */
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
@@ -439,7 +434,6 @@ export const BodyBoldText = styled.div`
 
     color: #2A2A2A;
 `
-
 
 export const MasterButton = styled.div`
     display: flex;
@@ -464,14 +458,12 @@ export const MasterButton = styled.div`
 
     /* Button */
 
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
     line-height: 20px;
     /* identical to box height, or 111% */
-    display: flex;
-    align-items: center;
     text-align: center;
     letter-spacing: 0.25px;
     color: ${props => props.disabled ? '#1C0E15' : '#FFFFFF'};
@@ -490,7 +482,6 @@ export const OutlineButton = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    align-self: start;
     padding: 8px 32px;
     gap: 8px;
     flex-wrap: wrap;
@@ -508,8 +499,6 @@ export const OutlineButton = styled.div`
     line-height: 20px;
     /* or 111% */
 
-    display: flex;
-    align-items: center;
     text-align: center;
     letter-spacing: 0.25px;
     align-self: center;
@@ -519,7 +508,7 @@ export const OutlineButton = styled.div`
 `;
 
 export const TextInput = styled.input`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
@@ -542,7 +531,7 @@ export const TextInput = styled.input`
 `
 
 export const H2Text = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 36px;
@@ -567,11 +556,11 @@ export const H2Text = styled.div`
 export const SliderBullet = styled.button`
     width: 18px;
     height: 5px;
-    border: 0px solid #0000;
+    border: 0 solid #0000;
     background-color: #fff;
     background: ${(props) => props.isActive ? '#8D8DFF' : '#FFFFFF'};
     /* padding: 0px 4px; */
-    margin: 0px 4px;
+    margin: 0 4px;
     border-radius: 4px;
 `
 
@@ -597,7 +586,7 @@ export const Padding = styled.div`
 `
 
 export const H1Text = styled.div`
-    font-family: 'Titillium Web';
+    font-family: 'Titillium Web',serif;
     font-style: normal;
     font-weight: 700;
     font-size: 48px;
@@ -607,8 +596,6 @@ export const H1Text = styled.div`
 
     color: #000000;
 `;
-
-
 
 export const AnimatedVisibility = styled.div`
 ${(props) => {

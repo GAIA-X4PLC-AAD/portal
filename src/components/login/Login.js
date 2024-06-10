@@ -1,17 +1,18 @@
-import React, { Component } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
-import { compose } from 'redux';
-import "./Login.css";
-import { signIn } from "../../actions";
-import { Link, useNavigate } from "react-router-dom";
-import { withTranslation } from "react-i18next";
-import LoginFail from "./LoginFail";
-import AuthPolling from "./AuthPolling";
-import axios from "axios";
+import axios from 'axios';
+import { t } from 'i18next';
 import PropTypes from 'prop-types';
-import { Column, OutlineButton, Padding, Row } from "../../common/styles";
-import { t } from "i18next";
-import { FR_ROLE, PPR_ROLE, PCR_ROLE, VR_ROLE, userData, storeJWT } from '../../common/auth';
+import { Component } from 'react';
+import { withTranslation } from 'react-i18next';
+import { connect } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { compose } from 'redux';
+
+import { signIn } from '../../actions';
+import { storeJWT } from '../../common/auth';
+
+import './Login.css';
+import AuthPolling from './AuthPolling';
+import LoginFail from './LoginFail';
 
 export const withNavigation = (Component) => {
   return props => <Component {...props} navigate={useNavigate()} />;
@@ -58,13 +59,11 @@ class Login extends Component {
   onAuthZWait() {
   }
 
-
-
   onWidgetInstalledCheck = () => {
 
     // if widget does not respond in 1 sec, show logging error message.
     let timeout = window.setTimeout(() => {
-      this.setState({ showLoginFail: true, loginFailMessage: "login.fail.widgetMessage" });
+      this.setState({ showLoginFail: true, loginFailMessage: 'login.fail.widgetMessage' });
     }, 1000);
 
     // add a listener for blur, if blur is trigger widget will be triggered and focus will be lost
@@ -76,11 +75,9 @@ class Login extends Component {
     window.location.href = this.state.walletLink;
   }
 
-
   componentWillUnmount() {
     // this.props.signInMenuQuit();
   }
-
 
   render() {
     return (
@@ -97,30 +94,30 @@ class Login extends Component {
 
         <LoginFail showAlertMessage={this.state.showLoginFail} message={this.state.loginFailMessage} onClose={() => { this.setState({ showLoginFail: false }) }} />
         <div className="login-group layout">
-          <h1 className="login-hero-title layout">{this.props.t("login.welcome")}</h1>
-          <h4 className="login-highlights3 layout">{this.props.t("login.signinContinue")}</h4>
+          <h1 className="login-hero-title layout">{this.props.t('login.welcome')}</h1>
+          <h4 className="login-highlights3 layout">{this.props.t('login.signinContinue')}</h4>
           <hr className="login-line2 layout" />
         </div>
         <div className="login-block7 layout">
           <h2 className="login-medium-title layout">
-            {this.props.t("login.scanMessage")}
+            {this.props.t('login.scanMessage')}
           </h2>
           <div className="login-block8 layout">
             <img className="login-image16 layout" src={this.state.imgLink} alt="Loading..." />
           </div>
           <div className="login-button layout">
-            <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t("login.loginButton")}</a>
+            <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t('login.loginButton')}</a>
           </div>
           <div className="login-block10 layout">
-            <Link to="/help"><h4 className="login-highlights5 layout">{this.props.t("login.faq")}</h4></Link>
+            <Link to="/help"><h4 className="login-highlights5 layout">{this.props.t('login.faq')}</h4></Link>
           </div>
           <h4 className="login-highlights6-box layout">
             <div className="login-highlights6">
               <span className="login-highlights6-span0" >
-                {this.props.t("login.missingAccount")}
+                {this.props.t('login.missingAccount')}
               </span>
               <br />
-              <span className="login-highlights6-span1"><Link to="/register">{this.props.t("login.register")}</Link></span>
+              <span className="login-highlights6-span1"><Link to="/register">{this.props.t('login.register')}</Link></span>
             </div>
           </h4>
         </div>

@@ -1,4 +1,4 @@
-import styles from "./Subtitle.module.css";
+import styles from './Subtitle.module.css';
 
 interface ISubtitle {
   children: string;

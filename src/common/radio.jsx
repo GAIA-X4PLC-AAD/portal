@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
 import PropTypes from 'prop-types';
+import React from 'react';
+import styled from 'styled-components';
 
 const RadioWrapper = styled.div`
   display: inline-block;
@@ -53,7 +53,7 @@ const Label = styled.label`
   position: relative;
   align-items: center;
   ${props =>
-        props.disabled &&
+    props.disabled &&
         `
         cursor: not-allowed;
         opacity: 0.4;
@@ -61,20 +61,20 @@ const Label = styled.label`
 `;
 
 const RadioButton = ({ name, onClick, defaultChecked, children }) => (
-    <RadioWrapper>
-        <Label>
-            <Input name={name} type="radio" onClick={onClick} defaultChecked = {defaultChecked}/>
-            <Mark />
-            {children}
-        </Label>
-    </RadioWrapper>
+  <RadioWrapper>
+    <Label>
+      <Input name={name} type="radio" onClick={onClick} defaultChecked = {defaultChecked}/>
+      <Mark />
+      {children}
+    </Label>
+  </RadioWrapper>
 );
 
 RadioButton.propTypes = {
-    name: PropTypes.string,
-    onClick: PropTypes.func,
-    defaultChecked: PropTypes.bool,
-    children: PropTypes.object
+  name: PropTypes.string,
+  onClick: PropTypes.func,
+  defaultChecked: PropTypes.bool,
+  children: PropTypes.object
 };
 
 export default RadioButton;

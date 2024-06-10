@@ -1,20 +1,19 @@
-
-import React, { useState, useEffect } from "react";
-
-import * as S from '../style';
 import PropTypes from 'prop-types';
-import { ColumnItem } from "./Common";
-import { Image, Column, Style, Tag, Padding, BlueButton } from "../../../../common/styles";
-import { Columns } from "../dataPreview/style";
-import DataPreview from "../dataPreview/DataPreview";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
+import { Image, Column, Style, Tag, Padding, BlueButton } from '../../../../common/styles';
+import DataPreview from '../dataPreview/DataPreview';
+import { Columns } from '../dataPreview/style';
+import * as S from '../style';
+
+import { ColumnItem } from './Common';
 
 const DescriptionTabView = (props,) => {
   const [details, setDetails] = useState({});
 
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -23,13 +22,12 @@ const DescriptionTabView = (props,) => {
     return data.ppr_name;
   }
 
-
   const buildCompositeServices = () => {
     if (details == undefined || props.params['type'] != 'composite-service') { return }
 
     const data2 = details['dependent_services'] || [];
 
-    if (data2.length == 0) return;
+    if (data2.length == 0) {return;}
 
     return (
       <>
@@ -59,13 +57,13 @@ const DescriptionTabView = (props,) => {
   };
 
   const showBuildButton = () => {
-    if (props.params['type'] != 'composite-service') return null;
+    if (props.params['type'] != 'composite-service') {return null;}
     return (
       <Style marginTop='auto' marginBottom='auto'>
-    <BlueButton marginLeft='0px' onClick={() => { navigate(`/sp/${details['id']}`) }}>
-       {t('discovery.description.build')}
-    </BlueButton>
-    </Style>
+        <BlueButton marginLeft='0px' onClick={() => { navigate(`/sp/${details['id']}`) }}>
+          {t('discovery.description.build')}
+        </BlueButton>
+      </Style>
     );
 
   }

@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import { CarLoader } from "../carLoader/CarLoader";
+import { useEffect, useState } from 'react';
 
-import "./Participants.css";
+import { CarLoader } from '../carLoader/CarLoader';
+
+import './Participants.css';
 
 const Participants = () => {
   const [isLoading, setIsLoading] = useState(false);

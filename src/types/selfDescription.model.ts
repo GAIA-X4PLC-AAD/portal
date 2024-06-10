@@ -1,5 +1,5 @@
-import {Participants} from "./participants.model";
-import { ServiceOfferings } from "./serviceOfferings.model";
+import { Participants } from './participants.model';
+import { ServiceOfferings } from './serviceOfferings.model';
 
 export type SelfDescription = {
   subjectTypes: string,
