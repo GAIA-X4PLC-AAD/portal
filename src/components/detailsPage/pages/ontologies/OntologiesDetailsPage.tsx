@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Ontology } from '../../../../utils/ontologyMapper';
+import { Ontology } from '../../../../types/shapesAndOntologies.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
 import DetailActions from '../../components/actions/DetailActions';
@@ -22,7 +22,7 @@ const OntologiesDetailsPage: FC<IOntologiesDetailsPage> = ({ ontology }) => {
 
   return (
     <DetailsPage>
-      <Header title={t('left-menu.shapesAndOntologies') + ' ' + ARROW_RIGHT + ' ' + ontology.subject} />
+      <Header title={`${t('left-menu.shapesAndOntologies')} ${ARROW_RIGHT} ${ontology.subject}`} />
       <DetailsContent>
         <DetailsMainContent>
           <MainContentOntology ontology={ontology} />
