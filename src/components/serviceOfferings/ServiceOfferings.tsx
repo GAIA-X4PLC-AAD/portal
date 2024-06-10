@@ -1,4 +1,3 @@
-import React, { useContext, useEffect, useState } from "react";
 import {
   Button,
   FormControl,
@@ -7,21 +6,22 @@ import {
   Select,
   SelectChangeEvent,
   TextField,
-} from "@mui/material";
+} from '@mui/material';
+import SelfDescriptionCard from 'components/cards/SelfDescriptionCard';
+import React, { useContext, useEffect, useState } from 'react';
 
-import { ApiService } from "../../services/ApiService";
-import { AuthContext } from "../../context/AuthContextProvider";
-import { RDFParser } from "../../utils/RDFParser";
-import { Padding } from "../discovery/tabs/style";
+import car from '../../assets/car.gif';
+import { AuthContext } from '../../context/AuthContextProvider';
+import { ApiService } from '../../services/ApiService';
+import { ShaclShape } from '../../types/shaclShape.model';
+import { RDFParser } from '../../utils/RDFParser';
+import { ServiceOffering, mapServiceOfferings } from '../../utils/dataMapper';
+import { getShapeProperties } from '../../utils/shapeHelpers';
+import { Padding } from '../discovery/tabs/style';
 // import SendIcon from '@mui/icons-material/Send';
 // @ts-ignore
-import car from "../../assets/car.gif";
-import SelfDescriptionCard from "components/cards/SelfDescriptionCard";
-import { ServiceOffering, mapServiceOfferings } from "../../utils/dataMapper";
-import { ShaclShape } from "../../types/shaclShape.model";
-import { getShapeProperties } from "../../utils/shapeHelpers";
 
-import "./ServiceOfferings.css";
+import './ServiceOfferings.css';
 
 const ServiceOfferings = () => {
   const [selfDescriptionData, setSelfDescriptionData] = useState<
@@ -32,8 +32,8 @@ const ServiceOfferings = () => {
   const isAuthenticated = authContext.isAuthenticated;
 
   const initShape: ShaclShape = {
-    shape: "",
-    short_shape: "",
+    shape: '',
+    short_shape: '',
     properties: [],
   };
 
@@ -41,7 +41,7 @@ const ServiceOfferings = () => {
   const [shapes, setShapes] = useState<ShaclShape[]>([]);
   const [isShapeSelected, setIsShapeSelected] = useState(false);
   const [isPropertySelected, setIsPropertySelected] = useState(false);
-  const [selectedProperty, setSelectedProperty] = useState("");
+  const [selectedProperty, setSelectedProperty] = useState('');
   const [properties, setProperties] = useState<string[]>([]);
 
   useEffect(() => {
@@ -63,11 +63,11 @@ const ServiceOfferings = () => {
       setIsLoading(true);
       try {
         const response = await ApiService.getAllSelfDescriptions(authContext);
-        console.log("My fetched data: ", response);
+        console.log('My fetched data: ', response);
         const map = mapServiceOfferings(response);
         setSelfDescriptionData(map);
       } catch (error) {
-        console.error("Error fetching self descriptions:", error);
+        console.error('Error fetching self descriptions:', error);
       } finally {
         setIsLoading(false);
       }
@@ -93,13 +93,13 @@ const ServiceOfferings = () => {
 
   async function handleSearch() {
     setIsLoading(true);
-    const targetClass = selectedShape.short_shape.replace("Shape", "");
+    const targetClass = selectedShape.short_shape.replace('Shape', '');
     const selfDescriptions = await ApiService.getSelfDescriptionsForShape(
       authContext,
       targetClass
     );
     const map = mapServiceOfferings(selfDescriptions.data);
-    console.log("Map:", map);
+    console.log('Map:', map);
     setSelfDescriptionData(map);
     setIsLoading(false);
   }

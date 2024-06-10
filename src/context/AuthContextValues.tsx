@@ -1,5 +1,3 @@
-import {KeycloakInstance} from "keycloak-js";
-
 /**
  * AuthContextValues defines the structure for the default values of the {@link AuthContext}.
  */

@@ -1,8 +1,6 @@
 // import tw, { styled, css } from "twin.macro";
 import styled, { css } from 'styled-components';
 
-
-
 export const AnimatedVisibility = styled.div`
 ${(props) => {
     if (props.visible) {
@@ -36,7 +34,6 @@ export const CircularLoader = styled.div`
     100% { transform: rotate(360deg); }
   }
 `
-
 
 export const Block = styled.div`
   /* border: 1px solid #ccc; */

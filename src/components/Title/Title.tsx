@@ -1,4 +1,4 @@
-import styles from "./Title.module.css";
+import styles from './Title.module.css';
 
 interface ITitle {
   children: string;

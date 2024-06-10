@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import ReactDOM from 'react-dom';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const Dimmer = styled.div`
 height: 100%;
@@ -11,7 +11,6 @@ left: 0;
 top: 0;
 z-index: 20;
 `;
-
 
 const ModalDiv = styled.div`
 display: flex!important;
@@ -30,17 +29,15 @@ overflow: auto;
 }
 `;
 
-
-
 const Modal = props => {
-    return ReactDOM.createPortal(
-        <Dimmer onClick={props.onDismiss}>
-            <ModalDiv onClick={(e)=> e.stopPropagation()} {...props}>
-                {props.children}
-            </ModalDiv>
-        </Dimmer>,
-        document.querySelector('#modal')
-    );
+  return ReactDOM.createPortal(
+    <Dimmer onClick={props.onDismiss}>
+      <ModalDiv onClick={(e)=> e.stopPropagation()} {...props}>
+        {props.children}
+      </ModalDiv>
+    </Dimmer>,
+    document.querySelector('#modal')
+  );
 
 };
 

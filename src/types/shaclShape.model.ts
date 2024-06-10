@@ -1,4 +1,4 @@
-import {ShapeProperty} from "./shapeProperty.model";
+import { ShapeProperty } from './shapeProperty.model';
 
 export type ShaclShape = {
   shape: string,

@@ -1,6 +1,4 @@
-
 import styled  from 'styled-components';
-
 
 export const SelectedTab= styled.hr`
     border: 3px solid #000094;
@@ -14,7 +12,7 @@ export const SeparatorLine= styled.hr`
     height: 1px;
     width: 100%;
     top: 0;
-    margin-top: 0px;
+    margin-top: 0;
     margin-bottom: 24px;
     position:relative;
 `;

@@ -1,6 +1,7 @@
-import {RDFParser} from "../RDFParser";
-import {describe, expect, it} from "@jest/globals";
-import {readFile} from "../readFile";
+import { describe, expect, it } from '@jest/globals';
+
+import { RDFParser } from '../RDFParser';
+import { readFile } from '../readFile';
 
 describe('RDF Parser', () => {
 

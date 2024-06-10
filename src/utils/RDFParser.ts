@@ -1,7 +1,9 @@
 import * as $rdf from 'rdflib';
-import {ShaclShape} from "../types/shaclShape.model";
-import {ShapeProperty} from "../types/shapeProperty.model";
-import {trimShapes} from "./shapeHelpers";
+
+import { ShaclShape } from '../types/shaclShape.model';
+import { ShapeProperty } from '../types/shapeProperty.model';
+
+import { trimShapes } from './shapeHelpers';
 
 export const RDFParser = {
 

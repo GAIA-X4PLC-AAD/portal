@@ -1,5 +1,6 @@
-import {describe, expect, it} from "@jest/globals";
-import {trimShapes} from "../shapeHelpers";
+import { describe, expect, it } from '@jest/globals';
+
+import { trimShapes } from '../shapeHelpers';
 
 describe('Shape Helpers', () => {
 

@@ -1,16 +1,16 @@
-import Title from "components/Title/Title";
-import Subtitle from "components/subtitle/Subtitle";
-import Divider from "components/divider/Divider";
-import DataField from "data-field/DataField";
-import Text from "components/Text/Text";
+import Text from 'components/Text/Text';
+import Title from 'components/Title/Title';
+import Divider from 'components/divider/Divider';
+import Subtitle from 'components/subtitle/Subtitle';
+import DataField from 'data-field/DataField';
 
-import styles from "./DetailsCard.module.css";
+import styles from './DetailsCard.module.css';
 
 interface IDetailsCard {
   name: string;
   description: string;
   items: Array<{
-    "properties(n)": { [key: string]: string | number | string[] };
+    'properties(n)': { [key: string]: string | number | string[] };
   }>;
 }
 
@@ -19,19 +19,19 @@ interface IDetailsCardProps {
 }
 
 export default function DetailsCard({ cardData }: Readonly<IDetailsCardProps>) {
-  console.log("What to work with: ", cardData);
+  console.log('What to work with: ', cardData);
 
   // Ensure cardData.items is an array and has data
   const propertiesList =
     cardData && cardData.items
-      ? cardData.items.map((item) => item["properties(n)"])
+      ? cardData.items.map((item) => item['properties(n)'])
       : [];
-  console.log("Property list: ", propertiesList);
+  console.log('Property list: ', propertiesList);
 
   // Temporary solution to extract name and description for our Card. Will be refactored once we have a better paylaod structure
   let name, description;
   if (cardData && cardData.items && cardData.items.length > 0) {
-    const propertiesN = cardData.items[0]["properties(n)"];
+    const propertiesN = cardData.items[0]['properties(n)'];
     name = propertiesN.name;
     description = propertiesN.description;
   }
@@ -51,16 +51,16 @@ export default function DetailsCard({ cardData }: Readonly<IDetailsCardProps>) {
   );
 
   return (
-    <div className={styles["details-card-container"]}>
+    <div className={styles['details-card-container']}>
       <Title>{name as string}</Title>
       <Text>{description as string}</Text>
       <Divider />
       <Subtitle>General Information:</Subtitle>
-      <div className={styles["details-grid-container"]}>
+      <div className={styles['details-grid-container']}>
         {generalPropertiesList &&
           generalPropertiesList.map((properties, index) =>
             Object.entries(properties).map(([label, content]) => {
-              if (content !== "Unknown") {
+              if (content !== 'Unknown') {
                 return (
                   <DataField
                     key={`${label}-${index}`}
@@ -74,14 +74,14 @@ export default function DetailsCard({ cardData }: Readonly<IDetailsCardProps>) {
       </div>
       <Divider />
       <Subtitle>Details:</Subtitle>
-      <div className={styles["details-grid-container"]}>
+      <div className={styles['details-grid-container']}>
         {otherPropertiesList &&
           otherPropertiesList.map((properties, index) =>
             Object.entries(properties).map(([label, content]) => {
               if (
-                label !== "name" &&
-                label !== "description" &&
-                content !== "Unknown"
+                label !== 'name' &&
+                label !== 'description' &&
+                content !== 'Unknown'
               ) {
                 return (
                   <DataField

@@ -1,16 +1,17 @@
-import {describe, expect, it} from "@jest/globals";
-import {readFile} from "../readFile";
+import { describe, expect, it } from '@jest/globals';
+
+import { readFile } from '../readFile';
 
 describe('ReadFile', () => {
-    it('_ read file', async () => {
-      // Given
-      const filePath = 'src/utils/__tests__/fixtures/test-shapes-short.ttl';
-      const expectedString = getExpectedString();
-      // When
-      const result = await readFile(filePath);
-      // Then
-      expect(result).toEqual(expectedString);
-    });
+  it('_ read file', async () => {
+    // Given
+    const filePath = 'src/utils/__tests__/fixtures/test-shapes-short.ttl';
+    const expectedString = getExpectedString();
+    // When
+    const result = await readFile(filePath);
+    // Then
+    expect(result).toEqual(expectedString);
+  });
 });
 const getExpectedString = () => {
   return '@prefix dcat:                <http://www.w3.org/ns/dcat#> .\n' +
