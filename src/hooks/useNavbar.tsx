@@ -29,10 +29,6 @@ export const useNavbar = () => {
       path: '/support',
       navigationItemName: t('left-menu.support'),
     },
-    {
-      path: '/ontologiesDetailsPage',
-      navigationItemName: 'ontologiesDetailsPage',
-    },
   ];
 
   return navbarAssets;
