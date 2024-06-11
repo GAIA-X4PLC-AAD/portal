@@ -120,9 +120,7 @@ export const downloadTurtleFile = async (authContext: AuthContextType, id: strin
 };
 
 export const getOntologyById = async (authContext: AuthContextType, id: string) => {
-  console.log('Try getting ontology with id:', id);
   const response = await getSchemaById(authContext, id);
-  console.log('Response:', response);
-  const parsedOntology = parseSingleOntology(response);
+  const parsedOntology = await parseSingleOntology(response);
   return createOntologyObject(parsedOntology);
 }

@@ -19,7 +19,7 @@ const DetailSuitableOfferings: FC<IDetailSuitableOfferings> = ({ linksForOfferin
         <Title>{t('dashboard.suitable-offerings')}</Title>
       </div>
       <div className={styles['links']}>
-        {linksForOfferings.length > 1 ? linksForOfferings.map((link, index) => <Link key={index} url={link} fontSize={'20px'}/>) : null}
+        {linksForOfferings && linksForOfferings.length > 1 ? linksForOfferings.map((link, index) => <Link key={index} url={link} fontSize={'20px'}/>) : null}
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import { AuthContext } from '../../context/AuthContextProvider';
 import { getAllOntologies } from '../../services/SchemaApiService';
 import { Ontology } from '../../types/shapesAndOntologies.model';
 import Text from '../Text/Text';
-import SelfDescriptionCard from '../cards/SelfDescriptionCard';
+import ItemCard from '../cards/ItemCard';
 import Header from '../header/Header';
 import SearchBar from '../searchBar/SearchBar';
 
@@ -66,12 +66,10 @@ const ShapesAndOntologies = () => {
               ) : (
                 filteredOntologies.length > 0 ? (
                   filteredOntologies.map((ontology, index) => (
-                    <SelfDescriptionCard
+                    <ItemCard
                       key={index}
                       label={t('ontologies.title')}
-                      name={ontology.subject}
-                      description={ontology.description}
-                      selfDescription={ontology}
+                      ontology={ontology}
                     />
                   ))
                 ) : (
