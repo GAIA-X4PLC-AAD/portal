@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { AuthContextValues } from '../context/AuthContextValues';
+import { AuthContextType } from '../context/AuthContextProvider';
 import { isEmpty } from '../utils/helpers';
 
-const getHeaders = (authContext: AuthContextValues) => {
+const getHeaders = (authContext: AuthContextType) => {
   return {
     Authorization: `Bearer ${authContext.token}`,
     'Access-Control-Allow-Origin': '*',
@@ -22,7 +22,7 @@ export const ApiService = {
    * @param searchTerm String of the keyword you want to search for
    */
   async getSelfDescriptionsForShape(
-    authContext: AuthContextValues,
+    authContext: AuthContextType,
     targetClass: string,
     searchProperty?: string,
     searchTerm?: string
@@ -61,7 +61,7 @@ export const ApiService = {
 
   // Returns every Service Offering available
   async getAllSelfDescriptions(
-    authContext: AuthContextValues
+    authContext: AuthContextType
   ): Promise<AxiosResponse<any, any>> {
     const endpoint = queryEndpoint;
     const headers = getHeaders(authContext);
@@ -84,7 +84,7 @@ export const ApiService = {
   },
 
   async getOneSelfDescriptions(
-    authContext: AuthContextValues,
+    authContext: AuthContextType,
     claimsGraphUri: string | undefined
   ): Promise<any> {
     if (!claimsGraphUri) {
@@ -116,7 +116,7 @@ export const ApiService = {
 
   // Returns every Resource available
   async getAllResources(
-    authContext: AuthContextValues
+    authContext: AuthContextType
   ): Promise<AxiosResponse<any, any>> {
     const endpoint = queryEndpoint;
     const headers = getHeaders(authContext);
@@ -139,7 +139,7 @@ export const ApiService = {
   },
 
   async getShaclShapesFromCatalogue(
-    authContext: AuthContextValues
+    authContext: AuthContextType
   ): Promise<AxiosResponse<any, any>> {
     const endpoint = serverUrl + '/schemas/latest?type=shape';
     const headers = getHeaders(authContext);

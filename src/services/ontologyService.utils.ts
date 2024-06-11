@@ -1,12 +1,12 @@
 import { AxiosResponse } from 'axios';
 import * as N3 from 'n3';
 
-import { AuthContextValues } from '../context/AuthContextValues';
+import { AuthContextType } from '../context/AuthContextProvider';
 import { Ontology, Shape, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
 
-import { getSchemasByIds } from './SchemaApiService';
+import { getSchemaById, getSchemasByIds } from './SchemaApiService';
 
-export const fetchOntologies = async (authContext: AuthContextValues, response: AxiosResponse<any, any>) => {
+export const fetchOntologies = async (authContext: AuthContextType, response: AxiosResponse<any, any>) => {
   const ontologiesStringArray = mapShapesAndOntologies(response);
   const promises = getSchemasByIds(authContext, ontologiesStringArray);
   const promiseAll = await Promise.all(promises);
@@ -18,18 +18,20 @@ export const mapShapesAndOntologies = (response: ShapesAndOntologiesInput): stri
   return response.ontologies.map((ontology) => ontology);
 }
 
-export const parseOntologies = (response: string[]): any[] => {
-  return response.map((item) => {
-    const parser = new N3.Parser();
-    const parsedItems: any[] = [];
-    parser.parse(item,
-      (error, quad) => {
-        if (quad) {
-          parsedItems.push(quad);
-        }
-      });
-    return parsedItems;
-  });
+export const parseSingleOntology = (item: string): any[] => {
+  const parser = new N3.Parser();
+  const parsedItems: any[] = [];
+  parser.parse(item,
+    (error, quad) => {
+      if (quad) {
+        parsedItems.push(quad);
+      }
+    });
+  return parsedItems;
+}
+
+export const parseOntologies = (items: string[]): any[] => {
+  return items.map(parseSingleOntology);
 }
 
 export const createAllOntologyObjects = (data: any[]): Ontology[] => {
@@ -102,7 +104,8 @@ export const createOntologyObject = (data: any[]): Ontology => {
   };
 };
 
-export const downloadTurtleFile = (id: string, response: AxiosResponse<any, any>) => {
+export const downloadTurtleFile = async (authContext: AuthContextType, id: string) => {
+  const response = await getSchemaById(authContext, id);
   const filename = id + '.ttl';
   const element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response));
@@ -115,3 +118,11 @@ export const downloadTurtleFile = (id: string, response: AxiosResponse<any, any>
 
   document.body.removeChild(element);
 };
+
+export const getOntologyById = async (authContext: AuthContextType, id: string) => {
+  console.log('Try getting ontology with id:', id);
+  const response = await getSchemaById(authContext, id);
+  console.log('Response:', response);
+  const parsedOntology = parseSingleOntology(response);
+  return createOntologyObject(parsedOntology);
+}

@@ -15,7 +15,7 @@ const keycloakInitOptions: KeycloakInitOptions = {
   pkceMethod: "S256",
 };
 
-interface AuthContextType {
+export interface AuthContextType {
   isAuthenticated: boolean;
   token: string;
   login: () => Promise<void>;

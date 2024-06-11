@@ -1,11 +1,11 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { AuthContextValues } from '../context/AuthContextValues';
+import { AuthContextType } from '../context/AuthContextProvider';
 import { Ontology } from '../types/shapesAndOntologies.model';
 
-import { downloadTurtleFile, fetchOntologies } from './ontologyService.utils';
+import { fetchOntologies } from './ontologyService.utils';
 
-const getHeaders = (authContext: AuthContextValues) => {
+const getHeaders = (authContext: AuthContextType) => {
   return {
     Authorization: `Bearer ${authContext.token}`,
     'Access-Control-Allow-Origin': '*',
@@ -19,8 +19,8 @@ const encodeString = (uri: string): string => {
 }
 
 const getAllSchemas = (
-  authContext: AuthContextValues
-): Promise<AxiosResponse<any, any>> => {
+  authContext: AuthContextType
+) => {
   const endpoint = serverUrl + '/schemas';
   const headers = getHeaders(authContext);
 
@@ -37,10 +37,10 @@ const getAllSchemas = (
     });
 };
 
-const getSchemaById = (
-  authContext: AuthContextValues,
+export const getSchemaById = (
+  authContext: AuthContextType,
   id: string
-): Promise<AxiosResponse<any, any>> => {
+) => {
   const encodedUrl = encodeString(id);
   const endpoint = serverUrl + '/schemas/' + encodedUrl;
   const headers = getHeaders(authContext);
@@ -58,16 +58,11 @@ const getSchemaById = (
     });
 };
 
-export const getAllOntologies = async (authContext: AuthContextValues): Promise<Ontology[]> => {
+export const getAllOntologies = async (authContext: AuthContextType): Promise<Ontology[]> => {
   const response = await getAllSchemas(authContext);
   return fetchOntologies(authContext, response);
 };
 
-export const getSchemasByIds = (authContext: AuthContextValues, ids: string[]):  Promise<AxiosResponse<any, any>>[] => {
+export const getSchemasByIds = (authContext: AuthContextType, ids: string[]):  Promise<AxiosResponse<any, any>>[] => {
   return ids.map((id) => getSchemaById(authContext, id));
 };
-
-export const handleRDfDownload = async (authContext: AuthContextValues, id: string) => {
-  const response = await getSchemaById(authContext, id);
-  downloadTurtleFile(id, response);
-}

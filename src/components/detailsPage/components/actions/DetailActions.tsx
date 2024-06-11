@@ -2,7 +2,7 @@ import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { AuthContext } from '../../../../context/AuthContextProvider';
-import { handleRDfDownload } from '../../../../services/SchemaApiService';
+import { downloadTurtleFile } from '../../../../services/ontologyService.utils';
 import { Ontology } from '../../../../types/shapesAndOntologies.model';
 import Title from '../../../Title/Title';
 import GaiaXButton from '../../../buttons/GaiaXButton';
@@ -24,7 +24,7 @@ const DetailActions: FC<IDetailActions> = ({ ontology }) => {
       </div>
       <div className={styles['buttons']}>
         <GaiaXButton label={t('details.view-graph')} handleOnClick={() => {}} width={'100%'}/>
-        <GaiaXButton label={t('details.download-file')} handleOnClick={() => handleRDfDownload(authContext, ontology.subject)} width={'100%'}/>
+        <GaiaXButton label={t('details.download-file')} handleOnClick={() => downloadTurtleFile(authContext, ontology.subject)} width={'100%'}/>
       </div>
     </div>
   );

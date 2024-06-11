@@ -517,7 +517,8 @@
     "titles": "Ontologien",
     "no-ontologies-available": "Keine Ontologien gefunden",
     "search-bar-text": "Suchen Sie nach speziellen Shapes oder Ontologien",
-    "related-ontologies": "Verwandte Ontologien"
+    "related-ontologies": "Verwandte Ontologien",
+    "not-found": "Ontologie nicht gefunden"
   },
   "shapes": {
     "title": "Shape",

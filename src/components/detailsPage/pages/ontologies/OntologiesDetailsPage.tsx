@@ -1,6 +1,10 @@
-import { FC } from 'react';
+import { FC, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
 
+import car from '../../../../assets/car.gif';
+import { AuthContext } from '../../../../context/AuthContextProvider';
+import { getOntologyById } from '../../../../services/ontologyService.utils';
 import { Ontology } from '../../../../types/shapesAndOntologies.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
@@ -13,12 +17,42 @@ import DetailsSidebar from '../../layout/sidebar/DetailsSidebar';
 
 import MainContentOntology from './MainContentOntology';
 
-interface IOntologiesDetailsPage {
-    ontology: Ontology;
-}
-
-const OntologiesDetailsPage: FC<IOntologiesDetailsPage> = ({ ontology }) => {
+const OntologiesDetailsPage: FC = () => {
   const { t } = useTranslation();
+  const { '*': id } = useParams();
+  const authContext = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(false);
+  const [ontology, setOntology] = useState<Ontology>();
+
+  useEffect(() => {
+    const loadOntology = async () => {
+      setIsLoading(true);
+      try {
+        const ontology = await getOntologyById(authContext, id);
+        console.log('Ontology:', ontology);
+
+        setOntology(ontology);
+      } catch (error) {
+        console.error('Error getting ontology:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadOntology();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="newCarLoader">
+        <img src={car} alt="loading..." className="car"/>
+      </div>
+    );
+  }
+
+  if (!ontology) {
+    return <div>{t('ontologies.not-found')}</div>;
+  }
 
   return (
     <DetailsPage>
