@@ -14,13 +14,17 @@ interface IItemCard {
     ontology: Ontology;
 }
 
+enum detailRoutes {
+    shapesAndOntologies = '/shapesAndOntologies/details/',
+}
+
 const ItemCard: FC<IItemCard> = ({ label, isGaiaXComlpiant, ontology }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleNavigationToDetailsPage = () => {
     const encodedUri = encodeURIComponent(ontology.subject);
-    navigate(`/shapesAndOntologies/details/${encodedUri}`);
+    navigate(`${detailRoutes.shapesAndOntologies}${encodedUri}`);
   }
 
   return (
