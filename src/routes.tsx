@@ -68,7 +68,7 @@ export const routes = (
       <Route path="/about" element={ViewContainer(<ProtectedRoute><AboutPage /></ProtectedRoute>)} />
       <Route path="/support" element={ViewContainer(<ProtectedRoute><SupportPage /></ProtectedRoute>)} />
       <Route path="/shapesAndOntologies" element={ViewContainer(<ProtectedRoute><ShapesAndOntologies /></ProtectedRoute>)} />
-      <Route path="/shapesAndOntologies/details/*" element={ViewContainer(<OntologiesDetailsPage />)} />
+      <Route path="/shapesAndOntologies/details/*" element={ViewContainer(<ProtectedRoute><OntologiesDetailsPage /></ProtectedRoute>)} />
     </Routes>
   </Column>
 );
