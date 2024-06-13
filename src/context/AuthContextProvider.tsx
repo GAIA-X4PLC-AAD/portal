@@ -94,6 +94,8 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 
   const handleLogout = async () => {
     await keycloak.logout();
+    setIsAuthenticated(false);
+    setToken("");
   };
 
   const contextValue = useMemo(
