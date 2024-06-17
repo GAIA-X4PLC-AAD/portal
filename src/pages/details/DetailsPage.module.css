@@ -4,3 +4,8 @@
     justify-content: space-between;
     width: auto;
 }
+
+.newCarLoader {
+    display: flex;
+    justify-content: center;
+}

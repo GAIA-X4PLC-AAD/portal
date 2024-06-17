@@ -21,6 +21,8 @@ export interface AuthContextType {
   login: () => Promise<void>;
   logout: () => Promise<void>;
   hasRole: (role: string) => boolean;
+  redirectPath: string | null;
+  setRedirectPath: (path: string | null) => void;
 }
 
 const defaultAuthContextValues: AuthContextType = {
@@ -29,6 +31,8 @@ const defaultAuthContextValues: AuthContextType = {
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
   hasRole: (role: string) => false,
+  redirectPath: null,
+  setRedirectPath: () => {},
 };
 
 export const AuthContext = createContext<AuthContextType>(
@@ -44,6 +48,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [token, setToken] = useState("");
+  const [redirectPath, setRedirectPath] = useState<string | null>(null);
 
   // Initialise Keycloak
   useEffect(() => {
@@ -89,6 +94,8 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 
   const handleLogout = async () => {
     await keycloak.logout();
+    setIsAuthenticated(false);
+    setToken("");
   };
 
   const contextValue = useMemo(
@@ -98,8 +105,10 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
       login: keycloak.login,
       logout: handleLogout,
       hasRole: keycloak.hasRealmRole,
+      redirectPath,
+      setRedirectPath,
     }),
-    [isAuthenticated, token]
+    [isAuthenticated, token, redirectPath]
   );
 
   return (
