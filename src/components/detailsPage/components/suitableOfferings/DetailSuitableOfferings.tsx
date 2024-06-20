@@ -1,16 +1,16 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Ontology } from '../../../../types/shapesAndOntologies.model';
 import Title from '../../../Title/Title';
-import Link from '../../../link/Link';
 
 import styles from './DetailSuitableOfferings.module.css';
 
 interface IDetailSuitableOfferings {
-   linksForOfferings: string[];
+    ontology: Ontology;
 }
 
-const DetailSuitableOfferings: FC<IDetailSuitableOfferings> = ({ linksForOfferings }) => {
+const DetailSuitableOfferings: FC<IDetailSuitableOfferings> = ({ ontology }) => {
   const { t } = useTranslation();
 
   return (
@@ -19,7 +19,6 @@ const DetailSuitableOfferings: FC<IDetailSuitableOfferings> = ({ linksForOfferin
         <Title>{t('dashboard.suitable-offerings')}</Title>
       </div>
       <div className={styles['links']}>
-        {linksForOfferings && linksForOfferings.length > 1 ? linksForOfferings.map((link, index) => <Link key={index} url={link} fontSize={'20px'}/>) : null}
       </div>
     </div>
   );

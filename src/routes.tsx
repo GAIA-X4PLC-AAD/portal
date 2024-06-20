@@ -67,8 +67,8 @@ export const routes = (
       <Route path="/lcm/:id/:index" element={ViewContainer(<LcmServices />)} />
       <Route path="/about" element={ViewContainer(<ProtectedRoute><AboutPage /></ProtectedRoute>)} />
       <Route path="/support" element={ViewContainer(<ProtectedRoute><SupportPage /></ProtectedRoute>)} />
-      <Route path="/shapesAndOntologies" element={ViewContainer(<ProtectedRoute><ShapesAndOntologies /></ProtectedRoute>)} />
-      <Route path="/shapesAndOntologies/details/*" element={ViewContainer(<ProtectedRoute><OntologiesDetailsPage /></ProtectedRoute>)} />
+      <Route path="/shapesAndOntologies" element={ViewContainer(<ShapesAndOntologies />)} />
+      <Route path="/shapesAndOntologies/details/*" element={ViewContainer(<OntologiesDetailsPage />)} />
     </Routes>
   </Column>
 );

@@ -51,36 +51,41 @@ const ShapesAndOntologies = () => {
     }
   };
 
+  if (!authContext.isAuthenticated) {
+    return <p>You need to be authenticated to view this page.</p>;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="newCarLoader">
+        <img src={car} alt="loading..." className="car"/>
+      </div>
+    );
+  }
+
   return (
     <div>
       <Header title={`${t('left-menu.shapesAndOntologies')}(${filteredOntologies.length} ${t('dashboard.results')})`}/>
       <div className={styles['shapesAndOntologies-content-container']}>
-        {authContext.isAuthenticated && (
-          <div className={styles.content}>
-            <div>
-              <SearchBar placeholder={t('ontologies.search-bar-text')} onSearch={handleSearch} />
-              {isLoading ? (
-                <div className="newCarLoader">
-                  <img src={car} alt="loading..." className="car"/>
-                </div>
+        <div className={styles.content}>
+          <div>
+            <SearchBar placeholder={t('ontologies.search-bar-text')} onSearch={handleSearch} />
+            {(
+              filteredOntologies.length > 0 ? (
+                filteredOntologies.map((ontology, index) => (
+                  <ItemCard
+                    key={index}
+                    label={t('ontologies.title')}
+                    ontology={ontology}
+                  />
+                ))
               ) : (
-                filteredOntologies.length > 0 ? (
-                  filteredOntologies.map((ontology, index) => (
-                    <ItemCard
-                      key={index}
-                      label={t('ontologies.title')}
-                      ontology={ontology}
-                    />
-                  ))
-                ) : (
-                  <Text>{t('ontologies.no-ontologies-available')}</Text>
-                )
-              )}
-            </div>
+                <Text>{t('ontologies.no-ontologies-available')}</Text>
+              )
+            )}
           </div>
-        )}
+        </div>
       </div>
-      {!authContext.isAuthenticated && <p>You are not authenticated!</p>}
     </div>
   );
 };

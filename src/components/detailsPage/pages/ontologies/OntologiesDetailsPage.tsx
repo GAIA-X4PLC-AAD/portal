@@ -21,12 +21,11 @@ const OntologiesDetailsPage: FC = () => {
   const { t } = useTranslation();
   const { '*': id } = useParams();
   const authContext = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [ontology, setOntology] = useState<Ontology>();
 
   useEffect(() => {
     const loadOntology = async () => {
-      setIsLoading(true);
       try {
         const ontology = await getOntologyById(authContext, id);
         console.log('Ontology:', ontology);
@@ -39,8 +38,15 @@ const OntologiesDetailsPage: FC = () => {
       }
     };
 
-    loadOntology();
-  }, []);
+    if (id && authContext.isAuthenticated) {
+      loadOntology();
+    }
+
+  }, [id, authContext.isAuthenticated]);
+
+  if (!authContext.isAuthenticated) {
+    return <p>You need to be authenticated to view this page.</p>;
+  }
 
   if (isLoading) {
     return (
@@ -62,7 +68,7 @@ const OntologiesDetailsPage: FC = () => {
           <MainContentOntology ontology={ontology} />
         </DetailsMainContent>
         <DetailsSidebar>
-          <DetailSuitableOfferings linksForOfferings={ontology.linksForOfferings} />
+          <DetailSuitableOfferings ontology={ontology} />
           <DetailActions ontology={ontology} />
         </DetailsSidebar>
       </DetailsContent>
