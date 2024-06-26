@@ -1,15 +1,14 @@
-import React, { useState, useRef, useEffect } from "react";
-
 import PropTypes from 'prop-types';
-import LoadingView from "../loading_view/LoadingView";
-import { Style, BodySmallBoldText, Column, Row, CaptionText } from "../../common/styles";
-import { Padding } from "../discovery/tabs/style";
-import { Block } from "../expandable/style";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
-import NextPrevButtons from "../../common/vertical_steps/next_prev_buttons";
-import { useTranslation } from "react-i18next";
+import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import Carousel from 'react-multi-carousel';
 
+import { Style, BodySmallBoldText, Column, Row, CaptionText } from '../../common/styles';
+import NextPrevButtons from '../../common/vertical_steps/next_prev_buttons';
+import { Padding } from '../discovery/tabs/style';
+import { Block } from '../expandable/style';
+import LoadingView from '../loading_view/LoadingView';
+import 'react-multi-carousel/lib/styles.css';
 
 const responsive = {
   superLargeDesktop: {
@@ -34,7 +33,6 @@ const responsive = {
 const _leftPanelWidth = '225px'
 const _maxItemsPerPage = 10
 
-
 const colItemView = ({ title, caption, subtitle, }) => {
   return <Column>
     <Row justifyContent='space-between' alignItems='center'>
@@ -57,13 +55,13 @@ const sectionView = (props,) => {
 
   }, [props.data]);
 
-  const sectionItemsViews = sectionItems?.map((element, _index) => {
+  const sectionItemsViews = (sectionItems && sectionItems.map((element, _index) => {
     return <Style key={`${element['title']}${_index}`} minWidth={_leftPanelWidth}>
       <Padding vertical='8px' horizontal='8px'>
         {colItemView({ title: element['title'], subtitle: element['subtitle'], caption: element['date'] })}
       </Padding>
     </Style>;
-  }) ?? []
+  })) || []
 
   const sectionItemsGroupedViews = []
   const chunkSize = _maxItemsPerPage;
@@ -100,17 +98,15 @@ const sectionView = (props,) => {
   );
 }
 
-
 sectionView.propTypes = {
   title: PropTypes.string.isRequired,
 }
 
-
 const SideSectionsView = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
-  const _transactionsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/transactions`;
-  const _newsUrl = process.env.REACT_APP_EDGE_API_URI + `/dashboard/news/`;
+  const _transactionsUrl = process.env.REACT_APP_EDGE_API_URI + '/dashboard/transactions';
+  const _newsUrl = process.env.REACT_APP_EDGE_API_URI + '/dashboard/news/';
 
   return (
     <>
