@@ -47,7 +47,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   children,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [token, setToken] = useState('');
+  const [token, setToken] = useState('');
   const [redirectPath, setRedirectPath] = useState<string | null>(null);
 
   // Initialise Keycloak
@@ -95,7 +95,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   const handleLogout = async () => {
     await keycloak.logout();
     setIsAuthenticated(false);
-    setToken("");
+    setToken('');
   };
 
   const contextValue = useMemo(

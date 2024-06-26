@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { AuthContext } from "context/AuthContextProvider";
-import { ApiService } from "services/ApiService";
-import DetailsCard from "components/cards/DetailsCard";
-import MapCard from "components/cards/MapCard";
-import SidebarCard from "components/cards/SidebarCard";
+import DetailsCard from 'components/cards/DetailsCard';
+import MapCard from 'components/cards/MapCard';
+import SidebarCard from 'components/cards/SidebarCard';
+import { AuthContext } from 'context/AuthContextProvider';
+import { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { ApiService } from 'services/ApiService';
 
-import car from "../../assets/car.gif";
-import styles from "./DetailsPage.module.css";
+import car from '../../assets/car.gif';
+
+import styles from './DetailsPage.module.css';
 
 export default function DetailsPage() {
   const authContext = useContext(AuthContext);
@@ -22,12 +23,12 @@ export default function DetailsPage() {
           authContext,
           resourceId
         );
-        console.log("Fetched data: ", response);
+        console.log('Fetched data: ', response);
         if (response) {
           setSelfDescriptionData(response);
         }
       } catch (error) {
-        console.error("Error fetching self descriptions:", error);
+        console.error('Error fetching self descriptions:', error);
       } finally {
         setIsLoading(false);
       }
@@ -55,7 +56,7 @@ export default function DetailsPage() {
   }
 
   return (
-    <div className={styles["details-page-container"]}>
+    <div className={styles['details-page-container']}>
       {isLoading ? (
         <div className="newCarLoader">
           <img src={car} alt="loading..." className="car" />
