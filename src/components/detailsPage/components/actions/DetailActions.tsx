@@ -2,20 +2,17 @@ import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { AuthContext } from '../../../../context/AuthContextProvider';
+import { OntologyContext } from '../../../../context/OntologyContext';
 import { downloadTurtleFile } from '../../../../services/ontologyService.utils';
-import { Ontology } from '../../../../types/shapesAndOntologies.model';
 import Title from '../../../Title/Title';
 import GaiaXButton from '../../../buttons/GaiaXButton';
 
 import styles from './DetailActions.module.css';
 
-interface IDetailActions {
-    ontology: Ontology;
-}
-
-const DetailActions: FC<IDetailActions> = ({ ontology }) => {
+const DetailActions: FC = () => {
   const { t } = useTranslation();
   const authContext = useContext(AuthContext);
+  const ontology = useContext(OntologyContext);
 
   return (
     <div className={styles['container']}>

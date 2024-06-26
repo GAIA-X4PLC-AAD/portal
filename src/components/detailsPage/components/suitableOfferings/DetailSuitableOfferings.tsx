@@ -1,17 +1,14 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Ontology } from '../../../../types/shapesAndOntologies.model';
+import { OntologyContext } from '../../../../context/OntologyContext';
 import Title from '../../../Title/Title';
 
 import styles from './DetailSuitableOfferings.module.css';
 
-interface IDetailSuitableOfferings {
-    ontology: Ontology;
-}
-
-const DetailSuitableOfferings: FC<IDetailSuitableOfferings> = ({ ontology }) => {
+const DetailSuitableOfferings: FC = () => {
   const { t } = useTranslation();
+  const ontology = useContext(OntologyContext);
 
   return (
     <div className={styles['container']}>

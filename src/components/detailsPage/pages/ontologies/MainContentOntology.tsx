@@ -1,24 +1,24 @@
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { Ontology } from '../../../../utils/ontologyMapper';
+import { OntologyContext } from '../../../../context/OntologyContext';
 import Text from '../../../Text/Text';
 import Title from '../../../Title/Title';
 
 import styles from './MainContentOntology.module.css';
 
-interface IMainContentOntology {
-    ontology: Ontology;
-}
-
-const MainContentOntology: FC<IMainContentOntology> = ({ ontology }) => {
+const MainContentOntology: FC = () => {
   const { t } = useTranslation();
+  const ontology = useContext(OntologyContext);
+
+  if (!ontology) {
+    return <div>{t('ontologies.not-found')}</div>;
+  }
 
   return (
     <div className={styles['container']}>
       <div>
         <Title>{t('ontologies.title')}</Title>
-        {/* todo Button?Label*/}
       </div>
       <Text>{ontology.description}</Text>
 

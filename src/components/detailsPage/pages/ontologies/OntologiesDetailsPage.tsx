@@ -1,3 +1,4 @@
+import { OntologyContext } from 'context/OntologyContext';
 import { FC, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -63,15 +64,17 @@ const OntologiesDetailsPage: FC = () => {
   return (
     <DetailsPage>
       <Header title={`${t('left-menu.shapesAndOntologies')} ${ARROW_RIGHT} ${ontology.subject}`} />
-      <DetailsContent>
-        <DetailsMainContent>
-          <MainContentOntology ontology={ontology} />
-        </DetailsMainContent>
-        <DetailsSidebar>
-          <DetailSuitableOfferings ontology={ontology} />
-          <DetailActions ontology={ontology} />
-        </DetailsSidebar>
-      </DetailsContent>
+      <OntologyContext.Provider value={ontology}>
+        <DetailsContent>
+          <DetailsMainContent>
+            <MainContentOntology />
+          </DetailsMainContent>
+          <DetailsSidebar>
+            <DetailSuitableOfferings />
+            <DetailActions />
+          </DetailsSidebar>
+        </DetailsContent>
+      </OntologyContext.Provider>
     </DetailsPage>
   );
 }
