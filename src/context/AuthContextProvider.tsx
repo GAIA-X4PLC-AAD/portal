@@ -1,18 +1,18 @@
-import React, { createContext, useEffect, useState, useMemo } from "react";
-import Keycloak, { KeycloakConfig, KeycloakInitOptions } from "keycloak-js";
+import Keycloak, { KeycloakConfig, KeycloakInitOptions } from 'keycloak-js';
+import React, { createContext, useEffect, useState, useMemo } from 'react';
 
 const keycloakConfig: KeycloakConfig = {
-  realm: "gaia-x",
-  clientId: "portal",
-  url: "https://fc-keycloak.gxfs.gx4fm.org/",
+  realm: 'gaia-x',
+  clientId: 'portal',
+  url: 'https://fc-keycloak.gxfs.gx4fm.org/',
 };
 
 const keycloak = new Keycloak(keycloakConfig);
 
 const keycloakInitOptions: KeycloakInitOptions = {
-  onLoad: "check-sso",
+  onLoad: 'check-sso',
   checkLoginIframe: false,
-  pkceMethod: "S256",
+  pkceMethod: 'S256',
 };
 
 export interface AuthContextType {
@@ -27,7 +27,7 @@ export interface AuthContextType {
 
 const defaultAuthContextValues: AuthContextType = {
   isAuthenticated: false,
-  token: "",
+  token: '',
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
   hasRole: (role: string) => false,
@@ -47,7 +47,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   children,
 }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [token, setToken] = useState("");
+    const [token, setToken] = useState('');
   const [redirectPath, setRedirectPath] = useState<string | null>(null);
 
   // Initialise Keycloak
@@ -57,12 +57,12 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
       .then((authenticated) => {
         setIsAuthenticated(authenticated);
         if (authenticated) {
-          setToken(keycloak.token ?? "");
+          setToken(keycloak.token ? keycloak.token : '');
           scheduleTokenRenewal();
         }
       })
       .catch((error) => {
-        console.error("Error during Keycloak initialization:", error);
+        console.error('Error during Keycloak initialization:', error);
       });
   }, []);
 
@@ -72,11 +72,11 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
         .updateToken(70)
         .then((refreshed) => {
           if (refreshed) {
-            setToken(keycloak.token ?? "");
+            setToken(keycloak.token ? keycloak.token : '');
           }
         })
         .catch(() => {
-          console.warn("Failed to refresh token. Logging out...");
+          console.warn('Failed to refresh token. Logging out...');
           handleLogout();
         });
     }, 60000);
