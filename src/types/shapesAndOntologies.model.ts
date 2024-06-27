@@ -1,3 +1,14 @@
+export interface Link {
+    source: string;
+    target: string;
+    value: string;
+}
+
+export interface Node {
+    id: string;
+    group: string;
+}
+
 export interface Shape {
     label: string;
     comment: string;
@@ -15,6 +26,8 @@ export interface Ontology {
     downloadLink?: string;
     linksForOfferings?: string[];
     relatedOntologies?: Ontology[];
+    nodes: Node[];
+    links: Link[];
 }
 
 export interface ShapesAndOntologiesInput {

@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import * as N3 from 'n3';
 
 import { AuthContextType } from '../context/AuthContextProvider';
-import { Ontology, Shape, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
+import { Link, Node, Ontology, Shape, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
 
 import { getSchemaById, getSchemasByIds } from './SchemaApiService';
 
@@ -20,14 +20,14 @@ export const mapShapesAndOntologies = (response: ShapesAndOntologiesInput): stri
 
 export const parseSingleOntology = (item: string): any[] => {
   const parser = new N3.Parser();
-  const parsedItems: any[] = [];
+  const quads: any[] = [];
   parser.parse(item,
     (error, quad) => {
       if (quad) {
-        parsedItems.push(quad);
+        quads.push(quad);
       }
     });
-  return parsedItems;
+  return quads;
 }
 
 export const parseOntologies = (items: string[]): any[] => {
@@ -40,8 +40,10 @@ export const createAllOntologyObjects = (data: any[]): Ontology[] => {
   });
 }
 
-export const createOntologyObject = (data: any[]): Ontology => {
-  const firstSubject = data.length > 0 ? data[0]._subject.id : 'No subject available!';
+export const createOntologyObject = (quads: any[]): Ontology => {
+  const firstSubject = quads.length > 0 ? quads[0]._subject.id : 'No subject available!';
+  const nodes: Node[] = [];
+  const links: Link[] = [];
 
   let subject = firstSubject;
   let contributors: string[] = [];
@@ -51,10 +53,10 @@ export const createOntologyObject = (data: any[]): Ontology => {
 
   let shapeMap: { [key: string]: Shape } = {};
 
-  data.forEach(item => {
-    const subjectId = item._subject.id;
-    const predicateId = item._predicate.id;
-    const objectId = item._object.id;
+  quads.forEach(quad => {
+    const subjectId = quad._subject.id;
+    const predicateId = quad._predicate.id;
+    const objectId = quad._object.id;
 
     // get the ontology information
     if (subjectId === firstSubject) {
@@ -91,6 +93,20 @@ export const createOntologyObject = (data: any[]): Ontology => {
         break;
       }
     }
+
+    const subject = quad.subject.value;
+    const predicate = quad.predicate.value;
+    const object = quad.object.value;
+
+    if (!nodes.find(node => node.id === subject)) {
+      nodes.push({ id: subject, group: '1' });
+    }
+    if (!nodes.find(node => node.id === object)) {
+      nodes.push({ id: object, group: '2' });
+    }
+
+    links.push({ source: subject, target: object, value: '1' });
+
   });
 
   shapes = Object.values(shapeMap).filter(shape => shape.label !== '');
@@ -101,6 +117,8 @@ export const createOntologyObject = (data: any[]): Ontology => {
     description,
     version,
     shapes,
+    nodes,
+    links
   };
 };
 

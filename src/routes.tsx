@@ -8,6 +8,7 @@ import Provider from './components/account/Provider';
 import DashboardPage from './components/dashboard/dashboard_page';
 import LcmFinal from './components/dashboard/lcm/LcmFinal';
 import LcmServices from './components/dashboard/lcm/LcmServices';
+import OwlGraph from './components/detailsPage/components/actions/OwlGraph/OwlGraph';
 import OntologiesDetailsPage from './components/detailsPage/pages/ontologies/OntologiesDetailsPage';
 import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
@@ -69,6 +70,7 @@ export const routes = (
       <Route path="/support" element={ViewContainer(<ProtectedRoute><SupportPage /></ProtectedRoute>)} />
       <Route path="/shapesAndOntologies" element={ViewContainer(<ShapesAndOntologies />)} />
       <Route path="/shapesAndOntologies/details/*" element={ViewContainer(<OntologiesDetailsPage />)} />
+      <Route path="/shapesAndOntologies/graph/*" element={ViewContainer(<OwlGraph />)} />
     </Routes>
   </Column>
 );
