@@ -1,6 +1,6 @@
 import Text from 'components/Text/Text';
 import Title from 'components/Title/Title';
-import Header from 'components/header/Header';
+import HeaderWithImage from 'components/headerWithImage/HeaderWithImage';
 import { AuthContext } from 'context/AuthContextProvider';
 import { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <div className={styles['home-container']}>
-      <Header
+      <HeaderWithImage
         title={t('home.header.title')}
         content={t('home.marketplace_text')}
         Image={HeaderImage}

@@ -3,10 +3,11 @@ import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
 import { AuthContext } from '../../context/AuthContextProvider';
-import { createAllOntologyObjects, fetchOntologies, Ontology, parseOntologies } from '../../utils/ontologyMapper';
+import { getAllOntologies } from '../../services/SchemaApiService';
+import { Ontology } from '../../types/shapesAndOntologies.model';
 import Text from '../Text/Text';
-import Title from '../Title/Title';
-import SelfDescriptionCard from '../cards/SelfDescriptionCard';
+import ItemCard from '../cards/ItemCard';
+import Header from '../header/Header';
 import SearchBar from '../searchBar/SearchBar';
 
 import styles from './ShapesAndOntologies.module.css';
@@ -22,9 +23,7 @@ const ShapesAndOntologies = () => {
     const loadOntologies = async () => {
       setIsLoading(true);
       try {
-        const fetchedOntologies = await fetchOntologies(authContext)
-          .then(parseOntologies)
-          .then(createAllOntologyObjects);
+        const fetchedOntologies = await getAllOntologies(authContext);
 
         console.log('fetchedOntologies:', fetchedOntologies);
         setOriginalOntologies(fetchedOntologies);
@@ -52,42 +51,41 @@ const ShapesAndOntologies = () => {
     }
   };
 
+  if (!authContext.isAuthenticated) {
+    return <p>You need to be authenticated to view this page.</p>;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="newCarLoader">
+        <img src={car} alt="loading..." className="car"/>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <header className={styles['header-container']}>
-        <div className={styles['header-title']}>
-          <Title>{t('left-menu.shapesAndOntologies')}({filteredOntologies.length} {t('dashboard.results')})</Title>
-        </div>
-      </header>
+      <Header title={`${t('left-menu.shapesAndOntologies')}(${filteredOntologies.length} ${t('dashboard.results')})`}/>
       <div className={styles['shapesAndOntologies-content-container']}>
-        {authContext.isAuthenticated && (
-          <div className={styles.content}>
-            <div>
-              <SearchBar placeholder={t('ontologies.searchBarText')} onSearch={handleSearch} />
-              {isLoading ? (
-                <div className="newCarLoader">
-                  <img src={car} alt="loading..." className="car"/>
-                </div>
+        <div className={styles.content}>
+          <div>
+            <SearchBar placeholder={t('ontologies.search-bar-text')} onSearch={handleSearch} />
+            {(
+              filteredOntologies.length > 0 ? (
+                filteredOntologies.map((ontology, index) => (
+                  <ItemCard
+                    key={index}
+                    label={t('ontologies.title')}
+                    ontology={ontology}
+                  />
+                ))
               ) : (
-                filteredOntologies.length > 0 ? (
-                  filteredOntologies.map((ontology, index) => (
-                    <SelfDescriptionCard
-                      key={index}
-                      label={t('ontologies.title')}
-                      name={ontology.subject}
-                      description={ontology.description}
-                      selfDescription={ontology}
-                    />
-                  ))
-                ) : (
-                  <Text>{t('ontologies.noOntologiesAvailable')}</Text>
-                )
-              )}
-            </div>
+                <Text>{t('ontologies.no-ontologies-available')}</Text>
+              )
+            )}
           </div>
-        )}
+        </div>
       </div>
-      {!authContext.isAuthenticated && <p>You are not authenticated!</p>}
     </div>
   );
 };

@@ -1,6 +1,8 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { createOntologyObject, Ontology } from './ontologyMapper';
+import { Ontology } from '../types/shapesAndOntologies.model';
+
+import { createOntologyObject } from './ontologyService.utils';
 
 describe('ontologyMapper test', () => {
   it('should create an ontology object from rdf data', () => {
