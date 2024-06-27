@@ -17,13 +17,11 @@ const MainContentOntology: FC = () => {
 
   return (
     <div className={styles['container']}>
-      <div>
-        <Title>{t('ontologies.title')}</Title>
-      </div>
-      <Text>{ontology.description}</Text>
+      <Title>{t('ontologies.title')}</Title>
 
+      <Text>{ontology.description}</Text>
       {ontology.shapes && ontology.shapes.length > 0 && (
-        <div style={{ gap: '1px' }}>
+        <div className={styles['container']}>
           <Title>{t('shapes.titles')}</Title>
           {ontology.shapes.map((shape, index) => (
             <Text key={index}>{shape.label}</Text>
@@ -31,7 +29,7 @@ const MainContentOntology: FC = () => {
         </div>
       )}
 
-      {ontology.relatedOntologies && ontology.relatedOntologies.length > 0 && (
+      {ontology.relatedOntologies && ontology.relatedOntologies.length > -1 && (
         <div style={{ gap: '1px' }}>
           <Title>{t('ontologies.related-ontologies')}</Title>
           {ontology.relatedOntologies.map((relatedOntology, index) => (
