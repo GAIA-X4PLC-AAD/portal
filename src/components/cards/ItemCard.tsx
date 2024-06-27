@@ -40,7 +40,9 @@ const ItemCard: FC<IItemCard> = ({ label, isGaiaXComlpiant, ontology }) => {
         )}
       </div>
       <div className={styles.content}>
-        <Title>{ontology.subject}</Title>
+        <div style={{ textAlign: 'left' }}>
+          <Title>{ontology.subject}</Title>
+        </div>
         <p>{ontology.description}</p>
         <div className={styles.button}>
           <GaiaXButton
