@@ -1,10 +1,12 @@
+import MapIcon from '@mui/icons-material/Map';
 import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
 import { AuthContext } from '../../context/AuthContextProvider';
 import { getAllOntologies } from '../../services/SchemaApiService';
-import { Ontology } from '../../types/shapesAndOntologies.model';
+import { Link, Node, Ontology } from '../../types/shapesAndOntologies.model';
+import RDFVisualization from '../../utils/RDFVisualization';
 import Text from '../Text/Text';
 import ItemCard from '../cards/ItemCard';
 import Header from '../header/Header';
@@ -16,8 +18,15 @@ const ShapesAndOntologies = () => {
   const { t } = useTranslation();
   const authContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [showMap, setShowMap] = useState(false);
   const [originalOntologies, setOriginalOntologies] = useState<Ontology[]>([]);
   const [filteredOntologies, setFilteredOntologies] = useState<Ontology[]>([]);
+  const [nodes, setNodes] = useState<Node[]>([]);
+  const [links, setLinks] = useState<Link[]>([]);
+
+  const toggleShowMap = () => {
+    setShowMap(showMap => !showMap);
+  };
 
   useEffect(() => {
     const loadOntologies = async () => {
@@ -25,7 +34,20 @@ const ShapesAndOntologies = () => {
       try {
         const fetchedOntologies = await getAllOntologies(authContext);
 
-        console.log('fetchedOntologies:', fetchedOntologies);
+        fetchedOntologies.forEach(ontology => {
+          ontology.nodes.forEach(node => {
+            if (!nodes.find(n => n.id === node.id)) {
+              nodes.push(node);
+            }
+          });
+
+          ontology.links.forEach(link => {
+            if (!links.find(l => l.source === link.source && l.target === link.target)) {
+              links.push(link);
+            }
+          });
+        });
+
         setOriginalOntologies(fetchedOntologies);
         setFilteredOntologies(fetchedOntologies);
       } catch (error) {
@@ -67,23 +89,26 @@ const ShapesAndOntologies = () => {
     <div>
       <Header title={`${t('left-menu.shapesAndOntologies')}(${filteredOntologies.length} ${t('dashboard.results')})`}/>
       <div className={styles['shapesAndOntologies-content-container']}>
-        <div className={styles.content}>
-          <div>
+        <div className={styles['content']}>
+          <div className={styles['searchAndButtonContainer']}>
             <SearchBar placeholder={t('ontologies.search-bar-text')} onSearch={handleSearch} />
-            {(
-              filteredOntologies.length > 0 ? (
-                filteredOntologies.map((ontology, index) => (
-                  <ItemCard
-                    key={index}
-                    label={t('ontologies.title')}
-                    ontology={ontology}
-                  />
-                ))
-              ) : (
-                <Text>{t('ontologies.no-ontologies-available')}</Text>
-              )
-            )}
+            <button className={styles['button']} onClick={toggleShowMap}><MapIcon />{t('details.view-graph')}</button>
           </div>
+          {showMap ? (
+            <RDFVisualization nodes={nodes} links={links}/>
+          ) : (
+            filteredOntologies.length > 0 ? (
+              filteredOntologies.map((ontology, index) => (
+                <ItemCard
+                  key={index}
+                  label={t('ontologies.title')}
+                  ontology={ontology}
+                />
+              ))
+            ) : (
+              <Text>{t('ontologies.no-ontologies-available')}</Text>
+            )
+          )}
         </div>
       </div>
     </div>

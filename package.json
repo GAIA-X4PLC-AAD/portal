@@ -4,9 +4,10 @@
   "private": true,
   "dependencies": {
     "@axios-use/react": "^6.0.0",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.5",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@mui/icons-material": "^5.16.0",
+    "@mui/material": "^5.16.0",
     "@mui/styled-engine": "5.14.18",
     "@mui/styled-engine-sc": "^5.12.0",
     "@mui/x-data-grid": "^6.11.1",
@@ -53,6 +54,7 @@
     "typescript": "3.2.1",
     "url": "^0.11.3",
     "util": "^0.12.5",
+    "vis-network": "^9.1.9",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

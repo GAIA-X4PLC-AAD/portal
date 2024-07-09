@@ -32,3 +32,17 @@
     display: flex;
     justify-content: center;
 }
+
+.searchAndButtonContainer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.button {
+    min-height: 5vh;
+    border-radius: 10px;
+    width: 150px;
+    box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.25);
+    background-color: white;
+}

@@ -1,11 +1,10 @@
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import car from '../../../../assets/car.gif';
 import { AuthContext } from '../../../../context/AuthContextProvider';
 import { OntologyContext } from '../../../../context/OntologyContext';
-import { downloadTurtleFile, getOntologyById } from '../../../../services/ontologyService.utils';
+import { downloadTurtleFile } from '../../../../services/ontologyService.utils';
 import Title from '../../../Title/Title';
 import GaiaXButton from '../../../buttons/GaiaXButton';
 

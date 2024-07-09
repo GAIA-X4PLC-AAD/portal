@@ -1,12 +1,11 @@
 export interface Link {
     source: string;
     target: string;
-    value: string;
 }
 
 export interface Node {
     id: string;
-    group: string;
+    label: string;
 }
 
 export interface Shape {

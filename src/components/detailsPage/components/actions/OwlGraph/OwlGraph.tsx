@@ -23,19 +23,15 @@ const OwlGraph = () => {
       try {
         const ontology = await getOntologyById(authContext, id);
         setOntology(ontology);
-        console.log('ontology:', ontology);
       } catch (error) {
-        console.error('Error getting ontology:', error);
+        console.error('Error fetching self descriptions:', error);
       } finally {
         setIsLoading(false);
       }
     };
 
-    if (id && authContext.isAuthenticated) {
-      loadOntology();
-    }
-
-  }, [id, authContext.isAuthenticated]);
+    loadOntology();
+  }, []);
 
   if (!authContext.isAuthenticated) {
     return <p>You need to be authenticated to view this page.</p>;
@@ -47,10 +43,6 @@ const OwlGraph = () => {
         <img src={car} alt="loading..." className="car"/>
       </div>
     );
-  }
-
-  if (!ontology) {
-    return <div>{t('ontologies.not-found')}</div>;
   }
 
   return (

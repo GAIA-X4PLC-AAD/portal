@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import * as N3 from 'n3';
 
 import { AuthContextType } from '../context/AuthContextProvider';
-import { Link, Node, Ontology, Shape, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
+import { Ontology, Shape, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
 
 import { getSchemaById, getSchemasByIds } from './SchemaApiService';
 
@@ -42,8 +42,8 @@ export const createAllOntologyObjects = (data: any[]): Ontology[] => {
 
 export const createOntologyObject = (quads: any[]): Ontology => {
   const firstSubject = quads.length > 0 ? quads[0]._subject.id : 'No subject available!';
-  const nodes: Node[] = [];
-  const links: Link[] = [];
+  const nodes: { id: string; label: string }[] = [];
+  const links: { source: string; target: string }[] = [];
 
   let subject = firstSubject;
   let contributors: string[] = [];
@@ -57,6 +57,12 @@ export const createOntologyObject = (quads: any[]): Ontology => {
     const subjectId = quad._subject.id;
     const predicateId = quad._predicate.id;
     const objectId = quad._object.id;
+
+    if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#label') {
+      nodes.push({ id: subjectId, label: objectId });
+    } else if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#subClassOf') {
+      links.push({ source: subjectId, target: objectId });
+    }
 
     // get the ontology information
     if (subjectId === firstSubject) {
@@ -93,19 +99,6 @@ export const createOntologyObject = (quads: any[]): Ontology => {
         break;
       }
     }
-
-    const subject = quad.subject.value;
-    const predicate = quad.predicate.value;
-    const object = quad.object.value;
-
-    if (!nodes.find(node => node.id === subject)) {
-      nodes.push({ id: subject, group: '1' });
-    }
-    if (!nodes.find(node => node.id === object)) {
-      nodes.push({ id: object, group: '2' });
-    }
-
-    links.push({ source: subject, target: object, value: '1' });
 
   });
 
