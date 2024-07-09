@@ -37,6 +37,10 @@ const OwlGraph = () => {
     return <p>You need to be authenticated to view this page.</p>;
   }
 
+  if (!ontology) {
+    return <div>{t('ontologies.not-found')}</div>;
+  }
+
   if (isLoading) {
     return (
       <div className="newCarLoader">
