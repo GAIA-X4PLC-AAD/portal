@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef } from 'react';
-import { DataSet, Network } from 'vis-network/standalone/esm/vis-network'
+import { useNavigate } from 'react-router-dom';
+import { DataSet, Network } from 'vis-network/standalone/esm/vis-network';
 
 import { Link, Node } from '../types/shapesAndOntologies.model';
 
@@ -8,8 +9,13 @@ interface IRDFVisualization {
   links: Link[];
 }
 
+enum detailRoutes {
+  shapesAndOntologies = '/shapesAndOntologies/details/',
+}
+
 const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links }) => {
   const ref = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (ref.current) {
@@ -45,7 +51,13 @@ const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links }) => {
           keyboard: true
         },
         physics: {
-          stabilization: false,
+          stabilization: {
+            enabled: true,
+            iterations: 1000, // Anzahl der Iterationen erhöhen
+            updateInterval: 25,
+            onlyDynamicEdges: false,
+            fit: true
+          },
           barnesHut: {
             gravitationalConstant: -20000,
             centralGravity: 0.3,
@@ -59,12 +71,27 @@ const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links }) => {
       // Initialize the network
       const network = new Network(ref.current, data, options);
 
+      network.on('click', function (params) {
+        if (params.nodes.length > 0) {
+          const nodeId = params.nodes[0];
+          // Finde das letzte Auftreten von '/' oder '#'
+          const lastSlashIndex = nodeId.lastIndexOf('/');
+          const lastHashIndex = nodeId.lastIndexOf('#');
+          const lastIndex = Math.max(lastSlashIndex, lastHashIndex);
+
+          // Schneide die URL bis zum letzten '/' oder '#', einschließlich des Zeichens
+          const baseUrl = nodeId.substring(0, lastIndex + 1);
+          const encodedUri = encodeURIComponent(baseUrl);
+          navigate(`${detailRoutes.shapesAndOntologies}${encodedUri}`);
+        }
+      });
+
       // Clean up on unmount
       return () => {
         network.destroy();
       };
     }
-  }, [nodes, links]);
+  }, [nodes, links, navigate]);
 
   return <div ref={ref} style={{ width: '100%', height: '600px' }} />;
 };
