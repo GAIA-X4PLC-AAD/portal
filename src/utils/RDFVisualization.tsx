@@ -15,7 +15,7 @@ const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links }) => {
     if (ref.current) {
       // Convert nodes and links to Vis.js format
       const visNodes = new DataSet(
-        nodes.map(node => ({ id: node.id, label: node.label }))
+        nodes.map(node => ({ id: node.id, label: node.label, title: node.id }))
       );
 
       const visEdges = new DataSet(
@@ -32,7 +32,7 @@ const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links }) => {
           shape: 'dot',
           size: 16,
           font: {
-            size: 14,
+            size: 20,
             color: '#000000'
           },
           borderWidth: 2

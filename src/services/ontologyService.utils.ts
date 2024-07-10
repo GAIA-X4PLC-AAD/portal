@@ -42,7 +42,7 @@ export const createAllOntologyObjects = (data: any[]): Ontology[] => {
 
 export const createOntologyObject = (quads: any[]): Ontology => {
   const firstSubject = quads.length > 0 ? quads[0]._subject.id : 'No subject available!';
-  const nodes: { id: string; label: string }[] = [];
+  const nodes: { id: string; label: string; type: string }[] = [];
   const links: { source: string; target: string }[] = [];
 
   let subject = firstSubject;
@@ -53,13 +53,21 @@ export const createOntologyObject = (quads: any[]): Ontology => {
 
   let shapeMap: { [key: string]: Shape } = {};
 
+  // Create a map to keep track of the types of each subject
+  let typesMap: { [key: string]: string } = {};
+
   quads.forEach(quad => {
     const subjectId = quad._subject.id;
     const predicateId = quad._predicate.id;
     const objectId = quad._object.id;
 
+    // Track types of subjects
+    if (predicateId === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type') {
+      typesMap[subjectId] = objectId;
+    }
+
     if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#label') {
-      nodes.push({ id: subjectId, label: objectId });
+      nodes.push({ id: subjectId, label: objectId, type: typesMap[subjectId] || 'Unknown' });
     } else if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#subClassOf') {
       links.push({ source: subjectId, target: objectId });
     }
@@ -99,7 +107,11 @@ export const createOntologyObject = (quads: any[]): Ontology => {
         break;
       }
     }
+  });
 
+  // Update nodes with type information
+  nodes.forEach(node => {
+    node.type = typesMap[node.id] || 'Unknown';
   });
 
   shapes = Object.values(shapeMap).filter(shape => shape.label !== '');
