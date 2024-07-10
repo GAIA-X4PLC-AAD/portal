@@ -6,6 +6,7 @@ export interface Link {
 export interface Node {
     id: string;
     label: string;
+    type: string;
 }
 
 export interface Shape {
