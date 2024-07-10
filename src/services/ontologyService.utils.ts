@@ -7,14 +7,14 @@ import { Ontology, Shape, ShapesAndOntologiesInput } from '../types/shapesAndOnt
 import { getSchemaById, getSchemasByIds } from './SchemaApiService';
 
 export const fetchOntologies = async (authContext: AuthContextType, response: AxiosResponse<any, any>) => {
-  const ontologiesStringArray = mapShapesAndOntologies(response);
+  const ontologiesStringArray = mapOntologies(response);
   const promises = getSchemasByIds(authContext, ontologiesStringArray);
   const promiseAll = await Promise.all(promises);
   const parsedOntologies = await parseOntologies(promiseAll);
   return createAllOntologyObjects(parsedOntologies);
 }
 
-export const mapShapesAndOntologies = (response: ShapesAndOntologiesInput): string[] => {
+export const mapOntologies = (response: ShapesAndOntologiesInput): string[] => {
   return response.ontologies.map((ontology) => ontology);
 }
 
