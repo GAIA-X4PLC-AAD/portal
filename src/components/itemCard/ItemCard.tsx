@@ -30,7 +30,7 @@ const ItemCard: FC<IItemCard> = ({ label, isGaiaXCompliant, ontology, shape }) =
           )
         )}
       </div>
-      <div>
+      <div className={styles.content}>
         {ontology ? (
           <OntologyCardContent ontology={ontology} />
         ) : shape ? (
