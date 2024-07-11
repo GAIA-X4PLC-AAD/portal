@@ -5,9 +5,9 @@ import { ShapeContext } from '../../../../context/ShapeContext';
 import Text from '../../../Text/Text';
 import Title from '../../../Title/Title';
 
-import styles from './MainContentShape.module.css';
+import styles from './ShapeMainContent.module.css';
 
-const MainContentShape: FC = () => {
+const ShapeMainContent: FC = () => {
   const { t } = useTranslation();
   const shape = useContext(ShapeContext);
 
@@ -30,4 +30,4 @@ const MainContentShape: FC = () => {
   );
 };
 
-export default MainContentShape;
+export default ShapeMainContent;

@@ -9,14 +9,14 @@ import { getOntologyById } from '../../../../services/ontologyService.utils';
 import { Ontology } from '../../../../types/shapesAndOntologies.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
-import DetailActions from '../../components/actions/DetailActions';
-import DetailSuitableOfferings from '../../components/suitableOfferings/DetailSuitableOfferings';
 import DetailsContent from '../../layout/content/DetailsContent';
 import DetailsMainContent from '../../layout/mainContent/DetailsMainContent';
 import DetailsPage from '../../layout/mainPage/DetailsPage';
 import DetailsSidebar from '../../layout/sidebar/DetailsSidebar';
 
-import MainContentOntology from './MainContentOntology';
+import OntologyMainContent from './OntologyMainContent';
+import OntologyActions from './components/actions/OntologyActions';
+import OntologySuitableOfferings from './components/suitableOfferings/OntologySuitableOfferings';
 
 const OntologiesDetailsPage: FC = () => {
   const { t } = useTranslation();
@@ -65,11 +65,11 @@ const OntologiesDetailsPage: FC = () => {
       <OntologyContext.Provider value={ontology}>
         <DetailsContent>
           <DetailsMainContent>
-            <MainContentOntology />
+            <OntologyMainContent />
           </DetailsMainContent>
           <DetailsSidebar>
-            <DetailSuitableOfferings />
-            <DetailActions />
+            <OntologySuitableOfferings />
+            <OntologyActions />
           </DetailsSidebar>
         </DetailsContent>
       </OntologyContext.Provider>

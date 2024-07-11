@@ -5,9 +5,9 @@ import { OntologyContext } from '../../../../context/OntologyContext';
 import Text from '../../../Text/Text';
 import Title from '../../../Title/Title';
 
-import styles from './MainContentOntology.module.css';
+import styles from './OntologyMainContent.module.css';
 
-const MainContentOntology: FC = () => {
+const OntologyMainContent: FC = () => {
   const { t } = useTranslation();
   const ontology = useContext(OntologyContext);
 
@@ -33,4 +33,4 @@ const MainContentOntology: FC = () => {
   );
 };
 
-export default MainContentOntology;
+export default OntologyMainContent;

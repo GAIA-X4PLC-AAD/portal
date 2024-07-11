@@ -506,7 +506,8 @@
     "contact-or-buy-button-notification": "Data was transfered",
     "more-details": "More Details",
     "view-graph": "View Graph",
-    "download-file": "Download turtle file"
+    "download-file": "Download turtle file",
+    "open-creation-wizard": "Open in SD Creation Wizard"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X compliant",

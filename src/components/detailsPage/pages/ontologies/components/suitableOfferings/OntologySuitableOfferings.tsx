@@ -1,12 +1,12 @@
 import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { OntologyContext } from '../../../../context/OntologyContext';
-import Title from '../../../Title/Title';
+import { OntologyContext } from '../../../../../../context/OntologyContext';
+import Title from '../../../../../Title/Title';
 
-import styles from './DetailSuitableOfferings.module.css';
+import styles from './OntologySuitableOfferings.module.css';
 
-const DetailSuitableOfferings: FC = () => {
+const OntologySuitableOfferings: FC = () => {
   const { t } = useTranslation();
   const ontology = useContext(OntologyContext);
 
@@ -21,4 +21,4 @@ const DetailSuitableOfferings: FC = () => {
   );
 };
 
-export default DetailSuitableOfferings;
+export default OntologySuitableOfferings;

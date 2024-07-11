@@ -2,19 +2,19 @@ import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { AuthContext } from '../../../../context/AuthContextProvider';
-import { OntologyContext } from '../../../../context/OntologyContext';
-import { downloadTurtleFile } from '../../../../services/ApiService';
-import Title from '../../../Title/Title';
-import GaiaXButton from '../../../buttons/GaiaXButton';
+import { AuthContext } from '../../../../../../context/AuthContextProvider';
+import { OntologyContext } from '../../../../../../context/OntologyContext';
+import { downloadTurtleFile } from '../../../../../../services/ApiService';
+import Title from '../../../../../Title/Title';
+import GaiaXButton from '../../../../../buttons/GaiaXButton';
 
-import styles from './DetailActions.module.css';
+import styles from './OntologyActions.module.css';
 
 enum graphRoutes {
     shapesAndOntologies = '/shapesAndOntologies/graph/',
 }
 
-const DetailActions: FC = () => {
+const OntologyActions: FC = () => {
   const { t } = useTranslation();
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
@@ -23,6 +23,10 @@ const DetailActions: FC = () => {
   const handleNavigationToGraphPage = () => {
     const encodedUri = encodeURIComponent(ontology.subject);
     navigate(`${graphRoutes.shapesAndOntologies}${encodedUri}`);
+  }
+
+  if (!ontology) {
+    return <div>{t('ontologies.not-found')}</div>;
   }
 
   return (
@@ -38,4 +42,4 @@ const DetailActions: FC = () => {
   );
 };
 
-export default DetailActions;
+export default OntologyActions;

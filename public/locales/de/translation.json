@@ -504,7 +504,8 @@
     "contact-or-buy-button-notification": "Daten wurden übertragen",
     "more-details": "Mehr Details",
     "view-graph": "Graph anzeigen",
-    "download-file": "Turtle-Datei herunterladen"
+    "download-file": "Turtle-Datei herunterladen",
+    "open-creation-wizard": "Im SD-Erstellungsassistenten öffnen"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X konform",

@@ -3,20 +3,21 @@ import { FC, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
+// @ts-ignore
 import car from '../../../../assets/car.gif';
 import { AuthContext } from '../../../../context/AuthContextProvider';
 import { getShapeById } from '../../../../services/shapeService.utils';
 import { Shape } from '../../../../types/shapesAndOntologies.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
-import DetailActions from '../../components/actions/DetailActions';
-import DetailSuitableOfferings from '../../components/suitableOfferings/DetailSuitableOfferings';
 import DetailsContent from '../../layout/content/DetailsContent';
 import DetailsMainContent from '../../layout/mainContent/DetailsMainContent';
 import DetailsPage from '../../layout/mainPage/DetailsPage';
 import DetailsSidebar from '../../layout/sidebar/DetailsSidebar';
 
-import MainContentShape from './MainContentShape';
+import ShapeMainContent from './ShapeMainContent';
+import ShapeActions from './components/actions/ShapeActions';
+import ShapeSuitableOfferings from './components/suitableOfferings/ShapeSuitableOfferings';
 
 const ShapesDetailsPage: FC = () => {
   const { t } = useTranslation();
@@ -66,11 +67,11 @@ const ShapesDetailsPage: FC = () => {
       <ShapeContext.Provider value={shape}>
         <DetailsContent>
           <DetailsMainContent>
-            <MainContentShape />
+            <ShapeMainContent />
           </DetailsMainContent>
           <DetailsSidebar>
-            <DetailSuitableOfferings />
-            <DetailActions />
+            <ShapeSuitableOfferings />
+            <ShapeActions />
           </DetailsSidebar>
         </DetailsContent>
       </ShapeContext.Provider>
