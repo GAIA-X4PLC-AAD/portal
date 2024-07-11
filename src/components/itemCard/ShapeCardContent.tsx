@@ -25,9 +25,6 @@ const ShapeCardContent: FC<IShapeCardContent> = ({ shape } ) => {
       <div style={{ textAlign: 'left' }}>
         <Title>{shape.subject}</Title>
       </div>
-      {/*{shape.map((item: any, index: number) => (*/}
-      {/*  <p key={index}>{item}</p>*/}
-      {/*))}*/}
       <div className={styles.button}>
         <GaiaXButton
           label={t('details.more-details')}

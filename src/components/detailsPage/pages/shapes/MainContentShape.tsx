@@ -1,7 +1,7 @@
 import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { OntologyContext } from '../../../../context/OntologyContext';
+import { ShapeContext } from '../../../../context/ShapeContext';
 import Text from '../../../Text/Text';
 import Title from '../../../Title/Title';
 
@@ -9,34 +9,23 @@ import styles from './MainContentShape.module.css';
 
 const MainContentShape: FC = () => {
   const { t } = useTranslation();
-  const ontology = useContext(OntologyContext);
+  const shape = useContext(ShapeContext);
 
-  if (!ontology) {
-    return <div>{t('ontologies.not-found')}</div>;
+  if (!shape) {
+    return <div>{t('shapes.not-found')}</div>;
   }
 
   return (
     <div className={styles['container']}>
-      <Title>{t('ontologies.title')}</Title>
-
-      <Text>{ontology.description}</Text>
-      {ontology.shapes && ontology.shapes.length > 0 && (
-        <div className={styles['container']}>
-          <Title>{t('shapes.titles')}</Title>
-          {ontology.shapes.map((shape, index) => (
-            <Text key={index}>{shape.label}</Text>
-          ))}
-        </div>
-      )}
-
-      {ontology.relatedOntologies && ontology.relatedOntologies.length > -1 && (
-        <div style={{ gap: '1px' }}>
-          <Title>{t('ontologies.related-ontologies')}</Title>
-          {ontology.relatedOntologies.map((relatedOntology, index) => (
-            <Text key={index}>{relatedOntology.subject}</Text>
-          ))}
-        </div>
-      )}
+      <Title>{t('shapes.title')}</Title>
+      <Text>Details:</Text>
+      {
+        shape.content.map((item, index) => (
+          <div key={index} style={{ textAlign: 'left' }}>
+            <p>{item.predicate}: {item.object}</p>
+          </div>
+        ))
+      }
     </div>
   );
 };

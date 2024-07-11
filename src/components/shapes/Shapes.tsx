@@ -24,7 +24,7 @@ const Shapes = () => {
       setIsLoading(true);
       try {
         const fetchedShapes = await getAllShapes(authContext);
-
+        console.log(fetchedShapes)
         setOriginalShapes(fetchedShapes);
         setFilteredShapes(fetchedShapes);
       } catch (error) {

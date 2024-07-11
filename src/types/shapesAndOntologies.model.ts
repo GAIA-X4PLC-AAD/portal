@@ -12,7 +12,7 @@ export interface Node {
 export interface Shape {
     id: string;
     subject: string;
-    content: string [];
+    content: {predicate: string, object: string}[];
 }
 
 export interface Ontology {
