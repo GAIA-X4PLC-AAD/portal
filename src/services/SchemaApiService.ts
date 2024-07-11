@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 
 import { AuthContextType } from '../context/AuthContextProvider';
-import { Ontology } from '../types/shapesAndOntologies.model';
 
 import { fetchOntologies } from './ontologyService.utils';
+import { fetchShapes } from './shapeService.utils';
 
 const getHeaders = (authContext: AuthContextType) => {
   return {
@@ -58,11 +58,16 @@ export const getSchemaById = (
     });
 };
 
-export const getAllOntologies = async (authContext: AuthContextType): Promise<Ontology[]> => {
+export const getAllOntologies = async (authContext: AuthContextType) => {
   const response = await getAllSchemas(authContext);
   return fetchOntologies(authContext, response);
 };
 
 export const getSchemasByIds = (authContext: AuthContextType, ids: string[]):  Promise<AxiosResponse<any, any>>[] => {
   return ids.map((id) => getSchemaById(authContext, id));
+};
+
+export const getAllShapes = async (authContext: AuthContextType) => {
+  const response = await getAllSchemas(authContext);
+  return fetchShapes(authContext, response);
 };

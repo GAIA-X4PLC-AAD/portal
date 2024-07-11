@@ -10,9 +10,9 @@ export interface Node {
 }
 
 export interface Shape {
-    label: string;
-    comment: string;
-    subClasses: string[];
+    id: string;
+    subject: string;
+    content: string [];
 }
 
 export interface Ontology {
@@ -20,7 +20,6 @@ export interface Ontology {
     contributors: string[];
     description: string;
     version: string;
-    shapes: Shape[];
     claimsGraphUri?: string;
     graphLink?: string;
     downloadLink?: string;

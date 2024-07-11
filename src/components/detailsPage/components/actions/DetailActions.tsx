@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AuthContext } from '../../../../context/AuthContextProvider';
 import { OntologyContext } from '../../../../context/OntologyContext';
-import { downloadTurtleFile } from '../../../../services/ontologyService.utils';
+import { downloadTurtleFile } from '../../../../services/ApiService';
 import Title from '../../../Title/Title';
 import GaiaXButton from '../../../buttons/GaiaXButton';
 

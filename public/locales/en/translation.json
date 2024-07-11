@@ -525,7 +525,9 @@
   "shapes": {
     "title": "Shape",
     "titles": "Shapes",
+    "search-bar-text": "Search for special shapes",
     "no-shapes-available": "No shapes available",
-    "related-shapes": "Related Shapes"
+    "related-shapes": "Related Shapes",
+    "not-found": "Shape not found"
   }
 }

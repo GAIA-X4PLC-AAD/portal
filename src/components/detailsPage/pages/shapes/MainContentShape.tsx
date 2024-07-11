@@ -5,9 +5,9 @@ import { OntologyContext } from '../../../../context/OntologyContext';
 import Text from '../../../Text/Text';
 import Title from '../../../Title/Title';
 
-import styles from './MainContentOntology.module.css';
+import styles from './MainContentShape.module.css';
 
-const MainContentOntology: FC = () => {
+const MainContentShape: FC = () => {
   const { t } = useTranslation();
   const ontology = useContext(OntologyContext);
 
@@ -20,6 +20,14 @@ const MainContentOntology: FC = () => {
       <Title>{t('ontologies.title')}</Title>
 
       <Text>{ontology.description}</Text>
+      {ontology.shapes && ontology.shapes.length > 0 && (
+        <div className={styles['container']}>
+          <Title>{t('shapes.titles')}</Title>
+          {ontology.shapes.map((shape, index) => (
+            <Text key={index}>{shape.label}</Text>
+          ))}
+        </div>
+      )}
 
       {ontology.relatedOntologies && ontology.relatedOntologies.length > -1 && (
         <div style={{ gap: '1px' }}>
@@ -33,4 +41,4 @@ const MainContentOntology: FC = () => {
   );
 };
 
-export default MainContentOntology;
+export default MainContentShape;

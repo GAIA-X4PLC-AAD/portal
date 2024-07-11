@@ -523,7 +523,9 @@
   "shapes": {
     "title": "Shape",
     "titles": "Shapes",
+    "search-bar-text": "Suchen Sie nach speziellen Shapes",
     "no-shapes-available": "Keine Shapes gefunden",
-    "related-shapes": "Verwandte Shapes"
+    "related-shapes": "Verwandte Shapes",
+    "not-found": "Shape nicht gefunden"
   }
 }

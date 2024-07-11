@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 import * as N3 from 'n3';
 
 import { AuthContextType } from '../context/AuthContextProvider';
-import { Ontology, Shape, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
+import { Ontology, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
 
 import { getSchemaById, getSchemasByIds } from './SchemaApiService';
 
@@ -49,9 +49,6 @@ export const createOntologyObject = (quads: any[]): Ontology => {
   let contributors: string[] = [];
   let description = 'No description available!';
   let version = 'No version available!';
-  let shapes: Shape[];
-
-  let shapeMap: { [key: string]: Shape } = {};
 
   // Create a map to keep track of the types of each subject
   let typesMap: { [key: string]: string } = {};
@@ -85,27 +82,6 @@ export const createOntologyObject = (quads: any[]): Ontology => {
         version = objectId.replace(/(^"|"$)/g, '').split('"^^')[0];
         break;
       }
-    } else {
-      // get the shape information
-      if (!shapeMap[subjectId]) {
-        shapeMap[subjectId] = {
-          label: '',
-          comment: '',
-          subClasses: []
-        };
-      }
-
-      switch (predicateId) {
-      case 'http://www.w3.org/2000/01/rdf-schema#label':
-        shapeMap[subjectId].label = objectId.replace(/(^"|"$)/g, '').split('"@')[0];
-        break;
-      case 'http://www.w3.org/2000/01/rdf-schema#comment':
-        shapeMap[subjectId].comment = objectId.replace(/(^"|"$)/g, '');
-        break;
-      case 'http://www.w3.org/2000/01/rdf-schema#subClassOf':
-        shapeMap[subjectId].subClasses.push(objectId.replace(/(^"|"$)/g, ''));
-        break;
-      }
     }
   });
 
@@ -114,32 +90,14 @@ export const createOntologyObject = (quads: any[]): Ontology => {
     node.type = typesMap[node.id] || 'Unknown';
   });
 
-  shapes = Object.values(shapeMap).filter(shape => shape.label !== '');
-
   return {
     subject,
     contributors,
     description,
     version,
-    shapes,
     nodes,
     links
   };
-};
-
-export const downloadTurtleFile = async (authContext: AuthContextType, id: string) => {
-  const response = await getSchemaById(authContext, id);
-  const filename = id + '.ttl';
-  const element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response));
-  element.setAttribute('download', filename);
-
-  element.style.display = 'none';
-  document.body.appendChild(element);
-
-  element.click();
-
-  document.body.removeChild(element);
 };
 
 export const getOntologyById = async (authContext: AuthContextType, id: string) => {
