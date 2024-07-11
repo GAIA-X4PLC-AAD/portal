@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 
 import { AuthContextType } from '../context/AuthContextProvider';
 
@@ -61,10 +61,6 @@ export const getSchemaById = (
 export const getAllOntologies = async (authContext: AuthContextType) => {
   const response = await getAllSchemas(authContext);
   return fetchOntologies(authContext, response);
-};
-
-export const getSchemasByIds = (authContext: AuthContextType, ids: string[]):  Promise<AxiosResponse<any, any>>[] => {
-  return ids.map((id) => getSchemaById(authContext, id));
 };
 
 export const getAllShapes = async (authContext: AuthContextType) => {

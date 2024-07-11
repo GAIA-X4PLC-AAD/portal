@@ -4,14 +4,18 @@ import * as N3 from 'n3';
 import { AuthContextType } from '../context/AuthContextProvider';
 import { Ontology, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
 
-import { getSchemaById, getSchemasByIds } from './SchemaApiService';
+import { getSchemaById } from './SchemaApiService';
 
 export const fetchOntologies = async (authContext: AuthContextType, response: AxiosResponse<any, any>) => {
   const ontologiesStringArray = mapOntologies(response);
-  const promises = getSchemasByIds(authContext, ontologiesStringArray);
-  const promiseAll = await Promise.all(promises);
-  const parsedOntologies = await parseOntologies(promiseAll);
-  return createAllOntologyObjects(parsedOntologies);
+
+  const promises = ontologiesStringArray.map(async id => {
+    const promise = await getSchemaById(authContext, id);
+    const parsedOntology = await parseSingleOntology(promise);
+    return createOntologyObject(parsedOntology);
+  });
+
+  return await Promise.all(promises);
 }
 
 export const mapOntologies = (response: ShapesAndOntologiesInput): string[] => {
@@ -28,16 +32,6 @@ export const parseSingleOntology = (item: string): any[] => {
       }
     });
   return quads;
-}
-
-export const parseOntologies = (items: string[]): any[] => {
-  return items.map(parseSingleOntology);
-}
-
-export const createAllOntologyObjects = (data: any[]): Ontology[] => {
-  return data.map((item) => {
-    return createOntologyObject(item);
-  });
 }
 
 export const createOntologyObject = (quads: any[]): Ontology => {
