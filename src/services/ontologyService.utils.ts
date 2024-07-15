@@ -1,13 +1,11 @@
-import { AxiosResponse } from 'axios';
 import * as N3 from 'n3';
+import { Quad } from 'n3';
 
-import { Ontology, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
+import { Ontology, Shape } from '../types/shapesAndOntologies.model';
 
-import { getSchemaById } from './SchemaApiService';
+import { getAllShapes, getSchemaById } from './SchemaApiService';
 
-export const fetchOntologies = async (response: AxiosResponse<any, any>) => {
-  const ontologiesStringArray = mapOntologies(response);
-
+export const fetchOntologies = async (ontologiesStringArray: string[]) => {
   const promises = ontologiesStringArray.map(async id => {
     const promise = await getSchemaById(id);
     const parsedOntology = await parseSingleOntology(promise);
@@ -17,11 +15,7 @@ export const fetchOntologies = async (response: AxiosResponse<any, any>) => {
   return await Promise.all(promises);
 }
 
-export const mapOntologies = (response: ShapesAndOntologiesInput): string[] => {
-  return response.ontologies.map((ontology) => ontology);
-}
-
-export const parseSingleOntology = (item: string): any[] => {
+export const parseSingleOntology = (item: string): Quad[] => {
   const parser = new N3.Parser();
   const quads: any[] = [];
   parser.parse(item,
@@ -33,10 +27,17 @@ export const parseSingleOntology = (item: string): any[] => {
   return quads;
 }
 
-export const createOntologyObject = (quads: any[]): Ontology => {
-  const firstSubject = quads.length > 0 ? quads[0]._subject.id : 'No subject available!';
+export const createOntologyObject = (quads: Quad[], shapes?: Shape[]): Ontology => {
+  const firstSubject = quads.length > 0 ? quads[0].subject.id : 'No subject available!';
   const nodes: { id: string; label: string; type: string }[] = [];
   const links: { source: string; target: string }[] = [];
+  const namespace: string = firstSubject.substring(0, firstSubject.lastIndexOf('/')+1);
+  const relatedShapes: Shape[] = [];
+
+  if (shapes && firstSubject != 'No subject available!') {
+    const shapesToPush: Shape[] = shapes.filter(shape => shape.subject.startsWith(namespace));
+    relatedShapes.push(...shapesToPush);
+  }
 
   let subject = firstSubject;
   let contributors: string[] = [];
@@ -47,9 +48,9 @@ export const createOntologyObject = (quads: any[]): Ontology => {
   let typesMap: { [key: string]: string } = {};
 
   quads.forEach(quad => {
-    const subjectId = quad._subject.id;
-    const predicateId = quad._predicate.id;
-    const objectId = quad._object.id;
+    const subjectId = quad.subject.id;
+    const predicateId = quad.predicate.id;
+    const objectId = quad.object.id;
 
     // Track types of subjects
     if (predicateId === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type') {
@@ -88,13 +89,16 @@ export const createOntologyObject = (quads: any[]): Ontology => {
     contributors,
     description,
     version,
+    namespace,
+    relatedShapes,
     nodes,
     links
   };
 };
 
 export const getOntologyById = async (id: string) => {
+  const shapes = await getAllShapes();
   const response = await getSchemaById(id);
   const parsedOntology = await parseSingleOntology(response);
-  return createOntologyObject(parsedOntology);
+  return createOntologyObject(parsedOntology, shapes);
 }

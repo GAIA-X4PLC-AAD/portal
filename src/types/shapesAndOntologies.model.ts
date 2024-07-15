@@ -1,8 +1,3 @@
-export interface Schema {
-    ontologies: string[];
-    shapes: string[];
-    vocabularies: string[];
-}
 export interface Link {
     source: string;
     target: string;
@@ -25,10 +20,7 @@ export interface Ontology {
     contributors: string[];
     description: string;
     version: string;
-    claimsGraphUri?: string;
-    graphLink?: string;
-    downloadLink?: string;
-    linksForOfferings?: string[];
+    namespace: string;
     relatedOntologies?: Ontology[];
     relatedShapes?: Shape[];
     nodes: Node[];

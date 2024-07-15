@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+import { ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
+
 import { fetchOntologies } from './ontologyService.utils';
 import { fetchShapes } from './shapeService.utils';
 
@@ -9,7 +11,7 @@ const encodeString = (uri: string): string => {
   return uri.startsWith('http') ? encodeURIComponent(uri) : uri;
 }
 
-const getAllSchemas = async () => {
+const getAllSchemas = async (): Promise<ShapesAndOntologiesInput | undefined> => {
   const endpoint = serverUrl + '/schemas';
 
   try {
@@ -34,10 +36,10 @@ export const getSchemaById = async (id: string) => {
 
 export const getAllOntologies = async () => {
   const response = await getAllSchemas();
-  return fetchOntologies(response);
+  return response ? fetchOntologies(response.ontologies) : [];
 };
 
 export const getAllShapes = async () => {
   const response = await getAllSchemas();
-  return fetchShapes(response);
+  return response ? fetchShapes(response.shapes) : [];
 };

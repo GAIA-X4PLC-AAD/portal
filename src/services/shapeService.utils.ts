@@ -1,14 +1,11 @@
-import { AxiosResponse } from 'axios';
 import * as N3 from 'n3';
+import { Quad } from 'n3';
 
-import { Shape, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
+import { Shape } from '../types/shapesAndOntologies.model';
 
-import { getAllShapes, getSchemaById } from './SchemaApiService';
+import { getSchemaById } from './SchemaApiService';
 
-export const fetchShapes = async (response: AxiosResponse<any, any>) => {
-  const shapesStringArray = mapShapes(response);
-  // todo for testing use only one shape: const shapesStringArray = ['26db67d15b7f28ae243c2b3745ca1e6bcaef72325246920dbb0a9aeaf7727bbb'];
-
+export const fetchShapes = async (shapesStringArray: string[]) => {
   const promises = shapesStringArray.map(async id => {
     const promise = await getSchemaById(id);
     const parsedShape = await parseSingleShape(promise);
@@ -18,11 +15,7 @@ export const fetchShapes = async (response: AxiosResponse<any, any>) => {
   return await Promise.all(promises);
 }
 
-export const mapShapes = (response: ShapesAndOntologiesInput): string[] => {
-  return response.shapes.map((shape) => shape);
-}
-
-export const parseSingleShape = (item: string): any[] => {
+export const parseSingleShape = (item: string): Quad[] => {
   const parser = new N3.Parser();
   const quads: any[] = [];
   parser.parse(item,
@@ -34,15 +27,15 @@ export const parseSingleShape = (item: string): any[] => {
   return quads;
 }
 
-export const createShapeObject = (id: string, quads: any[]): Shape => {
-  const firstSubject = quads.length > 0 ? quads[0]._subject.id : 'No subject available!';
+export const createShapeObject = (id: string, quads: Quad[]): Shape => {
+  const firstSubject = quads.length > 0 ? quads[0].subject.id : 'No subject available!';
   const content: {predicate: string, object: string}[] = [];
   let subject = firstSubject;
 
   quads.forEach(quad => {
-    const subjectId = quad._subject.id;
-    const predicateId = quad._predicate.id;
-    const objectId = quad._object.id;
+    const subjectId = quad.subject.id;
+    const predicateId = quad.predicate.id;
+    const objectId = quad.object.id;
 
     // if (subjectId != subject) {
     content.push({ object: objectId, predicate: predicateId });
@@ -62,12 +55,3 @@ export const getShapeById = async (id: string) => {
   return createShapeObject(id, parsedShape);
 }
 
-export const getShapeByName = async (name: string) => {
-  const shapes = await getAllShapes();
-  return shapes.find((shape) => shape.subject === name);
-}
-
-export const getShapesByNamespace = async (namespace: string) => {
-  const shapes = await getAllShapes();
-  return shapes.filter((shape) => shape.subject.startsWith(namespace));
-}

@@ -31,7 +31,6 @@ const ShapesDetailsPage: FC = () => {
       try {
         const shape = await getShapeById(id);
         setShape(shape);
-        console.log('shape', shape);
       } catch (error) {
         console.error('Error getting shape:', error);
       } finally {
