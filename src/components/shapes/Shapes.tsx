@@ -23,7 +23,7 @@ const Shapes = () => {
     const loadShapes = async () => {
       setIsLoading(true);
       try {
-        const fetchedShapes = await getAllShapes(authContext);
+        const fetchedShapes = await getAllShapes();
         setOriginalShapes(fetchedShapes);
         setFilteredShapes(fetchedShapes);
       } catch (error) {

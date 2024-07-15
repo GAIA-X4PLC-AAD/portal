@@ -1,16 +1,15 @@
 import { AxiosResponse } from 'axios';
 import * as N3 from 'n3';
 
-import { AuthContextType } from '../context/AuthContextProvider';
 import { Ontology, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
 
 import { getSchemaById } from './SchemaApiService';
 
-export const fetchOntologies = async (authContext: AuthContextType, response: AxiosResponse<any, any>) => {
+export const fetchOntologies = async (response: AxiosResponse<any, any>) => {
   const ontologiesStringArray = mapOntologies(response);
 
   const promises = ontologiesStringArray.map(async id => {
-    const promise = await getSchemaById(authContext, id);
+    const promise = await getSchemaById(id);
     const parsedOntology = await parseSingleOntology(promise);
     return createOntologyObject(parsedOntology);
   });
@@ -94,8 +93,8 @@ export const createOntologyObject = (quads: any[]): Ontology => {
   };
 };
 
-export const getOntologyById = async (authContext: AuthContextType, id: string) => {
-  const response = await getSchemaById(authContext, id);
+export const getOntologyById = async (id: string) => {
+  const response = await getSchemaById(id);
   const parsedOntology = await parseSingleOntology(response);
   return createOntologyObject(parsedOntology);
 }

@@ -28,7 +28,7 @@ const OntologiesDetailsPage: FC = () => {
   useEffect(() => {
     const loadOntology = async () => {
       try {
-        const ontology = await getOntologyById(authContext, id);
+        const ontology = await getOntologyById(id);
         setOntology(ontology);
       } catch (error) {
         console.error('Error getting ontology:', error);

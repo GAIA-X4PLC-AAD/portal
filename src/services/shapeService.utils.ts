@@ -1,17 +1,16 @@
 import { AxiosResponse } from 'axios';
 import * as N3 from 'n3';
 
-import { AuthContextType } from '../context/AuthContextProvider';
 import { Shape, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
 
-import { getSchemaById } from './SchemaApiService';
+import { getAllShapes, getSchemaById } from './SchemaApiService';
 
-export const fetchShapes = async (authContext: AuthContextType, response: AxiosResponse<any, any>) => {
+export const fetchShapes = async (response: AxiosResponse<any, any>) => {
   const shapesStringArray = mapShapes(response);
   // todo for testing use only one shape: const shapesStringArray = ['26db67d15b7f28ae243c2b3745ca1e6bcaef72325246920dbb0a9aeaf7727bbb'];
 
   const promises = shapesStringArray.map(async id => {
-    const promise = await getSchemaById(authContext, id);
+    const promise = await getSchemaById(id);
     const parsedShape = await parseSingleShape(promise);
     return createShapeObject(id, parsedShape);
   });
@@ -57,8 +56,18 @@ export const createShapeObject = (id: string, quads: any[]): Shape => {
   };
 }
 
-export const getShapeById = async (authContext: AuthContextType, id: string) => {
-  const response = await getSchemaById(authContext, id);
+export const getShapeById = async (id: string) => {
+  const response = await getSchemaById(id);
   const parsedShape = await parseSingleShape(response);
   return createShapeObject(id, parsedShape);
+}
+
+export const getShapeByName = async (name: string) => {
+  const shapes = await getAllShapes();
+  return shapes.find((shape) => shape.subject === name);
+}
+
+export const getShapesByNamespace = async (namespace: string) => {
+  const shapes = await getAllShapes();
+  return shapes.filter((shape) => shape.subject.startsWith(namespace));
 }

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import Keycloak, { KeycloakConfig, KeycloakInitOptions } from 'keycloak-js';
 import React, { createContext, useEffect, useState, useMemo } from 'react';
 
@@ -57,6 +58,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
       .then((authenticated) => {
         setIsAuthenticated(authenticated);
         if (authenticated) {
+          axios.defaults.headers.common.Authorization = `Bearer ${keycloak.token ? keycloak.token : ''}`
           setToken(keycloak.token ? keycloak.token : '');
           scheduleTokenRenewal();
         }

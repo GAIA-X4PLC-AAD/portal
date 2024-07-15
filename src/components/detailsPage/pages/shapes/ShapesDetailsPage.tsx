@@ -29,7 +29,7 @@ const ShapesDetailsPage: FC = () => {
   useEffect(() => {
     const loadShape = async () => {
       try {
-        const shape = await getShapeById(authContext, id);
+        const shape = await getShapeById(id);
         setShape(shape);
         console.log('shape', shape);
       } catch (error) {

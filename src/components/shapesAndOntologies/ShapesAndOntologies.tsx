@@ -32,7 +32,7 @@ const ShapesAndOntologies = () => {
     const loadOntologies = async () => {
       setIsLoading(true);
       try {
-        const fetchedOntologies = await getAllOntologies(authContext);
+        const fetchedOntologies = await getAllOntologies();
 
         fetchedOntologies.forEach(ontology => {
           ontology.nodes.forEach(node => {
