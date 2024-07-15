@@ -15,9 +15,9 @@ export const fetchShapes = async (shapesStringArray: string[]) => {
   return await Promise.all(promises);
 }
 
-export const parseSingleShape = (item: string): Quad[] => {
+export const parseSingleShape = (item: string) => {
   const parser = new N3.Parser();
-  const quads: any[] = [];
+  const quads: Quad[] = [];
   parser.parse(item,
     (error, quad) => {
       if (quad) {
@@ -54,4 +54,3 @@ export const getShapeById = async (id: string) => {
   const parsedShape = await parseSingleShape(response);
   return createShapeObject(id, parsedShape);
 }
-

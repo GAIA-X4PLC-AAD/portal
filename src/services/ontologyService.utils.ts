@@ -15,9 +15,9 @@ export const fetchOntologies = async (ontologiesStringArray: string[]) => {
   return await Promise.all(promises);
 }
 
-export const parseSingleOntology = (item: string): Quad[] => {
+export const parseSingleOntology = (item: string) => {
   const parser = new N3.Parser();
-  const quads: any[] = [];
+  const quads: Quad[] = [];
   parser.parse(item,
     (error, quad) => {
       if (quad) {
