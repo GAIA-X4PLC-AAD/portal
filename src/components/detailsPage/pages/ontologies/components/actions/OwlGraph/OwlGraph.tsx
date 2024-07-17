@@ -2,14 +2,12 @@ import { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import car from '../../../../../assets/car.gif';
-import { AuthContext } from '../../../../../context/AuthContextProvider';
-import { getOntologyById } from '../../../../../services/ontologyService.utils';
-import { Ontology } from '../../../../../types/shapesAndOntologies.model';
-import RDFVisualization from '../../../../../utils/RDFVisualization';
-import Header from '../../../../header/Header';
-
-import styles from './OwlGraph.module.css';
+import car from '../../../../../../../assets/car.gif';
+import { AuthContext } from '../../../../../../../context/AuthContextProvider';
+import { getOntologyById } from '../../../../../../../services/ontologyService.utils';
+import { Ontology } from '../../../../../../../types/shapesAndOntologies.model';
+import RDFVisualization from '../../../../../../../utils/RDFVisualization';
+import Header from '../../../../../../header/Header';
 
 const OwlGraph = () => {
   const { t } = useTranslation();

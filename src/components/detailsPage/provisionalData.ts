@@ -18,8 +18,6 @@ export const testOntology2: Ontology = {
   description: 'description2',
   version: 'version',
   shapes: [testShape1, testShape2],
-  graphLink: 'http://owlgred.lumii.lv/online_visualization/',
-  downloadLink: 'https://www.google.de',
   linksForOfferings: ['https://www.google.de', 'https://www.google.de'],
   relatedOntologies: []
 };

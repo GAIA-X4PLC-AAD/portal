@@ -8,8 +8,8 @@ import { getAllOntologies } from '../../services/SchemaApiService';
 import { Link, Node, Ontology } from '../../types/shapesAndOntologies.model';
 import RDFVisualization from '../../utils/RDFVisualization';
 import Text from '../Text/Text';
-import ItemCard from '../cards/ItemCard';
 import Header from '../header/Header';
+import ItemCard from '../itemCard/ItemCard';
 import SearchBar from '../searchBar/SearchBar';
 
 import styles from './ShapesAndOntologies.module.css';
@@ -32,11 +32,11 @@ const ShapesAndOntologies = () => {
     const loadOntologies = async () => {
       setIsLoading(true);
       try {
-        const fetchedOntologies = await getAllOntologies(authContext);
+        const fetchedOntologies = await getAllOntologies();
 
         fetchedOntologies.forEach(ontology => {
           ontology.nodes.forEach(node => {
-            if (node.type == 'http://www.w3.org/2000/01/rdf-schema#Class' || node.type == 'http://www.w3.org/2002/07/owl#Class'){
+            if (node.type == 'http://www.w3.org/2000/01/rdf-schema#Class' || node.type == 'http://www.w3.org/2002/07/owl#Class' || node.type == 'http://www.w3.org/2002/07/owl#ObjectProperty'){
               if (!nodes.find(n => n.id === node.id)) {
                 nodes.push(node);
               }

@@ -6,12 +6,13 @@ export interface Link {
 export interface Node {
     id: string;
     label: string;
+    type: string;
 }
 
 export interface Shape {
-    label: string;
-    comment: string;
-    subClasses: string[];
+    id: string;
+    subject: string;
+    content: {predicate: string, object: string}[];
 }
 
 export interface Ontology {
@@ -19,12 +20,9 @@ export interface Ontology {
     contributors: string[];
     description: string;
     version: string;
-    shapes: Shape[];
-    claimsGraphUri?: string;
-    graphLink?: string;
-    downloadLink?: string;
-    linksForOfferings?: string[];
+    namespace: string;
     relatedOntologies?: Ontology[];
+    relatedShapes?: Shape[];
     nodes: Node[];
     links: Link[];
 }

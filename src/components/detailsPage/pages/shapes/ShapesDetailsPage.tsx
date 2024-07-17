@@ -1,12 +1,13 @@
-import { OntologyContext } from 'context/OntologyContext';
+import { ShapeContext } from 'context/ShapeContext';
 import { FC, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
+// @ts-ignore
 import car from '../../../../assets/car.gif';
 import { AuthContext } from '../../../../context/AuthContextProvider';
-import { getOntologyById } from '../../../../services/ontologyService.utils';
-import { Ontology } from '../../../../types/shapesAndOntologies.model';
+import { getShapeById } from '../../../../services/shapeService.utils';
+import { Shape } from '../../../../types/shapesAndOntologies.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
 import DetailsContent from '../../layout/content/DetailsContent';
@@ -14,31 +15,31 @@ import DetailsMainContent from '../../layout/mainContent/DetailsMainContent';
 import DetailsPage from '../../layout/mainPage/DetailsPage';
 import DetailsSidebar from '../../layout/sidebar/DetailsSidebar';
 
-import OntologyMainContent from './OntologyMainContent';
-import OntologyActions from './components/actions/OntologyActions';
-import OntologySuitableOfferings from './components/suitableOfferings/OntologySuitableOfferings';
+import ShapeMainContent from './ShapeMainContent';
+import ShapeActions from './components/actions/ShapeActions';
+import ShapeSuitableOfferings from './components/suitableOfferings/ShapeSuitableOfferings';
 
-const OntologiesDetailsPage: FC = () => {
+const ShapesDetailsPage: FC = () => {
   const { t } = useTranslation();
   const { '*': id } = useParams();
   const authContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [ontology, setOntology] = useState<Ontology>();
+  const [shape, setShape] = useState<Shape>();
 
   useEffect(() => {
-    const loadOntology = async () => {
+    const loadShape = async () => {
       try {
-        const ontology = await getOntologyById(id);
-        setOntology(ontology);
+        const shape = await getShapeById(id);
+        setShape(shape);
       } catch (error) {
-        console.error('Error getting ontology:', error);
+        console.error('Error getting shape:', error);
       } finally {
         setIsLoading(false);
       }
     };
 
     if (id && authContext.isAuthenticated) {
-      loadOntology();
+      loadShape();
     }
 
   }, [id, authContext.isAuthenticated]);
@@ -55,26 +56,26 @@ const OntologiesDetailsPage: FC = () => {
     );
   }
 
-  if (!ontology) {
-    return <div>{t('ontologies.not-found')}</div>;
+  if (!shape) {
+    return <div>{t('shapes.not-found')}</div>;
   }
 
   return (
     <DetailsPage>
-      <Header title={`${t('left-menu.shapesAndOntologies')} ${ARROW_RIGHT} ${ontology.subject}`} />
-      <OntologyContext.Provider value={ontology}>
+      <Header title={`${t('shapes.titles')} ${ARROW_RIGHT} ${shape.subject}`} />
+      <ShapeContext.Provider value={shape}>
         <DetailsContent>
           <DetailsMainContent>
-            <OntologyMainContent />
+            <ShapeMainContent />
           </DetailsMainContent>
           <DetailsSidebar>
-            <OntologySuitableOfferings />
-            <OntologyActions />
+            <ShapeSuitableOfferings />
+            <ShapeActions />
           </DetailsSidebar>
         </DetailsContent>
-      </OntologyContext.Provider>
+      </ShapeContext.Provider>
     </DetailsPage>
   );
 }
 
-export default OntologiesDetailsPage;
+export default ShapesDetailsPage;

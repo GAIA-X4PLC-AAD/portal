@@ -1,26 +1,23 @@
-import { AxiosResponse } from 'axios';
 import * as N3 from 'n3';
+import { Quad } from 'n3';
 
-import { AuthContextType } from '../context/AuthContextProvider';
-import { Ontology, Shape, ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
+import { Ontology, Shape } from '../types/shapesAndOntologies.model';
 
-import { getSchemaById, getSchemasByIds } from './SchemaApiService';
+import { getAllShapes, getSchemaById } from './SchemaApiService';
 
-export const fetchOntologies = async (authContext: AuthContextType, response: AxiosResponse<any, any>) => {
-  const ontologiesStringArray = mapShapesAndOntologies(response);
-  const promises = getSchemasByIds(authContext, ontologiesStringArray);
-  const promiseAll = await Promise.all(promises);
-  const parsedOntologies = await parseOntologies(promiseAll);
-  return createAllOntologyObjects(parsedOntologies);
+export const fetchOntologies = async (ontologiesStringArray: string[]) => {
+  const promises = ontologiesStringArray.map(async id => {
+    const promise = await getSchemaById(id);
+    const parsedOntology = await parseSingleOntology(promise);
+    return createOntologyObject(parsedOntology);
+  });
+
+  return await Promise.all(promises);
 }
 
-export const mapShapesAndOntologies = (response: ShapesAndOntologiesInput): string[] => {
-  return response.ontologies.map((ontology) => ontology);
-}
-
-export const parseSingleOntology = (item: string): any[] => {
+export const parseSingleOntology = (item: string) => {
   const parser = new N3.Parser();
-  const quads: any[] = [];
+  const quads: Quad[] = [];
   parser.parse(item,
     (error, quad) => {
       if (quad) {
@@ -30,45 +27,38 @@ export const parseSingleOntology = (item: string): any[] => {
   return quads;
 }
 
-export const parseOntologies = (items: string[]): any[] => {
-  return items.map(parseSingleOntology);
-}
-
-export const createAllOntologyObjects = (data: any[]): Ontology[] => {
-  return data.map((item) => {
-    return createOntologyObject(item);
-  });
-}
-
-export const createOntologyObject = (quads: any[]): Ontology => {
-  const firstSubject = quads.length > 0 ? quads[0]._subject.id : 'No subject available!';
+export const createOntologyObject = (quads: Quad[], shapes?: Shape[]): Ontology => {
+  const firstSubject = quads.length > 0 ? quads[0].subject.id : 'No subject available!';
   const nodes: { id: string; label: string; type: string }[] = [];
   const links: { source: string; target: string }[] = [];
+  const namespace: string = firstSubject.substring(0, firstSubject.lastIndexOf('/')+1);
+  const relatedShapes: Shape[] = [];
+
+  if (shapes && firstSubject != 'No subject available!') {
+    const shapesToPush: Shape[] = shapes.filter(shape => shape.subject.startsWith(namespace));
+    relatedShapes.push(...shapesToPush);
+  }
 
   let subject = firstSubject;
   let contributors: string[] = [];
   let description = 'No description available!';
   let version = 'No version available!';
-  let shapes: Shape[];
-
-  let shapeMap: { [key: string]: Shape } = {};
 
   // Create a map to keep track of the types of each subject
   let typesMap: { [key: string]: string } = {};
-
   quads.forEach(quad => {
-    const subjectId = quad._subject.id;
-    const predicateId = quad._predicate.id;
-    const objectId = quad._object.id;
+    const subjectId = quad.subject.id;
+    const predicateId = quad.predicate.id;
+    const objectId = quad.object.id;
 
     // Track types of subjects
     if (predicateId === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type') {
       typesMap[subjectId] = objectId;
     }
 
-    if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#label') {
+    if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#label' || predicateId ==='http://www.w3.org/2002/07/owl#ObjectProperty') {
       nodes.push({ id: subjectId, label: objectId, type: typesMap[subjectId] || 'Unknown' });
-    } else if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#subClassOf') {
+    } else if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#subClassOf' || predicateId ==='http://www.w3.org/2000/01/rdf-schema#domain' || predicateId ==='http://www.w3.org/2000/01/rdf-schema#range') {
       links.push({ source: subjectId, target: objectId });
     }
 
@@ -85,27 +75,6 @@ export const createOntologyObject = (quads: any[]): Ontology => {
         version = objectId.replace(/(^"|"$)/g, '').split('"^^')[0];
         break;
       }
-    } else {
-      // get the shape information
-      if (!shapeMap[subjectId]) {
-        shapeMap[subjectId] = {
-          label: '',
-          comment: '',
-          subClasses: []
-        };
-      }
-
-      switch (predicateId) {
-      case 'http://www.w3.org/2000/01/rdf-schema#label':
-        shapeMap[subjectId].label = objectId.replace(/(^"|"$)/g, '').split('"@')[0];
-        break;
-      case 'http://www.w3.org/2000/01/rdf-schema#comment':
-        shapeMap[subjectId].comment = objectId.replace(/(^"|"$)/g, '');
-        break;
-      case 'http://www.w3.org/2000/01/rdf-schema#subClassOf':
-        shapeMap[subjectId].subClasses.push(objectId.replace(/(^"|"$)/g, ''));
-        break;
-      }
     }
   });
 
@@ -114,36 +83,21 @@ export const createOntologyObject = (quads: any[]): Ontology => {
     node.type = typesMap[node.id] || 'Unknown';
   });
 
-  shapes = Object.values(shapeMap).filter(shape => shape.label !== '');
-
   return {
     subject,
     contributors,
     description,
     version,
-    shapes,
+    namespace,
+    relatedShapes,
     nodes,
     links
   };
 };
 
-export const downloadTurtleFile = async (authContext: AuthContextType, id: string) => {
-  const response = await getSchemaById(authContext, id);
-  const filename = id + '.ttl';
-  const element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response));
-  element.setAttribute('download', filename);
-
-  element.style.display = 'none';
-  document.body.appendChild(element);
-
-  element.click();
-
-  document.body.removeChild(element);
-};
-
-export const getOntologyById = async (authContext: AuthContextType, id: string) => {
-  const response = await getSchemaById(authContext, id);
+export const getOntologyById = async (id: string) => {
+  const shapes = await getAllShapes();
+  const response = await getSchemaById(id);
   const parsedOntology = await parseSingleOntology(response);
-  return createOntologyObject(parsedOntology);
+  return createOntologyObject(parsedOntology, shapes);
 }
