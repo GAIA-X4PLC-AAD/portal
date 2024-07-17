@@ -8,8 +8,9 @@ import Provider from './components/account/Provider';
 import DashboardPage from './components/dashboard/dashboard_page';
 import LcmFinal from './components/dashboard/lcm/LcmFinal';
 import LcmServices from './components/dashboard/lcm/LcmServices';
-import OwlGraph from './components/detailsPage/components/actions/OwlGraph/OwlGraph';
 import OntologiesDetailsPage from './components/detailsPage/pages/ontologies/OntologiesDetailsPage';
+import OwlGraph from './components/detailsPage/pages/ontologies/components/actions/OwlGraph/OwlGraph';
+import ShapesDetailsPage from './components/detailsPage/pages/shapes/ShapesDetailsPage';
 import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
 import AboutPage from './components/help/AboutPage'
@@ -23,6 +24,7 @@ import ProvideOverview from './components/provide/ProvideOverview';
 import ProvideSelection from './components/provide/ProvideSelection';
 import Resources from './components/resources/Resources';
 import ServiceOfferings from './components/serviceOfferings/ServiceOfferings';
+import Shapes from './components/shapes/Shapes';
 import ShapesAndOntologies from './components/shapesAndOntologies/ShapesAndOntologies';
 import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
 import DetailsPage from './pages/details/DetailsPage';
@@ -71,6 +73,8 @@ export const routes = (
       <Route path="/shapesAndOntologies" element={ViewContainer(<ShapesAndOntologies />)} />
       <Route path="/shapesAndOntologies/details/*" element={ViewContainer(<OntologiesDetailsPage />)} />
       <Route path="/shapesAndOntologies/graph/*" element={ViewContainer(<OwlGraph />)} />
+      <Route path="/shapes" element={ViewContainer(<Shapes />)} />
+      <Route path="/shapes/details/*" element={ViewContainer(<ShapesDetailsPage />)} />
     </Routes>
   </Column>
 );

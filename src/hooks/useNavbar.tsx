@@ -26,6 +26,10 @@ export const useNavbar = () => {
       navigationItemName: t('left-menu.shapesAndOntologies'),
     },
     {
+      path: '/shapes',
+      navigationItemName: t('shapes.titles'),
+    },
+    {
       path: '/support',
       navigationItemName: t('left-menu.support'),
     },

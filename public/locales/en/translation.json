@@ -506,7 +506,8 @@
     "contact-or-buy-button-notification": "Data was transfered",
     "more-details": "More Details",
     "view-graph": "View Graph",
-    "download-file": "Download turtle file"
+    "download-file": "Download turtle file",
+    "open-creation-wizard": "Open in SD Creation Wizard"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X compliant",
@@ -525,7 +526,9 @@
   "shapes": {
     "title": "Shape",
     "titles": "Shapes",
+    "search-bar-text": "Search for special shapes",
     "no-shapes-available": "No shapes available",
-    "related-shapes": "Related Shapes"
+    "related-shapes": "Related Shapes",
+    "not-found": "Shape not found"
   }
 }
