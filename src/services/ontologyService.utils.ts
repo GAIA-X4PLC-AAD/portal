@@ -55,7 +55,6 @@ export const createOntologyObject = (quads: any[]): Ontology => {
 
   // Create a map to keep track of the types of each subject
   let typesMap: { [key: string]: string } = {};
-
   quads.forEach(quad => {
     const subjectId = quad._subject.id;
     const predicateId = quad._predicate.id;
@@ -66,9 +65,9 @@ export const createOntologyObject = (quads: any[]): Ontology => {
       typesMap[subjectId] = objectId;
     }
 
-    if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#label') {
+    if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#label' || predicateId ==='http://www.w3.org/2002/07/owl#ObjectProperty') {
       nodes.push({ id: subjectId, label: objectId, type: typesMap[subjectId] || 'Unknown' });
-    } else if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#subClassOf') {
+    } else if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#subClassOf' || predicateId ==='http://www.w3.org/2000/01/rdf-schema#domain' || predicateId ==='http://www.w3.org/2000/01/rdf-schema#range') {
       links.push({ source: subjectId, target: objectId });
     }
 

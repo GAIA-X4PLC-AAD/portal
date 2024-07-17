@@ -33,10 +33,10 @@ const ShapesAndOntologies = () => {
       setIsLoading(true);
       try {
         const fetchedOntologies = await getAllOntologies(authContext);
-
+        console.log(fetchedOntologies);
         fetchedOntologies.forEach(ontology => {
           ontology.nodes.forEach(node => {
-            if (node.type == 'http://www.w3.org/2000/01/rdf-schema#Class' || node.type == 'http://www.w3.org/2002/07/owl#Class'){
+            if (node.type == 'http://www.w3.org/2000/01/rdf-schema#Class' || node.type == 'http://www.w3.org/2002/07/owl#Class' || node.type == 'http://www.w3.org/2002/07/owl#ObjectProperty'){
               if (!nodes.find(n => n.id === node.id)) {
                 nodes.push(node);
               }

@@ -21,7 +21,15 @@ const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links }) => {
     if (ref.current) {
       // Convert nodes and links to Vis.js format
       const visNodes = new DataSet(
-        nodes.map(node => ({ id: node.id, label: node.label, title: node.id }))
+        nodes.map(node => {
+          let color;
+          if (node.type === 'http://www.w3.org/2002/07/owl#ObjectProperty') {
+            color = '#ff0000'; // rot
+          } else if (node.type === 'http://www.w3.org/2000/01/rdf-schema#Class' || node.type === 'http://www.w3.org/2002/07/owl#Class') {
+            color = '#0000ff'; // blau
+          }
+          return { id: node.id, label: node.label, title: node.id, color };
+        })
       );
 
       const visEdges = new DataSet(
