@@ -2,7 +2,6 @@ import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { AuthContext } from '../../../../../../context/AuthContextProvider';
 import { OntologyContext } from '../../../../../../context/OntologyContext';
 import { downloadTurtleFile } from '../../../../../../services/ApiService';
 import Title from '../../../../../Title/Title';
@@ -16,17 +15,16 @@ enum graphRoutes {
 
 const OntologyActions: FC = () => {
   const { t } = useTranslation();
-  const authContext = useContext(AuthContext);
   const navigate = useNavigate();
+
   const ontology = useContext(OntologyContext);
+  if (!ontology) {
+    return <div>{t('ontologies.not-found')}</div>;
+  }
 
   const handleNavigationToGraphPage = () => {
     const encodedUri = encodeURIComponent(ontology.subject);
     navigate(`${graphRoutes.shapesAndOntologies}${encodedUri}`);
-  }
-
-  if (!ontology) {
-    return <div>{t('ontologies.not-found')}</div>;
   }
 
   return (
@@ -36,7 +34,7 @@ const OntologyActions: FC = () => {
       </div>
       <div className={styles['buttons']}>
         <GaiaXButton label={t('details.view-graph')} handleOnClick={() => handleNavigationToGraphPage()} width={'100%'}/>
-        <GaiaXButton label={t('details.download-file')} handleOnClick={() => downloadTurtleFile(authContext, ontology.subject)} width={'100%'}/>
+        <GaiaXButton label={t('details.download-file')} handleOnClick={() => downloadTurtleFile(ontology.subject)} width={'100%'}/>
       </div>
     </div>
   );
