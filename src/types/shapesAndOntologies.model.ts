@@ -21,6 +21,7 @@ export interface Ontology {
     description: string;
     version: string;
     namespace: string;
+    classes?: string[];
     relatedOntologies?: Ontology[];
     relatedShapes?: Shape[];
     nodes: Node[];
