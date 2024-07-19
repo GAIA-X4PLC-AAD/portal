@@ -33,6 +33,7 @@ export const createOntologyObject = (quads: Quad[], shapes?: Shape[]): Ontology 
   const links: { source: string; target: string }[] = [];
   const namespace: string = firstSubject.substring(0, firstSubject.lastIndexOf('/')+1);
   const relatedShapes: Shape[] = [];
+  const classes: string[] = [];
 
   if (shapes && firstSubject != 'No subject available!') {
     const shapesToPush: Shape[] = shapes.filter(shape => shape.subject.startsWith(namespace));
@@ -47,6 +48,7 @@ export const createOntologyObject = (quads: Quad[], shapes?: Shape[]): Ontology 
   // Create a map to keep track of the types of each subject
   let typesMap: { [key: string]: string } = {};
   quads.forEach(quad => {
+    console.log('quad:', quad);
     const subjectId = quad.subject.id;
     const predicateId = quad.predicate.id;
     const objectId = quad.object.id;
@@ -75,6 +77,15 @@ export const createOntologyObject = (quads: Quad[], shapes?: Shape[]): Ontology 
         version = objectId.replace(/(^"|"$)/g, '').split('"^^')[0];
         break;
       }
+    } else {
+      switch (objectId) {
+      case 'http://www.w3.org/2000/01/rdf-schema#Class':
+        classes.push(subjectId.replace(/(^"|"$)/g, ''));
+        break;
+      case 'http://www.w3.org/2002/07/owl#Class':
+        classes.push(subjectId.replace(/(^"|"$)/g, ''));
+        break;
+      }
     }
   });
 
@@ -89,6 +100,7 @@ export const createOntologyObject = (quads: Quad[], shapes?: Shape[]): Ontology 
     description,
     version,
     namespace,
+    classes,
     relatedShapes,
     nodes,
     links

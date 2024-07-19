@@ -123,7 +123,7 @@ export const ApiService = {
     const endpoint = queryEndpoint;
     const headers = getHeaders(authContext);
     const requestBody = {
-      statement: 'MATCH (n) WHERE (n:HDMap OR n:EnvironmentModel OR n:Scenario) RETURN properties(n), labels(n)',
+      statement: 'MATCH (n) RETURN properties(n), labels(n)',
     };
 
     // Perform POST request
@@ -160,8 +160,9 @@ export const ApiService = {
   },
 };
 
-export const downloadTurtleFile = async (authContext: AuthContextType, id: string) => {
-  const response = await getSchemaById(authContext, id);
+export const downloadTurtleFile = async (id: string) => {
+  const response = await getSchemaById(id);
+  console.log('response:', response);
   const filename = id + '.ttl';
   const element = document.createElement('a');
   element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response));
