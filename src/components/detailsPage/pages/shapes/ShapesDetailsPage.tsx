@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import car from '../../../../assets/car.gif';
 import { AuthContext } from '../../../../context/AuthContextProvider';
 import { getShapeById } from '../../../../services/shapeService.utils';
-import { Shape } from '../../../../types/shapesAndOntologies.model';
+import { ShaclShape } from '../../../../types/shaclShape.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
 import DetailsContent from '../../layout/content/DetailsContent';
@@ -24,7 +24,7 @@ const ShapesDetailsPage: FC = () => {
   const { '*': id } = useParams();
   const authContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [shape, setShape] = useState<Shape>();
+  const [shape, setShape] = useState<ShaclShape>();
 
   useEffect(() => {
     const loadShape = async () => {
@@ -62,7 +62,7 @@ const ShapesDetailsPage: FC = () => {
 
   return (
     <DetailsPage>
-      <Header title={`${t('shapes.titles')} ${ARROW_RIGHT} ${shape.subject}`} />
+      <Header title={`${t('shapes.titles')} ${ARROW_RIGHT} ${shape.short_shape}`} />
       <ShapeContext.Provider value={shape}>
         <DetailsContent>
           <DetailsMainContent>

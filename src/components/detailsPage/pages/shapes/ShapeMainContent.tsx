@@ -17,15 +17,38 @@ const ShapeMainContent: FC = () => {
 
   return (
     <div className={styles['container']}>
-      <Title>{t('shapes.title')}</Title>
+      <Title>{shape.short_shape}</Title>
       <Text>Details:</Text>
-      {
-        shape.content.map((item, index) => (
-          <div key={index} style={{ textAlign: 'left' }}>
-            <p>{item.predicate}: {item.object}</p>
-          </div>
-        ))
-      }
+      <div>
+        {shape.properties && shape.properties.length > 0 ? (
+          <table className={styles['table']}>
+            <thead>
+              <tr>
+                <th>{t('shapes.path')}</th>
+                <th>{t('shapes.name')}</th>
+                <th>{t('shapes.description')}</th>
+                <th>{t('shapes.message')}</th>
+                <th>{t('shapes.minCount')}</th>
+                <th>{t('shapes.datatype')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {shape.properties.map((property, index) => (
+                <tr key={index}>
+                  <td>{property.path}</td>
+                  <td>{property.name || '-'}</td>
+                  <td>{property.description || '-'}</td>
+                  <td>{property.message || '-'}</td>
+                  <td>{property.minCount !== undefined ? property.minCount : '-'}</td>
+                  <td>{property.datatype || '-'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>{t('shapes.no-properties')}</p>
+        )}
+      </div>
     </div>
   );
 };

@@ -2,14 +2,14 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Shape } from '../../types/shapesAndOntologies.model';
+import { ShaclShape } from '../../types/shaclShape.model';
 import Title from '../Title/Title';
 import GaiaXButton from '../buttons/GaiaXButton';
 
 import styles from './ItemCard.module.css';
 
 interface IShapeCardContent {
-    shape: Shape;
+    shape: ShaclShape;
 }
 
 const ShapeCardContent: FC<IShapeCardContent> = ({ shape } ) => {
@@ -17,13 +17,13 @@ const ShapeCardContent: FC<IShapeCardContent> = ({ shape } ) => {
   const navigate = useNavigate();
 
   const handleNavigationToDetailsPage = () => {
-    navigate(`/shapes/details/${shape.id}`);
+    navigate(`/shapes/details/${shape.shape}`);
   }
 
   return (
     <div className={styles.content}>
       <div style={{ textAlign: 'left' }}>
-        <Title>{shape.subject}</Title>
+        <Title>{shape.short_shape}</Title>
       </div>
       <div className={styles.button}>
         <GaiaXButton

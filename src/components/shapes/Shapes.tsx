@@ -26,6 +26,7 @@ const Shapes = () => {
         const fetchedShapes = await getAllShapes();
         setOriginalShapes(fetchedShapes);
         setFilteredShapes(fetchedShapes);
+        console.log(fetchedShapes);
       } catch (error) {
         console.error('Error fetching self descriptions:', error);
       } finally {
