@@ -18,10 +18,6 @@ export const useNavbar = () => {
       navigationItemName: t('left-menu.tooltip.resources'),
     },
     {
-      path: '/about',
-      navigationItemName: t('left-menu.about'),
-    },
-    {
       path: '/shapesAndOntologies',
       navigationItemName: t('left-menu.shapesAndOntologies'),
     },
@@ -29,10 +25,14 @@ export const useNavbar = () => {
       path: '/shapes',
       navigationItemName: t('shapes.titles'),
     },
-    {
-      path: '/support',
-      navigationItemName: t('left-menu.support'),
-    },
+    // {
+    //   path: '/support',
+    //   navigationItemName: t('left-menu.support'),
+    // },
+    // {
+    //   path: '/about',
+    //   navigationItemName: t('left-menu.about'),
+    // },
   ];
 
   return navbarAssets;

@@ -39,9 +39,18 @@ export const routes = (
     <Routes>
       <Route path="/" element={<Column><Home /></Column>} />
       <Route path="/home" element={ViewContainer(<Home />)} />
+      <Route path="/resources" element={ViewContainer(<ProtectedRoute><Resources /></ProtectedRoute>)} />
+      <Route path="/resources/details/*" element={ViewContainer(<ResourcesDetailsPage />)} />
+      <Route path="/shapesAndOntologies" element={ViewContainer(<ShapesAndOntologies />)} />
+      <Route path="/shapesAndOntologies/details/*" element={ViewContainer(<OntologiesDetailsPage />)} />
+      <Route path="/shapesAndOntologies/graph/*" element={ViewContainer(<OwlGraph />)} />
+      <Route path="/shapes" element={ViewContainer(<Shapes />)} />
+      <Route path="/shapes/details/*" element={ViewContainer(<ShapesDetailsPage />)} />
+      <Route path="/about" element={ViewContainer(<ProtectedRoute><AboutPage /></ProtectedRoute>)} />
+      <Route path="/support" element={ViewContainer(<ProtectedRoute><SupportPage /></ProtectedRoute>)} />
+
       <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
       <Route path="/participants" element={ViewContainer(<Participants />)} />
-      <Route path="/resources" element={ViewContainer(<ProtectedRoute><Resources /></ProtectedRoute>)} />
       <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
       <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
       <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />
@@ -67,14 +76,6 @@ export const routes = (
       <Route path="/lcm/:id" element={ViewContainer(<LcmServices />)} />
       <Route path="/lcm/:id/final" element={ViewContainer(<LcmFinal />)} />
       <Route path="/lcm/:id/:index" element={ViewContainer(<LcmServices />)} />
-      <Route path="/about" element={ViewContainer(<ProtectedRoute><AboutPage /></ProtectedRoute>)} />
-      <Route path="/support" element={ViewContainer(<ProtectedRoute><SupportPage /></ProtectedRoute>)} />
-      <Route path="/shapesAndOntologies" element={ViewContainer(<ShapesAndOntologies />)} />
-      <Route path="/shapesAndOntologies/details/*" element={ViewContainer(<OntologiesDetailsPage />)} />
-      <Route path="/shapesAndOntologies/graph/*" element={ViewContainer(<OwlGraph />)} />
-      <Route path="/shapes" element={ViewContainer(<Shapes />)} />
-      <Route path="/shapes/details/*" element={ViewContainer(<ShapesDetailsPage />)} />
-      <Route path="/resources/details/*" element={ViewContainer(<ResourcesDetailsPage />)} />
     </Routes>
   </Column>
 );
