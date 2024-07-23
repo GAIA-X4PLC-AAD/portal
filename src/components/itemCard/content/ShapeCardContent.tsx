@@ -2,11 +2,10 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Shape } from '../../types/shapesAndOntologies.model';
-import Title from '../Title/Title';
-import GaiaXButton from '../buttons/GaiaXButton';
-
-import styles from './ItemCard.module.css';
+import { Shape } from '../../../types/shapesAndOntologies.model';
+import Title from '../../Title/Title';
+import GaiaXButton from '../../buttons/GaiaXButton';
+import styles from '../ItemCard.module.css';
 
 interface IShapeCardContent {
     shape: Shape;

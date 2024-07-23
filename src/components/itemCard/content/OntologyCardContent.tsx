@@ -2,11 +2,10 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Ontology } from '../../types/shapesAndOntologies.model';
-import Title from '../Title/Title';
-import GaiaXButton from '../buttons/GaiaXButton';
-
-import styles from './ItemCard.module.css';
+import { Ontology } from '../../../types/shapesAndOntologies.model';
+import Title from '../../Title/Title';
+import GaiaXButton from '../../buttons/GaiaXButton';
+import styles from '../ItemCard.module.css';
 
 interface IOntologyCardContent {
     ontology: Ontology;

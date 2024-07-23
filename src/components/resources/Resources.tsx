@@ -8,9 +8,9 @@ import { useResourceFilter } from '../../hooks/useResourceFilter';
 import { ApiService } from '../../services/ApiService';
 import { Resource, mapResources } from '../../utils/dataMapper';
 import Text from '../Text/Text';
-import SelfDescriptionCard from '../cards/SelfDescriptionCard';
 import Filter from '../filter/Filter';
 import Header from '../header/Header';
+import ItemCard from '../itemCard/ItemCard';
 import SearchBar from '../searchBar/SearchBar';
 
 import styles from './Resources.module.css';
@@ -96,15 +96,13 @@ const Resources = () => {
                 </div>
               )}
               {!isLoading && filteredResourceData.length > 0 ? (
-                filteredResourceData.map((resource) => {
+                filteredResourceData.map((resource, index) => {
                   return (
-                    <SelfDescriptionCard
-                      key={resource.name}
+                    <ItemCard
+                      key={index}
                       label={resource.label}
-                      isGaiaXComlpiant={true}
-                      name={resource.name}
-                      description={resource.description}
-                      selfDescription={resource}
+                      isGaiaXCompliant={true}
+                      resource={resource}
                     />
                   );
                 })

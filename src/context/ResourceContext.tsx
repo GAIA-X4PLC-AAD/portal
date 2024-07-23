@@ -1,5 +1,5 @@
 import { createContext } from 'react';
 
-import { Resource } from '../types/resources.model';
+import { SelfDescription } from '../types/resources.model';
 
-export const ResourceContext = createContext<Resource | undefined>(undefined);
+export const ResourceContext = createContext<SelfDescription | undefined>(undefined);

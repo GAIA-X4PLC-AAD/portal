@@ -1,21 +1,24 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { Resource } from '../../types/resources.model';
 import { Ontology, Shape } from '../../types/shapesAndOntologies.model';
 import Title from '../Title/Title';
 
 import styles from './ItemCard.module.css';
-import OntologyCardContent from './OntologyCardContent';
-import ShapeCardContent from './ShapeCardContent';
+import OntologyCardContent from './content/OntologyCardContent';
+import ResourceCardContent from './content/ResourceCardContent';
+import ShapeCardContent from './content/ShapeCardContent';
 
 interface IItemCard {
     label: string;
     isGaiaXCompliant?: boolean;
     ontology?: Ontology;
     shape?: Shape;
+    resource?: Resource;
 }
 
-const ItemCard: FC<IItemCard> = ({ label, isGaiaXCompliant, ontology, shape }) => {
+const ItemCard: FC<IItemCard> = ({ label, isGaiaXCompliant, ontology, shape, resource }) => {
   const { t } = useTranslation();
 
   return (
@@ -35,7 +38,9 @@ const ItemCard: FC<IItemCard> = ({ label, isGaiaXCompliant, ontology, shape }) =
           <OntologyCardContent ontology={ontology} />
         ) : shape ? (
           <ShapeCardContent shape={shape} />
-        ) : null}
+        ) : resource ? (
+          <ResourceCardContent resource={resource} />
+        ) :null}
       </div>
     </div>
   );

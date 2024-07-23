@@ -7,7 +7,7 @@ import car from '../../../../assets/car.gif';
 import { AuthContext } from '../../../../context/AuthContextProvider';
 import { ResourceContext } from '../../../../context/ResourceContext';
 import { ApiService } from '../../../../services/ApiService';
-import { Resource } from '../../../../types/resources.model';
+import { SelfDescription } from '../../../../types/resources.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
 import DetailsContent from '../../layout/content/DetailsContent';
@@ -24,7 +24,7 @@ const ResourceDetailsPage: FC = () => {
   const { '*': id } = useParams();
   const authContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [resource, setResource] = useState<Resource>();
+  const [resource, setResource] = useState<SelfDescription>();
   const [name, setName] = useState<string>();
 
   useEffect(() => {
