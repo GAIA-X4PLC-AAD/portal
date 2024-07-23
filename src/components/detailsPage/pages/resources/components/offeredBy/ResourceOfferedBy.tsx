@@ -5,14 +5,14 @@ import Subtitle from 'components/subtitle/Subtitle';
 import { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ResourceContext } from '../../../../../../context/ResourceContext';
+import { SelfDescriptionContext } from '../../../../../../context/SelfDescriptionContext';
 
 import styles from './ResourceOfferedBy.module.css';
 
 const ResourceOfferedBy = () => {
   const { t } = useTranslation();
   const [showNotification, setShowNotification] = useState(false);
-  const resource = useContext(ResourceContext)
+  const selfDescription = useContext(SelfDescriptionContext)
 
   const title='Offered by'
   const subtitle='3D Mapping Solutions GmbH'

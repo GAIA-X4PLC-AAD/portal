@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 // @ts-ignore
 import car from '../../../../assets/car.gif';
 import { AuthContext } from '../../../../context/AuthContextProvider';
-import { ResourceContext } from '../../../../context/ResourceContext';
+import { SelfDescriptionContext } from '../../../../context/SelfDescriptionContext';
 import { ApiService } from '../../../../services/ApiService';
 import { SelfDescription } from '../../../../types/resources.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
@@ -24,14 +24,14 @@ const ResourceDetailsPage: FC = () => {
   const { '*': id } = useParams();
   const authContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
-  const [resource, setResource] = useState<SelfDescription>();
+  const [selfDescription, setSelfDescription] = useState<SelfDescription>();
   const [name, setName] = useState<string>();
 
   useEffect(() => {
     const loadResource = async () => {
       try {
         const resource = await ApiService.getOneSelfDescriptions(id);
-        setResource(resource);
+        setSelfDescription(resource);
         setName(resource.items[0]['properties(n)'].name);
       } catch (error) {
         console.error('Error getting resource:', error);
@@ -58,14 +58,14 @@ const ResourceDetailsPage: FC = () => {
     );
   }
 
-  if (!resource) {
+  if (!selfDescription) {
     return <div>{t('resources.not-found')}</div>;
   }
 
   return (
     <DetailsPage>
       <Header title={`${t('left-menu.resources')} ${ARROW_RIGHT} ${name}`} />
-      <ResourceContext.Provider value={resource}>
+      <SelfDescriptionContext.Provider value={selfDescription}>
         <DetailsContent>
           <DetailsMainContent>
             <ResourceMainContent />
@@ -75,7 +75,7 @@ const ResourceDetailsPage: FC = () => {
             <ResourceOfferedBy />
           </DetailsSidebar>
         </DetailsContent>
-      </ResourceContext.Provider>
+      </SelfDescriptionContext.Provider>
     </DetailsPage>
   );
 }

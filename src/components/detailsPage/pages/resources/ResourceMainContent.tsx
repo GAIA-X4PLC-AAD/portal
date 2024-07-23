@@ -1,7 +1,7 @@
 import { FC, useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ResourceContext } from '../../../../context/ResourceContext';
+import { SelfDescriptionContext } from '../../../../context/SelfDescriptionContext';
 import DataField from '../../../../data-field/DataField';
 import Text from '../../../Text/Text';
 import Title from '../../../Title/Title';
@@ -12,7 +12,7 @@ import styles from './ResourceMainContent.module.css';
 
 const ResourceMainContent: FC = () => {
   const { t } = useTranslation();
-  const resource = useContext(ResourceContext);
+  const selfDescription = useContext(SelfDescriptionContext);
   const [name, setName] = useState<string | number | string[]>();
   const [description, setDescription] = useState<string | number | string[]>();
   const [generalPropertiesList, setGeneralPropertiesList] = useState<Array<{ [key: string]: string | number | string[] | undefined }>>();
@@ -21,13 +21,13 @@ const ResourceMainContent: FC = () => {
   useEffect(() => {
     // Ensure cardData.items is an array and has data
     const propertiesList =
-            resource && resource.items
-              ? resource.items.map((item) => item['properties(n)'])
+            selfDescription && selfDescription.items
+              ? selfDescription.items.map((item) => item['properties(n)'])
               : [];
 
     // Temporary solution to extract name and description for our Card. Will be refactored once we have a better paylaod structure
-    if (resource && resource.items && resource.items.length > 0) {
-      const propertiesN = resource.items[0]['properties(n)'];
+    if (selfDescription && selfDescription.items && selfDescription.items.length > 0) {
+      const propertiesN = selfDescription.items[0]['properties(n)'];
       setName(propertiesN.name);
       setDescription(propertiesN.description);
     }
@@ -50,7 +50,7 @@ const ResourceMainContent: FC = () => {
     setOtherPropertiesList(listOfOtherProperties);
   }, []);
 
-  if (!resource) {
+  if (!selfDescription) {
     return <div>{t('resources.not-found')}</div>;
   }
 
