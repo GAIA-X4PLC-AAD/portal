@@ -10,6 +10,7 @@ import LcmFinal from './components/dashboard/lcm/LcmFinal';
 import LcmServices from './components/dashboard/lcm/LcmServices';
 import OntologiesDetailsPage from './components/detailsPage/pages/ontologies/OntologiesDetailsPage';
 import OwlGraph from './components/detailsPage/pages/ontologies/components/actions/OwlGraph/OwlGraph';
+import ResourcesDetailsPage from './components/detailsPage/pages/resources/ResourcesDetailsPage';
 import ShapesDetailsPage from './components/detailsPage/pages/shapes/ShapesDetailsPage';
 import DiscoveryItem from './components/discovery/DiscoveryItem';
 import SearchView from './components/discovery/search/SearchView';
@@ -27,7 +28,6 @@ import ServiceOfferings from './components/serviceOfferings/ServiceOfferings';
 import Shapes from './components/shapes/Shapes';
 import ShapesAndOntologies from './components/shapesAndOntologies/ShapesAndOntologies';
 import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
-import DetailsPage from './pages/details/DetailsPage';
 import Home from './pages/home/Home';
 
 const ViewContainer = (view: ReactNode) => {
@@ -42,7 +42,6 @@ export const routes = (
       <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
       <Route path="/participants" element={ViewContainer(<Participants />)} />
       <Route path="/resources" element={ViewContainer(<ProtectedRoute><Resources /></ProtectedRoute>)} />
-      <Route path="/details/:resourceId" element={ViewContainer(<DetailsPage />)} />
       <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
       <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
       <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />
@@ -75,6 +74,7 @@ export const routes = (
       <Route path="/shapesAndOntologies/graph/*" element={ViewContainer(<OwlGraph />)} />
       <Route path="/shapes" element={ViewContainer(<Shapes />)} />
       <Route path="/shapes/details/*" element={ViewContainer(<ShapesDetailsPage />)} />
+      <Route path="/resources/details/*" element={ViewContainer(<ResourcesDetailsPage />)} />
     </Routes>
   </Column>
 );

@@ -33,6 +33,7 @@ export const createShapeObject = (id: string, quads: Quad[]): Shape => {
   let subject = firstSubject;
 
   quads.forEach(quad => {
+    console.log('quad:', quad);
     const subjectId = quad.subject.id;
     const predicateId = quad.predicate.id;
     const objectId = quad.object.id;

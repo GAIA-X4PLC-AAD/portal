@@ -511,7 +511,8 @@
     "is-gaia-x-compliant": "Gaia-X konform",
     "not-gaia-x-compliant": "Nicht Gaia-X konform",
     "not-authenticated": "Nicht berechtigt",
-    "search-bar-text": "Suchen Sie nach speziellen Ressourcen oder Angeboten"
+    "search-bar-text": "Suchen Sie nach speziellen Ressourcen oder Angeboten",
+    "notFound": "Keine Ressourcen gefunden"
   },
   "ontologies": {
     "title": "Ontologie",

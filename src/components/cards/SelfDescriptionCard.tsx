@@ -37,7 +37,7 @@ export default function SelfDescriptionCard({
       // Encode the URI component to ensure special characters are URL-safe
       const encodedUri = encodeURIComponent(firstUri);
       // Navigate to the details page with the encoded URI
-      navigate(`/details/${encodedUri}`);
+      navigate(`/resources/details/${encodedUri}`);
     } else {
       // Handle the case where claimsGraphUri is not available or not in expected format
       console.error('Invalid claimsGraphUri:', selfDescription.claimsGraphUri);

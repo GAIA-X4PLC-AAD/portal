@@ -2,24 +2,21 @@ import Text from 'components/Text/Text';
 import Title from 'components/Title/Title';
 import GaiaXButton from 'components/buttons/GaiaXButton';
 import Subtitle from 'components/subtitle/Subtitle';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import styles from './SidebarCard.module.css';
+import { ResourceContext } from '../../../../../../context/ResourceContext';
 
-interface ISidebarCard {
-  title: string;
-  subtitle: string;
-  text: string;
-}
+import styles from './ResourceOfferedBy.module.css';
 
-export default function SidebarCard({
-  title,
-  subtitle,
-  text,
-}: Readonly<ISidebarCard>) {
+const ResourceOfferedBy = () => {
   const { t } = useTranslation();
   const [showNotification, setShowNotification] = useState(false);
+  const resource = useContext(ResourceContext)
+
+  const title='Offered by'
+  const subtitle='3D Mapping Solutions GmbH'
+  const text='We offer high-precision 3D map data of roads and urban environments for applications in autonomous driving, robotics, urban planning and navigation systems.'
 
   const handleClickContactOrBuy = () => {
     setShowNotification(true);
@@ -45,3 +42,5 @@ export default function SidebarCard({
     </div>
   );
 }
+
+export default ResourceOfferedBy;

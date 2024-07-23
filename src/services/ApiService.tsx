@@ -86,7 +86,6 @@ export const ApiService = {
   },
 
   async getOneSelfDescriptions(
-    authContext: AuthContextType,
     claimsGraphUri: string | undefined
   ): Promise<any> {
     if (!claimsGraphUri) {
@@ -96,7 +95,6 @@ export const ApiService = {
     }
 
     const endpoint = queryEndpoint;
-    const headers = getHeaders(authContext);
     const requestBody = {
       statement: `MATCH (n:HDMap) WHERE '${claimsGraphUri.replace(
         /'/g,
@@ -105,9 +103,7 @@ export const ApiService = {
     };
 
     try {
-      await axios.options(endpoint, { headers });
-      const response = await axios.post(endpoint, requestBody, { headers });
-      console.log('This is ONE Service Offering: ', response.data);
+      const response = await axios.post(endpoint, requestBody);
       return response.data;
     } catch (error) {
       console.error('Error fetching self descriptions:', error);
@@ -123,7 +119,7 @@ export const ApiService = {
     const endpoint = queryEndpoint;
     const headers = getHeaders(authContext);
     const requestBody = {
-      statement: 'MATCH (n) RETURN properties(n), labels(n)',
+      statement: 'MATCH (n) WHERE (n:HDMap OR n:EnvironmentModel OR n:Scenario) RETURN properties(n), labels(n)',
     };
 
     // Perform POST request
@@ -175,7 +171,3 @@ export const downloadTurtleFile = async (id: string) => {
 
   document.body.removeChild(element);
 };
-
-function useContext(AuthContext: any): { token: any } {
-  throw new Error('Function not implemented.');
-}

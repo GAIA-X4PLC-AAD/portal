@@ -1,8 +1,8 @@
 import Title from 'components/Title/Title';
 
-import styles from './MapCard.module.css';
+import styles from './ResourceMap.module.css';
 
-export default function MapCard() {
+export const ResourceMap = () => {
   return (
     <div className={styles['map-card-container']}>
       <Title>Map</Title>
@@ -15,3 +15,5 @@ export default function MapCard() {
     </div>
   );
 }
+
+export default ResourceMap;
