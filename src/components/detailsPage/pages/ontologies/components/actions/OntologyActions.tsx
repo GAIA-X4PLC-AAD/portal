@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { OntologyContext } from '../../../../../../context/OntologyContext';
-import { downloadTurtleFile } from '../../../../../../services/ApiService';
+import { downloadTurtleFile } from '../../../../../../services/schemaService.utils';
 import Title from '../../../../../Title/Title';
 import GaiaXButton from '../../../../../buttons/GaiaXButton';
 

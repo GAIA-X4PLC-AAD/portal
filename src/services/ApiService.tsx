@@ -3,8 +3,6 @@ import axios, { AxiosResponse } from 'axios';
 import { AuthContextType } from '../context/AuthContextProvider';
 import { isEmpty } from '../utils/helpers';
 
-import { getSchemaById } from './SchemaApiService';
-
 const getHeaders = (authContext: AuthContextType) => {
   return {
     Authorization: `Bearer ${authContext.token}`,
@@ -158,22 +156,6 @@ export const ApiService = {
         console.error('Error:', error);
       });
   },
-};
-
-export const downloadTurtleFile = async (id: string) => {
-  const response = await getSchemaById(id);
-  console.log('response:', response);
-  const filename = id + '.ttl';
-  const element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response));
-  element.setAttribute('download', filename);
-
-  element.style.display = 'none';
-  document.body.appendChild(element);
-
-  element.click();
-
-  document.body.removeChild(element);
 };
 
 function useContext(AuthContext: any): { token: any } {

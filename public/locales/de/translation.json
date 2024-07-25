@@ -505,7 +505,7 @@
     "more-details": "Mehr Details",
     "view-graph": "Graph anzeigen",
     "download-file": "Turtle-Datei herunterladen",
-    "open-creation-wizard": "Im SD-Erstellungsassistenten öffnen"
+    "download-json": "Json-Datei herunterladen",
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X konform",

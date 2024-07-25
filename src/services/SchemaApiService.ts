@@ -8,7 +8,7 @@ import { fetchShapes } from './shapeService.utils';
 const serverUrl: string = 'https://fc-server.gxfs.gx4fm.org';
 
 const encodeString = (uri: string): string => {
-  return uri.startsWith('http') ? encodeURIComponent(uri) : uri;
+  return encodeURIComponent(uri);
 }
 
 const getAllSchemas = async (): Promise<ShapesAndOntologiesInput | undefined> => {
@@ -33,6 +33,18 @@ export const getSchemaById = async (id: string) => {
     console.error('Error:', error);
   }
 };
+
+export const getConvertedFile = async (id: string)=> {
+  const requestBody = await getSchemaById(id);
+  const endpoint = 'https://sd-creation-wizard-api.gxfs.gx4fm.org/convertFile';
+
+  try {
+    const response = await axios.post(endpoint, requestBody);
+    return response.data;
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
 
 export const getAllOntologies = async () => {
   const response = await getAllSchemas();
