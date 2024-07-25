@@ -35,11 +35,6 @@ export const createOntologyObject = (quads: Quad[], shapes?: Shape[]): Ontology 
   const relatedShapes: Shape[] = [];
   const classes: string[] = [];
 
-  if (shapes && firstSubject != 'No subject available!') {
-    const shapesToPush: Shape[] = shapes.filter(shape => shape.subject.startsWith(namespace));
-    relatedShapes.push(...shapesToPush);
-  }
-
   let subject = firstSubject;
   let contributors: string[] = [];
   let description = 'No description available!';
@@ -48,7 +43,6 @@ export const createOntologyObject = (quads: Quad[], shapes?: Shape[]): Ontology 
   // Create a map to keep track of the types of each subject
   let typesMap: { [key: string]: string } = {};
   quads.forEach(quad => {
-    console.log('quad:', quad);
     const subjectId = quad.subject.id;
     const predicateId = quad.predicate.id;
     const objectId = quad.object.id;
