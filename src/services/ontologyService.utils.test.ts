@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { Ontology } from '../types/shapesAndOntologies.model';
+import { Ontology } from '../types/ontologies.model';
 
 import { createOntologyObject } from './ontologyService.utils';
 

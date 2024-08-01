@@ -1,13 +1,13 @@
 import * as N3 from 'n3';
 import { Quad } from 'n3';
 
-import { ShaclShape } from '../types/shaclShape.model';
-import { ShapeProperty } from '../types/shapeProperty.model';
+import { Shape, ShapeProperty } from '../types/shapes.model';
 
 import { getSchemaById } from './SchemaApiService';
 
 // Hauptfunktion zum Abrufen der Shapes
-export const fetchShapes = async (shapesStringArray: string[]): Promise<ShaclShape[]> => {
+export const fetchShapes = async (shapesStringArray: string[]): Promise<Shape[]> => {
+  // const shapesStringArray2 = ['b8eecadef886515092e38c26abcfc8e826a6bd6cde4cc8e4681e1d82f83f7a89']
   const promises = shapesStringArray.map(async id => {
     const schema = await getSchemaById(id);
     const parsedQuads = await parseSingleShape(schema);
@@ -36,89 +36,67 @@ export const parseSingleShape = (item: string): Promise<Quad[]> => {
 }
 
 // Funktion zum Erstellen der Shape-Objekte
-export const createShapeObjects = (id: string, quads: Quad[]): ShaclShape[] => {
-  const shapesMap: { [key: string]: ShaclShape } = {};
-  const propertiesMap: { [key: string]: { [key: string]: ShapeProperty } } = {};
+export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[] => {
+  const shapesMap: Record<string, Shape> = {};
+  const propertiesMap: Record<string, ShapeProperty[]> = {};
 
   quads.forEach(quad => {
-    const subjectId = quad.subject.value;
-    const predicateId = quad.predicate.value;
-    const objectId = quad.object.value;
+    console.log(quad);
+    const subject = quad.subject.value;
+    const predicate = quad.predicate.value;
+    const object = quad.object.value;
 
-    // Shape-Typ prüfen
-    if (predicateId === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' && objectId === 'http://www.w3.org/ns/shacl#NodeShape') {
-      if (!shapesMap[subjectId]) {
-        shapesMap[subjectId] = {
-          shape: id,
-          short_shape: '',
+    const isShapeType = predicate === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type' && object === 'http://www.w3.org/ns/shacl#NodeShape';
+    const isTargetClass = predicate === 'http://www.w3.org/ns/shacl#targetClass';
+    const isProperty = predicate === 'http://www.w3.org/ns/shacl#property';
+
+    if (isShapeType || isTargetClass || isProperty) {
+      if (!shapesMap[subject]) {
+        shapesMap[subject] = {
+          shaclShapeId,
+          subject,
+          shortSubject: '',
+          propertyIds: [],
           properties: []
         };
       }
-    }
-
-    // Target Class verarbeiten
-    if (predicateId === 'http://www.w3.org/ns/shacl#targetClass') {
-      if (!shapesMap[subjectId]) {
-        shapesMap[subjectId] = {
-          shape: id,
-          short_shape: '',
-          properties: []
-        };
+      if (isProperty) {
+        shapesMap[subject].propertyIds.push(object);
+      } else {
+        shapesMap[subject].shortSubject = object.includes('#') ? object.split('#').pop() || object : object.split('/').pop() || object;
       }
-      shapesMap[subjectId].short_shape = objectId.includes('#') ? objectId.split('#').pop() || objectId : objectId.split('/').pop() || objectId;
-    }
-
-    // Property verarbeiten
-    if (predicateId === 'http://www.w3.org/ns/shacl#property') {
-      if (!propertiesMap[subjectId]) {
-        propertiesMap[subjectId] = {};
+    } else {
+      if (!propertiesMap[subject]) {
+        propertiesMap[subject] = [];
       }
-      propertiesMap[subjectId][objectId] = { path: '' };
-    }
-
-    // Property Attribute verarbeiten
-    if (propertiesMap[subjectId] && propertiesMap[subjectId][objectId]) {
-      switch (predicateId) {
-      case 'http://www.w3.org/ns/shacl#path':
-        propertiesMap[subjectId][objectId].path = objectId;
-        break;
-      case 'http://www.w3.org/ns/shacl#name':
-        propertiesMap[subjectId][objectId].name = objectId;
-        break;
-      case 'http://www.w3.org/ns/shacl#description':
-        propertiesMap[subjectId][objectId].description = objectId;
-        break;
-      case 'http://www.w3.org/ns/shacl#message':
-        propertiesMap[subjectId][objectId].message = objectId;
-        break;
-      case 'http://www.w3.org/ns/shacl#minCount':
-        propertiesMap[subjectId][objectId].minCount = parseInt(objectId, 10);
-        break;
-      case 'http://www.w3.org/ns/shacl#maxCount':
-        propertiesMap[subjectId][objectId].maxCount = parseInt(objectId, 10);
-        break;
-      case 'http://www.w3.org/ns/shacl#datatype':
-        propertiesMap[subjectId][objectId].datatype = objectId;
-        break;
-      default:
-      }
+      propertiesMap[subject].push({ predicate, object });
     }
   });
 
-  // Zuordnung der Properties zu den Shapes
-  Object.keys(propertiesMap).forEach(shapeId => {
-    const shape = shapesMap[shapeId];
-    if (shape) {
-      shape.properties = Object.values(propertiesMap[shapeId]);
+  console.log(shapesMap);
+  console.log(propertiesMap);
+
+  Object.keys(shapesMap).forEach(shapeKey => {
+    const shape = shapesMap[shapeKey];
+
+    if (shape.propertyIds) {
+      shape.propertyIds.forEach(propertyId => {
+        shape.properties.push(...propertiesMap[propertyId]);
+      });
     }
   });
 
   return Object.values(shapesMap);
-}
+};
 
 // Funktion zum Abrufen einer Shape nach ID
-export const getShapeById = async (id: string): Promise<ShaclShape[]> => {
-  const response = await getSchemaById(id);
+export const getShaclShapeById = async (shaclShapeId: string): Promise<Shape[]> => {
+  const response = await getSchemaById(shaclShapeId);
   const parsedQuads = await parseSingleShape(response);
-  return createShapeObjects(id, parsedQuads);
+  return createShapeObjects(shaclShapeId, parsedQuads);
+}
+
+export const getShapeByName = async (shaclShapeId: string, name: string) => {
+  const shaclShape = await getShaclShapeById(shaclShapeId);
+  return shaclShape.find(shape => shape.shortSubject === name);
 }

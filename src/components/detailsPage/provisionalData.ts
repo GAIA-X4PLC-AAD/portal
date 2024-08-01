@@ -1,4 +1,5 @@
-import { Ontology, Shape } from '../../types/shapesAndOntologies.model';
+import { Ontology } from '../../types/ontologies.model';
+import { Shape } from '../../types/shapes.model';
 
 export const testShape1: Shape = {
   comment: 'comment',

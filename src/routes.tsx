@@ -17,6 +17,7 @@ import AboutPage from './components/help/AboutPage'
 import SupportPage from './components/help/SupportPage'
 import LoginFail from './components/login/LoginFail';
 import OnboardingPage from './components/onboarding/onboarding_page';
+import Ontologies from './components/ontologies/Ontologies';
 import Participants from './components/participants/Participants';
 import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
 import ProvideAttributes from './components/provide/ProvideAttributes';
@@ -25,7 +26,6 @@ import ProvideSelection from './components/provide/ProvideSelection';
 import Resources from './components/resources/Resources';
 import ServiceOfferings from './components/serviceOfferings/ServiceOfferings';
 import Shapes from './components/shapes/Shapes';
-import ShapesAndOntologies from './components/shapesAndOntologies/ShapesAndOntologies';
 import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
 import DetailsPage from './pages/details/DetailsPage';
 import Home from './pages/home/Home';
@@ -70,9 +70,9 @@ export const routes = (
       <Route path="/lcm/:id/:index" element={ViewContainer(<LcmServices />)} />
       <Route path="/about" element={ViewContainer(<ProtectedRoute><AboutPage /></ProtectedRoute>)} />
       <Route path="/support" element={ViewContainer(<ProtectedRoute><SupportPage /></ProtectedRoute>)} />
-      <Route path="/shapesAndOntologies" element={ViewContainer(<ShapesAndOntologies />)} />
-      <Route path="/shapesAndOntologies/details/*" element={ViewContainer(<OntologiesDetailsPage />)} />
-      <Route path="/shapesAndOntologies/graph/*" element={ViewContainer(<OwlGraph />)} />
+      <Route path="/ontologies" element={ViewContainer(<Ontologies />)} />
+      <Route path="/ontologies/details/*" element={ViewContainer(<OntologiesDetailsPage />)} />
+      <Route path="/ontologies/graph/*" element={ViewContainer(<OwlGraph />)} />
       <Route path="/shapes" element={ViewContainer(<Shapes />)} />
       <Route path="/shapes/details/*" element={ViewContainer(<ShapesDetailsPage />)} />
     </Routes>

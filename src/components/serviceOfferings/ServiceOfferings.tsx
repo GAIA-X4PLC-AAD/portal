@@ -13,7 +13,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import car from '../../assets/car.gif';
 import { AuthContext } from '../../context/AuthContextProvider';
 import { ApiService } from '../../services/ApiService';
-import { ShaclShape } from '../../types/shaclShape.model';
+import { Shape } from '../../types/shapes.model';
 import { RDFParser } from '../../utils/RDFParser';
 import { ServiceOffering, mapServiceOfferings } from '../../utils/dataMapper';
 import { getShapeProperties } from '../../utils/shapeHelpers';
@@ -31,14 +31,14 @@ const ServiceOfferings = () => {
   const authContext = useContext(AuthContext);
   const isAuthenticated = authContext.isAuthenticated;
 
-  const initShape: ShaclShape = {
-    shape: '',
-    short_shape: '',
+  const initShape: Shape = {
+    shaclShapeId: '',
+    shortSubject: '',
     properties: [],
   };
 
-  const [selectedShape, setSelectedShape] = useState<ShaclShape>(initShape);
-  const [shapes, setShapes] = useState<ShaclShape[]>([]);
+  const [selectedShape, setSelectedShape] = useState<Shape>(initShape);
+  const [shapes, setShapes] = useState<Shape[]>([]);
   const [isShapeSelected, setIsShapeSelected] = useState(false);
   const [isPropertySelected, setIsPropertySelected] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState('');
@@ -79,7 +79,7 @@ const ServiceOfferings = () => {
   const handleShapeChange = (event: SelectChangeEvent) => {
     let uiSelectedShape = event.target.value;
     shapes.forEach((shape) => {
-      if (shape.short_shape === uiSelectedShape) {
+      if (shape.shortSubject === uiSelectedShape) {
         setSelectedShape(shape);
       }
     });
@@ -93,7 +93,7 @@ const ServiceOfferings = () => {
 
   async function handleSearch() {
     setIsLoading(true);
-    const targetClass = selectedShape.short_shape.replace('Shape', '');
+    const targetClass = selectedShape.shortSubject.replace('Shape', '');
     const selfDescriptions = await ApiService.getSelfDescriptionsForShape(
       authContext,
       targetClass
@@ -116,13 +116,13 @@ const ServiceOfferings = () => {
             <Select
               labelId="shape-label"
               id="shape-select"
-              value={selectedShape.short_shape}
+              value={selectedShape.shortSubject}
               label="SHACL Shape"
               onChange={handleShapeChange}
             >
               {shapes.map((shape) => (
-                <MenuItem key={shape.short_shape} value={shape.short_shape}>
-                  {shape.short_shape}
+                <MenuItem key={shape.shortSubject} value={shape.shortSubject}>
+                  {shape.shortSubject}
                 </MenuItem>
               ))}
             </Select>

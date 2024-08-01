@@ -23,8 +23,8 @@ const ShapeActions: FC = () => {
         <Title>{t('dashboard.actions')}</Title>
       </div>
       <div className={styles['buttons']}>
-        <GaiaXButton label={t('details.download-json')} handleOnClick={() => downloadJsonFile(shape.id)} width={'100%'}/>
-        <GaiaXButton label={t('details.download-file')} handleOnClick={() => downloadTurtleFile(shape.id)} width={'100%'}/>
+        <GaiaXButton label={t('details.download-json')} handleOnClick={() => downloadJsonFile(shape.shaclShapeId)} width={'100%'}/>
+        <GaiaXButton label={t('details.download-file')} handleOnClick={() => downloadTurtleFile(shape.shaclShapeId)} width={'100%'}/>
       </div>
     </div>
   );

@@ -505,7 +505,7 @@
     "more-details": "Mehr Details",
     "view-graph": "Graph anzeigen",
     "download-file": "Turtle-Datei herunterladen",
-    "download-json": "Json-Datei herunterladen",
+    "download-json": "Json-Datei herunterladen"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X konform",
@@ -517,7 +517,7 @@
     "title": "Ontologie",
     "titles": "Ontologien",
     "no-ontologies-available": "Keine Ontologien gefunden",
-    "search-bar-text": "Suchen Sie nach speziellen Shapes oder Ontologien",
+    "search-bar-text": "Suchen Sie nach speziellen Ontologien",
     "related-ontologies": "Verwandte Ontologien",
     "not-found": "Ontologie nicht gefunden"
   },

@@ -39,10 +39,6 @@ export default function DetailsPage() {
     }
   }, [resourceId, authContext.isAuthenticated]);
 
-  if (!authContext.isAuthenticated) {
-    return <p>You need to be authenticated to view this page.</p>;
-  }
-
   if (isLoading) {
     return (
       <div className="newCarLoader">

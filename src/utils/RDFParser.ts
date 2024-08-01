@@ -1,13 +1,12 @@
 import * as $rdf from 'rdflib';
 
-import { ShaclShape } from '../types/shaclShape.model';
-import { ShapeProperty } from '../types/shapeProperty.model';
+import { Shape, ShapeProperties } from '../types/shapes.model';
 
 import { trimShapes } from './shapeHelpers';
 
 export const RDFParser = {
 
-  parseShapesFromRdfResponse(rdfData: any): ShaclShape[] {
+  parseShapesFromRdfResponse(rdfData: any): Shape[] {
     // Step 1: Create a rdf graph
     const store = $rdf.graph();
     const baseUriNode = 'https://w3id.org/gaia-x/core#';  // Create a base URI node //TODO:Throws error by parsing
@@ -21,13 +20,13 @@ export const RDFParser = {
       // console.info('Error parsing Turtle data:', error);
     }
 
-    let items: ShaclShape[] = [];
+    let items: Shape[] = [];
     items = this.parseNodeShapes(store);
     return items;
   },
 
-  parseNodeShapes(store: any): ShaclShape[] {
-    let shapes: Array<ShaclShape> = [];
+  parseNodeShapes(store: any): Shape[] {
+    let shapes: Array<Shape> = [];
 
     // Create NamedNodes
     const predicateURI = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'; // Replace with your predicate URI
@@ -44,9 +43,9 @@ export const RDFParser = {
       let short_shape = trimShapes(shape);
       let properties = parseProperties(store, shape);
 
-      const shaclShape: ShaclShape = {
-        shape: shape,
-        short_shape: short_shape,
+      const shaclShape: Shape = {
+        shaclShapeId: shape,
+        shortSubject: short_shape,
         properties: properties,
       };
 
@@ -56,8 +55,8 @@ export const RDFParser = {
   },
 }
 
-const parseProperties = (store: $rdf.Store, selectedShape: string): ShapeProperty[] | undefined => {
-  let properties: ShapeProperty[] = [];
+const parseProperties = (store: $rdf.Store, selectedShape: string): ShapeProperties[] | undefined => {
+  let properties: ShapeProperties[] = [];
   // Create NamedNodes
   const subjectNode = $rdf.sym(selectedShape);
   const predicateURI = 'http://www.w3.org/ns/shacl#property';
@@ -75,7 +74,7 @@ const parseProperties = (store: $rdf.Store, selectedShape: string): ShapePropert
     const propertyDescriptionPredicateNode = $rdf.sym('http://www.w3.org/ns/shacl#description');
     const propertyDescription = store.anyValue(triple.object, propertyDescriptionPredicateNode);
 
-    let property: ShapeProperty = {
+    let property: ShapeProperties = {
       path: '',
     };
 

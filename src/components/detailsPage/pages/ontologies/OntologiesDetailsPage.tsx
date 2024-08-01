@@ -1,12 +1,11 @@
 import { OntologyContext } from 'context/OntologyContext';
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import car from '../../../../assets/car.gif';
-import { AuthContext } from '../../../../context/AuthContextProvider';
 import { getOntologyById } from '../../../../services/ontologyService.utils';
-import { Ontology } from '../../../../types/shapesAndOntologies.model';
+import { Ontology } from '../../../../types/ontologies.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
 import DetailsContent from '../../layout/content/DetailsContent';
@@ -21,7 +20,6 @@ import OntologySuitableOfferings from './components/suitableOfferings/OntologySu
 const OntologiesDetailsPage: FC = () => {
   const { t } = useTranslation();
   const { '*': id } = useParams();
-  const authContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
   const [ontology, setOntology] = useState<Ontology>();
 
@@ -37,15 +35,9 @@ const OntologiesDetailsPage: FC = () => {
       }
     };
 
-    if (id && authContext.isAuthenticated) {
-      loadOntology();
-    }
+    loadOntology();
 
-  }, [id, authContext.isAuthenticated]);
-
-  if (!authContext.isAuthenticated) {
-    return <p>You need to be authenticated to view this page.</p>;
-  }
+  }, [id]);
 
   if (isLoading) {
     return (

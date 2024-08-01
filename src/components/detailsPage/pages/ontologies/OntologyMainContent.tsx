@@ -25,26 +25,6 @@ const OntologyMainContent: FC = () => {
     <div className={styles['container']}>
       <Title>{t('ontologies.title')}</Title>
       <Text>{ontology.description}</Text>
-
-      {ontology.relatedShapes && ontology.relatedShapes.length > 0 && (
-        <div style={{ gap: '1px',  textAlign: 'left' }}>
-          <Title>{t('shapes.titles')}</Title>
-          {ontology.relatedShapes.map((shape, index) => (
-            <div key={index} onClick={() => handleNavigationToShapeDetailsPage(shape.id)} style={{ cursor: 'pointer' }}>
-              <Text>{shape.subject.replace(new RegExp(`^${ontology.namespace}`), '')}</Text>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {ontology.relatedOntologies && ontology.relatedOntologies.length > -1 && (
-        <div style={{ gap: '1px', textAlign: 'left' }}>
-          <Title>{t('ontologies.related-ontologies')}</Title>
-          {ontology.relatedOntologies.map((relatedOntology, index) => (
-            <Text key={index}>{relatedOntology.subject}</Text>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

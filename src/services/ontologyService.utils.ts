@@ -1,9 +1,9 @@
 import * as N3 from 'n3';
 import { Quad } from 'n3';
 
-import { Ontology, Shape } from '../types/shapesAndOntologies.model';
+import { Ontology } from '../types/ontologies.model';
 
-import { getAllShapes, getSchemaById } from './SchemaApiService';
+import { getSchemaById } from './SchemaApiService';
 
 export const fetchOntologies = async (ontologiesStringArray: string[]) => {
   const promises = ontologiesStringArray.map(async id => {
@@ -27,13 +27,10 @@ export const parseSingleOntology = (item: string) => {
   return quads;
 }
 
-export const createOntologyObject = (quads: Quad[], shapes?: Shape[]): Ontology => {
+export const createOntologyObject = (quads: Quad[]): Ontology => {
   const firstSubject = quads.length > 0 ? quads[0].subject.id : 'No subject available!';
   const nodes: { id: string; label: string; type: string }[] = [];
   const links: { source: string; target: string }[] = [];
-  const namespace: string = firstSubject.substring(0, firstSubject.lastIndexOf('/')+1);
-  const relatedShapes: Shape[] = [];
-  const classes: string[] = [];
 
   let subject = firstSubject;
   let contributors: string[] = [];
@@ -71,15 +68,6 @@ export const createOntologyObject = (quads: Quad[], shapes?: Shape[]): Ontology 
         version = objectId.replace(/(^"|"$)/g, '').split('"^^')[0];
         break;
       }
-    } else {
-      switch (objectId) {
-      case 'http://www.w3.org/2000/01/rdf-schema#Class':
-        classes.push(subjectId.replace(/(^"|"$)/g, ''));
-        break;
-      case 'http://www.w3.org/2002/07/owl#Class':
-        classes.push(subjectId.replace(/(^"|"$)/g, ''));
-        break;
-      }
     }
   });
 
@@ -93,17 +81,13 @@ export const createOntologyObject = (quads: Quad[], shapes?: Shape[]): Ontology 
     contributors,
     description,
     version,
-    namespace,
-    classes,
-    relatedShapes,
     nodes,
     links
   };
 };
 
 export const getOntologyById = async (id: string) => {
-  const shapes = await getAllShapes();
   const response = await getSchemaById(id);
   const parsedOntology = await parseSingleOntology(response);
-  return createOntologyObject(parsedOntology, shapes);
+  return createOntologyObject(parsedOntology);
 }

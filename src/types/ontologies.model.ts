@@ -9,21 +9,11 @@ export interface Node {
     type: string;
 }
 
-export interface Shape {
-    id: string;
-    subject: string;
-    content: {predicate: string, object: string}[];
-}
-
 export interface Ontology {
     subject: string;
     contributors: string[];
     description: string;
     version: string;
-    namespace: string;
-    classes?: string[];
-    relatedOntologies?: Ontology[];
-    relatedShapes?: Shape[];
     nodes: Node[];
     links: Link[];
 }

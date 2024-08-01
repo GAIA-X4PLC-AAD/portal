@@ -1,10 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
-import { AuthContext } from '../../context/AuthContextProvider';
 import { getAllShapes } from '../../services/SchemaApiService';
-import { Shape } from '../../types/shapesAndOntologies.model';
+import { Shape } from '../../types/shapes.model';
 import Text from '../Text/Text';
 import Header from '../header/Header';
 import ItemCard from '../itemCard/ItemCard';
@@ -14,7 +13,6 @@ import styles from './Shapes.module.css';
 
 const Shapes = () => {
   const { t } = useTranslation();
-  const authContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [originalShapes, setOriginalShapes] = useState<Shape[]>([]);
   const [filteredShapes, setFilteredShapes] = useState<Shape[]>([]);
@@ -24,9 +22,9 @@ const Shapes = () => {
       setIsLoading(true);
       try {
         const fetchedShapes = await getAllShapes();
-        setOriginalShapes(fetchedShapes);
-        setFilteredShapes(fetchedShapes);
-        console.log(fetchedShapes);
+        const sortedShapes = fetchedShapes.sort((a: Shape, b: Shape) => a.shortSubject.localeCompare(b.shortSubject));
+        setOriginalShapes(sortedShapes);
+        setFilteredShapes(sortedShapes);
       } catch (error) {
         console.error('Error fetching self descriptions:', error);
       } finally {
@@ -49,10 +47,6 @@ const Shapes = () => {
       setFilteredShapes(filtered);
     }
   };
-
-  if (!authContext.isAuthenticated) {
-    return <p>You need to be authenticated to view this page.</p>;
-  }
 
   if (isLoading) {
     return (

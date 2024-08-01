@@ -1,13 +1,12 @@
 import { ShapeContext } from 'context/ShapeContext';
-import { FC, useContext, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 // @ts-ignore
 import car from '../../../../assets/car.gif';
-import { AuthContext } from '../../../../context/AuthContextProvider';
-import { getShapeById } from '../../../../services/shapeService.utils';
-import { ShaclShape } from '../../../../types/shaclShape.model';
+import { getShapeByName } from '../../../../services/shapeService.utils';
+import { Shape } from '../../../../types/shapes.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
 import DetailsContent from '../../layout/content/DetailsContent';
@@ -21,15 +20,15 @@ import ShapeSuitableOfferings from './components/suitableOfferings/ShapeSuitable
 
 const ShapesDetailsPage: FC = () => {
   const { t } = useTranslation();
-  const { '*': id } = useParams();
-  const authContext = useContext(AuthContext);
+  const { '*': params } = useParams();
+  const [id, name] = params.split('/');
   const [isLoading, setIsLoading] = useState(true);
-  const [shape, setShape] = useState<ShaclShape>();
+  const [shape, setShape] = useState<Shape>();
 
   useEffect(() => {
     const loadShape = async () => {
       try {
-        const shape = await getShapeById(id);
+        const shape = await getShapeByName(id, name);
         setShape(shape);
       } catch (error) {
         console.error('Error getting shape:', error);
@@ -38,15 +37,9 @@ const ShapesDetailsPage: FC = () => {
       }
     };
 
-    if (id && authContext.isAuthenticated) {
-      loadShape();
-    }
+    loadShape();
 
-  }, [id, authContext.isAuthenticated]);
-
-  if (!authContext.isAuthenticated) {
-    return <p>You need to be authenticated to view this page.</p>;
-  }
+  }, [params]);
 
   if (isLoading) {
     return (
@@ -62,7 +55,7 @@ const ShapesDetailsPage: FC = () => {
 
   return (
     <DetailsPage>
-      <Header title={`${t('shapes.titles')} ${ARROW_RIGHT} ${shape.short_shape}`} />
+      <Header title={`${t('shapes.titles')} ${ARROW_RIGHT} ${shape.subject}`} />
       <ShapeContext.Provider value={shape}>
         <DetailsContent>
           <DetailsMainContent>

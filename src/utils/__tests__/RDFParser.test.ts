@@ -15,7 +15,7 @@ describe('RDF Parser', () => {
       // Then
       let resultList : string[] = [];
       result.forEach(result => {
-        resultList.push(result.short_shape);
+        resultList.push(result.shortSubject);
       });
       expect(resultList).toStrictEqual(expectedShapes);
     });

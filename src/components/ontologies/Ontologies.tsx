@@ -1,22 +1,20 @@
 import MapIcon from '@mui/icons-material/Map';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
-import { AuthContext } from '../../context/AuthContextProvider';
 import { getAllOntologies } from '../../services/SchemaApiService';
-import { Link, Node, Ontology } from '../../types/shapesAndOntologies.model';
+import { Link, Node, Ontology } from '../../types/ontologies.model';
 import RDFVisualization from '../../utils/RDFVisualization';
 import Text from '../Text/Text';
 import Header from '../header/Header';
 import ItemCard from '../itemCard/ItemCard';
 import SearchBar from '../searchBar/SearchBar';
 
-import styles from './ShapesAndOntologies.module.css';
+import styles from './Ontologies.module.css';
 
-const ShapesAndOntologies = () => {
+const Ontologies = () => {
   const { t } = useTranslation();
-  const authContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(false);
   const [showMap, setShowMap] = useState(false);
   const [originalOntologies, setOriginalOntologies] = useState<Ontology[]>([]);
@@ -75,10 +73,6 @@ const ShapesAndOntologies = () => {
     }
   };
 
-  if (!authContext.isAuthenticated) {
-    return <p>You need to be authenticated to view this page.</p>;
-  }
-
   if (isLoading) {
     return (
       <div className="newCarLoader">
@@ -89,7 +83,7 @@ const ShapesAndOntologies = () => {
 
   return (
     <div>
-      <Header title={`${t('left-menu.shapesAndOntologies')}(${filteredOntologies.length} ${t('dashboard.results')})`}/>
+      <Header title={`${t('ontologies.titles')}(${filteredOntologies.length} ${t('dashboard.results')})`}/>
       <div className={styles['shapesAndOntologies-content-container']}>
         <div className={styles['content']}>
           <div className={styles['searchAndButtonContainer']}>
@@ -117,4 +111,4 @@ const ShapesAndOntologies = () => {
   );
 };
 
-export default ShapesAndOntologies;
+export default Ontologies;

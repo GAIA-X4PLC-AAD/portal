@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ShapesAndOntologiesInput } from '../types/shapesAndOntologies.model';
+import { ShapesAndOntologiesInput } from '../types/ontologies.model';
 
 import { fetchOntologies } from './ontologyService.utils';
 import { fetchShapes } from './shapeService.utils';

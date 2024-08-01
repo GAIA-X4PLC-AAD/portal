@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Ontology } from '../../types/shapesAndOntologies.model';
+import { Ontology } from '../../types/ontologies.model';
 import Title from '../Title/Title';
 import GaiaXButton from '../buttons/GaiaXButton';
 
@@ -18,7 +18,7 @@ const OntologyCardContent: FC<IOntologyCardContent> = ({ ontology } ) => {
 
   const handleNavigationToDetailsPage = () => {
     const encodedUri = encodeURIComponent(ontology.subject);
-    navigate(`/shapesAndOntologies/details/${encodedUri}`);
+    navigate(`/ontologies/details/${encodedUri}`);
   }
 
   return (
