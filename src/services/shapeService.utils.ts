@@ -5,7 +5,6 @@ import { Shape, ShapeProperty } from '../types/shapes.model';
 
 import { getSchemaById } from './SchemaApiService';
 
-// Hauptfunktion zum Abrufen der Shapes
 export const fetchShapes = async (shapesStringArray: string[]): Promise<Shape[]> => {
   // const shapesStringArray2 = ['b8eecadef886515092e38c26abcfc8e826a6bd6cde4cc8e4681e1d82f83f7a89']
   const promises = shapesStringArray.map(async id => {
@@ -18,7 +17,6 @@ export const fetchShapes = async (shapesStringArray: string[]): Promise<Shape[]>
   return shapesArrays.flat();
 }
 
-// Funktion zum Parsen der Quads
 export const parseSingleShape = (item: string): Promise<Quad[]> => {
   return new Promise((resolve, reject) => {
     const parser = new N3.Parser();
@@ -35,7 +33,6 @@ export const parseSingleShape = (item: string): Promise<Quad[]> => {
   });
 }
 
-// Funktion zum Erstellen der Shape-Objekte
 export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[] => {
   const shapesMap: Record<string, Shape> = {};
   const propertiesMap: Record<string, ShapeProperty[]> = {};
@@ -69,12 +66,15 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
       if (!propertiesMap[subject]) {
         propertiesMap[subject] = [];
       }
-      propertiesMap[subject].push({ predicate, object });
+
+      const existingProperty = propertiesMap[subject].find(prop => prop.propertyId === subject);
+      if (existingProperty) {
+        existingProperty.values.push({ predicate, object });
+      } else {
+        propertiesMap[subject].push({ propertyId: subject, values: [{ predicate, object }] });
+      }
     }
   });
-
-  console.log(shapesMap);
-  console.log(propertiesMap);
 
   Object.keys(shapesMap).forEach(shapeKey => {
     const shape = shapesMap[shapeKey];
@@ -89,7 +89,6 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
   return Object.values(shapesMap);
 };
 
-// Funktion zum Abrufen einer Shape nach ID
 export const getShaclShapeById = async (shaclShapeId: string): Promise<Shape[]> => {
   const response = await getSchemaById(shaclShapeId);
   const parsedQuads = await parseSingleShape(response);

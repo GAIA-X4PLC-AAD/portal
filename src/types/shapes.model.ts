@@ -7,8 +7,8 @@ export interface Shape {
 }
 
 export interface ShapeProperty {
-    predicate: string;
-    object: string;
+    propertyId: string;
+    values: {predicate: string; object: string;}[];
 }
 
 export interface ShapeProperties {

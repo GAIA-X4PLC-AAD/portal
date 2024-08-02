@@ -15,26 +15,35 @@ const ShapeMainContent: FC = () => {
     return <div>{t('shapes.not-found')}</div>;
   }
 
+  const uniquePredicates = Array.from(new Set(
+    shape.properties.flatMap(property => property.values.map(value => value.predicate))
+  )).sort();
+
   return (
     <div className={styles['container']}>
       <Title>{shape.subject}</Title>
-      <Text>Details:</Text>
+      <Text>Details</Text>
+
       <table className={styles['table']}>
         <thead>
           <tr>
-            <th>Type</th>
-            <th>Value</th>
+            {uniquePredicates.map((predicate, index) => (
+              <th key={index}>{predicate.split('#').pop()}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
           {shape.properties.map((property, index) => (
             <tr key={index}>
-              <td>{property.predicate.split('#').pop()}</td>
-              <td>{property.object}</td>
+              {uniquePredicates.map((predicate, index) => {
+                const value = property.values.find(value => value.predicate === predicate);
+                return <td key={index}>{value ? value.object : ''}</td>;
+              })}
             </tr>
           ))}
         </tbody>
       </table>
+
     </div>
   );
 };
