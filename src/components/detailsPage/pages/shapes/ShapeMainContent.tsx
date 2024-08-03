@@ -15,8 +15,8 @@ const ShapeMainContent: FC = () => {
     return <div>{t('shapes.not-found')}</div>;
   }
 
-  const uniquePredicates = Array.from(new Set(
-    shape.properties.flatMap(property => property.values.map(value => value.predicate))
+  const uniqueTypes = Array.from(new Set(
+    shape.properties.flatMap(property => property.propertyValues.map(value => value.type))
   )).sort();
 
   return (
@@ -27,17 +27,17 @@ const ShapeMainContent: FC = () => {
       <table className={styles['table']}>
         <thead>
           <tr>
-            {uniquePredicates.map((predicate, index) => (
-              <th key={index}>{predicate.split('#').pop()}</th>
+            {uniqueTypes.map((type, index) => (
+              <th key={index}>{type.split('#').pop()}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {shape.properties.map((property, index) => (
             <tr key={index}>
-              {uniquePredicates.map((predicate, index) => {
-                const value = property.values.find(value => value.predicate === predicate);
-                return <td key={index}>{value ? value.object : ''}</td>;
+              {uniqueTypes.map((type, index) => {
+                const value = property.propertyValues.find(value => value.type === type);
+                return <td key={index}>{value ? value.value : ''}</td>;
               })}
             </tr>
           ))}

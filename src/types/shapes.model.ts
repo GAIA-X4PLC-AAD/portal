@@ -9,7 +9,7 @@ export interface Shape {
 
 export interface ShapeProperty {
     propertyId: string;
-    values: {predicate: string; object: string;}[];
+    propertyValues: {type: string; value: string;}[];
 }
 
 export interface ShapeProperties {
@@ -20,9 +20,4 @@ export interface ShapeProperties {
     minCount?: number;
     maxCount?: number;
     datatype?: string;
-}
-
-export interface shaclShape {
-    shaclShapeId: string;
-    shapes: Shape[];
 }

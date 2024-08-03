@@ -21,7 +21,7 @@ export const parseSingleShape = (item: string): Promise<Quad[]> => {
   return new Promise((resolve, reject) => {
     const parser = new N3.Parser();
     const quads: Quad[] = [];
-    parser.parse(item, (error, quad, prefixes) => {
+    parser.parse(item, (error, quad) => {
       if (error) {
         reject(error);
       } else if (quad) {
@@ -75,9 +75,9 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
 
       const existingProperty = propertiesMap[subject].find(prop => prop.propertyId === subject);
       if (existingProperty) {
-        existingProperty.values.push({ predicate, object });
+        existingProperty.propertyValues.push({ type: predicate, value: object });
       } else {
-        propertiesMap[subject].push({ propertyId: subject, values: [{ predicate, object }] });
+        propertiesMap[subject].push({ propertyId: subject, propertyValues: [{ type: predicate, value: object }] });
       }
     }
   });
