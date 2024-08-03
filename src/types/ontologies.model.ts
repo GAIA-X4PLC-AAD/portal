@@ -1,3 +1,5 @@
+import { Shape } from './shapes.model';
+
 export interface Link {
     source: string;
     target: string;
@@ -16,6 +18,7 @@ export interface Ontology {
     version: string;
     nodes: Node[];
     links: Link[];
+    relatedShapes: Shape[];
 }
 
 export interface ShapesAndOntologiesInput {

@@ -3,7 +3,7 @@ import { Quad } from 'n3';
 
 import { Shape, ShapeProperty } from '../types/shapes.model';
 
-import { getSchemaById } from './SchemaApiService';
+import { getAllShapes, getSchemaById } from './SchemaApiService';
 
 export const fetchShapes = async (shapesStringArray: string[]): Promise<Shape[]> => {
   // const shapesStringArray2 = ['b8eecadef886515092e38c26abcfc8e826a6bd6cde4cc8e4681e1d82f83f7a89']
@@ -38,7 +38,6 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
   const propertiesMap: Record<string, ShapeProperty[]> = {};
 
   quads.forEach(quad => {
-    console.log(quad);
     const subject = quad.subject.value;
     const predicate = quad.predicate.value;
     const object = quad.object.value;
@@ -54,14 +53,21 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
           subject,
           shortSubject: '',
           propertyIds: [],
-          properties: []
+          properties: [],
+          targetClasses: [],
         };
       }
+
       if (isProperty) {
         shapesMap[subject].propertyIds.push(object);
       } else {
         shapesMap[subject].shortSubject = object.includes('#') ? object.split('#').pop() || object : object.split('/').pop() || object;
       }
+
+      if (isTargetClass) {
+        shapesMap[subject].targetClasses.push(object)
+      }
+
     } else {
       if (!propertiesMap[subject]) {
         propertiesMap[subject] = [];
@@ -84,7 +90,7 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
         shape.properties.push(...propertiesMap[propertyId]);
       });
     }
-  });
+  })
 
   return Object.values(shapesMap);
 };
@@ -99,3 +105,7 @@ export const getShapeByName = async (shaclShapeId: string, name: string) => {
   const shaclShape = await getShaclShapeById(shaclShapeId);
   return shaclShape.find(shape => shape.shortSubject === name);
 }
+
+export const getRelatedShapes = async (targetClass: string): Promise<Shape[]> => {
+  const shapes = await getAllShapes();
+  return shapes.filter(shape => shape.targetClasses.some(tc => tc.includes(targetClass)));}

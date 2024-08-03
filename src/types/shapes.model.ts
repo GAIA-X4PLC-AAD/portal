@@ -4,6 +4,7 @@ export interface Shape {
     shortSubject?: string;
     propertyIds?: string[];
     properties: ShapeProperty[];
+    targetClasses: string[];
 }
 
 export interface ShapeProperty {
@@ -19,4 +20,9 @@ export interface ShapeProperties {
     minCount?: number;
     maxCount?: number;
     datatype?: string;
+}
+
+export interface shaclShape {
+    shaclShapeId: string;
+    shapes: Shape[];
 }

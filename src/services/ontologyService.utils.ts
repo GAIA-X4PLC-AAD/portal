@@ -2,14 +2,17 @@ import * as N3 from 'n3';
 import { Quad } from 'n3';
 
 import { Ontology } from '../types/ontologies.model';
+import { Shape } from '../types/shapes.model';
 
 import { getSchemaById } from './SchemaApiService';
+import { getRelatedShapes } from './shapeService.utils';
 
 export const fetchOntologies = async (ontologiesStringArray: string[]) => {
   const promises = ontologiesStringArray.map(async id => {
+    const relatedShapes = await getRelatedShapes(id);
     const promise = await getSchemaById(id);
     const parsedOntology = await parseSingleOntology(promise);
-    return createOntologyObject(parsedOntology);
+    return createOntologyObject(parsedOntology, relatedShapes);
   });
 
   return await Promise.all(promises);
@@ -27,7 +30,7 @@ export const parseSingleOntology = (item: string) => {
   return quads;
 }
 
-export const createOntologyObject = (quads: Quad[]): Ontology => {
+export const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ontology => {
   const firstSubject = quads.length > 0 ? quads[0].subject.id : 'No subject available!';
   const nodes: { id: string; label: string; type: string }[] = [];
   const links: { source: string; target: string }[] = [];
@@ -82,12 +85,14 @@ export const createOntologyObject = (quads: Quad[]): Ontology => {
     description,
     version,
     nodes,
-    links
+    links,
+    relatedShapes,
   };
 };
 
 export const getOntologyById = async (id: string) => {
+  const relatedShapes = await getRelatedShapes(id);
   const response = await getSchemaById(id);
   const parsedOntology = await parseSingleOntology(response);
-  return createOntologyObject(parsedOntology);
+  return createOntologyObject(parsedOntology, relatedShapes);
 }
