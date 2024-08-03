@@ -34,17 +34,29 @@ export const getSchemaById = async (id: string) => {
   }
 };
 
-export const getConvertedFile = async (id: string)=> {
-  const requestBody = await getSchemaById(id);
-  const endpoint = 'https://sd-creation-wizard-api.gxfs.gx4fm.org/convertFile';
-
+export const getConvertedFile = async (id: string) => {
   try {
-    const response = await axios.post(endpoint, requestBody);
+    const textContent = await getSchemaById(id);
+
+    const blob = new Blob([textContent], { type: 'text/plain' });
+
+    const formData = new FormData();
+    formData.append('file', blob, 'shaclFile.shacl');
+
+    const endpoint = 'https://sd-creation-wizard-api.gxfs.gx4fm.org/convertFile';
+
+    const response = await axios.post(endpoint, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+
     return response.data;
   } catch (error) {
     console.error('Error:', error);
+    throw error;
   }
-}
+};
 
 export const getAllOntologies = async () => {
   const response = await getAllSchemas();

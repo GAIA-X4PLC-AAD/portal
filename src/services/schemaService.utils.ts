@@ -16,17 +16,22 @@ export const downloadTurtleFile = async (id: string) => {
 }
 
 export const downloadJsonFile = async (id: string) => {
-  const response = await getConvertedFile(id);
-  const filename = id + '.json';
+  try {
+    const response = await getConvertedFile(id);
+    const filename = id + '.json';
 
-  const element = document.createElement('a');
-  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(response));
-  element.setAttribute('download', filename);
+    const blob = new Blob([JSON.stringify(response, null, 2)], { type: 'application/json' });
 
-  element.style.display = 'none';
-  document.body.appendChild(element);
+    const element = document.createElement('a');
+    element.href = URL.createObjectURL(blob);
+    element.download = filename;
 
-  element.click();
+    document.body.appendChild(element);
 
-  document.body.removeChild(element);
-}
+    element.click();
+
+    document.body.removeChild(element);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
