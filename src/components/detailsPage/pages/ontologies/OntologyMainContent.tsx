@@ -30,7 +30,7 @@ const OntologyMainContent: FC = () => {
         <div style={{ textAlign: 'left' }}>
           <Text>{t('shapes.titles')}</Text>
           {ontology.relatedShapes.map((shape, index) => (
-            <div style={{ cursor: 'pointer' }} key={index} onClick={() => handleNavigationToShapeDetailsPage(shape)}>
+            <div className={styles['link']} key={index} onClick={() => handleNavigationToShapeDetailsPage(shape)}>
               {shape.subject}
             </div>
           ))}
