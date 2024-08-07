@@ -7,10 +7,6 @@ import { fetchShapes } from './shapeService.utils';
 
 const serverUrl: string = 'https://fc-server.gxfs.gx4fm.org';
 
-const encodeString = (uri: string): string => {
-  return encodeURIComponent(uri);
-}
-
 const getAllSchemas = async (): Promise<ShapesAndOntologiesInput | undefined> => {
   const endpoint = serverUrl + '/schemas';
 
@@ -23,7 +19,7 @@ const getAllSchemas = async (): Promise<ShapesAndOntologiesInput | undefined> =>
 };
 
 export const getSchemaById = async (id: string) => {
-  const encodedUrl = encodeString(id);
+  const encodedUrl = encodeURIComponent(id);
   const endpoint = serverUrl + '/schemas/' + encodedUrl;
 
   try {

@@ -1,7 +1,7 @@
 import { ShapeContext } from 'context/ShapeContext';
 import { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 // @ts-ignore
 import car from '../../../../assets/car.gif';
@@ -20,7 +20,8 @@ import ShapeSuitableOfferings from './components/suitableOfferings/ShapeSuitable
 
 const ShapesDetailsPage: FC = () => {
   const { t } = useTranslation();
-  const { '*': id } = useParams();
+  const location = useLocation();
+  const id = location.pathname.split('/shapes/details/')[1] + location.hash;
   const [isLoading, setIsLoading] = useState(true);
   const [shape, setShape] = useState<Shape>();
 
