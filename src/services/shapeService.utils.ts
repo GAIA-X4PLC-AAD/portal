@@ -53,6 +53,7 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
           shaclShapeId,
           subject,
           shortSubject: '',
+          classname: '',
           propertyIds: [],
           properties: [],
           targetClasses: [],
@@ -64,10 +65,11 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
         shapesMap[subject].propertyIds.push(object);
       } else {
         shapesMap[subject].shortSubject = object.includes('#') ? object.split('#').pop() || object : object.split('/').pop() || object;
+        shapesMap[subject].classname = object;
       }
 
       if (isTargetClass) {
-        shapesMap[subject].targetClasses.push(object)
+        shapesMap[subject].targetClasses.push(object);
       }
 
     } else {

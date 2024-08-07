@@ -521,7 +521,8 @@
     "no-ontologies-available": "No ontologies available",
     "search-bar-text": "Search for special ontologies",
     "related-ontologies": "Related Ontologies",
-    "not-found": "Ontology not found"
+    "not-found": "Ontology not found",
+    "classes": "Classes"
   },
   "shapes": {
     "title": "Shape",
