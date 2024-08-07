@@ -95,17 +95,12 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
   return Object.values(shapesMap);
 };
 
-export const getShaclShapeById = async (shaclShapeId: string): Promise<Shape[]> => {
-  const response = await getSchemaById(shaclShapeId);
-  const parsedQuads = await parseSingleShape(response);
-  return createShapeObjects(shaclShapeId, parsedQuads);
-}
-
-export const getShapeByName = async (shaclShapeId: string, name: string) => {
-  const shaclShape = await getShaclShapeById(shaclShapeId);
-  return shaclShape.find(shape => shape.shortSubject === name);
+export const getShapeByName = async (name: string): Promise<Shape | undefined> => {
+  const allShapes = await getAllShapes();
+  return allShapes ? allShapes.find(shape => shape.subject === name) : undefined;
 }
 
 export const getRelatedShapes = async (targetClass: string): Promise<Shape[]> => {
   const shapes = await getAllShapes();
-  return shapes.filter(shape => shape.targetClasses.some(tc => tc.includes(targetClass)));}
+  return shapes.filter(shape => shape.targetClasses.some(tc => tc.includes(targetClass)));
+}

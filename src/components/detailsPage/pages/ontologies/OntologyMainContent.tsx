@@ -15,7 +15,7 @@ const OntologyMainContent: FC = () => {
   const ontology = useContext(OntologyContext);
 
   const handleNavigationToShapeDetailsPage = (shape: Shape) => {
-    navigate(`/shapes/details/${shape.shaclShapeId}/${shape.shortSubject}`);
+    navigate(`/shapes/details/${shape.subject}`);
   }
 
   if (!ontology) {

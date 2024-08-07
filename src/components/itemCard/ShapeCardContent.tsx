@@ -17,7 +17,7 @@ const ShapeCardContent: FC<IShapeCardContent> = ({ shape } ) => {
   const navigate = useNavigate();
 
   const handleNavigationToDetailsPage = () => {
-    navigate(`/shapes/details/${shape.shaclShapeId}/${shape.shortSubject}`);
+    navigate(`/shapes/details/${shape.subject}`);
   }
 
   return (

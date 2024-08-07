@@ -20,15 +20,14 @@ import ShapeSuitableOfferings from './components/suitableOfferings/ShapeSuitable
 
 const ShapesDetailsPage: FC = () => {
   const { t } = useTranslation();
-  const { '*': params } = useParams();
-  const [id, name] = params.split('/');
+  const { '*': id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [shape, setShape] = useState<Shape>();
 
   useEffect(() => {
     const loadShape = async () => {
       try {
-        const shape = await getShapeByName(id, name);
+        const shape = await getShapeByName(id);
         setShape(shape);
       } catch (error) {
         console.error('Error getting shape:', error);
@@ -39,7 +38,7 @@ const ShapesDetailsPage: FC = () => {
 
     loadShape();
 
-  }, [params]);
+  }, [id]);
 
   if (isLoading) {
     return (

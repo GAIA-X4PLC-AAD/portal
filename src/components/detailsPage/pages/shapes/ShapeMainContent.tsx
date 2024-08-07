@@ -1,18 +1,27 @@
 import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { ShapeContext } from '../../../../context/ShapeContext';
-import Text from '../../../Text/Text';
+import { getShapeByName } from '../../../../services/shapeService.utils';
 import Title from '../../../Title/Title';
 
 import styles from './ShapeMainContent.module.css';
 
 const ShapeMainContent: FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const shape = useContext(ShapeContext);
 
   if (!shape) {
     return <div>{t('shapes.not-found')}</div>;
+  }
+
+  const handleNavigationToDetailsPage = async (shapeName: string) => {
+    const shapeToLink = await getShapeByName(shapeName);
+    if (shapeToLink) {
+      navigate(`/shapes/details/${shapeToLink.subject}`);
+    }
   }
 
   const uniqueTypes = Array.from(new Set(
@@ -22,7 +31,6 @@ const ShapeMainContent: FC = () => {
   return (
     <div className={styles['container']}>
       <Title>{shape.subject}</Title>
-      <Text>Details</Text>
 
       <table className={styles['table']}>
         <thead>
@@ -37,7 +45,11 @@ const ShapeMainContent: FC = () => {
             <tr key={index}>
               {uniqueTypes.map((type, index) => {
                 const value = property.propertyValues.find(value => value.type === type);
-                return <td key={index}>{value ? value.value : ''}</td>;
+                if (value && value.value && type === 'http://www.w3.org/ns/shacl#node') {
+                  return <td key={index} className={styles['link']} onClick={() => handleNavigationToDetailsPage(value.value)}>{value ? value.value : ''}</td>;
+                } else {
+                  return <td key={index}>{value ? value.value : ''}</td>;
+                }
               })}
             </tr>
           ))}
