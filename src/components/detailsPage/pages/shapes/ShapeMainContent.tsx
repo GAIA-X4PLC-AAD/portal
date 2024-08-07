@@ -26,7 +26,7 @@ const ShapeMainContent: FC = () => {
 
   const uniqueTypes = Array.from(new Set(
     shape.properties.flatMap(property => property.propertyValues.map(value => value.type))
-  )).sort();
+  ));
 
   return (
     <div className={styles['container']}>

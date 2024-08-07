@@ -11,7 +11,12 @@ export interface Shape {
 
 export interface ShapeProperty {
     propertyId: string;
-    propertyValues: {type: string; value: string;}[];
+    propertyValues: PropertyValue[];
+}
+
+export interface PropertyValue {
+    type: string;
+    value: string;
 }
 
 export interface ShapeProperties {
