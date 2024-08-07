@@ -36,6 +36,7 @@ export const parseSingleShape = (item: string): Promise<Quad[]> => {
 export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[] => {
   const shapesMap: Record<string, Shape> = {};
   const propertiesMap: Record<string, ShapeProperty[]> = {};
+  const nodesMap: Record<string, string[]> = {};
 
   quads.forEach(quad => {
     const subject = quad.subject.value;
@@ -55,6 +56,7 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
           propertyIds: [],
           properties: [],
           targetClasses: [],
+          nodes: [],
         };
       }
 
@@ -79,6 +81,14 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
       } else {
         propertiesMap[subject].push({ propertyId: subject, propertyValues: [{ type: predicate, value: object }] });
       }
+
+      if (!nodesMap[subject]) {
+        nodesMap[subject] = [];
+      }
+
+      if (predicate === 'http://www.w3.org/ns/shacl#node') {
+        nodesMap[subject].push(object);
+      }
     }
   });
 
@@ -88,6 +98,7 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
     if (shape.propertyIds) {
       shape.propertyIds.forEach(propertyId => {
         shape.properties.push(...propertiesMap[propertyId]);
+        shape.nodes.push(...nodesMap[propertyId]);
       });
     }
   })

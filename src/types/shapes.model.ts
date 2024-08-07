@@ -5,6 +5,7 @@ export interface Shape {
     propertyIds?: string[];
     properties: ShapeProperty[];
     targetClasses: string[];
+    nodes: string[];
 }
 
 export interface ShapeProperty {
