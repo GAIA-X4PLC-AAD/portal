@@ -2,21 +2,18 @@ import Title from 'components/Title/Title';
 import { useContext } from 'react';
 
 import { SelfDescriptionContext } from '../../../../../../context/SelfDescriptionContext';
+import VcMapComponent from '../../../../../VcMapComponent/VcMapComponent';
 
 import styles from './ResourceMap.module.css';
 
 export const ResourceMap = () => {
   const selfDescription = useContext(SelfDescriptionContext)
+  const geoJSON  = './../../vienna-streets.geojson';
 
   return (
     <div className={styles['map-card-container']}>
       <Title>Map</Title>
-      <img
-        src="https://media.wired.com/photos/59269cd37034dc5f91bec0f1/191:100/w_1280,c_limit/GoogleMapTA.jpg"
-        alt="Map of a location"
-        width={400}
-        height={350}
-      />
+      <VcMapComponent geoJSON={geoJSON}/>
     </div>
   );
 }
