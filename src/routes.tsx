@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom';
 
 import WorkInProgress from './WorkInProgress';
 import { Column } from './common/styles';
-import VcMapPage from './components/VcMapComponent/VcMapPage';
 import AccountHome from './components/account/AccountHome';
 import Provider from './components/account/Provider';
 import DashboardPage from './components/dashboard/dashboard_page';
@@ -49,7 +48,6 @@ export const routes = (
       <Route path="/shapes/details/*" element={ViewContainer(<ShapesDetailsPage />)} />
       <Route path="/about" element={ViewContainer(<ProtectedRoute><AboutPage /></ProtectedRoute>)} />
       <Route path="/support" element={ViewContainer(<ProtectedRoute><SupportPage /></ProtectedRoute>)} />
-      <Route path="/vcmap" element={ViewContainer(<VcMapPage />)} />
 
       <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
       <Route path="/participants" element={ViewContainer(<Participants />)} />
