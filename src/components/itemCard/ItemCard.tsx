@@ -25,9 +25,9 @@ const ItemCard: FC<IItemCard> = ({ label, isGaiaXCompliant, ontology, shape }) =
         <Title>{label}</Title>
         {isGaiaXCompliant === undefined ? null : (
           isGaiaXCompliant ? (
-            <p>{t('resources.is-gaia-x-compliant')}</p>
+            <p>{t('common.is-gaia-x-compliant')}</p>
           ) : (
-            <p>{t('resources.not-gaia-x-compliant')}</p>
+            <p>{t('common.not-gaia-x-compliant')}</p>
           )
         )}
       </div>

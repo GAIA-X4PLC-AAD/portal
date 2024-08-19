@@ -5,10 +5,10 @@ export const useNavbar = () => {
 
   return [
     // These were commented out for the Hannover Fair - they will be added back later
-    // {
-    //   path: "/service-offerings",
-    //   navigationItemName: t("left-menu.tooltip.service-offerings"),
-    // },
+    {
+      path: '/service-offerings',
+      navigationItemName: t('service-offerings.title'),
+    },
     // {
     //   path: "/participants",
     //   navigationItemName: t("left-menu.tooltip.participants"),

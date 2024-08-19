@@ -2,7 +2,7 @@ import Title from 'components/Title/Title';
 import GaiaXButton from 'components/buttons/GaiaXButton';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { ServiceOffering, Resource } from 'utils/dataMapper';
+import { Resource, ServiceOffering } from 'utils/dataMapper';
 
 import { Ontology } from '../../utils/ontologyMapper';
 
@@ -46,18 +46,18 @@ export default function SelfDescriptionCard({
   };
 
   return (
-    <div className={styles.card}>
-      <div className={styles.label}>
+    <article className={styles.card}>
+      <section className={styles.label}>
         <Title>{label}</Title>
         {isGaiaXComlpiant === undefined ? null : (
           isGaiaXComlpiant ? (
-            <p>{t('resources.is-gaia-x-compliant')}</p>
+            <p>{t('common.is-gaia-x-compliant')}</p>
           ) : (
-            <p>{t('resources.not-gaia-x-compliant')}</p>
+            <p>{t('common.not-gaia-x-compliant')}</p>
           )
         )}
-      </div>
-      <div className={styles.content}>
+      </section>
+      <section className={styles.content}>
         <Title>{name}</Title>
         <p>{description}</p>
         <div className={styles.button}>
@@ -66,7 +66,7 @@ export default function SelfDescriptionCard({
             handleOnClick={handleNavigationToDetailsPage}
           />
         </div>
-      </div>
-    </div>
+      </section>
+    </article>
   );
 }
