@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 import { AuthContextType } from '../context/AuthContextProvider';
+import { ServiceOfferingInput } from '../utils/dataMapper';
 import { isEmpty } from '../utils/helpers';
 
 const getHeaders = (authContext: AuthContextType) => {
@@ -62,7 +63,7 @@ export const ApiService = {
   // Returns every Service Offering available
   async getAllSelfDescriptions(
     authContext: AuthContextType
-  ): Promise<AxiosResponse<any, any>> {
+  ): Promise<ServiceOfferingInput> {
     const endpoint = queryEndpoint;
     const headers = getHeaders(authContext);
     const requestBody = {
