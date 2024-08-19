@@ -1,42 +1,44 @@
-import React, { ReactNode } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import React, { FC, ReactNode } from 'react';
+import { Route, Routes as ReactRoutes } from 'react-router-dom';
 
-import WorkInProgress from './WorkInProgress';
-import { Column } from './common/styles';
-import AccountHome from './components/account/AccountHome';
-import Provider from './components/account/Provider';
-import DashboardPage from './components/dashboard/dashboard_page';
-import LcmFinal from './components/dashboard/lcm/LcmFinal';
-import LcmServices from './components/dashboard/lcm/LcmServices';
-import OntologiesDetailsPage from './components/detailsPage/pages/ontologies/OntologiesDetailsPage';
-import OwlGraph from './components/detailsPage/pages/ontologies/components/actions/OwlGraph/OwlGraph';
-import ShapesDetailsPage from './components/detailsPage/pages/shapes/ShapesDetailsPage';
-import DiscoveryItem from './components/discovery/DiscoveryItem';
-import SearchView from './components/discovery/search/SearchView';
-import AboutPage from './components/help/AboutPage'
-import SupportPage from './components/help/SupportPage'
-import LoginFail from './components/login/LoginFail';
-import OnboardingPage from './components/onboarding/onboarding_page';
-import Ontologies from './components/ontologies/Ontologies';
-import Participants from './components/participants/Participants';
-import ProtectedRoute from './components/protectedRoute/ProtectedRoute';
-import ProvideAttributes from './components/provide/ProvideAttributes';
-import ProvideOverview from './components/provide/ProvideOverview';
-import ProvideSelection from './components/provide/ProvideSelection';
-import Resources from './components/resources/Resources';
-import ServiceOfferings from './components/serviceOfferings/ServiceOfferings';
-import Shapes from './components/shapes/Shapes';
-import SolutionPackagingView from './components/solutionPackaging/SolutionPackagingView';
-import DetailsPage from './pages/details/DetailsPage';
-import Home from './pages/home/Home';
+import WorkInProgress from '../WorkInProgress';
+import { Column } from '../common/styles';
+import DetailsPage from '../pages/details/DetailsPage';
+import Home from '../pages/home/Home';
+
+import AccountHome from './account/AccountHome';
+import Provider from './account/Provider';
+import DashboardPage from './dashboard/dashboard_page';
+import LcmFinal from './dashboard/lcm/LcmFinal';
+import LcmServices from './dashboard/lcm/LcmServices';
+import OntologiesDetailsPage from './detailsPage/pages/ontologies/OntologiesDetailsPage';
+import OwlGraph from './detailsPage/pages/ontologies/components/actions/OwlGraph/OwlGraph';
+import ShapesDetailsPage from './detailsPage/pages/shapes/ShapesDetailsPage';
+import DiscoveryItem from './discovery/DiscoveryItem';
+import SearchView from './discovery/search/SearchView';
+import AboutPage from './help/AboutPage'
+import SupportPage from './help/SupportPage'
+import LoginFail from './login/LoginFail';
+import OnboardingPage from './onboarding/onboarding_page';
+import Ontologies from './ontologies/Ontologies';
+import Participants from './participants/Participants';
+import ProtectedRoute from './protectedRoute/ProtectedRoute';
+import ProvideAttributes from './provide/ProvideAttributes';
+import ProvideOverview from './provide/ProvideOverview';
+import ProvideSelection from './provide/ProvideSelection';
+import Resources from './resources/Resources';
+import ServiceOfferings from './serviceOfferings/ServiceOfferings';
+import Shapes from './shapes/Shapes';
+import SolutionPackagingView from './solutionPackaging/SolutionPackagingView';
 
 const ViewContainer = (view: ReactNode) => {
+  // @ts-ignore
   return <div className='body-container'>{view}</div>
 }
 
-export const routes = (
+const Routes: FC = () => (
   <Column>
-    <Routes>
+    <ReactRoutes>
       <Route path="/" element={<Column><Home /></Column>} />
       <Route path="/home" element={ViewContainer(<Home />)} />
       <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
@@ -75,6 +77,8 @@ export const routes = (
       <Route path="/ontologies/graph/*" element={ViewContainer(<OwlGraph />)} />
       <Route path="/shapes" element={ViewContainer(<Shapes />)} />
       <Route path="/shapes/details/*" element={ViewContainer(<ShapesDetailsPage />)} />
-    </Routes>
+    </ReactRoutes>
   </Column>
 );
+
+export default Routes;

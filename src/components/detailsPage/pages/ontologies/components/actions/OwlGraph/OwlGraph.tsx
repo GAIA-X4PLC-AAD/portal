@@ -15,18 +15,14 @@ const OwlGraph = () => {
   const [ontology, setOntology] = useState<Ontology>();
 
   useEffect(() => {
-    const loadOntology = async () => {
-      try {
-        const ontology = await getOntologyById(id);
-        setOntology(ontology);
-      } catch (error) {
-        console.error('Error fetching self descriptions:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadOntology();
+    getOntologyById(id)
+      .then(
+        (ontology) => setOntology(ontology)
+      ).catch(
+        error => console.error('Error fetching self descriptions:', error)
+      ).finally(
+        () => setIsLoading(false)
+      )
   }, []);
 
   if (!ontology) {

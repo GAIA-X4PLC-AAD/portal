@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { ShapesAndOntologiesInput } from '../types/ontologies.model';
+import { Ontology, ShapesAndOntologiesInput } from '../types/ontologies.model';
 
 import { fetchOntologies } from './ontologyService.utils';
 import { fetchShapes } from './shapeService.utils';
@@ -56,7 +56,7 @@ export const getConvertedFile = async (id: string) => {
 
 export const getAllOntologies = async () => {
   const response = await getAllSchemas();
-  return response ? fetchOntologies(response.ontologies) : [];
+  return (response ? await fetchOntologies(response.ontologies) : []) as Ontology[];
 };
 
 export const getAllShapes = async () => {

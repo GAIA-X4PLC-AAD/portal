@@ -33,8 +33,8 @@ const OntologyActions: FC = () => {
         <Title>{t('dashboard.actions')}</Title>
       </div>
       <div className={styles['buttons']}>
-        <GaiaXButton label={t('details.view-graph')} handleOnClick={() => handleNavigationToGraphPage()} width={'100%'}/>
-        <GaiaXButton label={t('details.download-file')} handleOnClick={() => downloadTurtleFile(ontology.subject)} width={'100%'}/>
+        <GaiaXButton label={t('details.view-graph')} handleOnClick={() => handleNavigationToGraphPage()}/>
+        <GaiaXButton label={t('details.download-file')} handleOnClick={() => downloadTurtleFile(ontology.subject)}/>
       </div>
     </div>
   );
