@@ -27,6 +27,7 @@ export const parseSingleOntology = (item: string) => {
         quads.push(quad);
       }
     });
+  console.log(quads);
   return quads;
 }
 
