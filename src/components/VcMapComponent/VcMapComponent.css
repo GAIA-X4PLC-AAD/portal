@@ -1,7 +1,9 @@
 .myMapContainer {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 220px;
+    left: 15px;
+    right: 15px;
+    bottom: 120px;
     background-color: #0000FF;
 }
 

@@ -8,12 +8,11 @@ import styles from './ResourceMap.module.css';
 
 export const ResourceMap = () => {
   const selfDescription = useContext(SelfDescriptionContext)
-  const geoJSON  = './../../vienna-streets.geojson';
 
   return (
     <div className={styles['map-card-container']}>
       <Title>Map</Title>
-      <VcMapComponent geoJSON={geoJSON}/>
+      <VcMapComponent />
     </div>
   );
 }
