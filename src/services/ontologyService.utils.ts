@@ -31,11 +31,10 @@ export const parseSingleOntology = (item: string) => {
 }
 
 export const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ontology => {
-  const firstSubject = quads.length > 0 ? quads[0].subject.id : 'No subject available!';
   const nodes: { id: string; label: string; type: string }[] = [];
   const links: { source: string; target: string }[] = [];
 
-  let subject = firstSubject;
+  let subject = 'No subject available!';
   let contributors: string[] = [];
   let description = 'No description available!';
   let version = 'No version available!';
@@ -49,6 +48,10 @@ export const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ont
 
     // Track types of subjects
     if (predicateId === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type') {
+      //owl#Ontology is the overall subject of the ontology
+      if (objectId === 'http://www.w3.org/2002/07/owl#Ontology') {
+        subject = subjectId;
+      }
       typesMap[subjectId] = objectId;
     }
 
@@ -59,7 +62,7 @@ export const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ont
     }
 
     // get the ontology information
-    if (subjectId === firstSubject) {
+    if (subjectId === subject) {
       switch (predicateId) {
       case 'http://purl.org/dc/terms/contributor':
         contributors.push(objectId.replace(/(^"|"$)/g, ''));
