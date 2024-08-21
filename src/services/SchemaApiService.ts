@@ -1,20 +1,18 @@
 import axios from 'axios';
 
-import { Ontology, ShapesAndOntologiesInput } from '../types/ontologies.model';
-
-import { fetchOntologies } from './ontologyService.utils';
-import { fetchShapes } from './shapeService.utils';
+import { ShapesAndOntologiesInput } from '../types/ontologies.model';
 
 const serverUrl: string = 'https://fc-server.gxfs.gx4fm.org';
 
-const getAllSchemas = async (): Promise<ShapesAndOntologiesInput | undefined> => {
+export const fetchAllSchemas = async (): Promise<ShapesAndOntologiesInput> => {
   const endpoint = serverUrl + '/schemas';
 
   try {
     const response = await axios.get(endpoint);
     return response.data;
   } catch (error) {
-    console.error('Error:', error);
+    console.error(error);
+    return { ontologies: [], shapes: [], vocabularies: [] }
   }
 };
 
@@ -54,12 +52,3 @@ export const getConvertedFile = async (id: string) => {
   }
 };
 
-export const getAllOntologies = async () => {
-  const response = await getAllSchemas();
-  return (response ? await fetchOntologies(response.ontologies) : []) as Ontology[];
-};
-
-export const getAllShapes = async () => {
-  const response = await getAllSchemas();
-  return response ? fetchShapes(response.shapes) : [];
-};

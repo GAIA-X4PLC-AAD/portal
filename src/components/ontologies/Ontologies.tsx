@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
-import { getAllOntologies } from '../../services/SchemaApiService';
+import { fetchAllSchemas } from '../../services/SchemaApiService';
+import { fetchAllOntologiesFromSchemas } from '../../services/ontologyService.utils';
 import { Link, Node, Ontology } from '../../types/ontologies.model';
 import RDFVisualization from '../../utils/RDFVisualization';
 import Text from '../Text/Text';
@@ -30,14 +31,19 @@ const Ontologies = () => {
     const loadOntologies = async () => {
       setIsLoading(true);
       try {
-        const fetchedOntologies = await getAllOntologies();
+        const schemas = await fetchAllSchemas();
+        const fetchedOntologies = await fetchAllOntologiesFromSchemas(schemas);
 
         const uniqueNodes = new Map(fetchedOntologies
           .map(ontology => ontology.nodes)
-          .reduce((result, currentOntologyNodes) => [...result, ...currentOntologyNodes])
-          .filter(node => node.type == 'http://www.w3.org/2000/01/rdf-schema#Class'
-                || node.type == 'http://www.w3.org/2002/07/owl#Class'
-                || node.type == 'http://www.w3.org/2002/07/owl#ObjectProperty')
+          .reduce((result, currentOntologyNodes) => [
+            ...result,
+            ...(
+              currentOntologyNodes.filter(
+                node => node.type == 'http://www.w3.org/2000/01/rdf-schema#Class'
+                          || node.type == 'http://www.w3.org/2002/07/owl#Class'
+                          || node.type == 'http://www.w3.org/2002/07/owl#ObjectProperty'))
+          ])
           .map(node => [node.id, node] as [string, Node]));
         setNodes(Array.from(uniqueNodes.values()))
 

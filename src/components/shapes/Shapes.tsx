@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
-import { getAllShapes } from '../../services/SchemaApiService';
+import { fetchAllSchemas } from '../../services/SchemaApiService';
+import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
 import { Shape } from '../../types/shapes.model';
 import Text from '../Text/Text';
 import Header from '../header/Header';
@@ -21,7 +22,8 @@ const Shapes = () => {
     const loadShapes = async () => {
       setIsLoading(true);
       try {
-        const fetchedShapes = await getAllShapes();
+        const schemas = await fetchAllSchemas();
+        const fetchedShapes = await fetchAllShapesFromSchemas(schemas);
         const sortedShapes = fetchedShapes.sort((a: Shape, b: Shape) => a.shortSubject.localeCompare(b.shortSubject));
         setOriginalShapes(sortedShapes);
         setFilteredShapes(sortedShapes);

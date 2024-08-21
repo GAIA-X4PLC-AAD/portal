@@ -3,7 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import car from '../../../../../../../assets/car.gif';
-import { getOntologyById } from '../../../../../../../services/ontologyService.utils';
+import { fetchAllSchemas } from '../../../../../../../services/SchemaApiService';
+import { fetchOntologyById } from '../../../../../../../services/ontologyService.utils';
+import { fetchAllShapesFromSchemas } from '../../../../../../../services/shapeService.utils';
 import { Ontology } from '../../../../../../../types/ontologies.model';
 import RDFVisualization from '../../../../../../../utils/RDFVisualization';
 import Header from '../../../../../../header/Header';
@@ -15,14 +17,23 @@ const OwlGraph = () => {
   const [ontology, setOntology] = useState<Ontology>();
 
   useEffect(() => {
-    getOntologyById(id)
-      .then(
-        (ontology) => setOntology(ontology)
-      ).catch(
-        error => console.error('Error fetching self descriptions:', error)
-      ).finally(
-        () => setIsLoading(false)
-      )
+    // TODO: Isn't it already available? Is it necessary to fetch the ontology? The view is probably opened from a
+    //  search view where ontologies already have been fetched
+    const loadOntology = async () => {
+      try {
+        const schemas = await fetchAllSchemas();
+        const shapes = await fetchAllShapesFromSchemas(schemas);
+        const ontology = await fetchOntologyById(shapes, id);
+        setOntology(ontology);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadOntology();
+
   }, []);
 
   if (!ontology) {
