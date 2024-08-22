@@ -72,3 +72,12 @@ export function mapResources(selfDescriptions: ResourceInput): Resource[] {
     claimsGraphUri : p.claimsGraphUri
   }));
 }
+
+export interface ISelfDescription {
+  name: string;
+  description: string;
+  items: Array<{
+    'properties(n)': { [key: string]: string | number | string[] };
+  }>;
+}
+
