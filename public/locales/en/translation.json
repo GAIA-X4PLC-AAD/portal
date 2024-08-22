@@ -510,10 +510,13 @@
   },
   "service-offerings": {
     "title": "Services",
-    "titles": "Service Offerings"
+    "titles": "Service Offerings",
+    "search-bar-text": "Search for special service offerings",
+    "no-description": "No description available!",
+    "no-title": "No title available"
   },
   "resources": {
-    "search-bar-text": "Search for special resources or service offerings"
+    "search-bar-text": "Search for special resources"
   },
   "ontologies": {
     "title": "Ontology",

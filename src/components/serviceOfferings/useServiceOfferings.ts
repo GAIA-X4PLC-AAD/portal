@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContextProvider';
 import { ApiService } from '../../services/ApiService';
 import { mapServiceOfferings, ServiceOffering } from '../../utils/dataMapper';
 
-export type ServiceOfferingsViewState = 'LOADING' | 'LOADED'
+export type ServiceOfferingsViewState = 'LOADING' | 'SHOW_OFFERINGS'
 
 export const useServiceOfferings = () => {
   const [serviceOfferings, setServiceOfferings] = useState<ServiceOffering[]>([]);
@@ -18,7 +18,7 @@ export const useServiceOfferings = () => {
           setServiceOfferings(mapServiceOfferings(selfDescriptions));
         })
         .catch(error => console.error('Error fetching self descriptions:', error))
-        .finally(() => setState('LOADED'))
+        .finally(() => setState('SHOW_OFFERINGS'))
     }
   }, [authContext.isAuthenticated]);
 

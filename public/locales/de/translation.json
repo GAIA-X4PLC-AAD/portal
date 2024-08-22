@@ -508,10 +508,13 @@
   },
   "service-offerings": {
     "title": "Dienstleistungen",
-    "titles": "Dienstleistungsangebote"
+    "titles": "Dienstleistungsangebote",
+    "search-bar-text": "Suchen Sie nach speziellen Diestleistungen",
+    "no-description": "Keine Beschreibung verfügbar!",
+    "no-title": "Kein Titel verfügbar!"
   },
   "resources": {
-    "search-bar-text": "Suchen Sie nach speziellen Ressourcen oder Angeboten"
+    "search-bar-text": "Suchen Sie nach speziellen Ressourcen"
   },
   "ontologies": {
     "title": "Ontologie",
