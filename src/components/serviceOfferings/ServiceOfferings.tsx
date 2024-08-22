@@ -1,9 +1,9 @@
-import SelfDescriptionCard from 'components/cards/SelfDescriptionCard';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import CardContainer from '../cardContainer/CardContainer';
 import Header from '../header/Header';
+import ItemCard from '../itemCard/ItemCard';
 import LoadingIndicator from '../loading_view/LoadingIndicator';
 import Main from '../main/Main';
 import SearchBar from '../searchBar/SearchBar';
@@ -24,20 +24,20 @@ const ServiceOfferings = () => {
       <Header title={`${t('service-offerings.titles')} (${serviceOfferings.length} ${t('common.results')})`}/>
       <Main>
         <LoadingIndicator isLoading={state === 'LOADING'}/>
-        <SearchBar placeholder={t('resources.search-bar-text')} onSearch={search}/>
-        <CardContainer isLoaded={state === 'LOADED'}>
+        <SearchBar placeholder={t('service-offerings.search-bar-text')} onSearch={search}/>
+        <CardContainer isLoaded={state === 'SHOW_OFFERINGS'}>
           {
             serviceOfferings
-              .filter(selfDescription => JSON.stringify(selfDescription).includes(searchText))
+              .filter(selfDescription => Object
+                .values(selfDescription)
+                .some(propertyValue => propertyValue && propertyValue.includes(searchText))
+              )
               .map(
                 (serviceOffering) => (
-                  <SelfDescriptionCard
+                  <ItemCard
                     key={serviceOffering.name}
                     label={serviceOffering.label}
-                    isGaiaXComlpiant={true}
-                    name={serviceOffering.name}
-                    description={serviceOffering.description}
-                    selfDescription={serviceOffering}
+                    service={serviceOffering}
                   />
                 ))
           }
