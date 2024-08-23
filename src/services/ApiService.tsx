@@ -18,7 +18,7 @@ function getEndpoint() {
 /**
  * Executing a graph DB query and returning the results
  *
- * @param authContext in order to get authorization for server calls
+ * @param authContext authorization token for server calls
  * @param requestBody graph db query request
  */
 const graphQuery = async (authContext: AuthContextType, requestBody: { statement: string }): Promise<any> => {
@@ -44,7 +44,7 @@ export const ApiService = {
   /**
    * Returns every Service Offering available
    *
-   * @param authContext in order to get authorization for server calls
+   * @param authContext authorization token for server calls
    */
   async getAllSelfDescriptions(authContext: AuthContextType): Promise<ServiceOfferingInput> {
     return graphQuery(authContext, {
@@ -55,7 +55,7 @@ export const ApiService = {
   /**
    * Returns details about a resource
    *
-   * @param authContext in order to get authorization for server calls
+   * @param authContext authorization token for server calls
    * @param claimsGraphUri the id of the resource to be queried
    */
   async getOneSelfDescriptions(authContext: AuthContextType, claimsGraphUri: string): Promise<ISelfDescription> {
@@ -68,11 +68,26 @@ export const ApiService = {
   /**
    * Returns all resources
    *
-   * @param authContext in order to get authorization for server calls
+   * @param authContext authorization token for server calls
    */
   async getAllResources(authContext: AuthContextType): Promise<ResourceInput> {
     return graphQuery(authContext, {
       statement: 'MATCH (n) RETURN properties(n), labels(n)',
     })
+  },
+
+  /**
+   * Fetches all available resource types
+   *
+   * @param authContext authorization token for server calls
+   */
+  async getResourceTypes(authContext: AuthContextType): Promise<any> {
+    const statement =
+        'MATCH (n:Resource) -[r*0..4]-> (m) ' +
+        'WHERE (m:Resource) ' +
+        'UNWIND labels(m) as labels ' +
+        'RETURN COLLECT(DISTINCT labels) as types'
+    console.debug({ statement })
+    return graphQuery(authContext, { statement })
   }
 }
