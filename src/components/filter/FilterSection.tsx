@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Asset } from '../../hooks/filterAssets';
+import { Asset } from '../../hooks/useFilterAssets';
 import Subtitle from '../subtitle/Subtitle';
 
 import styles from './Filter.module.css';

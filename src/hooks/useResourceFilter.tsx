@@ -4,13 +4,12 @@ import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContextProvider';
 import { useFilters } from '../context/ResourceFilterContext';
 
-import { resourceFilters } from './filterAssets';
+import { useFilterAssets } from './useFilterAssets';
 
 export const useResourceFilter = () => {
   const { filters } = useFilters();
   const { token } = useContext(AuthContext);
-  const { typeAssets, formatAssets, vendorAssets } = resourceFilters;
-
+  const { typeAssets, formatAssets, vendorAssets } = useFilterAssets();
   const fetchFilteredData = async () => {
     const endpoint = 'https://fc-server.gxfs.gx4fm.org/query';
     const headers = {
