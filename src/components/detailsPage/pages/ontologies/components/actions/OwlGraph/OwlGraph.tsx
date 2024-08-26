@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import car from '../../../../../../../assets/car.gif';
-import { fetchAllSchemas } from '../../../../../../../services/SchemaApiService';
 import { fetchOntologyById } from '../../../../../../../services/ontologyService.utils';
+import { fetchAllSchemas } from '../../../../../../../services/schemaApiService';
 import { fetchAllShapesFromSchemas } from '../../../../../../../services/shapeService.utils';
 import { Ontology } from '../../../../../../../types/ontologies.model';
 import RDFVisualization from '../../../../../../../utils/RDFVisualization';

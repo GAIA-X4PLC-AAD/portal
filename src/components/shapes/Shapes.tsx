@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
-import { fetchAllSchemas } from '../../services/SchemaApiService';
+import { fetchAllSchemas } from '../../services/schemaApiService';
 import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
 import { Shape } from '../../types/shapes.model';
 import Text from '../Text/Text';

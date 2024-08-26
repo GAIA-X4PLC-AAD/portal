@@ -1,4 +1,4 @@
-import { getConvertedFile, getSchemaById } from './SchemaApiService';
+import { getConvertedFile, getSchemaById } from './schemaApiService';
 
 export const downloadTurtleFile = async (id: string) => {
   const response = await getSchemaById(id);

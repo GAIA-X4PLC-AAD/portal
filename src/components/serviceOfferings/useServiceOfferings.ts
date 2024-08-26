@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from '../../context/AuthContextProvider';
-import { ApiService } from '../../services/ApiService';
+import { CypherQueryApiService as cypherQuery } from '../../services/cypherQueryApiService';
 import { mapServiceOfferings, ServiceOffering } from '../../utils/dataMapper';
 
 export type ServiceOfferingsViewState = 'LOADING' | 'SHOW_OFFERINGS'
@@ -13,7 +13,7 @@ export const useServiceOfferings = () => {
 
   useEffect(() => {
     if (authContext.isAuthenticated) {
-      ApiService.getAllSelfDescriptions(authContext)
+      cypherQuery.getAllSelfDescriptions(authContext)
         .then((selfDescriptions) => {
           setServiceOfferings(mapServiceOfferings(selfDescriptions));
         })

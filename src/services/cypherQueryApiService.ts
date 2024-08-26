@@ -21,7 +21,7 @@ function getEndpoint() {
  * @param authContext authorization token for server calls
  * @param requestBody graph db query request
  */
-const graphQuery = async (authContext: AuthContextType, requestBody: { statement: string }): Promise<any> => {
+const cypherQuery = async (authContext: AuthContextType, requestBody: { statement: string }): Promise<any> => {
   const endpoint = getEndpoint();
   const headers = getHeaders(authContext);
 
@@ -39,7 +39,7 @@ const graphQuery = async (authContext: AuthContextType, requestBody: { statement
     })
 }
 
-export const ApiService = {
+export const CypherQueryApiService = {
 
   /**
    * Returns every Service Offering available
@@ -47,7 +47,7 @@ export const ApiService = {
    * @param authContext authorization token for server calls
    */
   async getAllSelfDescriptions(authContext: AuthContextType): Promise<ServiceOfferingInput> {
-    return graphQuery(authContext, {
+    return cypherQuery(authContext, {
       statement: 'MATCH (n:ServiceOffering) RETURN properties(n), labels(n) LIMIT 100',
     })
   },
@@ -60,7 +60,7 @@ export const ApiService = {
    */
   async getOneSelfDescriptions(authContext: AuthContextType, claimsGraphUri: string): Promise<ISelfDescription> {
     const uri = claimsGraphUri.replace(/'/g, '\\\'');
-    return graphQuery(authContext, {
+    return cypherQuery(authContext, {
       statement: `MATCH (n:HDMap) WHERE '${uri}' IN n.claimsGraphUri RETURN properties(n), labels(n) LIMIT 1`,
     })
   },
@@ -71,7 +71,7 @@ export const ApiService = {
    * @param authContext authorization token for server calls
    */
   async getAllResources(authContext: AuthContextType): Promise<ResourceInput> {
-    return graphQuery(authContext, {
+    return cypherQuery(authContext, {
       statement: 'MATCH (n) RETURN properties(n), labels(n)',
     })
   },
@@ -88,6 +88,6 @@ export const ApiService = {
         'UNWIND labels(m) as labels ' +
         'RETURN COLLECT(DISTINCT labels) as types'
     console.debug({ statement })
-    return graphQuery(authContext, { statement })
+    return cypherQuery(authContext, { statement })
   }
 }

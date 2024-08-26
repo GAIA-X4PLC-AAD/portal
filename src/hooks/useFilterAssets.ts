@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 
 import { AuthContext } from '../context/AuthContextProvider';
-import { ApiService } from '../services/ApiService';
+import { CypherQueryApiService as cypherQuery } from '../services/cypherQueryApiService';
 
 export interface Asset {
     checkboxName: string;
@@ -19,7 +19,7 @@ export const useFilterAssets = (): Filter => {
   const [typeAssets, setTypeAssets] = useState([]);
 
   useEffect(() => {
-    ApiService
+    cypherQuery
       .getResourceTypes(authContext)
       .then(resourceTypes =>
         setTypeAssets(

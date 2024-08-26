@@ -4,7 +4,7 @@ import SidebarCard from 'components/cards/SidebarCard';
 import { AuthContext } from 'context/AuthContextProvider';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { ApiService } from 'services/ApiService';
+import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiService';
 
 import car from '../../assets/car.gif';
 
@@ -19,7 +19,7 @@ export default function DetailsPage() {
   useEffect(() => {
     const fetchAndSetSelfDescriptions = async () => {
       try {
-        const response = await ApiService.getOneSelfDescriptions(
+        const response = await cypherQuery.getOneSelfDescriptions(
           authContext,
           resourceId
         );

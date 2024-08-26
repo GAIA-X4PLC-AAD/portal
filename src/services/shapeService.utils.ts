@@ -4,7 +4,7 @@ import { Quad } from 'n3';
 import { ShapesAndOntologiesInput } from '../types/ontologies.model';
 import { Shape, ShapeProperty } from '../types/shapes.model';
 
-import { fetchAllSchemas, getSchemaById } from './SchemaApiService';
+import { fetchAllSchemas, getSchemaById } from './schemaApiService';
 
 export const fetchAllShapesFromSchemas = async (schemas: ShapesAndOntologiesInput): Promise<Shape[]> => {
   const shapeArrayPromises = schemas.shapes.map(async id => fetchShapeById(id));

@@ -5,8 +5,8 @@ import car from '../../assets/car.gif';
 import { AuthContext } from '../../context/AuthContextProvider';
 import { useFilters } from '../../context/ResourceFilterContext';
 import { useResourceFilter } from '../../hooks/useResourceFilter';
-import { ApiService } from '../../services/ApiService';
-import { Resource, mapResources } from '../../utils/dataMapper';
+import { CypherQueryApiService as cypherQuery } from '../../services/cypherQueryApiService';
+import { mapResources, Resource } from '../../utils/dataMapper';
 import Text from '../Text/Text';
 import SelfDescriptionCard from '../cards/SelfDescriptionCard';
 import Filter from '../filter/Filter';
@@ -31,7 +31,7 @@ const Resources = () => {
     const fetchAndSetSelfDescriptions = async () => {
       setIsLoading(true);
       try {
-        const response = await ApiService.getAllResources(authContext);
+        const response = await cypherQuery.getAllResources(authContext);
         console.log('My fetched data: ', response);
         const map = mapResources(response);
         setResourceData(map);

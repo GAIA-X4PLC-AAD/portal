@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import car from '../../assets/car.gif';
-import { fetchAllSchemas } from '../../services/SchemaApiService';
 import { fetchAllOntologiesFromSchemas } from '../../services/ontologyService.utils';
+import { fetchAllSchemas } from '../../services/schemaApiService';
 import { Link, Node, Ontology } from '../../types/ontologies.model';
 import RDFVisualization from '../../utils/RDFVisualization';
 import Text from '../Text/Text';
