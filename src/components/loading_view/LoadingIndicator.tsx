@@ -6,13 +6,13 @@ import car from '../../assets/car.gif';
 import styles from './LoadingIndicator.css';
 
 interface ILoadingIndicator {
-    isLoading: boolean
+    visible: boolean
 }
 
-const LoadingIndicator: FC<ILoadingIndicator> = ({ isLoading }) => {
+const LoadingIndicator: FC<ILoadingIndicator> = ({ visible }) => {
   const { t } = useTranslation()
 
-  if (isLoading) {
+  if (visible) {
     return (
       <div className={styles.newCarLoader}>
         <img src={car} alt={t('common.is-loading')} className={'car'}/>

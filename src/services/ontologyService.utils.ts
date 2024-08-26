@@ -1,17 +1,16 @@
 import * as N3 from 'n3';
 import { Quad } from 'n3';
 
-import { Ontology, ShapesAndOntologiesInput } from '../types/ontologies.model';
+import { Link, Node, Ontology, ShapesAndOntologiesInput } from '../types/ontologies.model';
 import { Shape } from '../types/shapes.model';
 
 import { getSchemaById } from './schemaApiService';
-import { fetchAllShapesFromSchemas, findRelatedShapes } from './shapeService.utils';
+import { findRelatedShapes } from './shapeService.utils';
 
-export const fetchAllOntologiesFromSchemas = async (schemas: ShapesAndOntologiesInput) => {
-  const allShapes = await fetchAllShapesFromSchemas(schemas);
+export const fetchAllOntologiesFromSchemas = async (schemas: ShapesAndOntologiesInput, shapes: Shape[]) => {
   return Promise.all(
     schemas.ontologies.map(
-      async id => fetchOntologyById(allShapes, id)));
+      async id => fetchOntologyById(shapes, id)));
 }
 
 export const parseSingleOntology = (item: string) => {
@@ -100,3 +99,31 @@ export const fetchOntologyById = async (shapes: Shape[], id: string) => {
     });
 }
 
+export const getUniqueNodes = (ontologies: Ontology[], nodeFilter: (node: Node) => boolean): Node[] => {
+  const uniqueNodes = new Map(ontologies
+    .map(ontology => ontology.nodes)
+    .flat()
+    .filter(nodeFilter)
+    .map((node: Node) => [node.id, node] as [string, Node]));
+
+  return Array.from(uniqueNodes.values());
+}
+
+export function getUniqueLinks(ontologies: Ontology[], uniqueNode: Node[]) {
+  const uniqueLinks = new Map(ontologies
+    .map(ontology => ontology.links)
+    .flat()
+    .filter(link => uniqueNode.some(uniqueNode => uniqueNode.id === link.source))
+    .filter(link => uniqueNode.some(uniqueNode => uniqueNode.id === link.target))
+    .map(link => [link.source + link.target, link] as [string, Link]))
+
+  return Array.from(uniqueLinks.values());
+}
+
+export function getResourceTypes(links: Link[], shapes: Shape[]) {
+  return links
+    .filter(link => link.target.endsWith('DataResource'))
+    .map(link => findRelatedShapes(shapes, link.source))
+    .flat()
+    .map(shape => shape.shortSubject);
+}

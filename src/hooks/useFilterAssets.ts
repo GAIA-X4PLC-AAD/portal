@@ -1,7 +1,20 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { AuthContext } from '../context/AuthContextProvider';
-import { CypherQueryApiService as cypherQuery } from '../services/cypherQueryApiService';
+import {
+  fetchAllOntologiesFromSchemas,
+  getResourceTypes,
+  getUniqueLinks,
+  getUniqueNodes
+} from '../services/ontologyService.utils';
+import { fetchAllSchemas } from '../services/schemaApiService';
+import { fetchAllShapesFromSchemas } from '../services/shapeService.utils';
+import { Node } from '../types/ontologies.model';
+
+const nodeTypeFilters = [
+  'http://www.w3.org/2000/01/rdf-schema#Class',
+  'http://www.w3.org/2002/07/owl#Class',
+  'http://www.w3.org/2002/07/owl#ObjectProperty'
+]
 
 export interface Asset {
     checkboxName: string;
@@ -15,18 +28,22 @@ interface Filter {
 }
 
 export const useFilterAssets = (): Filter => {
-  const authContext = useContext(AuthContext);
-  const [typeAssets, setTypeAssets] = useState([]);
+  const [typeAssets, setTypeAssets] = useState<Asset[]>([]);
 
   useEffect(() => {
-    cypherQuery
-      .getResourceTypes(authContext)
-      .then(resourceTypes =>
-        setTypeAssets(
-          resourceTypes.items[0].types.map((type: string) => ({
-            checkboxName: type,
-            label: type
-          }))))
+    (async () => {
+      const schemas = await fetchAllSchemas();
+      const shapes = await fetchAllShapesFromSchemas(schemas);
+      const ontologies = await fetchAllOntologiesFromSchemas(schemas, shapes)
+
+      const nodes = getUniqueNodes(ontologies, (node: Node) => nodeTypeFilters.includes(node.type));
+      const links = getUniqueLinks(ontologies, nodes);
+      const resourceTypes = getResourceTypes(links, shapes)
+      setTypeAssets(resourceTypes.map((type: string) => ({
+        checkboxName: type,
+        label: type
+      })));
+    })();
   }, []);
 
   return {

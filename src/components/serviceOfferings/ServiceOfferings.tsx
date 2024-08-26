@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import CardContainer from '../cardContainer/CardContainer';
+import CardContainer from '../cards/CardContainer';
 import Header from '../header/Header';
 import ItemCard from '../itemCard/ItemCard';
+import Main from '../layout/Main';
 import LoadingIndicator from '../loading_view/LoadingIndicator';
-import Main from '../main/Main';
 import SearchBar from '../searchBar/SearchBar';
 
 import { useServiceOfferings } from './useServiceOfferings';
@@ -14,6 +14,13 @@ const ServiceOfferings = () => {
   const { t } = useTranslation()
   const { state, serviceOfferings } = useServiceOfferings();
   const [searchText, setSearchText] = useState('')
+  const filteredServiceOfferings = useMemo(() => serviceOfferings
+    .filter(services => Object
+      .values(services)
+      .some(propertyValue => propertyValue &&
+              String(propertyValue).toLowerCase()
+                .includes(searchText.toLowerCase()))
+    ), [serviceOfferings, searchText])
 
   const search = (filter: string) => {
     setSearchText(filter)
@@ -23,15 +30,11 @@ const ServiceOfferings = () => {
     <>
       <Header title={`${t('service-offerings.titles')} (${serviceOfferings.length} ${t('common.results')})`}/>
       <Main>
-        <LoadingIndicator isLoading={state === 'LOADING'}/>
+        <LoadingIndicator visible={state === 'LOADING'}/>
         <SearchBar placeholder={t('service-offerings.search-bar-text')} onSearch={search}/>
-        <CardContainer isLoaded={state === 'SHOW_OFFERINGS'}>
+        <CardContainer visible={state === 'SHOW_OFFERINGS'}>
           {
-            serviceOfferings
-              .filter(selfDescription => Object
-                .values(selfDescription)
-                .some(propertyValue => propertyValue && propertyValue.includes(searchText))
-              )
+            filteredServiceOfferings
               .map(
                 (serviceOffering) => (
                   <ItemCard

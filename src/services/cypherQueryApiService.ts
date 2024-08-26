@@ -75,19 +75,4 @@ export const CypherQueryApiService = {
       statement: 'MATCH (n) RETURN properties(n), labels(n)',
     })
   },
-
-  /**
-   * Fetches all available resource types
-   *
-   * @param authContext authorization token for server calls
-   */
-  async getResourceTypes(authContext: AuthContextType): Promise<any> {
-    const statement =
-        'MATCH (n:Resource) -[r*0..4]-> (m) ' +
-        'WHERE (m:Resource) ' +
-        'UNWIND labels(m) as labels ' +
-        'RETURN COLLECT(DISTINCT labels) as types'
-    console.debug({ statement })
-    return cypherQuery(authContext, { statement })
-  }
 }
