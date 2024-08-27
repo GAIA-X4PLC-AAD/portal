@@ -22,18 +22,18 @@
     align-items: center;
 }
 
-.shapesAndOntologies-content-container {
+.shapes-and-ontologies-content-container {
     display: flex;
     justify-content: flex-start;
     width: 100%;
 }
 
-.newCarLoader {
+.new-car-loader {
     display: flex;
     justify-content: center;
 }
 
-.searchAndButtonContainer {
+.search-and-button-container {
     display: flex;
     align-items: center;
     width: 100%;

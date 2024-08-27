@@ -503,9 +503,9 @@
   "details": {
     "title": "Details",
     "sidebar-button-label": "Contact or buy",
-    "contact-or-buy-button-notification": "Data was transfered",
-    "more-details": "More Details",
-    "view-graph": "View Graph",
+    "contact-or-buy-button-notification": "Data was transferred",
+    "more-details": "More details",
+    "view-graph": "View graph",
     "download-file": "Download turtle file",
     "download-json": "Download json file"
   },
@@ -513,14 +513,14 @@
     "is-gaia-x-compliant": "Gaia-X compliant",
     "not-gaia-x-compliant": "Not Gaia-X compliant",
     "not-authenticated": "Not authenticated",
-    "search-bar-text": "Search for special Resources or Service Offerings"
+    "search-bar-text": "Search for special resources or service offerings"
   },
   "ontologies": {
     "title": "Ontology",
     "titles": "Ontologies",
     "no-ontologies-available": "No ontologies available",
     "search-bar-text": "Search for special ontologies",
-    "related-ontologies": "Related Ontologies",
+    "related-ontologies": "Related ontologies",
     "not-found": "Ontology not found",
     "classes": "Classes"
   },
@@ -529,7 +529,7 @@
     "titles": "Shapes",
     "search-bar-text": "Search for special shapes",
     "no-shapes-available": "No shapes available",
-    "related-shapes": "Related Shapes",
+    "related-shapes": "Related shapes",
     "not-found": "Shape not found"
   }
 }

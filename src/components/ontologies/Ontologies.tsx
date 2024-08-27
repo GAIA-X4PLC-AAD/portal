@@ -75,7 +75,7 @@ const Ontologies = () => {
 
   if (isLoading) {
     return (
-      <div className="newCarLoader">
+      <div className="new-car-loader">
         <img src={car} alt="loading..." className="car"/>
       </div>
     );

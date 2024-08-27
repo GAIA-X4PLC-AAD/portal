@@ -50,7 +50,7 @@ const Shapes = () => {
 
   if (isLoading) {
     return (
-      <div className="newCarLoader">
+      <div className="new-car-loader">
         <img src={car} alt="loading..." className="car"/>
       </div>
     );
@@ -59,9 +59,9 @@ const Shapes = () => {
   return (
     <div>
       <Header title={`${t('shapes.titles')}(${filteredShapes.length} ${t('dashboard.results')})`}/>
-      <div className={styles['shapesAndOntologies-content-container']}>
+      <div className={styles['shapes-and-ontologies-content-container']}>
         <div className={styles['content']}>
-          <div className={styles['searchAndButtonContainer']}>
+          <div className={styles['search-and-button-container']}>
             <SearchBar placeholder={t('shapes.search-bar-text')} onSearch={handleSearch} />
           </div>
           {(
