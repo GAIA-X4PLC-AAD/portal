@@ -22,8 +22,27 @@
     align-items: center;
 }
 
-.shapesAndOntologies-content-container {
+.shapes-and-ontologies-content-container {
     display: flex;
     justify-content: flex-start;
     width: 100%;
+}
+
+.new-car-loader {
+    display: flex;
+    justify-content: center;
+}
+
+.search-and-button-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.button {
+    min-height: 5vh;
+    border-radius: 10px;
+    width: 150px;
+    box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.25);
+    background-color: white;
 }

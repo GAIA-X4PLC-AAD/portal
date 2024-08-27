@@ -1,4 +1,4 @@
-import { ShaclShape } from '../types/shaclShape.model';
+import { Shape } from '../types/shapes.model';
 
 export const trimShapes = (shape: string) =>{
   let trimmedShape = '';
@@ -13,7 +13,7 @@ export const trimShapes = (shape: string) =>{
   return trimmedShape;
 };
 
-export const getShapeProperties = (shape: ShaclShape) => {
+export const getShapeProperties = (shape: Shape) => {
   let propertyList : string[] = [];
   if (shape.properties) {
     shape.properties.forEach((property) => {

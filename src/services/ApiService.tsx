@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from 'axios';
 
-import { AuthContextValues } from '../context/AuthContextValues';
+import { AuthContextType } from '../context/AuthContextProvider';
 import { isEmpty } from '../utils/helpers';
 
-const getHeaders = (authContext: AuthContextValues) => {
+const getHeaders = (authContext: AuthContextType) => {
   return {
     Authorization: `Bearer ${authContext.token}`,
     'Access-Control-Allow-Origin': '*',
@@ -12,10 +12,6 @@ const getHeaders = (authContext: AuthContextValues) => {
 
 const serverUrl: string = 'https://fc-server.gxfs.gx4fm.org';
 const queryEndpoint: string = serverUrl + '/query';
-
-const encodeString = (uri: string): string => {
-  return uri.startsWith('http') ? encodeURIComponent(uri) : uri;
-}
 
 export const ApiService = {
   /**
@@ -26,7 +22,7 @@ export const ApiService = {
    * @param searchTerm String of the keyword you want to search for
    */
   async getSelfDescriptionsForShape(
-    authContext: AuthContextValues,
+    authContext: AuthContextType,
     targetClass: string,
     searchProperty?: string,
     searchTerm?: string
@@ -65,7 +61,7 @@ export const ApiService = {
 
   // Returns every Service Offering available
   async getAllSelfDescriptions(
-    authContext: AuthContextValues
+    authContext: AuthContextType
   ): Promise<AxiosResponse<any, any>> {
     const endpoint = queryEndpoint;
     const headers = getHeaders(authContext);
@@ -88,7 +84,7 @@ export const ApiService = {
   },
 
   async getOneSelfDescriptions(
-    authContext: AuthContextValues,
+    authContext: AuthContextType,
     claimsGraphUri: string | undefined
   ): Promise<any> {
     if (!claimsGraphUri) {
@@ -120,12 +116,12 @@ export const ApiService = {
 
   // Returns every Resource available
   async getAllResources(
-    authContext: AuthContextValues
+    authContext: AuthContextType
   ): Promise<AxiosResponse<any, any>> {
     const endpoint = queryEndpoint;
     const headers = getHeaders(authContext);
     const requestBody = {
-      statement: 'MATCH (n) WHERE (n:HDMap OR n:EnvironmentModel OR n:Scenario) RETURN properties(n), labels(n)',
+      statement: 'MATCH (n) RETURN properties(n), labels(n)',
     };
 
     // Perform POST request
@@ -143,49 +139,9 @@ export const ApiService = {
   },
 
   async getShaclShapesFromCatalogue(
-    authContext: AuthContextValues
+    authContext: AuthContextType
   ): Promise<AxiosResponse<any, any>> {
     const endpoint = serverUrl + '/schemas/latest?type=shape';
-    const headers = getHeaders(authContext);
-
-    return axios
-      .options(endpoint, { headers })
-      .then(() => {
-        return axios.get(endpoint, { headers });
-      })
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  },
-
-  async getAllSchemas(
-    authContext: AuthContextValues
-  ): Promise<AxiosResponse<any, any>> {
-    const endpoint = serverUrl + '/schemas';
-    const headers = getHeaders(authContext);
-
-    return axios
-      .options(endpoint, { headers })
-      .then(() => {
-        return axios.get(endpoint, { headers });
-      })
-      .then((response) => {
-        return response.data;
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  },
-
-  async getSchemaWithId(
-    authContext: AuthContextValues,
-    id: string
-  ): Promise<AxiosResponse<any, any>> {
-    const encodedUrl = encodeString(id);
-    const endpoint = serverUrl + '/schemas/' + encodedUrl;
     const headers = getHeaders(authContext);
 
     return axios

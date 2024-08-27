@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 export const useNavbar = () => {
   const { t } = useTranslation();
 
-  const navbarAssets = [
+  return [
     // These were commented out for the Hannover Fair - they will be added back later
     // {
     //   path: "/service-offerings",
@@ -22,14 +22,16 @@ export const useNavbar = () => {
       navigationItemName: t('left-menu.about'),
     },
     {
-      path: '/shapesAndOntologies',
-      navigationItemName: t('left-menu.shapesAndOntologies'),
+      path: '/ontologies',
+      navigationItemName: t('ontologies.titles'),
+    },
+    {
+      path: '/shapes',
+      navigationItemName: t('shapes.titles'),
     },
     {
       path: '/support',
       navigationItemName: t('left-menu.support'),
     },
   ];
-
-  return navbarAssets;
 };

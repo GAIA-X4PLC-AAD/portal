@@ -72,7 +72,13 @@
     "tooltip": {
       "manage": "Manage your service (LCM)",
       "edit": "Upload new SD"
-    }
+    },
+    "suitable-offerings": "Suitable offerings",
+    "no-offerings-available": "No offerings available",
+    "actions": "Actions",
+    "offered-by": "Offered by",
+    "suitable-data-offerings": "Suitable data offerings",
+    "map": "Map"
   },
   "top-menu": {
     "help": "Help",
@@ -495,21 +501,35 @@
     "final_description": "You can download template and upload configuration or complete form manually."
   },
   "details": {
+    "title": "Details",
     "sidebar-button-label": "Contact or buy",
-    "contact-or-buy-button-notification": "Data was transfered",
-    "moreDetails": "More Details"
+    "contact-or-buy-button-notification": "Data was transferred",
+    "more-details": "More details",
+    "view-graph": "View graph",
+    "download-file": "Download turtle file",
+    "download-json": "Download json file"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X compliant",
     "not-gaia-x-compliant": "Not Gaia-X compliant",
-    "no-offerings-available": "No offerings available",
     "not-authenticated": "Not authenticated",
-    "searchBarText": "Search for special Resources or Service Offerings"
+    "search-bar-text": "Search for special resources or service offerings"
   },
   "ontologies": {
     "title": "Ontology",
     "titles": "Ontologies",
-    "noOntologiesAvailable": "No ontologies available",
-    "searchBarText": "Search for special shapes or ontologies"
+    "no-ontologies-available": "No ontologies available",
+    "search-bar-text": "Search for special ontologies",
+    "related-ontologies": "Related ontologies",
+    "not-found": "Ontology not found",
+    "classes": "Classes"
+  },
+  "shapes": {
+    "title": "Shape",
+    "titles": "Shapes",
+    "search-bar-text": "Search for special shapes",
+    "no-shapes-available": "No shapes available",
+    "related-shapes": "Related shapes",
+    "not-found": "Shape not found"
   }
 }

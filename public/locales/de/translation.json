@@ -70,7 +70,13 @@
     "tooltip": {
       "manage": "Manage your service (LCM)",
       "edit": "Upload new SD"
-    }
+    },
+    "suitable-offerings": "Passende Angebote",
+    "no-offerings-available": "Keine Angebote verfügbar",
+    "actions": "Aktionen",
+    "offered-by": "Angeboten von",
+    "suitable-data-offerings": "Passende Datenangebote",
+    "map": "Karte"
   },
   "top-menu": {
     "help": "Hilfe",
@@ -493,21 +499,35 @@
     "final_description": "You can download template and upload configuration or complete form manually."
   },
   "details": {
+    "title": "Details",
     "sidebar-button-label": "Kontaktieren oder kaufen",
     "contact-or-buy-button-notification": "Daten wurden übertragen",
-    "moreDetails": "Mehr Details"
+    "more-details": "Mehr Details",
+    "view-graph": "Graph anzeigen",
+    "download-file": "Turtle-Datei herunterladen",
+    "download-json": "Json-Datei herunterladen"
   },
   "resources": {
     "is-gaia-x-compliant": "Gaia-X konform",
     "not-gaia-x-compliant": "Nicht Gaia-X konform",
-    "no-offerings-available": "Keine Angebote verfügbar",
     "not-authenticated": "Nicht berechtigt",
-    "searchBarText": "Suchen Sie nach speziellen Ressourcen oder Angeboten"
+    "search-bar-text": "Suchen Sie nach speziellen Ressourcen oder Angeboten"
   },
   "ontologies": {
     "title": "Ontologie",
     "titles": "Ontologien",
-    "noOntologiesAvailable": "Keine Ontologien gefunden",
-    "searchBarText": "Suchen Sie nach speziellen Shapes oder Ontologien"
+    "no-ontologies-available": "Keine Ontologien gefunden",
+    "search-bar-text": "Suchen Sie nach speziellen Ontologien",
+    "related-ontologies": "Verwandte Ontologien",
+    "not-found": "Ontologie nicht gefunden",
+    "classes": "Klassen"
+  },
+  "shapes": {
+    "title": "Shape",
+    "titles": "Shapes",
+    "search-bar-text": "Suchen Sie nach speziellen Shapes",
+    "no-shapes-available": "Keine Shapes gefunden",
+    "related-shapes": "Verwandte Shapes",
+    "not-found": "Shape nicht gefunden"
   }
 }

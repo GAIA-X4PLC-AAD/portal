@@ -8,9 +8,9 @@ import { useResourceFilter } from '../../hooks/useResourceFilter';
 import { ApiService } from '../../services/ApiService';
 import { Resource, mapResources } from '../../utils/dataMapper';
 import Text from '../Text/Text';
-import Title from '../Title/Title';
 import SelfDescriptionCard from '../cards/SelfDescriptionCard';
 import Filter from '../filter/Filter';
+import Header from '../header/Header';
 import SearchBar from '../searchBar/SearchBar';
 
 import styles from './Resources.module.css';
@@ -76,11 +76,7 @@ const Resources = () => {
 
   return (
     <div>
-      <header className={styles['header-container']}>
-        <div className={styles['header-title']}>
-          <Title>{t('left-menu.resources')}({filteredResourceData.length} {t('dashboard.results')})</Title>
-        </div>
-      </header>
+      <Header title={`${t('left-menu.resources')}(${filteredResourceData.length} ${t('dashboard.results')})`}/>
       <div className={styles['resource-content-container']}>
         <Filter
           typeAssets={typeAssets}
@@ -91,7 +87,7 @@ const Resources = () => {
         {authContext.isAuthenticated && (
           <div className={styles.content}>
             <div>
-              <SearchBar placeholder={t('resources.searchBarText')} onSearch={handleSearch}/>
+              <SearchBar placeholder={t('resources.search-bar-text')} onSearch={handleSearch}/>
             </div>
             <div>
               {isLoading && (
@@ -113,7 +109,7 @@ const Resources = () => {
                   );
                 })
               ) : (
-                <Text>{t('resources.no-offerings-available')}</Text>
+                <Text>{t('dashboard.no-offerings-available')}</Text>
               )}
             </div>
           </div>

@@ -1,17 +1,23 @@
+import { FC } from 'react';
+
 import styles from './GaiaXButton.module.css';
 
 interface IGaiaXButton {
   label: string;
   handleOnClick: () => void;
+  width?: string;
 }
 
-export default function GaiaXButton({
+const GaiaXButton: FC<Readonly<IGaiaXButton>> = ({
   label,
   handleOnClick,
-}: Readonly<IGaiaXButton>) {
+  width,
+}) => {
   return (
-    <button className={styles.button} onClick={handleOnClick}>
+    <button className={styles.button} onClick={handleOnClick} style={width ? { width } : {}}>
       {label}
     </button>
   );
 }
+
+export default GaiaXButton;
