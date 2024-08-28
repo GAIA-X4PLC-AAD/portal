@@ -5,7 +5,6 @@
   "left-menu": {
     "home": "Home",
     "resources": "Resources",
-    "service-offerings": "Service Offerings",
     "services": "Services",
     "data": "Data",
     "provider": "Provider",
@@ -509,11 +508,15 @@
     "download-file": "Download turtle file",
     "download-json": "Download json file"
   },
+  "service-offerings": {
+    "title": "Services",
+    "titles": "Service Offerings",
+    "search-bar-text": "Search for special service offerings",
+    "no-description": "No description available!",
+    "no-title": "No title available"
+  },
   "resources": {
-    "is-gaia-x-compliant": "Gaia-X compliant",
-    "not-gaia-x-compliant": "Not Gaia-X compliant",
-    "not-authenticated": "Not authenticated",
-    "search-bar-text": "Search for special resources or service offerings"
+    "search-bar-text": "Search for special resources"
   },
   "ontologies": {
     "title": "Ontology",
@@ -531,5 +534,12 @@
     "no-shapes-available": "No shapes available",
     "related-shapes": "Related shapes",
     "not-found": "Shape not found"
+  },
+  "common": {
+    "is-gaia-x-compliant": "Gaia-X compliant",
+    "not-gaia-x-compliant": "Not Gaia-X compliant",
+    "not-authenticated": "You are not authenticated!",
+    "results": "results",
+    "is-loading": "loading..."
   }
 }
