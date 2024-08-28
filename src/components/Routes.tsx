@@ -41,7 +41,7 @@ const Routes: FC = () => (
     <ReactRoutes>
       <Route path="/" element={<Column><Home /></Column>} />
       <Route path="/home" element={ViewContainer(<Home />)} />
-      <Route path="/service-offerings" element={ViewContainer(<ServiceOfferings />)} />
+      <Route path="/service-offerings" element={ViewContainer(<ProtectedRoute><ServiceOfferings/></ProtectedRoute>)}/>
       <Route path="/participants" element={ViewContainer(<Participants />)} />
       <Route path="/resources" element={ViewContainer(<ProtectedRoute><Resources /></ProtectedRoute>)} />
       <Route path="/details/:resourceId" element={ViewContainer(<DetailsPage />)} />

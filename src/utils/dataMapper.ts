@@ -27,7 +27,7 @@ export interface ServiceOffering {
 }
 
 export function mapServiceOfferings(selfDescriptions: ServiceOfferingInput): ServiceOffering[] {
-  console.log('From mapper: ', selfDescriptions);
+  console.debug('From mapper: ', selfDescriptions);
   return selfDescriptions.items.map(({ 'properties(n)': p, 'labels(n)': l }) => ({
     label: l[1],
     name: p.name,
