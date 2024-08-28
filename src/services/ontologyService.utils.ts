@@ -8,14 +8,8 @@ import { getSchemaById } from './SchemaApiService';
 import { getRelatedShapes } from './shapeService.utils';
 
 export const fetchOntologies = async (ontologiesStringArray: string[]) => {
-  const promises = ontologiesStringArray.map(async id => {
-    const relatedShapes = await getRelatedShapes(id);
-    const promise = await getSchemaById(id);
-    const parsedOntology = await parseSingleOntology(promise);
-    return createOntologyObject(parsedOntology, relatedShapes);
-  });
-
-  return await Promise.all(promises);
+  const ontologiesPromise = ontologiesStringArray.map(async id => getOntologyById(id));
+  return await Promise.all(ontologiesPromise);
 }
 
 export const parseSingleOntology = (item: string) => {
@@ -94,8 +88,12 @@ export const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ont
 };
 
 export const getOntologyById = async (id: string) => {
-  const relatedShapes = await getRelatedShapes(id);
-  const response = await getSchemaById(id);
-  const parsedOntology = await parseSingleOntology(response);
-  return createOntologyObject(parsedOntology, relatedShapes);
+  const relatedShapesPromise = getRelatedShapes(id);
+  const parsedOntologyPromise = getSchemaById(id).then((response) => parseSingleOntology(response));
+
+  return await Promise.all([relatedShapesPromise, parsedOntologyPromise]).then(
+    ([relatedShapes, parsedOntology]) => createOntologyObject(parsedOntology, relatedShapes)
+  ).catch((reason) => {
+    throw reason
+  });
 }

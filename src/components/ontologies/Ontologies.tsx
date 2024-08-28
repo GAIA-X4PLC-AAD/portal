@@ -32,21 +32,20 @@ const Ontologies = () => {
       try {
         const fetchedOntologies = await getAllOntologies();
 
-        fetchedOntologies.forEach(ontology => {
-          ontology.nodes.forEach(node => {
-            if (node.type == 'http://www.w3.org/2000/01/rdf-schema#Class' || node.type == 'http://www.w3.org/2002/07/owl#Class' || node.type == 'http://www.w3.org/2002/07/owl#ObjectProperty'){
-              if (!nodes.find(n => n.id === node.id)) {
-                nodes.push(node);
-              }
-            }
-          });
+        const uniqueNodes = new Map(fetchedOntologies
+          .map(ontology => ontology.nodes)
+          .reduce((result, currentOntologyNodes) => [...result, ...currentOntologyNodes])
+          .filter(node => node.type == 'http://www.w3.org/2000/01/rdf-schema#Class'
+                || node.type == 'http://www.w3.org/2002/07/owl#Class'
+                || node.type == 'http://www.w3.org/2002/07/owl#ObjectProperty')
+          .map(node => [node.id, node] as [string, Node]));
+        setNodes(Array.from(uniqueNodes.values()))
 
-          ontology.links.forEach(link => {
-            if (!links.find(l => l.source === link.source && l.target === link.target)) {
-              links.push(link);
-            }
-          });
-        });
+        const uniqueLinks = new Map(fetchedOntologies
+          .map(ontology => ontology.links)
+          .reduce((merged, currentOntologyLinks) => [...merged, ...currentOntologyLinks])
+          .map(link => [link.source + link.target, link] as [string, Link]))
+        setLinks(Array.from(uniqueLinks.values()))
 
         setOriginalOntologies(fetchedOntologies);
         setFilteredOntologies(fetchedOntologies);
