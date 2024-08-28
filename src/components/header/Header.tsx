@@ -10,11 +10,13 @@ interface IHeader {
 
 const Header: FC<IHeader> = ({ title }) => {
   return (
-    <header className={styles['header-container']}>
-      <div className={styles['header-title']}>
-        <Title>{title}</Title>
-      </div>
-    </header>
+    <div className={styles['container']}>
+      <header className={styles['header-container']}>
+        <div className={styles['header-title']}>
+          <Title>{title}</Title>
+        </div>
+      </header>
+    </div>
   );
 };
 
