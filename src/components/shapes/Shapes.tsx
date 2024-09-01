@@ -5,9 +5,9 @@ import car from '../../assets/car.gif';
 import { fetchAllSchemas } from '../../services/schemaApiService';
 import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
 import { Shape } from '../../types/shapes.model';
+import ItemCard from '../ItemCard/ItemCard';
 import Text from '../Text/Text';
 import Header from '../header/Header';
-import ItemCard from '../itemCard/ItemCard';
 import SearchBar from '../searchBar/SearchBar';
 
 import styles from './Shapes.module.css';

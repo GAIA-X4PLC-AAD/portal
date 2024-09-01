@@ -64,7 +64,7 @@ const useOntologies = ({ nodeTypeFilters }: IUseOntologies) => {
     } else {
       return 'SHOW_NO_RESULTS'
     }
-  }, [filteredOntologies, showMap])
+  }, [filteredOntologies, showMap, isLoading])
 
   const search = (filter: string) => {
     setSearchText(filter)

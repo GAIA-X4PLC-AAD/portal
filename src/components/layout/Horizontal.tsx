@@ -1,5 +1,6 @@
 import { FC, ReactNode } from 'react';
-import './Horizontal.css'
+
+import style from './Layout.module.css'
 
 interface IContainer {
     children: ReactNode;
@@ -7,11 +8,15 @@ interface IContainer {
 }
 
 const Horizontal: FC<IContainer> = ({ children, visible = true }) => {
-  return (
-    <div className={'horizontal'}>
-      {visible && children}
-    </div>
-  )
+
+  if (visible) {
+    return (
+      <div className={style.horizontal}>
+        {children}
+      </div>
+    )
+  }
+  return <></>
 }
 
 export default Horizontal;

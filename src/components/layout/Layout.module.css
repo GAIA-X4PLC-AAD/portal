@@ -1,0 +1,21 @@
+.main {
+    margin: 40px 50px;
+    box-sizing: border-box;
+}
+
+.horizontal {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    gap: 30px;
+    box-sizing: border-box;
+}
+
+.vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 30px;
+    box-sizing: border-box;
+}

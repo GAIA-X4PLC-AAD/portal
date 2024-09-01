@@ -1,5 +1,7 @@
 import { FC, ReactNode } from 'react';
 
+import Vertical from '../layout/Vertical';
+
 interface IResultContainer {
     children: ReactNode;
     visible: boolean;
@@ -7,9 +9,9 @@ interface IResultContainer {
 
 const CardContainer: FC<IResultContainer> = ({ children, visible }) => {
   return (
-    <div>
+    <Vertical>
       {visible && children}
-    </div>
+    </Vertical>
   )
 }
 

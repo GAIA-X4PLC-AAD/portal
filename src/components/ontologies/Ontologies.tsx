@@ -2,10 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import RDFVisualization from '../../utils/RDFVisualization';
+import ItemCard from '../ItemCard/ItemCard';
 import ShowMapButton from '../buttons/ShowMapButton';
 import CardContainer from '../cards/CardContainer';
 import Header from '../header/Header';
-import ItemCard from '../itemCard/ItemCard';
 import Horizontal from '../layout/Horizontal';
 import Main from '../layout/Main';
 import LoadingIndicator from '../loading_view/LoadingIndicator';

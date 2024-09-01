@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
+import { fetchAllSchemas } from 'services/schemaApiService';
 
 import {
   fetchAllOntologiesFromSchemas,
   getResourceTypes,
   getUniqueLinks,
   getUniqueNodes
-} from '../services/ontologyService.utils';
-import { fetchAllSchemas } from '../services/schemaApiService';
-import { fetchAllShapesFromSchemas } from '../services/shapeService.utils';
-import { Node } from '../types/ontologies.model';
+} from '../../services/ontologyService.utils';
+import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
+import { Node } from '../../types/ontologies.model';
 
 const nodeTypeFilters = [
   'http://www.w3.org/2000/01/rdf-schema#Class',

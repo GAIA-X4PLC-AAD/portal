@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import ItemCard from '../ItemCard/ItemCard';
 import CardContainer from '../cards/CardContainer';
 import Header from '../header/Header';
-import ItemCard from '../itemCard/ItemCard';
 import Main from '../layout/Main';
 import LoadingIndicator from '../loading_view/LoadingIndicator';
 import SearchBar from '../searchBar/SearchBar';
