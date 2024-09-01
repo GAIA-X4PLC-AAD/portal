@@ -1,50 +1,51 @@
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ItemCard from '../ItemCard/ItemCard';
 import CardContainer from '../cards/CardContainer';
 import Header from '../header/Header';
+import Horizontal from '../layout/Horizontal';
 import Main from '../layout/Main';
+import Vertical from '../layout/Vertical';
 import LoadingIndicator from '../loading_view/LoadingIndicator';
+import NoContent from '../nocontent/NoContent';
 import SearchBar from '../searchBar/SearchBar';
 
 import { useServiceOfferings } from './useServiceOfferings';
 
 const ServiceOfferings = () => {
   const { t } = useTranslation()
-  const { state, serviceOfferings } = useServiceOfferings();
-  const [searchText, setSearchText] = useState('')
-  const filteredServiceOfferings = useMemo(() => serviceOfferings
-    .filter(services => Object
-      .values(services)
-      .some(propertyValue => propertyValue &&
-              String(propertyValue).toLowerCase()
-                .includes(searchText.toLowerCase()))
-    ), [serviceOfferings, searchText])
-
-  const search = (filter: string) => {
-    setSearchText(filter)
-  }
+  const {
+    state,
+    serviceOfferings,
+    search
+  } = useServiceOfferings();
 
   return (
     <>
       <Header title={`${t('service-offerings.titles')} (${serviceOfferings.length} ${t('common.results')})`}/>
       <Main>
-        <LoadingIndicator visible={state === 'LOADING'}/>
-        <SearchBar placeholder={t('service-offerings.search-bar-text')} onSearch={search}/>
-        <CardContainer visible={state === 'SHOW_OFFERINGS'}>
-          {
-            filteredServiceOfferings
-              .map(
-                (serviceOffering) => (
-                  <ItemCard
-                    key={serviceOffering.name}
-                    label={serviceOffering.label}
-                    service={serviceOffering}
-                  />
-                ))
-          }
-        </CardContainer>
+        <Vertical>
+          <Horizontal visible={['SHOW_OFFERINGS', 'SHOW_NO_RESULTS'].includes(state)}>
+            <SearchBar placeholder={t('service-offerings.search-bar-text')} onSearch={search}/>
+          </Horizontal>
+          <LoadingIndicator visible={state === 'LOADING'}/>
+          <CardContainer visible={state === 'SHOW_OFFERINGS'}>
+            {
+              serviceOfferings.map((serviceOffering) => (
+                <ItemCard
+                  key={serviceOffering.name}
+                  label={serviceOffering.label}
+                  isGaiaXCompliant={true}
+                  service={serviceOffering}
+                />
+              ))
+            }
+          </CardContainer>
+          <NoContent
+            message={t('service-offerings.no-offerings-available')}
+            visible={state === 'SHOW_NO_RESULTS'}/>
+        </Vertical>
       </Main>
     </>
   );

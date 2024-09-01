@@ -1,87 +1,53 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import car from '../../assets/car.gif';
-import { fetchAllSchemas } from '../../services/schemaApiService';
-import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
-import { Shape } from '../../types/shapes.model';
 import ItemCard from '../ItemCard/ItemCard';
-import Text from '../Text/Text';
+import CardContainer from '../cards/CardContainer';
 import Header from '../header/Header';
+import Horizontal from '../layout/Horizontal';
+import Main from '../layout/Main';
+import Vertical from '../layout/Vertical';
+import LoadingIndicator from '../loading_view/LoadingIndicator';
+import NoContent from '../nocontent/NoContent';
 import SearchBar from '../searchBar/SearchBar';
 
-import styles from './Shapes.module.css';
+import { useShapes } from './useShapes';
 
 const Shapes = () => {
   const { t } = useTranslation();
-  const [isLoading, setIsLoading] = useState(false);
-  const [originalShapes, setOriginalShapes] = useState<Shape[]>([]);
-  const [filteredShapes, setFilteredShapes] = useState<Shape[]>([]);
-
-  useEffect(() => {
-    const loadShapes = async () => {
-      setIsLoading(true);
-      try {
-        const schemas = await fetchAllSchemas();
-        const fetchedShapes = await fetchAllShapesFromSchemas(schemas);
-        const sortedShapes = fetchedShapes.sort((a: Shape, b: Shape) => a.shortSubject.localeCompare(b.shortSubject));
-        setOriginalShapes(sortedShapes);
-        setFilteredShapes(sortedShapes);
-      } catch (error) {
-        console.error('Error fetching self descriptions:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadShapes();
-  }, []);
-
-  const handleSearch = (query: string) => {
-    if (query === '') {
-      setFilteredShapes(originalShapes);
-    } else {
-      const lowerCaseQuery = query.toLowerCase();
-      const filtered = originalShapes.filter(shape => {
-        const shapeString = JSON.stringify(shape).toLowerCase();
-        return shapeString.includes(lowerCaseQuery);
-      });
-      setFilteredShapes(filtered);
-    }
-  };
-
-  if (isLoading) {
-    return (
-      <div className="new-car-loader">
-        <img src={car} alt="loading..." className="car"/>
-      </div>
-    );
-  }
+  const {
+    state,
+    shapes,
+    search
+  } = useShapes();
 
   return (
-    <div>
-      <Header title={`${t('shapes.titles')}(${filteredShapes.length} ${t('dashboard.results')})`}/>
-      <div className={styles['shapes-and-ontologies-content-container']}>
-        <div className={styles['content']}>
-          <div className={styles['search-and-button-container']}>
-            <SearchBar placeholder={t('shapes.search-bar-text')} onSearch={handleSearch} />
-          </div>
-          {(
-            filteredShapes.length > 0 ? (
-              filteredShapes.map((shape, index) => (
+    <>
+      <Header title={`${t('shapes.titles')} (${shapes.length} ${t('dashboard.results')})`}/>
+      <Main>
+        <Vertical>
+          <Horizontal visible={['SHOW_SHAPES', 'SHOW_NO_RESULTS'].includes(state)}>
+            <SearchBar placeholder={t('resources.search-bar-text')} onSearch={search}/>
+          </Horizontal>
+          <LoadingIndicator visible={state === 'LOADING'}/>
+          <CardContainer visible={state === 'SHOW_SHAPES'}>
+            {
+              shapes.map((shape, index) => (
                 <ItemCard
                   key={index}
                   label={t('shapes.title')}
+                  isGaiaXCompliant={true}
                   shape={shape}
                 />
               ))
-            ) : (
-              <Text>{t('shapes.no-shapes-available')}</Text>
-            )
-          )}
-        </div>
-      </div>
-    </div>
+            }
+          </CardContainer>
+          <NoContent
+            message={t('shapes.no-shapes-available')}
+            visible={state === 'SHOW_NO_RESULTS'}/>
+        </Vertical>
+      </Main>
+    </>
   );
 };
 
