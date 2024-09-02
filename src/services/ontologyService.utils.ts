@@ -125,5 +125,5 @@ export function getResourceTypes(links: Link[], shapes: Shape[]) {
     .filter(link => link.target.endsWith('DataResource'))
     .map(link => findRelatedShapes(shapes, link.source))
     .flat()
-    .map(shape => shape.shortSubject);
+    .map(shape => ({ id: shape.subject, label: shape.shortSubject }));
 }

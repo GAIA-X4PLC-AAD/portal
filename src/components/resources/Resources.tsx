@@ -12,6 +12,7 @@ import LoadingIndicator from '../loading_view/LoadingIndicator';
 import NoContent from '../nocontent/NoContent';
 import SearchBar from '../searchBar/SearchBar';
 
+import { Asset } from './useResourceFilterAssets';
 import { useResources } from './useResources';
 
 const Resources = () => {
@@ -23,10 +24,12 @@ const Resources = () => {
     typeAssets,
     formatAssets,
     vendorAssets,
-    search
+    search,
+    updateAssetFilter
   } = useResources();
 
-  console.debug(resources)
+  console.debug(typeAssets)
+  console.debug('resource labels:', new Set(resources.map(resource => resource.labels).flat()))
   return (
     <>
       <Header title={`${t('left-menu.resources')} (${resources.length} ${t('dashboard.results')})`}/>
@@ -36,8 +39,9 @@ const Resources = () => {
             typeAssets={typeAssets}
             formatAssets={formatAssets}
             vendorAssets={vendorAssets}
-            toggleFilter={(filterName: string) => {
-              console.debug('toggleFilter:', filterName)
+            updateAssetFilter={(asset: Asset) => {
+              console.debug('update filter:', asset);
+              updateAssetFilter(asset);
             }}
           />
           <Vertical>
@@ -50,7 +54,7 @@ const Resources = () => {
                 resources.map((resource) => (
                   <ItemCard
                     key={resource.uri}
-                    label={resource.label}
+                    label={resource.labels}
                     isGaiaXCompliant={true}
                     resource={resource}
                   />
@@ -58,7 +62,7 @@ const Resources = () => {
               }
             </CardContainer>
             <NoContent
-              message={t('dashboard.no-offerings-available')}
+              message={t('resources.no-resources-available')}
               visible={state === 'SHOW_NO_RESULTS'}/>
           </Vertical>
         </Horizontal>

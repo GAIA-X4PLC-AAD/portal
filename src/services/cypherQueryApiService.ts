@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { Asset } from '../components/resources/useResourceFilterAssets';
 import { AuthContextType } from '../context/AuthContextProvider';
 import { ISelfDescription, ResourceInput, ServiceOfferingInput } from '../utils/dataMapper';
 
@@ -69,10 +70,24 @@ export const CypherQueryApiService = {
    * Returns all resources
    *
    * @param authContext authorization token for server calls
+   * @param typeAssets the list of type assets that should be included in the cypher query
    */
-  async getAllResources(authContext: AuthContextType): Promise<ResourceInput> {
+  async getAllResources(authContext: AuthContextType, typeAssets: Asset[]): Promise<ResourceInput> {
+    // TODO: Should only be loaded only resources with valid type? An asset has a valid type if its type exists in
+    //  the 'typeAssets' array passed in as input parameter.
+
+    // Only resources with valid type
+    // const whereClause = typeAssets.length ?
+    //   `WHERE ANY(label IN labels(n) WHERE label IN [ '${
+    //     typeAssets
+    //       .map(asset => asset.label)
+    //       .join('\', \'')
+    //   }'])`
+    //   : ''
+    const whereClause = '' // Disabled where clause
+
     return cypherQuery(authContext, {
-      statement: 'MATCH (n) RETURN properties(n), labels(n)',
+      statement: `MATCH (n) ${whereClause} RETURN properties(n), labels(n) LIMIT 1000`,
     })
   },
 }

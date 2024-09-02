@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContextProvider';
 import { CypherQueryApiService as cypherQuery } from '../../services/cypherQueryApiService';
 import { mapResources, Resource } from '../../utils/dataMapper';
 
-import { useResourceFilter } from './useResourceFilter';
+import { Asset, useResourceFilterAssets } from './useResourceFilterAssets';
 
 export type ResourcesViewState = 'LOADING' | 'SHOW_RESOURCES' | 'SHOW_NO_RESULTS';
 
@@ -18,43 +18,54 @@ export const useResources = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [searchText, setSearchText] = useState('')
   const {
+    isLoadingAssets,
     typeAssets,
     formatAssets,
-    vendorAssets
-  } = useResourceFilter();
+    vendorAssets,
+    updateAssetFilter
+  } = useResourceFilterAssets();
 
   useEffect(() => {
     (async () => {
       try {
-        const resourceInput = await cypherQuery.getAllResources(authContext);
-        const fetchedResources = mapResources(resourceInput);
+        if (!isLoadingAssets) {
+          const resourceInput = await cypherQuery.getAllResources(authContext, typeAssets);
+          const fetchedResources = mapResources(resourceInput);
 
-        setResources(fetchedResources)
+          setResources(fetchedResources)
+        }
       } catch (error) {
         console.error('Error fetching resources:', error);
       } finally {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [isLoadingAssets]);
+
+  const filterAssets = useMemo(() => [typeAssets, formatAssets, vendorAssets].flat(),
+    [typeAssets, formatAssets, vendorAssets])
 
   const filteredResources = useMemo(() => resources
     .filter(resource => Object
-      .values(resource)
-      .some(propertyValue => !propertyValue ||
-                String(propertyValue).toLowerCase()
-                  .includes(searchText.toLowerCase()))
-    ), [resources, searchText])
+      .entries(resource)
+      .some(property => !searchText ||
+            String(property[1]).toLowerCase()
+              .includes(searchText.toLowerCase())
+      )
+    )
+    .filter(resource =>
+      assetFilterPredicate(resource, filterAssets)
+    ), [resources, searchText, filterAssets])
 
   const state = useMemo<ResourcesViewState>(() => {
-    if (isLoading) {
+    if (isLoading || isLoadingAssets) {
       return 'LOADING'
     } else if (filteredResources.length) {
       return 'SHOW_RESOURCES'
     } else {
       return 'SHOW_NO_RESULTS'
     }
-  }, [filteredResources, isLoading])
+  }, [filteredResources, isLoading, isLoadingAssets])
 
   const search = (filter: string) => {
     setSearchText(filter)
@@ -66,6 +77,19 @@ export const useResources = () => {
     typeAssets,
     formatAssets,
     vendorAssets,
-    search
+    search,
+    updateAssetFilter
   }
 }
+
+function assetFilterPredicate(resource: Resource, assets: Asset[]) {
+  const activeAssetFilters = assets.filter(asset => asset.value)
+  if (activeAssetFilters.length) {
+    return activeAssetFilters
+      .some(asset => resource.labels
+        .map(label => label.toLowerCase())
+        .includes(asset.label.toLowerCase()))
+  }
+  return true
+}
+

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Asset } from '../resources/useFilterAssets';
+import { Asset } from '../resources/useResourceFilterAssets';
 import Subtitle from '../subtitle/Subtitle';
 
 import styles from './Filter.module.css';
@@ -8,21 +8,27 @@ import styles from './Filter.module.css';
 interface IFilterSection {
     subtitle: string;
     assets: Asset[];
-    toggleFilter: (filterName: string) => void;
+    updateAssetFilter: (asset: Asset) => void;
 }
 
-export const FilterSection: FC<IFilterSection> = ({ subtitle, assets , toggleFilter }) => {
+export const FilterSection: FC<IFilterSection> = ({ subtitle, assets, updateAssetFilter }) => {
   return (
     <>
       <Subtitle>{subtitle}</Subtitle>
-      {assets.map((item, index) => (
-        <div className={styles.checkboxContainer} key={index}>
+      {assets.map((item) => (
+        <div className={styles.checkboxContainer} key={`${item.type} ${item.id}`}>
           <label className={styles.label}>
             <input
+              id={item.id}
               type="checkbox"
               className={styles.checkbox}
-              name={item.checkboxName}
-              onChange={() => toggleFilter(item.checkboxName)}
+              name={item.label}
+              checked={item.value}
+              onChange={() => updateAssetFilter({
+                ...item,
+                value: !item.value
+              })}
+              disabled={item.disabled}
             />
             {item.label}
           </label>

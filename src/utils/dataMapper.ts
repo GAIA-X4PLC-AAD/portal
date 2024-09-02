@@ -41,10 +41,7 @@ export function mapServiceOfferings(selfDescriptions: ServiceOfferingInput): Ser
 // Interfaces and Mappers for Resources
 export interface ResourceInput {
   items: Array<{
-    'labels(n)': {
-      0: string,
-      1: string
-    },
+    'labels(n)': string[],
     'properties(n)': {
       name: string,
       description: string,
@@ -55,7 +52,7 @@ export interface ResourceInput {
 }
 
 export interface Resource {
-  label: string,
+  labels: string[],
   name: string,
   description: string,
   uri: string,
@@ -63,14 +60,15 @@ export interface Resource {
 }
 
 export function mapResources(selfDescriptions: ResourceInput): Resource[] {
-  console.log('From mapper: ', selfDescriptions);
-  return selfDescriptions.items.map(({ 'properties(n)': p, 'labels(n)': l }) => ({
-    label: l[1],
-    name: p.name,
-    description: p.description,
-    uri : p.uri,
-    claimsGraphUri : p.claimsGraphUri
-  }));
+  console.debug('mapResource: ', selfDescriptions);
+  return selfDescriptions
+    .items.map(({ 'properties(n)': p, 'labels(n)': l }) => ({
+      labels: l.filter(label => label !== 'Resource' && label !== 'DataResource'),
+      name: p.name,
+      description: p.description,
+      uri: p.uri,
+      claimsGraphUri: p.claimsGraphUri
+    }));
 }
 
 export interface ISelfDescription {
