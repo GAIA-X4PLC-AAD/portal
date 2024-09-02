@@ -53,8 +53,8 @@ const Resources = () => {
               {
                 resources.map((resource) => (
                   <ItemCard
-                    key={resource.uri}
-                    label={resource.labels}
+                    key={resource.uri + resource.name}
+                    label={resource.labels.join(', ')}
                     isGaiaXCompliant={true}
                     resource={resource}
                   />
