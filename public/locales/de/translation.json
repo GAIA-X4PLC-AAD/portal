@@ -514,7 +514,8 @@
     "no-title": "Kein Titel verfügbar!"
   },
   "resources": {
-    "search-bar-text": "Suchen Sie nach speziellen Ressourcen"
+    "search-bar-text": "Suchen Sie nach speziellen Ressourcen",
+    "no-resources-available": "Keine Resourcen verfügbar!"
   },
   "ontologies": {
     "title": "Ontologie",
