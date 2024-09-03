@@ -67,27 +67,20 @@ export const CypherQueryApiService = {
   },
 
   /**
-   * Returns all resources
+   * Returns all resources of type included in the type asset list passed in as parameter.
    *
    * @param authContext authorization token for server calls
-   * @param typeAssets the list of type assets that should be included in the cypher query
+   * @param typeFilters the list of requested resource types
    */
-  async getAllResources(authContext: AuthContextType, typeAssets: Asset[]): Promise<ResourceInput> {
-    // TODO: Should only be loaded only resources with valid type? An asset has a valid type if its type exists in
-    //  the 'typeAssets' array passed in as input parameter.
-
-    // Only resources with valid type
-    // const whereClause = typeAssets.length ?
-    //   `WHERE ANY(label IN labels(n) WHERE label IN [ '${
-    //     typeAssets
-    //       .map(asset => asset.label)
-    //       .join('\', \'')
-    //   }'])`
-    //   : ''
-    const whereClause = '' // Disabled where clause
+  async getAllResources(authContext: AuthContextType, typeFilters: Asset[]): Promise<ResourceInput> {
+    const whereClause = typeFilters.length ?
+      `WHERE ANY (label IN labels(n) WHERE label IN [ '${typeFilters.join('\', \'')}'])
+       AND 'DataResource' IN labels(n)
+       AND NOT n.uri STARTS WITH 'bnode://'`
+      : ''
 
     return cypherQuery(authContext, {
-      statement: `MATCH (n) ${whereClause} RETURN properties(n), labels(n) LIMIT 1000`,
+      statement: `MATCH (n) ${whereClause} RETURN properties(n) AS properties, labels(n) AS labels`,
     })
   },
 }

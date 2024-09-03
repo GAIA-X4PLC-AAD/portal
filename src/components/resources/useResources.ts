@@ -2,7 +2,8 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { AuthContext } from '../../context/AuthContextProvider';
 import { CypherQueryApiService as cypherQuery } from '../../services/cypherQueryApiService';
-import { mapResources, Resource } from '../../utils/dataMapper';
+import { Resource } from '../../types/resources.model';
+import { mapResources } from '../../utils/dataMapper';
 
 import { Asset, useResourceFilterAssets } from './useResourceFilterAssets';
 

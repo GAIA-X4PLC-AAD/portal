@@ -2,7 +2,8 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { AuthContext } from '../../context/AuthContextProvider';
 import { CypherQueryApiService as cypherQuery } from '../../services/cypherQueryApiService';
-import { mapServiceOfferings, ServiceOffering } from '../../utils/dataMapper';
+import { ServiceOffering } from '../../types/serviceOfferings.model';
+import { mapServiceOfferings } from '../../utils/dataMapper';
 
 export type ServiceOfferingsViewState = 'LOADING' | 'SHOW_OFFERINGS' | 'SHOW_NO_RESULTS'
 

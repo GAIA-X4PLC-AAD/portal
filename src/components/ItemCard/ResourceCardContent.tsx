@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Resource } from '../../utils/dataMapper';
+import { Resource } from '../../types/resources.model';
 import Title from '../Title/Title';
 import GaiaXButton from '../buttons/GaiaXButton';
 

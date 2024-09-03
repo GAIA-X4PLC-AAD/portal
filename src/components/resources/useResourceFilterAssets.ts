@@ -33,14 +33,14 @@ export const useResourceFilterAssets = (): IUseFilterAssets => {
       const ontologies = await fetchAllOntologiesFromSchemas(schemas, shapes)
       const resourceTypes = getResourceTypes(ontologies)
 
-      console.debug({ resourceTypes })
-      setTypeAssets(resourceTypes.map(({ id, label }) => ({
-        id: id,
+      console.debug('resourceTypes:', resourceTypes)
+      setTypeAssets(resourceTypes.map((resourceType) => ({
+        id: resourceType,
         type: 'typeAssets',
-        label: label,
+        label: resourceType,
         value: false,
         disabled: false
-      })));
+      } as Asset)));
       setIsLoading(false);
     })();
   }, []);
