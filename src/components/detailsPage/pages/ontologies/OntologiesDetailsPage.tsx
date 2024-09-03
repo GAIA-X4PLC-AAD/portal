@@ -4,7 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import car from '../../../../assets/car.gif';
-import { getOntologyById } from '../../../../services/ontologyService.utils';
+import { fetchOntologyById } from '../../../../services/ontologyService.utils';
+import { fetchAllSchemas } from '../../../../services/schemaApiService';
+import { fetchAllShapesFromSchemas } from '../../../../services/shapeService.utils';
 import { Ontology } from '../../../../types/ontologies.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
@@ -26,7 +28,9 @@ const OntologiesDetailsPage: FC = () => {
   useEffect(() => {
     const loadOntology = async () => {
       try {
-        const ontology = await getOntologyById(id);
+        const schemas = await fetchAllSchemas();
+        const shapes = await fetchAllShapesFromSchemas(schemas);
+        const ontology = await fetchOntologyById(shapes, id);
         setOntology(ontology);
       } catch (error) {
         console.error('Error getting ontology:', error);

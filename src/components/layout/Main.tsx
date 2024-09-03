@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import styles from './Main.css'
+import style from './Layout.module.css'
 
 interface IMain {
     children: ReactNode
@@ -8,7 +8,7 @@ interface IMain {
 
 const Main: FC<IMain> = ({ children }) => {
   return (
-    <main className={styles.content}>
+    <main className={style.main}>
       {children}
     </main>
   )

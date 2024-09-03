@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import './i18n';
 import App from './App';
 import AuthContextProvider from './context/AuthContextProvider';
-import { ResourceFilterProvider } from './context/ResourceFilterContext';
+import { ResourceContextProvider } from './context/ResourceContext';
 import reducers from './reducers';
 
 import './index.css';
@@ -46,9 +46,9 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 root.render(
   <Provider store={store}>
     <AuthContextProvider>
-      <ResourceFilterProvider>
+      <ResourceContextProvider>
         <App/>
-      </ResourceFilterProvider>
+      </ResourceContextProvider>
     </AuthContextProvider>
   </Provider>
 );

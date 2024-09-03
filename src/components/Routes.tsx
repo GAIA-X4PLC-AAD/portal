@@ -12,7 +12,6 @@ import DashboardPage from './dashboard/dashboard_page';
 import LcmFinal from './dashboard/lcm/LcmFinal';
 import LcmServices from './dashboard/lcm/LcmServices';
 import OntologiesDetailsPage from './detailsPage/pages/ontologies/OntologiesDetailsPage';
-import OwlGraph from './detailsPage/pages/ontologies/components/actions/OwlGraph/OwlGraph';
 import ShapesDetailsPage from './detailsPage/pages/shapes/ShapesDetailsPage';
 import DiscoveryItem from './discovery/DiscoveryItem';
 import SearchView from './discovery/search/SearchView';
@@ -74,7 +73,6 @@ const Routes: FC = () => (
       <Route path="/support" element={ViewContainer(<ProtectedRoute><SupportPage /></ProtectedRoute>)} />
       <Route path="/ontologies" element={ViewContainer(<Ontologies />)} />
       <Route path="/ontologies/details/*" element={ViewContainer(<OntologiesDetailsPage />)} />
-      <Route path="/ontologies/graph/*" element={ViewContainer(<OwlGraph />)} />
       <Route path="/shapes" element={ViewContainer(<Shapes />)} />
       <Route path="/shapes/details/*" element={ViewContainer(<ShapesDetailsPage />)} />
     </ReactRoutes>

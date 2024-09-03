@@ -1,22 +1,25 @@
 import * as N3 from 'n3';
 import { Quad } from 'n3';
 
+import { ShapesAndOntologiesInput } from '../types/ontologies.model';
 import { Shape, ShapeProperty } from '../types/shapes.model';
 
-import { getAllShapes, getSchemaById } from './SchemaApiService';
+import { fetchAllSchemas, getSchemaById } from './schemaApiService';
 
-export const fetchShapes = async (shapesStringArray: string[]): Promise<Shape[]> => {
-  // const shapesStringArray2 = ['b8eecadef886515092e38c26abcfc8e826a6bd6cde4cc8e4681e1d82f83f7a89']
-  const promises = shapesStringArray.map(async id => {
-    const schema = await getSchemaById(id);
-    const parsedQuads = await parseSingleShape(schema);
-    return createShapeObjects(id, parsedQuads);
-  });
-
-  const shapesArrays = await Promise.all(promises);
-  return shapesArrays.flat();
+export const fetchAllShapesFromSchemas = async (schemas: ShapesAndOntologiesInput): Promise<Shape[]> => {
+  const shapeArrayPromises = schemas.shapes.map(async id => fetchShapeById(id));
+  const shapeArrays = await Promise.all(shapeArrayPromises);
+  return shapeArrays.flat();
 }
 
+const fetchShapeById = async (shapeId: string) => {
+  return getSchemaById(shapeId)
+    .then(schema => parseSingleShape(schema))
+    .then(quads => createShapeObjects(shapeId, quads))
+    .catch(error => {
+      throw error
+    })
+}
 export const parseSingleShape = (item: string): Promise<Quad[]> => {
   return new Promise((resolve, reject) => {
     const parser = new N3.Parser();
@@ -127,11 +130,13 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
 };
 
 export const getShapeByName = async (name: string): Promise<Shape | undefined> => {
-  const allShapes = await getAllShapes();
+  const schemas = await fetchAllSchemas();
+  const allShapes = await fetchAllShapesFromSchemas(schemas);
   return allShapes ? allShapes.find(shape => shape.subject === name) : undefined;
 }
 
-export const getRelatedShapes = async (targetClass: string): Promise<Shape[]> => {
-  const shapes = await getAllShapes();
-  return shapes.filter(shape => shape.targetClasses.some(tc => tc.includes(targetClass)));
+export const findRelatedShapes = (shapes: Shape[], ontologyId: string): Shape[] => {
+  return shapes.filter(
+    shape => shape.targetClasses.some(
+      targetClasses => targetClasses.includes(ontologyId)));
 }

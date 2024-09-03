@@ -4,14 +4,11 @@ import Divider from 'components/divider/Divider';
 import Subtitle from 'components/subtitle/Subtitle';
 import DataField from 'data-field/DataField';
 
+import { ISelfDescription } from '../../utils/dataMapper';
+
 import styles from './DetailsCard.module.css';
 
-interface IDetailsCard {
-  name: string;
-  description: string;
-  items: Array<{
-    'properties(n)': { [key: string]: string | number | string[] };
-  }>;
+export interface IDetailsCard extends ISelfDescription {
 }
 
 interface IDetailsCardProps {

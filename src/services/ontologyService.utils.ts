@@ -1,15 +1,16 @@
 import * as N3 from 'n3';
 import { Quad } from 'n3';
 
-import { Ontology } from '../types/ontologies.model';
+import { Link, Node, Ontology, ShapesAndOntologiesInput } from '../types/ontologies.model';
 import { Shape } from '../types/shapes.model';
 
-import { getSchemaById } from './SchemaApiService';
-import { getRelatedShapes } from './shapeService.utils';
+import { getSchemaById } from './schemaApiService';
+import { findRelatedShapes } from './shapeService.utils';
 
-export const fetchOntologies = async (ontologiesStringArray: string[]) => {
-  const ontologiesPromise = ontologiesStringArray.map(async id => getOntologyById(id));
-  return await Promise.all(ontologiesPromise);
+export const fetchAllOntologiesFromSchemas = async (schemas: ShapesAndOntologiesInput, shapes: Shape[]) => {
+  return Promise.all(
+    schemas.ontologies.map(
+      async id => fetchOntologyById(shapes, id)));
 }
 
 export const parseSingleOntology = (item: string) => {
@@ -49,9 +50,9 @@ export const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ont
       typesMap[subjectId] = objectId;
     }
 
-    if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#label' || predicateId ==='http://www.w3.org/2002/07/owl#ObjectProperty') {
+    if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#label' || predicateId === 'http://www.w3.org/2002/07/owl#ObjectProperty') {
       nodes.push({ id: subjectId, label: objectId, type: typesMap[subjectId] || 'Unknown' });
-    } else if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#subClassOf' || predicateId ==='http://www.w3.org/2000/01/rdf-schema#domain' || predicateId ==='http://www.w3.org/2000/01/rdf-schema#range') {
+    } else if (predicateId === 'http://www.w3.org/2000/01/rdf-schema#subClassOf' || predicateId === 'http://www.w3.org/2000/01/rdf-schema#domain' || predicateId === 'http://www.w3.org/2000/01/rdf-schema#range') {
       links.push({ source: subjectId, target: objectId });
     }
 
@@ -87,13 +88,42 @@ export const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ont
   };
 };
 
-export const getOntologyById = async (id: string) => {
-  const relatedShapesPromise = getRelatedShapes(id);
-  const parsedOntologyPromise = getSchemaById(id).then((response) => parseSingleOntology(response));
+export const fetchOntologyById = async (shapes: Shape[], id: string) => {
+  const relatedShapes = findRelatedShapes(shapes, id);
 
-  return await Promise.all([relatedShapesPromise, parsedOntologyPromise]).then(
-    ([relatedShapes, parsedOntology]) => createOntologyObject(parsedOntology, relatedShapes)
-  ).catch((reason) => {
-    throw reason
-  });
+  return getSchemaById(id)
+    .then((schema) => parseSingleOntology(schema))
+    .then((parsedQuads) => createOntologyObject(parsedQuads, relatedShapes))
+    .catch((error) => {
+      throw error
+    });
+}
+
+export const getUniqueNodes = (ontologies: Ontology[], nodeFilter: (node: Node) => boolean): Node[] => {
+  const uniqueNodes = new Map(ontologies
+    .map(ontology => ontology.nodes)
+    .flat()
+    .filter(nodeFilter)
+    .map((node: Node) => [node.id, node] as [string, Node]));
+
+  return Array.from(uniqueNodes.values());
+}
+
+export function getUniqueLinks(ontologies: Ontology[], uniqueNode: Node[]) {
+  const uniqueLinks = new Map(ontologies
+    .map(ontology => ontology.links)
+    .flat()
+    .filter(link => uniqueNode.some(uniqueNode => uniqueNode.id === link.source))
+    .filter(link => uniqueNode.some(uniqueNode => uniqueNode.id === link.target))
+    .map(link => [link.source + link.target, link] as [string, Link]))
+
+  return Array.from(uniqueLinks.values());
+}
+
+export function getResourceTypes(links: Link[], shapes: Shape[]) {
+  return links
+    .filter(link => link.target.endsWith('DataResource'))
+    .map(link => findRelatedShapes(shapes, link.source))
+    .flat()
+    .map(shape => ({ id: shape.subject, label: shape.shortSubject }));
 }
