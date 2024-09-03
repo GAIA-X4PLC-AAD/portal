@@ -1,20 +1,8 @@
 import { useEffect, useState } from 'react';
 import { fetchAllSchemas } from 'services/schemaApiService';
 
-import {
-  fetchAllOntologiesFromSchemas,
-  getResourceTypes,
-  getUniqueLinks,
-  getUniqueNodes
-} from '../../services/ontologyService.utils';
+import { fetchAllOntologiesFromSchemas, getResourceTypes } from '../../services/ontologyService.utils';
 import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
-import { Node } from '../../types/ontologies.model';
-
-const NODE_TYPE_FILTERS = [
-  'http://www.w3.org/2000/01/rdf-schema#Class',
-  'http://www.w3.org/2002/07/owl#Class',
-  'http://www.w3.org/2002/07/owl#ObjectProperty'
-]
 
 type AssetValueType = boolean | string;
 
@@ -43,11 +31,9 @@ export const useResourceFilterAssets = (): IUseFilterAssets => {
       const schemas = await fetchAllSchemas();
       const shapes = await fetchAllShapesFromSchemas(schemas);
       const ontologies = await fetchAllOntologiesFromSchemas(schemas, shapes)
+      const resourceTypes = getResourceTypes(ontologies)
 
-      const nodes = getUniqueNodes(ontologies, (node: Node) => NODE_TYPE_FILTERS.includes(node.type));
-      const links = getUniqueLinks(ontologies, nodes);
-      const resourceTypes = getResourceTypes(links, shapes)
-
+      console.debug({ resourceTypes })
       setTypeAssets(resourceTypes.map(({ id, label }) => ({
         id: id,
         type: 'typeAssets',

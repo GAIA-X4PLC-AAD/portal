@@ -7,6 +7,8 @@ import { Shape } from '../types/shapes.model';
 import { getSchemaById } from './schemaApiService';
 import { findRelatedShapes } from './shapeService.utils';
 
+const DATA_RESOURCE_CLASS = 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#DataResource'
+
 export const fetchAllOntologiesFromSchemas = async (schemas: ShapesAndOntologiesInput, shapes: Shape[]) => {
   return Promise.all(
     schemas.ontologies.map(
@@ -120,10 +122,30 @@ export function getUniqueLinks(ontologies: Ontology[], uniqueNode: Node[]) {
   return Array.from(uniqueLinks.values());
 }
 
-export function getResourceTypes(links: Link[], shapes: Shape[]) {
-  return links
-    .filter(link => link.target.endsWith('DataResource'))
-    .map(link => findRelatedShapes(shapes, link.source))
+/**
+ * Returns all resource types. Resource types are the individual names of all subclasses of the DataResource class.
+ *
+ * @param ontologies serving as the source of information
+ * @return a list of resource types
+ */
+export function getResourceTypes(ontologies: Ontology[]): string[] {
+  return ontologies
+    .map(ontology => ontology.relatedShapes
+      .filter(relatedShape => isSubclassOfDataResource(ontology, relatedShape))
+      .map(shape => shape.shortSubject))
     .flat()
-    .map(shape => ({ id: shape.subject, label: shape.shortSubject }));
 }
+
+/**
+ * Based on the ontology determines if a class described by the given shape is subclass of DataResource class.
+ *
+ * @param ontology represented by the shacl shape used to determine the relations.
+ * @param shape containing the class name.
+ * @return if the shape is subclass of DataResource.
+ */
+function isSubclassOfDataResource(ontology: Ontology, shape: Shape): boolean {
+  return ontology.links
+    .filter(link => link.target === DATA_RESOURCE_CLASS)
+    .some(link => link.source === shape.classname);
+}
+
