@@ -18,4 +18,7 @@ $ npm run start
 
 Now application can be accessed in browser via URL http://localhost:3000.
 
+## Keycloak Configuration
+The portal uses a Keycloak of the connected GXFS Federated Catalogue as a IAM. The right keycloak set up can be found [here](https://github.com/orgs/GAIA-X4PLC-AAD/projects/3/views/1?pane=issue&itemId=46993662)
+
 
