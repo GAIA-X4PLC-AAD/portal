@@ -26,8 +26,6 @@ const OntologiesDetailsPage: FC = () => {
   const [ontology, setOntology] = useState<Ontology>();
 
   useEffect(() => {
-    // TODO: Isn't it already available? Is it necessary to fetch the ontology? The view is probably opened from a
-    //  search view where ontologies already have been fetched
     const loadOntology = async () => {
       try {
         const schemas = await fetchAllSchemas();
