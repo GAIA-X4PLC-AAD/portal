@@ -18,12 +18,13 @@ export const fetchAllOntologiesFromSchemas = async (schemas: ShapesAndOntologies
 export const parseSingleOntology = (item: string) => {
   const parser = new N3.Parser();
   const quads: Quad[] = [];
-  parser.parse(item,
-    (error, quad) => {
-      if (quad) {
-        quads.push(quad);
-      }
-    });
+  parser.parse(item, (error, quad) => {
+    if (error) {
+      console.error(error)
+    } else if (quad) {
+      quads.push(quad);
+    }
+  });
   return quads;
 }
 
