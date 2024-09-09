@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import GMarkdown from '../../common/markdown/GMarkdown';
 import { Ontology } from '../../types/ontologies.model';
 import Title from '../Title/Title';
 import GaiaXButton from '../buttons/GaiaXButton';
@@ -26,7 +27,7 @@ const OntologyCardContent: FC<IOntologyCardContent> = ({ ontology } ) => {
       <div style={{ textAlign: 'left' }}>
         <Title>{ontology.subject}</Title>
       </div>
-      <p>{ontology.description}</p>
+      <GMarkdown isCard>{ontology.description}</GMarkdown>
       <div className={styles.button}>
         <GaiaXButton
           label={t('details.more-details')}

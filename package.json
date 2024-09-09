@@ -28,6 +28,7 @@
     "js-file-download": "^0.4.12",
     "jwt-decode": "^3.1.2",
     "keycloak-js": "^22.0.5",
+    "markdown-to-jsx": "^7.5.0",
     "mem": "^9.0.2",
     "moment": "^2.29.3",
     "n3": "^1.17.3",
