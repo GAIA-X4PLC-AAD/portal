@@ -58,7 +58,9 @@ export const parseSingleShape = (item: string): Promise<Quad[]> => {
 
 // -----------------------------------------------------------------------------
 
-const PARAM_PATH_TYPE = 'http://www.w3.org/ns/shacl#path';
+const PARAM_PATH = 'http://www.w3.org/ns/shacl#path';
+const PARAM_IN = 'http://www.w3.org/ns/shacl#in';
+const NIL = '/www.w3.org/1999/02/22-rdf-syntax-ns#nil';
 
 const PARAMETER_TYPES = [
   'http://www.w3.org/ns/shacl#name',
@@ -84,9 +86,9 @@ type Parameter = {
   value: string,
 }
 
-const isLinkedListValue = (quad: Quad) => (quad.predicate.value === 'ww.w3.org/1999/02/22-rdf-syntax-ns#first')
+const isLinkedListValue = (quad: Quad) => (quad.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#first')
 
-const isLinkedListNextItem = (quad: Quad) => (quad.predicate.value === 'www.w3.org/1999/02/22-rdf-syntax-ns#rest')
+const isLinkedListNextItem = (quad: Quad) => (quad.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#rest')
 
 const isParameter = (quad: Quad) => (
   PARAMETER_TYPES.includes(quad.predicate.value)
@@ -117,12 +119,28 @@ const getShortSubject = (targetClass: string) =>
     : targetClass.split('/').pop()
         || targetClass
 
-const getPropertyValues = (propertyId: string, parameters: Map<string, Parameter[]>) => {
+const getInPropertyValues = (firstItemId: string, linkedListValues: Map<string, ListItem>) => {
+  const values = [] as string[];
+
+  let currentItem = linkedListValues.get(firstItemId);
+  while (currentItem && currentItem.value !== NIL) {
+    values.push(currentItem.value);
+    currentItem = linkedListValues.get(currentItem.next);
+  }
+  return values;
+}
+
+const getPropertyValues = (propertyId: string, parameters: Map<string, Parameter[]>, linkedListValues: Map<string, ListItem>) => {
   const propertyParameters = parameters.get(propertyId) || [];
-  const params = propertyParameters.map(parameter => ({
-    type: parameter.name,
-    value: parameter.value,
-  } as PropertyValue));
+  const params = propertyParameters.map(parameter => {
+    const type = parameter.name;
+    let value: string | string[] = parameter.value;
+    if (parameter.name === PARAM_IN) {
+      const firstItemId = parameter.value;
+      value = getInPropertyValues(firstItemId, linkedListValues);
+    }
+    return { type, value, } as PropertyValue
+  });
 
   return params.sort((a, b) => {
     const indexA = PARAMETER_TYPES.indexOf(a.type);
@@ -131,11 +149,11 @@ const getPropertyValues = (propertyId: string, parameters: Map<string, Parameter
   });
 }
 
-const getShapeProperties = (shapeId: string, propertyIds: Map<string, string[]>, parameters: Map<string, Parameter[]>) => {
+const getShapeProperties = (shapeId: string, propertyIds: Map<string, string[]>, parameters: Map<string, Parameter[]>, linkedListValues: Map<string, ListItem>) => {
   const shapePropertyIds = propertyIds.get(shapeId) || [];
   return shapePropertyIds.map(propertyId => {
-    const propertyValues = getPropertyValues(propertyId, parameters);
-    const propertyPath = propertyValues.find(prop => prop.type === PARAM_PATH_TYPE);
+    const propertyValues = getPropertyValues(propertyId, parameters, linkedListValues);
+    const propertyPath = propertyValues.find(prop => prop.type === PARAM_PATH);
 
     return {
       propertyId: propertyPath ? propertyPath.value : propertyId,
@@ -161,9 +179,9 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
 
   quads.forEach(quad => {
     if (isLinkedListValue(quad)) {
-      const itemId = quad.subject.value;
-      const listItem = linkedListValues.get(itemId) || {};
-      linkedListValues.set(itemId, { ...listItem, value: quad.object.value } as ListItem)
+      const id = quad.subject.value;
+      const listItem = linkedListValues.get(id) || {};
+      linkedListValues.set(id, { ...listItem, value: quad.object.value } as ListItem)
     }
 
     if (isLinkedListNextItem(quad)) {
@@ -213,7 +231,7 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
     const shapeTargetClasses = targetClasses.get(shapeId) || [];
     const classname = getClassname(shapeId, shapeTargetClasses);
     const shortSubject = getShortSubject(classname);
-    const properties = getShapeProperties(shapeId, propertyIds, parameters);
+    const properties = getShapeProperties(shapeId, propertyIds, parameters, linkedListValues);
     const nodes = getNodes(shapeId, propertyIds, nodeIds);
 
     const shape: Shape = {

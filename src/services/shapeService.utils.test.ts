@@ -1986,7 +1986,21 @@ describe('createShapeObjects documentation', () => {
               },
               {
                 type: 'http://www.w3.org/ns/shacl#in',
-                value: 'n3-99'
+                value: [
+                  'Bicycle',
+                  'LowSpeed',
+                  'Motorway',
+                  'Pedestrian',
+                  'Rural',
+                  'Town',
+                  'TownArterial',
+                  'TownCollector',
+                  'TownExpressway',
+                  'TownLocal',
+                  'TownPlayStreet',
+                  'TownPrivate',
+                  'Unknown'
+                ]
               },
               {
                 type: 'http://www.w3.org/ns/shacl#message',
@@ -2023,7 +2037,25 @@ describe('createShapeObjects documentation', () => {
               },
               {
                 type: 'http://www.w3.org/ns/shacl#in',
-                value: 'n3-113'
+                value: [
+                  'biking',
+                  'border',
+                  'connectingRamp',
+                  'curb',
+                  'driving',
+                  'entry',
+                  'exit',
+                  'median',
+                  'none',
+                  'offRamp',
+                  'onRamp',
+                  'parking',
+                  'restricted',
+                  'shoulder',
+                  'slipLane',
+                  'stop',
+                  'walking'
+                ]
               },
               {
                 type: 'http://www.w3.org/ns/shacl#message',
@@ -2060,7 +2092,16 @@ describe('createShapeObjects documentation', () => {
               },
               {
                 type: 'http://www.w3.org/ns/shacl#in',
-                value: 'n3-131'
+                value: [
+                  'barrier',
+                  'bike',
+                  'building',
+                  'bus',
+                  'car',
+                  'crosswalk',
+                  'gantry',
+                  'motorbike'
+                ]
               },
               {
                 type: 'http://www.w3.org/ns/shacl#message',
@@ -2097,7 +2138,10 @@ describe('createShapeObjects documentation', () => {
               },
               {
                 type: 'http://www.w3.org/ns/shacl#in',
-                value: 'n3-140'
+                value: [
+                  'left-hand',
+                  'right-hand'
+                ]
               },
               {
                 type: 'http://www.w3.org/ns/shacl#maxCount',
@@ -2269,8 +2313,14 @@ describe('createShapeObjects documentation', () => {
               },
               {
                 type: 'http://www.w3.org/ns/shacl#in',
-                // TODO: it should be an array: ["ASAM OpenDRIVE", "Lanelet", "Road5", "Shape", "road2sim", "roadXML"]
-                value: 'n3-146'
+                value: [
+                  'ASAM OpenDRIVE',
+                  'Lanelet',
+                  'Road5',
+                  'Shape',
+                  'road2sim',
+                  'roadXML'
+                ]
               },
               {
                 type: 'http://www.w3.org/ns/shacl#maxCount',
