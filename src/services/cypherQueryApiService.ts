@@ -74,7 +74,7 @@ export const CypherQueryApiService = {
    */
   async getAllResources(authContext: AuthContextType, typeFilters: Asset[]): Promise<ResourceInput> {
     const whereClause = typeFilters.length ?
-      `WHERE ANY (label IN labels(n) WHERE label IN [ '${typeFilters.join('\', \'')}'])
+      `WHERE ANY (label IN labels(n) WHERE label IN [ '${typeFilters.map(asset => asset.label).join('\', \'')}'])
        AND 'DataResource' IN labels(n)
        AND NOT n.uri STARTS WITH 'bnode://'`
       : ''
