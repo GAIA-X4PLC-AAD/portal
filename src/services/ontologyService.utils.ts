@@ -135,11 +135,13 @@ export function getUniqueLinks(ontologies: Ontology[], uniqueNode: Node[]) {
  * @return a list of resource types
  */
 export function getResourceTypes(ontologies: Ontology[]): string[] {
-  return ontologies
-    .map(ontology => ontology.relatedShapes
-      .filter(relatedShape => isSubclassOfDataResource(ontology, relatedShape))
-      .map(shape => shape.shortSubject))
-    .flat()
+  return Array.from(new Set(
+    ontologies
+      .map(ontology => ontology.relatedShapes
+        .filter(relatedShape => isSubclassOfDataResource(ontology, relatedShape))
+        .map(shape => shape.shortSubject))
+      .flat()
+  ))
 }
 
 /**
