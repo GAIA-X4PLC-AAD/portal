@@ -2,9 +2,11 @@ import * as N3 from 'n3';
 import { Quad } from 'n3';
 
 import { ShapesAndOntologiesInput } from '../types/ontologies.model';
-import { Shape, ShapeProperty } from '../types/shapes.model';
+import { PropertyValue, Shape, ShapeProperty } from '../types/shapes.model';
 
 import { fetchAllSchemas, getSchemaById } from './schemaApiService';
+
+// -----------------------------------------------------------------------------
 
 export const fetchAllShapesFromSchemas = async (schemas: ShapesAndOntologiesInput): Promise<Shape[]> => {
   const shapeArrayPromises = schemas.shapes.map(async id => fetchShapeById(id));
@@ -15,11 +17,29 @@ export const fetchAllShapesFromSchemas = async (schemas: ShapesAndOntologiesInpu
 const fetchShapeById = async (shapeId: string) => {
   return getSchemaById(shapeId)
     .then(schema => parseSingleShape(schema))
-    .then(quads => createShapeObjects(shapeId, quads))
+    .then(quads => {
+      const shapes = createShapeObjects(shapeId, quads)
+      console.debug('shapes', shapes)
+
+      // const nodes = getNodes(quads);
+      // console.debug('nodes', nodes);
+      // console.debug('-----------------------------------------------------------')
+      return shapes;
+    })
     .catch(error => {
       throw error
     })
 }
+
+// TODO: It is not optimal to fetch everything again.
+export const getShapeByName = async (name: string): Promise<Shape | undefined> => {
+  const schemas = await fetchAllSchemas();
+  const allShapes = await fetchAllShapesFromSchemas(schemas);
+  return allShapes ? allShapes.find(shape => shape.subject === name) : undefined;
+}
+
+// -----------------------------------------------------------------------------
+
 export const parseSingleShape = (item: string): Promise<Quad[]> => {
   return new Promise((resolve, reject) => {
     const parser = new N3.Parser();
@@ -36,107 +56,170 @@ export const parseSingleShape = (item: string): Promise<Quad[]> => {
   });
 }
 
-export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[] => {
-  const shapesMap = new Map<string, Shape>();
-  const propertiesMap = new Map<string, ShapeProperty[]>();
-  const nodesMap = new Map<string, string[]>();
+// -----------------------------------------------------------------------------
 
-  const RDF_TYPE: string = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type';
-  const SHACL_NODE_SHAPE: string = 'http://www.w3.org/ns/shacl#NodeShape';
-  const SHACL_TARGET_CLASS: string = 'http://www.w3.org/ns/shacl#targetClass';
-  const SHACL_PROPERTY: string = 'http://www.w3.org/ns/shacl#property';
-  const SHACL_NODE: string = 'http://www.w3.org/ns/shacl#node';
+const PARAMETER_TYPES = [
+  'http://www.w3.org/ns/shacl#name',
+  'http://www.w3.org/ns/shacl#description',
+  'http://www.w3.org/2004/02/skos/core#example',
+  'http://www.w3.org/ns/shacl#datatype',
+  'http://www.w3.org/ns/shacl#in',
+  'http://www.w3.org/ns/shacl#maxCount',
+  'http://www.w3.org/ns/shacl#message',
+  'http://www.w3.org/ns/shacl#minCount',
+  'http://www.w3.org/ns/shacl#node',
+  'http://www.w3.org/ns/shacl#order',
+  'http://www.w3.org/ns/shacl#path',
+];
 
-  quads.forEach(quad => {
-    const subject = quad.subject.value;
-    const predicate = quad.predicate.value;
-    const object = quad.object.value;
-
-    const isShapeType = predicate === RDF_TYPE && object === SHACL_NODE_SHAPE;
-    const isTargetClass = predicate === SHACL_TARGET_CLASS;
-    const isProperty = predicate === SHACL_PROPERTY;
-
-    if (isShapeType || isTargetClass || isProperty) {
-      if (!shapesMap.has(subject)) {
-        shapesMap.set(subject, {
-          shaclShapeId,
-          subject,
-          shortSubject: '',
-          classname: '',
-          propertyIds: [],
-          properties: [],
-          targetClasses: [],
-          nodes: [],
-        });
-      }
-
-      const shape = shapesMap.get(subject)!;
-
-      if (isProperty) {
-        shape.propertyIds.push(object);
-      } else {
-        shape.shortSubject = object.includes('#') ? object.split('#').pop() || object : object.split('/').pop() || object;
-        shape.classname = object;
-      }
-
-      if (isTargetClass) {
-        shape.targetClasses.push(object);
-      }
-
-    } else {
-      if (!propertiesMap.has(subject)) {
-        propertiesMap.set(subject, []);
-      }
-
-      const properties = propertiesMap.get(subject)!;
-      const existingProperty = properties.find(prop => prop.propertyId === subject);
-
-      if (existingProperty) {
-        existingProperty.propertyValues.push({ type: predicate, value: object });
-      } else {
-        properties.push({ propertyId: subject, propertyValues: [{ type: predicate, value: object }] });
-      }
-
-      if (!nodesMap.has(subject)) {
-        nodesMap.set(subject, []);
-      }
-
-      if (predicate === SHACL_NODE) {
-        nodesMap.get(subject)!.push(object);
-      }
-    }
-  });
-
-  propertiesMap.forEach(properties => {
-    properties.forEach(property => {
-      property.propertyValues.sort((a, b) => {
-        if (a.type === 'http://www.w3.org/ns/shacl#name') {return -1;}
-        if (b.type === 'http://www.w3.org/ns/shacl#name') {return 1;}
-        if (a.type === 'http://www.w3.org/ns/shacl#description') {return -1;}
-        if (b.type === 'http://www.w3.org/ns/shacl#description') {return 1;}
-        return a.type.localeCompare(b.type);
-      });
-    });
-  })
-
-  shapesMap.forEach(shape => {
-    shape.propertyIds.forEach(propertyId => {
-      shape.properties.push(...(propertiesMap.get(propertyId) || []));
-      shape.nodes.push(...(nodesMap.get(propertyId) || []));
-    });
-  });
-
-  return Array.from(shapesMap.values());
+type ListItem = {
+  value: string;
+  next: string;
 };
 
-export const getShapeByName = async (name: string): Promise<Shape | undefined> => {
-  const schemas = await fetchAllSchemas();
-  const allShapes = await fetchAllShapesFromSchemas(schemas);
-  return allShapes ? allShapes.find(shape => shape.subject === name) : undefined;
+type Parameter = {
+  name: string,
+  value: string,
 }
 
-export const findRelatedShapes = (shapes: Shape[], ontologyId: string): Shape[] => {
-  return shapes.filter(
-    shape => shape.targetClasses.some(
-      targetClasses => targetClasses.includes(ontologyId)));
+const isLinkedListValue = (quad: Quad) => (quad.predicate.value === 'ww.w3.org/1999/02/22-rdf-syntax-ns#first')
+
+const isLinkedListNextItem = (quad: Quad) => (quad.predicate.value === 'www.w3.org/1999/02/22-rdf-syntax-ns#rest')
+
+const isParameter = (quad: Quad) => (
+  PARAMETER_TYPES.includes(quad.predicate.value)
+);
+
+const isNodeParameter = (quad: Quad) => (quad.predicate.value === 'http://www.w3.org/ns/shacl#node');
+
+const isProperty = (quad: Quad) => (quad.predicate.value === 'http://www.w3.org/ns/shacl#property');
+
+const isTargetClass = (quad: Quad) => (quad.predicate.value === 'http://www.w3.org/ns/shacl#targetClass');
+
+const isShape = (quad: Quad) => (
+  quad.predicate.value === 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
+    && quad.object.value === 'http://www.w3.org/ns/shacl#NodeShape'
+);
+
+const getClassname = (shapeId: string, shapeTargetClasses?: string[]) => {
+  if (!shapeTargetClasses || !shapeTargetClasses.length) {
+    console.error(`The shape '${shapeId}' does not have any targetClasses!`);
+    return '';
+  }
+  return shapeTargetClasses[0];
+}
+
+const getShortSubject = (targetClass: string) =>
+  targetClass.includes('#')
+    ? targetClass.split('#').pop()!
+    : targetClass.split('/').pop()
+        || targetClass
+
+const getPropertyValues = (propertyId: string, parameters: Map<string, Parameter[]>) => {
+  const propertyParameters = parameters.get(propertyId) || [];
+  const params = propertyParameters.map(parameter => ({
+    type: parameter.name,
+    value: parameter.value,
+  } as PropertyValue));
+
+  return params.sort((a, b) => {
+    const indexA = PARAMETER_TYPES.indexOf(a.type);
+    const indexB = PARAMETER_TYPES.indexOf(b.type);
+    return indexA - indexB;
+  });
+}
+
+const getShapeProperties = (shapeId: string, propertyIds: Map<string, string[]>, parameters: Map<string, Parameter[]>) => {
+  const shapePropertyIds = propertyIds.get(shapeId) || [];
+  return shapePropertyIds.map(propertyId => ({
+    propertyId,
+    propertyValues: getPropertyValues(propertyId, parameters)
+  } as ShapeProperty));
+}
+
+const getNodes = (shapeId: string, propertyIds: Map<string, string[]>, nodeIds: Map<string, string>): string[] => {
+  const shapeProperties = propertyIds.get(shapeId) || [];
+  return shapeProperties
+    .map(propertyId => nodeIds.get(propertyId))
+    .filter(nodeId => nodeId !== undefined) as string[];
+}
+
+export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[] => {
+  const linkedListValues = new Map<string, ListItem>();
+  const parameters = new Map<string, Parameter[]>();
+  const nodeIds = new Map<string, string>();
+  const propertyIds = new Map<string, string[]>();
+  const targetClasses = new Map<string, string[]>();
+  const shapeIds = [] as string[];
+
+  quads.forEach(quad => {
+    if (isLinkedListValue(quad)) {
+      const itemId = quad.subject.value;
+      const listItem = linkedListValues.get(itemId) || {};
+      linkedListValues.set(itemId, { ...listItem, value: quad.object.value } as ListItem)
+    }
+
+    if (isLinkedListNextItem(quad)) {
+      const id = quad.subject.value;
+      const listItem = linkedListValues.get(id) || {};
+      linkedListValues.set(id, { ...listItem, next: quad.object.value } as ListItem)
+    }
+
+    if (isParameter(quad)) {
+      const propertyId = quad.subject.value;
+      const propertyParameters = parameters.get(propertyId) || [] as Parameter[];
+      const name = quad.predicate.value;
+      const value = quad.object.value;
+      propertyParameters.push({ name, value } as Parameter);
+      parameters.set(propertyId, propertyParameters)
+    }
+
+    if (isNodeParameter(quad)) {
+      const propertyId = quad.subject.value;
+      const nodeId = quad.object.value;
+      nodeIds.set(propertyId, nodeId);
+    }
+
+    if (isProperty(quad)) {
+      const shapeId = quad.subject.value;
+      const propertyId = quad.object.value;
+      const shapeProperties = propertyIds.get(shapeId) || [];
+      shapeProperties.push(propertyId);
+      propertyIds.set(shapeId, shapeProperties);
+    }
+
+    if (isTargetClass(quad)) {
+      const shapeId = quad.subject.value;
+      const shapeTargetClasses = targetClasses.get(shapeId) || [] as string[];
+      const targetClass = quad.object.value;
+      shapeTargetClasses.push(targetClass);
+      targetClasses.set(shapeId, shapeTargetClasses);
+    }
+
+    if (isShape(quad)) {
+      const shapeId = quad.subject.value;
+      shapeIds.push(shapeId);
+    }
+  })
+
+  return shapeIds.map(shapeId => {
+    const shapeTargetClasses = targetClasses.get(shapeId) || [];
+    const classname = getClassname(shapeId, shapeTargetClasses);
+    const shortSubject = getShortSubject(classname);
+    const properties = getShapeProperties(shapeId, propertyIds, parameters);
+    const nodes = getNodes(shapeId, propertyIds, nodeIds);
+
+    const shape: Shape = {
+      shaclShapeId,
+      subject: shapeId,
+      classname,
+      shortSubject,
+      propertyIds: propertyIds.get(shapeId) || [],
+      properties,
+      nodes,
+      targetClasses: shapeTargetClasses,
+    }
+
+    return shape;
+  })
 }

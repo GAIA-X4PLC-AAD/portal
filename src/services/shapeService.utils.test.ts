@@ -1,4 +1,4 @@
-import { describe, expect, it } from '@jest/globals';
+import { describe, it } from '@jest/globals';
 import { Quad } from 'n3';
 
 import { Shape } from '../types/shapes.model';
@@ -2909,7 +2909,7 @@ describe('createShapeObjects documentation', () => {
       }
     ] as unknown as Shape[];
 
-    const result = createShapeObjects(shaclShapeId, quads)
+    const result = createShapeObjects(shaclShapeId, quads);
     expect(result).toEqual(expected);
   })
 })

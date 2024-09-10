@@ -5,7 +5,6 @@ import { Link, Node, Ontology, ShapesAndOntologiesInput } from '../types/ontolog
 import { Shape } from '../types/shapes.model';
 
 import { getSchemaById } from './schemaApiService';
-import { findRelatedShapes } from './shapeService.utils';
 
 const DATA_RESOURCE_CLASS = 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#DataResource'
 
@@ -90,6 +89,12 @@ export const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ont
     relatedShapes,
   };
 };
+
+export const findRelatedShapes = (shapes: Shape[], ontologyId: string): Shape[] => {
+  return shapes.filter(
+    shape => shape.targetClasses.some(
+      targetClasses => targetClasses.includes(ontologyId)));
+}
 
 export const fetchOntologyById = async (shapes: Shape[], id: string) => {
   const relatedShapes = findRelatedShapes(shapes, id);
