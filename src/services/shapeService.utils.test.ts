@@ -1,4 +1,4 @@
-import { describe, it } from '@jest/globals';
+import { describe, expect, it } from '@jest/globals';
 import { Quad } from 'n3';
 
 import { Shape } from '../types/shapes.model';
@@ -1779,7 +1779,7 @@ describe('createShapeObjects documentation', () => {
         ],
         properties: [
           {
-            propertyId: 'n3-91',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/general',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#maxCount',
@@ -1804,7 +1804,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-92',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/format',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#maxCount',
@@ -1829,7 +1829,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-93',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/content',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#maxCount',
@@ -1854,7 +1854,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-94',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/quantity',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#maxCount',
@@ -1879,7 +1879,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-95',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/quality',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#maxCount',
@@ -1904,7 +1904,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-96',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/dataSource',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#maxCount',
@@ -1929,7 +1929,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-97',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/georeference',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#maxCount',
@@ -1954,15 +1954,6 @@ describe('createShapeObjects documentation', () => {
             ]
           }
         ],
-        propertyIds: [
-          'n3-91',
-          'n3-92',
-          'n3-93',
-          'n3-94',
-          'n3-95',
-          'n3-96',
-          'n3-97'
-        ],
         shaclShapeId: '700f40c0030d83b0ca6ed147144037891b27f4fa73fe596d0092c25b07c9d98b',
         shortSubject: 'HdMap',
         subject: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/HdMapShape',
@@ -1975,7 +1966,7 @@ describe('createShapeObjects documentation', () => {
         nodes: [],
         properties: [
           {
-            propertyId: 'n3-98',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/roadTypes',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2012,7 +2003,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-112',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/laneTypes',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2049,7 +2040,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-130',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/levelOfDetail',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2086,7 +2077,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-139',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/trafficDirection',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2127,12 +2118,6 @@ describe('createShapeObjects documentation', () => {
             ]
           }
         ],
-        propertyIds: [
-          'n3-98',
-          'n3-112',
-          'n3-130',
-          'n3-139'
-        ],
         shaclShapeId: '700f40c0030d83b0ca6ed147144037891b27f4fa73fe596d0092c25b07c9d98b',
         shortSubject: 'Content',
         subject: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/ContentShape',
@@ -2145,7 +2130,7 @@ describe('createShapeObjects documentation', () => {
         nodes: [],
         properties: [
           {
-            propertyId: 'n3-142',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/measurementSystem',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2182,7 +2167,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-143',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/usedDataSources',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2215,10 +2200,6 @@ describe('createShapeObjects documentation', () => {
             ]
           }
         ],
-        propertyIds: [
-          'n3-142',
-          'n3-143'
-        ],
         shaclShapeId: '700f40c0030d83b0ca6ed147144037891b27f4fa73fe596d0092c25b07c9d98b',
         shortSubject: 'DataSource',
         subject: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/DataSourceShape',
@@ -2231,7 +2212,7 @@ describe('createShapeObjects documentation', () => {
         nodes: [],
         properties: [
           {
-            propertyId: 'n3-144',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/version',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2268,7 +2249,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-145',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/formatType',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2310,10 +2291,6 @@ describe('createShapeObjects documentation', () => {
             ]
           }
         ],
-        propertyIds: [
-          'n3-144',
-          'n3-145'
-        ],
         shaclShapeId: '700f40c0030d83b0ca6ed147144037891b27f4fa73fe596d0092c25b07c9d98b',
         shortSubject: 'Format',
         subject: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/FormatShape',
@@ -2326,7 +2303,7 @@ describe('createShapeObjects documentation', () => {
         nodes: [],
         properties: [
           {
-            propertyId: 'n3-152',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/accuracySignals',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2367,7 +2344,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-153',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/accuracyObjects',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2408,7 +2385,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-154',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/accuracyLaneModelHeight',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2449,7 +2426,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-155',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/precision',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2490,7 +2467,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-156',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/accuracyLaneModel2d',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2531,13 +2508,6 @@ describe('createShapeObjects documentation', () => {
             ]
           }
         ],
-        propertyIds: [
-          'n3-152',
-          'n3-153',
-          'n3-154',
-          'n3-155',
-          'n3-156'
-        ],
         shaclShapeId: '700f40c0030d83b0ca6ed147144037891b27f4fa73fe596d0092c25b07c9d98b',
         shortSubject: 'Quality',
         subject: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/QualityShape',
@@ -2552,7 +2522,7 @@ describe('createShapeObjects documentation', () => {
         ],
         properties: [
           {
-            propertyId: 'n3-157',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/numberIntersections',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2589,7 +2559,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-158',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/numberTrafficLights',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2626,7 +2596,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-159',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/rangeOfModeling',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2667,7 +2637,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-160',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/numberOutlines',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2704,7 +2674,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-161',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/speedLimit',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2741,7 +2711,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-162',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/length',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2778,7 +2748,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-163',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/elevationRange',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2815,7 +2785,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-164',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/numberObjects',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2852,7 +2822,7 @@ describe('createShapeObjects documentation', () => {
             ]
           },
           {
-            propertyId: 'n3-165',
+            propertyId: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/hdmap/numberTrafficSigns',
             propertyValues: [
               {
                 type: 'http://www.w3.org/ns/shacl#name',
@@ -2888,17 +2858,6 @@ describe('createShapeObjects documentation', () => {
               }
             ]
           }
-        ],
-        propertyIds: [
-          'n3-157',
-          'n3-158',
-          'n3-159',
-          'n3-160',
-          'n3-161',
-          'n3-162',
-          'n3-163',
-          'n3-164',
-          'n3-165'
         ],
         shaclShapeId: '700f40c0030d83b0ca6ed147144037891b27f4fa73fe596d0092c25b07c9d98b',
         shortSubject: 'Quantity',

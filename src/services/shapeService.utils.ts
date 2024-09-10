@@ -2,7 +2,7 @@ import * as N3 from 'n3';
 import { Quad } from 'n3';
 
 import { ShapesAndOntologiesInput } from '../types/ontologies.model';
-import { PropertyValue, Shape, ShapeProperty } from '../types/shapes.model';
+import { PropertyValue, Shape } from '../types/shapes.model';
 
 import { fetchAllSchemas, getSchemaById } from './schemaApiService';
 
@@ -57,6 +57,8 @@ export const parseSingleShape = (item: string): Promise<Quad[]> => {
 }
 
 // -----------------------------------------------------------------------------
+
+const PARAM_PATH_TYPE = 'http://www.w3.org/ns/shacl#path';
 
 const PARAMETER_TYPES = [
   'http://www.w3.org/ns/shacl#name',
@@ -131,10 +133,15 @@ const getPropertyValues = (propertyId: string, parameters: Map<string, Parameter
 
 const getShapeProperties = (shapeId: string, propertyIds: Map<string, string[]>, parameters: Map<string, Parameter[]>) => {
   const shapePropertyIds = propertyIds.get(shapeId) || [];
-  return shapePropertyIds.map(propertyId => ({
-    propertyId,
-    propertyValues: getPropertyValues(propertyId, parameters)
-  } as ShapeProperty));
+  return shapePropertyIds.map(propertyId => {
+    const propertyValues = getPropertyValues(propertyId, parameters);
+    const propertyPath = propertyValues.find(prop => prop.type === PARAM_PATH_TYPE);
+
+    return {
+      propertyId: propertyPath ? propertyPath.value : propertyId,
+      propertyValues
+    }
+  });
 }
 
 const getNodes = (shapeId: string, propertyIds: Map<string, string[]>, nodeIds: Map<string, string>): string[] => {
@@ -214,7 +221,6 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
       subject: shapeId,
       classname,
       shortSubject,
-      propertyIds: propertyIds.get(shapeId) || [],
       properties,
       nodes,
       targetClasses: shapeTargetClasses,

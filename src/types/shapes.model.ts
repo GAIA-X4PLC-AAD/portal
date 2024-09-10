@@ -3,7 +3,6 @@ export interface Shape {
     subject: string;
     shortSubject: string;
     classname: string;
-    propertyIds: string[];
     properties: ShapeProperty[];
     targetClasses: string[];
     nodes: string[];
