@@ -73,24 +73,26 @@ export const CypherQueryApiService = {
    * @param typeFilters the list of requested resource types
    */
   async getAllResources(authContext: AuthContextType, typeFilters: Asset[]): Promise<ResourceInput> {
-    const whereClause = typeFilters.length ?
-      `WHERE ANY (label IN labels(n) WHERE label IN [ '${typeFilters.map(asset => asset.label).join('\', \'')}'])
-       AND 'DataResource' IN labels(n)
-       AND NOT n.uri STARTS WITH 'bnode://'`
+    const whereDataResource = typeFilters.length ? `
+    WHERE ANY (label IN labels(n) WHERE label IN [ '${typeFilters.map(asset => asset.label).join('\', \'')}'])
+      AND 'DataResource' IN labels(n)
+      AND NOT n.uri STARTS WITH 'bnode://'`
       : ''
+
+    const matchFormatNode = `
+    OPTIONAL MATCH(m)
+    WHERE n.uri IN m.claimsGraphUri 
+      AND ANY(label IN labels(m) WHERE label CONTAINS 'Format')`
 
     return cypherQuery(authContext, {
       statement: `
-        MATCH (n) 
-        ${whereClause} 
-        OPTIONAL MATCH(m)
-        WHERE n.uri IN m.claimsGraphUri 
-          AND ANY(label IN labels(m) WHERE label CONTAINS 'Format')
-        RETURN 
-          properties(n) AS properties, 
-          labels(n) AS labels, 
-          properties(m).type AS format
-      `,
+      MATCH (n) 
+      ${whereDataResource} 
+      ${matchFormatNode}
+      RETURN 
+        properties(n) AS properties, 
+        labels(n) AS labels, 
+        properties(m).type AS format`,
     })
   },
 
