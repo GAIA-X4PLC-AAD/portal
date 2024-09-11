@@ -80,7 +80,17 @@ export const CypherQueryApiService = {
       : ''
 
     return cypherQuery(authContext, {
-      statement: `MATCH (n) ${whereClause} RETURN properties(n) AS properties, labels(n) AS labels`,
+      statement: `
+        MATCH (n) 
+        ${whereClause} 
+        OPTIONAL MATCH(m)
+        WHERE n.uri IN m.claimsGraphUri 
+          AND ANY(label IN labels(m) WHERE label CONTAINS 'Format')
+        RETURN 
+          properties(n) AS properties, 
+          labels(n) AS labels, 
+          properties(m).type AS format
+      `,
     })
   },
 

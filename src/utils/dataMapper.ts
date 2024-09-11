@@ -37,6 +37,7 @@ export function mapServiceOfferings(selfDescriptions: ServiceOfferingInput): Ser
 type ResourceInputProperties = Exclude<Resource, 'labels'>
 export interface ResourceInput {
   items: {
+    format: string,
     labels: string[],
     properties: ResourceInputProperties;
   }[];
@@ -45,9 +46,10 @@ export interface ResourceInput {
 export function mapResources(selfDescriptions: ResourceInput): Resource[] {
   console.debug('mapResource: ', selfDescriptions);
   return selfDescriptions
-    .items.map(({ properties, labels }) => ({
+    .items.map(({ format, properties, labels }) => ({
       ...properties,
       labels,
+      format
     }));
 }
 
