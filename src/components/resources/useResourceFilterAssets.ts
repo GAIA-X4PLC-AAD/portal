@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react';
 import { fetchAllSchemas } from 'services/schemaApiService';
 
-import { fetchAllOntologiesFromSchemas, getResourceTypes } from '../../services/ontologyService.utils';
+import {
+  fetchAllOntologiesFromSchemas,
+  getResourceFormats,
+  getResourceTypes
+} from '../../services/ontologyService.utils';
 import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
 
 type AssetValueType = boolean | string;
 
+const TYPE_ASSETS = 'typeAssets';
+const FORMAT_ASSETS = 'formatAssets';
+const VENDOR_ASSETS = 'vendorAssets';
+
 export interface Asset {
     id: string;
-    type: string;
+  type: 'typeAssets' | 'formatAssets' | 'vendorAssets';
     label: string;
     value: AssetValueType;
     disabled: boolean;
@@ -25,30 +33,44 @@ interface IUseFilterAssets {
 export const useResourceFilterAssets = (): IUseFilterAssets => {
   const [isLoading, setIsLoading] = useState(true);
   const [typeAssets, setTypeAssets] = useState<Asset[]>([]);
+  const [formatAssets, setFormatAssets] = useState<Asset[]>([]);
 
   useEffect(() => {
     (async () => {
       const schemas = await fetchAllSchemas();
       const shapes = await fetchAllShapesFromSchemas(schemas);
       const ontologies = await fetchAllOntologiesFromSchemas(schemas, shapes)
-      const resourceTypes = getResourceTypes(ontologies)
+      const resourceTypes = getResourceTypes(ontologies);
+      const resourceFormats = getResourceFormats(ontologies);
 
       console.debug('resourceTypes:', resourceTypes)
+      console.debug('resourceFormats:', resourceTypes)
       setTypeAssets(resourceTypes.map((resourceType) => ({
         id: resourceType,
-        type: 'typeAssets',
+        type: TYPE_ASSETS,
         label: resourceType,
         value: false,
         disabled: false
       } as Asset)));
+      setFormatAssets(resourceFormats.map((resourceFormat => ({
+        id: resourceFormat,
+        type: FORMAT_ASSETS,
+        label: resourceFormat,
+        value: false,
+        disabled: false
+      } as Asset))))
       setIsLoading(false);
     })();
   }, []);
 
   const updateAssetFilter = (asset: Asset) => {
     switch (asset.type) {
-    case 'typeAssets':
+    case TYPE_ASSETS:
       setTypeAssets(typeAssets
+        .map(item => item.id === asset.id ? asset : item))
+      break
+    case FORMAT_ASSETS:
+      setFormatAssets(formatAssets
         .map(item => item.id === asset.id ? asset : item))
       break
     default:
@@ -59,49 +81,26 @@ export const useResourceFilterAssets = (): IUseFilterAssets => {
   return {
     isLoadingAssets: isLoading,
     typeAssets,
-    // TODO: Demo values for format assets should be replaced by dynamic loading
-    formatAssets: [
-      {
-        id: 'openDrive',
-        type: 'formatAssets',
-        label: 'Opendrive',
-        value: false,
-        disabled: true
-      },
-      {
-        id: 'fbx',
-        type: 'formatAssets',
-        label: 'FBX',
-        value: false,
-        disabled: true
-      },
-      {
-        id: 'openScenario',
-        type: 'formatAssets',
-        label: 'OpenSCENARIO',
-        value: false,
-        disabled: true
-      },
-    ],
+    formatAssets,
     // TODO: Demo values for vendor assets should be replaced by dynamic loading
     vendorAssets: [
       {
         id: 'threeDMapping',
-        type: 'vendorAsset',
+        type: VENDOR_ASSETS,
         label: '3D Mapping',
         value: false,
         disabled: true
       },
       {
         id: 'trainGraphics',
-        type: 'vendorAsset',
+        type: VENDOR_ASSETS,
         label: 'TrainGraphics',
         value: false,
         disabled: true
       },
       {
         id: 'dlr',
-        type: 'vendorAsset',
+        type: VENDOR_ASSETS,
         label: 'DLR',
         value: false,
         disabled: true

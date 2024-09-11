@@ -145,6 +145,38 @@ export function getResourceTypes(ontologies: Ontology[]): string[] {
 }
 
 /**
+ * Returns all resource formats. Resource formats are listed in a node of a resource called Format. The possible
+ * values are contained inside the http://www.w3.org/ns/shacl#in property.
+ *
+ * @param ontologies serving as the source of information
+ * @return a list of resource formats
+ */
+export function getResourceFormats(ontologies: Ontology[]): string[] {
+  const dataResourceOntologies = ontologies
+    .filter(ontology => ontology.relatedShapes
+      .some(relatedShape => isSubclassOfDataResource(ontology, relatedShape))
+    )
+  const formatShapes = dataResourceOntologies
+    .map(ontology => ontology.relatedShapes
+      .filter(relatedShape => relatedShape.classname.endsWith('/Format'))
+    )
+    .flat()
+  const formatShapeProperties = formatShapes
+    .map(shape => shape.properties
+      .filter(property => property.propertyId.endsWith('/formatType'))
+    )
+    .flat()
+  const inPropertyParameters = formatShapeProperties
+    .map(property => property.propertyValues
+      .filter(propertyParameter => propertyParameter.type === 'http://www.w3.org/ns/shacl#in')
+    )
+    .flat()
+  return Array.from(new Set<string>(
+    inPropertyParameters.map(parameter => parameter.value).flat()
+  ));
+}
+
+/**
  * Based on the ontology determines if a class described by the given shape is subclass of DataResource class.
  *
  * @param ontology represented by the shacl shape used to determine the relations.
@@ -157,3 +189,8 @@ function isSubclassOfDataResource(ontology: Ontology, shape: Shape): boolean {
     .some(link => link.source === shape.classname);
 }
 
+function is(ontology: Ontology, shape: Shape): boolean {
+  return ontology.links
+    .filter(link => link.target === DATA_RESOURCE_CLASS)
+    .some(link => link.source === shape.classname);
+}
