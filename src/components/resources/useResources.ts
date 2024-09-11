@@ -9,10 +9,6 @@ import { Asset, FORMAT_ASSETS, TYPE_ASSETS, useResourceFilterAssets } from './us
 
 export type ResourcesViewState = 'LOADING' | 'SHOW_RESOURCES' | 'SHOW_NO_RESULTS';
 
-interface IUseResources {
-
-}
-
 export const useResources = () => {
   const authContext = useContext(AuthContext);
   const [resources, setResources] = useState<Resource[]>([])

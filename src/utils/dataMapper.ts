@@ -44,13 +44,14 @@ export interface ResourceInput {
 }
 
 export function mapResources(selfDescriptions: ResourceInput): Resource[] {
-  console.debug('mapResource: ', selfDescriptions);
-  return selfDescriptions
+  const resources = selfDescriptions
     .items.map(({ format, properties, labels }) => ({
       ...properties,
       labels,
       format
     }));
+  console.debug('resources', resources)
+  return resources;
 }
 
 export interface ISelfDescription {

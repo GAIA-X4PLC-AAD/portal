@@ -17,15 +17,7 @@ export const fetchAllShapesFromSchemas = async (schemas: ShapesAndOntologiesInpu
 const fetchShapeById = async (shapeId: string) => {
   return getSchemaById(shapeId)
     .then(schema => parseSingleShape(schema))
-    .then(quads => {
-      const shapes = createShapeObjects(shapeId, quads)
-      console.debug('shapes', shapes)
-
-      // const nodes = getNodes(quads);
-      // console.debug('nodes', nodes);
-      // console.debug('-----------------------------------------------------------')
-      return shapes;
-    })
+    .then(quads => createShapeObjects(shapeId, quads))
     .catch(error => {
       throw error
     })

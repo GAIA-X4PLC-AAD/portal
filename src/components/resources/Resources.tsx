@@ -28,8 +28,6 @@ const Resources = () => {
     updateAssetFilter
   } = useResources();
 
-  console.debug(typeAssets)
-  console.debug('resource labels:', new Set(resources.map(resource => resource.labels).flat()))
   return (
     <>
       <Header title={`${t('left-menu.resources')} (${resources.length} ${t('dashboard.results')})`}/>
