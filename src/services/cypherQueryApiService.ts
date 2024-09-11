@@ -83,4 +83,16 @@ export const CypherQueryApiService = {
       statement: `MATCH (n) ${whereClause} RETURN properties(n) AS properties, labels(n) AS labels`,
     })
   },
+
+  /**
+   * Returns all entries from the cypher db. This method is used for development purposes only, in cases when
+   * available data has to be analysed.
+   *
+   * @param authContext authorization token for server calls
+   */
+  async getEverything(authContext: AuthContextType): Promise<ResourceInput> {
+    return cypherQuery(authContext, {
+      statement: 'MATCH (n) RETURN properties(n) AS properties, labels(n) AS labels LIMIT 1000',
+    })
+  },
 }
