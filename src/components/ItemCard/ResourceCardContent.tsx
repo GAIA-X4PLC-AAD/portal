@@ -17,7 +17,7 @@ const ResourceCardContent: FC<IResourceCardContent> = ({ resource }) => {
   const navigate = useNavigate();
 
   const handleNavigationToDetailsPage = () => {
-    const encodedUri = encodeURIComponent(resource.claimsGraphUri);
+    const encodedUri = encodeURIComponent(JSON.stringify(resource.claimsGraphUri));
     navigate(`/details/${encodedUri}`);
   };
 

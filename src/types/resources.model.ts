@@ -3,6 +3,6 @@ export interface Resource {
     name: string,
     description: string,
     uri: string,
-    claimsGraphUri: string,
+    claimsGraphUri: string[],
     format: string
 }
