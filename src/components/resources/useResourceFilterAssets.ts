@@ -10,9 +10,9 @@ import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
 
 type AssetValueType = boolean | string;
 
-const TYPE_ASSETS = 'typeAssets';
-const FORMAT_ASSETS = 'formatAssets';
-const VENDOR_ASSETS = 'vendorAssets';
+export const TYPE_ASSETS = 'typeAssets';
+export const FORMAT_ASSETS = 'formatAssets';
+export const VENDOR_ASSETS = 'vendorAssets';
 
 export interface Asset {
     id: string;
@@ -43,8 +43,7 @@ export const useResourceFilterAssets = (): IUseFilterAssets => {
       const resourceTypes = getResourceTypes(ontologies);
       const resourceFormats = getResourceFormats(ontologies);
 
-      console.debug('resourceTypes:', resourceTypes)
-      console.debug('resourceFormats:', resourceTypes)
+      console.debug('resourceTypes:', resourceTypes);
       setTypeAssets(resourceTypes.map((resourceType) => ({
         id: resourceType,
         type: TYPE_ASSETS,
@@ -52,6 +51,8 @@ export const useResourceFilterAssets = (): IUseFilterAssets => {
         value: false,
         disabled: false
       } as Asset)));
+
+      console.debug('resourceFormats:', resourceFormats);
       setFormatAssets(resourceFormats.map((resourceFormat => ({
         id: resourceFormat,
         type: FORMAT_ASSETS,
@@ -82,7 +83,9 @@ export const useResourceFilterAssets = (): IUseFilterAssets => {
     isLoadingAssets: isLoading,
     typeAssets,
     formatAssets,
-    // TODO: Demo values for vendor assets should be replaced by dynamic loading
+    // TODO: Demo values for vendor assets. Should be replaced by dynamic loading of vendor information. At the
+    //  moment this information is not available in the ontologies and shacl shapes. It can not be retrieved from
+    //  the backend.
     vendorAssets: [
       {
         id: 'threeDMapping',

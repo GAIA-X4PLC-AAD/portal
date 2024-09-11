@@ -5,7 +5,7 @@ import { CypherQueryApiService as cypherQuery } from '../../services/cypherQuery
 import { Resource } from '../../types/resources.model';
 import { mapResources } from '../../utils/dataMapper';
 
-import { Asset, useResourceFilterAssets } from './useResourceFilterAssets';
+import { Asset, FORMAT_ASSETS, TYPE_ASSETS, useResourceFilterAssets } from './useResourceFilterAssets';
 
 export type ResourcesViewState = 'LOADING' | 'SHOW_RESOURCES' | 'SHOW_NO_RESULTS';
 
@@ -32,7 +32,6 @@ export const useResources = () => {
         if (!isLoadingAssets) {
           const resourceInput = await cypherQuery.getAllResources(authContext, typeAssets);
           const fetchedResources = mapResources(resourceInput);
-
           setResources(fetchedResources)
         }
       } catch (error) {
@@ -73,7 +72,7 @@ export const useResources = () => {
   };
 
   return {
-    resources: filteredResources,
+    resources: removeDataResourceLabels(filteredResources),
     state,
     typeAssets,
     formatAssets,
@@ -83,14 +82,42 @@ export const useResources = () => {
   }
 }
 
-function assetFilterPredicate(resource: Resource, assets: Asset[]) {
+const typeAssetPredicate = (resource: Resource, asset: Asset): boolean => (
+  resource.labels
+    .map(label => label.toLowerCase())
+    .includes(asset.label.toLowerCase())
+)
+
+const formatAssetPredicate = (resource: Resource, asset: Asset): boolean => {
+  return !!resource.format && resource.format.toLowerCase() === asset.label.toLowerCase();
+}
+
+const assetFilterPredicate = (resource: Resource, assets: Asset[]): boolean => {
   const activeAssetFilters = assets.filter(asset => asset.value)
-  if (activeAssetFilters.length) {
-    return activeAssetFilters
-      .some(asset => resource.labels
-        .map(label => label.toLowerCase())
-        .includes(asset.label.toLowerCase()))
+
+  let typeFiltersApply = true;
+  const typeAssets = activeAssetFilters
+    .filter(asset => asset.type === TYPE_ASSETS)
+  if (typeAssets.length) {
+    typeFiltersApply = typeAssets
+      .some(asset => typeAssetPredicate(resource, asset))
   }
-  return true
+
+  let formatFiltersApply = true;
+  const formatAssets = activeAssetFilters
+    .filter(asset => asset.type === FORMAT_ASSETS)
+  if (formatAssets.length) {
+    formatFiltersApply = formatAssets
+      .some(asset => formatAssetPredicate(resource, asset))
+  }
+
+  return typeFiltersApply && formatFiltersApply
+}
+
+const removeDataResourceLabels = (resources: Resource[]) => {
+  return resources.map(resource => ({
+    ...resource,
+    labels: resource.labels.filter(label => !['Resource', 'DataResource'].includes(label))
+  }));
 }
 
