@@ -23,7 +23,12 @@ const ResourceCardContent: FC<IResourceCardContent> = ({ resource }) => {
 
   return (
     <section className={styles.content}>
-      <Title>{resource.claimsGraphUri}</Title>
+      <Title>{
+        resource.claimsGraphUri.map(claimsGraphUri => (
+          <div key={claimsGraphUri}>{claimsGraphUri}</div>
+        ))
+      }
+      </Title>
       <p>{resource.description}</p>
       <div className={styles.button}>
         <GaiaXButton
