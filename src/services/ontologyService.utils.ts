@@ -8,16 +8,57 @@ import { getSchemaById } from './schemaApiService';
 
 const DATA_RESOURCE_CLASS = 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#DataResource'
 
+/**
+ * Fetches all ontologies defined in a schema.
+ *
+ * @param schemas where a list of ontologies are defined.
+ * @param shapes a list of shapes from which the ontology related shapes will be picked.
+ */
 export const fetchAllOntologiesFromSchemas = async (schemas: ShapesAndOntologiesInput, shapes: Shape[]) => {
   return Promise.all(
     schemas.ontologies.map(
       async id => fetchOntologyById(shapes, id)));
 }
 
-export const parseSingleOntology = (item: string) => {
+/**
+ * Fetches a single ontology turtle file from the backend parses it and creates an Ontology object from it.
+ *
+ * @param shapes will be filtered for those who relate to the ontology and will be put in the relatedShapes property.
+ * @param id is the id of the ontology on the server.
+ */
+export const fetchOntologyById = async (shapes: Shape[], id: string) => {
+  const relatedShapes = findRelatedShapes(shapes, id);
+
+  return getSchemaById(id)
+    .then((schema) => parseSingleOntology(schema))
+    .then((parsedQuads) => createOntologyObject(parsedQuads, relatedShapes))
+    .catch((error) => {
+      throw error
+    });
+}
+
+/**
+ * Returns all shapes from a given shape list which relate to an ontology identified by its id.
+ *
+ * @param shapes is the original list of shapes.
+ * @param ontologyId identifying the ontology to which a shape must relate to.
+ */
+const findRelatedShapes = (shapes: Shape[], ontologyId: string): Shape[] => {
+  return shapes.filter(
+    shape => shape.targetClasses.some(
+      targetClasses => targetClasses.includes(ontologyId)));
+}
+
+/**
+ * Convert an ontology described in a turtle format and converts it to quads.
+ * Quads are triplets (subject, predicate, object) which describe an ontology.
+ *
+ * @param schema ontology defined in a turtle format.
+ */
+const parseSingleOntology = (schema: string) => {
   const parser = new N3.Parser();
   const quads: Quad[] = [];
-  parser.parse(item, (error, quad) => {
+  parser.parse(schema, (error, quad) => {
     if (error) {
       console.error(error)
     } else if (quad) {
@@ -27,6 +68,12 @@ export const parseSingleOntology = (item: string) => {
   return quads;
 }
 
+/**
+ * Creates from a list of quads which describe an ontology an actual Ontology object.
+ *
+ * @param quads a list of triplets (subject, predicate, object) which describe an ontology.
+ * @param relatedShapes a list of shapes described the quads.
+ */
 export const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ontology => {
   const nodes: { id: string; label: string; type: string }[] = [];
   const links: { source: string; target: string }[] = [];
@@ -90,23 +137,17 @@ export const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ont
   };
 };
 
-export const findRelatedShapes = (shapes: Shape[], ontologyId: string): Shape[] => {
-  return shapes.filter(
-    shape => shape.targetClasses.some(
-      targetClasses => targetClasses.includes(ontologyId)));
-}
-
-export const fetchOntologyById = async (shapes: Shape[], id: string) => {
-  const relatedShapes = findRelatedShapes(shapes, id);
-
-  return getSchemaById(id)
-    .then((schema) => parseSingleOntology(schema))
-    .then((parsedQuads) => createOntologyObject(parsedQuads, relatedShapes))
-    .catch((error) => {
-      throw error
-    });
-}
-
+/**
+ * Returns the all the nodes defined in the ontologies passed in as a parameter.
+ *
+ * Nodes represent classes defined inside ontologies. Nodes and links together can be viewed also as a graph where nodes
+ * are the dots and links are the edges of the graph. This graph represents how classes represented as nodes inside the
+ * ontologies relate to each other.
+ *
+ * @param ontologies where the nodes are defined, and will be extracted into a unique list.
+ * @param nodeFilter is a filter predicate which reduces the nodes to be returned.
+ * @return a list of unique nodes.
+ */
 export const getUniqueNodes = (ontologies: Ontology[], nodeFilter: (node: Node) => boolean): Node[] => {
   const uniqueNodes = new Map(ontologies
     .map(ontology => ontology.nodes)
@@ -117,15 +158,22 @@ export const getUniqueNodes = (ontologies: Ontology[], nodeFilter: (node: Node) 
   return Array.from(uniqueNodes.values());
 }
 
-export function getUniqueLinks(ontologies: Ontology[], uniqueNode: Node[]) {
-  const uniqueLinks = new Map(ontologies
+/**
+ * Returns the all the links defined in the ontologies passed in as a parameter.
+ *
+ * Links have a source and a target property and define a directional connection between two nodes also defined in the
+ * ontologies. Nodes and links together can be viewed also as a graph where nodes are the dots and links are the edges
+ * of the graph. This graph represents how classes represented as nodes inside the ontologies relate to each other.
+ *
+ * @param ontologies where the links are defined, and will be extracted into a unique list.
+ * @return a list of unique links.
+ */
+export const getUniqueLinks = (ontologies: Ontology[]) => {
+  return Array.from(new Map(ontologies
     .map(ontology => ontology.links)
     .flat()
-    .filter(link => uniqueNode.some(uniqueNode => uniqueNode.id === link.source))
-    .filter(link => uniqueNode.some(uniqueNode => uniqueNode.id === link.target))
-    .map(link => [link.source + link.target, link] as [string, Link]))
-
-  return Array.from(uniqueLinks.values());
+    .map(link => [link.source + link.target, link] as [string, Link])
+  ).values());
 }
 
 /**
@@ -134,7 +182,7 @@ export function getUniqueLinks(ontologies: Ontology[], uniqueNode: Node[]) {
  * @param ontologies serving as the source of information
  * @return a list of resource types
  */
-export function getResourceTypes(ontologies: Ontology[]): string[] {
+export const getResourceTypes = (ontologies: Ontology[]): string[] => {
   return Array.from(new Set(
     ontologies
       .map(ontology => ontology.relatedShapes
@@ -151,7 +199,7 @@ export function getResourceTypes(ontologies: Ontology[]): string[] {
  * @param ontologies serving as the source of information
  * @return a list of resource formats
  */
-export function getResourceFormats(ontologies: Ontology[]): string[] {
+export const getResourceFormats = (ontologies: Ontology[]): string[] => {
   const dataResourceOntologies = ontologies
     .filter(ontology => ontology.relatedShapes
       .some(relatedShape => isSubclassOfDataResource(ontology, relatedShape))
@@ -183,13 +231,7 @@ export function getResourceFormats(ontologies: Ontology[]): string[] {
  * @param shape containing the class name.
  * @return if the shape is subclass of DataResource.
  */
-function isSubclassOfDataResource(ontology: Ontology, shape: Shape): boolean {
-  return ontology.links
-    .filter(link => link.target === DATA_RESOURCE_CLASS)
-    .some(link => link.source === shape.classname);
-}
-
-function is(ontology: Ontology, shape: Shape): boolean {
+const isSubclassOfDataResource = (ontology: Ontology, shape: Shape): boolean => {
   return ontology.links
     .filter(link => link.target === DATA_RESOURCE_CLASS)
     .some(link => link.source === shape.classname);

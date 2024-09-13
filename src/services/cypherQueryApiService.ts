@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { Asset } from '../components/resources/useResourceFilterAssets';
+import { Asset } from '../components/resources/helpers/resourceFilterAssetHelper';
 import { AuthContextType } from '../context/AuthContextProvider';
 import { ISelfDescription, ResourceInput, ServiceOfferingInput } from '../utils/dataMapper';
 

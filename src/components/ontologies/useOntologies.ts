@@ -51,8 +51,8 @@ const useOntologies = ({ nodeTypeFilters }: IUseOntologies) => {
     [ontologies])
 
   const links = useMemo(
-    () => getUniqueLinks(ontologies, nodes),
-    [ontologies, nodes]);
+    () => getUniqueLinks(ontologies),
+    [ontologies]);
 
   const state = useMemo<OntologiesViewState>(() => {
     if (isLoading) {
