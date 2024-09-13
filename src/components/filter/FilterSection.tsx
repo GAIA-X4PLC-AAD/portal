@@ -23,7 +23,7 @@ export const FilterSection: FC<IFilterSection> = ({ subtitle, assets, updateAsse
               type="checkbox"
               className={styles.checkbox}
               name={item.label}
-              checked={item.value}
+              checked={!item.disabled && item.value}
               onChange={() => updateAssetFilter({
                 ...item,
                 value: !item.value
