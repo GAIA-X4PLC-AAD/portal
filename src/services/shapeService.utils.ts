@@ -175,10 +175,8 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
       parameters.set(propertyId, propertyParameters)
 
       if (isNodeParameter(quad)) {
-        const propertyId = quad.subject.value;
         const nodeId = quad.object.value;
         nodeIds.set(propertyId, nodeId);
-
       }
     } else if (isProperty(quad)) {
       const shapeId = quad.subject.value;
