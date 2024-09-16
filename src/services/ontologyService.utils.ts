@@ -3,6 +3,7 @@ import { Quad } from 'n3';
 
 import { Link, Node, Ontology, ShapesAndOntologiesInput } from '../types/ontologies.model';
 import { Shape } from '../types/shapes.model';
+import { trimShapes } from '../utils/shapeHelpers';
 
 import { getSchemaById } from './schemaApiService';
 
@@ -190,9 +191,7 @@ export const getResourceTypes = (ontologies: Ontology[]): string[] => {
       .map(ontology => ontology.relatedShapes
         .filter(relatedShape => isSubclassOfDataResource(ontology, relatedShape))
         .map(shape => shape.targetClasses
-          .map(targetClass => (targetClass.includes('#')
-            ? targetClass.split('#').pop()
-            : targetClass.split('/').pop()) || '')
+          .map(targetClass => trimShapes(targetClass))
         )
         .flat()
       )
