@@ -27,7 +27,7 @@ const fetchShapeById = async (shapeId: string) => {
 export const getShapeByName = async (name: string): Promise<Shape | undefined> => {
   const schemas = await fetchAllSchemas();
   const allShapes = await fetchAllShapesFromSchemas(schemas);
-  return allShapes ? allShapes.find(shape => shape.subject === name) : undefined;
+  return allShapes ? allShapes.find(shape => shape.shaclShapeName === name) : undefined;
 }
 
 // -----------------------------------------------------------------------------
@@ -97,20 +97,6 @@ const isShape = (quad: Quad) => (
     && quad.object.value === 'http://www.w3.org/ns/shacl#NodeShape'
 );
 
-const getClassname = (shapeId: string, shapeTargetClasses?: string[]) => {
-  if (!shapeTargetClasses || !shapeTargetClasses.length) {
-    console.error(`The shape '${shapeId}' does not have any targetClasses!`);
-    return '';
-  }
-  return shapeTargetClasses[0];
-}
-
-const getShortSubject = (targetClass: string) =>
-  targetClass.includes('#')
-    ? targetClass.split('#').pop()!
-    : targetClass.split('/').pop()
-        || targetClass
-
 const getInPropertyValues = (firstItemId: string, linkedListValues: Map<string, ListItem>) => {
   const values = [] as string[];
 
@@ -167,7 +153,7 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
   const nodeIds = new Map<string, string>();
   const propertyIds = new Map<string, string[]>();
   const targetClasses = new Map<string, string[]>();
-  const shapeIds = [] as string[];
+  const shaclShapeNames = [] as string[];
 
   quads.forEach(quad => {
     if (isLinkedListValue(quad)) {
@@ -215,22 +201,18 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
 
     if (isShape(quad)) {
       const shapeId = quad.subject.value;
-      shapeIds.push(shapeId);
+      shaclShapeNames.push(shapeId);
     }
   })
 
-  return shapeIds.map(shapeId => {
-    const shapeTargetClasses = targetClasses.get(shapeId) || [];
-    const classname = getClassname(shapeId, shapeTargetClasses);
-    const shortSubject = getShortSubject(classname);
-    const properties = getShapeProperties(shapeId, propertyIds, parameters, linkedListValues);
-    const nodes = getNodes(shapeId, propertyIds, nodeIds);
+  return shaclShapeNames.map(shaclShapeName => {
+    const shapeTargetClasses = targetClasses.get(shaclShapeName) || [];
+    const properties = getShapeProperties(shaclShapeName, propertyIds, parameters, linkedListValues);
+    const nodes = getNodes(shaclShapeName, propertyIds, nodeIds);
 
     const shape: Shape = {
       shaclShapeId,
-      subject: shapeId,
-      classname,
-      shortSubject,
+      shaclShapeName,
       properties,
       nodes,
       targetClasses: shapeTargetClasses,

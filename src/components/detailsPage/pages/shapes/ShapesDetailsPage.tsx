@@ -55,7 +55,7 @@ const ShapesDetailsPage: FC = () => {
 
   return (
     <DetailsPage>
-      <Header title={`${t('shapes.titles')} ${ARROW_RIGHT} ${shape.subject}`} />
+      <Header title={`${t('shapes.titles')} ${ARROW_RIGHT} ${shape.shaclShapeName}`}/>
       <ShapeContext.Provider value={shape}>
         <DetailsContent>
           <DetailsMainContent>

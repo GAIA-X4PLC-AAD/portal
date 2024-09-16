@@ -6,7 +6,7 @@ import { Shape } from '../types/shapes.model';
 
 import { getSchemaById } from './schemaApiService';
 
-const DATA_RESOURCE_CLASS = 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#DataResource'
+export const DATA_RESOURCE_CLASS = 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#DataResource'
 
 /**
  * Fetches all ontologies defined in a schema.
@@ -14,7 +14,9 @@ const DATA_RESOURCE_CLASS = 'https://registry.lab.gaia-x.eu/development/api/trus
  * @param schemas where a list of ontologies are defined.
  * @param shapes a list of shapes from which the ontology related shapes will be picked.
  */
-export const fetchAllOntologiesFromSchemas = async (schemas: ShapesAndOntologiesInput, shapes: Shape[]) => {
+export const fetchAllOntologiesFromSchemas = async (
+  schemas: ShapesAndOntologiesInput, shapes: Shape[]
+): Promise<Ontology[]> => {
   return Promise.all(
     schemas.ontologies.map(
       async id => fetchOntologyById(shapes, id)));
@@ -74,7 +76,7 @@ const parseSingleOntology = (schema: string) => {
  * @param quads a list of triplets (subject, predicate, object) which describe an ontology.
  * @param relatedShapes a list of shapes described the quads.
  */
-export const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ontology => {
+const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ontology => {
   const nodes: { id: string; label: string; type: string }[] = [];
   const links: { source: string; target: string }[] = [];
 
@@ -187,7 +189,13 @@ export const getResourceTypes = (ontologies: Ontology[]): string[] => {
     ontologies
       .map(ontology => ontology.relatedShapes
         .filter(relatedShape => isSubclassOfDataResource(ontology, relatedShape))
-        .map(shape => shape.shortSubject))
+        .map(shape => shape.targetClasses
+          .map(targetClass => (targetClass.includes('#')
+            ? targetClass.split('#').pop()
+            : targetClass.split('/').pop()) || '')
+        )
+        .flat()
+      )
       .flat()
   ))
 }
@@ -206,7 +214,8 @@ export const getResourceFormats = (ontologies: Ontology[]): string[] => {
     )
   const formatShapes = dataResourceOntologies
     .map(ontology => ontology.relatedShapes
-      .filter(relatedShape => relatedShape.classname.endsWith('/Format'))
+      .filter(relatedShape => relatedShape.targetClasses
+        .some(targetClass => targetClass.endsWith('/Format')))
     )
     .flat()
   const formatShapeProperties = formatShapes
@@ -234,5 +243,5 @@ export const getResourceFormats = (ontologies: Ontology[]): string[] => {
 const isSubclassOfDataResource = (ontology: Ontology, shape: Shape): boolean => {
   return ontology.links
     .filter(link => link.target === DATA_RESOURCE_CLASS)
-    .some(link => link.source === shape.classname);
+    .some(link => shape.targetClasses.includes(link.source));
 }

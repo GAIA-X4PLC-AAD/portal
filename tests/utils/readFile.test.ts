@@ -1,11 +1,11 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { readFile } from '../readFile';
+import { readFile } from '../../src/utils/readFile';
 
 describe('ReadFile', () => {
   it('_ read file', async () => {
     // Given
-    const filePath = 'src/utils/__tests__/fixtures/test-shapes-short.ttl';
+    const filePath = 'tests/utils/__fixtures__/test-shapes-short.ttl';
     const expectedString = getExpectedString();
     // When
     const result = await readFile(filePath);

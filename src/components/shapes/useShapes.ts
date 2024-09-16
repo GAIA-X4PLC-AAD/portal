@@ -16,7 +16,9 @@ export const useShapes = () => {
       try {
         const schemas = await fetchAllSchemas();
         const fetchedShapes = await fetchAllShapesFromSchemas(schemas);
-        const sortedShapes = fetchedShapes.sort((a: Shape, b: Shape) => a.shortSubject.localeCompare(b.shortSubject));
+        const sortedShapes = fetchedShapes
+          .sort((a: Shape, b: Shape) => a.targetClasses.join(', ')
+            .localeCompare(b.targetClasses.join(',')));
 
         setShapes(sortedShapes)
       } catch (error) {

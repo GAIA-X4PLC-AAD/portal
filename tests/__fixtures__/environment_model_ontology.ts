@@ -1,4 +1,4 @@
-import { Ontology } from '../../types/ontologies.model';
+import { Ontology } from '../../src/types/ontologies.model';
 
 export const EnvironmentModelOntology: Ontology = {
   subject: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/environment-model/',
@@ -15,7 +15,7 @@ export const EnvironmentModelOntology: Ontology = {
     },
     {
       id: 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/environment-model/EnvironmentModel',
-      label: '"environment-model"',
+      label: '"class definition for environment-model"',
       type: 'http://www.w3.org/2002/07/owl#Class'
     },
   ],

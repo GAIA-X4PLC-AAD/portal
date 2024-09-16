@@ -17,13 +17,13 @@ const ShapeCardContent: FC<IShapeCardContent> = ({ shape } ) => {
   const navigate = useNavigate();
 
   const handleNavigationToDetailsPage = () => {
-    navigate(`/shapes/details/${shape.subject}`);
+    navigate(`/shapes/details/${shape.shaclShapeName}`);
   }
 
   return (
     <div className={styles.content}>
       <div style={{ textAlign: 'left' }}>
-        <Title>{shape.subject}</Title>
+        <Title>{shape.shaclShapeName}</Title>
       </div>
       <div className={styles.button}>
         <GaiaXButton

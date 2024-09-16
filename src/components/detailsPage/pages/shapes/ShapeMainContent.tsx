@@ -20,7 +20,7 @@ const ShapeMainContent: FC = () => {
   const handleNavigationToDetailsPage = async (shapeName: string) => {
     const shapeToLink = await getShapeByName(shapeName);
     if (shapeToLink) {
-      navigate(`/shapes/details/${shapeToLink.subject}`);
+      navigate(`/shapes/details/${shapeToLink.shaclShapeName}`);
     }
   }
 
@@ -30,7 +30,7 @@ const ShapeMainContent: FC = () => {
 
   return (
     <div className={styles['container']}>
-      <Title>{shape.subject}</Title>
+      <Title>{shape.shaclShapeName}</Title>
 
       <table className={styles['table']}>
         <thead>
