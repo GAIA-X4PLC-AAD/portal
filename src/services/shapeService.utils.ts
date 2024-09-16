@@ -160,46 +160,41 @@ export const createShapeObjects = (shaclShapeId: string, quads: Quad[]): Shape[]
       const id = quad.subject.value;
       const listItem = linkedListValues.get(id) || {};
       linkedListValues.set(id, { ...listItem, value: quad.object.value } as ListItem)
-    }
 
-    if (isLinkedListNextItem(quad)) {
+    } else if (isLinkedListNextItem(quad)) {
       const id = quad.subject.value;
       const listItem = linkedListValues.get(id) || {};
       linkedListValues.set(id, { ...listItem, next: quad.object.value } as ListItem)
-    }
 
-    if (isParameter(quad)) {
+    } else if (isParameter(quad)) {
       const propertyId = quad.subject.value;
       const propertyParameters = parameters.get(propertyId) || [] as Parameter[];
       const name = quad.predicate.value;
       const value = quad.object.value;
       propertyParameters.push({ name, value } as Parameter);
       parameters.set(propertyId, propertyParameters)
-    }
 
-    if (isNodeParameter(quad)) {
-      const propertyId = quad.subject.value;
-      const nodeId = quad.object.value;
-      nodeIds.set(propertyId, nodeId);
-    }
+      if (isNodeParameter(quad)) {
+        const propertyId = quad.subject.value;
+        const nodeId = quad.object.value;
+        nodeIds.set(propertyId, nodeId);
 
-    if (isProperty(quad)) {
+      }
+    } else if (isProperty(quad)) {
       const shapeId = quad.subject.value;
       const propertyId = quad.object.value;
       const shapeProperties = propertyIds.get(shapeId) || [];
       shapeProperties.push(propertyId);
       propertyIds.set(shapeId, shapeProperties);
-    }
 
-    if (isTargetClass(quad)) {
+    } else if (isTargetClass(quad)) {
       const shapeId = quad.subject.value;
       const shapeTargetClasses = targetClasses.get(shapeId) || [] as string[];
       const targetClass = quad.object.value;
       shapeTargetClasses.push(targetClass);
       targetClasses.set(shapeId, shapeTargetClasses);
-    }
 
-    if (isShape(quad)) {
+    } else if (isShape(quad)) {
       const shapeId = quad.subject.value;
       shaclShapeNames.push(shapeId);
     }
