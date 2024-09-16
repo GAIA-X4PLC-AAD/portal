@@ -19,10 +19,7 @@ export default function DetailsPage() {
   useEffect(() => {
     const fetchAndSetSelfDescriptions = async () => {
       try {
-        const response = await cypherQuery.getOneSelfDescriptions(
-          authContext,
-          resourceId
-        );
+        const response = await cypherQuery.getOneSelfDescriptions(resourceId);
         console.log('Fetched data: ', response);
         if (response) {
           setSelfDescriptionData(response);

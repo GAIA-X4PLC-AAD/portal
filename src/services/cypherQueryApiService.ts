@@ -1,12 +1,10 @@
 import axios from 'axios';
 
 import { Asset } from '../components/resources/helpers/resourceFilterAssetHelper';
-import { AuthContextType } from '../context/AuthContextProvider';
 import { ISelfDescription, ResourceInput, ServiceOfferingInput } from '../utils/dataMapper';
 
-const getHeaders = (authContext: AuthContextType) => {
+const getHeaders = () => {
   return {
-    Authorization: `Bearer ${authContext.token}`,
     'Access-Control-Allow-Origin': '*',
   };
 }
@@ -19,12 +17,11 @@ function getEndpoint() {
 /**
  * Executing a graph DB query and returning the results
  *
- * @param authContext authorization token for server calls
  * @param requestBody graph db query request
  */
-const cypherQuery = async (authContext: AuthContextType, requestBody: { statement: string }): Promise<any> => {
+const cypherQuery = async (requestBody: { statement: string }): Promise<any> => {
   const endpoint = getEndpoint();
-  const headers = getHeaders(authContext);
+  const headers = getHeaders();
 
   return axios
     .options(endpoint, { headers })
@@ -44,11 +41,9 @@ export const CypherQueryApiService = {
 
   /**
    * Returns every Service Offering available
-   *
-   * @param authContext authorization token for server calls
    */
-  async getAllSelfDescriptions(authContext: AuthContextType): Promise<ServiceOfferingInput> {
-    return cypherQuery(authContext, {
+  async getAllSelfDescriptions(): Promise<ServiceOfferingInput> {
+    return cypherQuery({
       statement: 'MATCH (n:ServiceOffering) RETURN properties(n), labels(n) LIMIT 100',
     })
   },
@@ -56,12 +51,11 @@ export const CypherQueryApiService = {
   /**
    * Returns details about a resource
    *
-   * @param authContext authorization token for server calls
    * @param claimsGraphUri the id of the resource to be queried
    */
-  async getOneSelfDescriptions(authContext: AuthContextType, claimsGraphUri: string): Promise<ISelfDescription> {
+  async getOneSelfDescriptions(claimsGraphUri: string): Promise<ISelfDescription> {
     const uri = claimsGraphUri.replace(/'/g, '\\\'');
-    return cypherQuery(authContext, {
+    return cypherQuery({
       statement: `MATCH (n:HDMap) WHERE '${uri}' IN n.claimsGraphUri RETURN properties(n), labels(n) LIMIT 1`,
     })
   },
@@ -69,10 +63,9 @@ export const CypherQueryApiService = {
   /**
    * Returns all resources of type included in the type asset list passed in as parameter.
    *
-   * @param authContext authorization token for server calls
    * @param typeFilters the list of requested resource types
    */
-  async getAllResources(authContext: AuthContextType, typeFilters: Asset[]): Promise<ResourceInput> {
+  async getAllResources(typeFilters: Asset[]): Promise<ResourceInput> {
     const whereDataResource = typeFilters.length ? `
     WHERE ANY (label IN labels(n) WHERE label IN [ '${typeFilters.map(asset => asset.label).join('\', \'')}'])
       AND 'DataResource' IN labels(n)
@@ -84,7 +77,7 @@ export const CypherQueryApiService = {
     WHERE n.uri IN m.claimsGraphUri 
       AND ANY(label IN labels(m) WHERE label CONTAINS 'Format')`
 
-    return cypherQuery(authContext, {
+    return cypherQuery({
       statement: `
       MATCH (n) 
       ${whereDataResource} 
@@ -99,11 +92,9 @@ export const CypherQueryApiService = {
   /**
    * Returns all entries from the cypher db. This method is used for development purposes only, in cases when
    * available data has to be analysed.
-   *
-   * @param authContext authorization token for server calls
    */
-  async getEverything(authContext: AuthContextType): Promise<ResourceInput> {
-    return cypherQuery(authContext, {
+  async getEverything(): Promise<ResourceInput> {
+    return cypherQuery({
       statement: 'MATCH (n) RETURN properties(n) AS properties, labels(n) AS labels LIMIT 1000',
     })
   },

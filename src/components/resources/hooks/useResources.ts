@@ -1,6 +1,5 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-import { AuthContext } from '../../../context/AuthContextProvider';
 import { Resource } from '../../../types/resources.model';
 import { loadResources } from '../helpers/resourceDataFlow';
 import { applyFilters, removeDataResourceLabels } from '../helpers/resourcesHelper';
@@ -10,7 +9,6 @@ import { useResourceFilterAssets } from './useResourceFilterAssets';
 export type ResourcesViewState = 'LOADING' | 'SHOW_RESOURCES' | 'SHOW_NO_RESULTS';
 
 export const useResources = () => {
-  const authContext = useContext(AuthContext);
   const [resources, setResources] = useState<Resource[]>([])
   const [isLoading, setIsLoading] = useState(true);
   const [searchText, setSearchText] = useState('')
@@ -26,7 +24,7 @@ export const useResources = () => {
 
   useEffect(() => {
     if (!isLoadingAssets) {
-      loadResources(authContext, typeAssets)
+      loadResources(typeAssets)
         .then((fetchedResources) => {
           setResources(fetchedResources);
           setAvailableTypeAssetIds(removeDataResourceLabels(fetchedResources).map(resource => resource.labels).flat()
