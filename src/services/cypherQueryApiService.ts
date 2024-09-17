@@ -67,25 +67,31 @@ export const CypherQueryApiService = {
    */
   async getAllResources(typeFilters: Asset[]): Promise<ResourceInput> {
     const whereDataResource = typeFilters.length ? `
-    WHERE ANY (label IN labels(n) WHERE label IN [ '${typeFilters.map(asset => asset.label).join('\', \'')}'])
-      AND 'DataResource' IN labels(n)
-      AND NOT n.uri STARTS WITH 'bnode://'`
+    WHERE ANY (label IN labels(resource) WHERE label IN [ '${typeFilters.map(asset => asset.label).join('\', \'')}'])
+      AND 'DataResource' IN labels(resource)
+      AND NOT resource.uri STARTS WITH 'bnode://'`
       : ''
 
-    const matchFormatNode = `
-    OPTIONAL MATCH(m)
-    WHERE n.uri IN m.claimsGraphUri 
-      AND ANY(label IN labels(m) WHERE label CONTAINS 'Format')`
+    const matchFormatPropertyNode = `
+    OPTIONAL MATCH(formatProperty)
+    WHERE resource.uri IN formatProperty.claimsGraphUri 
+      AND ANY(label IN labels(formatProperty) WHERE label CONTAINS 'Format')`
+
+    const matchCopyrightOwnedBy = `
+    OPTIONAL MATCH(copyrightOwner)
+    WHERE copyrightOwner.uri = resource.copyrightOwnedBy`
 
     return cypherQuery({
       statement: `
-      MATCH (n) 
+      MATCH (resource) 
       ${whereDataResource} 
-      ${matchFormatNode}
+      ${matchFormatPropertyNode}
+      ${matchCopyrightOwnedBy}
       RETURN 
-        properties(n) AS properties, 
-        labels(n) AS labels, 
-        properties(m).type AS format`,
+        properties(resource) AS properties, 
+        labels(resource) AS labels, 
+        properties(formatProperty).type AS format,
+        properties(copyrightOwner).legalName AS vendor`,
     })
   },
 

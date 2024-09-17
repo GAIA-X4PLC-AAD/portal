@@ -4,5 +4,6 @@ export interface Resource {
     description: string,
     uri: string,
     claimsGraphUri: string[],
-    format: string
+    format: string,
+    vendor: string
 }

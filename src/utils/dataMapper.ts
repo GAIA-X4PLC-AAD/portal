@@ -34,9 +34,10 @@ export function mapServiceOfferings(selfDescriptions: ServiceOfferingInput): Ser
   }));
 }
 
-type ResourceInputProperties = Exclude<Resource, 'labels'>
+type ResourceInputProperties = Exclude<Resource, 'labels, format, vendors'>
 export interface ResourceInput {
   items: {
+    vendor: string,
     format: string,
     labels: string[],
     properties: ResourceInputProperties;
