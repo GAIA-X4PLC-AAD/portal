@@ -8,6 +8,10 @@
     word-break: break-all; /* Aggressively breaks at any point */
 }
 
+.title div {
+    padding-bottom: 10px;
+}
+
 @media (max-width: 1700px) {
     .title {
       font-size: x-large;

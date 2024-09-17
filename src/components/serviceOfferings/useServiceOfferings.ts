@@ -1,27 +1,24 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-import { AuthContext } from '../../context/AuthContextProvider';
 import { CypherQueryApiService as cypherQuery } from '../../services/cypherQueryApiService';
-import { mapServiceOfferings, ServiceOffering } from '../../utils/dataMapper';
+import { ServiceOffering } from '../../types/serviceOfferings.model';
+import { mapServiceOfferings } from '../../utils/dataMapper';
 
 export type ServiceOfferingsViewState = 'LOADING' | 'SHOW_OFFERINGS' | 'SHOW_NO_RESULTS'
 
 export const useServiceOfferings = () => {
-  const authContext = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
   const [serviceOfferings, setServiceOfferings] = useState<ServiceOffering[]>([]);
   const [searchText, setSearchText] = useState('')
 
   useEffect(() => {
-    if (authContext.isAuthenticated) {
-      cypherQuery.getAllSelfDescriptions(authContext)
-        .then((selfDescriptions) => {
-          setServiceOfferings(mapServiceOfferings(selfDescriptions));
-        })
-        .catch(error => console.error('Error fetching self descriptions:', error))
-        .finally(() => setIsLoading(false))
-    }
-  }, [authContext.isAuthenticated]);
+    cypherQuery.getAllSelfDescriptions()
+      .then((selfDescriptions) => {
+        setServiceOfferings(mapServiceOfferings(selfDescriptions));
+      })
+      .catch(error => console.error('Error fetching self descriptions:', error))
+      .finally(() => setIsLoading(false))
+  }, []);
 
   const filteredServiceOfferings = useMemo(() => serviceOfferings
     .filter(services => Object

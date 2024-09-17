@@ -2,8 +2,9 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Ontology } from '../../types/ontologies.model';
+import { Resource } from '../../types/resources.model';
+import { ServiceOffering } from '../../types/serviceOfferings.model';
 import { Shape } from '../../types/shapes.model';
-import { Resource, ServiceOffering } from '../../utils/dataMapper';
 import Title from '../Title/Title';
 
 import styles from './ItemCard.module.css';

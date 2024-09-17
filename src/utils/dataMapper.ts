@@ -1,6 +1,10 @@
 // This Interface is termporary, due to how we recieve data at the moment.
 
 // Interfaces and Mappers for Service Offerings
+import { Resource } from '../types/resources.model';
+import { ServiceOffering } from '../types/serviceOfferings.model';
+
+// TODO: Refactor. See ResourceInput.
 export interface ServiceOfferingInput {
   items: Array<{
     'labels(n)': {
@@ -17,15 +21,7 @@ export interface ServiceOfferingInput {
   }>;
 }
 
-export interface ServiceOffering {
-  label: string,
-  name: string,
-  policy: string,
-  uri: string,
-  description: string,
-  claimsGraphUri: string,
-}
-
+// TODO: Refactor. See mapResources(...).
 export function mapServiceOfferings(selfDescriptions: ServiceOfferingInput): ServiceOffering[] {
   console.debug('From mapper: ', selfDescriptions);
   return selfDescriptions.items.map(({ 'properties(n)': p, 'labels(n)': l }) => ({
@@ -38,37 +34,24 @@ export function mapServiceOfferings(selfDescriptions: ServiceOfferingInput): Ser
   }));
 }
 
-// Interfaces and Mappers for Resources
+type ResourceInputProperties = Exclude<Resource, 'labels'>
 export interface ResourceInput {
-  items: Array<{
-    'labels(n)': string[],
-    'properties(n)': {
-      name: string,
-      description: string,
-      uri: string,
-      claimsGraphUri: string,
-    };
-  }>;
-}
-
-export interface Resource {
-  labels: string[],
-  name: string,
-  description: string,
-  uri: string,
-  claimsGraphUri: string,
+  items: {
+    format: string,
+    labels: string[],
+    properties: ResourceInputProperties;
+  }[];
 }
 
 export function mapResources(selfDescriptions: ResourceInput): Resource[] {
-  console.debug('mapResource: ', selfDescriptions);
-  return selfDescriptions
-    .items.map(({ 'properties(n)': p, 'labels(n)': l }) => ({
-      labels: l.filter(label => label !== 'Resource' && label !== 'DataResource'),
-      name: p.name,
-      description: p.description,
-      uri: p.uri,
-      claimsGraphUri: p.claimsGraphUri
+  const resources = selfDescriptions
+    .items.map(({ format, properties, labels }) => ({
+      ...properties,
+      labels,
+      format
     }));
+  console.debug('resources', resources)
+  return resources;
 }
 
 export interface ISelfDescription {

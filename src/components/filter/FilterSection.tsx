@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Asset } from '../resources/useResourceFilterAssets';
+import { Asset } from '../resources/helpers/resourceFilterAssetHelper';
 import Subtitle from '../subtitle/Subtitle';
 
 import styles from './Filter.module.css';
@@ -23,7 +23,7 @@ export const FilterSection: FC<IFilterSection> = ({ subtitle, assets, updateAsse
               type="checkbox"
               className={styles.checkbox}
               name={item.label}
-              checked={item.value}
+              checked={!item.disabled && item.value}
               onChange={() => updateAssetFilter({
                 ...item,
                 value: !item.value

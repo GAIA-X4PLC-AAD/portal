@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Resource } from '../../utils/dataMapper';
+import { Resource } from '../../types/resources.model';
 import Title from '../Title/Title';
 import GaiaXButton from '../buttons/GaiaXButton';
 
@@ -17,13 +17,18 @@ const ResourceCardContent: FC<IResourceCardContent> = ({ resource }) => {
   const navigate = useNavigate();
 
   const handleNavigationToDetailsPage = () => {
-    const encodedUri = encodeURIComponent(resource.claimsGraphUri);
+    const encodedUri = encodeURIComponent(JSON.stringify(resource.claimsGraphUri));
     navigate(`/details/${encodedUri}`);
   };
 
   return (
     <section className={styles.content}>
-      <Title>{resource.claimsGraphUri}</Title>
+      <Title>{
+        resource.claimsGraphUri.map(claimsGraphUri => (
+          <div key={claimsGraphUri}>{claimsGraphUri}</div>
+        ))
+      }
+      </Title>
       <p>{resource.description}</p>
       <div className={styles.button}>
         <GaiaXButton

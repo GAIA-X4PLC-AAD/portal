@@ -1,11 +1,11 @@
 {
     "compilerOptions": {
-    "target": "es6",
-        "lib": [
-        "dom",
-        "dom.iterable",
-        "esnext"
-    ],
+        "target": "es6",
+            "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
         "allowJs": true,
         "skipLibCheck": true,
         "esModuleInterop": true,
@@ -20,12 +20,12 @@
         "noEmit": true,
         "jsx": "preserve",
         "baseUrl": "./src"
-},
+    },
     "include": [
-    "src",
-    "public",
-    "node_modules/ts-jest/globals.d.ts"
-],
+        "src",
+        "public",
+        "node_modules/ts-jest/globals.d.ts"
+    ],
     "exclude": ["api_mock/**"]
 }
 

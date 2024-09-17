@@ -15,7 +15,7 @@ import SearchBar from '../searchBar/SearchBar';
 
 import useOntologies from './useOntologies';
 
-const nodeTypeFilters = [
+const CLASS_OR_OBJECT_PROPERTY_NODE_TYPES = [
   'http://www.w3.org/2000/01/rdf-schema#Class',
   'http://www.w3.org/2002/07/owl#Class',
   'http://www.w3.org/2002/07/owl#ObjectProperty'
@@ -30,7 +30,7 @@ const Ontologies = () => {
     state,
     toggleShowMap,
     search
-  } = useOntologies({ nodeTypeFilters })
+  } = useOntologies({ nodeTypeFilters: CLASS_OR_OBJECT_PROPERTY_NODE_TYPES })
 
   return (
     <>

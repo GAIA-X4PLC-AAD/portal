@@ -9,3 +9,12 @@ export type ServiceOfferings = {
   survey_title?: string,
   survey_url?: string,
 }
+
+export interface ServiceOffering {
+  label: string,
+  name: string,
+  policy: string,
+  uri: string,
+  description: string,
+  claimsGraphUri: string,
+}
