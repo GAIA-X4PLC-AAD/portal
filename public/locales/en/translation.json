@@ -73,7 +73,6 @@
       "edit": "Upload new SD"
     },
     "suitable-offerings": "Suitable offerings",
-    "no-offerings-available": "No offerings available",
     "actions": "Actions",
     "offered-by": "Offered by",
     "suitable-data-offerings": "Suitable data offerings",
@@ -512,11 +511,13 @@
     "title": "Services",
     "titles": "Service Offerings",
     "search-bar-text": "Search for special service offerings",
+    "no-offerings-available": "No offerings available",
     "no-description": "No description available!",
     "no-title": "No title available"
   },
   "resources": {
-    "search-bar-text": "Search for special resources"
+    "search-bar-text": "Search for special resources",
+    "no-resources-available": "No resources available"
   },
   "ontologies": {
     "title": "Ontology",

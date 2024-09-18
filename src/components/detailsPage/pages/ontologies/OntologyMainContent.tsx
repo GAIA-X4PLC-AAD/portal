@@ -16,7 +16,7 @@ const OntologyMainContent: FC = () => {
   const ontology = useContext(OntologyContext);
 
   const handleNavigationToShapeDetailsPage = (shape: Shape) => {
-    navigate(`/shapes/details/${shape.subject}`);
+    navigate(`/shapes/details/${shape.shaclShapeName}`);
   }
 
   if (!ontology) {
@@ -34,7 +34,7 @@ const OntologyMainContent: FC = () => {
           <Text>{t('ontologies.classes')}</Text>
           {ontology.relatedShapes.map((shape, index) => (
             <div className={styles['link']} key={index} onClick={() => handleNavigationToShapeDetailsPage(shape)}>
-              {shape.classname ? shape.classname : shape.subject}
+              {shape.shaclShapeName}
             </div>
           ))}
         </div>

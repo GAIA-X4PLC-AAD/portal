@@ -7,18 +7,19 @@ import { Link, Node } from '../types/ontologies.model';
 interface IRDFVisualization {
   nodes: Node[];
   links: Link[];
+  visible: boolean;
 }
 
 enum detailRoutes {
   shapesAndOntologies = '/shapesAndOntologies/details/',
 }
 
-const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links }) => {
+const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links, visible }) => {
   const ref = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (ref.current) {
+    if (visible && ref.current) {
       // Convert nodes and links to Vis.js format
       const visNodes = new DataSet(
         nodes.map(node => {
@@ -99,9 +100,12 @@ const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links }) => {
         network.destroy();
       };
     }
-  }, [nodes, links, navigate]);
+  }, [nodes, links, navigate, visible]);
 
-  return <div ref={ref} style={{ width: '100%', height: '600px' }} />;
+  if (visible) {
+    return <div ref={ref} style={{ width: '100%', height: '600px' }}/>;
+  }
+  return <></>
 };
 
 export default RDFVisualization;

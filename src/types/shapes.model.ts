@@ -1,9 +1,6 @@
 export interface Shape {
     shaclShapeId: string;
-    subject: string;
-    shortSubject: string;
-    classname: string;
-    propertyIds: string[];
+    shaclShapeName: string;
     properties: ShapeProperty[];
     targetClasses: string[];
     nodes: string[];

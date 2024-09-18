@@ -1,0 +1,55 @@
+.card {
+    min-height: 15vh;
+    border-radius: 10px;
+    box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.25);
+    display: flex;
+    background-color: white;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.button {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.label {
+    min-width: 30%;
+    height: inherit;
+    border-radius: 10px 0 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000094;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.label h2 {
+    color: white;
+}
+
+.label p {
+    color: white;
+    font-size: 15px;
+    font-weight: 300;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.content p {
+    color: #666666;
+}
