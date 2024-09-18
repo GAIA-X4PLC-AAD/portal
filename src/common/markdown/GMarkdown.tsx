@@ -12,14 +12,12 @@ type GMarkdownProps = {
 
 const GMarkdown: React.FC<GMarkdownProps> = ({ isCard, maxContentHeight = 300, children }) => {
   const [isHigher, setIsHigher] = useState(false);
-  const [contentHeight, setContentHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (contentRef.current) {
       const contentHeight = contentRef.current.scrollHeight;
       setIsHigher(contentHeight > maxContentHeight); // Adjust height as needed
-      setContentHeight(contentHeight);
     }
   }, [children]);
 
