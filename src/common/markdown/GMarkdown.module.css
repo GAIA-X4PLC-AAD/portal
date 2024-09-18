@@ -58,3 +58,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.ellipsis {
+  margin: auto;
+}

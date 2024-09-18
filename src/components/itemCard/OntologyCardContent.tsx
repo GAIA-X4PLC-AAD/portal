@@ -27,7 +27,7 @@ const OntologyCardContent: FC<IOntologyCardContent> = ({ ontology } ) => {
       <div style={{ textAlign: 'left' }}>
         <Title>{ontology.subject}</Title>
       </div>
-      <GMarkdown isCard>{ontology.description}</GMarkdown>
+      <GMarkdown isCard maxContentHeight={200}>{ontology.description}</GMarkdown>
       <div className={styles.button}>
         <GaiaXButton
           label={t('details.more-details')}
