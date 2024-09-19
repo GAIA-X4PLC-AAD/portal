@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import './i18n';
 import App from './App';
 import AuthContextProvider from './context/AuthContextProvider';
-import { ResourceContextProvider } from './context/ResourceContext';
+import { SchemasContextProvider } from './context/SchemasContext';
 import reducers from './reducers';
 
 import './index.css';
@@ -36,6 +36,7 @@ const store = configureStore({
   preloadedState: persistedStore,
 });
 
+// TODO: May be not the entire store should be saved into cookies. It has to be refactored.
 store.subscribe(() => {
   saveToLocalStorage(store.getState());
 });
@@ -46,9 +47,9 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 root.render(
   <Provider store={store}>
     <AuthContextProvider>
-      <ResourceContextProvider>
+      <SchemasContextProvider>
         <App/>
-      </ResourceContextProvider>
+      </SchemasContextProvider>
     </AuthContextProvider>
   </Provider>
 );
