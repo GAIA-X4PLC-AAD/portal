@@ -36,7 +36,7 @@ type UpdateAssetFilterMethod = (
  * @param formatAssets the current format assets list
  * @param setFormatAssets the setter of the format assets list
  */
-export const updateAssetFilter: UpdateAssetFilterMethod = (asset, {
+export const updateFilterAsset: UpdateAssetFilterMethod = (asset, {
   typeAssets,
   setTypeAssets,
   formatAssets,
@@ -67,7 +67,7 @@ export const updateAssetFilter: UpdateAssetFilterMethod = (asset, {
 export const createAsset = (
   label: string,
   type: AssetTypes,
-  disabled: boolean = false
+  disabled: boolean = true
 ): Asset => ({
   id: label,
   type,
@@ -90,3 +90,4 @@ export const disableNonAvailableAssets = (assets: Asset[], availableAssetIds: st
     disabled: !availableAssetIds.some(availableAssetId => availableAssetId === asset.id)
   }))
 )
+

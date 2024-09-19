@@ -1,6 +1,6 @@
 import { Resource } from '../../../types/resources.model';
 
-import { Asset, FORMAT_ASSETS, TYPE_ASSETS } from './resourceFilterAssetHelper';
+import { Asset, createAsset, FORMAT_ASSETS, TYPE_ASSETS } from './resourceFilterAssetHelper';
 
 /**
  * Checks if a resource corresponds to a certain criteria represented by the asset.
@@ -10,21 +10,13 @@ import { Asset, FORMAT_ASSETS, TYPE_ASSETS } from './resourceFilterAssetHelper';
  * @return true if corresponds, false otherwise
  */
 export const assetFilterPredicate = (resource: Resource, assets: Asset[]): boolean => {
-  let typeFiltersApply = true;
-  const typeAssets = assets
-    .filter(asset => asset.value && asset.type === TYPE_ASSETS)
-  if (typeAssets.length) {
-    typeFiltersApply = typeAssets
-      .some(asset => typeAssetPredicate(resource, asset))
-  }
+  const typeAssets = assets.filter(asset => asset.value && asset.type === TYPE_ASSETS)
+  const typeFiltersApply = !typeAssets.length
+      || typeAssets.some(asset => typeAssetPredicate(resource, asset))
 
-  let formatFiltersApply = true;
-  const formatAssets = assets
-    .filter(asset => asset.value && asset.type === FORMAT_ASSETS)
-  if (formatAssets.length) {
-    formatFiltersApply = formatAssets
-      .some(asset => formatAssetPredicate(resource, asset))
-  }
+  const formatAssets = assets.filter(asset => asset.value && asset.type === FORMAT_ASSETS)
+  const formatFiltersApply = !formatAssets.length
+      || formatAssets.some(asset => formatAssetPredicate(resource, asset))
 
   return typeFiltersApply && formatFiltersApply
 }
@@ -76,14 +68,65 @@ export const removeDataResourceLabels = (resources: Resource[]) => {
  */
 export const applyFilters = (resources: Resource[], searchText: string, assets: Asset[]): Resource[] => (
   resources
+    .filter(resource => assetFilterPredicate(resource, assets))
     .filter(resource => Object
       .entries(resource)
       .some(property => !searchText ||
-                String(property[1]).toLowerCase()
-                  .includes(searchText.toLowerCase())
+          getPropertyValue(property).toLowerCase()
+            .includes(searchText.toLowerCase())
       )
-    )
-    .filter(resource =>
-      assetFilterPredicate(resource, assets)
-    )
-)
+    ))
+
+const getPropertyValue = (objectEntry: [string, any]) => String(objectEntry[1])
+
+export const createTypeAssets = (types: string[], resources: Resource[]) => {
+  const resourceLabels = getAllLabels(resources);
+  return types.map(type => createAsset(type, 'typeAssets', !resourceLabels.has(type)));
+}
+
+export const getAllLabels = (resources: Resource[]) =>
+  new Set(
+    resources
+      .map(resource => resource.labels)
+      .flat()
+  );
+
+export const createFormatAssets = (
+  formats: string[],
+  typeAssets: Asset[],
+  resources: Resource[],
+  initiallySelected: Asset[]
+) => {
+  let selectedTypeAssets = typeAssets
+    .filter(asset => !asset.disabled && asset.value)
+    .map(asset => asset.id)
+
+  // If nothing is selected it is considered that all enabled ones are selected
+  if (!selectedTypeAssets.length) {
+    selectedTypeAssets = typeAssets
+      .filter(asset => !asset.disabled)
+      .map(asset => asset.id);
+  }
+
+  // Get formats only from selected resources
+  const resourceFormats =
+      getAllFormats(resources
+        .filter(resource => resource.labels
+          .some(label => selectedTypeAssets.includes(label))));
+
+  return formats.map(format => ({
+    id: format,
+    type: 'formatAssets',
+    label: format,
+    value: initiallySelected.some(asset => asset.id === format),
+    disabled: !resourceFormats.has(format)
+  } as Asset));
+}
+
+export const getAllFormats = (resources: Resource[]) =>
+  new Set(
+    resources
+      .map(resource => resource.format)
+      .flat()
+  );
+

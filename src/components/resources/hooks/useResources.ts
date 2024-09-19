@@ -1,79 +1,86 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { Resource } from '../../../types/resources.model';
-import { loadResources } from '../helpers/resourceDataFlow';
-import { applyFilters, removeDataResourceLabels } from '../helpers/resourcesHelper';
-
-import { useResourceFilterAssets } from './useResourceFilterAssets';
+import { loadResourceSearchPageData } from '../helpers/resourceDataFlow';
+import { Asset, updateFilterAsset } from '../helpers/resourceFilterAssetHelper';
+import { applyFilters, createFormatAssets, createTypeAssets, removeDataResourceLabels } from '../helpers/resourcesHelper';
 
 export type ResourcesViewState = 'LOADING' | 'SHOW_RESOURCES' | 'SHOW_NO_RESULTS';
 
 export const useResources = () => {
   const [resources, setResources] = useState<Resource[]>([])
+
+  const [typeAssets, setTypeAssets] = useState<Asset[]>([]);
+  const [formatAssets, setFormatAssets] = useState<Asset[]>([]);
+  const [vendorAssets, setVendorAssets] = useState<Asset[]>([]);
+
   const [isLoading, setIsLoading] = useState(true);
   const [searchText, setSearchText] = useState('')
-  const {
-    isLoadingAssets,
-    typeAssets,
-    formatAssets,
-    vendorAssets,
-    setAvailableTypeAssetIds,
-    setAvailableFormatAssetIds,
-    updateAssetFilter
-  } = useResourceFilterAssets();
 
   useEffect(() => {
-    if (!isLoadingAssets) {
-      loadResources(typeAssets)
-        .then((fetchedResources) => {
-          setResources(fetchedResources);
-          setAvailableTypeAssetIds(removeDataResourceLabels(fetchedResources).map(resource => resource.labels).flat()
-          )
-        })
-        .finally(() => setIsLoading(false));
-    }
-  }, [isLoadingAssets]);
+    loadResourceSearchPageData()
+      .then((data) => {
+        setResources(data.resources);
 
-  const filterAssets = useMemo(() => [typeAssets, formatAssets, vendorAssets].flat(),
-    [typeAssets, formatAssets, vendorAssets])
+        const resourceTypeAssets = createTypeAssets(data.resourceTypes, data.resources);
+        setTypeAssets(resourceTypeAssets);
 
-  const filteredResources = useMemo(() => applyFilters(resources, searchText, filterAssets),
-    [resources, searchText, filterAssets])
+        const resourceFormatAssets = createFormatAssets(
+          data.resourceFormats,
+          resourceTypeAssets,
+          data.resources,
+          []
+        );
+        setFormatAssets(resourceFormatAssets);
+      })
+      .finally(() => setIsLoading(false));
+  }, []);
 
+  const filteredResources = useMemo(() => applyFilters(
+    resources,
+    searchText,
+    [...typeAssets, ...formatAssets, ...vendorAssets]
+  ),
+  [resources, searchText, typeAssets, formatAssets, vendorAssets])
+
+  // Recreate format filter assets in order to update their disables flag when type filter asset has been changed.
   useEffect(() => {
-    setAvailableFormatAssetIds(filteredResources
-      .filter(resource => !!resource.format)
-      .map(resource => resource.format))
-    // Depending on the length of the filtered resources is important. Otherwise, there is a cyclic dependency in this
-    // hook. The filtered resources list depends on the format asset list. The format asset list depends on the
-    // available format asset id list. The available format asset id list is changed inside this use effect. If this
-    // use effect was depending on the filtered resource list instead of its length it would have triggered an
-    // infinite rerender cycle. By using the length, even when filtered resource list is rerendered the length
-    // wouldn't change only if there is a change in the filters.
-  }, [filteredResources.length]);
+    const formats = formatAssets.map(asset => asset.id);
+    const selectedFormats = formatAssets.filter(asset => asset.value);
+
+    setFormatAssets(createFormatAssets(
+      formats,
+      typeAssets,
+      resources,
+      selectedFormats
+    ))
+  }, [typeAssets]);
 
   const state = useMemo<ResourcesViewState>(() => {
-    if (isLoading || isLoadingAssets) {
+    if (isLoading) {
       return 'LOADING'
     } else if (filteredResources.length) {
       return 'SHOW_RESOURCES'
     } else {
       return 'SHOW_NO_RESULTS'
     }
-  }, [filteredResources, isLoading, isLoadingAssets])
+  }, [filteredResources, isLoading])
 
-  const search = (filter: string) => {
-    setSearchText(filter)
-  };
+  const updateSearchText = (filter: string) => setSearchText(filter);
 
   return {
     resources: removeDataResourceLabels(filteredResources),
-    state,
     typeAssets,
     formatAssets,
     vendorAssets,
-    search,
-    updateAssetFilter
+    state,
+    updateSearchText,
+    updateFilterAsset: (asset: Asset) => updateFilterAsset(asset, {
+      typeAssets,
+      setTypeAssets,
+      formatAssets,
+      setFormatAssets
+    })
   }
 }
 

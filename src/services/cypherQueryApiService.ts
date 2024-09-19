@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-import { Asset } from '../components/resources/helpers/resourceFilterAssetHelper';
 import { ISelfDescription, ResourceInput, ServiceOfferingInput } from '../utils/dataMapper';
 
 const getHeaders = () => {
@@ -63,30 +62,28 @@ export const CypherQueryApiService = {
   /**
    * Returns all resources of type included in the type asset list passed in as parameter.
    *
-   * @param typeFilters the list of requested resource types
+   * @param types the list of requested resource types
    */
-  async getAllResources(typeFilters: Asset[]): Promise<ResourceInput> {
-    const whereDataResource = typeFilters.length ? `
-    WHERE ANY (label IN labels(resource) WHERE label IN [ '${typeFilters.map(asset => asset.label).join('\', \'')}'])
-      AND 'DataResource' IN labels(resource)
-      AND NOT resource.uri STARTS WITH 'bnode://'`
-      : ''
-
-    const matchFormatPropertyNode = `
-    OPTIONAL MATCH(formatProperty)
-    WHERE resource.uri IN formatProperty.claimsGraphUri 
-      AND ANY(label IN labels(formatProperty) WHERE label CONTAINS 'Format')`
-
-    const matchCopyrightOwnedBy = `
-    OPTIONAL MATCH(copyrightOwner)
-    WHERE copyrightOwner.uri = resource.copyrightOwnedBy`
+  async getAllResources(types: string[]): Promise<ResourceInput> {
+    if (!types.length) {
+      return { items: [] };
+    }
+    const typeLabels = types.join('\', \'');
 
     return cypherQuery({
       statement: `
       MATCH (resource) 
-      ${whereDataResource} 
-      ${matchFormatPropertyNode}
-      ${matchCopyrightOwnedBy}
+      WHERE ANY (label IN labels(resource) WHERE label IN [ '${typeLabels}'])
+        AND 'DataResource' IN labels(resource)
+        AND NOT resource.uri STARTS WITH 'bnode://'
+      
+      OPTIONAL MATCH(formatProperty)
+      WHERE resource.uri IN formatProperty.claimsGraphUri 
+        AND ANY(label IN labels(formatProperty) WHERE label CONTAINS 'Format')
+      
+      OPTIONAL MATCH(copyrightOwner)
+      WHERE copyrightOwner.uri = resource.copyrightOwnedBy
+      
       RETURN 
         properties(resource) AS properties, 
         labels(resource) AS labels, 
