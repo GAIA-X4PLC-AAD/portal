@@ -149,3 +149,37 @@ export const getSelectedAssets = (assets: Asset[]): SelectedAssets => {
   }
   return selectedAssets;
 }
+
+type UpdateFilterAsset = (
+    typeAssets: Asset[],
+    setTypeAssets: (assets: Asset[]) => void,
+    formatAssets: Asset[],
+    setFormatAssets: (assets: Asset[]) => void,
+    vendorAssets: Asset[],
+    setVendorAssets: (assets: Asset[]) => void,
+) => (asset: Asset) => void;
+
+export const updateFilterAsset: UpdateFilterAsset = (
+  typeAssets, setTypeAssets,
+  formatAssets, setFormatAssets,
+  vendorAssets, setVendorAssets
+) => {
+  return (asset: Asset) => {
+    switch (asset.type) {
+    case TYPE_ASSETS:
+      setTypeAssets(typeAssets
+        .map(item => item.id === asset.id ? asset : item))
+      break
+    case FORMAT_ASSETS:
+      setFormatAssets(formatAssets
+        .map(item => item.id === asset.id ? asset : item))
+      break
+    case VENDOR_ASSETS:
+      setVendorAssets(vendorAssets
+        .map(item => item.id === asset.id ? asset : item))
+      break
+    default:
+      console.info('The \'updateAsset\' method is not implemented for the following asset', asset);
+    }
+  };
+}

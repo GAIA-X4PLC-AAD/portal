@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import Title from '../Title/Title';
-import { Asset } from '../resources/helpers/resourceFilterAssetHelper';
+import { Asset } from '../resources/helpers/resourceFilterHelper';
 
 import styles from './Filter.module.css';
 import { FilterSection } from './FilterSection';

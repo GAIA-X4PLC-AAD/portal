@@ -14,7 +14,7 @@ import SearchBar from '../searchBar/SearchBar';
 
 import { useResources } from './hooks/useResources';
 
-const Resources = () => {
+const ResourceSearchPage = () => {
 
   const { t } = useTranslation();
   const {
@@ -64,4 +64,4 @@ const Resources = () => {
     </>
   );
 };
-export default Resources;
+export default ResourceSearchPage;

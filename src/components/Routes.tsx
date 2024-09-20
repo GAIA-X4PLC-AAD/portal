@@ -25,7 +25,7 @@ import ProtectedRoute from './protectedRoute/ProtectedRoute';
 import ProvideAttributes from './provide/ProvideAttributes';
 import ProvideOverview from './provide/ProvideOverview';
 import ProvideSelection from './provide/ProvideSelection';
-import Resources from './resources/Resources';
+import ResourceSearchPage from './resources/ResourceSearchPage';
 import ServiceOfferings from './serviceOfferings/ServiceOfferings';
 import Shapes from './shapes/Shapes';
 import SolutionPackagingView from './solutionPackaging/SolutionPackagingView';
@@ -42,7 +42,7 @@ const Routes: FC = () => (
       <Route path="/home" element={ViewContainer(<Home />)} />
       <Route path="/service-offerings" element={ViewContainer(<ProtectedRoute><ServiceOfferings/></ProtectedRoute>)}/>
       <Route path="/participants" element={ViewContainer(<Participants />)} />
-      <Route path="/resources" element={ViewContainer(<ProtectedRoute><Resources /></ProtectedRoute>)} />
+      <Route path="/resources" element={ViewContainer(<ProtectedRoute><ResourceSearchPage/></ProtectedRoute>)}/>
       <Route path="/details/:resourceId" element={ViewContainer(<ProtectedRoute><DetailsPage/></ProtectedRoute>)}/>
       <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
       <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
