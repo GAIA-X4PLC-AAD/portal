@@ -19,7 +19,7 @@ const Resources = () => {
   const { t } = useTranslation();
   const {
     resources,
-    state,
+    viewContentType,
     typeAssets,
     formatAssets,
     vendorAssets,
@@ -39,11 +39,11 @@ const Resources = () => {
             updateAssetFilter={updateFilterAsset}
           />
           <Vertical>
-            <Horizontal visible={['SHOW_RESOURCES', 'SHOW_NO_RESULTS'].includes(state)}>
+            <Horizontal visible={['SHOW_RESOURCES', 'SHOW_NO_RESULTS'].includes(viewContentType)}>
               <SearchBar placeholder={t('resources.search-bar-text')} onSearch={updateSearchText}/>
             </Horizontal>
-            <LoadingIndicator visible={state === 'LOADING'}/>
-            <CardContainer visible={state === 'SHOW_RESOURCES'}>
+            <LoadingIndicator visible={viewContentType === 'LOADING'}/>
+            <CardContainer visible={viewContentType === 'SHOW_RESOURCES'}>
               {
                 resources.map((resource) => (
                   <ItemCard
@@ -57,7 +57,7 @@ const Resources = () => {
             </CardContainer>
             <NoContent
               message={t('resources.no-resources-available')}
-              visible={state === 'SHOW_NO_RESULTS'}/>
+              visible={viewContentType === 'SHOW_NO_RESULTS'}/>
           </Vertical>
         </Horizontal>
       </Main>

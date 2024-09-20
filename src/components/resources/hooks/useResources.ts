@@ -1,86 +1,138 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Resource } from '../../../types/resources.model';
-import { loadResourceSearchPageData } from '../helpers/resourceDataFlow';
-import { Asset, updateFilterAsset } from '../helpers/resourceFilterAssetHelper';
-import { applyFilters, createFormatAssets, createTypeAssets, removeDataResourceLabels } from '../helpers/resourcesHelper';
+import { resourcesLoadedAction, resourcesLoadingErrorAction } from '../../../actions/resourcesActions';
+import { SchemasContext } from '../../../context/SchemasContext';
+import { AppState } from '../../../reducers';
+import { getResourceFormats, getResourceTypes } from '../../../services/ontologyService.utils';
+import { loadResources } from '../helpers/resourceDataFlow';
+import {
+  Asset,
+  createFormatAssets,
+  createTypeAssets,
+  createVendorAssets,
+  FORMAT_ASSETS,
+  getResourceVendors,
+  getSelectedAssets,
+  TYPE_ASSETS,
+  VENDOR_ASSETS
+} from '../helpers/resourceFilterAssetHelper';
+import { getPropertyValue, removeNonResourceTypeLabels } from '../helpers/resourcesHelper';
 
-export type ResourcesViewState = 'LOADING' | 'SHOW_RESOURCES' | 'SHOW_NO_RESULTS';
+export type ResourcesSearchPageContentType = 'LOADING' | 'SHOW_RESOURCES' | 'SHOW_NO_RESULTS';
 
 export const useResources = () => {
-  const [resources, setResources] = useState<Resource[]>([])
+  const dispatch = useDispatch();
+
+  const schemas = useContext(SchemasContext);
+  const { resources } = useSelector((state: AppState) => ({
+    resources: state.resources
+  }))
 
   const [typeAssets, setTypeAssets] = useState<Asset[]>([]);
   const [formatAssets, setFormatAssets] = useState<Asset[]>([]);
   const [vendorAssets, setVendorAssets] = useState<Asset[]>([]);
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchText, setSearchText] = useState('')
+  const [searchText, setSearchText] = useState<string>('');
 
   useEffect(() => {
-    loadResourceSearchPageData()
-      .then((data) => {
-        setResources(data.resources);
+    if (!schemas.isLoading && !schemas.hasError) {
+      const resourceTypes = Array.from(getResourceTypes(schemas.ontologies));
+      loadResources(resourceTypes)
+        .then(resources => {
+          dispatch(resourcesLoadedAction({ resources }));
+          setTypeAssets(createTypeAssets(resourceTypes, resources));
+        })
+        .catch(error => dispatch(resourcesLoadingErrorAction(error)))
+    }
+  }, [schemas.isLoading]);
 
-        const resourceTypeAssets = createTypeAssets(data.resourceTypes, data.resources);
-        setTypeAssets(resourceTypeAssets);
+  const resourcesWithTypeFilterApplied = useMemo(() => !resources.hasError
+    ? resources.resources
+      .filter((resource) => {
+        const selectedAssets = getSelectedAssets(typeAssets)
+        return selectedAssets === 'ALL' || selectedAssets
+          .some(type => resource.labels.includes(type))
 
-        const resourceFormatAssets = createFormatAssets(
-          data.resourceFormats,
-          resourceTypeAssets,
-          data.resources,
-          []
-        );
-        setFormatAssets(resourceFormatAssets);
       })
-      .finally(() => setIsLoading(false));
-  }, []);
+    : [],
+  [typeAssets]);
 
-  const filteredResources = useMemo(() => applyFilters(
-    resources,
-    searchText,
-    [...typeAssets, ...formatAssets, ...vendorAssets]
-  ),
-  [resources, searchText, typeAssets, formatAssets, vendorAssets])
-
-  // Recreate format filter assets in order to update their disables flag when type filter asset has been changed.
   useEffect(() => {
-    const formats = formatAssets.map(asset => asset.id);
-    const selectedFormats = formatAssets.filter(asset => asset.value);
+    const resourceFormats = !schemas.isLoading && !schemas.hasError
+      ? Array.from(getResourceFormats(schemas.ontologies)) : [];
 
-    setFormatAssets(createFormatAssets(
-      formats,
-      typeAssets,
-      resources,
-      selectedFormats
-    ))
-  }, [typeAssets]);
+    setFormatAssets((prevFormatAssets) =>
+      createFormatAssets(resourceFormats, prevFormatAssets, resourcesWithTypeFilterApplied));
+  }, [resourcesWithTypeFilterApplied]);
 
-  const state = useMemo<ResourcesViewState>(() => {
-    if (isLoading) {
+  const resourcesWithFormatFilterApplied = useMemo(() => resourcesWithTypeFilterApplied
+    .filter(resource => {
+      const selectedAssets = getSelectedAssets(formatAssets)
+      return selectedAssets === 'ALL' || selectedAssets
+        .some(format => resource.format === format)
+    }), [formatAssets])
+
+  useEffect(() => {
+    const resourceVendors = !resources.hasError
+      ? Array.from(getResourceVendors(resources.resources)) : [];
+
+    setVendorAssets((prevVendorAssets) =>
+      createVendorAssets(resourceVendors, prevVendorAssets, resourcesWithFormatFilterApplied));
+  }, [resourcesWithFormatFilterApplied]);
+
+  const resourcesWithVendorFilterApplied = useMemo(() => resourcesWithFormatFilterApplied
+    .filter(resource => {
+      const selectedAssets = getSelectedAssets(vendorAssets)
+      return selectedAssets === 'ALL' || selectedAssets
+        .some(vendor => resource.vendor === vendor)
+    }), [vendorAssets])
+
+  const resourcesWithSearchTextFilterApplied = useMemo(() => resourcesWithVendorFilterApplied
+    .filter(resource => Object
+      .entries(resource)
+      .some(property => !searchText ||
+              getPropertyValue(property).toLowerCase()
+                .includes(searchText.toLowerCase()))
+    ), [resourcesWithVendorFilterApplied, searchText]);
+
+  const viewContentType = useMemo<ResourcesSearchPageContentType>(() => {
+    if (resources.isLoading) {
       return 'LOADING'
-    } else if (filteredResources.length) {
+    } else if (resourcesWithVendorFilterApplied.length) {
       return 'SHOW_RESOURCES'
     } else {
       return 'SHOW_NO_RESULTS'
     }
-  }, [filteredResources, isLoading])
-
-  const updateSearchText = (filter: string) => setSearchText(filter);
+  }, [resourcesWithSearchTextFilterApplied, resources.isLoading])
 
   return {
-    resources: removeDataResourceLabels(filteredResources),
+    resources: removeNonResourceTypeLabels(
+      resourcesWithSearchTextFilterApplied,
+      typeAssets.map(asset => asset.id)
+    ),
     typeAssets,
     formatAssets,
     vendorAssets,
-    state,
-    updateSearchText,
-    updateFilterAsset: (asset: Asset) => updateFilterAsset(asset, {
-      typeAssets,
-      setTypeAssets,
-      formatAssets,
-      setFormatAssets
-    })
+    viewContentType,
+    updateSearchText: (filter: string) => setSearchText(filter),
+    updateFilterAsset: (asset: Asset) => {
+      switch (asset.type) {
+      case TYPE_ASSETS:
+        setTypeAssets(typeAssets
+          .map(item => item.id === asset.id ? asset : item))
+        break
+      case FORMAT_ASSETS:
+        setFormatAssets(formatAssets
+          .map(item => item.id === asset.id ? asset : item))
+        break
+      case VENDOR_ASSETS:
+        setVendorAssets(vendorAssets
+          .map(item => item.id === asset.id ? asset : item))
+        break
+      default:
+        console.info('The \'updateAsset\' method is not implemented for the following asset', asset);
+      }
+    }
   }
 }
 

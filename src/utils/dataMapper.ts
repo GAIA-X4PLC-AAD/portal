@@ -46,11 +46,10 @@ export interface ResourceInput {
 
 export function mapResources(selfDescriptions: ResourceInput): Resource[] {
   const resources = selfDescriptions
-    .items.map(({ format, properties, labels }) => ({
-      ...properties,
-      labels,
-      format
-    }));
+    .items.map((selfDescriptionItem) => {
+      const { properties, ...resource } = selfDescriptionItem;
+      return { ...resource, ...properties }
+    });
   console.debug('resources', resources)
   return resources;
 }
