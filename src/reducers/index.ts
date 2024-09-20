@@ -1,14 +1,11 @@
 import { Reducer } from 'react';
 import { AnyAction, combineReducers } from 'redux';
 
-import { Ontology } from '../types/ontologies.model';
 import { Resource } from '../types/resources.model';
-import { Shape } from '../types/shapes.model';
 
 import searchCriteriaStore from './SearchCriteriaStore';
 import lcmReducer from './lcmReducer';
 import resources from './resourcesReducer';
-import schemas from './schemasReducer';
 import serviceDescriptorReducer from './serviceDescriptorReducer';
 import userReducer from './userReducer';
 
@@ -27,12 +24,6 @@ export interface AppState {
   // searchCriteriaStore: { ... },
   // serviceDescriptor: { ... },
   // lcm: { ... },
-  schemas: {
-    isLoading: true,
-    hasError: false,
-    shapes: Shape[],
-    ontologies: Ontology[],
-  },
   resources: {
     isLoading: true,
     hasError: false,
@@ -45,6 +36,5 @@ export default combineReducers<Reducer<AppState, AnyAction>>({
   searchCriteriaStore: searchCriteriaStore,
   serviceDescriptor: serviceDescriptorReducer,
   lcm: lcmReducer,
-  schemas,
   resources,
 });

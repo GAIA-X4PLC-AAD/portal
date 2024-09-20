@@ -1,8 +1,8 @@
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { resourcesLoadedAction, resourcesLoadingErrorAction } from '../../../actions/resourcesActions';
-import { SchemasContext } from '../../../context/SchemasContext';
+import { useSchemas } from '../../../hooks/useSchemas';
 import { AppState } from '../../../reducers';
 import { getResourceFormats, getResourceTypes } from '../../../services/ontologyService.utils';
 import { loadResources } from '../helpers/resourceDataFlow';
@@ -23,8 +23,8 @@ export type ResourcesSearchPageContentType = 'LOADING' | 'SHOW_RESOURCES' | 'SHO
 
 export const useResources = () => {
   const dispatch = useDispatch();
+  const schemas = useSchemas();
 
-  const schemas = useContext(SchemasContext);
   const { resources } = useSelector((state: AppState) => ({
     resources: state.resources
   }))

@@ -6,7 +6,7 @@ import './i18n';
 import App from './App';
 import { configureStore } from './configureStore';
 import AuthContextProvider from './context/AuthContextProvider';
-import { SchemasContextProvider } from './context/SchemasContext';
+import { ResourceContextProvider } from './context/ResourceContext';
 
 import './index.css';
 
@@ -42,9 +42,9 @@ const root = createRoot(container); // createRoot(container!) if you use TypeScr
 root.render(
   <Provider store={store}>
     <AuthContextProvider>
-      <SchemasContextProvider>
+      <ResourceContextProvider>
         <App/>
-      </SchemasContextProvider>
+      </ResourceContextProvider>
     </AuthContextProvider>
   </Provider>
 );
