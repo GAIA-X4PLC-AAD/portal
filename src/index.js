@@ -1,13 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import './i18n';
 import App from './App';
+import { configureStore } from './configureStore';
 import AuthContextProvider from './context/AuthContextProvider';
 import { SchemasContextProvider } from './context/SchemasContext';
-import reducers from './reducers';
 
 import './index.css';
 
@@ -30,11 +29,7 @@ const loadFromLocalStorage = () => {
 };
 
 const persistedStore = loadFromLocalStorage();
-
-const store = configureStore({
-  reducer: reducers,
-  preloadedState: persistedStore,
-});
+const store = configureStore(persistedStore);
 
 // TODO: May be not the entire store should be saved into cookies. It has to be refactored.
 store.subscribe(() => {
