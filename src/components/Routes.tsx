@@ -3,7 +3,6 @@ import { Route, Routes as ReactRoutes } from 'react-router-dom';
 
 import WorkInProgress from '../WorkInProgress';
 import { Column } from '../common/styles';
-import DetailsPage from '../pages/details/DetailsPage';
 import Home from '../pages/home/Home';
 
 import AccountHome from './account/AccountHome';
@@ -12,6 +11,7 @@ import DashboardPage from './dashboard/dashboard_page';
 import LcmFinal from './dashboard/lcm/LcmFinal';
 import LcmServices from './dashboard/lcm/LcmServices';
 import OntologiesDetailsPage from './detailsPage/pages/ontologies/OntologiesDetailsPage';
+import ResourcesDetailsPage from './detailsPage/pages/resources/ResourcesDetailsPage';
 import ShapesDetailsPage from './detailsPage/pages/shapes/ShapesDetailsPage';
 import DiscoveryItem from './discovery/DiscoveryItem';
 import SearchView from './discovery/search/SearchView';
@@ -43,7 +43,8 @@ const Routes: FC = () => (
       <Route path="/service-offerings" element={ViewContainer(<ProtectedRoute><ServiceOfferings/></ProtectedRoute>)}/>
       <Route path="/participants" element={ViewContainer(<Participants />)} />
       <Route path="/resources" element={ViewContainer(<ProtectedRoute><Resources /></ProtectedRoute>)} />
-      <Route path="/details/:resourceId" element={ViewContainer(<ProtectedRoute><DetailsPage/></ProtectedRoute>)}/>
+      <Route path="/resources/:resourceId"
+        element={ViewContainer(<ProtectedRoute><ResourcesDetailsPage/></ProtectedRoute>)}/>
       <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
       <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
       <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />
