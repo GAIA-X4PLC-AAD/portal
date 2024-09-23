@@ -1,4 +1,9 @@
+import { getResourceFormats, getResourceTypes } from '../../../services/ontologyService.utils';
+import { Ontology } from '../../../types/ontologies.model';
 import { Resource } from '../../../types/resources.model';
+
+import { ResourceFilterState } from './resourceFilterReducer';
+import { getPropertyValue } from './resourcesHelper';
 
 export const TYPE_ASSETS = 'typeAssets';
 export const FORMAT_ASSETS = 'formatAssets';
@@ -150,36 +155,63 @@ export const getSelectedAssets = (assets: Asset[]): SelectedAssets => {
   return selectedAssets;
 }
 
-type UpdateFilterAsset = (
-    typeAssets: Asset[],
-    setTypeAssets: (assets: Asset[]) => void,
-    formatAssets: Asset[],
-    setFormatAssets: (assets: Asset[]) => void,
-    vendorAssets: Asset[],
-    setVendorAssets: (assets: Asset[]) => void,
-) => (asset: Asset) => void;
-
-export const updateFilterAsset: UpdateFilterAsset = (
-  typeAssets, setTypeAssets,
-  formatAssets, setFormatAssets,
-  vendorAssets, setVendorAssets
+/**
+ * Calculates the filter assets from ontologies and resources. Calculates the new filtered resource list also.
+ *
+ * @param ontologies list of ontologies from which the filter assets should be calculated.
+ * @param resources list of resources from which the filter assets should be calculated.
+ * @param filters previous filter assets state in order to preserve an existing selection during the update of an asset.
+ * @return the new state of the {@link useResourceFilter} hook.
+ */
+export const calculateResourceFiltersAssetState = (
+  ontologies: Ontology[],
+  resources: Resource[],
+  filters: ResourceFilterState
 ) => {
-  return (asset: Asset) => {
-    switch (asset.type) {
-    case TYPE_ASSETS:
-      setTypeAssets(typeAssets
-        .map(item => item.id === asset.id ? asset : item))
-      break
-    case FORMAT_ASSETS:
-      setFormatAssets(formatAssets
-        .map(item => item.id === asset.id ? asset : item))
-      break
-    case VENDOR_ASSETS:
-      setVendorAssets(vendorAssets
-        .map(item => item.id === asset.id ? asset : item))
-      break
-    default:
-      console.info('The \'updateAsset\' method is not implemented for the following asset', asset);
-    }
+  const resourceTypes = Array.from(getResourceTypes(ontologies));
+  const typeAssets = createTypeAssets(resourceTypes, resources)
+    .map(typeAsset => filters.typeAssets
+      .find(item => item.id === typeAsset.id) || typeAsset);
+
+  const resourcesWithTypeFilterApplied = resources
+    .filter((resource) => {
+      const selectedAssets = getSelectedAssets(filters.typeAssets)
+      return selectedAssets === 'ALL' || selectedAssets
+        .some(type => resource.labels.includes(type))
+    });
+
+  const resourceFormats = Array.from(getResourceFormats(ontologies));
+  const formatAssets = createFormatAssets(resourceFormats, filters.formatAssets, resourcesWithTypeFilterApplied);
+
+  const resourcesWithFormatFilterApplied = resourcesWithTypeFilterApplied
+    .filter(resource => {
+      const selectedAssets = getSelectedAssets(filters.formatAssets)
+      return selectedAssets === 'ALL' || selectedAssets
+        .some(format => resource.format === format)
+    });
+
+  const resourceVendors = Array.from(getResourceVendors(resources));
+  const vendorAssets = createVendorAssets(resourceVendors, filters.vendorAssets, resourcesWithFormatFilterApplied);
+
+  const resourcesWithVendorFilterApplied = resourcesWithFormatFilterApplied
+    .filter(resource => {
+      const selectedAssets = getSelectedAssets(filters.vendorAssets)
+      return selectedAssets === 'ALL' || selectedAssets
+        .some(vendor => resource.vendor === vendor)
+    });
+
+  const resourcesWithSearchTextFilterApplied = resourcesWithVendorFilterApplied
+    .filter(resource => Object
+      .entries(resource)
+      .some(property => !filters.searchText ||
+              getPropertyValue(property).toLowerCase()
+                .includes(filters.searchText.toLowerCase()))
+    );
+
+  return {
+    typeAssets,
+    formatAssets,
+    vendorAssets,
+    filteredResources: resourcesWithSearchTextFilterApplied
   };
 }
