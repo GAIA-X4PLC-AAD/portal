@@ -1,31 +1,33 @@
-import { useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { Reducer, useEffect, useMemo, useReducer } from 'react';
+import { AnyAction } from 'redux';
 
-import { resourcesLoadedAction, resourcesLoadingErrorAction } from '../../../actions/resourcesActions';
 import { useSchemas } from '../../../hooks/useSchemas';
-import { AppState } from '../../../reducers';
 import { getResourceTypes } from '../../../services/ontologyService.utils';
 import { loadResources } from '../helpers/resourceDataFlow';
 import { removeNonResourceTypeLabels } from '../helpers/resourcesHelper';
+import {
+  AllResourcesState,
+  initialResourceState,
+  resourcesLoadedAction,
+  resourcesLoadingErrorAction,
+  resourcesReducer
+} from '../helpers/resourcesReducer';
 
 import { useResourceFilter } from './useResourceFilter';
 
 export type ResourcesSearchPageContentType = 'LOADING' | 'SHOW_RESOURCES' | 'SHOW_NO_RESULTS';
 
 export const useResources = () => {
-  const dispatch = useDispatch();
-  const {
-    isLoading,
-    resources
-  } = useSelector((state: AppState) => ({
-    isLoading: state.resources.isLoading,
-    resources: !state.resources.isLoading && !state.resources.hasError ? state.resources.resources : []
-  }))
-
   const schemas = useSchemas();
   const ontologies = useMemo(() =>
     !schemas.isLoading && !schemas.hasError ? schemas.ontologies : [],
   [schemas.isLoading]);
+
+  const [state, dispatch] = useReducer<Reducer<AllResourcesState, AnyAction>>(resourcesReducer, initialResourceState);
+  const { isLoading, resources } = useMemo(() => ({
+    isLoading: state.isLoading,
+    resources: !state.isLoading && !state.hasError ? state.resources : []
+  }), [state]);
 
   const {
     filteredResources,

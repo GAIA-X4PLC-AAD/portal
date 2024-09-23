@@ -11,9 +11,3 @@ export const LCM_SERVICES_LOADED = 'LCM_SERVICES_LOADED';
 export const RESET_LCM_SERVICES = 'RESET_LCM_SERVICES';
 export const LCM_SELECT_SERVICE = 'LCM_SELECT_SERVICE';
 export const CHANGE_USER_ROLE = 'CHANGE_USER_ROLE'
-
-////////////////////////////////////////////////////////////////////////////////
-// Resources
-////////////////////////////////////////////////////////////////////////////////
-export const SET_ALL_RESOURCES = 'SET_ALL_RESOURCES';
-export const SET_ALL_RESOURCES_LOADING_ERROR = 'SET_ALL_RESOURCES_LOADING_ERROR';

@@ -1,11 +1,8 @@
 import { Reducer } from 'react';
 import { AnyAction, combineReducers } from 'redux';
 
-import { Resource } from '../types/resources.model';
-
 import searchCriteriaStore from './SearchCriteriaStore';
 import lcmReducer from './lcmReducer';
-import resources from './resourcesReducer';
 import serviceDescriptorReducer from './serviceDescriptorReducer';
 import userReducer from './userReducer';
 
@@ -24,17 +21,11 @@ export interface AppState {
   // searchCriteriaStore: { ... },
   // serviceDescriptor: { ... },
   // lcm: { ... },
-  resources: {
-    isLoading: true,
-    hasError: false,
-    resources: Resource[]
-  }
 }
 
 export default combineReducers<Reducer<AppState, AnyAction>>({
   user: userReducer,
   searchCriteriaStore: searchCriteriaStore,
   serviceDescriptor: serviceDescriptorReducer,
-  lcm: lcmReducer,
-  resources,
+  lcm: lcmReducer
 });
