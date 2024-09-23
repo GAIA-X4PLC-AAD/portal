@@ -10,7 +10,7 @@ type GMarkdownProps = {
     maxContentHeight?: number;
 };
 
-const GMarkdown: React.FC<GMarkdownProps> = ({ isCard, maxContentHeight = 300, children }) => {
+const GMarkdown: React.FC<GMarkdownProps> = ({ isCard, maxContentHeight = 200, children }) => {
   const [isHigher, setIsHigher] = useState(false);
   const contentRef = useRef<HTMLDivElement | null>(null);
 
