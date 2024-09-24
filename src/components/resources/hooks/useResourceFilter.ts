@@ -18,6 +18,7 @@ export const useResourceFilter = (ontologies: Ontology[], resources: Resource[])
     dispatch(setResourceFilterAssetsAction(ontologies, resources));
   }, [ontologies, resources]);
 
+  // Remove the "searchText" property from the "filters"
   const { searchText, ...resourceFilterAssetSate } = filters;
   return {
     ...resourceFilterAssetSate,

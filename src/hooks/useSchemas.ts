@@ -4,7 +4,7 @@ import { loadSchemas } from '../helpers/schemasDataFlow';
 import { AllSchemasState, schemasReducer } from '../helpers/schemasReducer';
 import { useThunkReducer } from '../reducers/useThunkReducer';
 
-export const initialState: AllSchemasState = {
+export const initialSchemaState: AllSchemasState = {
   isLoading: true,
   hasError: false,
   shapes: [],
@@ -12,7 +12,7 @@ export const initialState: AllSchemasState = {
 }
 
 export const useSchemas = (): AllSchemasState => {
-  const [schemas, dispatch] = useThunkReducer(schemasReducer, initialState);
+  const [schemas, dispatch] = useThunkReducer(schemasReducer, initialSchemaState);
 
   useEffect(
     () => dispatch(loadSchemas),

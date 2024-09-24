@@ -20,7 +20,7 @@ type AllSchemas = {
 }
 
 type AllSchemasError = {
-    error: string;
+  error: string | Error;
 }
 
 // TODO: Extend the AnyAction type

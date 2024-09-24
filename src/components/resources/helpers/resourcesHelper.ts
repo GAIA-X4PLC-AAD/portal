@@ -12,13 +12,13 @@ export const getPropertyValue = (objectEntry: [string, any]) => String(objectEnt
  * This has relevance when displaying the resource list. We do not want to show the above-mentioned labels.
  *
  * @param resources the original resource list.
- * @param reosurceTypes the types to be considered as resource types.
+ * @param resourceTypes the types to be considered as resource types.
  * @return returns  copy of the original resources without the labels.
  */
-export const removeNonResourceTypeLabels = (resources: Resource[], reosurceTypes: string[]) => {
+export const removeNonResourceTypeLabels = (resources: Resource[], resourceTypes: string[]) => {
   return resources.map(resource => ({
     ...resource,
-    labels: resource.labels.filter(label => reosurceTypes.includes(label))
+    labels: resource.labels.filter(label => resourceTypes.includes(label))
   }));
 }
 

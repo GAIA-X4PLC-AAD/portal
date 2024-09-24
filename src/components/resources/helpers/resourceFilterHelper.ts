@@ -5,9 +5,6 @@ import { Resource } from '../../../types/resources.model';
 import { ResourceFilterState } from './resourceFilterReducer';
 import { getPropertyValue } from './resourcesHelper';
 
-export const TYPE_ASSETS = 'typeAssets';
-export const FORMAT_ASSETS = 'formatAssets';
-export const VENDOR_ASSETS = 'vendorAssets';
 export type AssetTypes = 'typeAssets' | 'formatAssets' | 'vendorAssets';
 
 /**
@@ -82,7 +79,7 @@ export const createFormatAssets = (
  * @param resources the list of resources to look for the formats in.
  * @return the set of available labels.
  */
-const getAllFormats = (resources: Resource[]) =>
+export const getAllFormats = (resources: Resource[]) =>
   new Set(
     resources
       .map(resource => resource.format)
@@ -131,7 +128,7 @@ export const getResourceVendors = (resources: Resource[]) =>
  * Represents a list of assets that are selected. It has an ALL option which means that everything is selected. No
  * list should be provided.
  */
-export type SelectedAssets = 'ALL' | string[];
+export type SelectedAssets = 'NOTHING' | string[];
 
 /**
  * Returns the selected assets from the list. It has an ALL option which means that everything is selected. No list
@@ -139,7 +136,7 @@ export type SelectedAssets = 'ALL' | string[];
  *
  * An asset is considered selected when it is not disabled and its value is true.
  *
- * If no asset is selected it is considered that everything is selected and in that case it is returned 'ALL'.
+ * If no asset is selected it is considered that everything is selected and in that case it is returned 'NOTHING'.
  *
  * @param assets list to be filtered for the selected one.
  */
@@ -150,9 +147,9 @@ export const getSelectedAssets = (assets: Asset[]): SelectedAssets => {
 
   // If type filter is selected it is considered that all enabled ones are selected
   if (!selectedAssets.length) {
-    return 'ALL'
+    return 'NOTHING'
   }
-  return selectedAssets;
+  return selectedAssets
 }
 
 /**
@@ -176,7 +173,7 @@ export const calculateResourceFiltersAssetState = (
   const resourcesWithTypeFilterApplied = resources
     .filter((resource) => {
       const selectedAssets = getSelectedAssets(filters.typeAssets)
-      return selectedAssets === 'ALL' || selectedAssets
+      return selectedAssets === 'NOTHING' || selectedAssets
         .some(type => resource.labels.includes(type))
     });
 
@@ -186,7 +183,7 @@ export const calculateResourceFiltersAssetState = (
   const resourcesWithFormatFilterApplied = resourcesWithTypeFilterApplied
     .filter(resource => {
       const selectedAssets = getSelectedAssets(filters.formatAssets)
-      return selectedAssets === 'ALL' || selectedAssets
+      return selectedAssets === 'NOTHING' || selectedAssets
         .some(format => resource.format === format)
     });
 
@@ -196,7 +193,7 @@ export const calculateResourceFiltersAssetState = (
   const resourcesWithVendorFilterApplied = resourcesWithFormatFilterApplied
     .filter(resource => {
       const selectedAssets = getSelectedAssets(filters.vendorAssets)
-      return selectedAssets === 'ALL' || selectedAssets
+      return selectedAssets === 'NOTHING' || selectedAssets
         .some(vendor => resource.vendor === vendor)
     });
 

@@ -5,26 +5,26 @@ import { Resource } from '../../../types/resources.model';
 ////////////////////////////////////////////////////////////////////////////////
 // Action types
 ////////////////////////////////////////////////////////////////////////////////
-const SET_ALL_RESOURCES = 'SET_ALL_RESOURCES';
-const SET_ALL_RESOURCES_LOADING_ERROR = 'SET_ALL_RESOURCES_LOADING_ERROR';
+export const SET_ALL_RESOURCES = 'SET_ALL_RESOURCES';
+export const SET_ALL_RESOURCES_LOADING_ERROR = 'SET_ALL_RESOURCES_LOADING_ERROR';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Type definitions
 ////////////////////////////////////////////////////////////////////////////////
-type AllResources = {
+export type AllResources = {
   resources: Resource[]
 };
 
 type AllResourceError = {
-  error: string;
+  error: string | Error;
 }
 
 type IsLoading = { isLoading: boolean; }
 export type AllResourcesState = (AllResources & { hasError: false } | AllResourceError & { hasError: true }) & IsLoading
 
 type AllResourcesAction =
-    { type: 'SET_ALL_RESOURCES', payload: AllResources } |
-    { type: 'SET_ALL_RESOURCES_LOADING_ERROR', payload: AllResourceError }
+  { type: 'SET_ALL_RESOURCES', payload: Resource[] } |
+  { type: 'SET_ALL_RESOURCES_LOADING_ERROR', payload: string | Error }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Initial state
@@ -38,11 +38,11 @@ export const initialResourceState: AllResourcesState = {
 ////////////////////////////////////////////////////////////////////////////////
 // Reducer
 ////////////////////////////////////////////////////////////////////////////////
-export const resourcesReducer = (state: AllResourcesState, action: AnyAction) => {
+export const resourcesReducer = (state: AllResourcesState, action: AnyAction): AllResourcesState => {
   switch (action.type) {
 
   case SET_ALL_RESOURCES:
-    return { ...action.payload, isLoading: false, hasError: false }
+    return { resources: action.payload, isLoading: false, hasError: false }
 
   case SET_ALL_RESOURCES_LOADING_ERROR:
     return { error: action.payload, isLoading: false, hasError: true }
@@ -55,12 +55,12 @@ export const resourcesReducer = (state: AllResourcesState, action: AnyAction) =>
 ////////////////////////////////////////////////////////////////////////////////
 // Actions
 ////////////////////////////////////////////////////////////////////////////////
-export const resourcesLoadedAction = (payload: AllResources): AllResourcesAction => ({
+export const resourcesLoadedAction = (resources: Resource[]): AllResourcesAction => ({
   type: SET_ALL_RESOURCES,
-  payload
+  payload: resources
 })
 
-export const resourcesLoadingErrorAction = (payload: AllResourceError): AllResourcesAction => ({
+export const resourcesLoadingErrorAction = (error: string | Error): AllResourcesAction => ({
   type: SET_ALL_RESOURCES_LOADING_ERROR,
-  payload
+  payload: error
 })

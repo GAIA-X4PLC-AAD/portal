@@ -33,7 +33,7 @@ const ItemCard: FC<IItemCard> = ({
   const { t } = useTranslation();
 
   return (
-    <div className={styles.card}>
+    <div data-testid={'Card:' + resource!.uri + ':' + resource!.name} className={styles.card}>
       <div className={styles.label}>
         <Title>{label}</Title>
         {isGaiaXCompliant === undefined ? null : (

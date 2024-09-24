@@ -8,9 +8,9 @@ import { Asset, calculateResourceFiltersAssetState } from './resourceFilterHelpe
 ////////////////////////////////////////////////////////////////////////////////
 // Action types
 ////////////////////////////////////////////////////////////////////////////////
-const SET_RESOURCE_FILTER_ASSETS = 'SET_RESOURCE_FILTER_ASSETS';
-const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
-const UPDATE_FILTER_ASSET = 'UPDATE_FILTER_ASSET';
+export const SET_RESOURCE_FILTER_ASSETS = 'SET_RESOURCE_FILTER_ASSETS';
+export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
+export const UPDATE_FILTER_ASSET = 'UPDATE_FILTER_ASSET';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Type definitions

@@ -1,12 +1,10 @@
-import { Reducer, useEffect, useMemo, useReducer } from 'react';
-import { AnyAction } from 'redux';
+import { useEffect, useMemo, useReducer } from 'react';
 
 import { useSchemas } from '../../../hooks/useSchemas';
 import { getResourceTypes } from '../../../services/ontologyService.utils';
 import { loadResources } from '../helpers/resourceDataFlow';
 import { removeNonResourceTypeLabels } from '../helpers/resourcesHelper';
 import {
-  AllResourcesState,
   initialResourceState,
   resourcesLoadedAction,
   resourcesLoadingErrorAction,
@@ -23,7 +21,7 @@ export const useResources = () => {
     !schemas.isLoading && !schemas.hasError ? schemas.ontologies : [],
   [schemas.isLoading]);
 
-  const [state, dispatch] = useReducer<Reducer<AllResourcesState, AnyAction>>(resourcesReducer, initialResourceState);
+  const [state, dispatch] = useReducer(resourcesReducer, initialResourceState);
   const { isLoading, resources } = useMemo(() => ({
     isLoading: state.isLoading,
     resources: !state.isLoading && !state.hasError ? state.resources : []
@@ -39,11 +37,15 @@ export const useResources = () => {
   } = useResourceFilter(ontologies, resources);
 
   useEffect(() => {
-    if (!schemas.isLoading && !schemas.hasError) {
-      const resourceTypes = Array.from(getResourceTypes(schemas.ontologies));
-      loadResources(resourceTypes)
-        .then(resources => dispatch(resourcesLoadedAction({ resources })))
-        .catch(error => dispatch(resourcesLoadingErrorAction(error)))
+    if (!schemas.isLoading) {
+      if (!schemas.hasError) {
+        const resourceTypes = Array.from(getResourceTypes(schemas.ontologies));
+        loadResources(resourceTypes)
+          .then(resources => dispatch(resourcesLoadedAction(resources)))
+          .catch(error => dispatch(resourcesLoadingErrorAction(error)))
+      } else {
+        dispatch(resourcesLoadingErrorAction(schemas.error))
+      }
     }
   }, [schemas.isLoading]);
 
