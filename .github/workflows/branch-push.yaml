@@ -1,0 +1,60 @@
+name: CI pipeline
+
+on:
+  pull_request:
+    branches:
+      - "**"  # Runs on all pull requests
+
+jobs:
+  check-test-coverage:
+    # The coverage is configured inside 'jest.config.js' by setting the 'coverageThreshold'
+    name: Checking test coverage (must be over 90%)
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 20.17 ]  # Define Node.js latest LTS version (update as needed)
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Node.js with the required version
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Run Jest tests
+      - name: Run Jest tests
+        # TODO: Adapt to run coverage on changed files only.
+        # run: npm test -- --coverage # $(git diff --name-only origin/main...HEAD | grep '\.[jt]sx\?$' | grep -v '\ .test\.')
+        run: npm test -- --coverage
+        env:
+          CI: true  # Ensures Jest runs in CI mode
+
+      # Step 5: Upload test coverage results (optional, if you want to store it in the workflow run artifacts)
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/lcov-report/  # Path to the HTML coverage report
+          retention-days: 7
+
+      # Step 6: Fail the job if there are uncovered files (js, ts, jsx, tsx)
+      # TODO: It needs to be implemented.
+
+      # Step 7: Fail the job if the test coverage is below a threshold (optional)
+      # TODO: This should be removed because it is solved within 'jest.config.js' by setting the 'coverageThreshold'.
+      # - name: Check coverage threshold
+      #  run: |
+      #    COVERAGE=$(grep -o '"total": {.*}' coverage/coverage-summary.json | grep -o '"lines":{.*}$' | grep -o '"pct":[0-9]*' | grep -m 1 '"pct":[0-9]*' | grep -o '[0-9]*')
+      #    if [ "$COVERAGE" -lt 90 ]; then
+      #      echo "Test coverage below 90%. Coverage: $COVERAGE%"
+      #      exit 1
+      #    fi

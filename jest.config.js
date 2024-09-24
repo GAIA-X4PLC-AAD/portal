@@ -25,5 +25,16 @@ module.exports = {
 
   moduleNameMapper: {
     '^axios$': '<rootDir>/node_modules/axios/dist/node/axios.cjs'
+  },
+
+  // Jest configurations
+  collectCoverage: true,                                                            // Enable coverage collection
+  coverageDirectory: 'coverage',                                                    // Output folder for coverage
+  collectCoverageFrom: ['./src/**'],                                                // Specify the path from which Jest should collect coverage
+  coverageReporters: ['json', 'lcov', 'text', 'clover', 'json-summary'],            // Add 'json-summary' to generate coverage-summary.json
+  coverageThreshold: {
+    global: {
+      lines: 90                                                                     // Line coverage must be over 90%
+    }
   }
 };
