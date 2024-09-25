@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 
 import { Asset } from '../resources/helpers/resourceFilterHelper';
 import Subtitle from '../subtitle/Subtitle';
