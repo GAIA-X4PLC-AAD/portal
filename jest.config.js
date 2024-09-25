@@ -24,17 +24,20 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 
   moduleNameMapper: {
-    '^axios$': '<rootDir>/node_modules/axios/dist/node/axios.cjs'
+    '^axios$': '<rootDir>/node_modules/axios/dist/node/axios.cjs',
+    '\\.(jpg|jpeg|png|gif|webp|svg)$': '<rootDir>/tests/__fixtures__/mocks/iconsMock.js',   // Map image files to iconsMock.js
+    '\\.module\\.css$': 'identity-obj-proxy',                                               // CSS module files
+    '\\.css$': '<rootDir>/tests/__fixtures__/mocks/stylesMock.js',                          // Optional: Mock regular CSS files
   },
 
   // Jest configurations
-  collectCoverage: true,                                                            // Enable coverage collection
-  coverageDirectory: 'coverage',                                                    // Output folder for coverage
-  collectCoverageFrom: ['./src/**'],                                                // Specify the path from which Jest should collect coverage
-  coverageReporters: ['json', 'lcov', 'text', 'clover', 'json-summary'],            // Add 'json-summary' to generate coverage-summary.json
+  collectCoverage: true,                                                                    // Enable coverage collection
+  coverageDirectory: 'coverage',                                                            // Output folder for coverage
+  collectCoverageFrom: ['./src/**'],                                                        // Specify the path from which Jest should collect coverage
+  coverageReporters: ['json', 'lcov', 'text', 'clover', 'json-summary'],                    // Add 'json-summary' to generate coverage-summary.json
   coverageThreshold: {
     global: {
-      lines: 90                                                                     // Line coverage must be over 90%
+      lines: 90                                                                             // Line coverage must be over 90%
     }
-  }
+  },
 };
