@@ -25,6 +25,7 @@ module.exports = {
 
   moduleNameMapper: {
     '^axios$': '<rootDir>/node_modules/axios/dist/node/axios.cjs',
+    '^react-i18next$': '<rootDir>/tests/__fixtures__/mocks/react-i18next.js',               // Map react-i18next to the mock file
     '\\.(jpg|jpeg|png|gif|webp|svg)$': '<rootDir>/tests/__fixtures__/mocks/iconsMock.js',   // Map image files to iconsMock.js
     '\\.module\\.css$': 'identity-obj-proxy',                                               // CSS module files
     '\\.css$': '<rootDir>/tests/__fixtures__/mocks/stylesMock.js',                          // Optional: Mock regular CSS files
