@@ -2,7 +2,10 @@ import axios from 'axios';
 
 import { ShapesAndOntologiesInput } from '../types/ontologies.model';
 
-const SERVER_BASE_URL: string = 'https://fc-server.gxfs.gx4fm.org';
+if (!process.env.REACT_APP_FEDERATED_CATALOGUE_API_URL) {
+  throw new Error('REACT_APP_FEDERATED_CATALOGUE_API_URL is not defined');
+}
+const SERVER_BASE_URL: string = process.env.REACT_APP_FEDERATED_CATALOGUE_API_URL;
 
 export const fetchAllSchemas = async (): Promise<ShapesAndOntologiesInput> => {
   const endpoint = SERVER_BASE_URL + '/schemas';
@@ -35,7 +38,11 @@ export const getConvertedFile = async (id: string) => {
     const formData = new FormData();
     formData.append('file', blob, 'shaclFile.shacl');
 
-    const endpoint = 'https://sd-creation-wizard-api.gxfs.gx4fm.org/convertFile';
+    if (!process.env.REACT_APP_SD_WIZARD_API) {
+      throw new Error('REACT_APP_SD_WIZARD_API is not defined');
+    }
+
+    const endpoint = process.env.REACT_APP_SD_WIZARD_API + '/convertFile';
     const response = await axios.post(endpoint, formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
