@@ -48,7 +48,7 @@ jobs:
       - name: Check uncovered files
         run: |
           # Step 1: Get the list of changed JS, TS, JSX and TSX files in the src directory
-          CHANGED_FILES=$(git diff --name-only origin/main...HEAD | grep '^src/.*\.[jt]sx\?$')
+          CHANGED_FILES=$(git diff --name-only origin/main...HEAD -- 'src/*.[jt]s' 'src/*.[jt]sx' || true)
           
           # Initialize an empty array to hold files without tests
           MISSING_TEST_FILES=()
