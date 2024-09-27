@@ -49,5 +49,5 @@ jobs:
         run: chmod +x ./check-missing-tests.sh
 
       # Step 7: Fail the job if there are uncovered files (js, ts, jsx, tsx)
-      - name: Check uncovered files
+      - name: Check missing tests
         run: ./check-missing-tests.sh
