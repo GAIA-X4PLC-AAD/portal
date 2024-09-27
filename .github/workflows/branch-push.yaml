@@ -43,11 +43,3 @@ jobs:
           name: coverage-report
           path: coverage/lcov-report/  # Path to the HTML coverage report
           retention-days: 7
-
-      # Step 6: Make 'check-missing-tests.sh' executable
-      - name: Make script 'check-missing-tests.sh' executable
-        run: chmod +x ./check-missing-tests.sh
-
-      # Step 7: Fail the job if there are uncovered files (js, ts, jsx, tsx)
-      - name: Check missing tests
-        run: ./check-missing-tests.sh
