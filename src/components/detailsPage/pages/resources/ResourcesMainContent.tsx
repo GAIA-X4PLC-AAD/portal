@@ -3,7 +3,7 @@ import Divider from 'components/divider/Divider';
 import Subtitle from 'components/subtitle/Subtitle';
 import DataField from 'data-field/DataField';
 
-import GMarkdown from '../../../../common/markdown/GMarkdown';
+import Markdown from '../../../../common/markdown/Markdown';
 import { ISelfDescription } from '../../utils/dataMapper';
 
 import styles from './ResourcesMainContent.module.css';
@@ -50,7 +50,7 @@ export default function ResourcesMainContent({ cardData }: Readonly<IDetailsCard
   return (
     <div className={styles['details-card-container']}>
       <Title>{name as string}</Title>
-      <GMarkdown>{description as string}</GMarkdown>
+      <Markdown>{description as string}</Markdown>
       <Divider/>
       <Subtitle>General Information:</Subtitle>
       <div className={styles['details-grid-container']}>

@@ -2,7 +2,7 @@ import { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import GMarkdown from '../../../../common/markdown/GMarkdown';
+import Markdown from '../../../../common/markdown/Markdown';
 import { OntologyContext } from '../../../../context/OntologyContext';
 import { Shape } from '../../../../types/shapes.model';
 import Text from '../../../Text/Text';
@@ -26,9 +26,9 @@ const OntologyMainContent: FC = () => {
   return (
     <div className={styles['container']}>
       <Title>{t('ontologies.title')}</Title>
-      <GMarkdown>
+      <Markdown>
         {ontology.description}
-      </GMarkdown>
+      </Markdown>
       {ontology.relatedShapes.length > 0 && (
         <div style={{ textAlign: 'left' }}>
           <Text>{t('ontologies.classes')}</Text>

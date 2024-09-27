@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import GMarkdown from '../../common/markdown/GMarkdown';
+import Markdown from '../../common/markdown/Markdown';
 import { Resource } from '../../types/resources.model';
 import Title from '../Title/Title';
 import GaiaXButton from '../buttons/GaiaXButton';
@@ -30,7 +30,7 @@ const ResourceCardContent: FC<IResourceCardContent> = ({ resource }) => {
         ))
       }
       </Title>
-      <GMarkdown isCard>{resource.description}</GMarkdown>
+      <Markdown>{resource.description}</Markdown>
       <div className={styles.button}>
         <GaiaXButton
           label={t('details.more-details')}

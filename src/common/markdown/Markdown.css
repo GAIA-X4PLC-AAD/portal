@@ -1,37 +1,37 @@
-.gmarkdown {
+.markdown {
   font-size: large;
   font-weight: lighter;
   text-align: justify;
 }
 
-.gmarkdown table {
+.markdown table {
   width: 100%;
   border: 1px solid black;
   border-collapse: collapse;
   margin: 20px 0;
 }
 
-.gmarkdown th,
-.gmarkdown td {
+.markdown th,
+.markdown td {
   border: 1px solid black;
   padding: 8px;
   text-align: left;
 }
 
-.gmarkdown th {
+.markdown th {
   background-color: #f2f2f2;
   font-weight: bold;
 }
 
-.gmarkdown tr:nth-child(even) {
+.markdown tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
-.gmarkdown tr:hover {
+.markdown tr:hover {
   background-color: #e0e0e0;
 }
 
-.gmarkdown pre {
+.markdown pre {
   background-color: #f5f5f5;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -41,22 +41,21 @@
   white-space: pre-wrap;
 }
 
-.gmarkdown code {
+.markdown code {
   background-color: #e8e8e8;
   border-radius: 4px;
   padding: 2px 4px;
   font-family: 'Courier New', Courier, monospace;
 }
 
-.gmarkdown pre code {
+.markdown pre code {
   background: none;
   color: inherit;
 }
 
-.card {
+.item-card .markdown {
   max-height: 200px;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .ellipsis {

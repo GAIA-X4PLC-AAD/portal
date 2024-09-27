@@ -5,12 +5,13 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiService';
 
-import car from '../../../../assets/car.gif';
+import LoadingIndicator from '../../../loading_view/LoadingIndicator';
+import NoContent from '../../../nocontent/NoContent';
 
-import styles from './ResourcesDatails.module.css';
+import styles from './ResourcesDatail.module.css';
 import ResourcesMainContent from './ResourcesMainContent';
 
-export default function ResourcesDetailsPage() {
+export default function ResourcesDetailPage() {
   const authContext = useContext(AuthContext);
   const [selfDescriptionData, setSelfDescriptionData] = useState(null);
   const { resourceId } = useParams();
@@ -24,8 +25,6 @@ export default function ResourcesDetailsPage() {
         if (response) {
           setSelfDescriptionData(response);
         }
-      } catch (error) {
-        console.error('Error fetching self descriptions:', error);
       } finally {
         setIsLoading(false);
       }
@@ -36,37 +35,26 @@ export default function ResourcesDetailsPage() {
     }
   }, [resourceId, authContext.isAuthenticated]);
 
-  if (isLoading) {
-    return (
-      <div className="newCarLoader">
-        <img src={car} alt="loading..." className="car"/>
-      </div>
-    );
-  }
-
-  if (!selfDescriptionData) {
-    return <div>No data available.</div>;
-  }
-
   return (
     <div className={styles['details-page-container']}>
-      {isLoading ? (
-        <div className="newCarLoader">
-          <img src={car} alt="loading..." className="car"/>
-        </div>
-      ) : (
+      <LoadingIndicator visible={isLoading}/>
+      {!isLoading && (
         <>
-          <div>
-            <ResourcesMainContent cardData={selfDescriptionData}/>
-          </div>
-          <div>
-            <MapCard/>
-            <SidebarCard
-              title="Offered by"
-              subtitle="3D Mapping Solutions GmbH"
-              text="We offer high-precision 3D map data of roads and urban environments for applications in autonomous driving, robotics, urban planning and navigation systems."
-            />
-          </div>
+          <NoContent message={'No data available.'} visible={!selfDescriptionData}/>
+          {selfDescriptionData && (
+            <>
+              <div>
+                <ResourcesMainContent cardData={selfDescriptionData}/>
+              </div>
+              <div>
+                <MapCard/>
+                <SidebarCard
+                  title="Offered by"
+                  subtitle="3D Mapping Solutions GmbH"
+                  text="We offer high-precision 3D map data of roads and urban environments for applications in autonomous driving, robotics, urban planning and navigation systems."
+                />
+              </div>
+            </>)}
         </>
       )}
     </div>
