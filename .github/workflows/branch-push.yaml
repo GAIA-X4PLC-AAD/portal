@@ -48,10 +48,10 @@ jobs:
       - name: Check uncovered files
         run: |
           # Step 1: Fetch the origin/main branch to compare the HEAD with
-          git fetch origin main
+          git fetch main
           
           # Step 2: Get the list of changed JS, TS, JSX and TSX files in the src directory
-          CHANGED_FILES=$(git diff --name-only origin/main...HEAD -- 'src/*.[jt]s' 'src/*.[jt]sx')
+          CHANGED_FILES=$(git diff --name-only origin/main..HEAD -- 'src/*.[jt]s' 'src/*.[jt]sx')
           
           # Initialize an empty array to hold files without tests
           MISSING_TEST_FILES=()
