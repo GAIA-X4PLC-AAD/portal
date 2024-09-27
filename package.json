@@ -97,6 +97,7 @@
     "@types/jest": "^29.5.13",
     "@types/n3": "^1.16.4",
     "customize-cra": "^1.0.0",
+    "dotenv": "^16.4.5",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-react": "^7.29.4",
     "jest": "^29.6.2",
