@@ -47,13 +47,16 @@ jobs:
       # Step 6: Fail the job if there are uncovered files (js, ts, jsx, tsx)
       - name: Check uncovered files
         run: |
-          # Step 1: Get the list of changed JS, TS, JSX and TSX files in the src directory
-          CHANGED_FILES=$(git diff --name-only origin/main...HEAD -- 'src/*.[jt]s' 'src/*.[jt]sx' || true)
+          # Step 1: Fetch the origin/main branch to compare the HEAD with
+          git fetch origin main
+          
+          # Step 2: Get the list of changed JS, TS, JSX and TSX files in the src directory
+          CHANGED_FILES=$(git diff --name-only origin/main...HEAD -- 'src/*.[jt]s' 'src/*.[jt]sx')
           
           # Initialize an empty array to hold files without tests
           MISSING_TEST_FILES=()
           
-          # Step 2: Loop through each changed file and check if it has a corresponding test file
+          # Step 3: Loop through each changed file and check if it has a corresponding test file
           for FILE in $CHANGED_FILES; do
             # Extract the file path and replace "src/" with "tests/" and add ".test" postfix
             TEST_FILE=$(echo "$FILE" | sed 's|^src/|tests/|' | sed 's|\.[jt]sx\?$|.test&|')
@@ -64,7 +67,7 @@ jobs:
             fi
           done
           
-          # Step 3: Report and fail if there are any missing test files
+          # Step 4: Report and fail if there are any missing test files
           if [ ${#MISSING_TEST_FILES[@]} -ne 0 ]; then
             echo "The following source files do not have corresponding test files:"
             for MISSING_FILE in "${MISSING_TEST_FILES[@]}"; do
