@@ -11,7 +11,7 @@ import DashboardPage from './dashboard/dashboard_page';
 import LcmFinal from './dashboard/lcm/LcmFinal';
 import LcmServices from './dashboard/lcm/LcmServices';
 import OntologiesDetailsPage from './detailsPage/pages/ontologies/OntologiesDetailsPage';
-import ResourcesDetailPage from './detailsPage/pages/resources/ResourcesDetailPage';
+import ResourceDetailsPage from './detailsPage/pages/resources/ResourceDetailsPage';
 import ShapesDetailsPage from './detailsPage/pages/shapes/ShapesDetailsPage';
 import DiscoveryItem from './discovery/DiscoveryItem';
 import SearchView from './discovery/search/SearchView';
@@ -44,7 +44,7 @@ const Routes: FC = () => (
       <Route path="/participants" element={ViewContainer(<Participants />)} />
       <Route path="/resources" element={ViewContainer(<ProtectedRoute><Resources /></ProtectedRoute>)} />
       <Route path="/resources/:resourceId"
-        element={ViewContainer(<ProtectedRoute><ResourcesDetailPage/></ProtectedRoute>)}/>
+        element={ViewContainer(<ProtectedRoute><ResourceDetailsPage/></ProtectedRoute>)}/>
       <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
       <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
       <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />

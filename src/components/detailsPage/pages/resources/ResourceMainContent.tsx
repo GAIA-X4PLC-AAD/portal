@@ -6,7 +6,7 @@ import DataField from 'data-field/DataField';
 import Markdown from '../../../../common/markdown/Markdown';
 import { ISelfDescription } from '../../utils/dataMapper';
 
-import styles from './ResourcesMainContent.module.css';
+import styles from './ResourceMainContent.module.css';
 
 export interface IDetailsCard extends ISelfDescription {
 }
@@ -15,7 +15,7 @@ interface IDetailsCardProps {
     cardData: IDetailsCard;
 }
 
-export default function ResourcesMainContent({ cardData }: Readonly<IDetailsCardProps>) {
+export default function ResourceMainContent({ cardData }: Readonly<IDetailsCardProps>) {
   console.log('What to work with: ', cardData);
 
   // Ensure cardData.items is an array and has data

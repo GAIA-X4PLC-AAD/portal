@@ -8,10 +8,10 @@ import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiSer
 import LoadingIndicator from '../../../loading_view/LoadingIndicator';
 import NoContent from '../../../nocontent/NoContent';
 
-import styles from './ResourcesDatail.module.css';
-import ResourcesMainContent from './ResourcesMainContent';
+import styles from './ResourceDatails.module.css';
+import ResourceMainContent from './ResourceMainContent';
 
-export default function ResourcesDetailPage() {
+export default function ResourceDetailsPage() {
   const authContext = useContext(AuthContext);
   const [selfDescriptionData, setSelfDescriptionData] = useState(null);
   const { resourceId } = useParams();
@@ -44,7 +44,7 @@ export default function ResourcesDetailPage() {
           {selfDescriptionData && (
             <>
               <div>
-                <ResourcesMainContent cardData={selfDescriptionData}/>
+                <ResourceMainContent cardData={selfDescriptionData}/>
               </div>
               <div>
                 <MapCard/>
