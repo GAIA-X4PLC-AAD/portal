@@ -15,6 +15,7 @@
     },
     "plugins": [
         "react",
+        "react-hooks",
         "@typescript-eslint",
         "import"
     ],
@@ -29,6 +30,8 @@
         "react/display-name": "off",
         "react/react-in-jsx-scope": "off",
         "react/jsx-uses-react": "off",
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
         "import/order": ["error", {
             "groups": ["builtin", "external", "internal", "parent", "sibling", "index"],
             "newlines-between": "always",
