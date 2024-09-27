@@ -110,7 +110,7 @@ const ServicesLoadingListView = ({ url, title, type }) => {
       <LoadingView
         url={url}
         successView={ServicesListView}
-        params={{ 'title': title, 'type': type }}
+        params={{ title: title, type: type }}
       />
     </>
   )

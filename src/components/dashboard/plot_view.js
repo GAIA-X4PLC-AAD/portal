@@ -82,7 +82,7 @@ const PlotLoadingView = ({ url, title, }) => {
   return <LoadingView
     url={url}
     successView={PlotSuccessView}
-    params={{ 'title': title }}
+    params={{ title: title }}
   />
 }
 

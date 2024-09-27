@@ -96,7 +96,7 @@ const VCProvider = ({ nextStage }) => {
   }
 
   const headerAuth = {
-    'Authorization': 'Bearer ' + retrieveOnboardingJWT()
+    Authorization: 'Bearer ' + retrieveOnboardingJWT()
   }
 
   return <LoadingView url={URL} successView={vcShow} headers={headerAuth}/>

@@ -60,10 +60,10 @@ const SolutionPackagingView = () => {
       }
     }).filter((service)=> service !== undefined);
     let saveData = {
-      'name': name,
-      'service_id': id,
-      'action': action,
-      'selected_items': selected }
+      name: name,
+      service_id: id,
+      action: action,
+      selected_items: selected }
 
     axios.post(SAVE_URL, saveData).then((response) => {
       navigate('/dashboard');

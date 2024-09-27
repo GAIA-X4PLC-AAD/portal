@@ -22,7 +22,7 @@ const FinishProvider = () => {
         URL,
         undefined,
         {
-          headers: { 'Authorization': 'Bearer ' + retrieveAndRemoveOnboardingJWT() }
+          headers: { Authorization: 'Bearer ' + retrieveAndRemoveOnboardingJWT() }
         }
       ).then(() => {
         navigate('/');

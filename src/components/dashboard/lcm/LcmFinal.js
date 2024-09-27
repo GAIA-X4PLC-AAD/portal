@@ -163,7 +163,7 @@ class LcmFinal extends Component {
 
   _getServicesRequest() {
     const request = {
-      'services': [
+      services: [
       ]
     }
 
