@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import RDFVisualization from '../../utils/RDFVisualization';
 import ItemCard from '../ItemCard/ItemCard';
+import { ontologyToItemCardData } from '../ItemCard/itemCardHelper';
 import ShowMapButton from '../buttons/ShowMapButton';
 import CardContainer from '../cards/CardContainer';
 import Header from '../header/Header';
@@ -46,11 +47,7 @@ const Ontologies = () => {
             {
               ontologies
                 .map((ontology, index) => (
-                  <ItemCard
-                    key={index}
-                    label={t('ontologies.title')}
-                    ontology={ontology}
-                  />
+                  <ItemCard key={index} itemCardData={ontologyToItemCardData(ontology)} />
                 ))
             }
           </CardContainer>

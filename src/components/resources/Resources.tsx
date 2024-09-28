@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ItemCard from '../ItemCard/ItemCard';
+import { resourceToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 import Filter from '../filter/Filter';
 import Header from '../header/Header';
@@ -49,13 +50,8 @@ const Resources = () => {
             <LoadingIndicator visible={state === 'LOADING'}/>
             <CardContainer visible={state === 'SHOW_RESOURCES'}>
               {
-                resources.map((resource) => (
-                  <ItemCard
-                    key={resource.uri + resource.name}
-                    label={resource.labels.join(', ')}
-                    isGaiaXCompliant={true}
-                    resource={resource}
-                  />
+                resources.map((resource, index) => (
+                  <ItemCard key={index} itemCardData={resourceToItemCardData(resource)} />
                 ))
               }
             </CardContainer>

@@ -1,36 +1,26 @@
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
-import { Ontology } from '../../types/ontologies.model';
-import { Resource } from '../../types/resources.model';
-import { ServiceOffering } from '../../types/serviceOfferings.model';
-import { Shape } from '../../types/shapes.model';
 import Title from '../Title/Title';
+import GaiaXButton from '../buttons/GaiaXButton';
 
 import styles from './ItemCard.module.css';
-import OntologyCardContent from './OntologyCardContent';
-import ResourceCardContent from './ResourceCardContent';
-import ServiceCardContent from './ServiceCardContent';
-import ShapeCardContent from './ShapeCardContent';
+import { ItemCardData } from './itemCardHelper';
 
 interface IItemCard {
-    label: string;
-    isGaiaXCompliant?: boolean;
-    ontology?: Ontology;
-    shape?: Shape;
-    service?: ServiceOffering
-    resource?: Resource
+    itemCardData: ItemCardData;
 }
 
-const ItemCard: FC<IItemCard> = ({
-  label,
-  isGaiaXCompliant,
-  ontology,
-  shape,
-  service,
-  resource
-}) => {
+const ItemCard: FC<IItemCard> = ({ itemCardData }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const { label, isGaiaXCompliant, title, description, navigationUrl } = itemCardData;
+
+  const handleNavigationToDetailsPage = () => {
+    navigate(navigationUrl);
+  }
 
   return (
     <div className={styles.card}>
@@ -45,17 +35,16 @@ const ItemCard: FC<IItemCard> = ({
         )}
       </div>
       <div className={styles.content}>
-        {ontology ? (
-          <OntologyCardContent ontology={ontology} />
-        ) : shape ? (
-          <ShapeCardContent shape={shape} />
-        ) : service ? (
-          <ServiceCardContent service={service}/>
-        ) : resource ? (
-          <ResourceCardContent resource={resource}/>
-        ) : (
-          <></>
-        )}
+        <div style={{ textAlign: 'left' }}>
+          <Title>{title}</Title>
+        </div>
+        <p>{description}</p>
+        <div className={styles.button}>
+          <GaiaXButton
+            label={t('details.more-details')}
+            handleOnClick={handleNavigationToDetailsPage}
+          />
+        </div>
       </div>
     </div>
   );
