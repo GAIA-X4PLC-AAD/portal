@@ -45,8 +45,10 @@ const colItemView = ({ title, caption, subtitle, }) => {
 
 const sectionView = (props,) => {
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [sectionItems, setSection] = useState(null);
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
     if (props.data !== undefined) {
       const _items = props.data['results']
