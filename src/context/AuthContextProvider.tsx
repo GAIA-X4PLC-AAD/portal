@@ -1,24 +1,22 @@
 import axios from 'axios';
+import keycloakConfig from 'keycloak-config';
 import Keycloak, { KeycloakConfig, KeycloakInitOptions } from 'keycloak-js';
-import React, { createContext, useEffect, useState, useMemo } from 'react';
+import React, { createContext, useEffect, useMemo, useState } from 'react';
 
-if (!process.env.REACT_APP_KEYCLOAK_API_URL) {
-  throw new Error('REACT_APP_KEYCLOAK_API_URL is not defined');
+const getDotEnvKeycloakApiUrl= (keycloakApiUrl: string): string => {
+  if (!process.env[keycloakApiUrl]) {
+    throw new Error(`${keycloakApiUrl} is not defined`);
+  }
+  return process.env[keycloakApiUrl];
 }
 
-const keycloakConfig: KeycloakConfig = {
-  realm: 'gaia-x',
-  clientId: 'portal',
-  url: process.env.REACT_APP_KEYCLOAK_API_URL,
+const config: KeycloakConfig = {
+  ...keycloakConfig.config,
+  url: getDotEnvKeycloakApiUrl(keycloakConfig.config.url)
 };
 
 const keycloak = new Keycloak(keycloakConfig);
-
-const keycloakInitOptions: KeycloakInitOptions = {
-  onLoad: 'check-sso',
-  checkLoginIframe: false,
-  pkceMethod: 'S256',
-};
+const initOptions = keycloakConfig.initOptions as KeycloakInitOptions;
 
 export interface AuthContextType {
   isAuthenticated: boolean;
@@ -35,7 +33,7 @@ const defaultAuthContextValues: AuthContextType = {
   token: '',
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
-  hasRole: (role: string) => false,
+  hasRole: (_role: string) => false,
   redirectPath: null,
   setRedirectPath: () => {},
 };
@@ -58,7 +56,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   // Initialise Keycloak
   useEffect(() => {
     keycloak
-      .init(keycloakInitOptions)
+      .init(initOptions)
       .then((authenticated) => {
         setIsAuthenticated(authenticated);
         if (authenticated) {

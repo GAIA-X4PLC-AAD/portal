@@ -1,0 +1,12 @@
+{
+  "config": {
+    "realm": "gaia-x",
+    "clientId": "portal",
+    "url": "https://fc-keycloak.gxfs.gx4fm.org/"
+  },
+  "initOptions": {
+    "onLoad": "check-sso",
+    "checkLoginIframe": false,
+    "pkceMethod": "S256"
+  }
+}
