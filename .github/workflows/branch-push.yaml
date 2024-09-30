@@ -20,23 +20,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # Step 2: Set up Node.js with the required version
+      # Step 2: Fail the job if there are uncovered files (js, ts, jsx, tsx)
+      - name: Make script 'check-missing-tests.sh' executable
+        run: chmod +x ./check-missing-tests.sh
+
+      - name: Check missing tests
+        run: ./check-missing-tests.sh
+
+      # Step 3: Set up Node.js with the required version
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
-      # Step 3: Install dependencies
+      # Step 4: Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Run Jest tests
+      # Step 5: Run Jest tests
       - name: Run Jest tests
         run: npm test -- --coverage
         env:
           CI: true  # Ensures Jest runs in CI mode
 
-      # Step 5: Upload test coverage results (optional, if you want to store it in the workflow run artifacts)
+      # Step 6: Upload test coverage results (optional, if you want to store it in the workflow run artifacts)
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
