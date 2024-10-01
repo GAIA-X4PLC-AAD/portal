@@ -31,7 +31,7 @@ const VcMapComponent: FC = () => {
         const vcsApp = new VcsApp();
         vcsApp.maps.setTarget(mapId);
         await loadModule(vcsApp, new URL('./../../../../../../../simple-config.json', window.location.href).toString());
-        const geoJSONUrl = new URL('./../../vienna-streets.geojson', window.location.href).toString();
+        const geoJSONUrl = new URL('./../../../../../../../vienna-streets.geojson', window.location.href).toString();
         const layer = new GeoJSONLayer({ url: geoJSONUrl });
         vcsApp.layers.add(layer);
         await layer.activate();
