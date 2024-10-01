@@ -17,7 +17,6 @@ import { Asset } from './helpers/resourceFilterAssetHelper';
 import { useResources } from './hooks/useResources';
 
 const Resources = () => {
-
   const { t } = useTranslation();
   const {
     resources,
@@ -50,8 +49,8 @@ const Resources = () => {
             <LoadingIndicator visible={state === 'LOADING'}/>
             <CardContainer visible={state === 'SHOW_RESOURCES'}>
               {
-                resources.map((resource, index) => (
-                  <ItemCard key={index} itemCardData={resourceToItemCardData(resource)} />
+                resources.map((resource) => (
+                  <ItemCard key={resource.uri + resource.name} itemCardData={resourceToItemCardData(resource)} />
                 ))
               }
             </CardContainer>
@@ -64,4 +63,5 @@ const Resources = () => {
     </>
   );
 };
+
 export default Resources;

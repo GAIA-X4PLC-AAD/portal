@@ -18,10 +18,6 @@ export const useNavbar = () => {
       navigationItemName: t('left-menu.tooltip.resources'),
     },
     {
-      path: '/about',
-      navigationItemName: t('left-menu.about'),
-    },
-    {
       path: '/ontologies',
       navigationItemName: t('ontologies.titles'),
     },
@@ -32,6 +28,10 @@ export const useNavbar = () => {
     {
       path: '/support',
       navigationItemName: t('left-menu.support'),
+    },
+    {
+      path: '/about',
+      navigationItemName: t('left-menu.about'),
     },
   ];
 };

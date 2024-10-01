@@ -66,7 +66,7 @@ export const resourceToItemCardData = (resource: Resource): ItemCardData => {
     resource.labels[0],
     resource.name,
     resource.description,
-    `/resources/details/${resource.claimsGraphUri}`,
+    `/resources/details/${resource.uri}`,
     true
   );
 }

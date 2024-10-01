@@ -54,12 +54,11 @@ export const CypherQueryApiService = {
   /**
    * Returns details about a resource
    *
-   * @param claimsGraphUri the id of the resource to be queried
+   * @param uri the id of the resource to be queried
    */
-  async getOneSelfDescriptions(claimsGraphUri: string): Promise<ISelfDescription> {
-    const uri = claimsGraphUri.replace(/'/g, '\\\'');
+  async getOneSelfDescriptions(uri: string): Promise<ISelfDescription> {
     return cypherQuery({
-      statement: `MATCH (n:HDMap) WHERE '${uri}' IN n.claimsGraphUri RETURN properties(n), labels(n) LIMIT 1`,
+      statement: `MATCH (n) WHERE '${uri}' IN n.uri RETURN properties(n), labels(n)`,
     })
   },
 

@@ -1,0 +1,83 @@
+import { FC, useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useParams } from 'react-router-dom';
+
+// @ts-ignore
+import car from '../../../../assets/car.gif';
+import { AuthContext } from '../../../../context/AuthContextProvider';
+import { SelfDescriptionContext } from '../../../../context/SelfDescriptionContext';
+import { CypherQueryApiService as cypherQuery } from '../../../../services/cypherQueryApiService';
+import { ISelfDescription } from '../../../../utils/dataMapper';
+import { ARROW_RIGHT } from '../../../../utils/symbols';
+import Header from '../../../header/Header';
+import DetailsContent from '../../layout/content/DetailsContent';
+import DetailsMainContent from '../../layout/mainContent/DetailsMainContent';
+import DetailsPage from '../../layout/mainPage/DetailsPage';
+import DetailsSidebar from '../../layout/sidebar/DetailsSidebar';
+
+import ResourceMainContent from './ResourceMainContent';
+import ResourceActions from './components/actions/ResourceActions';
+import ResourceMap from './components/map/ResourceMap';
+
+const ResourceDetailsPage: FC = () => {
+  const { t } = useTranslation();
+  const { '*': id } = useParams();
+  const authContext = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selfDescription, setSelfDescription] = useState<ISelfDescription>();
+  const [name, setName] = useState<string>();
+
+  useEffect(() => {
+    const loadResource = async () => {
+      try {
+        const resource = await cypherQuery.getOneSelfDescriptions(id);
+        setSelfDescription(resource);
+        setName(resource.name);
+      } catch (error) {
+        console.error('Error getting resource:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (id && authContext.isAuthenticated) {
+      loadResource();
+    }
+
+  }, [id, authContext.isAuthenticated]);
+
+  if (!authContext.isAuthenticated) {
+    return <p>You need to be authenticated to view this page.</p>;
+  }
+
+  if (isLoading) {
+    return (
+      <div className="newCarLoader">
+        <img src={car} alt="loading..." className="car"/>
+      </div>
+    );
+  }
+
+  if (!selfDescription) {
+    return <div>{t('resources.not-found')}</div>;
+  }
+
+  return (
+    <DetailsPage>
+      <Header title={`${t('left-menu.resources')} ${ARROW_RIGHT} ${name}`} />
+      <SelfDescriptionContext.Provider value={selfDescription}>
+        <DetailsContent>
+          <DetailsMainContent>
+            <ResourceMainContent />
+          </DetailsMainContent>
+          <DetailsSidebar>
+            <ResourceMap />
+            <ResourceActions />
+          </DetailsSidebar>
+        </DetailsContent>
+      </SelfDescriptionContext.Provider>
+    </DetailsPage>
+  );
+}
+
+export default ResourceDetailsPage;
