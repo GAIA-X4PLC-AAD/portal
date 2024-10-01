@@ -2,11 +2,11 @@ import MarkdownToJSX from 'markdown-to-jsx';
 import React, { useEffect, useRef, useState } from 'react';
 import './Markdown.css'
 
-type GMarkdownProps = {
+type MarkdownProps = {
     children: React.ReactNode;
 };
 
-const Markdown: React.FC<GMarkdownProps> = ({ children }) => {
+const Markdown: React.FC<MarkdownProps> = ({ children }) => {
   const [isTruncated, setIsTruncated] = useState(false);
   const contentRef = useRef<HTMLDivElement | null>(null);
 
