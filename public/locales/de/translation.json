@@ -515,7 +515,9 @@
   },
   "resources": {
     "search-bar-text": "Suchen Sie nach speziellen Ressourcen",
-    "no-resources-available": "Keine Resourcen verfügbar!"
+    "no-resources-available": "Keine Resourcen verfügbar!",
+    "download-description": "Beschreibung herunterladen",
+    "contact-provider": "Anbieter kontaktieren"
   },
   "ontologies": {
     "title": "Ontologie",
