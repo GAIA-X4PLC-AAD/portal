@@ -20,7 +20,8 @@ import SupportPage from './help/SupportPage'
 import LoginFail from './login/LoginFail';
 import OnboardingPage from './onboarding/onboarding_page';
 import Ontologies from './ontologies/Ontologies';
-import Participants from './participants/Participants';
+import ParticipantDetails from './participants/ParticipantDetails';
+import ParticipantSearchPage from './participants/ParticipantSearchPage';
 import ProtectedRoute from './protectedRoute/ProtectedRoute';
 import ProvideAttributes from './provide/ProvideAttributes';
 import ProvideOverview from './provide/ProvideOverview';
@@ -41,7 +42,8 @@ const Routes: FC = () => (
       <Route path="/" element={<Column><Home /></Column>} />
       <Route path="/home" element={ViewContainer(<Home />)} />
       <Route path="/service-offerings" element={ViewContainer(<ProtectedRoute><ServiceOfferings/></ProtectedRoute>)}/>
-      <Route path="/participants" element={ViewContainer(<Participants />)} />
+      <Route path="/participants" element={ViewContainer(<ParticipantSearchPage/>)}/>
+      <Route path="/participants/:participantId" element={ViewContainer(<ParticipantDetails/>)}/>
       <Route path="/resources" element={ViewContainer(<ProtectedRoute><Resources /></ProtectedRoute>)} />
       <Route path="/details/:resourceId" element={ViewContainer(<ProtectedRoute><DetailsPage/></ProtectedRoute>)}/>
       <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />

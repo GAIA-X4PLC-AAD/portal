@@ -2,6 +2,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Ontology } from '../../types/ontologies.model';
+import { Participant } from '../../types/participants.model';
 import { Resource } from '../../types/resources.model';
 import { ServiceOffering } from '../../types/serviceOfferings.model';
 import { Shape } from '../../types/shapes.model';
@@ -9,6 +10,7 @@ import Title from '../Title/Title';
 
 import styles from './ItemCard.module.css';
 import OntologyCardContent from './OntologyCardContent';
+import ParticipantCardContent from './ParticipantCardContent';
 import ResourceCardContent from './ResourceCardContent';
 import ServiceCardContent from './ServiceCardContent';
 import ShapeCardContent from './ShapeCardContent';
@@ -19,7 +21,8 @@ interface IItemCard {
     ontology?: Ontology;
     shape?: Shape;
     service?: ServiceOffering
-    resource?: Resource
+    resource?: Resource,
+    participant?: Participant
 }
 
 const ItemCard: FC<IItemCard> = ({
@@ -28,7 +31,8 @@ const ItemCard: FC<IItemCard> = ({
   ontology,
   shape,
   service,
-  resource
+  resource,
+  participant
 }) => {
   const { t } = useTranslation();
 
@@ -53,6 +57,8 @@ const ItemCard: FC<IItemCard> = ({
           <ServiceCardContent service={service}/>
         ) : resource ? (
           <ResourceCardContent resource={resource}/>
+        ) : participant ? (
+          <ParticipantCardContent participant={participant}/>
         ) : (
           <></>
         )}
