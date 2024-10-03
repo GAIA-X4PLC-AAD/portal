@@ -1,8 +1,9 @@
 import { CypherQueryApiService as cypherQuery } from '../../../services/cypherQueryApiService';
-import { mapResources } from '../../../utils/dataMapper';
+
+import { mapParticipants } from './dataMapper';
 
 export const loadParticipants = async (): Promise<any> => {
-  return cypherQuery.getAllParticipants().then((participant) => mapResources(participant)).catch(
+  return cypherQuery.getAllParticipants().then((participant) => mapParticipants(participant)).catch(
     error => {
       console.error('Error fetching resources:', error);
       throw error;
@@ -22,7 +23,7 @@ export const loadParticipants = async (): Promise<any> => {
 
 export const getParticipantByLegalName = (legalName: string): Promise<any> => {
   return cypherQuery.getParticipantByLegalName(legalName)
-    .then(participant => mapResources(participant))
+    .then(participant => mapParticipants(participant))
     .catch(error => {
       console.error('Error getting participant by legal name:', error);
       throw error;
