@@ -24,8 +24,6 @@ export const useParticipants = () => {
   useEffect(() => {
     loadParticipants().then((fetchedParticipants) => {
       setParticipants(fetchedParticipants)
-      console.log(fetchedParticipants);
-      console.log(participants);
     }).finally(() => setIsLoading(false));
   }, []);
 

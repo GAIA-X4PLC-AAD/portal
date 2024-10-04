@@ -1,11 +1,20 @@
 export type Participant = {
   legalName: string,
+  labels: string[]
+}
+
+export type ParticipantDetail = Participant & {
   claimsGraphUri: string[],
   uri: string,
-  format?: string,
-  labels: string[],
-  gaiaxTermsAndConditions: string,
-  //description?: string,
-  // legalForm?: string,
-  // registrationNumber?: string,
+  gaiaxTermsAndConditions: string
+} | null | undefined;
+
+export interface ParticipantResponse {
+  totalCount: number;
+  items: Participant[];
+}
+
+export interface ParticipantDetailsResponse {
+  totalCount: number;
+  items: ParticipantDetail[];
 }

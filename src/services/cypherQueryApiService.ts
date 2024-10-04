@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { Asset } from '../components/resources/helpers/resourceFilterAssetHelper';
+import { ParticipantDetailsResponse, ParticipantResponse } from '../types/participants.model';
 import { ISelfDescription, ResourceInput, ServiceOfferingInput } from '../utils/dataMapper';
 
 const getHeaders = () => {
@@ -95,47 +96,33 @@ export const CypherQueryApiService = {
   /**
    *Returns all participants
    */
-  async getAllParticipants(): Promise<any> {
+  async getAllParticipants(): Promise<ParticipantResponse> {
     return cypherQuery({
       statement: `
-      MATCH (legalParticipant:LegalParticipant)
-
-      OPTIONAL MATCH(nodeProperties)
-      WHERE ANY( claim IN legalParticipant.claimsGraphUri
-                 WHERE claim IN nodeProperties.claimsGraphUri )
-
+      MATCH (service)
+        WHERE 'LegalParticipant' IN labels(service)
       RETURN
-        properties(legalParticipant) AS properties,
-        labels(legalParticipant) AS labels,
-        COLLECT({
-          properties: properties(nodeProperties),
-          labels: labels(nodeProperties)
-        }) AS nodes`
-
+        properties(service).legalName AS legalName,
+        labels(service) AS labels
+      `
     });
   },
 
   /**
    *Returns 1 participant by LegalName
    */
-  async getParticipantByLegalName(legalName: string): Promise<any> {
+  async getParticipantByLegalName(legalName: string): Promise<ParticipantDetailsResponse> {
     return cypherQuery({
       statement: `
-      MATCH (legalParticipant:LegalParticipant)
-      
-      OPTIONAL MATCH(nodeProperties)
-      WHERE ANY( claim IN legalParticipant.claimsGraphUri 
-                 WHERE claim IN nodeProperties.claimsGraphUri )
-      AND nodeProperties.LegalName = $legalName
-      
-      RETURN 
-        properties(legalParticipant) AS properties,
-        labels(legalParticipant) AS labels,
-        COLLECT({
-          properties: properties(nodeProperties),
-          labels: labels(nodeProperties)
-        }) AS nodes`
-
+      MATCH (service)
+        WHERE 'LegalParticipant' IN labels(service) AND properties(service).legalName = 'msg systems ag'
+      RETURN
+        properties(service).legalName AS legalName,
+        properties(service).claimsGraphUri AS claimsGraphUri,
+        properties(service).uri AS uri,
+        properties(service).gaiaxTermsAndConditions AS gaiaxTermsAndConditions,
+        labels(service) AS labels
+      `
     });
   },
 

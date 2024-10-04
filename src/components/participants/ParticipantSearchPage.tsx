@@ -23,7 +23,7 @@ const ParticipantSearchPage = () => {
 
   return (
     <>
-      <Header title='ParticipantSearchPage'/>
+      <Header title={'Participants (' + participants.length + 'results)'}/>
       <Main>
         <Vertical>
           <Horizontal>
@@ -33,10 +33,9 @@ const ParticipantSearchPage = () => {
           </Horizontal>
           <LoadingIndicator visible={state === 'LOADING'}/>
           <CardContainer visible={state === 'SHOW_PARTICIPANTS'}>
-            {() => console.log('test')}
             {
               participants.map((participant) => (
-                <ItemCard key={participant.uri + participant.legalName} label="LegalParticipant"
+                <ItemCard key={participant.legalName} label={participant.labels.join(', ')}
                   isGaiaXCompliant={true}
                   participant={participant}/>)
               )}
