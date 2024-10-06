@@ -275,7 +275,7 @@ describe('getAllFormats', () => {
   it('returns all available formats present in the resources list', () => {
     const result = getAllFormats(resources_HdMap_EnvironmentModel_x2);
 
-    expect(result).toEqual(new Set(['ASAM OpenDRIVE']));
+    expect(result).toEqual(new Set(['ASAM OpenDRIVE', 'Unreal DataSmith']));
   })
 })
 
@@ -398,7 +398,7 @@ describe('getSelectedAssets', () => {
 
 describe('calculateResourceFiltersAssetState', () => {
 
-  it('With no selected filter passed in, the resource list will not be filtered,' +
+  it('With no selected filter passed in, the resource list will not be filtered' +
     'the assets are created from ontologies.', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
@@ -425,7 +425,7 @@ describe('calculateResourceFiltersAssetState', () => {
       }
     ]);
 
-    expect(result.formatAssets.filter(asset => !asset.disabled).length).toEqual(1);
+    expect(result.formatAssets.filter(asset => !asset.disabled).length).toEqual(2);
     expect(result.formatAssets).toEqual(expect.arrayContaining([
       {
         id: 'ASAM OpenDRIVE',
@@ -434,6 +434,13 @@ describe('calculateResourceFiltersAssetState', () => {
         value: false,
         disabled: false
       },
+      {
+        id: 'Unreal DataSmith',
+        type: 'formatAssets',
+        label: 'Unreal DataSmith',
+        value: false,
+        disabled: false
+      }
     ]));
 
     expect(result.vendorAssets.filter(asset => !asset.disabled).length).toEqual(1)
@@ -540,7 +547,16 @@ describe('calculateResourceFiltersAssetState', () => {
       }
     ]));
 
-    expect(result.formatAssets.filter(asset => !asset.disabled).length).toEqual(0);
+    expect(result.formatAssets.filter(asset => !asset.disabled).length).toEqual(1);
+    expect(result.formatAssets).toEqual(expect.arrayContaining([
+      {
+        id: 'Unreal DataSmith',
+        type: 'formatAssets',
+        label: 'Unreal DataSmith',
+        value: false,
+        disabled: false
+      }
+    ]));
 
     expect(result.vendorAssets.filter(asset => !asset.disabled).length).toEqual(1)
     expect(result.vendorAssets).toEqual([
@@ -577,7 +593,7 @@ describe('calculateResourceFiltersAssetState', () => {
       } as ResourceFilterState
     )
 
-    expect(result.filteredResources.length).toEqual(0);
+    expect(result.filteredResources.length).toEqual(2);
 
     expect(result.typeAssets.filter(asset => !asset.value).length).toEqual(1);
     expect(result.typeAssets).toEqual(expect.arrayContaining([
@@ -590,9 +606,18 @@ describe('calculateResourceFiltersAssetState', () => {
       }
     ]));
 
-    expect(result.formatAssets.filter(asset => !asset.disabled).length).toEqual(0);
+    expect(result.formatAssets.filter(asset => !asset.disabled).length).toEqual(1);
+    expect(result.formatAssets).toEqual(expect.arrayContaining([
+      {
+        id: 'Unreal DataSmith',
+        type: 'formatAssets',
+        label: 'Unreal DataSmith',
+        value: false,
+        disabled: false
+      }
+    ]));
 
-    expect(result.vendorAssets.filter(asset => !asset.disabled).length).toEqual(0)
+    expect(result.vendorAssets.filter(asset => !asset.disabled).length).toEqual(1);
   })
 
   it('Pass in "vendor filter" as previously selected it will filter the resources list', () => {
@@ -624,7 +649,7 @@ describe('calculateResourceFiltersAssetState', () => {
 
     expect(result.typeAssets.filter(asset => !asset.value).length).toEqual(2);
 
-    expect(result.formatAssets.filter(asset => !asset.disabled).length).toEqual(1);
+    expect(result.formatAssets.filter(asset => !asset.disabled).length).toEqual(2);
     expect(result.formatAssets).toEqual(expect.arrayContaining([
       {
         id: 'ASAM OpenDRIVE',
@@ -633,6 +658,13 @@ describe('calculateResourceFiltersAssetState', () => {
         value: false,
         disabled: false
       },
+      {
+        id: 'Unreal DataSmith',
+        type: 'formatAssets',
+        label: 'Unreal DataSmith',
+        value: false,
+        disabled: false,
+      }
     ]));
 
     expect(result.vendorAssets.filter(asset => !asset.disabled).length).toEqual(2)
@@ -672,7 +704,7 @@ describe('calculateResourceFiltersAssetState', () => {
         disabled: false
       }
     ]);
-    expect(result.formatAssets.filter(asset => !asset.disabled).length).toEqual(1);
+    expect(result.formatAssets.filter(asset => !asset.disabled).length).toEqual(2);
     expect(result.formatAssets).toEqual(expect.arrayContaining([
       {
         id: 'ASAM OpenDRIVE',
@@ -681,6 +713,13 @@ describe('calculateResourceFiltersAssetState', () => {
         value: false,
         disabled: false
       },
+      {
+        id: 'Unreal DataSmith',
+        label: 'Unreal DataSmith',
+        type: 'formatAssets',
+        value: false,
+        disabled: false,
+      }
     ]));
 
     expect(result.vendorAssets.filter(asset => !asset.disabled).length).toEqual(1)

@@ -21,7 +21,7 @@ describe('loadResources', () => {
   const resourceTypes = ['Georeference', 'HdMap', 'EnvironmentModel', 'OSITrace'];
 
   it('the backend Data will be transformed to a Resource array', async () => {
-    getAllResources.mockResolvedValueOnce(resources);
+    getAllResources.mockResolvedValueOnce(resources.items);
 
     const result = await loadResources(resourceTypes);
     expect(result).toEqual(expectedResources);

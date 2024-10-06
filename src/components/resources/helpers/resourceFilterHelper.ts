@@ -172,7 +172,7 @@ export const calculateResourceFiltersAssetState = (
 
   const resourcesWithTypeFilterApplied = resources
     .filter((resource) => {
-      const selectedAssets = getSelectedAssets(filters.typeAssets)
+      const selectedAssets = getSelectedAssets(typeAssets)
       return selectedAssets === 'NOTHING' || selectedAssets
         .some(type => resource.labels.includes(type))
     });
@@ -182,7 +182,7 @@ export const calculateResourceFiltersAssetState = (
 
   const resourcesWithFormatFilterApplied = resourcesWithTypeFilterApplied
     .filter(resource => {
-      const selectedAssets = getSelectedAssets(filters.formatAssets)
+      const selectedAssets = getSelectedAssets(formatAssets)
       return selectedAssets === 'NOTHING' || selectedAssets
         .some(format => resource.format === format)
     });
@@ -192,7 +192,7 @@ export const calculateResourceFiltersAssetState = (
 
   const resourcesWithVendorFilterApplied = resourcesWithFormatFilterApplied
     .filter(resource => {
-      const selectedAssets = getSelectedAssets(filters.vendorAssets)
+      const selectedAssets = getSelectedAssets(vendorAssets)
       return selectedAssets === 'NOTHING' || selectedAssets
         .some(vendor => resource.vendor === vendor)
     });

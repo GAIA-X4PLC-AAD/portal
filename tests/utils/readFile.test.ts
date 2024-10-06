@@ -3,6 +3,7 @@ import { describe, expect, it } from '@jest/globals';
 import { readFile } from '../../src/utils/readFile';
 
 console.error = jest.fn(); // Disable error log
+console.log = jest.fn(); // Disable console log
 
 describe('readFile', () => {
   it('reads content', async () => {

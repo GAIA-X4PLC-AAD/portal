@@ -11,6 +11,8 @@ const hdmap_shacl_ttl = readFile('tests/__fixtures__/hdmap_shacl.ttl');
 const post = jest.spyOn(axios, 'post');
 const get = jest.spyOn(axios, 'get');
 
+console.error = jest.fn() // Disable error log
+
 describe('getConvertedFile', () => {
   beforeEach(() => {
     get.mockReset();

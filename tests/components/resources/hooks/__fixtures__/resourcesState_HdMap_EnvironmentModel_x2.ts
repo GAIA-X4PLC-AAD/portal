@@ -64,7 +64,7 @@ export const initiallyLoaded_ResourcesState = {
       value: false
     },
     {
-      disabled: true,
+      disabled: false,
       id: 'Unreal DataSmith',
       label: 'Unreal DataSmith',
       type: 'formatAssets',
@@ -74,64 +74,45 @@ export const initiallyLoaded_ResourcesState = {
   resources: [
     {
       claimsGraphUri: [
-        'https://www.gaia-x4plcaad.info/claims/physical-resource/01a9590e-e872-470f-b400-aaa513499114',
-        'did:web:registry.gaia-x.eu:HdMap:wDgNY3gZAxMe3LjhdAZ9TbPiYnQ-yybNhCu8'
-      ],
-      containsPII: 'false',
-      copyrightOwnedBy: 'https://participant.gxfs.gx4fm.org/msg-systems-ag/legalParticipant.json',
-      description: 'Generated description.',
-      expirationDateTime: '2025-05-23T07:23:25',
-      format: 'ASAM OpenDRIVE',
-      labels: [
-        'HdMap'
-      ],
-      license: 'Apache-2.0',
-      name: 'Generated Data Resource',
-      obsoleteDateTime: '2025-05-23T07:23:25',
-      policy: 'package access_control  default allow = false  allow {     input.method == "GET"     input.path == "/public" }  allow {     input.method == "POST"     input.path == "/private"     input.user.role == "admin" }',
-      test: 'Wird das zusammengemergt?',
-      uri: 'did:web:registry.gaia-x.eu:HdMap:wDgNY3gZAxMe3LjhdAZ9TbPiYnQ-yybNhCu8',
-      vendor: 'msg systems ag'
-    },
-    {
-      claimsGraphUri: [
         'https://www.gaia-x4plcaad.info/claims/physical-resource/57232ba1-7310-4f79-b64c-6793b378d76a'
       ],
-      containsPII: 'false',
-      copyrightOwnedBy: 'https://participant.gxfs.gx4fm.org/msg-systems-ag/legalParticipant.json',
       description: 'Generated description.',
-      expirationDateTime: '2025-06-17T11:37:14',
-      format: null,
+      format: 'Unreal DataSmith',
       labels: [
         'EnvironmentModel'
       ],
-      license: 'Apache-2.0',
       name: 'Generated Data Resource',
-      obsoleteDateTime: '2025-06-17T11:37:14',
-      policy: 'package access_control  default allow = false  allow {     input.method == "GET"     input.path == "/public" }  allow {     input.method == "POST"     input.path == "/private"     input.user.role == "admin" }',
       uri: 'https://www.gaia-x4plcaad.info/claims/data-resource/57232ba1-7310-4f79-b64c-6793b378d76a',
       vendor: 'msg systems ag'
     },
     {
       claimsGraphUri: [
         'https://www.gaia-x4plcaad.info/claims/service-access-point/fe9f0d7f-3a80-48ef-9630-a7c9c3c1e78f',
-        'https://www.gaia-x4plcaad.info/claims/virtual-resource/fe9f0d7f-3a80-48ef-9630-a7c9c3c1e78f',
         'https://www.gaia-x4plcaad.info/claims/data-resource/fe9f0d7f-3a80-48ef-9630-a7c9c3c1e78f',
+        'https://www.gaia-x4plcaad.info/claims/virtual-resource/fe9f0d7f-3a80-48ef-9630-a7c9c3c1e78f',
         'https://www.gaia-x4plcaad.info/claims/physical-resource/fe9f0d7f-3a80-48ef-9630-a7c9c3c1e78f'
       ],
-      containsPII: 'false',
-      copyrightOwnedBy: 'https://participant.gxfs.gx4fm.org/msg-systems-ag/legalParticipant.json',
       description: 'Generated description.',
-      expirationDateTime: '2025-04-08T14:25:58',
       format: null,
       labels: [
         'EnvironmentModel'
       ],
-      license: 'Apache-2.0',
       name: 'Generated Data Resource',
-      obsoleteDateTime: '2025-04-08T14:25:58',
-      policy: 'package access_control  default allow = false  allow {     input.method == "GET"     input.path == "/public" }  allow {     input.method == "POST"     input.path == "/private"     input.user.role == "admin" }',
       uri: 'https://www.gaia-x4plcaad.info/claims/data-resource/fe9f0d7f-3a80-48ef-9630-a7c9c3c1e78f',
+      vendor: 'msg systems ag'
+    },
+    {
+      claimsGraphUri: [
+        'https://www.gaia-x4plcaad.info/claims/physical-resource/01a9590e-e872-470f-b400-aaa513499114',
+        'did:web:registry.gaia-x.eu:HdMap:wDgNY3gZAxMe3LjhdAZ9TbPiYnQ-yybNhCu8'
+      ],
+      description: 'Generated description.',
+      format: 'ASAM OpenDRIVE',
+      labels: [
+        'HdMap'
+      ],
+      name: 'Generated Data Resource',
+      uri: 'did:web:registry.gaia-x.eu:HdMap:wDgNY3gZAxMe3LjhdAZ9TbPiYnQ-yybNhCu8',
       vendor: 'msg systems ag'
     }
   ],
@@ -229,7 +210,7 @@ export const filteredBy_searchText_HdMap_ResourcesState = {
       value: false
     },
     {
-      disabled: true,
+      disabled: false,
       id: 'Unreal DataSmith',
       label: 'Unreal DataSmith',
       type: 'formatAssets',
@@ -242,19 +223,12 @@ export const filteredBy_searchText_HdMap_ResourcesState = {
         'https://www.gaia-x4plcaad.info/claims/physical-resource/01a9590e-e872-470f-b400-aaa513499114',
         'did:web:registry.gaia-x.eu:HdMap:wDgNY3gZAxMe3LjhdAZ9TbPiYnQ-yybNhCu8'
       ],
-      containsPII: 'false',
-      copyrightOwnedBy: 'https://participant.gxfs.gx4fm.org/msg-systems-ag/legalParticipant.json',
       description: 'Generated description.',
-      expirationDateTime: '2025-05-23T07:23:25',
       format: 'ASAM OpenDRIVE',
       labels: [
         'HdMap'
       ],
-      license: 'Apache-2.0',
       name: 'Generated Data Resource',
-      obsoleteDateTime: '2025-05-23T07:23:25',
-      policy: 'package access_control  default allow = false  allow {     input.method == "GET"     input.path == "/public" }  allow {     input.method == "POST"     input.path == "/private"     input.user.role == "admin" }',
-      test: 'Wird das zusammengemergt?',
       uri: 'did:web:registry.gaia-x.eu:HdMap:wDgNY3gZAxMe3LjhdAZ9TbPiYnQ-yybNhCu8',
       vendor: 'msg systems ag'
     }
