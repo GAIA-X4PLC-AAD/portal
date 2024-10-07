@@ -1,7 +1,5 @@
 import Title from 'components/Title/Title';
 
-import VcMapComponent from '../../../../../VcMapComponent/VcMapComponent';
-
 import styles from './ResourceMap.module.css';
 
 const ResourceMap = () => {
@@ -10,7 +8,7 @@ const ResourceMap = () => {
       <div className={styles['title']}>
         <Title>Map</Title>
       </div>
-      <VcMapComponent/>
+      {/*<VcMapComponent/>*/}
     </div>
   );
 }

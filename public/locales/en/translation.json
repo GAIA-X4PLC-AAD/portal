@@ -545,6 +545,11 @@
     "results": "results",
     "is-loading": "loading...",
     "no-title": "No title",
-    "no-description": "No description"
+    "no-description": "No description",
+    "no-name": "No name",
+    "general-details": "General details",
+    "content-details": "Content details",
+    "compatible-offerings": "Compatible offerings",
+    "related-offerings": "Directly related offerings"
   }
 }

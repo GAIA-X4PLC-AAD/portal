@@ -43,7 +43,7 @@ const VcMapComponent: FC = () => {
     };
 
     initializeMap();
-  }, []);
+  }, [mapId]);
 
   return (
     <div className="myMapContainer">

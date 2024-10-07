@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 import { Asset } from '../components/resources/helpers/resourceFilterAssetHelper';
+import { ResourceDetails } from '../types/resources.model';
 import { ISelfDescription, ResourceInput, ServiceOfferingInput } from '../utils/dataMapper';
 
 const getHeaders = () => {
@@ -59,6 +60,33 @@ export const CypherQueryApiService = {
   async getOneSelfDescriptions(uri: string): Promise<ISelfDescription> {
     return cypherQuery({
       statement: `MATCH (n) WHERE '${uri}' IN n.uri RETURN properties(n), labels(n)`,
+    })
+  },
+
+  /**
+   * Returns details about a resource
+   * ${uri}
+   * @param uri the id of the resource to be queried
+   */
+  async getOneResourceDetails(uri: string): Promise<ResourceDetails> {
+    return cypherQuery(  {
+      statement:
+          `CALL { MATCH (resource)
+          WHERE ${uri} IN resource.uri
+          RETURN
+            resource.license as license,
+            resource.expirationDateTime as expirationDateTime,
+            resource.copyrightOwnedBy as copyrightOwnedBy,
+            resource.containsPII as containsPII, resource.name as name,
+            resource.description as description,
+            resource.obsoleteDateTime as obsoleteDateTime }
+          CALL { MATCH (resource)
+          WHERE ${uri} IN resource.claimsGraphUri
+            RETURN head(collect(resource.roadTypes)) AS roadType,
+          collect(resource.laneTypes) AS laneTypes,
+          head(collect(resource.levelOfDetail)) AS levelOfDetail,
+          head(collect(resource.trafficDirection)) AS trafficDirection }
+          RETURN *`
     })
   },
 

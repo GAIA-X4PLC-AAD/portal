@@ -31,6 +31,8 @@ const ResourceDetailsPage: FC = () => {
     const loadResource = async () => {
       try {
         const resource = await cypherQuery.getOneSelfDescriptions(id);
+        // const r2 = await cypherQuery.getOneResourceDetails(id);
+        // console.log('------', r2)
         setSelfDescription(resource);
         setName(resource.name);
       } catch (error) {

@@ -543,6 +543,11 @@
     "results": "Ergebnisse",
     "is-loading": "es wird geladen...",
     "no-title": "Kein Titel vorhanden",
-    "no-description": "Keine Beschreibung vorhanden"
+    "no-description": "Keine Beschreibung vorhanden",
+    "no-name": "Kein Name vorhanden",
+    "general-details": "Allgemeine Details",
+    "content-details": "Inhaltliche Details",
+    "compatible-offerings": "Kompatibles Angebote",
+    "related-offerings": "Direkt verwandte Angebote"
   }
 }
