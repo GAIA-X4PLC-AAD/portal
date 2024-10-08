@@ -1,24 +1,5 @@
-const path = require('path');
+// Overrides create-react-app webpack configs without ejecting
+// https://github.com/timarney/react-app-rewired
 
 const { useBabelRc, override } = require('customize-cra');
-
-module.exports = override(
-  // Use Babel config from .babelrc
-  useBabelRc(),
-
-  // Add Webpack alias for Keycloak configuration based on the environment
-  (config) => {
-    const isProduction = process.env.NODE_ENV === 'production';
-
-    // Define the path to the correct keycloak-config based on the environment
-    config.resolve.alias['keycloak-config'] = path.resolve(
-      __dirname,
-      isProduction
-        ? 'src/keycloak-config.prod.json'   // Production environment
-        : 'src/keycloak-config.json'        // Development environment
-    );
-
-    // Return the modified Webpack config
-    return config;
-  }
-);
+module.exports = override(useBabelRc());

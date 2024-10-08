@@ -10,10 +10,7 @@ const getHeaders = () => {
 }
 
 function getEndpoint() {
-  if (!process.env.REACT_APP_FEDERATED_CATALOGUE_API_URL) {
-    throw new Error('REACT_APP_FEDERATED_CATALOGUE_API_URL is not defined');
-  }
-  const serverUrl = process.env.REACT_APP_FEDERATED_CATALOGUE_API_URL;
+  const serverUrl: string = 'https://fc-server.gxfs.gx4fm.org';
   return serverUrl + '/query';
 }
 
