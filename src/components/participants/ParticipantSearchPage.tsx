@@ -23,24 +23,25 @@ const ParticipantSearchPage = () => {
 
   return (
     <>
-      <Header title={'Participants (' + participants.length + 'results)'}/>
+      <Header title={`${t('participants.titles')} (${participants.length} ${t('common.results')})`}/>
       <Main>
         <Vertical>
           <Horizontal>
             <Vertical>
-              <SearchBar placeholder={t('resources.search-bar-text')} onSearch={search}/>
+              <SearchBar placeholder={t('participants.search-bar-text')} onSearch={search}/>
             </Vertical>
           </Horizontal>
           <LoadingIndicator visible={state === 'LOADING'}/>
           <CardContainer visible={state === 'SHOW_PARTICIPANTS'}>
             {
               participants.map((participant) => (
-                <ItemCard key={participant.legalName} label={participant.labels.join(', ')}
+                <ItemCard key={participant.legalName}
+                  label={participant.labels.filter((label: string) => ['LegalParticipant'].includes(label)).join(', ')}
                   isGaiaXCompliant={true}
                   participant={participant}/>)
               )}
           </CardContainer>
-          <NoContent message={'test no content message'} visible={state === 'SHOW_NO_RESULTS'}/>
+          <NoContent message={`${t('no-participants-available')}`} visible={state === 'SHOW_NO_RESULTS'}/>
         </Vertical>
       </Main>
     </>

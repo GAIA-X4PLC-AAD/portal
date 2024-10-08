@@ -136,7 +136,7 @@ export const CypherQueryApiService = {
     return cypherQuery({
       statement: `
       MATCH (service)
-        WHERE 'LegalParticipant' IN labels(service) AND properties(service).legalName = 'msg systems ag'
+        WHERE 'LegalParticipant' IN labels(service) AND properties(service).legalName = '${legalName}'
       RETURN
         properties(service).legalName AS legalName,
         properties(service).claimsGraphUri AS claimsGraphUri,

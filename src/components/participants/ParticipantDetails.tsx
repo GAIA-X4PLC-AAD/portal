@@ -22,8 +22,8 @@ const ParticipantDetails: FC = () => {
   return (
     <div className='container'>
       <LoadingIndicator visible={state === 'LOADING'}/>
-      <NoContent message={'participants detail no content message'} visible={state === 'SHOW_NO_RESULT'}/>
-      <Header title={`${t('participant.titles')} ${ARROW_RIGHT} ${participant && participant.legalName}`}
+      <NoContent message={`${t('participants.no-participant-available')}`} visible={state === 'SHOW_NO_RESULT'}/>
+      <Header title={`${t('participants.title')} ${ARROW_RIGHT} ${participant && participant.legalName}`}
         visible={state === 'SHOW_PARTICIPANT'}/>
       <Text visible={state === 'SHOW_PARTICIPANT'}>
         {participant && (
@@ -35,7 +35,7 @@ const ParticipantDetails: FC = () => {
               {participant.claimsGraphUri.map((cgu) => (
                 <li key={cgu}>
                   {cgu.includes('service-offering') ? (
-                    <Link component={RouterLink} to={`/shapes/details/${cgu}`} variant="contained"
+                    <Link component={RouterLink} to={`/shapes/details/${encodeURIComponent(cgu)}`} variant="contained"
                       color="primary">{cgu}</Link>
                   ) : (<></>
                   )}
