@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ItemCard from '../ItemCard/ItemCard';
+import { shapeToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 import Header from '../header/Header';
 import Horizontal from '../layout/Horizontal';
@@ -33,12 +34,7 @@ const Shapes = () => {
           <CardContainer visible={state === 'SHOW_SHAPES'}>
             {
               shapes.map((shape, index) => (
-                <ItemCard
-                  key={index}
-                  label={t('shapes.title')}
-                  isGaiaXCompliant={true}
-                  shape={shape}
-                />
+                <ItemCard key={index} itemCardData={shapeToItemCardData(shape)} />
               ))
             }
           </CardContainer>

@@ -541,6 +541,8 @@
     "not-gaia-x-compliant": "Not Gaia-X compliant",
     "not-authenticated": "You are not authenticated!",
     "results": "results",
-    "is-loading": "loading..."
+    "is-loading": "loading...",
+    "no-title": "No title available",
+    "no-description": "No description available"
   }
 }

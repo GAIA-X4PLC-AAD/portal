@@ -539,6 +539,8 @@
     "not-gaia-x-compliant": "Nicht Gaia-X konform",
     "not-authenticated": "Nicht berechtigt",
     "results": "Ergebnisse",
-    "is-loading": "es wird geladen..."
+    "is-loading": "es wird geladen...",
+    "no-title": "Kein Titel vorhanden",
+    "no-description": "Keine Beschreibung vorhanden"
   }
 }

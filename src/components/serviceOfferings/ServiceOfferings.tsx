@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import ItemCard from '../ItemCard/ItemCard';
+import { serviceToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 import Header from '../header/Header';
 import Horizontal from '../layout/Horizontal';
@@ -33,12 +34,7 @@ const ServiceOfferings = () => {
           <CardContainer visible={state === 'SHOW_OFFERINGS'}>
             {
               serviceOfferings.map((serviceOffering) => (
-                <ItemCard
-                  key={serviceOffering.name}
-                  label={serviceOffering.label}
-                  isGaiaXCompliant={true}
-                  service={serviceOffering}
-                />
+                <ItemCard key={serviceOffering.name} itemCardData={serviceToItemCardData(serviceOffering)} />
               ))
             }
           </CardContainer>
