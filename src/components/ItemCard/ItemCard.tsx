@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -33,7 +34,7 @@ const ItemCard: FC<IItemCard> = ({
   const { t } = useTranslation();
 
   return (
-    <div data-testid={getTestId({ ontology, shape, service, resource })} className={styles.card}>
+    <div data-testid={getTestId({ ontology, shape, service, resource })} className={classNames(styles.card, 'item-card')}>
       <div className={styles.label}>
         <Title>{label}</Title>
         {isGaiaXCompliant === undefined ? null : (
