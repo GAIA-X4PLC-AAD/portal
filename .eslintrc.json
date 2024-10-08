@@ -19,6 +19,10 @@
         "import"
     ],
     "rules": {
+        "quote-props": [
+            "warn",
+            "as-needed"
+        ],
         "no-const-assign": "warn",
         "no-this-before-super": "warn",
         "no-undef": "warn",
@@ -44,7 +48,10 @@
         "no-trailing-spaces": ["error"],
         "quotes": ["error", "single"],
         "object-curly-spacing": ["error", "always"],
-        "eol-last": ["error", "always"]
+        "eol-last": [
+            "error",
+            "always"
+        ]
     },
     "extends": [
         "eslint:recommended",

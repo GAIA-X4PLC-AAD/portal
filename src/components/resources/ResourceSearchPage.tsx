@@ -12,20 +12,19 @@ import LoadingIndicator from '../loading_view/LoadingIndicator';
 import NoContent from '../nocontent/NoContent';
 import SearchBar from '../searchBar/SearchBar';
 
-import { Asset } from './helpers/resourceFilterAssetHelper';
 import { useResources } from './hooks/useResources';
 
-const Resources = () => {
+const ResourceSearchPage = () => {
 
   const { t } = useTranslation();
   const {
     resources,
-    state,
+    viewContentType,
     typeAssets,
     formatAssets,
     vendorAssets,
-    search,
-    updateAssetFilter
+    updateSearchText,
+    updateFilterAsset,
   } = useResources();
 
   return (
@@ -37,17 +36,14 @@ const Resources = () => {
             typeAssets={typeAssets}
             formatAssets={formatAssets}
             vendorAssets={vendorAssets}
-            updateAssetFilter={(asset: Asset) => {
-              console.debug('update filter:', asset);
-              updateAssetFilter(asset);
-            }}
+            updateAssetFilter={updateFilterAsset}
           />
           <Vertical>
-            <Horizontal visible={['SHOW_RESOURCES', 'SHOW_NO_RESULTS'].includes(state)}>
-              <SearchBar placeholder={t('resources.search-bar-text')} onSearch={search}/>
+            <Horizontal visible={['SHOW_RESOURCES', 'SHOW_NO_RESULTS'].includes(viewContentType)}>
+              <SearchBar placeholder={t('resources.search-bar-text')} onSearch={updateSearchText}/>
             </Horizontal>
-            <LoadingIndicator visible={state === 'LOADING'}/>
-            <CardContainer visible={state === 'SHOW_RESOURCES'}>
+            <LoadingIndicator visible={viewContentType === 'LOADING'}/>
+            <CardContainer visible={viewContentType === 'SHOW_RESOURCES'}>
               {
                 resources.map((resource) => (
                   <ItemCard
@@ -61,11 +57,11 @@ const Resources = () => {
             </CardContainer>
             <NoContent
               message={t('resources.no-resources-available')}
-              visible={state === 'SHOW_NO_RESULTS'}/>
+              visible={viewContentType === 'SHOW_NO_RESULTS'}/>
           </Vertical>
         </Horizontal>
       </Main>
     </>
   );
 };
-export default Resources;
+export default ResourceSearchPage;

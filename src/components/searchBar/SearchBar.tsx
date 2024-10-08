@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from 'react';
+import React, { ChangeEvent, FC, useState } from 'react';
 
 import styles from './SearchBar.module.css';
 

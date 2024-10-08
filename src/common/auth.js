@@ -13,25 +13,25 @@ export function userData() {
 
     return {
       user: {
-        'first_name': dToken.given_name,
-        'family_name': dToken.family_name,
-        'email': dToken.email,
-        'user_role': retrieveRole(dToken),
-        'organization_url': dToken.prWeb,
-        'organization_name': dToken.prName,
-        'organization_realm': dToken.prRealm
+        first_name: dToken.given_name,
+        family_name: dToken.family_name,
+        email: dToken.email,
+        user_role: retrieveRole(dToken),
+        organization_url: dToken.prWeb,
+        organization_name: dToken.prName,
+        organization_realm: dToken.prRealm
       }
     }
   } else {
     return {
       user: {
-        'first_name': null,
-        'family_name': null,
-        'email': null,
-        'user_role': VR_ROLE,
-        'organization_url': null,
-        'organization_name': null,
-        'organization_realm': null
+        first_name: null,
+        family_name: null,
+        email: null,
+        user_role: VR_ROLE,
+        organization_url: null,
+        organization_name: null,
+        organization_realm: null
       }
     }
   }

@@ -112,7 +112,7 @@ const VCCustomer = ({ nextStage }) => {
   }
 
   const headerAuth = {
-    'Authorization': 'Bearer ' + retrieveAndRemoveOnboardingJWT()
+    Authorization: 'Bearer ' + retrieveAndRemoveOnboardingJWT()
   }
 
   return <LoadingView url={URL} successView={vcShow} headers={headerAuth}/>

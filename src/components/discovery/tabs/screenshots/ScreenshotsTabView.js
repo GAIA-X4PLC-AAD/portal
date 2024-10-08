@@ -18,12 +18,12 @@ const ScreenshotsTabView = (props,) => {
 
   var _images = (slideImages && slideImages.map((p, index) => {
     return {
-      'original': p['url'],
-      'originalHeight': '500px',
-      'originalWidth': '100%',
-      'thumbnail': p['url'],
+      original: p['url'],
+      originalHeight: '500px',
+      originalWidth: '100%',
+      thumbnail: p['url'],
       // 'thumbnailHeight': '128px',
-      'thumbnailWidth': '128px'
+      thumbnailWidth: '128px'
     }
   })) || []
 
