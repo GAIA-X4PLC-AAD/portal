@@ -20,7 +20,7 @@ const SearchView = ({ type, onSelect, serviceId, slot }) => {
     if (store.type !== 'home')
     {dispatch(updateSearchType(type));}
     else {dispatch(updateSeartTypeWithTerm(type, store.searchTerms));}
-  }, [type]);
+  }, [dispatch, store.searchTerms, store.type, type]);
 
   return (
     <React.Fragment key={type}>

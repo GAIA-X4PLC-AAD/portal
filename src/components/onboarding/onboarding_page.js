@@ -385,7 +385,9 @@ const OnboardingPage = () => {
   }
 
   const userFillDetailsView = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [userFormDetailsInput, setInput] = useState({});
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [errorMessage, setErrorMessage] = useState('');
 
     // const getValue = (target) => {

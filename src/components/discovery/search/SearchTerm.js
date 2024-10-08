@@ -39,7 +39,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
     if (criteria.type === 'home') {
       setSearchTerm(criteria.searchTerms);
     }
-  }, []);
+  }, [criteria.searchTerms, criteria.type]);
 
   useEffect(
     () => {
@@ -54,7 +54,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
       //     }
       // }
     }
-    , [searchTerm]);
+    , [chips, searchTerm]);
 
   // const callApi = () => {
   //     axios.get(URL).then(res => {

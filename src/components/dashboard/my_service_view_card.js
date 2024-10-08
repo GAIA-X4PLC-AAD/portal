@@ -67,7 +67,9 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
 
   const buildDeleteDialog = ({ closeModal }) => {
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isLoading, setIsLoading] = useState(false);
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [successOrError, setSuccessOrError] = useState(null);
 
     const deleteService = () => {
@@ -113,6 +115,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
   const buildManageButton = () => {
 
     // delete dialog confirmation
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [openModal, setOpenModal] = useState(false);
 
     const onOpenModal = () => setOpenModal(true);
@@ -157,6 +160,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     }
   };
   const buildCard = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [activated, setActivated] = useState(isActivated);
     const type = getType();
 

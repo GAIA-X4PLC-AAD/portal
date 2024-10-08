@@ -47,7 +47,7 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
       if (items.length === 0) {
         setItems(data);
       }
-    }, [data]);
+    }, [data, items.length]);
 
     const shouldDisplayNextPrev = items.length > 2;
     const responsive = {

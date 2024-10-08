@@ -35,7 +35,7 @@ const SolutionPackagingView = () => {
   useEffect(() => {
     if (!slotsCopy && slots )
     {setSlotsCopy(cloneArray(slots));}
-  }, [slots]);
+  }, [slots, slotsCopy]);
 
   const createSlots = (data) => {
     const slotData =  data.dependent_services.reduce((result, service) => {
@@ -130,7 +130,7 @@ const SolutionPackagingView = () => {
       if (items.length === 0){
         setItems(data);
       }
-    }, [data]);
+    }, [data, items.length]);
 
     const shouldDisplayNextPrev = items.length > 5;
     const responsive = {

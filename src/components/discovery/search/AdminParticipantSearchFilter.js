@@ -24,7 +24,7 @@ const AdminParticipantSearchFilter = ({ type }) => {
     return () => {
       clearTimeout(timerId);
     }
-  }, [filters]);
+  }, [dispatch, filters]);
 
   // update state of current filters
   const onFormChanged = (a) => {

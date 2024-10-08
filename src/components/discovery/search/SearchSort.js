@@ -19,12 +19,12 @@ const SearchSort = ({ type, data }) => {
   useEffect (()=> {
     if (type != criteria.type)
     {setDirection('ASC');}
-  }, []);
+  }, [criteria.type, type]);
 
   useEffect (()=> {
     if (direction != criteria.sort_direction)
     {dispatch(updateFilterCriteria({ sort_direction: direction }));}
-  }, [direction]);
+  }, [criteria.sort_direction, direction, dispatch]);
 
   const changeSortDirection = () =>{
     switch (direction) {
