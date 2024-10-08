@@ -15,7 +15,7 @@ export const fetchAllSchemas = async (): Promise<ShapesAndOntologiesInput> => {
     return response.data;
   } catch (error) {
     console.error(error);
-    return { ontologies: [], shapes: [], vocabularies: [] }
+    return { ontologies: [], shapes: [], vocabularies: [] };
   }
 };
 
@@ -28,9 +28,14 @@ export const getSchemaById = async (id: string) => {
     return response.data;
   } catch (error) {
     console.error('Error:', error);
+    throw error;
   }
 };
 
+/**
+ *
+ * @param id
+ */
 export const getConvertedFile = async (id: string) => {
   try {
     const textContent = await getSchemaById(id);

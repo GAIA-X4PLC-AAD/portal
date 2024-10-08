@@ -183,10 +183,10 @@ export const getUniqueLinks = (ontologies: Ontology[]) => {
  * Returns all resource types. Resource types are the individual names of all subclasses of the DataResource class.
  *
  * @param ontologies serving as the source of information
- * @return a list of resource types
+ * @return a set of resource types
  */
-export const getResourceTypes = (ontologies: Ontology[]): string[] => {
-  return Array.from(new Set(
+export const getResourceTypes = (ontologies: Ontology[]): Set<string> => {
+  return new Set(
     ontologies
       .map(ontology => ontology.relatedShapes
         .filter(relatedShape => isSubclassOfDataResource(ontology, relatedShape))
@@ -196,7 +196,7 @@ export const getResourceTypes = (ontologies: Ontology[]): string[] => {
         .flat()
       )
       .flat()
-  ))
+  )
 }
 
 /**

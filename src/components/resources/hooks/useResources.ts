@@ -1,79 +1,75 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useReducer } from 'react';
 
-import { Resource } from '../../../types/resources.model';
+import { useSchemas } from '../../../hooks/useSchemas';
+import { getResourceTypes } from '../../../services/ontologyService.utils';
 import { loadResources } from '../helpers/resourceDataFlow';
-import { applyFilters, removeDataResourceLabels } from '../helpers/resourcesHelper';
+import { removeNonResourceTypeLabels } from '../helpers/resourcesHelper';
+import {
+  initialResourceState,
+  resourcesLoadedAction,
+  resourcesLoadingErrorAction,
+  resourcesReducer
+} from '../helpers/resourcesReducer';
 
-import { useResourceFilterAssets } from './useResourceFilterAssets';
+import { useResourceFilter } from './useResourceFilter';
 
-export type ResourcesViewState = 'LOADING' | 'SHOW_RESOURCES' | 'SHOW_NO_RESULTS';
+export type ResourcesSearchPageContentType = 'LOADING' | 'SHOW_RESOURCES' | 'SHOW_NO_RESULTS';
 
 export const useResources = () => {
-  const [resources, setResources] = useState<Resource[]>([])
-  const [isLoading, setIsLoading] = useState(true);
-  const [searchText, setSearchText] = useState('')
+  const schemas = useSchemas();
+  const ontologies = useMemo(() =>
+    !schemas.isLoading && !schemas.hasError ? schemas.ontologies : [],
+  [schemas.isLoading]);
+
+  const [state, dispatch] = useReducer(resourcesReducer, initialResourceState);
+  const { isLoading, resources } = useMemo(() => ({
+    isLoading: state.isLoading,
+    resources: !state.isLoading && !state.hasError ? state.resources : []
+  }), [state]);
+
   const {
-    isLoadingAssets,
+    filteredResources,
     typeAssets,
     formatAssets,
     vendorAssets,
-    setAvailableTypeAssetIds,
-    setAvailableFormatAssetIds,
-    updateAssetFilter
-  } = useResourceFilterAssets();
+    updateSearchText,
+    updateFilterAsset,
+  } = useResourceFilter(ontologies, resources);
 
   useEffect(() => {
-    if (!isLoadingAssets) {
-      loadResources(typeAssets)
-        .then((fetchedResources) => {
-          setResources(fetchedResources);
-          setAvailableTypeAssetIds(removeDataResourceLabels(fetchedResources).map(resource => resource.labels).flat()
-          )
-        })
-        .finally(() => setIsLoading(false));
+    if (!schemas.isLoading) {
+      if (!schemas.hasError) {
+        const resourceTypes = Array.from(getResourceTypes(schemas.ontologies));
+        loadResources(resourceTypes)
+          .then(resources => dispatch(resourcesLoadedAction(resources)))
+          .catch(error => dispatch(resourcesLoadingErrorAction(error)))
+      } else {
+        dispatch(resourcesLoadingErrorAction(schemas.error))
+      }
     }
-  }, [isLoadingAssets]);
+  }, [schemas.isLoading]);
 
-  const filterAssets = useMemo(() => [typeAssets, formatAssets, vendorAssets].flat(),
-    [typeAssets, formatAssets, vendorAssets])
-
-  const filteredResources = useMemo(() => applyFilters(resources, searchText, filterAssets),
-    [resources, searchText, filterAssets])
-
-  useEffect(() => {
-    setAvailableFormatAssetIds(filteredResources
-      .filter(resource => !!resource.format)
-      .map(resource => resource.format))
-    // Depending on the length of the filtered resources is important. Otherwise, there is a cyclic dependency in this
-    // hook. The filtered resources list depends on the format asset list. The format asset list depends on the
-    // available format asset id list. The available format asset id list is changed inside this use effect. If this
-    // use effect was depending on the filtered resource list instead of its length it would have triggered an
-    // infinite rerender cycle. By using the length, even when filtered resource list is rerendered the length
-    // wouldn't change only if there is a change in the filters.
-  }, [filteredResources.length]);
-
-  const state = useMemo<ResourcesViewState>(() => {
-    if (isLoading || isLoadingAssets) {
+  const viewContentType = useMemo<ResourcesSearchPageContentType>(() => {
+    if (isLoading) {
       return 'LOADING'
     } else if (filteredResources.length) {
       return 'SHOW_RESOURCES'
     } else {
       return 'SHOW_NO_RESULTS'
     }
-  }, [filteredResources, isLoading, isLoadingAssets])
-
-  const search = (filter: string) => {
-    setSearchText(filter)
-  };
+  }, [filteredResources, isLoading]);
 
   return {
-    resources: removeDataResourceLabels(filteredResources),
-    state,
+    resources: removeNonResourceTypeLabels(
+      filteredResources,
+      typeAssets.map(asset => asset.id)
+    ),
     typeAssets,
     formatAssets,
     vendorAssets,
-    search,
-    updateAssetFilter
+    viewContentType,
+    updateSearchText,
+    updateFilterAsset,
   }
 }
 

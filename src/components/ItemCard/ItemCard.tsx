@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Ontology } from '../../types/ontologies.model';
@@ -34,7 +34,7 @@ const ItemCard: FC<IItemCard> = ({
   const { t } = useTranslation();
 
   return (
-    <div className={classNames(styles.card, 'item-card')}>
+    <div data-testid={getTestId({ ontology, shape, service, resource })} className={classNames(styles.card, 'item-card')}>
       <div className={styles.label}>
         <Title>{label}</Title>
         {isGaiaXCompliant === undefined ? null : (
@@ -63,3 +63,21 @@ const ItemCard: FC<IItemCard> = ({
 }
 
 export default ItemCard;
+
+const getTestId = ({ ontology, shape, service, resource }:
+  {
+    ontology?: Ontology,
+    shape?: Shape,
+    service?: ServiceOffering,
+    resource?: Resource
+  }) => (
+  ontology
+    ? 'Card:' + ontology.subject
+    : shape
+      ? 'Card:' + shape.shaclShapeName
+      : service
+        ? 'Card:' + service.uri + ':' + service.name
+        : resource
+          ? 'Card:' + resource.uri + ':' + resource.name
+          : ''
+)

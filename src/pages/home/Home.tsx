@@ -2,7 +2,7 @@ import Text from 'components/Text/Text';
 import Title from 'components/Title/Title';
 import HeaderWithImage from 'components/headerWithImage/HeaderWithImage';
 import { AuthContext } from 'context/AuthContextProvider';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ReactComponent as HeaderImage } from '../../assets/images/header_image.svg';

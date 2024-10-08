@@ -113,12 +113,12 @@ const SideSectionsView = () => {
       <LoadingView
         url={_transactionsUrl}
         successView={sectionView}
-        params={{ 'title': t('dashboard.my_transactions') }}
+        params={{ title: t('dashboard.my_transactions') }}
       />
       <LoadingView
         url={_newsUrl}
         successView={sectionView}
-        params={{ 'title': t('dashboard.news') }}
+        params={{ title: t('dashboard.news') }}
       />
     </>
   )

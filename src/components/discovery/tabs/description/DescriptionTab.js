@@ -26,7 +26,7 @@ const DescriptionTab = ({ id, type }) => {
   return (
     <LoadingView
       url={URL}
-      params={{ 'type': type }}
+      params={{ type: type }}
       successView={getSuccessView(type)}
     />
   )

@@ -1,7 +1,7 @@
 import axios from 'axios';
+import { Resource } from 'types/resources.model';
 
-import { Asset } from '../components/resources/helpers/resourceFilterAssetHelper';
-import { ISelfDescription, ResourceInput, ServiceOfferingInput } from '../utils/dataMapper';
+import { CypherQueryResult, ServiceOfferingInput } from '../utils/dataMapper';
 
 const getHeaders = () => {
   return {
@@ -22,7 +22,7 @@ function getEndpoint() {
  *
  * @param requestBody graph db query request
  */
-const cypherQuery = async (requestBody: { statement: string }): Promise<any> => {
+const cypherQuery = async (requestBody: { statement: string }): Promise<CypherQueryResult> => {
   const endpoint = getEndpoint();
   const headers = getHeaders();
 
@@ -35,7 +35,7 @@ const cypherQuery = async (requestBody: { statement: string }): Promise<any> => 
       return response.data;
     })
     .catch(error => {
-      console.error(error)
+      console.error('An error occurred when executing this cypher query:', requestBody.statement, 'Error:', error);
       throw error
     })
 }
@@ -56,7 +56,7 @@ export const CypherQueryApiService = {
    *
    * @param claimsGraphUri the id of the resource to be queried
    */
-  async getOneSelfDescriptions(claimsGraphUri: string): Promise<ISelfDescription> {
+  async getOneSelfDescriptions(claimsGraphUri: string): Promise<CypherQueryResult> {
     const uri = claimsGraphUri.replace(/'/g, '\\\'');
     return cypherQuery({
       statement: `MATCH (n:HDMap) WHERE '${uri}' IN n.claimsGraphUri RETURN properties(n), labels(n) LIMIT 1`,
@@ -66,37 +66,58 @@ export const CypherQueryApiService = {
   /**
    * Returns all resources of type included in the type asset list passed in as parameter.
    *
-   * @param typeFilters the list of requested resource types
+   * @param types the list of requested resource types
    */
-  async getAllResources(typeFilters: Asset[]): Promise<ResourceInput> {
-    const whereDataResource = typeFilters.length ? `
-    WHERE ANY (label IN labels(n) WHERE label IN [ '${typeFilters.map(asset => asset.label).join('\', \'')}'])
-      AND 'DataResource' IN labels(n)
-      AND NOT n.uri STARTS WITH 'bnode://'`
-      : ''
-
-    const matchFormatNode = `
-    OPTIONAL MATCH(m)
-    WHERE n.uri IN m.claimsGraphUri 
-      AND ANY(label IN labels(m) WHERE label CONTAINS 'Format')`
+  async getAllResources(types: string[]): Promise<Resource[]> {
+    if (!types.length) {
+      return [];
+    }
+    const typeLabels = types.join('\', \'');
 
     return cypherQuery({
       statement: `
-      MATCH (n) 
-      ${whereDataResource} 
-      ${matchFormatNode}
-      RETURN 
-        properties(n) AS properties, 
-        labels(n) AS labels, 
-        properties(m).type AS format`,
-    })
+      MATCH (resource)
+      WHERE ANY (label IN labels(resource) WHERE label IN ['${typeLabels}'])
+        AND 'DataResource' IN labels(resource)
+      WITH COUNT(resource) AS totalCount, resource
+
+      OPTIONAL MATCH (resource)-[relation]-(nodeProperty)
+      WITH
+        properties(resource) AS properties,
+        labels(resource) AS labels,
+        COLLECT({
+          name: type(relation),
+          labels: labels(nodeProperty),
+          properties: properties(nodeProperty)
+        }) AS nodeProperties,
+        totalCount
+
+      WITH labels, properties, nodeProperties,
+        [property IN nodeProperties WHERE property.name = 'format'] AS formatNodeProperty,
+        [property IN nodeProperties WHERE property.name = 'producedBy'] AS producedByNodeProperty,
+        totalCount
+
+      RETURN
+        COALESCE(
+          HEAD(formatNodeProperty).properties.type,
+          HEAD(formatNodeProperty).properties.formatType
+        ) AS format,
+        HEAD(producedByNodeProperty).properties.legalName AS vendor,
+        labels,
+        properties.name AS name,
+        properties.description AS description,
+        properties.uri AS uri,
+        properties.claimsGraphUri AS claimsGraphUri
+      ORDER BY name, uri 
+      `,
+    }).then(queryResult => queryResult.items);
   },
 
   /**
    * Returns all entries from the cypher db. This method is used for development purposes only, in cases when
    * available data has to be analysed.
    */
-  async getEverything(): Promise<ResourceInput> {
+  async getEverything(): Promise<CypherQueryResult> {
     return cypherQuery({
       statement: 'MATCH (n) RETURN properties(n) AS properties, labels(n) AS labels LIMIT 1000',
     })
