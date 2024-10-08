@@ -3,7 +3,6 @@ import { Route, Routes as ReactRoutes } from 'react-router-dom';
 
 import WorkInProgress from '../WorkInProgress';
 import { Column } from '../common/styles';
-import DetailsPage from '../pages/details/DetailsPage';
 import Home from '../pages/home/Home';
 
 import AccountHome from './account/AccountHome';
@@ -12,6 +11,7 @@ import DashboardPage from './dashboard/dashboard_page';
 import LcmFinal from './dashboard/lcm/LcmFinal';
 import LcmServices from './dashboard/lcm/LcmServices';
 import OntologiesDetailsPage from './detailsPage/pages/ontologies/OntologiesDetailsPage';
+import ResourceDetailsPage from './detailsPage/pages/resources/ResourceDetailsPage';
 import ShapesDetailsPage from './detailsPage/pages/shapes/ShapesDetailsPage';
 import DiscoveryItem from './discovery/DiscoveryItem';
 import SearchView from './discovery/search/SearchView';
@@ -26,7 +26,7 @@ import ProtectedRoute from './protectedRoute/ProtectedRoute';
 import ProvideAttributes from './provide/ProvideAttributes';
 import ProvideOverview from './provide/ProvideOverview';
 import ProvideSelection from './provide/ProvideSelection';
-import Resources from './resources/Resources';
+import ResourceSearchPage from './resources/ResourceSearchPage';
 import ServiceOfferings from './serviceOfferings/ServiceOfferings';
 import Shapes from './shapes/Shapes';
 import SolutionPackagingView from './solutionPackaging/SolutionPackagingView';
@@ -44,8 +44,9 @@ const Routes: FC = () => (
       <Route path="/service-offerings" element={ViewContainer(<ProtectedRoute><ServiceOfferings/></ProtectedRoute>)}/>
       <Route path="/participants" element={ViewContainer(<ParticipantSearchPage/>)}/>
       <Route path="/participants/:participantId" element={ViewContainer(<ParticipantDetails/>)}/>
-      <Route path="/resources" element={ViewContainer(<ProtectedRoute><Resources /></ProtectedRoute>)} />
-      <Route path="/details/:resourceId" element={ViewContainer(<ProtectedRoute><DetailsPage/></ProtectedRoute>)}/>
+      <Route path="/resources" element={ViewContainer(<ProtectedRoute><ResourceSearchPage/></ProtectedRoute>)}/>
+      <Route path="/resources/:resourceId"
+        element={ViewContainer(<ProtectedRoute><ResourceDetailsPage/></ProtectedRoute>)}/>
       <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
       <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
       <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />

@@ -1,8 +1,9 @@
 // This Interface is termporary, due to how we recieve data at the moment.
 
 // Interfaces and Mappers for Service Offerings
-import { Resource } from '../types/resources.model';
 import { ServiceOffering } from '../types/serviceOfferings.model';
+
+export type CypherQueryResult<T = any> = { items: T[] }
 
 // TODO: Refactor. See ResourceInput.
 export interface ServiceOfferingInput {
@@ -34,27 +35,7 @@ export function mapServiceOfferings(selfDescriptions: ServiceOfferingInput): Ser
   }));
 }
 
-type ResourceInputProperties = Exclude<Resource, 'labels'>
-export interface ResourceInput {
-  items: {
-    format: string,
-    labels: string[],
-    properties: ResourceInputProperties;
-  }[];
-}
-
-export function mapResources(selfDescriptions: ResourceInput): Resource[] {
-  const resources = selfDescriptions
-    .items.map(({ format, properties, labels }) => ({
-      ...properties,
-      labels,
-      format
-    }));
-  console.debug('resources', resources)
-  return resources;
-}
-
-export interface ISelfDescription {
+export interface ISelfDescription extends CypherQueryResult {
   name: string;
   description: string;
   items: Array<{

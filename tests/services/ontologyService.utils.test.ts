@@ -89,7 +89,7 @@ describe('getResourceType', () => {
     const shapes = await fetchAllShapesFromSchemas(schemas)
     const ontologies = await fetchAllOntologiesFromSchemas(schemas, shapes);
     const resourceTypes = getResourceTypes(ontologies)
-    expect(resourceTypes).toEqual(['HdMap', 'EnvironmentModel'])
+    expect(resourceTypes).toEqual(new Set(['HdMap', 'EnvironmentModel']));
   })
 })
 
