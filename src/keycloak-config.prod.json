@@ -1,0 +1,11 @@
+{
+  "config": {
+    "realm": "gaia-x",
+    "clientId": "portal"
+  },
+  "initOptions": {
+    "onLoad": "check-sso",
+    "checkLoginIframe": false,
+    "pkceMethod": "S256"
+  }
+}
