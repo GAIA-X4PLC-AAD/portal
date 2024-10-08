@@ -1,21 +1,19 @@
 import axios from 'axios';
 import keycloakConfig from 'keycloak-config';
-import Keycloak, { KeycloakConfig, KeycloakInitOptions } from 'keycloak-js';
+import Keycloak, { KeycloakInitOptions } from 'keycloak-js';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 
-const getDotEnvKeycloakApiUrl= (keycloakApiUrl: string): string => {
-  if (!process.env[keycloakApiUrl]) {
-    throw new Error(`${keycloakApiUrl} is not defined`);
+const getDotEnvKeycloakApiUrl = (): string => {
+  if (!process.env.REACT_APP_KEYCLOAK_API_URL) {
+    throw new Error('REACT_APP_KEYCLOAK_API_URL is not defined');
   }
-  return process.env[keycloakApiUrl];
+  return process.env.REACT_APP_KEYCLOAK_API_URL;
 }
 
-const config: KeycloakConfig = {
+const keycloak = new Keycloak({
   ...keycloakConfig.config,
-  url: getDotEnvKeycloakApiUrl(keycloakConfig.config.url)
-};
-
-const keycloak = new Keycloak(keycloakConfig);
+  url: getDotEnvKeycloakApiUrl()
+});
 const initOptions = keycloakConfig.initOptions as KeycloakInitOptions;
 
 export interface AuthContextType {
