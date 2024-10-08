@@ -1,10 +1,8 @@
 import axios from 'axios';
 import { Resource } from 'types/resources.model';
 
-import { CypherQueryResult, ServiceOfferingInput } from '../utils/dataMapper';
-import { Asset } from '../components/resources/helpers/resourceFilterAssetHelper';
 import { ParticipantDetailsResponse, ParticipantResponse } from '../types/participants.model';
-import { ISelfDescription, ResourceInput, ServiceOfferingInput } from '../utils/dataMapper';
+import { CypherQueryResult, ServiceOfferingInput } from '../utils/dataMapper';
 
 const getHeaders = () => {
   return {
