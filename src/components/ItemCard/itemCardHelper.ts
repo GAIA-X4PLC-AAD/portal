@@ -11,6 +11,7 @@ export interface ItemCardData {
     title: string;
     description: string;
     navigationUrl: string;
+    testId: string;
 }
 
 const NO_TITLE = i18next.t('common.no-title');
@@ -21,13 +22,15 @@ const createItemCardData = (
   title: string | undefined,
   description: string | undefined,
   url: string,
-  isGaiaXCompliant: boolean
+  isGaiaXCompliant: boolean,
+  testId: string
 ): ItemCardData => ({
   label,
   title: title ? title : NO_TITLE,
   description: description ? description : NO_DESCRIPTION,
   navigationUrl: url,
-  isGaiaXCompliant
+  isGaiaXCompliant,
+  testId
 });
 
 export const ontologyToItemCardData = (ontology: Ontology): ItemCardData => {
@@ -36,7 +39,8 @@ export const ontologyToItemCardData = (ontology: Ontology): ItemCardData => {
     ontology.subject,
     ontology.description,
     `/ontologies/details/${ontology.subject}`,
-    false
+    false,
+    'Card:' + ontology.subject
   );
 }
 
@@ -46,7 +50,8 @@ export const shapeToItemCardData = (shape: Shape): ItemCardData => {
     shape.shaclShapeName,
     undefined,
     `/shapes/details/${shape.shaclShapeName}`,
-    false
+    false,
+    'Card:' + shape.shaclShapeName
   );
 }
 
@@ -57,7 +62,8 @@ export const serviceToItemCardData = (service: ServiceOffering): ItemCardData =>
     service.name,
     service.description,
     `/services/details/${service.claimsGraphUri}`,
-    false
+    false,
+    'Card:' + service.uri + ':' + service.name
   );
 }
 
@@ -67,6 +73,7 @@ export const resourceToItemCardData = (resource: Resource): ItemCardData => {
     resource.claimsGraphUri.join(', '),
     resource.description,
     `/resources/details/${resource.uri}`,
-    true
+    true,
+    'Card:' + resource.uri + ':' + resource.name
   );
 }
