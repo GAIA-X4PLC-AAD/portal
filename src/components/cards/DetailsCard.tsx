@@ -65,6 +65,8 @@ export default function DetailsCard({ cardData }: Readonly<IDetailsCardProps>) {
                     content={String(content)}
                   />
                 );
+              } else {
+                return <></>
               }
             })
           )}
@@ -87,6 +89,8 @@ export default function DetailsCard({ cardData }: Readonly<IDetailsCardProps>) {
                     content={String(content)}
                   />
                 );
+              } else {
+                return <></>
               }
             })
           )}

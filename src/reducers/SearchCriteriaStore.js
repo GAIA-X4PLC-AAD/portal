@@ -18,8 +18,8 @@ const INITIAL_STATE = {
 
 const parameterBuilder = (state) => {
 
-  let criterias = state.filterCriteria.map((criteria) => { return (`&${encodeURIComponent(criteria.key)}=${encodeURIComponent(criteria.value)}`) }).
-    reduce((previous, current) => previous + current, '');
+  let criterias = state.filterCriteria.map((criteria) => { return (`&${encodeURIComponent(criteria.key)}=${encodeURIComponent(criteria.value)}`) })
+    .reduce((previous, current) => previous + current, '');
   let sort = state.sort_field ? `&sort_field=${state.sort_field}&sort_direction=${state.sort_direction}` : '';
   let searchTerm = state.searchTerms ? `&search_terms=${encodeURIComponent(state.searchTerms)}` : '';
   return `size=${state.size}&page=${state.page}${searchTerm}${criterias}${sort}`;

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Carousel from 'react-multi-carousel';
 import { useSelector } from 'react-redux';
 
-import { HeaderTitle, Row, Column, Padding } from '../../../common/styles';
+import { Column, HeaderTitle, Padding, Row } from '../../../common/styles';
 import NP from '../../../common/vertical_steps/next_prev_buttons';
 import LoadingView from '../../loading_view/LoadingView';
 import ServicePreview from '../../solutionPackaging/ServicePreview';
@@ -16,6 +16,7 @@ import * as S from './style';
 
 const SearchContent = ({ type, onSelect, serviceId, slot }) => {
 
+  // eslint-disable-next-line no-self-compare
   const addParams = serviceId || slot || '' != '' ? `/${serviceId}/${slot}` : '';
 
   const criteria = useSelector(state => state.searchCriteriaStore);

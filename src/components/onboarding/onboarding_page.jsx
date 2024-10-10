@@ -1,6 +1,5 @@
 import { useResource } from '@axios-use/react';
 import axios from 'axios';
-import { t } from 'i18next';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +7,22 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import history from '../../common/history'
 import RadioButton from '../../common/radio';
-import { Column, Row, Style, Card, Circle, H4Text, BodyText, ButtonText, H4LightText, MasterButton, HorizontalLine, OutlineButton, TextInput, Image, BlueButton } from '../../common/styles';
+import {
+  BlueButton,
+  BodyText,
+  ButtonText,
+  Card,
+  Circle,
+  Column,
+  H4LightText,
+  H4Text,
+  HorizontalLine,
+  MasterButton,
+  OutlineButton,
+  Row,
+  Style,
+  TextInput
+} from '../../common/styles';
 // import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Row, Style, TextInput, Image, BlueButton } from "../../common/styles";
 import { Padding } from '../discovery/tabs/style';
 
@@ -46,8 +60,8 @@ const RequestVCView = ({ type, confirmationCode }) => {
 
   useEffect(() => { }, [isLoading, error, data]);
 
-  let isError = error != undefined;
-  const isSuccess = !isLoading && error == undefined && !(data === undefined)
+  let isError = error !== undefined;
+  const isSuccess = !isLoading && error === undefined && !(data === undefined)
 
   if (isSuccess) {
     return thanksForConfirmingVC
@@ -184,8 +198,8 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
     )
   }
 
-  let isError = error != undefined;
-  const isSuccess = !isLoading && error == undefined && !(data === undefined)
+  let isError = error !== undefined;
+  const isSuccess = !isLoading && error === undefined && !(data === undefined)
 
   // if (isSuccess) return
 
@@ -237,7 +251,7 @@ const OnboardingPage = () => {
 
   const [activeStage, setActiveStage] = useState(initialPage)
   // const [activeStage, setActiveStage] = useState(4)
-  const [customerOrOrganization, setCustomerOrOrganization] = useState(userType == ORGANIZATION ? ORGANIZATION : CUSTOMER)
+  const [customerOrOrganization, setCustomerOrOrganization] = useState(userType === ORGANIZATION ? ORGANIZATION : CUSTOMER)
 
   const userFillDetailsFormRef = React.createRef()
   const nextButtonRef = React.createRef()
@@ -253,9 +267,9 @@ const OnboardingPage = () => {
 
   const nextStage = () => {
     // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
-    if (activeStage == 1) {
+    if (activeStage === 1) {
       setActiveStage(2)
-    } else if (activeStage == 2) {
+    } else if (activeStage === 2) {
       if (validateUserFillDetailsForm()) {
         // const _result = await registerUserApi()
         // console.log(`nextStage, _result: ${_result}`)
@@ -263,52 +277,63 @@ const OnboardingPage = () => {
         setActiveStage(3)
       }
 
-    } else if (activeStage == 3) {
+    } else if (activeStage === 3) {
       setActiveStage(4)
 
-    } else if (activeStage == 4) {
+    } else if (activeStage === 4) {
       setActiveStage(5)
-    } else if (activeStage == 5) {
+    } else if (activeStage === 5) {
       dontHaveDidModal()
     }
   }
 
   const previousStage = () => {
     // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
-    if (activeStage == 2) {
+    if (activeStage === 2) {
       setActiveStage(1)
-    } else if (activeStage == 3) {
+    } else if (activeStage === 3) {
       setActiveStage(2)
-    } else if (activeStage == 4) {
+    } else if (activeStage === 4) {
       setActiveStage(3)
-    } else if (activeStage == 5) {
+    } else if (activeStage === 5) {
       setActiveStage(4)
     }
   }
 
   // CURRENT STAGE VIEW
   const CurrentStageView = () => {
-    if (activeStage == 1) {
+    if (activeStage === 1) {
       return customerOrProviderView()
-    } else if (activeStage == 2) {
-      if (customerOrOrganization == ORGANIZATION) {return <OrganizationDetailsView nextStage={() => { setActiveStage(3) }} didStage={() => { setActiveStage(5) }} />;}
+    } else if (activeStage === 2) {
+      if (customerOrOrganization === ORGANIZATION) {
+        return <OrganizationDetailsView nextStage={() => {
+          setActiveStage(3)
+        }} didStage={() => {
+          setActiveStage(5)
+        }}/>;
+      }
       else { return userFillDetailsView() }
-    } else if (activeStage == 3) {
+    } else if (activeStage === 3) {
       return confirmationEmailView()
-    } else if (activeStage == 4) {
+    } else if (activeStage === 4) {
       if (confirmationCode !== undefined) {
         return EmailConfirmedView({ type: customerOrOrganization, confirmationCode: confirmationCode })
       } else {
         return EmailAlreadyConfirmedView();
       }
-    }
-    else if (activeStage == 5) {
+    } else if (activeStage === 5) {
       return <DidOnboardingView userType={customerOrOrganization} nextStage={() => { setActiveStage(6) }} />
-    } else if (activeStage == 6) {
-      if (customerOrOrganization == ORGANIZATION) {return <VCProvider nextStage={() => { setActiveStage(7) }} />;}
+    } else if (activeStage === 6) {
+      if (customerOrOrganization === ORGANIZATION) {
+        return <VCProvider nextStage={() => {
+          setActiveStage(7)
+        }}/>;
+      }
       else { return <VCCustomer nextStage={() => { setActiveStage(7) }} />; }
     } else if (activeStage === 7) {
-      if (customerOrOrganization == ORGANIZATION) {return <FinishProvider />;}
+      if (customerOrOrganization === ORGANIZATION) {
+        return <FinishProvider/>;
+      }
       else { return <FinishCustomer />; }
 
     }
@@ -330,7 +355,7 @@ const OnboardingPage = () => {
 
   const stepsPane = ({ activeStage = 1, isNextDisabled = false, isPreviousDisabled = false }) => {
 
-    const isCustomer = CUSTOMER == customerOrOrganization
+    const isCustomer = CUSTOMER === customerOrOrganization
 
     return (
       <>
@@ -353,8 +378,10 @@ const OnboardingPage = () => {
             <Padding horizontal='24px'>
               <Padding vertical='40px'>
                 <Column>
-                  <RadioButton name='step1' onClick={() => setCustomerOrOrganization(CUSTOMER)} defaultChecked={CUSTOMER == customerOrOrganization}><BodyText>{t('onboarding.customer')}</BodyText></RadioButton>
-                  <RadioButton name='step1' onClick={() => setCustomerOrOrganization(ORGANIZATION)} defaultChecked={ORGANIZATION == customerOrOrganization}><BodyText>{t('onboarding.organization')}</BodyText></RadioButton>
+                  <RadioButton name="step1" onClick={() => setCustomerOrOrganization(CUSTOMER)}
+                    defaultChecked={CUSTOMER === customerOrOrganization}><BodyText>{t('onboarding.customer')}</BodyText></RadioButton>
+                  <RadioButton name="step1" onClick={() => setCustomerOrOrganization(ORGANIZATION)}
+                    defaultChecked={ORGANIZATION === customerOrOrganization}><BodyText>{t('onboarding.organization')}</BodyText></RadioButton>
                 </Column>
               </Padding>
             </Padding>
@@ -385,7 +412,9 @@ const OnboardingPage = () => {
   }
 
   const userFillDetailsView = () => {
+    // eslint-disable-next-line  react-hooks/rules-of-hooks
     const [userFormDetailsInput, setInput] = useState({});
+    // eslint-disable-next-line  react-hooks/rules-of-hooks
     const [errorMessage, setErrorMessage] = useState('');
 
     // const getValue = (target) => {
@@ -490,8 +519,8 @@ const OnboardingPage = () => {
   }
 
   const disableNextButton = () => {
-    if (activeStage == 1) {
-      return customerOrOrganization == null
+    if (activeStage === 1) {
+      return customerOrOrganization === null
     }
     return true
   }

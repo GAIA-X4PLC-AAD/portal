@@ -1,11 +1,23 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Modal from '../../Modal';
 import Checkbox from '../../common/checkbox';
-import {  Column, Row, Style, Card, BodyText, H4LightText, HorizontalLine, OutlineButton, TextInput, Image, BodySmallBoldText } from '../../common/styles';
+import {
+  BodySmallBoldText,
+  BodyText,
+  Card,
+  Column,
+  H4LightText,
+  HorizontalLine,
+  Image,
+  OutlineButton,
+  Row,
+  Style,
+  TextInput
+} from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
 
 const OrganizationDetailsView = ({ nextStage, didStage }) => {
@@ -63,7 +75,7 @@ const OrganizationDetailsView = ({ nextStage, didStage }) => {
   }
 
   const onError = (eMessage) => {
-    if (eMessage || eMessage != '') {
+    if (eMessage || eMessage !== '') {
       return (
         <Modal>
           <div className="login-fail-flex-col">

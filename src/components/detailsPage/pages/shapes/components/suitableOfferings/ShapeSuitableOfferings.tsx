@@ -8,6 +8,7 @@ import styles from './ShapeSuitableOfferings.module.css';
 
 const ShapeSuitableOfferings: FC = () => {
   const { t } = useTranslation();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const shape = useContext(ShapeContext);
 
   return (

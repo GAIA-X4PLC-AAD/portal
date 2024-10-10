@@ -106,6 +106,7 @@ class Login extends Component {
             <img className="login-image16 layout" src={this.state.imgLink} alt="Loading..." />
           </div>
           <div className="login-button layout">
+            {/*eslint-disable-next-line jsx-a11y/anchor-is-valid*/}
             <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t('login.loginButton')}</a>
           </div>
           <div className="login-block10 layout">

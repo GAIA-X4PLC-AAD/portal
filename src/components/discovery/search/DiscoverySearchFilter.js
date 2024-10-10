@@ -6,6 +6,7 @@ import SearchFilterView from './SearchFilterView';
 
 const DiscoverySearchFilter = ({ type, serviceId, slot }) => {
 
+  // eslint-disable-next-line no-self-compare
   const addParams = serviceId || slot || '' != ''?`/${serviceId}/${slot}`:'';
 
   const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}${addParams}/filter-criterias`;

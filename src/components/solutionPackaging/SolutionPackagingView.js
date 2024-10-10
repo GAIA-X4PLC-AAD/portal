@@ -20,7 +20,7 @@ const SolutionPackagingView = () => {
 
   const { id } = useParams();
 
-  const isUserSignedIn = useSelector((state) => state.user.user.user_role) != VR_ROLE;
+  const isUserSignedIn = useSelector((state) => state.user.user.user_role) !== VR_ROLE;
 
   const SAVE_URL = process.env.REACT_APP_EDGE_API_URI + '/sp-service/save';
   const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/${id}/details/`;
@@ -58,6 +58,7 @@ const SolutionPackagingView = () => {
       if (service.id){
         return { service_id: service.id, slot_id: service.slot_id };
       }
+      return undefined
     }).filter((service)=> service !== undefined);
     let saveData = {
       name: name,
