@@ -22,7 +22,7 @@ export default function ResourceDetailsPage() {
     const fetchAndSetSelfDescriptions = async () => {
       try {
         const response = await loadResourceDetails(decodeURI(resourceId));
-        console.log('Fetched data: ', response);
+        console.log('Fetched resource details: ', response);
         if (response) {
           setSelfDescriptionData(response);
         }
@@ -53,7 +53,7 @@ export default function ResourceDetailsPage() {
                   title="Offered by"
                   subtitle="3D Mapping Solutions GmbH"
                   text="We offer high-precision 3D map data of roads and urban environments for applications in autonomous driving, robotics, urban planning and navigation systems."
-                  contractId={selfDescriptionData.contractId}
+                  resource={selfDescriptionData}
                 />
               </div>
             </>)}
