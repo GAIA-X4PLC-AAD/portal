@@ -17,7 +17,7 @@ const ParticipantSearchPage = () => {
   const { t } = useTranslation();
   const {
     participants,
-    state,
+    viewContentType,
     search,
   } = useParticipants()
 
@@ -31,8 +31,8 @@ const ParticipantSearchPage = () => {
               <SearchBar placeholder={t('participants.search-bar-text')} onSearch={search}/>
             </Vertical>
           </Horizontal>
-          <LoadingIndicator visible={state === 'LOADING'}/>
-          <CardContainer visible={state === 'SHOW_PARTICIPANTS'}>
+          <LoadingIndicator visible={viewContentType === 'LOADING'}/>
+          <CardContainer visible={viewContentType === 'SHOW_PARTICIPANTS'}>
             {
               participants.map((participant) => (
                 <ItemCard key={participant.legalName}
@@ -41,7 +41,7 @@ const ParticipantSearchPage = () => {
                   participant={participant}/>)
               )}
           </CardContainer>
-          <NoContent message={`${t('no-participants-available')}`} visible={state === 'SHOW_NO_RESULTS'}/>
+          <NoContent message={`${t('no-participants-available')}`} visible={viewContentType === 'SHOW_NO_RESULTS'}/>
         </Vertical>
       </Main>
     </>

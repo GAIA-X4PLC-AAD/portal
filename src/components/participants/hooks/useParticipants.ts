@@ -4,14 +4,14 @@ import { Participant } from '../../../types/participants.model';
 import { loadParticipants } from '../helpers/participantDataFlow';
 import { applyFilters } from '../helpers/participantHelper';
 
-export type ParticipantsViewState = 'LOADING' | 'SHOW_PARTICIPANTS' | 'SHOW_NO_RESULTS';
+export type ParticipantsContentType = 'LOADING' | 'SHOW_PARTICIPANTS' | 'SHOW_NO_RESULTS';
 
 export const useParticipants = () => {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchText, setSearchText] = useState('')
 
-  const state = useMemo<ParticipantsViewState>(() => {
+  const viewContentType = useMemo<ParticipantsContentType>(() => {
     if (isLoading) {
       return 'LOADING'
     } else if (participants.length) {
@@ -34,7 +34,7 @@ export const useParticipants = () => {
 
   return {
     participants: filteredParticipants,
-    state,
+    viewContentType,
     search
   }
 }

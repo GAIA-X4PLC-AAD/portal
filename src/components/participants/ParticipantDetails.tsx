@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
 
 import { ARROW_RIGHT } from '../../utils/symbols';
-import Text from '../Text/Text';
 import Header from '../header/Header';
 import LoadingIndicator from '../loading_view/LoadingIndicator';
 import NoContent from '../nocontent/NoContent';
@@ -14,37 +13,39 @@ import { useParticipant } from './hooks/useParticipant';
 import './ParticipantDetials.css';
 
 const ParticipantDetails: FC = () => {
-  const id = location.pathname.split('/participants/')[1] + location.hash;
+  const id = location.pathname.split('/participants/')[1];
   const decodeUri = decodeURIComponent(id);
-  const { participant, state } = useParticipant(decodeUri);
+  const { participant, viewContentType } = useParticipant(decodeUri);
   const { t } = useTranslation();
+  console.log('decode uri:', decodeUri);
+  console.log('uri:', id);
 
   return (
     <div className='container'>
-      <LoadingIndicator visible={state === 'LOADING'}/>
-      <NoContent message={`${t('participants.no-participant-available')}`} visible={state === 'SHOW_NO_RESULT'}/>
+      <LoadingIndicator visible={viewContentType === 'LOADING'}/>
       <Header title={`${t('participants.title')} ${ARROW_RIGHT} ${participant && participant.legalName}`}
-        visible={state === 'SHOW_PARTICIPANT'}/>
-      <Text visible={state === 'SHOW_PARTICIPANT'}>
-        {participant && (
-          <div className='main-content-container'>
-            <p><b>Uri:</b> {participant.uri}</p>
-            <p><b>Hash:</b> {participant.gaiaxTermsAndConditions}</p>
-            <b>List of service offerings:</b>
-            <ul>
-              {participant.claimsGraphUri.map((cgu) => (
-                <li key={cgu}>
-                  {cgu.includes('service-offering') ? (
-                    <Link component={RouterLink} to={`/shapes/details/${encodeURIComponent(cgu)}`} variant="contained"
-                      color="primary">{cgu}</Link>
-                  ) : (<></>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </Text>
+        visible={viewContentType === 'SHOW_PARTICIPANT'}/>
+      <NoContent message={`${t('participants.no-participant-available')}`}
+        visible={viewContentType === 'SHOW_NO_RESULT'}/>
+      {viewContentType === 'SHOW_PARTICIPANT' && (
+        <div className='main-content-container'>
+          <p><b>Uri:</b> {participant.uri}</p>
+          <p><b>Hash:</b> {participant.gaiaxTermsAndConditions}</p>
+          <b>List of service offerings:</b>
+          <ul>
+            {participant.claimsGraphUri.map((cgu) => (
+              <li key={cgu}>
+                {cgu.includes('service-offering') ? (
+                  <Link component={RouterLink} to={`/shapes/details/${encodeURIComponent(cgu)}`}
+                    variant="contained"
+                    color="primary">{cgu}</Link>
+                ) : (<></>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { Resource } from 'types/resources.model';
 
-import { ParticipantDetailsResponse, ParticipantResponse } from '../types/participants.model';
 import { CypherQueryResult, ServiceOfferingInput } from '../utils/dataMapper';
 
 const getHeaders = () => {
@@ -117,7 +116,7 @@ export const CypherQueryApiService = {
   /**
    *Returns all participants
    */
-  async getAllParticipants(): Promise<ParticipantResponse> {
+  async getAllParticipants(): Promise<CypherQueryResult> {
     return cypherQuery({
       statement: `
       MATCH (service)
@@ -132,11 +131,11 @@ export const CypherQueryApiService = {
   /**
    *Returns 1 participant by LegalName
    */
-  async getParticipantByLegalName(legalName: string): Promise<ParticipantDetailsResponse> {
+  async getParticipantByLegalName(legalName: string): Promise<CypherQueryResult> {
     return cypherQuery({
       statement: `
       MATCH (service)
-        WHERE 'LegalParticipant' IN labels(service) AND properties(service).legalName = '${legalName}'
+        WHERE 'LegalParticipant' IN labels(service) AND properties(service).legalName CONTAINS '${legalName}'
       RETURN
         properties(service).legalName AS legalName,
         properties(service).claimsGraphUri AS claimsGraphUri,

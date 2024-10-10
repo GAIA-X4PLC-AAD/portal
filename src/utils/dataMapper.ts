@@ -3,7 +3,7 @@
 // Interfaces and Mappers for Service Offerings
 import { ServiceOffering } from '../types/serviceOfferings.model';
 
-export type CypherQueryResult<T = any> = { items: T[] }
+export type CypherQueryResult<T = any> = { totalCount: number, items: T[] }
 
 // TODO: Refactor. See ResourceInput.
 export interface ServiceOfferingInput {
