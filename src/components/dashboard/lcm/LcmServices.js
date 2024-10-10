@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { useParams, NavLink, Navigate } from 'react-router-dom';
+import { Navigate, NavLink, useParams } from 'react-router-dom';
 
 import { lcmServicesLoaded, resetLcmServices, selectLcmService } from '../../../actions';
-import { HeaderTitle, BodyText, BlueButton, CancelButton } from '../../../common/styles';
+import { BlueButton, BodyText, CancelButton, HeaderTitle } from '../../../common/styles';
 import { Tab } from '../../../common/tabs/tab';
 import './lcm.css'
 
@@ -21,7 +21,7 @@ class LcmServices extends Component {
 
     const { id } = this.props.params;
     const idFromState = this.props.lcm.id;
-    if (id != idFromState) {
+    if (id !== idFromState) {
       axios.get(process.env.REACT_APP_EDGE_API_URI + '/lcm-service/service/overview?serviceId=' + id).then((response) => {
         this.props.lcmServicesLoaded(id, response.data.services);
       }, (error) => {
@@ -43,7 +43,7 @@ class LcmServices extends Component {
     const { id, index } = this.props.params;
     const idFromState = this.props.lcm.id;
 
-    if (idFromState && id != idFromState) {
+    if (idFromState && id !== idFromState) {
       this.props.resetLcmServices();
       return <Navigate to={'/lcm/' + id} />
     }
@@ -72,26 +72,30 @@ class LcmServices extends Component {
     }
 
     let back;
-    if (index && index != 0) {
+    if (index && index !== 0) {
       back = <NavLink to={'/lcm/' + id + '/' + (parseInt(index || 0) - 1)}><CancelButton>{t('lcm.back_button')}</CancelButton></NavLink>
     }
 
     let next;
-    if (index == this.props.lcm.services.length - 1) {
-      if (this.state.currentIndex != index && !anythingSelected) {
-        next = <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
+    if (index === this.props.lcm.services.length - 1) {
+      if (this.state.currentIndex !== index && !anythingSelected) {
+        next = <BlueButton
+          disabled={this.state.currentIndex !== index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
       } else {
         next = <NavLink to={'/lcm/' + id + '/final'}>
-          <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
+          <BlueButton
+            disabled={this.state.currentIndex !== index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
         </NavLink>
       }
 
     } else {
-      if (this.state.currentIndex != index && !anythingSelected) {
-        next = <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
+      if (this.state.currentIndex !== index && !anythingSelected) {
+        next = <BlueButton
+          disabled={this.state.currentIndex !== index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
       } else {
         next = <NavLink to={'/lcm/' + id + '/' + (parseInt(index || 0) + 1)}>
-          <BlueButton disabled={this.state.currentIndex != index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
+          <BlueButton
+            disabled={this.state.currentIndex !== index && !anythingSelected}>{t('lcm.next_button')}</BlueButton>
         </NavLink>
       }
     }

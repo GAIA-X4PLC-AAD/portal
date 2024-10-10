@@ -65,6 +65,8 @@ export default function ResourceMainContent({ cardData }: Readonly<IDetailsCardP
                               content={String(content)}
                             />
                           );
+                        } else {
+                          return <></>
                         }
                       })
                     )}
@@ -87,6 +89,8 @@ export default function ResourceMainContent({ cardData }: Readonly<IDetailsCardP
                               content={String(content)}
                             />
                           );
+                        } else {
+                          return <></>
                         }
                       })
                     )}

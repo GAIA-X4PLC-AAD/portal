@@ -8,7 +8,21 @@ import { Modal } from 'react-responsive-modal';
 import { useNavigate } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
-import { AnimatedVisibility, CircularLoader, BodySmallBoldText, BodyText, ButtonText, CaptionText, Card, Circle, Column, H4LightText, HeaderTitle, HorizontalLine, Image, OutlineButton, Row, Style } from '../../common/styles';
+import {
+  AnimatedVisibility,
+  BodySmallBoldText,
+  BodyText,
+  ButtonText,
+  CaptionText,
+  Circle,
+  CircularLoader,
+  Column,
+  H4LightText,
+  HorizontalLine,
+  Image,
+  Row,
+  Style
+} from '../../common/styles';
 import { BlueButton, CancelButton } from '../admin/style';
 import { Padding } from '../discovery/tabs/style';
 import { Block } from '../expandable/style';
@@ -67,7 +81,10 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
 
   const buildDeleteDialog = ({ closeModal }) => {
 
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [isLoading, setIsLoading] = useState(false);
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [successOrError, setSuccessOrError] = useState(null);
 
     const deleteService = () => {
@@ -113,12 +130,15 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
   const buildManageButton = () => {
 
     // delete dialog confirmation
+    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [openModal, setOpenModal] = useState(false);
 
     const onOpenModal = () => setOpenModal(true);
     const onCloseModal = () => setOpenModal(false);
 
-    if ( _status == 'undeploying' || _status == 'deploying') {return <></>}
+    if (_status === 'undeploying' || _status === 'deploying') {
+      return <></>
+    }
 
     const tpOverridePos = (props) => {
       return { left: 80, top: props.top };
@@ -134,10 +154,11 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
             >
               {t('dashboard.manage.manage')}
             </ButtonText>}>
-          {_status == 'undeployed' ? <MenuItem onClick={() => create()}>{t('dashboard.manage.create')}</MenuItem> : ''}
-          {_status == 'deployed' ? <MenuItem onClick={() => edit()}>{t('dashboard.manage.edit')}</MenuItem> : ''}
-          {_status == 'deployed' ? <MenuItem onClick={() => downloadLogs()}>{t('dashboard.manage.download-logs')}</MenuItem> : ''}
-          {_status == 'deployed' ? <MenuItem onClick={onOpenModal}>{t('dashboard.manage.delete')}</MenuItem> : ''}
+          {_status === 'undeployed' ? <MenuItem onClick={() => create()}>{t('dashboard.manage.create')}</MenuItem> : ''}
+          {_status === 'deployed' ? <MenuItem onClick={() => edit()}>{t('dashboard.manage.edit')}</MenuItem> : ''}
+          {_status === 'deployed' ?
+            <MenuItem onClick={() => downloadLogs()}>{t('dashboard.manage.download-logs')}</MenuItem> : ''}
+          {_status === 'deployed' ? <MenuItem onClick={onOpenModal}>{t('dashboard.manage.delete')}</MenuItem> : ''}
         </Menu>
       </Padding>
       <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
@@ -157,6 +178,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     }
   };
   const buildCard = () => {
+    // eslint-disable-next-line  react-hooks/rules-of-hooks
     const [activated, setActivated] = useState(isActivated);
     const type = getType();
 
@@ -172,7 +194,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
 
     const buildActivateDeactivateButton = () => {
 
-      if ( (_status == 'undeployed' && activated) || !activated )
+      if ((_status === 'undeployed' && activated) || !activated)
       {return   <ButtonText onClick={activateDeactivate}>{activated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText>}
       return <Style height='20px'/>;
     }

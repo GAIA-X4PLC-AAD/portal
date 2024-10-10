@@ -2,9 +2,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { BodyBoldText, BodySmallBoldText, BodySmallText, Card, Circle, Column, Padding, Row, Style } from '../../common/styles';
-
-import { CUSTOMER } from './onboarding_page';
+import {
+  BodyBoldText,
+  BodySmallBoldText,
+  BodySmallText,
+  Card,
+  Circle,
+  Column,
+  Padding,
+  Row,
+  Style
+} from '../../common/styles';
 
 const StepsPane = ({ type, currentStage }) => {
 
@@ -12,7 +20,7 @@ const StepsPane = ({ type, currentStage }) => {
 
   const buildStepCardView = ({ stage, title, subtitle, isActive }) => {
     return (
-      <Padding vertical='12px' paddingTop={stage == 1 ? '0px' : ''}>
+      <Padding vertical="12px" paddingTop={stage === 1 ? '0px' : ''}>
         <Card background='#fff' borderColor='#0' boxShadow={`0px ${isActive ? '3' : '2'}px 4px 0px rgb(29 36 48 / ${isActive ? '25' : '12'}%)`}>
           <Padding vertical='12px' horizontal='10px'>
             <Row alignItems='center'>
@@ -40,9 +48,24 @@ const StepsPane = ({ type, currentStage }) => {
       {buildStepCardView({ stage: '2', title: t(`onboarding.${type || 'user'}_details`), subtitle: t('onboarding.step_2'), isActive: (2 === currentStage) })}
       {buildStepCardView({ stage: '3', title: t('onboarding.email_confirmation'), subtitle: t('onboarding.step_3'), isActive: (3 === currentStage) })}
       {buildStepCardView({ stage: '4', title: t('onboarding.request_submission'), subtitle: t('onboarding.step_4'), isActive: (4 === currentStage) })}
-      {buildStepCardView({ stage: '5', title: t('onboarding.proof_on_onboarding'), subtitle: t('onboarding.step_5'), isActive: currentStage == 5 })}
-      {buildStepCardView({ stage: '6', title: t('onboarding.vc_details'), subtitle: t('onboarding.step_6'), isActive: currentStage == 6 })}
-      {buildStepCardView({ stage: '7', title: t('onboarding.finish_onboarding'), subtitle: t('onboarding.step_7'), isActive: currentStage == 7 })}
+      {buildStepCardView({
+        stage: '5',
+        title: t('onboarding.proof_on_onboarding'),
+        subtitle: t('onboarding.step_5'),
+        isActive: currentStage === 5
+      })}
+      {buildStepCardView({
+        stage: '6',
+        title: t('onboarding.vc_details'),
+        subtitle: t('onboarding.step_6'),
+        isActive: currentStage === 6
+      })}
+      {buildStepCardView({
+        stage: '7',
+        title: t('onboarding.finish_onboarding'),
+        subtitle: t('onboarding.step_7'),
+        isActive: currentStage === 7
+      })}
 
     </>
   )
