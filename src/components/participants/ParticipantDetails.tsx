@@ -1,5 +1,5 @@
 import { Link } from '@mui/material';
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -17,8 +17,6 @@ const ParticipantDetails: FC = () => {
   const decodeUri = decodeURIComponent(id);
   const { participant, viewContentType } = useParticipant(decodeUri);
   const { t } = useTranslation();
-  console.log('decode uri:', decodeUri);
-  console.log('uri:', id);
 
   return (
     <div className='container'>

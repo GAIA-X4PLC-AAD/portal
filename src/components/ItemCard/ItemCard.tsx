@@ -38,7 +38,8 @@ const ItemCard: FC<IItemCard> = ({
   const { t } = useTranslation();
 
   return (
-    <div data-testid={getTestId({ ontology, shape, service, resource })} className={classNames(styles.card, 'item-card')}>
+    <div data-testid={getTestId({ ontology, shape, service, resource, participant })}
+      className={classNames(styles.card, 'item-card')}>
       <div className={styles.label}>
         <Title>{label}</Title>
         {isGaiaXCompliant === undefined ? null : (
@@ -70,12 +71,13 @@ const ItemCard: FC<IItemCard> = ({
 
 export default ItemCard;
 
-const getTestId = ({ ontology, shape, service, resource }:
+const getTestId = ({ ontology, shape, service, resource, participant }:
   {
     ontology?: Ontology,
     shape?: Shape,
     service?: ServiceOffering,
-    resource?: Resource
+      resource?: Resource,
+      participant?: Participant
   }) => (
   ontology
     ? 'Card:' + ontology.subject
@@ -85,5 +87,7 @@ const getTestId = ({ ontology, shape, service, resource }:
         ? 'Card:' + service.uri + ':' + service.name
         : resource
           ? 'Card:' + resource.uri + ':' + resource.name
-          : ''
+          : participant
+            ? 'Card:' + participant.legalName
+            : ''
 )

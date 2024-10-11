@@ -19,9 +19,6 @@ export const useParticipant = (legalName: string) => {
     }
   }, [isLoading])
 
-  console.log('participant', participant);
-  console.log('isLoading', isLoading);
-
   useEffect(() => {
     getParticipantByLegalName(legalName).then((fetchedParticipant) => {
       setParticipant(fetchedParticipant);
