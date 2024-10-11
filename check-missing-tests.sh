@@ -1,8 +1,11 @@
 #!/bin/bash
+
+# Fetch the latest changes from origin (main)
 git fetch origin main
 
-# Step 1: Get the list of changed JS, TS, JSX and TSX files in the src directory
-CHANGED_FILES=$(git diff --name-only origin/main..HEAD -- 'src/*.[jt]s' 'src/*.[jt]sx')
+# Step 1: Get the list of changed JS, TS, JSX, and TSX files in the src directory, compared to the merge base
+# Only include added or modified files (exclude deleted ones) using --diff-filter=ACM
+CHANGED_FILES=$(git diff --name-only --diff-filter=ACM origin/main..HEAD -- 'src/*.[jt]s' 'src/*.[jt]sx')
 
 # Initialize an empty array to hold files without tests
 MISSING_TEST_FILES=()
