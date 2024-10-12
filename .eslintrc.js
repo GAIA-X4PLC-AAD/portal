@@ -28,43 +28,35 @@ module.exports = {
   rules: {
     'quote-props': [
       'warn',
-      'as-needed'
+      'consistent-as-needed'
     ],
-    'no-const-assign': 'warn',
-    'no-this-before-super': 'warn',
-    'no-undef': 'warn',
-    'no-unreachable': 'warn',
-    'no-unused-vars': 'off',
-    'constructor-super': 'warn',
-    'valid-typeof': 'warn',
-    'react/display-name': 'off',
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-uses-react': 'error',
+    'react/jsx-uses-react': 'off',
     'import/order': ['error', {
-      groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+      'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
       'newlines-between': 'always',
-      alphabetize: {
+      'alphabetize': {
         order: 'asc',
         caseInsensitive: false
       }
     }],
     'no-multiple-empty-lines': ['error', { max: 1, maxEOF: 1, maxBOF: 0 }],
-    indent: ['error', 2],
+    'indent': ['error', 2],
     'keyword-spacing': ['error', { before: true, after: true }],
-    curly: ['error', 'all'],
+    'curly': ['error', 'all'],
     'no-trailing-spaces': ['error'],
-    quotes: ['error', 'single'],
+    'quotes': ['error', 'single'],
     'object-curly-spacing': ['error', 'always'],
-    'eol-last': [
-      'error',
-      'always'
-    ],
+    'eol-last': ['error', 'always'],
     'no-throw-literal': 'off',
-    '@typescript-eslint/no-unused-expressions': 'off',
     'react-hooks/exhaustive-deps': 'off',
-    'import/no-named-as-default': 'off',
-    'import/no-anonymous-default-export': 'off'
   },
+  overrides: [
+    {
+      files: ['*.test.js', '*.test.jsx', '*.test.ts', '*.test.tsx'],
+      rules: { '@typescript-eslint/no-unused-expressions': 'off' }
+    }
+  ],
   extends: [
     'react-app',
     'eslint:recommended',
