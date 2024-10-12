@@ -30,8 +30,8 @@ module.exports = {
       'warn',
       'consistent-as-needed'
     ],
-    'react/react-in-jsx-scope': 'off',
-    'react/jsx-uses-react': 'off',
+    'react/react-in-jsx-scope': 'warn',
+    'react/jsx-uses-react': 'warn',
     'import/order': ['error', {
       'groups': ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
       'newlines-between': 'always',
