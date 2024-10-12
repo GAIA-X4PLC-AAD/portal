@@ -1,4 +1,6 @@
+import React from 'react';
 import './CarLoader.css';
+
 export const CarLoader = () => {
   return (
     <div>

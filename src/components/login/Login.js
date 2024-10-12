@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { t } from 'i18next';
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';

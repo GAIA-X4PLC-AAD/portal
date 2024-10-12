@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import React from 'react';
 import { withTranslation } from 'react-i18next';
 
 import { Column, Image, Padding, Row, Style } from '../../../common/styles';

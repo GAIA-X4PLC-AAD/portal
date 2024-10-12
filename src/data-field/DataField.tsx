@@ -1,3 +1,5 @@
+import React from 'react';
+
 import styles from './DataField.module.css';
 
 interface IDataField {

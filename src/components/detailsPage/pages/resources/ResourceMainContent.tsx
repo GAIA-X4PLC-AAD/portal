@@ -2,6 +2,7 @@ import Title from 'components/Title/Title';
 import Divider from 'components/divider/Divider';
 import Subtitle from 'components/subtitle/Subtitle';
 import DataField from 'data-field/DataField';
+import React from 'react';
 
 import Markdown from '../../../../common/markdown/Markdown';
 import { ISelfDescription } from '../../utils/dataMapper';

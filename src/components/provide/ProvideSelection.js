@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import { resetDescriptorFile } from '../../actions';
-import { HeaderTitle, BodySmallText, BodyText, BodyBoldText, BlueButton } from '../../common/styles';
+import { BlueButton, BodyBoldText, BodySmallText, BodyText, HeaderTitle } from '../../common/styles';
 
 import './ProvideSelection.css'
 
