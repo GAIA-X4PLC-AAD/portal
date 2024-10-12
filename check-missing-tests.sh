@@ -10,8 +10,23 @@ CHANGED_FILES=$(git diff --name-only --diff-filter=ACM origin/main..HEAD -- 'src
 # Initialize an empty array to hold files without tests
 MISSING_TEST_FILES=()
 
-# Step 2: Loop through each changed file and check if it has a corresponding test file
+# Read the list of files to ignore for coverage, trim leading and trailing whitespaces
+IGNORE_LIST=$(sed 's/^[[:space:]]*//;s/[[:space:]]*$//' .coverageignore)
+
+# Step 2: Loop through each changed file and check if it has a corresponding test file or contains the istanbul ignore comment
 for FILE in $CHANGED_FILES; do
+  # Check if the file is in the ignore list
+    if echo "$IGNORE_LIST" | grep -Fxq "$FILE"; then
+      echo "Skipping coverage check for $FILE (in .coverageignore)"
+      continue
+    fi
+
+  # Check if the file contains the /* test coverage not required */ comment
+  if grep -q "/\* test coverage not required \*/" "$FILE"; then
+    echo "Skipping coverage check for $FILE (contains /* test coverage not required */)"
+    continue
+  fi
+
   # Extract the file path and replace "src/" with "tests/" and add ".test" postfix
   TEST_FILE=$(echo "$FILE" | sed 's|^src/|tests/|' | sed 's|\.[jt]sx\?$|.test&|')
 
