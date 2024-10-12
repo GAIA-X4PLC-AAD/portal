@@ -1,14 +1,12 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { ShapeContext } from '../../../../../../context/ShapeContext';
 import Title from '../../../../../Title/Title';
 
 import styles from './ShapeSuitableOfferings.module.css';
 
 const ShapeSuitableOfferings: FC = () => {
   const { t } = useTranslation();
-  const shape = useContext(ShapeContext);
 
   return (
     <div className={styles['container']}>

@@ -6,7 +6,7 @@ import SearchFilterView from './SearchFilterView';
 
 const DiscoverySearchFilter = ({ type, serviceId, slot }) => {
 
-  const addParams = serviceId || slot || '' != ''?`/${serviceId}/${slot}`:'';
+  const addParams = (!serviceId && !slot) ? `${serviceId}/${slot}` : '';
 
   const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}${addParams}/filter-criterias`;
 

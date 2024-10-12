@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Carousel from 'react-multi-carousel';
 
-import { Style, BodySmallBoldText, Column, Row, CaptionText } from '../../common/styles';
+import { BodySmallBoldText, CaptionText, Column, Row, Style } from '../../common/styles';
 import NextPrevButtons from '../../common/vertical_steps/next_prev_buttons';
 import { Padding } from '../discovery/tabs/style';
 import { Block } from '../expandable/style';
@@ -43,16 +43,17 @@ const colItemView = ({ title, caption, subtitle, }) => {
   </Column>
 }
 
-const sectionView = (props,) => {
+const SectionView = (props,) => {
 
   const [sectionItems, setSection] = useState(null);
 
   useEffect(() => {
-    if (props.data !== undefined) {
-      const _items = props.data['results']
-      setSection(_items)
+    // eslint-disable-next-line react/prop-types
+    if ('data' in props && props.data && 'results' in props.data) {
+      // eslint-disable-next-line react/prop-types
+      setSection(props.data.results)
     }
-
+    // eslint-disable-next-line react/prop-types
   }, [props.data]);
 
   const sectionItemsViews = (sectionItems && sectionItems.map((element, _index) => {
@@ -78,9 +79,10 @@ const sectionView = (props,) => {
 
   return (
     <>
+      {/* eslint-disable-next-line react/prop-types */}
       <BodySmallBoldText>{`${props.params['title']} (${sectionItemsViews.length})`}</BodySmallBoldText>
       <Block border={true} borderBottom={true} position='relative'>
-        {(sectionItems !== undefined || sectionItems != null) ?
+        {(sectionItems) ?
           <Carousel
             arrows={false}
             swipeable={false}
@@ -98,7 +100,7 @@ const sectionView = (props,) => {
   );
 }
 
-sectionView.propTypes = {
+SectionView.propTypes = {
   title: PropTypes.string.isRequired,
 }
 
@@ -112,12 +114,12 @@ const SideSectionsView = () => {
     <>
       <LoadingView
         url={_transactionsUrl}
-        successView={sectionView}
+        successView={SectionView}
         params={{ title: t('dashboard.my_transactions') }}
       />
       <LoadingView
         url={_newsUrl}
-        successView={sectionView}
+        successView={SectionView}
         params={{ title: t('dashboard.news') }}
       />
     </>

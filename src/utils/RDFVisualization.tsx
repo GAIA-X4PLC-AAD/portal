@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataSet, Network } from 'vis-network/standalone/esm/vis-network';
 
@@ -10,7 +10,9 @@ interface IRDFVisualization {
   visible: boolean;
 }
 
+// eslint-disable-next-line no-unused-vars
 enum detailRoutes {
+  // eslint-disable-next-line no-unused-vars
   shapesAndOntologies = '/shapesAndOntologies/details/',
 }
 

@@ -19,8 +19,9 @@ import SlotDetails from './SlotDetails';
 const SolutionPackagingView = () => {
 
   const { id } = useParams();
-
-  const isUserSignedIn = useSelector((state) => state.user.user.user_role) != VR_ROLE;
+  const { isUserSignedIn } = useSelector((state) => ({
+    isUserSignedIn: state.user.user.user_role !== VR_ROLE
+  }));
 
   const SAVE_URL = process.env.REACT_APP_EDGE_API_URI + '/sp-service/save';
   const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/${id}/details/`;
@@ -54,11 +55,14 @@ const SolutionPackagingView = () => {
   }
 
   const onSaveBookAction = (name, action) => {
-    const selected = slots.map((service)=> {
-      if (service.id){
-        return { service_id: service.id, slot_id: service.slot_id };
-      }
-    }).filter((service)=> service !== undefined);
+    const selected = slots
+      .map((service) => {
+        if (service.id) {
+          return { service_id: service.id, slot_id: service.slot_id };
+        }
+        return null
+      })
+      .filter((service) => service !== null);
     let saveData = {
       name: name,
       service_id: id,
@@ -189,7 +193,6 @@ const SolutionPackagingView = () => {
 
   // clone array with map function to keep keys from original array
   const cloneArray = (array) => {
-    let keys= array.keys();
     let newItem = [];
     for (const key  in array) {
       newItem[key] = JSON.parse(JSON.stringify(array[key]));

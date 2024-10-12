@@ -21,7 +21,6 @@ const ServiceTile = ({ input, id, t }) => {
 
   const showComponent = () => {
     let _width = '100%'
-    let _maxWidth = '850px'
     return (
       <>
         <ExpandableView
@@ -50,6 +49,7 @@ const ServiceTile = ({ input, id, t }) => {
           <Padding horizontal='28px' vertical='24px'><CheckBox type="checkbox" /></Padding>
 
           {/* LOGO */}
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href={'#' || input.services.ppr_url}>
             {/* <Image */}
             <Image src={input.logo} alt='Provider Logo' width='48px' height='48px' />

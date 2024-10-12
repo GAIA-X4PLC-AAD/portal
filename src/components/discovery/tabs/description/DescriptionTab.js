@@ -8,10 +8,10 @@ import DescriptionPprView from './DescriptionPprView';
 import DescriptionTabView from './DescriptionTabView';
 
 const DescriptionTab = ({ id, type }) => {
-
-  let _type = type;
-  if (_type == 'composite-service' || _type == 'service') {_type = 'services'}
-  const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${_type}/${id}/details/`;
+  if (type === 'composite-service' || type === 'service') {
+    type = 'services'
+  }
+  const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}/${id}/details/`;
 
   const getSuccessView = (type) => {
     switch (type ) {

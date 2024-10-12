@@ -6,26 +6,6 @@ import { H4Text, Style } from '../../common/styles';
 import LoadingView from '../loading_view/LoadingView';
 import 'react-multi-carousel/lib/styles.css';
 
-const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 3000 },
-    items: 1
-  },
-  desktop: {
-    breakpoint: { max: 3000, min: 1024 },
-    items: 1
-  },
-  tablet: {
-    breakpoint: { max: 1024, min: 464 },
-    items: 2
-  },
-  mobile: {
-    breakpoint: { max: 464, min: 0 },
-    items: 1
-  }
-};
-
 const PlotView = ({ plots }) => {
 
   return <Plot
@@ -44,7 +24,6 @@ PlotView.propTypes = {
 const PlotSuccessView = (props,) => {
 
   const [_data, _setData] = useState(null);
-  const [_fake1, _setFake1] = useState(true);
 
   useEffect(() => {
     if (props.data !== undefined) {

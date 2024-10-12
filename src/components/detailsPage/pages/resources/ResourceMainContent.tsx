@@ -66,6 +66,7 @@ export default function ResourceMainContent({ cardData }: Readonly<IDetailsCardP
                             />
                           );
                         }
+                        return <></>
                       })
                     )}
       </div>
@@ -74,21 +75,24 @@ export default function ResourceMainContent({ cardData }: Readonly<IDetailsCardP
       <div className={styles['details-grid-container']}>
         {otherPropertiesList &&
                     otherPropertiesList.map((properties, index) =>
-                      Object.entries(properties).map(([label, content]) => {
-                        if (
-                          label !== 'name' &&
+                      Object
+                        .entries(properties)
+                        .map(([label, content]) => {
+                          if (
+                            label !== 'name' &&
                                 label !== 'description' &&
                                 content !== 'Unknown'
-                        ) {
-                          return (
-                            <DataField
-                              key={`${label}-${index}`}
-                              label={label}
-                              content={String(content)}
-                            />
-                          );
-                        }
-                      })
+                          ) {
+                            return (
+                              <DataField
+                                key={`${label}-${index}`}
+                                label={label}
+                                content={String(content)}
+                              />
+                            );
+                          }
+                          return <></>;
+                        })
                     )}
       </div>
     </div>
