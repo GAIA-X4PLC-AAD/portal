@@ -1,12 +1,14 @@
 import Text from 'components/Text/Text';
 import Title from 'components/Title/Title';
 import GaiaXButton from 'components/buttons/GaiaXButton';
+import { useTransferState } from 'components/resources/hooks/useTransferState';
 import Subtitle from 'components/subtitle/Subtitle';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ResourceDetails } from '../../types/resources.model';
 import ResourceBuyingModal from '../resources/components/ResourceBuyingModal';
+import { resourceDataTransfer } from '../resources/helpers/resourceDataFlow';
 
 import styles from './SidebarCard.module.css';
 
@@ -25,11 +27,13 @@ export default function SidebarCard({
 }: Readonly<ISidebarCard>) {
   const { t } = useTranslation();
   const [isOpen, setOpen] = useState(false);
+  const { transferState, startMonitoring } = useTransferState();
 
   const handleClickContactOrBuy = () => {
     setOpen(true);
   };
 
+  console.debug('Transfer state:', transferState);
   return (
     <>
       <ResourceBuyingModal
@@ -38,7 +42,10 @@ export default function SidebarCard({
         resourceDetails={resource}
         onTransfer={(transferInput) => {
           setOpen(false)
-          console.debug('transfer ...')
+          resourceDataTransfer(transferInput)
+            .then((transferProcessInformation) => {
+              startMonitoring(transferInput, transferProcessInformation)
+            })
         }}
         onClose={() => setOpen(false)}
       />

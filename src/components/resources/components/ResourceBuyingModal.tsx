@@ -36,7 +36,7 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
     const host = resourceDetails.serviceAccessPoint ? resourceDetails.serviceAccessPoint.host.replace(/\/$/, '') : '';
     return `${protocol}://${host}`
   }, []);
-  const [consumerBaseUrl, setConsumerBaseUrl] = useState(`${process.env.REACT_APP_DEFAULT_EDC_CONSUMER}/management`);
+  const [consumerBaseUrl, setConsumerBaseUrl] = useState(`${process.env.REACT_APP_DEFAULT_EDC_CONSUMER.replace(/\/$/, '')}`);
   const [container, setContainer] = useState(`${process.env.REACT_APP_DEFAULT_EDC_DESTINATION_CONTAINER}`);
   const [account, setAccount] = useState(`${process.env.REACT_APP_DEFAULT_EDC_DESTINATION_ACCOUNT}`);
 
