@@ -11,17 +11,20 @@ interface ISidebarCard {
   title: string;
   subtitle: string;
   text: string;
+  contractId?: string;
 }
 
 export default function SidebarCard({
   title,
   subtitle,
   text,
+  contractId
 }: Readonly<ISidebarCard>) {
   const { t } = useTranslation();
   const [showNotification, setShowNotification] = useState(false);
 
   const handleClickContactOrBuy = () => {
+    console.debug('contractId', contractId);
     setShowNotification(true);
     setTimeout(() => {
       setShowNotification(false);
