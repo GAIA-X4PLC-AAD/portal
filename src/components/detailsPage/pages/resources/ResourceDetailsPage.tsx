@@ -1,62 +1,71 @@
-import MapCard from 'components/cards/MapCard';
-import SidebarCard from 'components/cards/SidebarCard';
-import { AuthContext } from 'context/AuthContextProvider';
-import { useContext, useEffect, useState } from 'react';
+import DetailsContent from 'components/detailsPage/layout/content/DetailsContent';
+import DetailsMainContent from 'components/detailsPage/layout/mainContent/DetailsMainContent';
+import DetailsSidebar from 'components/detailsPage/layout/sidebar/DetailsSidebar';
+import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiService';
 
+import { ResourceDetailsContext } from '../../../../context/ResourceDetailsContext';
+import { ARROW_RIGHT } from '../../../../utils/symbols';
+import Header from '../../../header/Header';
 import LoadingIndicator from '../../../loading_view/LoadingIndicator';
 import NoContent from '../../../nocontent/NoContent';
+import DetailsPage from '../../layout/mainPage/DetailsPage';
 
-import styles from './ResourceDatails.module.css';
 import ResourceMainContent from './ResourceMainContent';
+import ResourceActions from './components/actions/ResourceActions';
+import ResourceMap from './components/map/ResourceMap';
 
-export default function ResourceDetailsPage() {
-  const authContext = useContext(AuthContext);
-  const [selfDescriptionData, setSelfDescriptionData] = useState(null);
+const ResourceDetailsPage = () => {
+  const { t } = useTranslation();
+  const [resourceDetails, setResourceDetails] = useState(null);
   const { resourceId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchAndSetSelfDescriptions = async () => {
+    const fetchAndSetResourceDetails = async () => {
       try {
-        const response = await cypherQuery.getOneSelfDescriptions(resourceId);
+        const response = await cypherQuery.getOneResourceWithDetails(resourceId);
         console.log('Fetched data: ', response);
         if (response) {
-          setSelfDescriptionData(response);
+          setResourceDetails(response);
         }
       } finally {
         setIsLoading(false);
       }
     };
 
-    if (resourceId && authContext.isAuthenticated) {
-      fetchAndSetSelfDescriptions();
-    }
-  }, [resourceId, authContext.isAuthenticated]);
+    fetchAndSetResourceDetails();
+
+  }, [resourceId]);
 
   return (
-    <div className={styles['details-page-container']}>
+    <>
       <LoadingIndicator visible={isLoading}/>
       {!isLoading && (
         <>
-          <NoContent message={'No data available.'} visible={!selfDescriptionData}/>
-          {selfDescriptionData && (
-            <>
-              <div>
-                <ResourceMainContent cardData={selfDescriptionData}/>
-              </div>
-              <div>
-                <MapCard/>
-                <SidebarCard
-                  title="Offered by"
-                  subtitle="3D Mapping Solutions GmbH"
-                  text="We offer high-precision 3D map data of roads and urban environments for applications in autonomous driving, robotics, urban planning and navigation systems."
-                />
-              </div>
-            </>)}
+          <NoContent message={'No data available.'} visible={!resourceDetails}/>
+          {resourceDetails && (
+            <DetailsPage>
+              <Header title={`${t('left-menu.resources')} ${ARROW_RIGHT} ${name}`} />
+              <ResourceDetailsContext.Provider value={resourceDetails}>
+                <DetailsContent>
+                  <DetailsMainContent>
+                    <ResourceMainContent />
+                  </DetailsMainContent>
+                  <DetailsSidebar>
+                    <ResourceMap />
+                    <ResourceActions />
+                  </DetailsSidebar>
+                </DetailsContent>
+              </ResourceDetailsContext.Provider>
+            </DetailsPage>
+          )}
         </>
       )}
-    </div>
+    </>
   );
 }
+
+export default ResourceDetailsPage;

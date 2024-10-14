@@ -114,6 +114,18 @@ export const CypherQueryApiService = {
   },
 
   /**
+   * Returns details about a resource
+   *
+   * @param claimsGraphUri the id of the resource to be queried
+   */
+  async getOneResourceWithDetails(claimsGraphUri: string): Promise<CypherQueryResult> {
+    const uri = claimsGraphUri.replace(/'/g, '\\\'');
+    return cypherQuery({
+      statement: `MATCH (n:HDMap) WHERE '${uri}' IN n.claimsGraphUri RETURN properties(n), labels(n) LIMIT 1`,
+    })
+  },
+
+  /**
    * Returns all entries from the cypher db. This method is used for development purposes only, in cases when
    * available data has to be analysed.
    */
