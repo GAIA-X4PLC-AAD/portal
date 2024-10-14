@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { Resource } from 'types/resources.model';
 
 import { CypherQueryResult, ServiceOfferingInput } from '../utils/dataMapper';
 
@@ -68,49 +67,30 @@ export const CypherQueryApiService = {
    *
    * @param types the list of requested resource types
    */
-  async getAllResources(types: string[]): Promise<Resource[]> {
-    if (!types.length) {
-      return [];
-    }
+  async getAllResources(types: string[]): Promise<CypherQueryResult> {
     const typeLabels = types.join('\', \'');
 
     return cypherQuery({
       statement: `
-      MATCH (resource)
-      WHERE ANY (label IN labels(resource) WHERE label IN ['${typeLabels}'])
-        AND 'DataResource' IN labels(resource)
-      WITH COUNT(resource) AS totalCount, resource
+      MATCH (dataResource:DataResource)
+      WHERE ANY (label IN labels(dataResource) WHERE label IN ['${typeLabels}'])
 
-      OPTIONAL MATCH (resource)-[relation]-(nodeProperty)
-      WITH
-        properties(resource) AS properties,
-        labels(resource) AS labels,
-        COLLECT({
-          name: type(relation),
-          labels: labels(nodeProperty),
-          properties: properties(nodeProperty)
-        }) AS nodeProperties,
-        totalCount
-
-      WITH labels, properties, nodeProperties,
-        [property IN nodeProperties WHERE property.name = 'format'] AS formatNodeProperty,
-        [property IN nodeProperties WHERE property.name = 'producedBy'] AS producedByNodeProperty,
-        totalCount
+      OPTIONAL MATCH (dataResource)-[:format]-(format)
+      OPTIONAL MATCH (dataResource)-[:producedBy]-(producedBy)
+      OPTIONAL MATCH (dataResource)-[:general]-(general)
+      OPTIONAL MATCH (general)-[:description]-(description)
 
       RETURN
-        COALESCE(
-          HEAD(formatNodeProperty).properties.type,
-          HEAD(formatNodeProperty).properties.formatType
-        ) AS format,
-        HEAD(producedByNodeProperty).properties.legalName AS vendor,
-        labels,
-        properties.name AS name,
-        properties.description AS description,
-        properties.uri AS uri,
-        properties.claimsGraphUri AS claimsGraphUri
-      ORDER BY name, uri 
+        properties(description).name AS name,
+        properties(description).description AS description,
+        properties(dataResource).uri AS uri,
+        properties(dataResource).claimsGraphUri AS claimsGraphUri,
+        coalesce(properties(format).type, properties(format).formatType) AS format,
+        properties(producedBy).legalName AS vendor,
+        labels(dataResource) AS labels
+        ORDER BY name, uri
       `,
-    }).then(queryResult => queryResult.items);
+    });
   },
 
   async getResourceDetails(uri: string): Promise<CypherQueryResult> {
