@@ -11,13 +11,19 @@ import { Resource, ResourceDetails } from '../../../types/resources.model';
  * @param resourceTypes only resources with this label will be loaded
  * @return the list of resources
  */
-export const loadResources = async (resourceTypes: string[]): Promise<Resource[]> =>
-  cypherQuery
+export const loadResources = async (resourceTypes: string[]): Promise<Resource[]> => {
+  if (!resourceTypes.length) {
+    return [];
+  }
+
+  return cypherQuery
     .getAllResources(resourceTypes)
+    .then(queryResult => queryResult.items)
     .catch(error => {
       console.error('Error fetching resources:', error);
       throw error;
     });
+}
 
 /**
  * Loads details for a given resource by its uri.
