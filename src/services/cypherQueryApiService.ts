@@ -113,6 +113,39 @@ export const CypherQueryApiService = {
     }).then(queryResult => queryResult.items);
   },
 
+  async getResourceDetails(uri: string): Promise<CypherQueryResult> {
+    return cypherQuery({
+      statement: `
+      MATCH (dataResource:DataResource)
+      WHERE properties(dataResource).uri='${uri}'
+
+      OPTIONAL MATCH (dataResource)-[:instanceOf]-(instantiatedVirtualResource:InstantiatedVirtualResource)
+      OPTIONAL MATCH (instantiatedVirtualResource)-[:serviceAccessPoint]-(serviceAccessPoint:ServiceAccessPoint)
+
+      OPTIONAL MATCH (dataResource)-[:general]-(general:General)
+      OPTIONAL MATCH (general)-[:data]-(data:Data)
+
+      WITH COUNT(*) AS totalCount,
+           properties(dataResource).name AS name,
+           properties(dataResource).uri AS uri,
+           labels(dataResource) AS labels,
+           CASE
+             WHEN serviceAccessPoint IS NOT NULL THEN {
+             name:     properties(serviceAccessPoint).name,
+             protocol: properties(serviceAccessPoint).protocol,
+             host:     properties(serviceAccessPoint).host,
+             port:     properties(serviceAccessPoint).port,
+             version:  properties(serviceAccessPoint).version
+           }
+             ELSE null
+             END AS serviceAccessPoint,
+           properties(data).contractId AS contractId
+
+      RETURN name, uri, contractId, serviceAccessPoint, labels
+      `
+    })
+  },
+
   /**
    * Returns all entries from the cypher db. This method is used for development purposes only, in cases when
    * available data has to be analysed.

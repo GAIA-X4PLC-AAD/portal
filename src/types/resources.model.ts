@@ -7,3 +7,13 @@ export interface Resource {
     uri: string,
     claimsGraphUri: string[],
 }
+
+export interface ResourceDetails {
+    name: string,
+    uri: string,
+    contractId?: string,
+    serviceAccessPoint?: {
+        protocol: string,
+        host: string,
+    }
+}
