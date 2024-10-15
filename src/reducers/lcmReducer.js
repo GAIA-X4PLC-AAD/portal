@@ -1,4 +1,4 @@
-import { LCM_SERVICES_LOADED, RESET_LCM_SERVICES, LCM_SELECT_SERVICE } from '../actions/types';
+import { LCM_SELECT_SERVICE, LCM_SERVICES_LOADED, RESET_LCM_SERVICES } from '../actions/types';
 
 const INITIAL_STATE = {
   id: null,
@@ -33,7 +33,7 @@ const updateState = (currentState, newState) => {
   return { ...currentState, ...newState };
 }
 
-export default (state = INITIAL_STATE, action) => {
+export const lcmReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case LCM_SERVICES_LOADED:
     return { ...state, ...{ id: action.id, services: action.services } };

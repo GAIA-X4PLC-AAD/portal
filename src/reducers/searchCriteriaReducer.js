@@ -18,11 +18,14 @@ const INITIAL_STATE = {
 
 const parameterBuilder = (state) => {
 
-  let criterias = state.filterCriteria.map((criteria) => { return (`&${encodeURIComponent(criteria.key)}=${encodeURIComponent(criteria.value)}`) }).
-    reduce((previous, current) => previous + current, '');
+  const criteria = state.filterCriteria
+    .map((criteria) => {
+      return (`&${encodeURIComponent(criteria.key)}=${encodeURIComponent(criteria.value)}`)
+    })
+    .reduce((previous, current) => previous + current, '');
   let sort = state.sort_field ? `&sort_field=${state.sort_field}&sort_direction=${state.sort_direction}` : '';
   let searchTerm = state.searchTerms ? `&search_terms=${encodeURIComponent(state.searchTerms)}` : '';
-  return `size=${state.size}&page=${state.page}${searchTerm}${criterias}${sort}`;
+  return `size=${state.size}&page=${state.page}${searchTerm}${criteria}${sort}`;
 }
 
 const updateState = (currentState, newState) => {
@@ -52,7 +55,7 @@ const setSearchTermFromHome = (searchTerm) => {
   return { ...state, parameters: parameterBuilder(state) }
 }
 
-export default (state = INITIAL_STATE, action) => {
+export const searchCriteriaReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case UPDATE_SEARCH_FILTER_CRITERIA:
     return updateState(state, action.filterCriteria);

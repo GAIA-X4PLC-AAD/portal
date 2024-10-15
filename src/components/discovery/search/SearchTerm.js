@@ -12,6 +12,7 @@ import * as S from './style';
 
 const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#000094', advancedSearchBgColor = '#000094', displayAsColumn = true }) => {
 
+  // eslint-disable-next-line no-unused-vars
   const API_TYPE = (type) => {
     switch (type) {
     case 'home':
@@ -22,9 +23,10 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
 
   const criteria = useSelector(state => state.searchCriteriaStore);
   const [searchTerm, setSearchTerm] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [advance, setAdvance] = useState(false);
-  const [chips, setChips] = useState([]);
-  // const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${API_TYPE(type)}/suggestions?searchTerm=${encodeURIComponent(searchTerm)}`;
+  // eslint-disable-next-line no-unused-vars
+  const [chips, setChips] = useState([]); // const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${API_TYPE(type)}/suggestions?searchTerm=${encodeURIComponent(searchTerm)}`;
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -43,6 +45,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
 
   useEffect(
     () => {
+      // eslint-disable-next-line no-unused-vars
       const chipAdded = chips.reduce((chipAdded, chip) => {
         if (chipAdded) {return chipAdded;}
         if (searchTerm.includes(chip.term)) {return true;}
@@ -74,6 +77,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
     setSearchTerm(`${searchTerm} ${chip.term}`);
   }
 
+  // eslint-disable-next-line no-unused-vars
   const showAdvanceMessage = (advance, displayAbsolute = false) => {
     if (type === 'management' || type === 'participant') {return null;}
     if (advance === false) {
@@ -89,6 +93,7 @@ const SearchTerm = ({ t, type, inputWidth = '800px', advancedTextColor = '#00009
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   const showAdvanceSearchChip = (advance) => {
     if (type === 'management' || type === 'participant') {return null;}
     if (advance === true) {

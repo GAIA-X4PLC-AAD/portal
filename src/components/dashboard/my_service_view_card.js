@@ -8,7 +8,21 @@ import { Modal } from 'react-responsive-modal';
 import { useNavigate } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip';
 
-import { AnimatedVisibility, CircularLoader, BodySmallBoldText, BodyText, ButtonText, CaptionText, Card, Circle, Column, H4LightText, HeaderTitle, HorizontalLine, Image, OutlineButton, Row, Style } from '../../common/styles';
+import {
+  AnimatedVisibility,
+  BodySmallBoldText,
+  BodyText,
+  ButtonText,
+  CaptionText,
+  Circle,
+  CircularLoader,
+  Column,
+  H4LightText,
+  HorizontalLine,
+  Image,
+  Row,
+  Style
+} from '../../common/styles';
 import { BlueButton, CancelButton } from '../admin/style';
 import { Padding } from '../discovery/tabs/style';
 import { Block } from '../expandable/style';
@@ -24,9 +38,9 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
 
   const isActivated = data['is_activated'];
   const isOwn = data['is_own']
-  const _name = data['name']
-  const _status = data['status'] !== null && data['status'] !== undefined ? data['status'] : 'undeployed';
-  const _id = data['id']
+  const name = data['name']
+  const status = data['status'] !== null && data['status'] !== undefined ? data['status'] : 'undeployed';
+  const id = data['id']
 
   const { t } = useTranslation();
 
@@ -43,36 +57,37 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
   }
 
   const openSd = () => {
-    navigate(`/provide/${itemType}/upload/${_id}/edit`)
+    navigate(`/provide/${itemType}/upload/${id}/edit`)
   }
 
   const edit = () => {
-    navigate(`/lcm/${_id}`)
+    navigate(`/lcm/${id}`)
   }
 
   const create = () => {
-    navigate(`/lcm/${_id}`)
+    navigate(`/lcm/${id}`)
   }
 
   const downloadLogs = () => {
-    axios.get(process.env.REACT_APP_EDGE_API_URI + `/lcm-service/service/${_id}/logs`,   {
+    axios.get(process.env.REACT_APP_EDGE_API_URI + `/lcm-service/service/${id}/logs`, {
       responseType: 'blob',
     }).then(
       response => {
-        fileDownload(response.data, `${_name}.log`);
+        fileDownload(response.data, `${name}.log`);
       }, error => {
         console.error(error);
       })
   }
 
-  const buildDeleteDialog = ({ closeModal }) => {
+  // eslint-disable-next-line react/prop-types
+  const BuildDeleteDialog = ({ closeModal }) => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [successOrError, setSuccessOrError] = useState(null);
 
     const deleteService = () => {
       setIsLoading(true)
-      axios.delete(process.env.REACT_APP_EDGE_API_URI + `/lcm-service/service/${_id}`,).then((response) => {
+      axios.delete(process.env.REACT_APP_EDGE_API_URI + `/lcm-service/service/${id}`,).then((response) => {
         setIsLoading(false);
         setSuccessOrError(t('dashboard.delete.successfull'));
       }, (error) => {
@@ -92,7 +107,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
           <H4LightText>{t('dashboard.delete.title')}</H4LightText>
           <HorizontalLine />
           <BodyText>
-            {successOrError? successOrError : t('dashboard.delete.message', { name: _name })}
+            {successOrError ? successOrError : t('dashboard.delete.message', { name: name })}
           </BodyText>
           <Padding vertical='20px'>
             <Row alignItems='center'>
@@ -110,7 +125,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
       </Style>
     </>
   }
-  const buildManageButton = () => {
+  const BuildManageButton = () => {
 
     // delete dialog confirmation
     const [openModal, setOpenModal] = useState(false);
@@ -118,10 +133,8 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     const onOpenModal = () => setOpenModal(true);
     const onCloseModal = () => setOpenModal(false);
 
-    if ( _status == 'undeploying' || _status == 'deploying') {return <></>}
-
-    const tpOverridePos = (props) => {
-      return { left: 80, top: props.top };
+    if (status === 'undeploying' || status === 'deploying') {
+      return <></>
     }
 
     return <>
@@ -134,14 +147,30 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
             >
               {t('dashboard.manage.manage')}
             </ButtonText>}>
-          {_status == 'undeployed' ? <MenuItem onClick={() => create()}>{t('dashboard.manage.create')}</MenuItem> : ''}
-          {_status == 'deployed' ? <MenuItem onClick={() => edit()}>{t('dashboard.manage.edit')}</MenuItem> : ''}
-          {_status == 'deployed' ? <MenuItem onClick={() => downloadLogs()}>{t('dashboard.manage.download-logs')}</MenuItem> : ''}
-          {_status == 'deployed' ? <MenuItem onClick={onOpenModal}>{t('dashboard.manage.delete')}</MenuItem> : ''}
+          {
+            status === 'undeployed'
+              ? <MenuItem onClick={() => create()}>{t('dashboard.manage.create')}</MenuItem>
+              : <></>
+          }
+          {
+            status === 'deployed'
+              ? <MenuItem onClick={() => edit()}>{t('dashboard.manage.edit')}</MenuItem>
+              : <></>
+          }
+          {
+            status === 'deployed'
+              ? <MenuItem onClick={() => downloadLogs()}>{t('dashboard.manage.download-logs')}</MenuItem>
+              : <></>
+          }
+          {
+            status === 'deployed'
+              ? <MenuItem onClick={onOpenModal}>{t('dashboard.manage.delete')}</MenuItem>
+              : <></>
+          }
         </Menu>
       </Padding>
       <Modal open={openModal} onClose={onCloseModal} center showCloseIcon={false}>
-        {buildDeleteDialog({ closeModal: onCloseModal })}
+        {BuildDeleteDialog({ closeModal: onCloseModal })}
       </Modal>
     </>;
   }
@@ -156,13 +185,13 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     default: return itemType;
     }
   };
-  const buildCard = () => {
+  const BuildCard = () => {
     const [activated, setActivated] = useState(isActivated);
     const type = getType();
 
     const activateDeactivate = () => {
       axios.post(process.env.REACT_APP_EDGE_API_URI + `/dashboard/${type}/`,
-        { id: _id, is_activated: !activated  }).then(
+        { id: id, is_activated: !activated }).then(
         (response) => {
           setActivated(!activated);
         }, (error) => {
@@ -172,13 +201,16 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
 
     const buildActivateDeactivateButton = () => {
 
-      if ( (_status == 'undeployed' && activated) || !activated )
-      {return   <ButtonText onClick={activateDeactivate}>{activated ? t('dashboard.deactivate') : t('dashboard.activate')}</ButtonText>}
+      if ((status === 'undeployed' && activated) || !activated) {
+        return (
+          <ButtonText onClick={activateDeactivate}>
+            {
+              activated ? t('dashboard.deactivate') : t('dashboard.activate')
+            }
+          </ButtonText>
+        )
+      }
       return <Style height='20px'/>;
-    }
-
-    const tpOverridePos = (props) => {
-      return { left: 50, top: props.top };
     }
 
     return (
@@ -206,7 +238,8 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                     })}
                   </Padding>
                 </Row>
-                {!isOwn ? <CaptionText>{t('dashboard.status', { status: _status })}</CaptionText> : <CaptionText>&#8203;</CaptionText>}
+                {!isOwn ? <CaptionText>{t('dashboard.status', { status: status })}</CaptionText> :
+                  <CaptionText>&#8203;</CaptionText>}
                 <Style maxWidth='213px'>
                   <Padding vertical='10px'>
                     <CaptionText>{data['description']}</CaptionText>
@@ -226,7 +259,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
                 </Padding>
                 <Padding vertical>{!isOwn ? <>
                   <Row>
-                    {buildManageButton()}
+                    {BuildManageButton()}
                     {buildActivateDeactivateButton()}
                   </Row></> :
                   <></>}
@@ -240,7 +273,7 @@ const MyServiceViewCard = ({ index, data, itemType }) => {
     );
   }
 
-  return buildCard();
+  return BuildCard();
 }
 
 MyServiceViewCard.propTypes = {

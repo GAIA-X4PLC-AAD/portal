@@ -1,7 +1,7 @@
 import MapCard from 'components/cards/MapCard';
 import SidebarCard from 'components/cards/SidebarCard';
 import { AuthContext } from 'context/AuthContextProvider';
-import { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiService';
 

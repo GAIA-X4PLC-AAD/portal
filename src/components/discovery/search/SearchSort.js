@@ -17,12 +17,12 @@ const SearchSort = ({ type, data }) => {
 
   // Reset direction when you move from different type (service, data, provider, management, participant)
   useEffect (()=> {
-    if (type != criteria.type)
+    if (type !== criteria.type)
     {setDirection('ASC');}
   }, []);
 
   useEffect (()=> {
-    if (direction != criteria.sort_direction)
+    if (direction !== criteria.sort_direction)
     {dispatch(updateFilterCriteria({ sort_direction: direction }));}
   }, [direction]);
 
@@ -34,6 +34,7 @@ const SearchSort = ({ type, data }) => {
     case 'DESC':
       setDirection('ASC');
       break;
+    default:
     }
   }
   // it should not be displayed in solution package

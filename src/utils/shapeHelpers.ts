@@ -14,7 +14,7 @@ export const trimShapes = (shape: string) =>{
 };
 
 export const getShapeProperties = (shape: Shape) => {
-  let propertyList : string[] = [];
+  const propertyList: string[] = [];
   if (shape.properties) {
     shape.properties.forEach((property) => {
       if (property.name && !propertyList.includes(property.name)) {

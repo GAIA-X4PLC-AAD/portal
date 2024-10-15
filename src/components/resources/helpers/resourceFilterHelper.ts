@@ -141,7 +141,7 @@ export type SelectedAssets = 'NOTHING' | string[];
  * @param assets list to be filtered for the selected one.
  */
 export const getSelectedAssets = (assets: Asset[]): SelectedAssets => {
-  let selectedAssets = assets
+  const selectedAssets = assets
     .filter(asset => !asset.disabled && asset.value)
     .map(asset => asset.id)
 

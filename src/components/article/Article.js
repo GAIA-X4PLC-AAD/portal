@@ -1,15 +1,16 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { withTranslation } from 'react-i18next';
 
-import { Padding, H1Text, BodyText } from '../../common/styles';
+import { BodyText, H1Text, Padding } from '../../common/styles';
 import DataPreview from '../discovery/tabs/dataPreview/DataPreview';
 
 import './Article.css';
 
 const Article = ({ category, headerMessage, t }) => {
+  // eslint-disable-next-line no-unused-vars
   const [callFlag, setCallFlag] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [articles, setArticles] = useState([]);
 
   function openLink(url) {

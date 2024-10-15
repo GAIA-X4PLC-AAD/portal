@@ -1,11 +1,18 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, useNavigate, useParams } from 'react-router-dom';
 
 import { setDescriptorFile } from '../../actions';
-import { HeaderTitle, BodyText, BodySmallBoldText, BlueButton, BlueUploadLabel, CancelButton } from '../../common/styles';
+import {
+  BlueButton,
+  BlueUploadLabel,
+  BodySmallBoldText,
+  BodyText,
+  CancelButton,
+  HeaderTitle
+} from '../../common/styles';
 
 import { toTypeLabel } from './ProvideUtil'
 
@@ -59,7 +66,7 @@ class ProvideOverview extends Component {
     const mode = this.props.params.mode;
     let back;
 
-    if (mode != 'edit') {
+    if (mode !== 'edit') {
       back = <NavLink to="/provide/start"> <CancelButton >Back</CancelButton></NavLink>
     }
 

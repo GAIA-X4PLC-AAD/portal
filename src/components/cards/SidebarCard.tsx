@@ -2,7 +2,7 @@ import Text from 'components/Text/Text';
 import Title from 'components/Title/Title';
 import GaiaXButton from 'components/buttons/GaiaXButton';
 import Subtitle from 'components/subtitle/Subtitle';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import styles from './SidebarCard.module.css';

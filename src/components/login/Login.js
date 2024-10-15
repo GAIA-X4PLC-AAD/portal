@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { t } from 'i18next';
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
@@ -15,7 +15,8 @@ import AuthPolling from './AuthPolling';
 import LoginFail from './LoginFail';
 
 export const withNavigation = (Component) => {
-  return props => <Component {...props} navigate={useNavigate()} />;
+  // eslint-disable-next-line react/display-name
+  return (props) => <Component {...props} navigate={useNavigate()}/>
 }
 
 class Login extends Component {
@@ -106,6 +107,7 @@ class Login extends Component {
             <img className="login-image16 layout" src={this.state.imgLink} alt="Loading..." />
           </div>
           <div className="login-button layout">
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a className="login-text layout" id={this.loginLinkRef} onClick={this.onWidgetInstalledCheck}>{this.props.t('login.loginButton')}</a>
           </div>
           <div className="login-block10 layout">

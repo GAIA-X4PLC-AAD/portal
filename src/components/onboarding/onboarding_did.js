@@ -1,11 +1,25 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'react-responsive-modal';
 
 import { storeOnboardingJWT } from '../../common/auth'
 import history from '../../common/history';
-import { Column, Row, Style, Card, H4LightText, HorizontalLine, OutlineButton, Image, Circle, ButtonText, BodyText, CancelButton, BlueButton } from '../../common/styles';
+import {
+  BlueButton,
+  BodyText,
+  ButtonText,
+  CancelButton,
+  Card,
+  Circle,
+  Column,
+  H4LightText,
+  HorizontalLine,
+  Image,
+  OutlineButton,
+  Row,
+  Style
+} from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
 import LoadingView from '../loading_view/LoadingView';
 import AuthPolling from '../login/AuthPolling';
@@ -58,7 +72,6 @@ const DidOnboardingView = ({ userType, nextStage }) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const onOpenModal = () => setIsOpen(true);
     const onCloseModal = () => setIsOpen(false);
 
     function toggleModal(e) {
