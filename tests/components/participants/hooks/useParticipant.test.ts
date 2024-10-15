@@ -1,4 +1,4 @@
-import { renderHook, waitFor } from '@testing-library/react'; // For testing hooks
+import { act, renderHook, waitFor } from '@testing-library/react'; // For testing hooks
 
 import { getParticipantByLegalName } from '../../../../src/components/participants/helpers/participantDataFlow'; // Import the mock
 import { useParticipant } from '../../../../src/components/participants/hooks/useParticipant';
@@ -16,15 +16,16 @@ describe('useParticipant', () => {
     jest.clearAllMocks();
   });
 
-  it('should return LOADING initially', () => {
-    // Mock getParticipantByLegalName to not resolve immediately
+  it('should return LOADING initially', async () => {
     (getParticipantByLegalName as jest.Mock).mockReturnValue(new Promise(() => {
     }));
 
     const { result } = renderHook(() => useParticipant(mockLegalName));
 
-    expect(result.current.viewContentType).toBe('LOADING');
-    expect(result.current.participant).toBeUndefined();
+    await act(async () => {
+      expect(result.current.viewContentType).toBe('LOADING');
+      expect(result.current.participant).toBeUndefined();
+    });
   });
 
   it('should return SHOW_PARTICIPANT when a participant is found', async () => {

@@ -1,4 +1,4 @@
-import { renderHook, waitFor } from '@testing-library/react';
+import { act, renderHook, waitFor } from '@testing-library/react';
 
 import { loadParticipants } from '../../../../src/components/participants/helpers/participantDataFlow';
 import { useParticipants } from '../../../../src/components/participants/hooks/useParticipants';
@@ -14,15 +14,18 @@ describe('useParticipants', () => {
     jest.clearAllMocks(); // Clear any previous mocks
   });
 
-  it('should return LOADING initially', () => {
-    // Mock getAllParticipants to not resolve immediately
+  it('should return LOADING initially', async () => {
+    // Mock loadParticipants to not resolve immediately
     (loadParticipants as jest.Mock).mockReturnValue(new Promise(() => {
     }));
 
     const { result } = renderHook(() => useParticipants());
 
-    expect(result.current.viewContentType).toBe('LOADING');
-    expect(result.current.participants).toEqual([]);
+    // Wait for the loading state
+    await act(async () => {
+      expect(result.current.viewContentType).toBe('LOADING');
+      expect(result.current.participants).toEqual([]);
+    });
   });
 
   it('should return SHOW_PARTICIPANTS when participants are fetched', async () => {
@@ -59,7 +62,9 @@ describe('useParticipants', () => {
     await waitFor(() => expect(result.current.viewContentType).toBe('SHOW_PARTICIPANTS'));
 
     // Search for "msg systems ag"
-    result.current.search('msg systems ag');
+    act(() => {
+      result.current.search('msg systems ag');
+    });
 
     // Check that the filtered participants contain only the expected result
     await waitFor(() => {
