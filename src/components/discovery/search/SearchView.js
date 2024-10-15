@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { updateSearchType, updateSeartTypeWithTerm } from '../../../actions';
-import { Row, Style, Column } from '../../../common/styles';
+import { Column, Row, Style } from '../../../common/styles';
 import AdminHeader from '../../admin/AdminHeader';
 import { Padding } from '../tabs/style';
 
@@ -36,7 +36,7 @@ const SearchView = ({ type, onSelect, serviceId, slot }) => {
         </Column>
         <Column maxWidth='100%'>
           {
-            (type !== 'participant' && type != 'management')
+            (type !== 'participant' && type !== 'management')
               ? <SearchTerm type={type} />
               : <></>
           }

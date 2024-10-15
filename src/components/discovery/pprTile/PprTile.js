@@ -56,6 +56,7 @@ const PprTile = ({ id, input, t }) => {
         <Row alignItems='Center' justifyContent='start'>
           <Padding horizontal='28px' vertical='24px'><CheckBox type="checkbox" /></Padding>
           {/* LOGO */}
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <a href={'#' || input.services.ppr_url}>
             {/* <Image */}
             <Image src={input.logo} alt='Provider Logo' width='48px' height='48px' />

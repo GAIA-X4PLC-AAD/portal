@@ -39,7 +39,7 @@ jobs:
 
       # Step 5: Run Jest tests
       - name: Run Jest tests
-        run: npm test -- --coverage
+        run: npm run test:coverage
         env:
           CI: true  # Ensures Jest runs in CI mode
 

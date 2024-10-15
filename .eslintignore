@@ -1,0 +1,8 @@
+build/
+node_modules/
+.github/
+.idea/
+api_mock/
+public/
+coverage/
+**__fixtures__**

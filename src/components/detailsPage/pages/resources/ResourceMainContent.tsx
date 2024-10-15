@@ -2,6 +2,7 @@ import Title from 'components/Title/Title';
 import Divider from 'components/divider/Divider';
 import Subtitle from 'components/subtitle/Subtitle';
 import DataField from 'data-field/DataField';
+import React from 'react';
 
 import Markdown from '../../../../common/markdown/Markdown';
 import { ISelfDescription } from '../../utils/dataMapper';
@@ -66,6 +67,7 @@ export default function ResourceMainContent({ cardData }: Readonly<IDetailsCardP
                             />
                           );
                         }
+                        return <></>
                       })
                     )}
       </div>
@@ -74,21 +76,24 @@ export default function ResourceMainContent({ cardData }: Readonly<IDetailsCardP
       <div className={styles['details-grid-container']}>
         {otherPropertiesList &&
                     otherPropertiesList.map((properties, index) =>
-                      Object.entries(properties).map(([label, content]) => {
-                        if (
-                          label !== 'name' &&
+                      Object
+                        .entries(properties)
+                        .map(([label, content]) => {
+                          if (
+                            label !== 'name' &&
                                 label !== 'description' &&
                                 content !== 'Unknown'
-                        ) {
-                          return (
-                            <DataField
-                              key={`${label}-${index}`}
-                              label={label}
-                              content={String(content)}
-                            />
-                          );
-                        }
-                      })
+                          ) {
+                            return (
+                              <DataField
+                                key={`${label}-${index}`}
+                                label={label}
+                                content={String(content)}
+                              />
+                            );
+                          }
+                          return <></>;
+                        })
                     )}
       </div>
     </div>

@@ -1,6 +1,5 @@
 import { useResource } from '@axios-use/react';
 import axios from 'axios';
-import { t } from 'i18next';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -8,7 +7,22 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 import history from '../../common/history'
 import RadioButton from '../../common/radio';
-import { Column, Row, Style, Card, Circle, H4Text, BodyText, ButtonText, H4LightText, MasterButton, HorizontalLine, OutlineButton, TextInput, Image, BlueButton } from '../../common/styles';
+import {
+  BlueButton,
+  BodyText,
+  ButtonText,
+  Card,
+  Circle,
+  Column,
+  H4LightText,
+  H4Text,
+  HorizontalLine,
+  MasterButton,
+  OutlineButton,
+  Row,
+  Style,
+  TextInput
+} from '../../common/styles';
 // import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Row, Style, TextInput, Image, BlueButton } from "../../common/styles";
 import { Padding } from '../discovery/tabs/style';
 
@@ -42,12 +56,11 @@ const RequestVCView = ({ type, confirmationCode }) => {
   </>
 
   const requestVCUrl = process.env.REACT_APP_EDGE_API_URI + `/onboarding/register/${type}/vc/request/` + confirmationCode
-  const [{ data, error, isLoading, code }] = useResource(() => ({ url: requestVCUrl, method: 'POST', data: {}, }), [])
+  const [{ data, error, isLoading }] = useResource(() => ({ url: requestVCUrl, method: 'POST', data: {}, }), [])
 
   useEffect(() => { }, [isLoading, error, data]);
 
-  let isError = error != undefined;
-  const isSuccess = !isLoading && error == undefined && !(data === undefined)
+  const isSuccess = !isLoading && error === undefined && !(data === undefined)
 
   if (isSuccess) {
     return thanksForConfirmingVC
@@ -184,9 +197,8 @@ const DontHaveDidView = ({ dontHaveDidModal }) => {
     )
   }
 
-  let isError = error != undefined;
-  const isSuccess = !isLoading && error == undefined && !(data === undefined)
-
+  //  let isError = error != undefined;
+  //  const isSuccess = !isLoading && error == undefined && !(data === undefined)
   // if (isSuccess) return
 
   return <>
@@ -244,7 +256,7 @@ const OnboardingPage = () => {
 
   // DONT HAVE DID MODAL
   const [dontHaveDidModalIsOpen, setDontHaveDidModalIsOpen] = useState(false);
-  const [dontHaveDidModalOpacity, setDontHaveModalOpacity] = useState(0);
+  const [, setDontHaveModalOpacity] = useState(0);
 
   function dontHaveDidModal(e) {
     setDontHaveModalOpacity(0);
@@ -291,8 +303,9 @@ const OnboardingPage = () => {
     if (activeStage == 1) {
       return customerOrProviderView()
     } else if (activeStage == 2) {
-      if (customerOrOrganization == ORGANIZATION) {return <OrganizationDetailsView nextStage={() => { setActiveStage(3) }} didStage={() => { setActiveStage(5) }} />;}
-      else { return userFillDetailsView() }
+      if (customerOrOrganization == ORGANIZATION) {return <OrganizationDetailsView nextStage={() => { setActiveStage(3) }} didStage={() => { setActiveStage(5) }} />;} else {
+        return UserFillDetailsView()
+      }
     } else if (activeStage == 3) {
       return confirmationEmailView()
     } else if (activeStage == 4) {
@@ -330,14 +343,26 @@ const OnboardingPage = () => {
 
   const stepsPane = ({ activeStage = 1, isNextDisabled = false, isPreviousDisabled = false }) => {
 
-    const isCustomer = CUSTOMER == customerOrOrganization
-
     return (
       <>
         <StepsPane type={customerOrOrganization} currentStage={activeStage} />
         <Row>
-          <Padding vertical='32px'>{!isPreviousDisabled && <MasterButton disabled={isPreviousDisabled} onClick={() => previousStage()}>{t('form.prev')}</MasterButton>}</Padding>
-          <Padding vertical='32px'>{!isNextDisabled && <MasterButton ref={nextButtonRef} disabled={isNextDisabled} onClick={() => nextStage()}>{t('form.next')}</MasterButton>}</Padding>
+          <Padding vertical="32px">
+            {
+              !isPreviousDisabled &&
+              <MasterButton disabled={isPreviousDisabled} onClick={() => previousStage()}>
+                {t('form.prev')}
+              </MasterButton>
+            }
+          </Padding>
+          <Padding vertical="32px">
+            {
+              !isNextDisabled &&
+              <MasterButton ref={nextButtonRef} disabled={isNextDisabled} onClick={() => nextStage()}>
+                {t('form.next')}
+              </MasterButton>
+            }
+          </Padding>
         </Row>
       </>
     )
@@ -384,7 +409,7 @@ const OnboardingPage = () => {
     return userFillDetailsFormRef.current.reportValidity()
   }
 
-  const userFillDetailsView = () => {
+  const UserFillDetailsView = () => {
     const [userFormDetailsInput, setInput] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -490,7 +515,7 @@ const OnboardingPage = () => {
   }
 
   const disableNextButton = () => {
-    if (activeStage == 1) {
+    if (activeStage === 1) {
       return customerOrOrganization == null
     }
     return true
@@ -501,26 +526,6 @@ const OnboardingPage = () => {
       return false
     }
     return true
-  }
-
-  const complienceCheckMessageView = () => {
-    return <>
-      <Style width='633px' height='246px'>
-        <Padding horizontal='20px'>
-          <Card background='#fff' borderColor='#0' boxShadow={'0px 2px 4px 0px rgb(29 36 48 / 12%)'}>
-            <Padding horizontal='24px'>
-              <H4LightText>Complience Check</H4LightText>
-              <BodyText color='#818C99'>Your onboarding request will be checked by the AISBL. This may take  some time. Please enter your email address to recieve status updates of your onboarding. </BodyText>
-              <HorizontalLine />
-              <Padding vertical='8px' />
-              <TextInput type='text' placeholder='Email' />
-              <Padding vertical='32px' />
-            </Padding>
-
-          </Card>
-        </Padding>
-      </Style>
-    </>
   }
 
   return <>

@@ -1,12 +1,11 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { useNavigate, useParams, Navigate } from 'react-router-dom';
+import { Navigate, NavLink, useNavigate, useParams } from 'react-router-dom';
 
 import { resetDescriptorFile } from '../../actions';
-import { HeaderTitle, BodyText, BlueButton, CancelButton, RedText } from '../../common/styles';
+import { BlueButton, BodyText, CancelButton, HeaderTitle, RedText } from '../../common/styles';
 import { Tab } from '../../common/tabs/tab';
 import { ToggleSwitch } from '../../common/toggle/ToggleSwitch'
 
@@ -70,21 +69,28 @@ class ProvideAttributes extends Component {
     const { index, type } = this.props.params;
     const checked = this.state.checked;
     const descriptor = this.props.serviceDescriptor.parsed_descriptor.results;
-    const that = this;
-    const header = descriptor.map(function (object, i) {
-      return <Tab key={i} index={i} currentIndex={index} link={'/provide/'+type+'/confirm/' + i} />
-    });
+    const header = descriptor
+      .map((object, descriptorIndex) => (
+        <Tab key={descriptorIndex} index={descriptorIndex} currentIndex={index}
+          link={'/provide/' + type + '/confirm/' + descriptorIndex}/>
+      ));
 
     const selectedDescriptor = descriptor[index];
 
-    const body = selectedDescriptor.attributes.map(function (attribute, i) {
-      if ((checked === true && attribute.mandatory) || checked === false) {
-        return <tr key={i} className={attribute.mandatory && !attribute.value ? 'invalid' : ''} ><td>{attribute.name}</td><td>{attribute.mandatory && !attribute.value ? 'Required' : attribute.value}</td></tr>
-      }
-    })
+    const body = selectedDescriptor.attributes
+      .map((attribute, descriptorIndex) => {
+        if ((checked === true && attribute.mandatory) || checked === false) {
+          return (
+            <tr key={descriptorIndex} className={attribute.mandatory && !attribute.value ? 'invalid' : ''}>
+              <td>{attribute.name}</td>
+              <td>{attribute.mandatory && !attribute.value ? 'Required' : attribute.value}</td>
+            </tr>)
+        }
+        return <></>
+      })
 
     let back;
-    if (index != 0) {
+    if (index !== 0) {
       back = <CancelButton onClick={this.clickBack} >Back</CancelButton>
     } else {
       back = <NavLink to={'/provide/' + type + '/upload'}><CancelButton>Back</CancelButton></NavLink>
@@ -93,7 +99,7 @@ class ProvideAttributes extends Component {
     let info_label;
 
     let next;
-    if (index == descriptor.length - 1) {
+    if (index === descriptor.length - 1) {
       if (!this.props.serviceDescriptor.parsed_descriptor.valid) {
         info_label = <RedText>Service Descriptor is invalid. Please fix descriptor to proceed.</RedText>
       }

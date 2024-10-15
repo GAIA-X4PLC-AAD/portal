@@ -1,7 +1,6 @@
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import { BodySmallBoldText, CaptionText, Card, Column, Row } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
@@ -20,12 +19,11 @@ const DateTimeCard = () => {
     </Column>
   }
 
-  const { t, i18n } = useTranslation();
-
+  // eslint-disable-next-line no-undef
   const _lang = i18n['language']
 
-  const _isEs = _lang.indexOf('es') == 0
-  const _isDe = _lang.indexOf('de') == 0
+  const _isEs = _lang.indexOf('es') === 0
+  const _isDe = _lang.indexOf('de') === 0
   if (_isEs) {
     require('moment/locale/es');
     moment.locale('es');

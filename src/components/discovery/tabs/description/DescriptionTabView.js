@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Image, Column, Style, Tag, Padding, BlueButton } from '../../../../common/styles';
+import { BlueButton, Column, Image, Padding, Style, Tag } from '../../../../common/styles';
 import DataPreview from '../dataPreview/DataPreview';
 import { Columns } from '../dataPreview/style';
 import * as S from '../style';
@@ -23,11 +23,15 @@ const DescriptionTabView = (props,) => {
   }
 
   const buildCompositeServices = () => {
-    if (details == undefined || props.params['type'] != 'composite-service') { return }
+    if (!details || props.params['type'] !== 'composite-service') {
+      return
+    }
 
     const data2 = details['dependent_services'] || [];
 
-    if (data2.length == 0) {return;}
+    if (data2.length === 0) {
+      return;
+    }
 
     return (
       <>
@@ -38,9 +42,10 @@ const DescriptionTabView = (props,) => {
               img_preview_url: record.img_preview_url,
               subline: providerLink(record),
               description: record.description,
-              onDetailsClick: () => { return; }
+              onDetailsClick: () => {
+              }
             }
-            return <Style marginLeft={index == 0 ? '0px' : '10px'} marginTop={'36px'} key={record.id}>
+            return <Style marginLeft={index === 0 ? '0px' : '10px'} marginTop={'36px'} key={record.id}>
               <DataPreview data={parsed} width='230px' minHeight='' shouldShowDetailsButton={false} />
             </Style>
           })
@@ -57,7 +62,9 @@ const DescriptionTabView = (props,) => {
   };
 
   const showBuildButton = () => {
-    if (props.params['type'] != 'composite-service') {return null;}
+    if (props.params['type'] !== 'composite-service') {
+      return null;
+    }
     return (
       <Style marginTop='auto' marginBottom='auto'>
         <BlueButton marginLeft='0px' onClick={() => { navigate(`/sp/${details['id']}`) }}>
