@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Resource } from 'types/resources.model';
+import { Resource, ResourceDetails } from 'types/resources.model';
 
 import { CypherQueryResult, ServiceOfferingInput } from '../utils/dataMapper';
 
@@ -116,13 +116,35 @@ export const CypherQueryApiService = {
   /**
    * Returns details about a resource
    *
-   * @param claimsGraphUri the id of the resource to be queried
+   * @param uri the id of the resource to be queried
    */
-  async getOneResourceWithDetails(claimsGraphUri: string): Promise<CypherQueryResult> {
-    const uri = claimsGraphUri.replace(/'/g, '\\\'');
+  async getOneResourceWithDetails(uri: string): Promise<ResourceDetails> {
     return cypherQuery({
-      statement: `MATCH (n:HDMap) WHERE '${uri}' IN n.claimsGraphUri RETURN properties(n), labels(n) LIMIT 1`,
-    })
+      statement: `
+      MATCH (dataResource) 
+      
+      WHERE '${uri}' IN dataResource.uri 
+      OPTIONAL MATCH (dataResource)-[:format]-(format) 
+      OPTIONAL MATCH (dataResource)-[:content]-(content) 
+      OPTIONAL MATCH (dataResource)-[:producedBy]-(producedBy) 
+      
+      RETURN 
+        properties(dataResource).uri as uri, 
+        properties(dataResource).name as name, 
+        properties(dataResource).description as description, 
+        properties(dataResource).license as license, 
+        properties(dataResource).copyrightOwnedBy as copyrightOwnedBy, 
+        properties(dataResource).claimsGraphUri as claimsGraphUri, 
+        properties(dataResource).containsPII as containsPII,  
+        properties(dataResource).obsoleteDateTime as obsoleteDateTime, 
+        properties(dataResource).expirationDateTime as expirationDateTime, 
+        properties(content).levelOfDetail as levelOfDetail, 
+        properties(content).trafficDirection as trafficDirection, 
+        properties(content).roadTypes as roadTypes, 
+        properties(content).laneTypes as laneTypes, 
+        properties(producedBy).legalName as legalName
+      `,
+    }).then(queryResult => queryResult.items[0]);
   },
 
   /**

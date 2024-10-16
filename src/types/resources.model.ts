@@ -9,15 +9,18 @@ export interface Resource {
 }
 
 export interface ResourceDetails {
+    uri: string,
+    name: string,
+    description: string,
+    claimsGraphUri: string[],
     license: string,
     copyrightOwnedBy: string,
     expirationDateTime: string,
-    roadType: string,
+    roadTypes: string,
     containsPII: boolean,
-    name: string,
-    description: string,
     levelOfDetail: string,
     trafficDirection: string,
     obsoleteDateTime: string,
-    laneTypes: string[]
+    laneTypes: string[],
+    legalName: string,
 }

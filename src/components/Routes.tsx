@@ -43,8 +43,7 @@ const Routes: FC = () => (
       <Route path="/service-offerings" element={ViewContainer(<ProtectedRoute><ServiceOfferings/></ProtectedRoute>)}/>
       <Route path="/participants" element={ViewContainer(<Participants />)} />
       <Route path="/resources" element={ViewContainer(<ProtectedRoute><ResourceSearchPage/></ProtectedRoute>)}/>
-      <Route path="/resources/:resourceId"
-        element={ViewContainer(<ProtectedRoute><ResourceDetailsPage/></ProtectedRoute>)}/>
+      <Route path="/resources/*" element={ViewContainer(<ProtectedRoute><ResourceDetailsPage/></ProtectedRoute>)}/>
       <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
       <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
       <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />

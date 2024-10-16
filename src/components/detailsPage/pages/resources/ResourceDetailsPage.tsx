@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiService';
 
 import { ResourceDetailsContext } from '../../../../context/ResourceDetailsContext';
+import { ResourceDetails } from '../../../../types/resources.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
 import LoadingIndicator from '../../../loading_view/LoadingIndicator';
@@ -19,8 +20,8 @@ import ResourceMap from './components/map/ResourceMap';
 
 const ResourceDetailsPage = () => {
   const { t } = useTranslation();
-  const [resourceDetails, setResourceDetails] = useState(null);
-  const { resourceId } = useParams();
+  const [resourceDetails, setResourceDetails] = useState<ResourceDetails>();
+  const { '*': resourceId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -48,7 +49,7 @@ const ResourceDetailsPage = () => {
           <NoContent message={'No data available.'} visible={!resourceDetails}/>
           {resourceDetails && (
             <DetailsPage>
-              <Header title={`${t('left-menu.resources')} ${ARROW_RIGHT} ${name}`} />
+              <Header title={`${t('left-menu.resources')} ${ARROW_RIGHT} ${resourceDetails.name}`} />
               <ResourceDetailsContext.Provider value={resourceDetails}>
                 <DetailsContent>
                   <DetailsMainContent>

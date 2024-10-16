@@ -517,7 +517,19 @@
   },
   "resources": {
     "search-bar-text": "Search for special resources",
-    "no-resources-available": "No resources available"
+    "no-resources-available": "No resources available",
+    "provided-by": "Provided by",
+    "copyright-owned-by": "Copyright owned by",
+    "license": "License",
+    "containsPII": "Contains PII",
+    "expiration-date-time": "Expiration date time",
+    "obsolete-date-time": "Obsolete date time",
+    "road-types": "Road types",
+    "lane-types": "Lane types",
+    "level-of-detail": "Level of detail",
+    "traffic-direction": "Traffic direction",
+    "download-description": "Download description",
+    "contact-provider": "Contact provider"
   },
   "ontologies": {
     "title": "Ontology",
@@ -543,6 +555,10 @@
     "results": "results",
     "is-loading": "loading...",
     "no-title": "No title available",
-    "no-description": "No description available"
+    "no-description": "No description available",
+    "general-details": "General details",
+    "content-details": "Content details",
+    "compatible-offerings": "Compatible offerings",
+    "directly-related-offerings": "Directly related offerings"
   }
 }

@@ -72,7 +72,7 @@ export const resourceToItemCardData = (resource: Resource): ItemCardData => {
     resource.labels.join(', '),
     resource.claimsGraphUri.join(', '),
     resource.description,
-    `/resources/details/${resource.uri}`,
+    `/resources/${resource.uri}`,
     true,
     'Card:' + resource.uri + ':' + resource.name
   );
