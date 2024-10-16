@@ -9,6 +9,7 @@ interface IGaiaXButton {
   className: string;
   disabled: boolean;
   children: React.ReactNode;
+  type: string;
 }
 
 const GaiaXButton: FC<Readonly<IGaiaXButton>> = ({
@@ -17,6 +18,7 @@ const GaiaXButton: FC<Readonly<IGaiaXButton>> = ({
   className,
   disabled = false,
   children,
+  type
 }) => {
   const disabledStyle = disabled ? [styles.buttonDisabled] : []
 
@@ -25,6 +27,7 @@ const GaiaXButton: FC<Readonly<IGaiaXButton>> = ({
       className={classnames([className, styles.button, ...disabledStyle])}
       onClick={handleOnClick}
       disabled={disabled}
+      type={type}
     >
       {!!label && label}
       {!!children && children}
