@@ -24,7 +24,7 @@ const GaiaXButton: FC<Readonly<IGaiaXButton>> = ({
 
   return (
     <button
-      className={classnames([className, styles.button, ...disabledStyle])}
+      className={classnames([...disabledStyle, className, styles.button])}
       onClick={handleOnClick}
       disabled={disabled}
       type={type}

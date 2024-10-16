@@ -1,41 +1,48 @@
 import { useEffect, useState } from 'react';
+import { checkTransferStatus } from 'services/edcServiceApi';
 
-import { checkTransferStatus } from '../../../services/edcServiceApi';
 import { DataTransferInputProps, TransferProcessInformation, TransferStates } from '../../../types/edc.model';
 
 type TransferStateInput = {
-  isLoading: true;
+  counter: number;
+  isVisible: true;
   transferInput: DataTransferInputProps;
   transferProcessInformation: TransferProcessInformation;
 } | {
-  isLoading: false;
+  counter: number;
+  isVisible: false
 }
 
 /**
  * Retries data transfer status repeatedly in a give interval until transfer state becomes 'COMPLETED'.
  */
 export const useTransferState = () => {
-  const [input, setInput] = useState<TransferStateInput>({ isLoading: false });
+  const [state, setState] = useState<TransferStateInput>({
+    counter: 0,
+    isVisible: false,
+  });
   const [transferState, setTransferState] = useState<TransferStates>();
 
   useEffect(() => {
-    if (input.isLoading) {
-      setInput({ ...input, isLoading: false });
-      checkTransferStatus(input.transferInput, input.transferProcessInformation)
+    if (state.isVisible && state.counter) {
+      checkTransferStatus(state.transferInput, state.transferProcessInformation)
         .then(transferStateInformation => {
           setTransferState(transferStateInformation.state)
+
           if (transferStateInformation.state !== 'COMPLETED') {
-            restartMonitoring(setInput, input);
+            rescheduleTransferStatusCheck(setState, state);
           }
-        });
+        })
     }
-  }, [input.isLoading]);
+  }, [state.isVisible, state.counter]);
 
   return {
+    isVisible: state.isVisible,
     transferState,
     startMonitoring: (transferInput: DataTransferInputProps, transferProcessInformation: TransferProcessInformation) => {
-      setInput({
-        isLoading: true,
+      setState({
+        counter: 6,
+        isVisible: true,
         transferInput,
         transferProcessInformation
       })
@@ -43,9 +50,11 @@ export const useTransferState = () => {
   }
 }
 
-const restartMonitoring = (setInput: (input: TransferStateInput) => void, input: TransferStateInput) => {
+const rescheduleTransferStatusCheck = (setInput: (input: TransferStateInput) => void, input: TransferStateInput) => {
   setTimeout(() => {
-    setInput({ ...input, isLoading: true } as TransferStateInput)
-  }, 3000)
+    if (input.counter) {
+      setInput({ ...input, counter: input.counter - 1 } as TransferStateInput)
+    }
+  }, 10000) // launch after 10 seconds
 }
 
