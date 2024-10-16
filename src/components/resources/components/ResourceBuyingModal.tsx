@@ -40,77 +40,89 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
   const [container, setContainer] = useState(`${process.env.REACT_APP_DEFAULT_EDC_DESTINATION_CONTAINER}`);
   const [account, setAccount] = useState(`${process.env.REACT_APP_DEFAULT_EDC_DESTINATION_ACCOUNT}`);
 
+  const submit = (event) => {
+    console.debug('onTransfer has been called')
+    event.preventDefault()
+    if (event.target.checkValidity()) {
+      onTransfer({
+        contractId: resourceDetails.contractId || '',
+        edc: {
+          consumerBaseUrl,
+          producerBaseUrl
+        },
+        dataDestination: {
+          container,
+          account
+        }
+      })
+    } else {
+      event.target.reportValidity();
+    }
+  }
+
   return (
-    <Modal isOpen={isOpen} className={styles.modal}>
-      <ModalHeader>
-        <Title>{title}</Title>
-        <ModalXButton onClose={onClose}/>
-      </ModalHeader>
+    <form onSubmit={submit}>
+      <Modal isOpen={isOpen} className={styles.modal}>
+        <ModalHeader>
+          <Title>{title}</Title>
+          <ModalXButton onClose={onClose}/>
+        </ModalHeader>
 
-      <ModalBody>
-        <label className={styles.label} htmlFor="EDC address">
-          {`${t('buy-dialog.edc-address')}*`}
-          <input
-            className={styles.edcTextInput}
-            type="text"
-            name="EDC address"
-            placeholder={t('buy-dialog.enter-edc-address')}
-            value={consumerBaseUrl}
-            onChange={(event) => setConsumerBaseUrl(event.target.value)}
-            required
+        <ModalBody>
+          <label className={styles.label} htmlFor="EDC address">
+            {`${t('buy-dialog.edc-address')}*`}
+            <input
+              className={styles.edcTextInput}
+              type="text"
+              name="EDC address"
+              placeholder={t('buy-dialog.enter-edc-address')}
+              value={consumerBaseUrl}
+              onChange={(event) => setConsumerBaseUrl(event.target.value)}
+              required
+            />
+          </label>
+
+          <label className={styles.label} htmlFor="EDC destination account">
+            {`${t('buy-dialog.edc-destination-account')}*`}
+            <input
+              className={styles.edcTextInput}
+              type="text"
+              name="EDC destination account"
+              placeholder={t('buy-dialog.enter-edc-destination-account')}
+              value={account}
+              onChange={(event) => setAccount(event.target.value)}
+              required
+            />
+          </label>
+
+          <label className={styles.label} htmlFor="EDC destination container">
+            {`${t('buy-dialog.edc-destination-container')}*`}
+            <input
+              className={styles.edcTextInput}
+              type="text"
+              name="EDC destination container"
+              placeholder={t('buy-dialog.enter-edc-destination-container')}
+              value={container}
+              onChange={(event) => setContainer(event.target.value)}
+              required
+            />
+          </label>
+        </ModalBody>
+
+        <ModalFooter>
+          <GaiaXButton
+            label={t('buy-dialog.transfer-button')}
+            className={classnames([styles.transferButton, styles.actionButton])}
+            type="submit"
           />
-        </label>
-
-        <label className={styles.label} htmlFor="EDC destination account">
-          {`${t('buy-dialog.edc-destination-account')}*`}
-          <input
-            className={styles.edcTextInput}
-            type="text"
-            name="EDC destination account"
-            placeholder={t('buy-dialog.enter-edc-destination-account')}
-            value={account}
-            onChange={(event) => setAccount(event.target.value)}
-            required
+          <GaiaXButton
+            label={t('buy-dialog.cancel-button')}
+            handleOnClick={onClose}
+            className={classnames([styles.cancelButton, styles.actionButton])}
           />
-        </label>
-
-        <label className={styles.label} htmlFor="EDC destination container">
-          {`${t('buy-dialog.edc-destination-container')}*`}
-          <input
-            className={styles.edcTextInput}
-            type="text"
-            name="EDC destination container"
-            placeholder={t('buy-dialog.enter-edc-destination-container')}
-            value={container}
-            onChange={(event) => setContainer(event.target.value)}
-            required
-          />
-        </label>
-      </ModalBody>
-
-      <ModalFooter>
-        <GaiaXButton
-          label={t('buy-dialog.transfer-button')}
-          handleOnClick={() => onTransfer({
-            contractId: resourceDetails.contractId || '',
-            edc: {
-              consumerBaseUrl,
-              producerBaseUrl
-            },
-            dataDestination: {
-              container,
-              account
-            }
-          })}
-          className={classnames([styles.transferButton, styles.actionButton])}
-        />
-        <GaiaXButton
-          label={t('buy-dialog.cancel-button')}
-          handleOnClick={onClose}
-          className={classnames([styles.cancelButton, styles.actionButton])}
-        />
-      </ModalFooter>
-    </Modal>
+        </ModalFooter>
+      </Modal>
+    </form>
   )
 }
 
