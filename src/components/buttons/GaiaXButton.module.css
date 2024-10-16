@@ -12,12 +12,18 @@
     padding: 8px 16px 8px 16px;
 }
 
-.buttonDisabled {
-    background-color: dimgray;
-}
-
 .button:hover {
     transition: all 0.4s ease 0s;
     cursor: pointer;
     transform: scale(1.2);
 }
+
+.button.buttonDisabled {
+    color: lightgray;
+    background-color: dimgray;
+}
+
+.buttonDisabled:hover {
+    transform: none;
+}
+

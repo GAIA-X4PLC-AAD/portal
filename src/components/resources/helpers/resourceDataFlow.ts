@@ -9,6 +9,7 @@ import {
 } from '../../../services/edcServiceApi';
 import { DataTransferInputProps, TransferProcessInformation } from '../../../types/edc.model';
 import { Resource, ResourceDetails } from '../../../types/resources.model';
+import { delay } from '../../../utils/timers';
 
 /**
  * Loads resources for which the following criteria are met:
@@ -83,10 +84,18 @@ export const resourceDataTransfer = async (input: DataTransferInputProps): Promi
   try {
     const contractInformation = await loadContractInformation(input);
     const agreementInformation = await negotiateContract(input, contractInformation);
-    const contractAgreementInformation = await loadAgreement(input, agreementInformation);
-    return await initiateDataTransfer(input, contractAgreementInformation, contractInformation);
+
+    // There is a lag between the previous calls and the arrival of the result to the endpoint which provides the
+    // agreement. If it is called to close to the previous calls then in the response the contractAgreementUID will
+    // be missing.
+    const contractAgreementInformation = await delay(() => {
+      return loadAgreement(input, agreementInformation);
+    }, 2000);
+
+    return initiateDataTransfer(input, contractAgreementInformation, contractInformation);
   } catch (error) {
     console.error('Resource data transfer has failed:', error)
     throw error
   }
 }
+

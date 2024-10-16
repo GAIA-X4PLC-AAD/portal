@@ -271,6 +271,7 @@
     "enter-edc-destination-account": "Please enter the destination account for data transfer",
     "edc-destination-container": "Destination container",
     "enter-edc-destination-container": "Please enter the destination container for data transfer",
+    "transfer-state": "Transfer state",
     "transfer-button": "Transfer",
     "cancel-button": "Cancel"
   },

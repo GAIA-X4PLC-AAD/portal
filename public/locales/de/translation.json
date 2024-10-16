@@ -269,6 +269,7 @@
     "enter-edc-destination-account": "Bitte geben Sie den ziel Konto ein",
     "edc-destination-container": "Ziel Container",
     "enter-edc-destination-container": "Bitte geben sie den zie Container ein",
+    "transfer-state": "Transfer Status",
     "transfer-button": "Übertragen",
     "cancel-button": "Abbrechen"
   },

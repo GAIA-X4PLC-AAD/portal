@@ -39,11 +39,12 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
   const [consumerBaseUrl, setConsumerBaseUrl] = useState(`${process.env.REACT_APP_DEFAULT_EDC_CONSUMER.replace(/\/$/, '')}`);
   const [container, setContainer] = useState(`${process.env.REACT_APP_DEFAULT_EDC_DESTINATION_CONTAINER}`);
   const [account, setAccount] = useState(`${process.env.REACT_APP_DEFAULT_EDC_DESTINATION_ACCOUNT}`);
+  const [isTransferButtonDisabled, setIsTransferButtonDisabled] = useState(false);
 
   const submit = (event) => {
-    console.debug('onTransfer has been called')
     event.preventDefault()
     if (event.target.checkValidity()) {
+      setIsTransferButtonDisabled(true);
       onTransfer({
         contractId: resourceDetails.contractId || '',
         edc: {
@@ -113,6 +114,7 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
           <GaiaXButton
             label={t('buy-dialog.transfer-button')}
             className={classnames([styles.transferButton, styles.actionButton])}
+            disabled={isTransferButtonDisabled}
             type="submit"
           />
           <GaiaXButton

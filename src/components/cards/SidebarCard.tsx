@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import Text from 'components/Text/Text';
 import Title from 'components/Title/Title';
 import GaiaXButton from 'components/buttons/GaiaXButton';
@@ -27,13 +28,12 @@ export default function SidebarCard({
 }: Readonly<ISidebarCard>) {
   const { t } = useTranslation();
   const [isOpen, setOpen] = useState(false);
-  const { transferState, startMonitoring } = useTransferState();
+  const { isVisible, transferState, startMonitoring } = useTransferState();
 
   const handleClickContactOrBuy = () => {
     setOpen(true);
   };
 
-  console.debug('Transfer state:', transferState);
   return (
     <>
       <ResourceBuyingModal
@@ -41,11 +41,12 @@ export default function SidebarCard({
         title={resource.name}
         resourceDetails={resource}
         onTransfer={(transferInput) => {
-          setOpen(false)
           resourceDataTransfer(transferInput)
             .then((transferProcessInformation) => {
               startMonitoring(transferInput, transferProcessInformation)
             })
+            .finally(() => setOpen(false))
+
         }}
         onClose={() => setOpen(false)}
       />
@@ -53,10 +54,15 @@ export default function SidebarCard({
         <Title>{title}</Title>
         <Subtitle>{subtitle}</Subtitle>
         <Text>{text}</Text>
+        <Text className={styles.transferStateLabel} visible={isVisible}>{t('buy-dialog.transfer-state')}</Text>
+        <Text className={styles.transferState} visible={isVisible}>
+          <span className={styles.transferStateValue}>{`${transferState}`}</span>
+        </Text>
         <GaiaXButton
+          className={classnames([styles.buyButton])}
           label={t('details.sidebar-buy-button')}
           handleOnClick={handleClickContactOrBuy}
-          disabled={!resource.contractId}
+          disabled={!resource.contractId || !!transferState}
         />
       </div>
     </>

@@ -24,7 +24,6 @@ export default function DetailsCard({ cardData }: Readonly<IDetailsCardProps>) {
     cardData && cardData.items
       ? cardData.items.map((item) => item['properties(n)'])
       : [];
-  console.log('Property list: ', propertiesList);
 
   // Temporary solution to extract name and description for our Card. Will be refactored once we have a better paylaod structure
   let name, description;
