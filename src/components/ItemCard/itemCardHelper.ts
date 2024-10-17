@@ -17,7 +17,7 @@ export interface ItemCardData {
 const NO_TITLE = i18next.t('common.no-title');
 const NO_DESCRIPTION = i18next.t('common.no-description');
 
-const createItemCardData = (
+export const createItemCardData = (
   label: string,
   title: string | undefined,
   description: string | undefined,
@@ -56,7 +56,6 @@ export const shapeToItemCardData = (shape: Shape): ItemCardData => {
 }
 
 export const serviceToItemCardData = (service: ServiceOffering): ItemCardData => {
-  console.log(service)
   return createItemCardData(
     service.label,
     service.name,
