@@ -45,6 +45,9 @@ export default function SidebarCard({
             .then((transferProcessInformation) => {
               startMonitoring(transferInput, transferProcessInformation)
             })
+            .catch(() => {
+              console.debug('error')
+            })
             .finally(() => setOpen(false))
 
         }}
