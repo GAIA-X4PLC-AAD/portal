@@ -9,10 +9,10 @@ export const useNavbar = () => {
       path: '/service-offerings',
       navigationItemName: t('service-offerings.title'),
     },
-    // {
-    //   path: "/participants",
-    //   navigationItemName: t("left-menu.tooltip.participants"),
-    // },
+    {
+      path: '/participants',
+      navigationItemName: t('left-menu.tooltip.participants'),
+    },
     {
       path: '/resources',
       navigationItemName: t('left-menu.tooltip.resources'),
