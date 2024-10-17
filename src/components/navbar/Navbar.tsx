@@ -1,4 +1,5 @@
-import GaiaXButton from 'components/buttons/GaiaXButton';
+/* test coverage not required */
+import GaiaXButton from 'common/components/buttons/GaiaXButton';
 import LanguageModal from 'components/modals/LanguageModal';
 import { AuthContext } from 'context/AuthContextProvider';
 import { useNavbar } from 'hooks/useNavbar';

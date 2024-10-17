@@ -1,9 +1,9 @@
 import { render, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import React, { ReactNode } from 'react';
-import { MemoryRouter } from 'react-router';
+import React from 'react';
 
 import ResourceSearchPage from '../../../src/components/resources/ResourceSearchPage';
+import { withRouter } from '../../common/testHelper';
 
 import { normal_render } from './__fixtures__/useResources_ResourceSearchPage';
 
@@ -12,11 +12,6 @@ const useResources = jest.fn();
 jest.mock('../../../src/components/resources/hooks/useResources', () => ({
   useResources: () => useResources()
 }))
-const withRouter = (component: ReactNode) => (<>
-  <MemoryRouter>
-    {component}
-  </MemoryRouter>
-</>);
 
 describe('ResourcesSearchPage', () => {
   it('renders all resources and filter assets correctly', () => {

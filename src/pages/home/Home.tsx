@@ -1,4 +1,4 @@
-import Text from 'components/Text/Text';
+import Text from 'common/components/fields/Text/Text';
 import Title from 'components/Title/Title';
 import HeaderWithImage from 'components/headerWithImage/HeaderWithImage';
 import { AuthContext } from 'context/AuthContextProvider';
