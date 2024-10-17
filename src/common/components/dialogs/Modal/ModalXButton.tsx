@@ -1,6 +1,5 @@
+import GaiaXButton from 'common/components/buttons/GaiaXButton';
 import React, { FC } from 'react';
-
-import GaiaXButton from '../../../components/buttons/GaiaXButton';
 
 import styles from './ModalXButton.module.css'
 
