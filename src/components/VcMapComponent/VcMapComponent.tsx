@@ -2,10 +2,8 @@ import { GeoJSONLayer, VcsApp, VcsModule, Viewpoint } from '@vcmap/core';
 import { FC, useEffect } from 'react';
 import './VcMapComponent.css';
 import { v4 as uuidv4 } from 'uuid';
-
 const VcMapComponent: FC = () => {
   const mapId = uuidv4();
-
   const loadModule = async (app: VcsApp, url: string) => {
     const config = await fetch(url).then(response => response.json());
     const module = new VcsModule(config);
@@ -30,8 +28,8 @@ const VcMapComponent: FC = () => {
       try {
         const vcsApp = new VcsApp();
         vcsApp.maps.setTarget(mapId);
-        await loadModule(vcsApp, new URL('./../../../../../../../simple-config.json', window.location.href).toString());
-        const geoJSONUrl = new URL('./../../../../../../../vienna-streets.geojson', window.location.href).toString();
+        await loadModule(vcsApp, new URL('/simple-config.json', window.location.href).toString());
+        const geoJSONUrl = new URL('/vienna-streets.geojson', window.location.href).toString();
         const layer = new GeoJSONLayer({ url: geoJSONUrl });
         vcsApp.layers.add(layer);
         await layer.activate();

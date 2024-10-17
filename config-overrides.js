@@ -41,9 +41,9 @@ module.exports = override(
           { from: 'node_modules/@vcmap-cesium/engine/Build/Workers', to: `${cesiumBaseUrl}/Workers` },
           { from: 'node_modules/@vcmap-cesium/engine/Build/ThirdParty', to: `${cesiumBaseUrl}/ThirdParty` },
           { from: 'node_modules/@vcmap-cesium/engine/Source/Assets', to: `${cesiumBaseUrl}/Assets` },
-          { from: 'node_modules/@vcmap-cesium/engine/Build/Workers', to: `resources/details/${cesiumBaseUrl}/Workers` },
-          { from: 'node_modules/@vcmap-cesium/engine/Build/ThirdParty', to: `resources/details/${cesiumBaseUrl}/ThirdParty` },
-          { from: 'node_modules/@vcmap-cesium/engine/Source/Assets', to: `resources/details/${cesiumBaseUrl}/Assets` },
+          { from: 'node_modules/@vcmap-cesium/engine/Build/Workers', to: `resources/${cesiumBaseUrl}/Workers` },
+          { from: 'node_modules/@vcmap-cesium/engine/Build/ThirdParty', to: `resources/${cesiumBaseUrl}/ThirdParty` },
+          { from: 'node_modules/@vcmap-cesium/engine/Source/Assets', to: `resources/${cesiumBaseUrl}/Assets` },
         ],
       }),
       new DefinePlugin({
