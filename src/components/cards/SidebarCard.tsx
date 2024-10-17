@@ -1,7 +1,7 @@
 import classnames from 'classnames';
-import Text from 'components/Text/Text';
+import GaiaXButton from 'common/components/buttons/GaiaXButton';
+import Text from 'common/components/fields/Text/Text';
 import Title from 'components/Title/Title';
-import GaiaXButton from 'components/buttons/GaiaXButton';
 import { useTransferState } from 'components/resources/hooks/useTransferState';
 import Subtitle from 'components/subtitle/Subtitle';
 import React, { useState } from 'react';

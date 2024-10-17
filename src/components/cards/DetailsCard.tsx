@@ -1,4 +1,4 @@
-import Text from 'components/Text/Text';
+import Text from 'common/components/fields/Text/Text';
 import Title from 'components/Title/Title';
 import Divider from 'components/divider/Divider';
 import Subtitle from 'components/subtitle/Subtitle';

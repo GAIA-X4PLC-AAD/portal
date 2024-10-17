@@ -1,16 +1,16 @@
 import classnames from 'classnames';
-import ModalBody from 'common/components/modal/ModalBody';
+import ModalBody from 'common/components/dialogs/Modal/ModalBody';
 import React, { FC, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ResourceDetails } from 'types/resources.model';
 
-import Modal from '../../../common/components/modal/Modal';
-import ModalFooter from '../../../common/components/modal/ModalFooter';
-import ModalHeader from '../../../common/components/modal/ModalHeader';
-import ModalXButton from '../../../common/components/modal/ModalXButton';
+import GaiaXButton from '../../../common/components/buttons/GaiaXButton';
+import Modal from '../../../common/components/dialogs/./Modal/Modal';
+import ModalFooter from '../../../common/components/dialogs/./Modal/ModalFooter';
+import ModalHeader from '../../../common/components/dialogs/./Modal/ModalHeader';
+import ModalXButton from '../../../common/components/dialogs/./Modal/ModalXButton';
 import { DataTransferInputProps } from '../../../types/edc.model';
 import Title from '../../Title/Title';
-import GaiaXButton from '../../buttons/GaiaXButton';
 
 import styles from './ResourceBuyingModal.module.css';
 

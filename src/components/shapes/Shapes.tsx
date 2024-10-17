@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import Horizontal from '../../common/components/./layouts/Horizontal';
+import Main from '../../common/components/./layouts/Main';
+import Vertical from '../../common/components/./layouts/Vertical';
 import ItemCard from '../ItemCard/ItemCard';
 import CardContainer from '../cards/CardContainer';
 import Header from '../header/Header';
-import Horizontal from '../layout/Horizontal';
-import Main from '../layout/Main';
-import Vertical from '../layout/Vertical';
 import LoadingIndicator from '../loading_view/LoadingIndicator';
 import NoContent from '../nocontent/NoContent';
 import SearchBar from '../searchBar/SearchBar';
