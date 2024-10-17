@@ -114,34 +114,37 @@ export const CypherQueryApiService = {
   },
 
   /**
-   *Returns all participants
-   */
+   * Returns all participants.
+   *
+   * @return the selected participant in a {@link CypherQueryResult} type  */
   async getAllParticipants(): Promise<CypherQueryResult> {
     return cypherQuery({
       statement: `
-      MATCH (service)
-        WHERE 'LegalParticipant' IN labels(service)
+      MATCH (participant)
+        WHERE 'LegalParticipant' IN labels(participant)
       RETURN
-        properties(service).legalName AS legalName,
-        labels(service) AS labels
+        properties(participant).legalName AS legalName,
+        labels(participant) AS labels
       `
     });
   },
 
   /**
-   *Returns 1 participant by LegalName
-   */
-  async getParticipantByLegalName(legalName: string): Promise<CypherQueryResult> {
+   * Returns a single participant selected by it legal name.
+   *
+   * @param legalName is the property by which the participant is selected.
+   * @return the selected participant in a {@link CypherQueryResult} type  */
+  async getParticipantDetails(legalName: string): Promise<CypherQueryResult> {
     return cypherQuery({
       statement: `
-      MATCH (service)
-        WHERE 'LegalParticipant' IN labels(service) AND properties(service).legalName CONTAINS '${legalName}'
+      MATCH (participant)
+        WHERE 'LegalParticipant' IN labels(participant) AND properties(participant).legalName CONTAINS '${legalName}'
       RETURN
-        properties(service).legalName AS legalName,
-        properties(service).claimsGraphUri AS claimsGraphUri,
-        properties(service).uri AS uri,
-        properties(service).gaiaxTermsAndConditions AS gaiaxTermsAndConditions,
-        labels(service) AS labels
+        properties(participant).legalName AS legalName,
+        properties(participant).claimsGraphUri AS claimsGraphUri,
+        properties(participant).uri AS uri,
+        properties(participant).gaiaxTermsAndConditions AS gaiaxTermsAndConditions,
+        labels(participant) AS labels
       `
     });
   },

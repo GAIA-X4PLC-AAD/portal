@@ -42,8 +42,9 @@ const Routes: FC = () => (
       <Route path="/" element={<Column><Home /></Column>} />
       <Route path="/home" element={ViewContainer(<Home />)} />
       <Route path="/service-offerings" element={ViewContainer(<ProtectedRoute><ServiceOfferings/></ProtectedRoute>)}/>
-      <Route path="/participants" element={ViewContainer(<ParticipantSearchPage/>)}/>
-      <Route path="/participants/:participantId" element={ViewContainer(<ParticipantDetails/>)}/>
+      <Route path="/participants" element={ViewContainer(<ProtectedRoute><ParticipantSearchPage/></ProtectedRoute>)}/>
+      <Route path="/participants/:participantId"
+        element={ViewContainer(<ProtectedRoute><ParticipantDetails/></ProtectedRoute>)}/>
       <Route path="/resources" element={ViewContainer(<ProtectedRoute><ResourceSearchPage/></ProtectedRoute>)}/>
       <Route path="/resources/:resourceId"
         element={ViewContainer(<ProtectedRoute><ResourceDetailsPage/></ProtectedRoute>)}/>

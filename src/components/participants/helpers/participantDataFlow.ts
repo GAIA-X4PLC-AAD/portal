@@ -13,19 +13,19 @@ export const loadParticipants = async (): Promise<Participant[]> => {
   }
 }
 
-export const getParticipantByLegalName = async (legalName: string): Promise<ParticipantDetail> => {
+export const loadParticipantDetails = async (legalName: string): Promise<ParticipantDetail> => {
   try {
-    const participantDetail = await cypherQuery.getParticipantByLegalName(legalName);
+    const cypherQueryResult = await cypherQuery.getParticipantDetails(legalName);
 
-    if (participantDetail.totalCount === 0) {
+    if (cypherQueryResult.items.length === 0) {
       throw new BusinessObjectNotFound(`Participant with the given LegalName: '${legalName}' does not exist!`, legalName);
     }
 
-    if (participantDetail.totalCount > 1) {
+    if (cypherQueryResult.items.length > 1) {
       throw new MultipleBusinessObjectFound(`Multiple participant exist with the given LegalName: '${legalName}'`, legalName);
     }
 
-    return participantDetail.items[0];
+    return cypherQueryResult.items[0];
   } catch (error) {
     console.error('Error getting participant by legal name:', error);
     throw error;

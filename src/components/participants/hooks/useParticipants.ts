@@ -19,7 +19,7 @@ export const useParticipants = () => {
     } else {
       return 'SHOW_NO_RESULTS'
     }
-  }, [isLoading])
+  }, [isLoading, participants])
 
   useEffect(() => {
     loadParticipants().then((fetchedParticipants) => {

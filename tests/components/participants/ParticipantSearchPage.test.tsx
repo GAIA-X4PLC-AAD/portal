@@ -1,9 +1,9 @@
 import { render, within } from '@testing-library/react';
-import React, { ReactNode } from 'react';
+import React from 'react';
 import '@testing-library/jest-dom';
-import { MemoryRouter } from 'react-router';
 
 import ParticipantSearchPage from '../../../src/components/participants/ParticipantSearchPage';
+import { withRouter } from '../../common/testHelper';
 
 import { normal_render } from './__fixtures__/useParticipants_ParticipantSearchPage';
 
@@ -12,12 +12,6 @@ const useParticipants = jest.fn();
 jest.mock('../../../src/components/participants/hooks/useParticipants', () => ({
   useParticipants: () => useParticipants(),
 }));
-
-const withRouter = (component: ReactNode) => (
-  <>
-    <MemoryRouter>{component}</MemoryRouter>
-  </>
-);
 
 describe('ParticipantSearchPage', () => {
   beforeEach(() => {

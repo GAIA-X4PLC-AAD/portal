@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { Participant } from '../../../types/participants.model';
-import { getParticipantByLegalName } from '../helpers/participantDataFlow';
+import { loadParticipantDetails } from '../helpers/participantDataFlow';
 
 export type ParticipantContentType = 'LOADING' | 'SHOW_PARTICIPANT' | 'SHOW_NO_RESULT';
 
@@ -17,10 +17,10 @@ export const useParticipant = (legalName: string) => {
     } else {
       return 'SHOW_NO_RESULT'
     }
-  }, [isLoading])
+  }, [isLoading, participant])
 
   useEffect(() => {
-    getParticipantByLegalName(legalName).then((fetchedParticipant) => {
+    loadParticipantDetails(legalName).then((fetchedParticipant) => {
       setParticipant(fetchedParticipant);
     }).finally(() => setIsLoading(false));
   }, []);

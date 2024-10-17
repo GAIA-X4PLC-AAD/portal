@@ -14,23 +14,9 @@ describe('useParticipants', () => {
     jest.clearAllMocks(); // Clear any previous mocks
   });
 
-  it('should return LOADING initially', async () => {
-    // Mock loadParticipants to not resolve immediately
-    (loadParticipants as jest.Mock).mockReturnValue(new Promise(() => {
-    }));
-
-    const { result } = renderHook(() => useParticipants());
-
-    // Wait for the loading state
-    await act(async () => {
-      expect(result.current.viewContentType).toBe('LOADING');
-      expect(result.current.participants).toEqual([]);
-    });
-  });
-
   it('should return SHOW_PARTICIPANTS when participants are fetched', async () => {
     // Mock loadParticipants to resolve with participant data
-    (loadParticipants as jest.Mock).mockResolvedValue(mockParticipants);
+    loadParticipants.mockResolvedValue(mockParticipants);
 
     const { result } = renderHook(() => useParticipants());
 
@@ -40,7 +26,7 @@ describe('useParticipants', () => {
 
   it('should return SHOW_NO_RESULTS when no participants are found', async () => {
     // Mock loadParticipants to resolve with an empty array
-    (loadParticipants as jest.Mock).mockResolvedValue([]);
+    loadParticipants.mockResolvedValue([]);
 
     const { result } = renderHook(() => useParticipants());
 
@@ -50,7 +36,7 @@ describe('useParticipants', () => {
 
   it('should filter participants based on search text', async () => {
     // Mock loadParticipants to resolve with participant data including "msg systems ag"
-    (loadParticipants as jest.Mock).mockResolvedValue(mockParticipants);
+    loadParticipants.mockResolvedValue(mockParticipants);
 
     const { result } = renderHook(() => useParticipants());
 

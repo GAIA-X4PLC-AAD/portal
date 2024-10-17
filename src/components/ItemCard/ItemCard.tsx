@@ -52,9 +52,9 @@ const ItemCard: FC<IItemCard> = ({
       </div>
       <div className={styles.content}>
         {ontology ? (
-          <OntologyCardContent ontology={ontology} />
+          <OntologyCardContent ontology={ontology}/>
         ) : shape ? (
-          <ShapeCardContent shape={shape} />
+          <ShapeCardContent shape={shape}/>
         ) : service ? (
           <ServiceCardContent service={service}/>
         ) : resource ? (
@@ -72,13 +72,13 @@ const ItemCard: FC<IItemCard> = ({
 export default ItemCard;
 
 const getTestId = ({ ontology, shape, service, resource, participant }:
-  {
-    ontology?: Ontology,
-    shape?: Shape,
-    service?: ServiceOffering,
-      resource?: Resource,
-      participant?: Participant
-  }) => (
+                       {
+                           ontology?: Ontology,
+                           shape?: Shape,
+                           service?: ServiceOffering,
+                           resource?: Resource,
+                           participant?: Participant
+                       }) => (
   ontology
     ? 'Card:' + ontology.subject
     : shape

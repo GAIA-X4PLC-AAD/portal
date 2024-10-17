@@ -1,7 +1,7 @@
 import { Link } from '@mui/material';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 
 import { ARROW_RIGHT } from '../../utils/symbols';
 import Header from '../header/Header';
@@ -13,6 +13,7 @@ import { useParticipant } from './hooks/useParticipant';
 import './ParticipantDetials.css';
 
 const ParticipantDetails: FC = () => {
+  const location = useLocation();
   const id = location.pathname.split('/participants/')[1];
   const decodeUri = decodeURIComponent(id);
   const { participant, viewContentType } = useParticipant(decodeUri);
