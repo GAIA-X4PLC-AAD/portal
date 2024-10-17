@@ -6,7 +6,7 @@ export const normal_render = {
   resources: [
     {
       uri: 'did:resource-HdMap',
-      name: 'HdMap',
+      name: 'HdMap Resource',
       format: 'ASAM OpenDRIVE',
       vendor: 'msg systems ag',
       labels: ['HdMap'],
@@ -15,7 +15,7 @@ export const normal_render = {
     },
     {
       uri: 'did:resource-EnvironmentModel',
-      name: 'EnvironmentModel',
+      name: 'EnvironmentModel resource',
       format: null,
       vendor: null,
       labels: ['EnvironmentModel'],
