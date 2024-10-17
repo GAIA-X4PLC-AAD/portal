@@ -5,11 +5,11 @@ import styles from './GaiaXButton.module.css';
 
 interface IGaiaXButton {
   label: string;
-  handleOnClick: () => void;
-  className: string;
-  disabled: boolean;
-  children: React.ReactNode;
-  type: string;
+  disabled?: boolean;
+  type?: string;
+  children?: React.ReactNode;
+  className?: string;
+  handleOnClick?: () => void;
 }
 
 const GaiaXButton: FC<Readonly<IGaiaXButton>> = ({

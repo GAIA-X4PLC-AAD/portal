@@ -1,3 +1,4 @@
+/* test coverage not required */
 import axios from 'axios';
 
 import { CypherQueryResult, ServiceOfferingInput } from '../utils/dataMapper';

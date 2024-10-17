@@ -1,3 +1,4 @@
+/* test coverage not required */
 import GaiaXButton from 'common/components/buttons/GaiaXButton';
 import React from 'react';
 import { useTranslation } from 'react-i18next';

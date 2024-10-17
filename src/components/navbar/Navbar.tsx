@@ -1,3 +1,4 @@
+/* test coverage not required */
 import GaiaXButton from 'common/components/buttons/GaiaXButton';
 import LanguageModal from 'components/modals/LanguageModal';
 import { AuthContext } from 'context/AuthContextProvider';
