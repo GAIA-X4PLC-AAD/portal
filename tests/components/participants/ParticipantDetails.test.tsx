@@ -14,7 +14,7 @@ jest.mock('../../../src/components/participants/hooks/useParticipant', () => ({
 }));
 
 describe('ParticipantDetails', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     useParticipant.mockReturnValue(normal_render); // Mock the useParticipants hook
   });
 

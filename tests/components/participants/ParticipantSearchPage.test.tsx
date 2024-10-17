@@ -14,13 +14,12 @@ jest.mock('../../../src/components/participants/hooks/useParticipants', () => ({
 }));
 
 describe('ParticipantSearchPage', () => {
-  beforeEach(() => {
+  beforeAll(() => {
     useParticipants.mockReturnValue(normal_render); // Mock the useParticipants hook
   });
 
   it('renders all participants correctly', () => {
     const { getByRole, getByTestId } = render(withRouter(<ParticipantSearchPage/>));
-    // console.log(prettyDOM());
     // Check the heading
     expect(getByRole('heading', { name: /participants.titles \(5 common.results\)/i })).toBeInTheDocument();
 

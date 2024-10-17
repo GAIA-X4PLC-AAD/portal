@@ -5,15 +5,17 @@ import {
   loadParticipantDetails,
   loadParticipants
 } from '../../../../src/components/participants/helpers/participantDataFlow';
-import { CypherQueryApiService as cypherQuery } from '../../../../src/services/cypherQueryApiService';
 
 import { mockParticipantsQueryResults } from './__fixtures__/participants_queryResults';
+
+const getAllParticipants = jest.fn();
+const getParticipantDetails = jest.fn();
 
 // Mock the services
 jest.mock('../../../../src/services/cypherQueryApiService', () => ({
   CypherQueryApiService: {
-    getAllParticipants: jest.fn(),
-    getParticipantByLegalName: jest.fn(),
+    getAllParticipants: () => getAllParticipants(),
+    getParticipantDetails: (legalName: string) => getParticipantDetails(legalName),
   }
 }));
 
@@ -26,13 +28,13 @@ describe('Participant Data Flow', () => {
   describe('loadParticipants', () => {
     it('should load participants successfully', async () => {
       //Mock the API response
-      (cypherQuery.getAllParticipants as jest.Mock).mockResolvedValue(mockParticipantsQueryResults);
+      getAllParticipants.mockResolvedValue(mockParticipantsQueryResults);
 
       const participants = await loadParticipants();
 
       // Assert that the correct participants are returned
       expect(participants).toEqual(mockParticipantsQueryResults.items);
-      expect(cypherQuery.getAllParticipants).toHaveBeenCalledTimes(1);
+      expect(getAllParticipants).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -40,32 +42,32 @@ describe('Participant Data Flow', () => {
     const errorMessage = 'Failed to fetch participants';
 
     // Mock the API to reject with an error
-    cypherQuery.getAllParticipants.mockRejectedValue(new Error(errorMessage));
+    getAllParticipants.mockRejectedValue(new Error(errorMessage));
 
     // Assert that an error is thrown
     await expect(loadParticipants()).rejects.toThrow(errorMessage);
-    expect(cypherQuery.getAllParticipants).toHaveBeenCalledTimes(1);
+    expect(getAllParticipants).toHaveBeenCalledTimes(1);
   });
 
-  describe('getParticipantByLegalName', () => {
+  describe('loadParticipantDetails', () => {
     it('should return participant details when found', async () => {
       const mockParticipantDetail = { totalCount: 1, items: [mockParticipantsQueryResults.items[0]] };
 
       // Mock the API response
-      cypherQuery.getParticipantDetails.mockResolvedValue(mockParticipantDetail);
+      getParticipantDetails.mockResolvedValue(mockParticipantDetail);
 
       const participant = await loadParticipantDetails('msg systems AG');
 
       // Assert that the correct participant details are returned
       expect(participant).toEqual(mockParticipantDetail.items[0]);
-      expect(cypherQuery.getParticipantDetails).toHaveBeenCalledWith('msg systems AG');
+      expect(getParticipantDetails).toHaveBeenCalledWith('msg systems AG');
     });
 
     it('should throw BusinessObjectNotFound when no participants are found', async () => {
       const mockResponse = { totalCount: 0, items: [] };
 
       // Mock the API response
-      cypherQuery.getParticipantDetails.mockResolvedValue(mockResponse);
+      getParticipantDetails.mockResolvedValue(mockResponse);
 
       // Assert that BusinessObjectNotFound is thrown
       await expect(loadParticipantDetails('Non-existent Participant')).rejects.toThrow(BusinessObjectNotFound);
@@ -78,7 +80,7 @@ describe('Participant Data Flow', () => {
       };
 
       // Mock the API response
-      cypherQuery.getParticipantDetails.mockResolvedValue(mockResponse);
+      getParticipantDetails.mockResolvedValue(mockResponse);
 
       // Assert that MultipleBusinessObjectFound is thrown
       await expect(loadParticipantDetails('Duplicate Participant')).rejects.toThrow(MultipleBusinessObjectFound);
@@ -88,11 +90,11 @@ describe('Participant Data Flow', () => {
       const errorMessage = 'Failed to fetch participant details';
 
       // Mock the API to reject with an error
-      cypherQuery.getParticipantDetails.mockRejectedValue(new Error(errorMessage));
+      getParticipantDetails.mockRejectedValue(new Error(errorMessage));
 
       // Assert that an error is thrown
       await expect(loadParticipantDetails('Participant')).rejects.toThrow(errorMessage);
-      expect(cypherQuery.getParticipantDetails).toHaveBeenCalledWith('Participant');
+      expect(getParticipantDetails).toHaveBeenCalledWith('Participant');
     });
   });
 });
