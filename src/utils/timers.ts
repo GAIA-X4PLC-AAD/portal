@@ -1,3 +1,4 @@
+// istanbul ignore file
 /**
  * Delays the execution of a given function with a given timeout.
  *

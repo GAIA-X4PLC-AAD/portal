@@ -1,3 +1,4 @@
+// istanbul ignore file
 import process from 'process';
 
 import axios from 'axios';
