@@ -103,10 +103,11 @@ export const CypherQueryApiService = {
 
       OPTIONAL MATCH (dataResource)-[:instanceOf]-(instantiatedVirtualResource:InstantiatedVirtualResource)
       OPTIONAL MATCH (instantiatedVirtualResource)-[:serviceAccessPoint]-(serviceAccessPoint:ServiceAccessPoint)
-
       OPTIONAL MATCH (dataResource)-[:general]-(general:General)
       OPTIONAL MATCH (general)-[:data]-(data:Data)
 
+      WHERE properties(dataResource).uri IN properties(data).claimsGraphUri
+      
       WITH COUNT(*) AS totalCount,
            properties(dataResource).name AS name,
            properties(dataResource).uri AS uri,
