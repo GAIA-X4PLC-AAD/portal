@@ -39,7 +39,7 @@ const ViewContainer = (view: ReactNode) => {
 const Routes: FC = () => (
   <Column>
     <ReactRoutes>
-      <Route path="/vc" element={ViewContainer(<VcMapComponent />)} />
+      <Route path="/vcmap" element={ViewContainer(<VcMapComponent />)} />
       <Route path="/" element={<Column><Home /></Column>} />
       <Route path="/home" element={ViewContainer(<Home />)} />
       <Route path="/service-offerings" element={ViewContainer(<ProtectedRoute><ServiceOfferings/></ProtectedRoute>)}/>

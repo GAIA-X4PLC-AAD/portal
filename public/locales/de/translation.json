@@ -557,6 +557,9 @@
     "general-details": "Allgemeine Details",
     "content-details": "Inhaltsdetails",
     "compatible-offerings": "Kompatible Angebote",
-    "directly-related-offerings": "Direkt verwandte Angebote"
+    "directly-related-offerings": "Direkt verwandte Angebote",
+    "not-specified": "Nicht spezifiziert",
+    "yes": "Ja",
+    "no": "Nein"
   }
 }

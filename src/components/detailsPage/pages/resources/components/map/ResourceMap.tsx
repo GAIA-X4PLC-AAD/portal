@@ -17,4 +17,5 @@ const ResourceMap = () => {
     </div>
   );
 }
+
 export default ResourceMap;

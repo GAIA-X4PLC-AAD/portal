@@ -3,9 +3,11 @@ import GaiaXButton from 'components/buttons/GaiaXButton';
 import { useTranslation } from 'react-i18next';
 
 import styles from './ResourceActions.module.css';
+
 const ResourceActions = () => {
   const { t } = useTranslation();
   const title='Actions'
+
   return (
     <div className={styles['sidebar-card-container']}>
       <Title>{title}</Title>

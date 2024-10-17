@@ -1,7 +1,7 @@
 import DetailsContent from 'components/detailsPage/layout/content/DetailsContent';
 import DetailsMainContent from 'components/detailsPage/layout/mainContent/DetailsMainContent';
 import DetailsSidebar from 'components/detailsPage/layout/sidebar/DetailsSidebar';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiService';

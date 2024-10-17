@@ -134,8 +134,12 @@ export const CypherQueryApiService = {
         properties(dataResource).description as description, 
         properties(dataResource).license as license, 
         properties(dataResource).copyrightOwnedBy as copyrightOwnedBy, 
-        properties(dataResource).claimsGraphUri as claimsGraphUri, 
-        properties(dataResource).containsPII as containsPII,  
+        properties(dataResource).claimsGraphUri as claimsGraphUri,
+        CASE properties(dataResource).containsPII
+          WHEN 'true' THEN true
+          WHEN 'false' THEN false
+          ELSE null
+        END as containsPII,
         properties(dataResource).obsoleteDateTime as obsoleteDateTime, 
         properties(dataResource).expirationDateTime as expirationDateTime, 
         properties(content).levelOfDetail as levelOfDetail, 

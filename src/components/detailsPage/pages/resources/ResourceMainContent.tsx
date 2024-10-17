@@ -1,11 +1,11 @@
 import Title from 'components/Title/Title';
-import Subtitle from 'components/subtitle/Subtitle';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Markdown from '../../../../common/markdown/Markdown';
 import { ResourceDetailsContext } from '../../../../context/ResourceDetailsContext';
 import Text from '../../../Text/Text';
+import SectionHeader from '../../../sectionHeader/Sectionheader';
 
 import styles from './ResourceMainContent.module.css';
 
@@ -21,26 +21,99 @@ const ResourceMainContent = () => {
     <div className={styles['container']}>
       <Title>{resourceDetails.name}</Title>
       <Markdown>{resourceDetails.description}</Markdown>
-      <Text>{`${t('resources.provided-by')}: ${resourceDetails.legalName}`}</Text>
+      <Text>
+        <span style={{ fontWeight: 'bold' }}>{t('resources.provided-by')}:</span> {resourceDetails.legalName}
+      </Text>
 
-      <Subtitle>{t('common.general-details')}</Subtitle>
-      <Text>{`${t('resources.copyright-owned-by')}: ${resourceDetails.legalName}`}</Text>
-      <Text>{`${t('resources.license')}: ${resourceDetails.license}`}</Text>
-      <Text>{`${t('resources.containsPII')}: ${resourceDetails.containsPII}`}</Text>
-      <Text>{`${t('resources.expiration-date-time')}: ${resourceDetails.expirationDateTime}`}</Text>
-      <Text>{`${t('resources.obsolete-date-time')}: ${resourceDetails.obsoleteDateTime}`}</Text>
+      <SectionHeader>{t('common.general-details')}</SectionHeader>
 
-      <Subtitle>{t('common.content-details')}</Subtitle>
-      <Text>{`${t('resources.road-types')}: ${resourceDetails.roadTypes}`}</Text>
-      <Text>{`${t('resources.lane-types')}: ${resourceDetails.laneTypes}`}</Text>
-      <Text>{`${t('resources.level-of-detail')}: ${resourceDetails.levelOfDetail}`}</Text>
-      <Text>{`${t('resources.traffic-direction')}: ${resourceDetails.trafficDirection}`}</Text>
+      <table className={styles['table']}>
+        <tbody>
+          <tr>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.copyright-owned-by')}:</span> {resourceDetails.legalName}
+              </Text>
+            </td>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.expiration-date-time')}:</span> {resourceDetails.expirationDateTime}
+              </Text>
+            </td>
+          </tr>
 
-      <Subtitle>{t('common.compatible-offerings')}</Subtitle>
+          <tr>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.license')}:</span> {resourceDetails.license}
+              </Text>
+            </td>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.obsolete-date-time')}:</span> {resourceDetails.obsoleteDateTime}
+              </Text>
+            </td>
+          </tr>
 
-      <Subtitle>{t('common.directly-related-offerings')}</Subtitle>
+          <tr>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.containsPII')}:</span> {resourceDetails.containsPII ? t('common.yes') : t('common.no')}
+              </Text>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <SectionHeader>{t('common.content-details')}</SectionHeader>
+
+      <table className={styles['table']}>
+        <tbody>
+          <tr>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.road-types')}:</span> {resourceDetails.roadTypes || t('common.not-specified')}
+              </Text>
+            </td>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.level-of-detail')}:</span> {resourceDetails.levelOfDetail || t('common.not-specified')}
+              </Text>
+            </td>
+          </tr>
+
+          <tr>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.lane-types')}:</span> {resourceDetails.laneTypes || t('common.not-specified')}
+              </Text>
+            </td>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.traffic-direction')}:</span> {resourceDetails.trafficDirection || t('common.not-specified')}
+              </Text>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table className={styles['table']}>
+        <tbody>
+          <tr>
+            <td className={styles['cell']}>
+              <SectionHeader>{t('common.compatible-offerings')}</SectionHeader>
+            </td>
+            <td className={styles['cell']}>
+              <SectionHeader>{t('common.directly-related-offerings')}</SectionHeader>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
       {resourceDetails.claimsGraphUri.map((uri, index) => (
-        <Text key={index}>{uri}</Text>
+        <div key={index} className={styles['cell']}>
+          <Text key={index}>{uri}</Text>
+        </div>
       ))}
     </div>
   );

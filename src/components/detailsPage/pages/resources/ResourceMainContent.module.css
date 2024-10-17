@@ -11,3 +11,14 @@
     cursor: pointer;
     text-decoration: underline;
 }
+
+.table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cell {
+    display: table-cell;
+    width: 50%;
+}
