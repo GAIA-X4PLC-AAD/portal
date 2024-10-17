@@ -79,6 +79,8 @@ export const CypherQueryApiService = {
       OPTIONAL MATCH (dataResource)-[:producedBy]-(producedBy)
       OPTIONAL MATCH (dataResource)-[:general]-(general)
       OPTIONAL MATCH (general)-[:description]-(description)
+      
+      WHERE properties(dataResource).uri IN properties(description).claimsGraphUri
 
       RETURN
         properties(description).name AS name,
