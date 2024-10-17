@@ -80,11 +80,11 @@ export const CypherQueryApiService = {
       OPTIONAL MATCH (dataResource)-[:general]-(general)
       OPTIONAL MATCH (general)-[:description]-(description)
       
-      WHERE properties(dataResource).uri IN properties(description).claimsGraphUri
+      WHERE description IS NULL OR properties(dataResource).uri IN properties(description).claimsGraphUri
 
       RETURN
-        properties(description).name AS name,
-        properties(description).description AS description,
+        coalesce(properties(description).name, properties(dataResource).name) AS name,
+        coalesce(properties(description).description, properties(dataResource).description) AS description,
         properties(dataResource).uri AS uri,
         properties(dataResource).claimsGraphUri AS claimsGraphUri,
         coalesce(properties(format).type, properties(format).formatType) AS format,
@@ -105,11 +105,14 @@ export const CypherQueryApiService = {
       OPTIONAL MATCH (instantiatedVirtualResource)-[:serviceAccessPoint]-(serviceAccessPoint:ServiceAccessPoint)
       OPTIONAL MATCH (dataResource)-[:general]-(general:General)
       OPTIONAL MATCH (general)-[:data]-(data:Data)
+      OPTIONAL MATCH (general)-[:description]-(description:Description)
 
-      WHERE properties(dataResource).uri IN properties(data).claimsGraphUri
+      WHERE (data IS NULL OR properties(dataResource).uri IN properties(data).claimsGraphUri)
+        AND (description IS NULL OR properties(dataResource).uri IN properties(description).claimsGraphUri)
       
       WITH COUNT(*) AS totalCount,
-           properties(dataResource).name AS name,
+           coalesce(properties(description).name, properties(dataResource).name) AS name,
+           coalesce(properties(description).description, properties(dataResource).description) AS description,
            properties(dataResource).uri AS uri,
            labels(dataResource) AS labels,
            CASE
