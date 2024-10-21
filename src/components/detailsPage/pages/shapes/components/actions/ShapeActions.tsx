@@ -1,11 +1,10 @@
-/* test coverage not required */
 import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import GaiaXButton from '../../../../../../common/components/buttons/GaiaXButton';
 import { ShapeContext } from '../../../../../../context/ShapeContext';
 import { downloadJsonFile, downloadTurtleFile } from '../../../../../../services/schemaService.utils';
 import Title from '../../../../../Title/Title';
+import GaiaXButton from '../../../../../buttons/GaiaXButton';
 
 import styles from './ShapeActions.module.css';
 

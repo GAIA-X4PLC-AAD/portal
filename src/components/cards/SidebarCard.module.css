@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: flex-start;
     width: 400px;
-    min-height: 25vh;
+    min-height: 30vh;
     border-radius: 10px;
     background-color: white;
     margin-top: 20px;
@@ -11,38 +11,13 @@
     box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.25);
 }
 
-.sidebar-card-container .buyButton {
-    width: 85%;
-    align-self: center;
+.sidebar-card-container button {
+    margin-left: 0px;
+    width: 100%;
 }
 
-.transferState {
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    width: 85%;
-    margin: 5px 20px;
-    align-self: center;
-}
-
-.transferStateLabel {
-    display: inline-block;
-    align-self: center;
-    width: 85%;
-    margin: 5px 20px;
-    font-weight: bold;
-}
-
-.transferStateValue {
-    flex-grow: 1;
-    display: inline-block;
-    padding: 10px 15px;
-    text-align: center;
-    font-weight: bold;
-    width: auto;
-    color: #F6F6F6;
-    background-color: var(--secondary-color-light);
-    border-radius: 5px;
+.sidebar-card-container button:hover {
+    transform: none;
 }
 
 /* Keyframes for fadeIn */
@@ -56,7 +31,7 @@
       transform: translateX(0);
     }
   }
-
+  
   /* Keyframes for fadeOut */
   @keyframes fadeOut {
     from {
@@ -68,12 +43,12 @@
       transform: translateX(50%);
     }
   }
-
+  
 
 .notification {
     position: fixed;
     top: 5%;
-    right: 3%;
+    right: 3%; 
     background-color: #A334ED;
     color: white;
     padding: 10px;
