@@ -2,10 +2,10 @@ import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import GaiaXButton from '../../../../../../common/components/buttons/GaiaXButton';
 import { OntologyContext } from '../../../../../../context/OntologyContext';
 import { downloadTurtleFile } from '../../../../../../services/schemaService.utils';
 import Title from '../../../../../Title/Title';
+import GaiaXButton from '../../../../../buttons/GaiaXButton';
 
 import styles from './OntologyActions.module.css';
 

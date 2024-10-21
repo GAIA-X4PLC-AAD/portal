@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Text from '../../common/components/fields/Text/Text';
+import Text from '../Text/Text';
 
 interface INoContent {
     message: string;
