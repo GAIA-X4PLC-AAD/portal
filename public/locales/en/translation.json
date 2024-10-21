@@ -264,17 +264,6 @@
     "submit": "Submit",
     "lAddress": "Address"
   },
-  "buy-dialog": {
-    "edc-address": "EDC management-endpoint",
-    "enter-edc-address": "Please enter the management endpoint of your EDC",
-    "edc-destination-account": "Destination account",
-    "enter-edc-destination-account": "Please enter the destination account for data transfer",
-    "edc-destination-container": "Destination container",
-    "enter-edc-destination-container": "Please enter the destination container for data transfer",
-    "transfer-state": "Transfer state",
-    "transfer-button": "Transfer",
-    "cancel-button": "Cancel"
-  },
   "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
   "footer_slogan_cap": " ",
   "footer_bmwk_eu": "Logo: Finanziert von der Europäischen Union, Gefördert durch Bundesministerium fpr Wirtschaft und Klimaschutz",
@@ -511,7 +500,7 @@
   },
   "details": {
     "title": "Details",
-    "sidebar-buy-button": "Buy",
+    "sidebar-button-label": "Contact or buy",
     "contact-or-buy-button-notification": "Data was transferred",
     "more-details": "More details",
     "view-graph": "View graph",

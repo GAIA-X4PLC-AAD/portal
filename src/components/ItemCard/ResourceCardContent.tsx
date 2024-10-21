@@ -2,10 +2,10 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import GaiaXButton from '../../common/components/buttons/GaiaXButton';
 import Markdown from '../../common/markdown/Markdown';
 import { Resource } from '../../types/resources.model';
 import Title from '../Title/Title';
+import GaiaXButton from '../buttons/GaiaXButton';
 
 import styles from './ItemCard.module.css';
 
@@ -18,16 +18,19 @@ const ResourceCardContent: FC<IResourceCardContent> = ({ resource }) => {
   const navigate = useNavigate();
 
   const handleNavigationToDetailsPage = () => {
-    const encodedUri = encodeURIComponent(resource.uri);
+    const encodedUri = encodeURIComponent(JSON.stringify(resource.claimsGraphUri));
     navigate(`/resources/${encodedUri}`);
   };
 
   return (
     <section className={styles.content}>
-      <Title>{resource.name}</Title>
-      {
-        resource.description && <Markdown>{resource.description}</Markdown>
+      <Title>{
+        resource.claimsGraphUri.map(claimsGraphUri => (
+          <div key={claimsGraphUri}>{claimsGraphUri}</div>
+        ))
       }
+      </Title>
+      <Markdown>{resource.description}</Markdown>
       <div className={styles.button}>
         <GaiaXButton
           label={t('details.more-details')}

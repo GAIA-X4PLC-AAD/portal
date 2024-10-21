@@ -1,4 +1,3 @@
-/* test coverage not required */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
@@ -30,10 +29,7 @@ overflow: auto;
 }
 `;
 
-/**
- * Please use the typescript version of this modal {@link Modal}
- */
-const DeprecatedModal = props => {
+const Modal = props => {
   return ReactDOM.createPortal(
     <Dimmer onClick={props.onDismiss}>
       <ModalDiv onClick={(e)=> e.stopPropagation()} {...props}>
@@ -45,4 +41,4 @@ const DeprecatedModal = props => {
 
 };
 
-export default DeprecatedModal;
+export default Modal;
