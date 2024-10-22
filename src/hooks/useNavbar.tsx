@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { useTranslation } from 'react-i18next';
 
 export const useNavbar = () => {

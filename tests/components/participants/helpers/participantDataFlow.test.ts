@@ -6,10 +6,14 @@ import {
   loadParticipants
 } from '../../../../src/components/participants/helpers/participantDataFlow';
 
+import { mockParticipant_msg_systems_AG, mockParticipant_msg_systems_ag } from './__fixtures__/participants';
 import { mockParticipantsQueryResults } from './__fixtures__/participants_queryResults';
 
 const getAllParticipants = jest.fn();
 const getParticipantDetails = jest.fn();
+
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
 
 // Mock the services
 jest.mock('../../../../src/services/cypherQueryApiService', () => ({
@@ -21,6 +25,8 @@ jest.mock('../../../../src/services/cypherQueryApiService', () => ({
 
 describe('Participant Data Flow', () => {
 
+  console.error = jest.fn(); // Disable error logging
+  console.debug = jest.fn()
   beforeEach(() => {
     jest.clearAllMocks(); // Clear any previous mocks
   });
@@ -51,7 +57,7 @@ describe('Participant Data Flow', () => {
 
   describe('loadParticipantDetails', () => {
     it('should return participant details when found', async () => {
-      const mockParticipantDetail = { totalCount: 1, items: [mockParticipantsQueryResults.items[0]] };
+      const mockParticipantDetail = { totalCount: 1, items: [mockParticipant_msg_systems_AG] };
 
       // Mock the API response
       getParticipantDetails.mockResolvedValue(mockParticipantDetail);
@@ -59,7 +65,7 @@ describe('Participant Data Flow', () => {
       const participant = await loadParticipantDetails('msg systems AG');
 
       // Assert that the correct participant details are returned
-      expect(participant).toEqual(mockParticipantDetail.items[0]);
+      expect(participant).toEqual(mockParticipant_msg_systems_AG);
       expect(getParticipantDetails).toHaveBeenCalledWith('msg systems AG');
     });
 
@@ -76,7 +82,7 @@ describe('Participant Data Flow', () => {
     it('should throw MultipleBusinessObjectFound when more than one participant is found', async () => {
       const mockResponse = {
         totalCount: 2,
-        items: [mockParticipantsQueryResults.items[0], mockParticipantsQueryResults.items[2]]
+        items: [mockParticipant_msg_systems_ag, mockParticipant_msg_systems_AG]
       };
 
       // Mock the API response

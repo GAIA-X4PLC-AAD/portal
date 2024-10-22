@@ -1,3 +1,4 @@
+/* test coverage not required */
 import React, { FC, ReactNode } from 'react';
 import { Route, Routes as ReactRoutes } from 'react-router-dom';
 

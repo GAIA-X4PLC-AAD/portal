@@ -5,7 +5,7 @@ import { loadParticipantDetails } from '../helpers/participantDataFlow';
 
 export type ParticipantContentType = 'LOADING' | 'SHOW_PARTICIPANT' | 'SHOW_NO_RESULT';
 
-export const useParticipant = (legalName: string) => {
+export const useParticipantDetails = (legalName: string) => {
   const [participant, setParticipant] = useState<Participant>();
   const [isLoading, setIsLoading] = useState(true);
 

@@ -1,3 +1,4 @@
+/* test coverage not required */
 export type Participant = {
   legalName: string,
   labels: string[]

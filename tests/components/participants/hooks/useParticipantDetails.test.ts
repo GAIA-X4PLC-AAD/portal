@@ -1,12 +1,12 @@
-import { renderHook, waitFor } from '@testing-library/react'; // For testing hooks
+import { renderHook, waitFor } from '@testing-library/react';
 
-import { loadParticipantDetails } from '../../../../src/components/participants/helpers/participantDataFlow'; // Import the mock
-import { useParticipant } from '../../../../src/components/participants/hooks/useParticipant';
+import { useParticipantDetails } from '../../../../src/components/participants/hooks/useParticipantDetails';
 
 import { mockParticipant } from './__fixtures__/participant';
 
+const loadParticipantDetails = jest.fn();
 jest.mock('../../../../src/components/participants/helpers/participantDataFlow', () => ({
-  loadParticipantDetails: jest.fn(),
+  loadParticipantDetails: () => loadParticipantDetails(),
 }));
 
 describe('useParticipant', () => {
@@ -17,11 +17,10 @@ describe('useParticipant', () => {
   });
 
   it('should return SHOW_PARTICIPANT when a participant is found', async () => {
-    console.log(mockParticipant);
     // Mock the API call to return the participant data
     loadParticipantDetails.mockResolvedValue(mockParticipant); // Return a single participant
 
-    const { result } = renderHook(() => useParticipant(mockLegalName));
+    const { result } = renderHook(() => useParticipantDetails(mockLegalName));
 
     await waitFor(() => expect(result.current.viewContentType).toBe('SHOW_PARTICIPANT'));
     expect(result.current.participant).toEqual(mockParticipant);
@@ -31,7 +30,7 @@ describe('useParticipant', () => {
     // Mock the API call to return null or undefined (no participant found)
     loadParticipantDetails.mockResolvedValue(undefined);
 
-    const { result } = renderHook(() => useParticipant(mockLegalName));
+    const { result } = renderHook(() => useParticipantDetails(mockLegalName));
 
     await waitFor(() => expect(result.current.viewContentType).toBe('SHOW_NO_RESULT'));
     expect(result.current.participant).toBeUndefined();

@@ -8,7 +8,7 @@ import Header from '../header/Header';
 import LoadingIndicator from '../loading_view/LoadingIndicator';
 import NoContent from '../nocontent/NoContent';
 
-import { useParticipant } from './hooks/useParticipant';
+import { useParticipantDetails } from './hooks/useParticipantDetails';
 
 import './ParticipantDetials.css';
 
@@ -16,7 +16,7 @@ const ParticipantDetails: FC = () => {
   const location = useLocation();
   const id = location.pathname.split('/participants/')[1];
   const decodeUri = decodeURIComponent(id);
-  const { participant, viewContentType } = useParticipant(decodeUri);
+  const { participant, viewContentType } = useParticipantDetails(decodeUri);
   const { t } = useTranslation();
 
   return (

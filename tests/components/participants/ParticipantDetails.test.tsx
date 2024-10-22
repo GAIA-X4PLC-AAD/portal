@@ -7,15 +7,15 @@ import { withRouter } from '../../common/testHelper';
 
 import { normal_render } from './__fixtures__/useParticipant_ParticipantDetails';
 
-const useParticipant = jest.fn();
+const useParticipantDetails = jest.fn();
 
-jest.mock('../../../src/components/participants/hooks/useParticipant', () => ({
-  useParticipant: () => useParticipant(),
+jest.mock('../../../src/components/participants/hooks/useParticipantDetails', () => ({
+  useParticipantDetails: () => useParticipantDetails(),
 }));
 
 describe('ParticipantDetails', () => {
   beforeAll(() => {
-    useParticipant.mockReturnValue(normal_render); // Mock the useParticipants hook
+    useParticipantDetails.mockReturnValue(normal_render); // Mock the useParticipants hook
   });
 
   it('renders al participant correctly', () => {
