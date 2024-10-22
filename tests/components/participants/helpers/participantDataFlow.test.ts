@@ -5,8 +5,8 @@ import {
   loadParticipantDetails,
   loadParticipants
 } from '../../../../src/components/participants/helpers/participantDataFlow';
+import { mockParticipant_msg_systems_AG, mockParticipant_msg_systems_ag } from '../__fixtures__/participants';
 
-import { mockParticipant_msg_systems_AG, mockParticipant_msg_systems_ag } from './__fixtures__/participants';
 import { mockParticipantsQueryResults } from './__fixtures__/participants_queryResults';
 
 const getAllParticipants = jest.fn();

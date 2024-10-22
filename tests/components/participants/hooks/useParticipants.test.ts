@@ -1,8 +1,7 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 
 import { useParticipants } from '../../../../src/components/participants/hooks/useParticipants';
-
-import { mockParticipants } from './__fixtures__/participants';
+import { mockParticipants } from '../__fixtures__/participants';
 
 const loadParticipants = jest.fn();
 jest.mock('../../../../src/components/participants/helpers/participantDataFlow', () => ({

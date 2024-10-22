@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
 import { applyFilters } from '../../../../src/components/participants/helpers/participantHelper';
-
-import { mockParticipants } from './__fixtures__/participants';
+import { mockParticipants } from '../__fixtures__/participants';
 
 describe('ParticipantHelper_ApplyFilters', () => {
   it('filters correctly the participant list', () => {

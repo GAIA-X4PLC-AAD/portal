@@ -1,8 +1,7 @@
 import { renderHook, waitFor } from '@testing-library/react';
 
 import { useParticipantDetails } from '../../../../src/components/participants/hooks/useParticipantDetails';
-
-import { mockParticipant } from './__fixtures__/participant';
+import { mockParticipant_msg_systems_ag } from '../__fixtures__/participants';
 
 const loadParticipantDetails = jest.fn();
 jest.mock('../../../../src/components/participants/helpers/participantDataFlow', () => ({
@@ -18,12 +17,12 @@ describe('useParticipant', () => {
 
   it('should return SHOW_PARTICIPANT when a participant is found', async () => {
     // Mock the API call to return the participant data
-    loadParticipantDetails.mockResolvedValue(mockParticipant); // Return a single participant
+    loadParticipantDetails.mockResolvedValue(mockParticipant_msg_systems_ag); // Return a single participant
 
     const { result } = renderHook(() => useParticipantDetails(mockLegalName));
 
     await waitFor(() => expect(result.current.viewContentType).toBe('SHOW_PARTICIPANT'));
-    expect(result.current.participant).toEqual(mockParticipant);
+    expect(result.current.participant).toEqual(mockParticipant_msg_systems_ag);
   });
 
   it('should return SHOW_NO_RESULT when no participant is found', async () => {
