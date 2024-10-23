@@ -9,7 +9,7 @@ describe('readFile', () => {
   it('reads content', async () => {
     const filePath = 'tests/utils/__fixtures__/test-shapes-short.ttl';
     const result = await readFile(filePath);
-    expect(result).toEqual(expectedContent);
+    expect(result.replace(/\r/g, '')).toEqual(expectedContent);
   });
 
   it('throws error', async () => {

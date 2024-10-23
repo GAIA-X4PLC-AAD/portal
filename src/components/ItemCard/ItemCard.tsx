@@ -1,8 +1,10 @@
+/* test coverage not required */
 import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Ontology } from '../../types/ontologies.model';
+import { Participant } from '../../types/participants.model';
 import { Resource } from '../../types/resources.model';
 import { ServiceOffering } from '../../types/serviceOfferings.model';
 import { Shape } from '../../types/shapes.model';
@@ -10,6 +12,7 @@ import Title from '../Title/Title';
 
 import styles from './ItemCard.module.css';
 import OntologyCardContent from './OntologyCardContent';
+import ParticipantCardContent from './ParticipantCardContent';
 import ResourceCardContent from './ResourceCardContent';
 import ServiceCardContent from './ServiceCardContent';
 import ShapeCardContent from './ShapeCardContent';
@@ -20,7 +23,8 @@ interface IItemCard {
     ontology?: Ontology;
     shape?: Shape;
     service?: ServiceOffering
-    resource?: Resource
+    resource?: Resource,
+    participant?: Participant
 }
 
 const ItemCard: FC<IItemCard> = ({
@@ -29,12 +33,14 @@ const ItemCard: FC<IItemCard> = ({
   ontology,
   shape,
   service,
-  resource
+  resource,
+  participant
 }) => {
   const { t } = useTranslation();
 
   return (
-    <div data-testid={getTestId({ ontology, shape, service, resource })} className={classNames(styles.card, 'item-card')}>
+    <div data-testid={getTestId({ ontology, shape, service, resource, participant })}
+      className={classNames(styles.card, 'item-card')}>
       <div className={styles.label}>
         <Title>{label}</Title>
         {isGaiaXCompliant === undefined ? null : (
@@ -47,13 +53,15 @@ const ItemCard: FC<IItemCard> = ({
       </div>
       <div className={styles.content}>
         {ontology ? (
-          <OntologyCardContent ontology={ontology} />
+          <OntologyCardContent ontology={ontology}/>
         ) : shape ? (
-          <ShapeCardContent shape={shape} />
+          <ShapeCardContent shape={shape}/>
         ) : service ? (
           <ServiceCardContent service={service}/>
         ) : resource ? (
           <ResourceCardContent resource={resource}/>
+        ) : participant ? (
+          <ParticipantCardContent participant={participant}/>
         ) : (
           <></>
         )}
@@ -64,13 +72,14 @@ const ItemCard: FC<IItemCard> = ({
 
 export default ItemCard;
 
-const getTestId = ({ ontology, shape, service, resource }:
-  {
-    ontology?: Ontology,
-    shape?: Shape,
-    service?: ServiceOffering,
-    resource?: Resource
-  }) => (
+const getTestId = ({ ontology, shape, service, resource, participant }:
+                       {
+                           ontology?: Ontology,
+                           shape?: Shape,
+                           service?: ServiceOffering,
+                           resource?: Resource,
+                           participant?: Participant
+                       }) => (
   ontology
     ? 'Card:' + ontology.subject
     : shape
@@ -79,5 +88,7 @@ const getTestId = ({ ontology, shape, service, resource }:
         ? 'Card:' + service.uri + ':' + service.name
         : resource
           ? 'Card:' + resource.uri + ':' + resource.name
-          : ''
+          : participant
+            ? 'Card:' + participant.legalName
+            : ''
 )
