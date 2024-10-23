@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 import './i18n';
 import App from './App';
@@ -9,6 +10,7 @@ import AuthContextProvider from './context/AuthContextProvider';
 import { ResourceContextProvider } from './context/ResourceContext';
 
 import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 const saveToLocalStorage = (state) => {
   try {
@@ -44,6 +46,7 @@ root.render(
     <AuthContextProvider>
       <ResourceContextProvider>
         <App/>
+        <ToastContainer/>
       </ResourceContextProvider>
     </AuthContextProvider>
   </Provider>
