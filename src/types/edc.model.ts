@@ -1,3 +1,12 @@
+export type DataTransferStatuses =
+  | 'STARTED'
+  | 'COMPLETED'
+  | 'TERMINATED'
+  | 'DEPROVISIONED'
+  | 'INITIATED'
+  | 'PROVISIONED'
+  | 'REQUESTED'
+
 export type DataTransferInputProps = {
   contractId: string;
   edc: {
@@ -28,15 +37,6 @@ export interface TransferProcessInformation {
   transferProcessId: string | null;
 }
 
-export type TransferStates =
-  'STARTED'
-  | 'COMPLETED'
-  | 'TERMINATED'
-  | 'DEPROVISIONED'
-  | 'INITIATED'
-  | 'PROVISIONED'
-  | 'REQUESTED'
-
 export interface TransferStateInformation {
-  state: TransferStates;
+  state: DataTransferStatuses;
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { checkTransferStatus } from 'services/edcServiceApi';
 
-import { DataTransferInputProps, TransferProcessInformation, TransferStates } from '../../../types/edc.model';
+import { DataTransferInputProps, DataTransferStatuses, TransferProcessInformation } from '../../../types/edc.model';
 
 type TransferStateInput = {
   counter: number;
@@ -21,7 +21,7 @@ export const useTransferState = () => {
     counter: 0,
     isVisible: false,
   });
-  const [transferState, setTransferState] = useState<TransferStates>();
+  const [transferState, setTransferState] = useState<DataTransferStatuses>();
 
   useEffect(() => {
     if (state.isVisible && state.counter) {
