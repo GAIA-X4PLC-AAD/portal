@@ -271,7 +271,12 @@
     "enter-edc-destination-container": "Bitte geben sie den zie Container ein",
     "transfer-state": "Transfer Status",
     "transfer-button": "Übertragen",
-    "cancel-button": "Abbrechen"
+    "cancel-button": "Abbrechen",
+    "failed-to-retrieve-contract-info": "Abrufen der Vertragsinformationen ist fehlgeschlagen!",
+    "contract-negotiation-failed": "Ein Fehler ist beim Abrufen der Vertragsinformationen aufgetreten!",
+    "failed-to-retrieve-agreement-info": "Abrufen der Vertragsinformationen ist fehlgeschlagen!",
+    "data-transfer-initiation-failed": "Ein Fehler ist beim Starten der Datenübertragung aufgetreten!",
+    "check-data-transfer-status-failed": "Ein Fehler ist bei der Überprüfung des Datenübertragungsstatus aufgetreten!"
   },
   "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
   "footer_slogan_cap": " powered by",

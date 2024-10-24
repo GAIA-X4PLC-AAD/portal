@@ -273,7 +273,12 @@
     "enter-edc-destination-container": "Please enter the destination container for data transfer",
     "transfer-state": "Transfer state",
     "transfer-button": "Transfer",
-    "cancel-button": "Cancel"
+    "cancel-button": "Cancel",
+    "failed-to-retrieve-contract-info": "Failed to retrieve contract information!",
+    "contract-negotiation-failed": "An error occurred during the contract information retrieval!",
+    "failed-to-retrieve-agreement-info": "Failed to retrieve agreement information!",
+    "data-transfer-initiation-failed": "An error occurred during the data transfer initiation!",
+    "check-data-transfer-status-failed": "An error occurred during the data transfer status check!"
   },
   "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
   "footer_slogan_cap": " ",
