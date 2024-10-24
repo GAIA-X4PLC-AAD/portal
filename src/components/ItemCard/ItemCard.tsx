@@ -9,7 +9,7 @@ import GaiaXButton from '../buttons/GaiaXButton';
 import styles from './ItemCard.module.css';
 import { ItemCardData } from './itemCardHelper';
 
-interface IItemCard {
+export interface IItemCard {
     itemCardData: ItemCardData;
 }
 
