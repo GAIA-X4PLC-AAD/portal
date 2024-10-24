@@ -11,6 +11,10 @@ module.exports = {
   // these scripts will be executed in the testing environment immediately before executing the test code itself.
   setupFiles: ['./jest.setup.js'],
 
+  transformIgnorePatterns: [
+    '/node_modules/(?!vis-network).+\\.js$'
+  ],
+
   // Jest transformations -- this adds support for TypeScript
   // using @swc/jest
   transform: {

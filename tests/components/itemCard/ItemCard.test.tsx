@@ -12,22 +12,22 @@ jest.mock('react-router-dom', () => ({
 }));
 
 const ComponentUnderTest: FC<Partial<IItemCard>> = () => (
-  <ItemCard itemCardData={{
-    label: 'defaultLabel',
-    isGaiaXCompliant: true,
-    title: 'defaultTitle',
-    description: 'defaultDescription',
-    navigationUrl: '/default',
-    testId: 'defaultTestId'
-  }} />
+  <MemoryRouter>
+    <ItemCard itemCardData={{
+      label: 'defaultLabel',
+      isGaiaXCompliant: true,
+      title: 'defaultTitle',
+      description: 'defaultDescription',
+      navigationUrl: '/default',
+      testId: 'defaultTestId'
+    }} />
+  </MemoryRouter>
 )
 
 describe('ItemCard', () => {
   it('should render ItemCard with provided data', () => {
     render(
-      <MemoryRouter>
-        <ComponentUnderTest />
-      </MemoryRouter>
+      <ComponentUnderTest />
     );
 
     expect(screen.queryByText('defaultLabel')).not.toBeNull();
@@ -38,9 +38,7 @@ describe('ItemCard', () => {
 
   it('should navigate to details page when button is clicked', () => {
     render(
-      <MemoryRouter>
-        <ComponentUnderTest />
-      </MemoryRouter>
+      <ComponentUnderTest />
     );
 
     act(() => {
