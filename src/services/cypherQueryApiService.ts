@@ -52,18 +52,6 @@ export const CypherQueryApiService = {
   },
 
   /**
-   * Returns details about a resource
-   *
-   * @param claimsGraphUri the id of the resource to be queried
-   */
-  async getOneSelfDescriptions(claimsGraphUri: string): Promise<CypherQueryResult> {
-    const uri = claimsGraphUri.replace(/'/g, '\\\'');
-    return cypherQuery({
-      statement: `MATCH (n:HDMap) WHERE '${uri}' IN n.claimsGraphUri RETURN properties(n), labels(n) LIMIT 1`,
-    })
-  },
-
-  /**
    * Returns all resources of type included in the type asset list passed in as parameter.
    *
    * @param types the list of requested resource types
