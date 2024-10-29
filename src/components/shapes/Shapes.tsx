@@ -12,7 +12,7 @@ import LoadingIndicator from '../loading_view/LoadingIndicator';
 import NoContent from '../nocontent/NoContent';
 import SearchBar from '../searchBar/SearchBar';
 
-import { useShapes } from './useShapes';
+import useShapes from './useShapes';
 
 const Shapes = () => {
   const { t } = useTranslation();
@@ -28,7 +28,7 @@ const Shapes = () => {
       <Main>
         <Vertical>
           <Horizontal visible={['SHOW_SHAPES', 'SHOW_NO_RESULTS'].includes(state)}>
-            <SearchBar placeholder={t('resources.search-bar-text')} onSearch={search}/>
+            <SearchBar placeholder={t('shapes.search-bar-text')} onSearch={search}/>
           </Horizontal>
           <LoadingIndicator visible={state === 'LOADING'}/>
           <CardContainer visible={state === 'SHOW_SHAPES'}>

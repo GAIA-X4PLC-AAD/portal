@@ -6,7 +6,7 @@ import { Shape } from '../../types/shapes.model';
 
 export type ShapesViewState = 'LOADING' | 'SHOW_SHAPES' | 'SHOW_NO_RESULTS'
 
-export const useShapes = () => {
+const useShapes = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [shapes, setShapes] = useState<Shape[]>([]);
   const [searchText, setSearchText] = useState('')
@@ -57,3 +57,5 @@ export const useShapes = () => {
     search
   }
 }
+
+export default useShapes;
