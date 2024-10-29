@@ -31,10 +31,6 @@ const SlotDetails = ({ service, onRemove, onAdd, selected }) => {
     available_services: PropTypes.number
   }
 
-  const tpOverridePos = (props) => {
-    return { left: 20, top: props.top };
-  }
-
   const emptySlot = (service) => {
     return (
       <>

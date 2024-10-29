@@ -1,5 +1,5 @@
 import { AuthContext } from 'context/AuthContextProvider';
-import { ReactNode, useContext, useEffect } from 'react';
+import React, { ReactNode, useContext, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 interface IProtectedRoute {

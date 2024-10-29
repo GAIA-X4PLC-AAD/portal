@@ -47,7 +47,9 @@ const KeyValueDetails = ({ id, url_prefix, searchRefresh }) => {
   }
 
   const showAttachments = (attachments) => {
-    if (!attachments || attachments.length == 0) {return null;}
+    if (!attachments || attachments.length === 0) {
+      return <></>
+    }
     return (
       <ElementGroup>
         <CaptionText>{t('admin.attachments')}</CaptionText>

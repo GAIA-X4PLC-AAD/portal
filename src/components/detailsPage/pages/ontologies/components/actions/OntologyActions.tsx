@@ -1,4 +1,4 @@
-import { FC, useContext } from 'react';
+import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,7 +9,9 @@ import GaiaXButton from '../../../../../buttons/GaiaXButton';
 
 import styles from './OntologyActions.module.css';
 
+// eslint-disable-next-line no-unused-vars
 enum graphRoutes {
+  // eslint-disable-next-line no-unused-vars
     shapesAndOntologies = '/shapesAndOntologies/graph/',
 }
 

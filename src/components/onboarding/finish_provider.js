@@ -1,18 +1,19 @@
 import axios from 'axios';
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { retrieveAndRemoveOnboardingJWT } from '../../common/auth';
 import { BodyText, Card, H4LightText, HorizontalLine, Padding, Style, TextInput } from '../../common/styles';
 import { BlueButton } from '../admin/style';
+
 const FinishProvider = () => {
 
   const { t } = useTranslation();
   const formRef = useRef();
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState('');
+  const [, setErrorMessage] = useState('');
 
   const URL = process.env.REACT_APP_EDGE_API_URI + `/onboarding/register/organization/pr?email=${email}`;
 

@@ -118,7 +118,7 @@ Search.propTypes = {
 
 const Wrap = (props) => {
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return <Search {...props} navigate={navigate} t={t}/>
 }
 export default connect (null, { updateSearchFromHome }) (Wrap);

@@ -4,10 +4,19 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { useParams, NavLink, Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, NavLink, useNavigate, useParams } from 'react-router-dom';
 
 import { resetLcmServices } from '../../../actions';
-import { HeaderTitle, BodyText, BlueButton, CancelButton, BlueTextClickable, BlueUploadLabel, BodySmallBoldText, TextInput } from '../../../common/styles';
+import {
+  BlueButton,
+  BlueTextClickable,
+  BlueUploadLabel,
+  BodySmallBoldText,
+  BodyText,
+  CancelButton,
+  HeaderTitle,
+  TextInput
+} from '../../../common/styles';
 import { Tab } from '../../../common/tabs/tab';
 
 import './lcm.css'
@@ -22,7 +31,7 @@ class LcmFinal extends Component {
 
     const { id } = this.props.params;
     const idFromState = this.state.id;
-    if (id != idFromState) {
+    if (id !== idFromState) {
       const request = this._getServicesRequest();
       axios.post(process.env.REACT_APP_EDGE_API_URI + '/lcm-service/service/configuration', request).then((response) => {
         this.setState({ services: response.data.services, id: id })
@@ -36,14 +45,13 @@ class LcmFinal extends Component {
   submitLcm = () => {
     const request = { services: this.state.services };
     console.log(request);
-    axios.post( process.env.REACT_APP_EDGE_API_URI + '/lcm-service/service/',  request).
-      then((response) => {
+    axios
+      .post(process.env.REACT_APP_EDGE_API_URI + '/lcm-service/service/', request)
+      .then((response) => {
         this.props.navigate('/dashboard');
         this.props.resetLcmServices();
-      }, (error) => {
-        console.error(error);
-      });
-
+      })
+      .catch((error) => console.error(error));
   }
 
   downloadTemplate = () => {
@@ -118,7 +126,7 @@ class LcmFinal extends Component {
     const { id } = this.props.params;
     const idFromState = this.props.lcm.id;
 
-    if (idFromState && id != idFromState) {
+    if (idFromState && id !== idFromState) {
       this.props.resetLcmServices();
       return <Navigate to={'/lcm/' + id} />
     }

@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import { Padding } from '../../components/discovery/tabs/style';
 import { ButtonText, Image, Style } from '../styles';

@@ -1,22 +1,22 @@
 import PropTypes from 'prop-types';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { Row, Style, CaptionText, Circle, CaptionTextLink } from '../../common/styles';
+import { CaptionText, CaptionTextLink, Circle, Row, Style } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
 
+import SideSectionsView from './SectionView';
 import DashboardView from './dashboard_view';
 import DateTimeCard from './date_time_card';
-import SideSectionsView from './side_sections_view';
 
 const DashboardPage = () => {
   const { t } = useTranslation();
 
   const user = useSelector((state) => state.user)
-  const role = user.user.user_role
   const type = 'dashboard';
-  const _leftPanelWidth = '225px'
+  const leftPanelWidth = '225px'
   const navigate = useNavigate();
 
   const SideBarView = () => {
@@ -62,7 +62,7 @@ const DashboardPage = () => {
   return <Row>
 
     {/* SIDE BAR */}
-    <Style minWidth={_leftPanelWidth}>
+    <Style minWidth={leftPanelWidth}>
       <SideBarView />
     </Style>
 

@@ -1,5 +1,5 @@
 import { ShapeContext } from 'context/ShapeContext';
-import { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 

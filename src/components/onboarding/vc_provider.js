@@ -1,9 +1,21 @@
 import PropTypes from 'prop-types';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import {  useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { retrieveOnboardingJWT } from '../../common/auth';
-import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Style, TextInput, BlueButton } from '../../common/styles';
+import {
+  BlueButton,
+  BodyText,
+  CaptionTeleNeoText,
+  Card,
+  Column,
+  H4LightText,
+  HorizontalLine,
+  Padding,
+  Style,
+  TextInput
+} from '../../common/styles';
 import LoadingView from '../loading_view/LoadingView';
 
 const VCProvider = ({ nextStage }) => {

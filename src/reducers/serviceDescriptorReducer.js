@@ -13,7 +13,7 @@ const updateState = (currentState, newState) => {
   return { ...currentState, ...newState };
 }
 
-export default (state = INITIAL_STATE, action) => {
+export const serviceDescriptorReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case SET_DESCRIPTOR_FILE:
     return updateFile(state, action.file, action.parsed_descriptor);

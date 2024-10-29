@@ -82,12 +82,12 @@ const createOntologyObject = (quads: Quad[], relatedShapes: Shape[]): Ontology =
   const links: { source: string; target: string }[] = [];
 
   let subject = 'No subject available!';
-  let contributors: string[] = [];
+  const contributors: string[] = [];
   let description = 'No description available!';
   let version = 'No version available!';
 
   // Create a map to keep track of the types of each subject
-  let typesMap: { [key: string]: string } = {};
+  const typesMap: { [key: string]: string } = {};
   quads.forEach(quad => {
     const subjectId = quad.subject.id;
     const predicateId = quad.predicate.id;
