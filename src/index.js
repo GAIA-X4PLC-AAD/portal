@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify';
 
 import './i18n';
 import App from './App';
+import ErrorBoundary from './components/error-boundary/ErrorBoundary';
 import { configureStore } from './configureStore';
 import AuthContextProvider from './context/AuthContextProvider';
 import { ResourceContextProvider } from './context/ResourceContext';
@@ -45,7 +46,10 @@ root.render(
   <Provider store={store}>
     <AuthContextProvider>
       <ResourceContextProvider>
-        <App/>
+        <ErrorBoundary
+        >
+          <App/>
+        </ErrorBoundary>
         <ToastContainer/>
       </ResourceContextProvider>
     </AuthContextProvider>
