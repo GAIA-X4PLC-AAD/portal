@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals';
 
-import { createShapeObjects } from '../../src/services/shapeService.utils';
+import { createShapeObjects, trimShapes } from '../../src/services/shapeService.utils';
 import { hdmapShapeQuads, hdmapShapes } from '../__fixtures__/hdmap_shacl';
 
 describe('createShapeObjects documentation', () => {
@@ -10,3 +10,23 @@ describe('createShapeObjects documentation', () => {
     expect(result).toEqual(hdmapShapes);
   })
 })
+
+describe('_ trim function for shapes', () => {
+  it('_ should trim a given shape which contains #', async () => {
+    // Given
+    const shape = 'https://w3id.org/gaia-x/validation#DataConnectorShape';
+    // When
+    const result = trimShapes(shape)
+    // Then
+    expect(result).toBe('DataConnectorShape');
+  });
+
+  it('_ should trim a given shape which contains /', async () => {
+    // Given
+    const shape = 'https://semanticweb.org/metadatasurveyontology/SurveyResultDataOffering';
+    // When
+    const result = trimShapes(shape)
+    // Then
+    expect(result).toBe('SurveyResultDataOffering');
+  });
+});

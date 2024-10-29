@@ -3,9 +3,9 @@ import { Quad } from 'n3';
 
 import { Link, Node, Ontology, ShapesAndOntologiesInput } from '../types/ontologies.model';
 import { Shape } from '../types/shapes.model';
-import { trimShapes } from '../utils/shapeHelpers';
 
 import { getSchemaById } from './schemaApiService';
+import { trimShapes } from './shapeService.utils';
 
 export const DATA_RESOURCE_CLASS = 'https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#DataResource'
 
