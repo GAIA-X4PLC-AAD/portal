@@ -1,5 +1,6 @@
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import Title from 'components/Title/Title';
+import React from 'react';
 
 import VcMapComponent from '../../../../../VcMapComponent/VcMapComponent';
 

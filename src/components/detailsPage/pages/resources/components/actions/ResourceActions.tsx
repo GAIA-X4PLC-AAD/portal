@@ -1,5 +1,6 @@
 import Title from 'components/Title/Title';
 import GaiaXButton from 'components/buttons/GaiaXButton';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import styles from './ResourceActions.module.css';

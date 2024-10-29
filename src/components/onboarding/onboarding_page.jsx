@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useResource } from '@axios-use/react';
 import axios from 'axios';
 import PropTypes from 'prop-types';

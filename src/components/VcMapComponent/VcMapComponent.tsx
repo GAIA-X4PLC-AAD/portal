@@ -1,7 +1,9 @@
 import { GeoJSONLayer, VcsApp, VcsModule, Viewpoint } from '@vcmap/core';
+import React from 'react';
 import { FC, useEffect } from 'react';
 import './VcMapComponent.css';
 import { v4 as uuidv4 } from 'uuid';
+
 const VcMapComponent: FC = () => {
   const mapId = uuidv4();
   const loadModule = async (app: VcsApp, url: string) => {

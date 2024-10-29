@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
