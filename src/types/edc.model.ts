@@ -1,8 +1,17 @@
+export type DataTransferDialogUserInput = {
+  edcConsumerBaseUrl: string;
+  dataDestinationAccount: string;
+  dataDestinationContainer: string;
+}
+
 export type RetrieveContractInfoInput = {
   contractId: string;
-  edcConsumerBaseUrl: string;
-  dataDestinationContainer: string;
-  dataDestinationAccount: string;
+  edcProducerBaseUrl: string;
+}
+
+export interface ContractInfo {
+  contractDefinitionId: string | null;
+  assetNameFull: string | null;
 }
 
 export type ContractNegotiationInput = {
@@ -12,18 +21,31 @@ export type ContractNegotiationInput = {
   assetNameFull: string;
 }
 
+export type NegotiatedContractInfo = {
+  contractNegotiationUID: string;
+}
+
 export type RetrieveAgreementInput = {
   edcConsumerBaseUrl: string;
   contractNegotiationUID: string;
 }
 
-export type DataTransferInitiationInput = {
+export interface AgreementInfo {
+  contractAgreementUID: string | null;
+  state: string | null;
+}
+
+export type DataTransferInput = {
   edcConsumerBaseUrl: string;
   edcProducerBaseUrl: string;
-  dataDestinationContainer: string;
   dataDestinationAccount: string;
+  dataDestinationContainer: string;
   contractAgreementUID: string;
   assetNameFull: string;
+}
+
+export interface DataTransferProcessInfo {
+  transferProcessId: string | null;
 }
 
 export type DataTransferStatusCheckInput = {
@@ -40,6 +62,10 @@ export type DataTransferStatuses =
   | 'PROVISIONED'
   | 'REQUESTED'
 
+export interface TransferStatusInfo {
+  status: DataTransferStatuses;
+}
+
 export type DataTransferInputProps = {
   contractId: string;
   edc: {
@@ -52,24 +78,3 @@ export type DataTransferInputProps = {
   }
 }
 
-export interface ContractInformation {
-  contractDefinitionId: string | null;
-  assetNameFull: string | null;
-}
-
-export interface AgreementInformation {
-  contractNegotiationUID: string;
-}
-
-export interface ContractAgreementInformation {
-  contractAgreementUID: string | null;
-  state: string | null;
-}
-
-export interface TransferProcessInformation {
-  transferProcessId: string | null;
-}
-
-export interface TransferStateInformation {
-  state: DataTransferStatuses;
-}

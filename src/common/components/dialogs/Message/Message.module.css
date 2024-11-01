@@ -1,0 +1,9 @@
+.message {
+    font-size: large;
+    font-weight: normal;
+    text-align: left;
+
+    /* Ensure the text wraps inside the container */
+    overflow-wrap: break-word; /* Modern, preferred */
+    word-wrap: break-word; /* Deprecated but still supported */
+}

@@ -274,11 +274,19 @@
     "transfer-state": "Transfer state",
     "transfer-button": "Transfer",
     "cancel-button": "Cancel",
+    "data-transfer-initiation-progress": "Data Transfer Initiation Progress",
+    "retrieve-contract-info": "Retrieving contract information ...",
     "failed-to-retrieve-contract-info": "Failed to retrieve contract information!",
-    "contract-negotiation-failed": "An error occurred during the contract information retrieval!",
+    "negotiate-contract": "Negotiating contract ...",
+    "contract-negotiation-failed": "An error occurred during the contract negotiation!",
+    "retrieve-agreement-info": "Retrieving agreement information ... ",
     "failed-to-retrieve-agreement-info": "Failed to retrieve agreement information!",
+    "failed-to-retrieve-agreement-info-after-10-attempts": "Failed to retrieve agreement information after 10 retry attempts!",
+    "initiate-data-transfer": "Initiating data transfer ...",
     "data-transfer-initiation-failed": "An error occurred during the data transfer initiation!",
-    "check-data-transfer-status-failed": "An error occurred during the data transfer status check!"
+    "check-data-transfer-status": "Checking data transfer status ...",
+    "check-data-transfer-status-failed": "An error occurred during the data transfer status check!",
+    "data-transfer-failed": "Data Transfer Failed"
   },
   "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
   "footer_slogan_cap": " ",
@@ -557,6 +565,7 @@
     "not-gaia-x-compliant": "Not Gaia-X compliant",
     "not-authenticated": "You are not authenticated!",
     "results": "results",
-    "is-loading": "loading..."
+    "is-loading": "loading...",
+    "close": "Close"
   }
 }

@@ -1,59 +1,51 @@
 import classnames from 'classnames';
 import ModalBody from 'common/components/dialogs/Modal/ModalBody';
-import React, { FC, useMemo, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ResourceDetails } from 'types/resources.model';
 
 import GaiaXButton from '../../../common/components/buttons/GaiaXButton';
 import Modal from '../../../common/components/dialogs/./Modal/Modal';
 import ModalFooter from '../../../common/components/dialogs/./Modal/ModalFooter';
 import ModalHeader from '../../../common/components/dialogs/./Modal/ModalHeader';
 import ModalXButton from '../../../common/components/dialogs/./Modal/ModalXButton';
-import { DataTransferInputProps } from '../../../types/edc.model';
 import Title from '../../Title/Title';
+import { ResourceBuyingAction, ResourceBuyingState } from '../helpers/resourceBuyingStateMachine';
 
 import styles from './ResourceBuyingModal.module.css';
 
 interface ResourceBuyingModalProps {
-  isOpen: boolean,
+  state: ResourceBuyingState,
+  dispatch: React.Dispatch<ResourceBuyingAction>,
   title: string,
-  resourceDetails: ResourceDetails,
-  onTransfer: (props: DataTransferInputProps) => void,
-  onClose: () => void,
 }
 
 const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
-  isOpen,
+  state,
+  dispatch,
   title,
-  resourceDetails,
-  onTransfer,
-  onClose
 }) => {
   const { t } = useTranslation();
 
-  const producerBaseUrl = useMemo(() => {
-    const protocol = resourceDetails.serviceAccessPoint ? resourceDetails.serviceAccessPoint.protocol : '';
-    const host = resourceDetails.serviceAccessPoint ? resourceDetails.serviceAccessPoint.host.replace(/\/$/, '') : '';
-    return `${protocol}://${host}`
-  }, []);
-  const [consumerBaseUrl, setConsumerBaseUrl] = useState(`${process.env.REACT_APP_DEFAULT_EDC_CONSUMER.replace(/\/$/, '')}`);
-  const [container, setContainer] = useState(`${process.env.REACT_APP_DEFAULT_EDC_DESTINATION_CONTAINER}`);
+  const [consumerBaseUrl, setConsumerBaseUrl] = useState();
   const [account, setAccount] = useState(`${process.env.REACT_APP_DEFAULT_EDC_DESTINATION_ACCOUNT}`);
-  const [isTransferButtonDisabled, setIsTransferButtonDisabled] = useState(false);
+  const [container, setContainer] = useState(`${process.env.REACT_APP_DEFAULT_EDC_DESTINATION_CONTAINER}`);
+
+  useEffect(() => {
+    if (state.name === 'TRANSFER_DIALOG') {
+      setConsumerBaseUrl(state.edcConsumerBaseUrl);
+      setAccount(state.dataDestinationAccount);
+      setContainer(state.dataDestinationContainer);
+    }
+  }, [state.name]);
 
   const submit = (event) => {
     event.preventDefault()
     if (event.target.checkValidity()) {
-      setIsTransferButtonDisabled(true);
-      onTransfer({
-        contractId: resourceDetails.contractId || '',
-        edc: {
-          consumerBaseUrl,
-          producerBaseUrl
-        },
-        dataDestination: {
-          container,
-          account
+      dispatch({
+        type: 'RETRIEVE_CONTRACT_INFORMATION', payload: {
+          edcConsumerBaseUrl: consumerBaseUrl,
+          dataDestinationAccount: account,
+          dataDestinationContainer: container
         }
       })
     } else {
@@ -63,10 +55,10 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
 
   return (
     <form onSubmit={submit}>
-      <Modal isOpen={isOpen} className={styles.modal}>
+      <Modal isOpen={state.name === 'TRANSFER_DIALOG'} className={styles.modal}>
         <ModalHeader>
           <Title>{title}</Title>
-          <ModalXButton onClose={onClose}/>
+          <ModalXButton onClose={() => dispatch({ type: 'CANCEL' })}/>
         </ModalHeader>
 
         <ModalBody>
@@ -114,12 +106,12 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
           <GaiaXButton
             label={t('buy-dialog.transfer-button')}
             className={classnames([styles.transferButton, styles.actionButton])}
-            disabled={isTransferButtonDisabled}
+            disabled={state.name !== 'TRANSFER_DIALOG' || !state.contractId || !state.serviceAccessPoint}
             type="submit"
           />
           <GaiaXButton
             label={t('buy-dialog.cancel-button')}
-            handleOnClick={onClose}
+            handleOnClick={() => dispatch({ type: 'CANCEL' })}
             className={classnames([styles.cancelButton, styles.actionButton])}
           />
         </ModalFooter>

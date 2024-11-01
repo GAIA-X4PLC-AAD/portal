@@ -272,11 +272,19 @@
     "transfer-state": "Transfer Status",
     "transfer-button": "Übertragen",
     "cancel-button": "Abbrechen",
+    "data-transfer-initiation-progress": "Datenübertragungsinitiierung Progress",
+    "retrieve-contract-info": "Abruf der Vertragsinformationen ...",
     "failed-to-retrieve-contract-info": "Abrufen der Vertragsinformationen ist fehlgeschlagen!",
-    "contract-negotiation-failed": "Ein Fehler ist beim Abrufen der Vertragsinformationen aufgetreten!",
+    "negotiate-contract": "Vertragsverhandlung ...",
+    "contract-negotiation-failed": "Ein Fehler ist bei der Vertragsverhandlung aufgetreten!",
+    "retrieve-agreement-info": "Abrufen der Vertragsinformationen ...",
     "failed-to-retrieve-agreement-info": "Abrufen der Vertragsinformationen ist fehlgeschlagen!",
+    "failed-to-retrieve-agreement-info-after-10-attempts": "Das Abrufen der Vereinbarungsinformationen ist nach 10 erneuten Versuchen fehlgeschlagen!",
+    "initiate-data-transfer": "Datenübertragung wird gestartet ...",
     "data-transfer-initiation-failed": "Ein Fehler ist beim Starten der Datenübertragung aufgetreten!",
-    "check-data-transfer-status-failed": "Ein Fehler ist bei der Überprüfung des Datenübertragungsstatus aufgetreten!"
+    "check-data-transfer-status": "Datenübertragungsstatus wird überprüft ...",
+    "check-data-transfer-status-failed": "Ein Fehler ist bei der Überprüfung des Datenübertragungsstatus aufgetreten!",
+    "data-transfer-failed": "Datenübertragungsfehler"
   },
   "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
   "footer_slogan_cap": " powered by",
@@ -555,6 +563,7 @@
     "not-gaia-x-compliant": "Nicht Gaia-X konform",
     "not-authenticated": "Nicht berechtigt",
     "results": "Ergebnisse",
-    "is-loading": "es wird geladen..."
+    "is-loading": "es wird geladen...",
+    "close": "Schließen"
   }
 }

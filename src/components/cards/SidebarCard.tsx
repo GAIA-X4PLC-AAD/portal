@@ -2,14 +2,16 @@ import classnames from 'classnames';
 import GaiaXButton from 'common/components/buttons/GaiaXButton';
 import Text from 'common/components/fields/Text/Text';
 import Title from 'components/Title/Title';
-import { useTransferState } from 'components/resources/hooks/useTransferState';
 import Subtitle from 'components/subtitle/Subtitle';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import NotificationDialog from '../../common/components/dialogs/NotificationDialog/NotificationDialog';
 import { ResourceDetails } from '../../types/resources.model';
+import DataTransferInitiationProgress from '../resources/components/DataTransferInitiationProgress';
+import DataTransferStatus from '../resources/components/DataTransferStatus';
 import ResourceBuyingModal from '../resources/components/ResourceBuyingModal';
-import { resourceDataTransfer } from '../resources/helpers/resourceDataFlow';
+import { useResourceBuyingStateMachine } from '../resources/helpers/resourceBuyingStateMachine';
 
 import styles from './SidebarCard.module.css';
 
@@ -27,45 +29,42 @@ export default function SidebarCard({
   resource
 }: Readonly<ISidebarCard>) {
   const { t } = useTranslation();
-  const [isOpen, setOpen] = useState(false);
-  const { isVisible, transferState, startMonitoring } = useTransferState();
+  const { state, dispatch } = useResourceBuyingStateMachine({
+    contractId: resource.contractId,
+    serviceAccessPoint: resource.serviceAccessPoint,
+  });
 
-  const handleClickContactOrBuy = () => {
-    setOpen(true);
+  const handleClickBuyButton = () => {
+    dispatch({ type: 'BUY' })
   };
 
   return (
     <>
+      <NotificationDialog
+        isOpen={state.name === 'ERROR_NOTIFICATION_DIALOG'}
+        close={() => dispatch({ type: 'CLOSE' })}
+        title={t('buy-dialog.data-transfer-failed')}
+        message={state.name === 'ERROR_NOTIFICATION_DIALOG' ? state.message : ''}
+      />
       <ResourceBuyingModal
-        isOpen={isOpen}
+        state={state}
+        dispatch={dispatch}
         title={resource.name}
-        resourceDetails={resource}
-        onTransfer={(transferInput) => {
-          resourceDataTransfer(transferInput)
-            .then((transferProcessInformation) => {
-              startMonitoring(transferInput, transferProcessInformation)
-            })
-            .catch(() => {
-              console.debug('error')
-            })
-            .finally(() => setOpen(false))
-
-        }}
-        onClose={() => setOpen(false)}
+      />
+      <DataTransferInitiationProgress
+        state={state}
+        dispatch={dispatch}
       />
       <div className={styles['sidebar-card-container']}>
         <Title>{title}</Title>
         <Subtitle>{subtitle}</Subtitle>
         <Text>{text}</Text>
-        <Text className={styles.transferStateLabel} visible={isVisible}>{t('buy-dialog.transfer-state')}</Text>
-        <Text className={styles.transferState} visible={isVisible}>
-          <span className={styles.transferStateValue}>{`${transferState}`}</span>
-        </Text>
+        <DataTransferStatus state={state}/>
         <GaiaXButton
           className={classnames([styles.buyButton])}
           label={t('details.sidebar-buy-button')}
-          handleOnClick={handleClickContactOrBuy}
-          disabled={!resource.contractId || !!transferState}
+          handleOnClick={handleClickBuyButton}
+          disabled={!['TRANSFER_ENABLED', 'FINISHED'].includes(state.name)}
         />
       </div>
     </>

@@ -17,8 +17,6 @@ interface IDetailsCardProps {
 }
 
 export default function DetailsCard({ cardData }: Readonly<IDetailsCardProps>) {
-  console.log('What to work with: ', cardData);
-
   // Ensure cardData.items is an array and has data
   const propertiesList =
     cardData && cardData.items

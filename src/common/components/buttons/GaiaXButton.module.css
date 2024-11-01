@@ -7,7 +7,7 @@
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s;
-    font-weight: 100;
+    font-weight: normal;
     margin: 20px;
     padding: 8px 16px 8px 16px;
 }

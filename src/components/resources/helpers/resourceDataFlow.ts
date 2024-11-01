@@ -1,15 +1,7 @@
 import BusinessObjectNotFound from '../../../common/exceptions/BusinessObjectNotFound';
 import MultipleBusinessObjectsFound from '../../../common/exceptions/MultipleBusinessObjectsFound';
 import { CypherQueryApiService as cypherQuery } from '../../../services/cypherQueryApiService';
-import {
-  initiateDataTransfer,
-  loadAgreement,
-  loadContractInformation,
-  negotiateContract
-} from '../../../services/edcServiceApi';
-import { DataTransferInputProps, TransferProcessInformation } from '../../../types/edc.model';
 import { Resource, ResourceDetails } from '../../../types/resources.model';
-import { delay } from '../../../utils/timers';
 
 /**
  * Loads resources for which the following criteria are met:
@@ -65,37 +57,3 @@ export const loadResourceDetails = async (resourceUri: string): Promise<Resource
         ...(!serviceAccessPoint ? {} : { serviceAccessPoint })
       }
     })
-
-/**
- * Starts data transfer from EDC.
- *
- * @param input
- * - contractId: is given in resource detail: dataResource.general.data.contractId
- * - edc:
- *   - consumerBaseUrl: is an input parameter give in a dialog box
- *   - producerBaseUrl: is given in resource detail: dataResource.instanceOf.serviceAccessPoint
- * - dataDestination:
- *   - container: is an input parameter given in a dialog box
- *   - account: is an input parameter given in a dialog box
- *
- * @return transfer process id
- */
-export const resourceDataTransfer = async (input: DataTransferInputProps): Promise<TransferProcessInformation> => {
-  try {
-    const contractInformation = await loadContractInformation(input);
-    const agreementInformation = await negotiateContract(input, contractInformation);
-
-    // There is a lag between the previous calls and the arrival of the result to the endpoint which provides the
-    // agreement. If it is called to close to the previous calls then in the response the contractAgreementUID will
-    // be missing.
-    const contractAgreementInformation = await delay(() => {
-      return loadAgreement(input, agreementInformation);
-    }, 2000);
-
-    return initiateDataTransfer(input, contractAgreementInformation, contractInformation);
-  } catch (error) {
-    console.error('Resource data transfer has failed:', error)
-    throw error
-  }
-}
-

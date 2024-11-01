@@ -1,16 +1,6 @@
-:root {
-    --primary-color: #a01441;
-    --secondary-color: #073A5E;
-    --secondary-color-light: #427599A0;
-    --normal-button--bg-color: var(--primary-color);
-    --primary-button-bg-color: var(--secondary-color);
-    --input-focus-color: var(--secondary-color-light);
-    --input-label-color: dimgray;
-}
-
 .modal {
     width: 600px;
-    height: 550px;
+    height: auto;
 }
 
 .label {
@@ -41,8 +31,8 @@
 }
 
 .actionButton {
-    margin-left: 10px;
-    margin-right: 10px;
+    margin-right: 0;
+    margin-bottom: 0;
 }
 
 .transferButton {

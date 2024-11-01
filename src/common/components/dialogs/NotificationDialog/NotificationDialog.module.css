@@ -1,0 +1,24 @@
+.modal {
+    width: 600px;
+    height: auto;
+}
+
+.modalBody {
+    flex: 1;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 20px;
+    overflow-y: hidden; /* Disable scrolling */
+}
+
+.actionButton {
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+.cancelButton {
+    background-color: var(--normal-button--bg-color);
+    color: white;
+}
+
