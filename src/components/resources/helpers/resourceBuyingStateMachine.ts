@@ -1,13 +1,5 @@
 import { t } from 'i18next';
-import { useEffect, useReducer } from 'react';
 
-import {
-  checkTransferStatus,
-  initiateDataTransfer,
-  negotiateContract,
-  retrieveAgreement,
-  retrieveContractInformation
-} from '../../../services/edcServiceApi';
 import {
   ContractInfo,
   DataTransferDialogUserInput,
@@ -16,7 +8,6 @@ import {
   DataTransferStatuses,
   NegotiatedContractInfo
 } from '../../../types/edc.model';
-import { delay } from '../../../utils/timers';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Type definitions
@@ -139,13 +130,10 @@ export interface ResourceBuyingStateMachineParams {
   }
 }
 
-type ResourceBuyingStateMachineRetVal = { state: ResourceBuyingState, dispatch: React.Dispatch<ResourceBuyingAction> }
-type ResourceBuyingStateMachineHook = (params: ResourceBuyingStateMachineParams) => ResourceBuyingStateMachineRetVal
-
 ////////////////////////////////////////////////////////////////////////////////
 // Initial state
 ////////////////////////////////////////////////////////////////////////////////
-const initialState: ResourceBuyingState = { name: 'INIT' }
+export const initialState: ResourceBuyingState = { name: 'INIT' }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Reducer
@@ -494,138 +482,3 @@ const transitionsOfFinishedState = (state: ResourceBuyingState, action: Resource
   return state
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// State Machine
-////////////////////////////////////////////////////////////////////////////////
-export const useResourceBuyingStateMachine: ResourceBuyingStateMachineHook = ({
-  contractId,
-  serviceAccessPoint,
-}) => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    console.debug('state:', state)
-
-    if (state.name === 'INIT') {
-      dispatch({ type: 'CHECK_TRANSFER_ENABLED', payload: { contractId, serviceAccessPoint } })
-    }
-
-    if (state.name === 'RETRIEVE_CONTRACT_INFORMATION') {
-      const { contractId, edcProducerBaseUrl } = state;
-      retrieveContractInformation({ contractId, edcProducerBaseUrl })
-        .then((contractInfo) => {
-          dispatch({ type: 'NEGOTIATE_CONTRACT', payload: contractInfo })
-        })
-        .catch((error) => {
-          dispatch({ type: 'ERROR', payload: `${t('buy-dialog.failed-to-retrieve-contract-info')} ${error}` })
-        })
-    }
-
-    if (state.name === 'CONTRACT_NEGOTIATION') {
-      const { edcConsumerBaseUrl, edcProducerBaseUrl, contractDefinitionId, assetNameFull } = state;
-      negotiateContract({ edcConsumerBaseUrl, edcProducerBaseUrl, contractDefinitionId, assetNameFull })
-        .then((negotiatedContractInfo) => {
-          dispatch({
-            type: 'RETRIEVE_AGREEMENT_INFORMATION',
-            payload: { ...negotiatedContractInfo }
-          })
-        })
-        .catch((error) => {
-          dispatch({ type: 'ERROR', payload: `${t('buy-dialog.contract-negotiation-failed')} ${error}` })
-        })
-    }
-
-    if (state.name === 'RETRIEVE_AGREEMENT_INFORMATION') {
-      const { edcConsumerBaseUrl, contractNegotiationUID } = state;
-      retrieveAgreement({ edcConsumerBaseUrl, contractNegotiationUID })
-        .then((agreementInfo) => {
-          if (agreementInfo.state !== 'FINALIZED') {
-            const { contractNegotiationUID, nrOfRetries } = state
-            delay(nrOfRetries * 1000).then(() => dispatch({
-              type: 'RETRIEVE_AGREEMENT_INFORMATION',
-              payload: { contractNegotiationUID }
-            }))
-          } else {
-            const { contractAgreementUID } = agreementInfo;
-            dispatch({
-              type: 'INITIATE_DATA_TRANSFER',
-              payload: {
-                edcConsumerBaseUrl: state.edcConsumerBaseUrl,
-                edcProducerBaseUrl: state.edcProducerBaseUrl,
-                dataDestinationAccount: state.dataDestinationAccount,
-                dataDestinationContainer: state.dataDestinationContainer,
-                contractAgreementUID: contractAgreementUID || '',
-                assetNameFull: state.assetNameFull,
-              }
-            })
-          }
-        })
-        .catch((error) => {
-          dispatch({ type: 'ERROR', payload: `${t('buy-dialog.failed-to-retrieve-agreement-info')} ${error}` })
-        })
-    }
-
-    if (state.name === 'DATA_TRANSFER_INITIATION') {
-      const {
-        edcConsumerBaseUrl,
-        edcProducerBaseUrl,
-        dataDestinationAccount,
-        dataDestinationContainer,
-        contractAgreementUID,
-        assetNameFull
-      } = state
-      initiateDataTransfer({
-        edcConsumerBaseUrl,
-        edcProducerBaseUrl,
-        dataDestinationAccount,
-        dataDestinationContainer,
-        contractAgreementUID,
-        assetNameFull
-      })
-        .then((transferProcessInfo) => {
-          dispatch({
-            type: 'CHECK_DATA_TRANSFER_STATUS',
-            payload: {
-              transferProcessId: transferProcessInfo.transferProcessId || '',
-              edcConsumerBaseUrl,
-            }
-          })
-        })
-        .catch((error) => {
-          dispatch({ type: 'ERROR', payload: `${t('buy-dialog.data-transfer-initiation-failed')} ${error}` })
-        })
-    }
-
-    if (state.name === 'CHECKING_DATA_TRANSFER_STATUS') {
-      const { transferProcessId, edcConsumerBaseUrl } = state
-      checkTransferStatus({ transferProcessId, edcConsumerBaseUrl })
-        .then((transferStatusInfo) => {
-          dispatch({ type: 'DISPLAY_DATA_TRANSFER_STATUS', payload: transferStatusInfo.status })
-        })
-        .catch((error) => {
-          dispatch({ type: 'ERROR', payload: `${t('buy-dialog.check-data-transfer-status-failed')} ${error}` })
-        })
-    }
-
-    if (state.name === 'DISPLAY_DATA_TRANSFER_STATUS') {
-      delay((state.status !== 'COMPLETED' ? state.nrOfRetries : 0) * 1000).then(() => {
-        dispatch({
-          type: 'CHECK_DATA_TRANSFER_STATUS',
-          payload: {
-            transferProcessId: state.transferProcessId || '',
-            edcConsumerBaseUrl: state.edcConsumerBaseUrl,
-          }
-        })
-      })
-    }
-  },
-  [
-    state.name,
-    state.name === 'RETRIEVE_AGREEMENT_INFORMATION' ? state.nrOfRetries : null
-  ]);
-
-  return {
-    state,
-    dispatch
-  }
-}

@@ -11,7 +11,7 @@ import { ResourceDetails } from '../../types/resources.model';
 import DataTransferInitiationProgress from '../resources/components/DataTransferInitiationProgress';
 import DataTransferStatus from '../resources/components/DataTransferStatus';
 import ResourceBuyingModal from '../resources/components/ResourceBuyingModal';
-import { useResourceBuyingStateMachine } from '../resources/helpers/resourceBuyingStateMachine';
+import { useResourceBuyingStateMachine } from '../resources/hooks/useResourceBuyingStateMachine';
 
 import styles from './SidebarCard.module.css';
 

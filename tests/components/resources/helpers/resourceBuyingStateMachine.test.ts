@@ -4,9 +4,11 @@ import { act, Dispatch } from 'react';
 import {
   ResourceBuyingAction,
   ResourceBuyingState,
-  ResourceBuyingStateMachineParams,
-  useResourceBuyingStateMachine
+  ResourceBuyingStateMachineParams
 } from '../../../../src/components/resources/helpers/resourceBuyingStateMachine';
+import {
+  useResourceBuyingStateMachine
+} from '../../../../src/components/resources/hooks/useResourceBuyingStateMachine';
 import {
   AgreementInfo,
   ContractInfo,
