@@ -128,6 +128,42 @@ export const CypherQueryApiService = {
   },
 
   /**
+   * Returns all participants.
+   *
+   * @return the selected participant in a {@link CypherQueryResult} type  */
+  async getAllParticipants(): Promise<CypherQueryResult> {
+    return cypherQuery({
+      statement: `
+      MATCH (participant)
+        WHERE 'LegalParticipant' IN labels(participant)
+      RETURN
+        properties(participant).legalName AS legalName,
+        labels(participant) AS labels
+      `
+    });
+  },
+
+  /**
+   * Returns a single participant selected by it legal name.
+   *
+   * @param legalName is the property by which the participant is selected.
+   * @return the selected participant in a {@link CypherQueryResult} type  */
+  async getParticipantDetails(legalName: string): Promise<CypherQueryResult> {
+    return cypherQuery({
+      statement: `
+      MATCH (participant)
+        WHERE 'LegalParticipant' IN labels(participant) AND properties(participant).legalName CONTAINS '${legalName}'
+      RETURN
+        properties(participant).legalName AS legalName,
+        properties(participant).claimsGraphUri AS claimsGraphUri,
+        properties(participant).uri AS uri,
+        properties(participant).gaiaxTermsAndConditions AS gaiaxTermsAndConditions,
+        labels(participant) AS labels
+      `
+    });
+  },
+
+  /**
    * Returns all entries from the cypher db. This method is used for development purposes only, in cases when
    * available data has to be analysed.
    */
