@@ -3,12 +3,6 @@ import { toast } from 'react-toastify';
 import { Notification } from '../../types/notification.model';
 
 export const notify = (notification: Notification) => {
-  const toastOptions = {
-    autoClose: getAutoClose(notification.autoClose),
-    className: notification.className || '',
-    bodyClassName: notification.bodyClassName || '',
-    icon: notification.icon || null,
-  };
 
   function getAutoClose(autoClose: number | undefined | false): number | false {
     if (autoClose === false) {
@@ -18,6 +12,11 @@ export const notify = (notification: Notification) => {
     } else {
       return autoClose; // Return the value of autoClose if it's a number
     }
+  }
+
+  const toastOptions = {
+    ...notification.options,
+    autoClose: getAutoClose(notification.options ? notification.options.autoClose : undefined),
   }
 
   switch (notification.messageType) {
@@ -43,7 +42,7 @@ export const notify = (notification: Notification) => {
     });
     break;
   default:
-    toast(notification.component, {
+    toast(notification.message, {
       ...toastOptions,
     });
     break
