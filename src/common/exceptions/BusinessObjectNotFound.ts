@@ -14,11 +14,12 @@ class BusinessObjectNotFound extends GaiaXException {
     this.type = 'BusinessException';
   }
 
-  showNotification() {
+  showNotification(saveError: () => void) {
     notify({
       messageType: 'ERROR',
       message: this.message,
     })
+    saveError();
   }
 }
 

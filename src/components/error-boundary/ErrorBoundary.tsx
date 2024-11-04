@@ -1,14 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { GaiaXException } from '../../common/exceptions/GaiaXException';
 import { notify } from '../notification/Notification';
 
 type ErrorBoundaryProps = {
-    children: React.ReactNode;
+  children: React.ReactNode;
+  onErrorListChange?: (errors: GaiaXException[]) => void;
 };
 
-const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
-  const lastErrorRef = useRef<string | null>(null);
+const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children, onErrorListChange }) => {
+  const [gaiaXExceptionList, setGaiaXExceptionList] = useState<GaiaXException[]>([]);
 
   const handleGlobalError = (event: ErrorEvent) => {
     event.preventDefault();
@@ -26,7 +27,13 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
   const handleException = (error: Error | string) => {
     // Check if the error is an instance of GaiaXException
     if (error instanceof GaiaXException) {
-      error.showNotification();  // Call showNotification if it's a GaiaXException
+      error.showNotification(() => {
+        setGaiaXExceptionList((prevList) => [...prevList, error]);
+        if (onErrorListChange) {
+          onErrorListChange(gaiaXExceptionList);
+        }
+        console.log('set ErrorBoundary', error);
+      });  // Call showNotification if it's a GaiaXException
     } else {
       // Show standard error notification if it's not a GaiaXException
       const errorMessage = getErrorMessage(error);
@@ -47,14 +54,10 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
   };
 
   const showNotification = (errorMessage: string) => {
-    // Only notify if the error message is unique
-    //   if (errorMessage !== lastErrorRef.current) {
-    lastErrorRef.current = errorMessage;
     notify({
       messageType: 'ERROR',
       message: errorMessage,
     });
-    //  }
   }
 
   useEffect(() => {

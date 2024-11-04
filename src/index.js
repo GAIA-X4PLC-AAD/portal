@@ -46,8 +46,7 @@ root.render(
   <Provider store={store}>
     <AuthContextProvider>
       <ResourceContextProvider>
-        <ErrorBoundary
-        >
+        <ErrorBoundary>
           <App/>
         </ErrorBoundary>
         <ToastContainer/>
