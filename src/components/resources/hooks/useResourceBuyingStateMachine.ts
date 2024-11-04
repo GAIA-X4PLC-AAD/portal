@@ -48,35 +48,12 @@ export const useResourceBuyingStateMachine: ResourceBuyingStateMachineHook = ({
     case 'DATA_TRANSFER_INITIATION':
       initiateDataTransferActionHandler(state, dispatch);
       break
-    }
-
-    if (state.name === 'CHECKING_DATA_TRANSFER_STATUS') {
-      const { transferProcessId, edcConsumerBaseUrl } = state
-      checkTransferStatus({ transferProcessId, edcConsumerBaseUrl })
-        .then((transferStatusInfo) => {
-          dispatch({ type: 'DISPLAY_DATA_TRANSFER_STATUS', payload: transferStatusInfo.status })
-        })
-        .catch((error) => {
-          dispatch({ type: 'ERROR', payload: `${t('buy-dialog.check-data-transfer-status-failed')} ${error}` })
-        })
-    }
-
-    if (state.name === 'DISPLAY_DATA_TRANSFER_STATUS') {
-      delay((state.status !== 'COMPLETED' ? state.nrOfRetries : 0) * 1000).then(() => {
-        dispatch({
-          type: 'CHECK_DATA_TRANSFER_STATUS',
-          payload: {
-            transferProcessId: state.transferProcessId || '',
-            edcConsumerBaseUrl: state.edcConsumerBaseUrl,
-          }
-        })
-      })
+    case 'CHECKING_DATA_TRANSFER_STATUS':
+      checkDataTransferStatusActionHandler(state, dispatch);
+      break
     }
   },
-  [
-    state.name,
-    state.name === 'RETRIEVE_AGREEMENT_INFORMATION' ? state.nrOfRetries : null
-  ]);
+  [state.name, 'nrOfRetries' in state ? state.nrOfRetries : null]);
 
   return {
     state,
@@ -177,6 +154,7 @@ const initiateDataTransferActionHandler = (
           payload: {
             transferProcessId: transferProcessInfo.transferProcessId || '',
             edcConsumerBaseUrl: state.edcProducerBaseUrl,
+            status: 'INITIATED'
           }
         })
       })
@@ -185,3 +163,29 @@ const initiateDataTransferActionHandler = (
       })
   }
 }
+
+const checkDataTransferStatusActionHandler = (
+  state: ResourceBuyingState,
+  dispatch: React.Dispatch<ResourceBuyingAction>
+) => {
+  if (state.name === 'CHECKING_DATA_TRANSFER_STATUS') {
+    checkTransferStatus(state)
+      .then((transferStatusInfo) => {
+        const timeout = (state.status !== 'COMPLETED' ? state.nrOfRetries : 0) * 1000;
+        delay(timeout).then(() => {
+          dispatch({
+            type: 'CHECK_DATA_TRANSFER_STATUS',
+            payload: {
+              transferProcessId: state.transferProcessId || '',
+              edcConsumerBaseUrl: state.edcConsumerBaseUrl,
+              status: transferStatusInfo.status
+            }
+          })
+        })
+      })
+      .catch((error) => {
+        dispatch({ type: 'ERROR', payload: `${t('buy-dialog.check-data-transfer-status-failed')} ${error}` })
+      })
+  }
+}
+

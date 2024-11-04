@@ -26,7 +26,6 @@ export type ResourceBuyingAction =
   | { type: 'RETRIEVE_AGREEMENT_INFORMATION', payload: NegotiatedContractInfo }
   | { type: 'INITIATE_DATA_TRANSFER', payload: DataTransferInput }
   | { type: 'CHECK_DATA_TRANSFER_STATUS', payload: DataTransferStatusCheckInput }
-  | { type: 'DISPLAY_DATA_TRANSFER_STATUS', payload: DataTransferStatuses }
 
 export type ResourceBuyingState =
   {
@@ -99,15 +98,7 @@ export type ResourceBuyingState =
     edcConsumerBaseUrl: string,
     transferProcessId: string,
     nrOfRetries: number,
-  } |
-  {
-    name: 'DISPLAY_DATA_TRANSFER_STATUS',
-    contractId: string,
-    serviceAccessPoint: { host: string, protocol: string },
-    edcConsumerBaseUrl: string,
-    transferProcessId: string,
-    nrOfRetries: number,
-    status: string,
+    status: DataTransferStatuses
   } |
   {
     name: 'FINISHED',
@@ -158,8 +149,6 @@ export const reducer = (state: ResourceBuyingState, action: ResourceBuyingAction
     return transitionsOfDataTransferInitiationState(state, action)
   case 'CHECKING_DATA_TRANSFER_STATUS':
     return transitionsOfDataTransferStatusCheckState(state, action)
-  case 'DISPLAY_DATA_TRANSFER_STATUS':
-    return transitionsOfDisplayDataTransferStatusState(state, action)
   case 'FINISHED':
     return transitionsOfFinishedState(state, action)
   case 'ERROR_NOTIFICATION_DIALOG':
@@ -376,7 +365,8 @@ const transitionsOfDataTransferInitiationState = (state: ResourceBuyingState, ac
         contractId: state.contractId,
         serviceAccessPoint: state.serviceAccessPoint,
         transferProcessId: action.payload.transferProcessId,
-        edcConsumerBaseUrl: action.payload.edcConsumerBaseUrl
+        edcConsumerBaseUrl: action.payload.edcConsumerBaseUrl,
+        status: action.payload.status
       }
     }
   }
@@ -393,40 +383,15 @@ const transitionsOfDataTransferStatusCheckState = (state: ResourceBuyingState, a
         serviceAccessPoint: state.serviceAccessPoint
       }
     }
-    if (action.type === 'DISPLAY_DATA_TRANSFER_STATUS') {
-      return {
-        name: 'DISPLAY_DATA_TRANSFER_STATUS',
-        contractId: state.contractId,
-        serviceAccessPoint: state.serviceAccessPoint,
-        transferProcessId: state.transferProcessId,
-        edcConsumerBaseUrl: state.edcConsumerBaseUrl,
-        nrOfRetries: state.nrOfRetries,
-        status: action.payload
-      }
-    }
-  }
-  return state
-}
-
-const transitionsOfDisplayDataTransferStatusState = (state: ResourceBuyingState, action: ResourceBuyingAction): ResourceBuyingState => {
-  if (state.name === 'DISPLAY_DATA_TRANSFER_STATUS') {
-    if (state.status === 'COMPLETED') {
-      return {
-        name: 'FINISHED',
-        contractId: state.contractId,
-        serviceAccessPoint: state.serviceAccessPoint,
-        status: state.status
-      }
-    }
-    if (action.type === 'ERROR') {
-      return {
-        name: 'ERROR_NOTIFICATION_DIALOG',
-        message: action.payload,
-        contractId: state.contractId,
-        serviceAccessPoint: state.serviceAccessPoint
-      }
-    }
     if (action.type === 'CHECK_DATA_TRANSFER_STATUS') {
+      if (action.payload.status === 'COMPLETED') {
+        return {
+          name: 'FINISHED',
+          contractId: state.contractId,
+          serviceAccessPoint: state.serviceAccessPoint,
+          status: state.status
+        }
+      }
       if (state.nrOfRetries >= 10) {
         return {
           name: 'ERROR_NOTIFICATION_DIALOG',
@@ -441,7 +406,8 @@ const transitionsOfDisplayDataTransferStatusState = (state: ResourceBuyingState,
         contractId: state.contractId,
         serviceAccessPoint: state.serviceAccessPoint,
         transferProcessId: action.payload.transferProcessId,
-        edcConsumerBaseUrl: action.payload.edcConsumerBaseUrl
+        edcConsumerBaseUrl: action.payload.edcConsumerBaseUrl,
+        status: action.payload.status
       }
     }
   }

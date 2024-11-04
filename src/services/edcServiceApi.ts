@@ -214,17 +214,17 @@ export const checkTransferStatus = async (
   // mock axios call
   const axios = {
     get: (endpoint: string, headers: object) => delay(100).then(() => {
-      let state = ''
+      let status = ''
       if (nrOfRetriesStatusCheck === 5) {
-        state = 'COMPLETED'
+        status = 'COMPLETED'
         nrOfRetriesStatusCheck = 0
       } else {
-        state = 'STARTED'
+        status = 'STARTED'
         nrOfRetriesStatusCheck += 1
       }
       return {
         data: {
-          'edc:state': state
+          'edc:state': status
         }
       }
     })

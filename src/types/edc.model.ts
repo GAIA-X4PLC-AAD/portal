@@ -48,11 +48,6 @@ export interface DataTransferProcessInfo {
   transferProcessId: string | null;
 }
 
-export type DataTransferStatusCheckInput = {
-  edcConsumerBaseUrl: string;
-  transferProcessId: string;
-}
-
 export type DataTransferStatuses =
   | 'STARTED'
   | 'COMPLETED'
@@ -62,19 +57,8 @@ export type DataTransferStatuses =
   | 'PROVISIONED'
   | 'REQUESTED'
 
-export interface TransferStatusInfo {
+export type DataTransferStatusCheckInput = {
+  edcConsumerBaseUrl: string;
+  transferProcessId: string;
   status: DataTransferStatuses;
 }
-
-export type DataTransferInputProps = {
-  contractId: string;
-  edc: {
-    consumerBaseUrl: string;
-    producerBaseUrl: string;
-  },
-  dataDestination: {
-    container: string;
-    account: string;
-  }
-}
-
