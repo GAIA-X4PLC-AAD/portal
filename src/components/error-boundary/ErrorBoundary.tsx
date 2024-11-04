@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import { GaiaXException } from '../../common/exceptions/GaiaXException';
 import { notify } from '../notification/Notification';
 
+import { useErrorContext } from './ErrorContext';
+
 type ErrorBoundaryProps = {
   children: React.ReactNode;
-  onErrorListChange?: (errors: GaiaXException[]) => void;
 };
 
-const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children, onErrorListChange }) => {
-  const [gaiaXExceptionList, setGaiaXExceptionList] = useState<GaiaXException[]>([]);
+const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
+  const { addException } = useErrorContext(); // Use the error context
 
   const handleGlobalError = (event: ErrorEvent) => {
     event.preventDefault();
@@ -20,29 +21,23 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children, onErrorListChan
   const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
     event.preventDefault();
     console.log('Handle unhandled rejection', event);
-    //const errorMessage = event.reason instanceof Error ? event.reason.message : String(event.reason);
-    handleException(event.reason)
+    handleException(event.reason);
   };
 
   const handleException = (error: Error | string) => {
-    // Check if the error is an instance of GaiaXException
     if (error instanceof GaiaXException) {
       error.showNotification(() => {
-        setGaiaXExceptionList((prevList) => [...prevList, error]);
-        if (onErrorListChange) {
-          onErrorListChange(gaiaXExceptionList);
-        }
+        addException(error); // Add the error to the context
         console.log('set ErrorBoundary', error);
-      });  // Call showNotification if it's a GaiaXException
+      });
     } else {
-      // Show standard error notification if it's not a GaiaXException
       const errorMessage = getErrorMessage(error);
       showNotification(errorMessage);
     }
-  }
+  };
 
   const getErrorMessage = (error: string | { message?: string }): string => {
-    let errorMessage = ''
+    let errorMessage = '';
     if (typeof error === 'string') {
       errorMessage = error;
     } else if (typeof error === 'object') {
@@ -58,7 +53,7 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children, onErrorListChan
       messageType: 'ERROR',
       message: errorMessage,
     });
-  }
+  };
 
   useEffect(() => {
     console.log('Register listeners');
