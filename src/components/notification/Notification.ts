@@ -1,6 +1,6 @@
 import { toast } from 'react-toastify';
 
-import { Notification } from './notification.model';
+import { Notification } from '../../types/notification.model';
 
 export const notify = (notification: Notification) => {
   const toastOptions = {
@@ -42,24 +42,11 @@ export const notify = (notification: Notification) => {
       ...toastOptions,
     });
     break;
-  case 'DEFAULT':
-    toast(notification.message, {
-      ...toastOptions,
-      icon: notification.icon || (() => '🔔'),
-    });
-    break;
-  case 'CUSTOM':
+  default:
     toast(notification.component, {
       ...toastOptions,
-      icon: notification.icon || (() => '🛠️'),
     });
-    break;
-  default:
-    toast(notification.message, {
-      ...toastOptions,
-      icon: notification.icon || (() => '📢'),
-    });
-    break;
+    break
   }
 };
 

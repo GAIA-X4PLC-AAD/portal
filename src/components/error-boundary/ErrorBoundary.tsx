@@ -11,16 +11,23 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
 
   const handleGlobalError = (event: ErrorEvent) => {
     event.preventDefault();
-    event.error.captured = true;
+    console.log('Handle global error', event);
 
-    const errorMessage = event.error.message || 'An unknown error occurred';
+    let errorMessage = ''
+    if (typeof event.error === 'string') {
+      errorMessage = event.error;
+    } else if (typeof event.error === 'object') {
+      errorMessage = event.error.message || 'Unknown error';
+    } else {
+      errorMessage = 'Unknown error';
+    }
 
     showNotification(errorMessage)
   };
 
   const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
     event.preventDefault();
-
+    console.log('Handle unhandled rejection', event);
     const errorMessage = event.reason instanceof Error ? event.reason.message : String(event.reason);
     showNotification(errorMessage)
   };
@@ -37,8 +44,9 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
   }
 
   useEffect(() => {
+    console.log('Register listeners');
     window.addEventListener('error', handleGlobalError);
-    window.addEventListener('unhandledrejection', handleUnhandledRejection);
+    // window.addEventListener('unhandledrejection', handleUnhandledRejection);
 
     return () => {
       window.removeEventListener('error', handleGlobalError);
