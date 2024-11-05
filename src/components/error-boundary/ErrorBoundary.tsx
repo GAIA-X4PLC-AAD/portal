@@ -26,9 +26,8 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
 
   const handleException = (error: Error | string) => {
     if (error instanceof GaiaXException) {
-      error.showNotification(() => {
+      error.handleNotification(() => {
         addException(error); // Add the error to the context
-        console.log('set ErrorBoundary', error);
       });
     } else {
       const errorMessage = getErrorMessage(error);

@@ -14,12 +14,11 @@ class MultipleBusinessObjectFound extends GaiaXException {
     this.type = 'BusinessException';
   }
 
-  showNotification(saveError: () => void) {
+  handleNotification() {
     notify({
       messageType: 'ERROR',
       message: this.message,
     })
-    saveError();
   }
 }
 

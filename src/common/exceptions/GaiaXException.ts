@@ -7,5 +7,5 @@ export abstract class GaiaXException extends Error {
       super(message);
     }
 
-    abstract showNotification(saveError: () => void): void;
+    abstract handleNotification(addException?: () => void): void;
 }
