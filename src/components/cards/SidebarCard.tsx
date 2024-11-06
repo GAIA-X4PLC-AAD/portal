@@ -1,17 +1,17 @@
 import classnames from 'classnames';
-import GaiaXButton from 'common/components/buttons/GaiaXButton';
-import Text from 'common/components/fields/Text/Text';
-import Title from 'components/Title/Title';
-import Subtitle from 'components/subtitle/Subtitle';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import GaiaXButton from '../../common/components/buttons/GaiaXButton';
 import NotificationDialog from '../../common/components/dialogs/NotificationDialog/NotificationDialog';
+import Text from '../../common/components/fields/Text/Text';
 import { ResourceDetails } from '../../types/resources.model';
+import Title from '../Title/Title';
 import DataTransferInitiationProgress from '../resources/components/DataTransferInitiationProgress';
 import DataTransferStatus from '../resources/components/DataTransferStatus';
 import ResourceBuyingModal from '../resources/components/ResourceBuyingModal';
 import { useResourceBuyingStateMachine } from '../resources/hooks/useResourceBuyingStateMachine';
+import Subtitle from '../subtitle/Subtitle';
 
 import styles from './SidebarCard.module.css';
 

@@ -1,3 +1,4 @@
+/* test coverage not required */
 import Title from 'components/Title/Title';
 import Divider from 'components/divider/Divider';
 import Subtitle from 'components/subtitle/Subtitle';

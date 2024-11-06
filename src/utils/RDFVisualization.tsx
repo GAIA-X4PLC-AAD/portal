@@ -93,7 +93,7 @@ const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links, visible }) => {
           // Schneide die URL bis zum letzten '/' oder '#', einschließlich des Zeichens
           const baseUrl = nodeId.substring(0, lastIndex + 1);
           const encodedUri = encodeURIComponent(baseUrl);
-          navigate(`${detailRoutes.shapesAndOntologies}${encodedUri}`);
+          navigate(`${DetailRoutes.shapesAndOntologies}${encodedUri}`);
         }
       });
 

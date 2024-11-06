@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import NoContent from '../../common/components/././NoContent/NoContent';
 import Horizontal from '../../common/components/./layouts/Horizontal';
 import Main from '../../common/components/./layouts/Main';
 import Vertical from '../../common/components/./layouts/Vertical';
@@ -8,7 +9,6 @@ import ItemCard from '../ItemCard/ItemCard';
 import CardContainer from '../cards/CardContainer';
 import Header from '../header/Header';
 import LoadingIndicator from '../loading_view/LoadingIndicator';
-import NoContent from '../nocontent/NoContent';
 import SearchBar from '../searchBar/SearchBar';
 
 import { useServiceOfferings } from './useServiceOfferings';

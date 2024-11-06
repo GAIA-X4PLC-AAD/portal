@@ -12,28 +12,20 @@ interface DataTransferStatusProps {
 
 const DataTransferStatus: React.FC<DataTransferStatusProps> = ({ state }) => {
   const { t } = useTranslation();
-  return (
-    <>
-      <Text className={styles.transferStateLabel}
-        visible={[
-          'CHECKING_DATA_TRANSFER_STATUS',
-          'DISPLAY_DATA_TRANSFER_STATUS',
-          'FINISHED'
-        ].includes(state.name)}>
-        {t('buy-dialog.transfer-state')}
-      </Text>
-      <Text className={styles.transferState}
-        visible={[
-          'CHECKING_DATA_TRANSFER_STATUS',
-          'DISPLAY_DATA_TRANSFER_STATUS',
-          'FINISHED'
-        ].includes(state.name)}>
-        <span className={styles.transferStateValue}>
-          {`${'status' in state ? state.status : ''}`}
-        </span>
-      </Text>
-    </>
-  )
+  if (state.name === 'CHECKING_DATA_TRANSFER_STATUS' || state.name === 'FINISHED') {
+    return (
+      <>
+        <Text className={styles.transferStateLabel}>
+          {t('buy-dialog.transfer-state')}
+        </Text>
+        <Text className={styles.transferState}>
+          <span className={styles.transferStateValue}>
+            {`${state.status}`}
+          </span>
+        </Text>
+      </>)
+  }
+  return <></>
 }
 
 export default DataTransferStatus

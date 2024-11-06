@@ -1,6 +1,7 @@
-import Text from 'common/components/fields/Text/Text';
-import Title from 'components/Title/Title';
 import React, { FC, FunctionComponent } from 'react';
+
+import Text from '../../common/components/fields/Text/Text'
+import Title from '../../components/Title/Title';
 
 import styles from './HeaderWithImage.module.css';
 

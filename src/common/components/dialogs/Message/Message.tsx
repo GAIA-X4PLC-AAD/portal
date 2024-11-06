@@ -5,7 +5,7 @@ import styles from './Message.module.css'
 
 interface ITitle {
   className?: string;
-  children: string;
+  children: React.ReactNode | string;
 }
 
 const Message: FC<ITitle> = ({ className, children }) => {

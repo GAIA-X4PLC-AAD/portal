@@ -43,13 +43,11 @@ const ItemCard: FC<IItemCard> = ({
       className={classNames(styles.card, 'item-card')}>
       <div className={styles.label}>
         <Title>{label}</Title>
-        {isGaiaXCompliant === undefined ? null : (
-          isGaiaXCompliant ? (
-            <p>{t('common.is-gaia-x-compliant')}</p>
-          ) : (
-            <p>{t('common.not-gaia-x-compliant')}</p>
-          )
-        )}
+        {
+          isGaiaXCompliant
+            ? <p>{t('common.is-gaia-x-compliant')}</p>
+            : <p>{t('common.not-gaia-x-compliant')}</p>
+        }
       </div>
       <div className={styles.content}>
         {ontology ? (

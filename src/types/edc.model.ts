@@ -1,3 +1,4 @@
+/* test coverage not required */
 export type DataTransferDialogUserInput = {
   edcConsumerBaseUrl: string;
   dataDestinationAccount: string;
@@ -61,4 +62,7 @@ export type DataTransferStatusCheckInput = {
   edcConsumerBaseUrl: string;
   transferProcessId: string;
   status: DataTransferStatuses;
+}
+export type TransferStatusInfo = {
+  status: string | null
 }

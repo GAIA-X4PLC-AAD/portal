@@ -389,7 +389,7 @@ const transitionsOfDataTransferStatusCheckState = (state: ResourceBuyingState, a
           name: 'FINISHED',
           contractId: state.contractId,
           serviceAccessPoint: state.serviceAccessPoint,
-          status: state.status
+          status: action.payload.status
         }
       }
       if (state.nrOfRetries >= 10) {

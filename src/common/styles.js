@@ -1,3 +1,4 @@
+/* test coverage not required */
 import styled, { css } from 'styled-components';
 import 'react-responsive-modal/styles.css';
 

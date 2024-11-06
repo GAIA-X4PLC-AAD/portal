@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import ModalBody from 'common/components/dialogs/Modal/ModalBody';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -8,6 +7,7 @@ import Modal from '../../../common/components/dialogs/./Modal/Modal';
 import ModalFooter from '../../../common/components/dialogs/./Modal/ModalFooter';
 import ModalHeader from '../../../common/components/dialogs/./Modal/ModalHeader';
 import ModalXButton from '../../../common/components/dialogs/./Modal/ModalXButton';
+import ModalBody from '../../../common/components/dialogs/Modal/ModalBody';
 import Title from '../../Title/Title';
 import { ResourceBuyingAction, ResourceBuyingState } from '../helpers/resourceBuyingStateMachine';
 
@@ -54,7 +54,10 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
   }
 
   return (
-    <form onSubmit={submit}>
+    <form
+      data-testid={'resource-buying-form'}
+      onSubmit={submit}
+    >
       <Modal isOpen={state.name === 'TRANSFER_DIALOG'} className={styles.modal}>
         <ModalHeader>
           <Title>{title}</Title>
@@ -65,6 +68,7 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
           <label className={styles.label} htmlFor="EDC address">
             {`${t('buy-dialog.edc-address')}*`}
             <input
+              data-testid={'buy-dialog.edc-address'}
               className={styles.edcTextInput}
               type="text"
               name="EDC address"
@@ -78,6 +82,7 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
           <label className={styles.label} htmlFor="EDC destination account">
             {`${t('buy-dialog.edc-destination-account')}*`}
             <input
+              data-testid={'buy-dialog.edc-destination-account'}
               className={styles.edcTextInput}
               type="text"
               name="EDC destination account"
@@ -91,6 +96,7 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
           <label className={styles.label} htmlFor="EDC destination container">
             {`${t('buy-dialog.edc-destination-container')}*`}
             <input
+              data-testid={'buy-dialog.edc-destination-container'}
               className={styles.edcTextInput}
               type="text"
               name="EDC destination container"
@@ -106,7 +112,6 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
           <GaiaXButton
             label={t('buy-dialog.transfer-button')}
             className={classnames([styles.transferButton, styles.actionButton])}
-            disabled={state.name !== 'TRANSFER_DIALOG' || !state.contractId || !state.serviceAccessPoint}
             type="submit"
           />
           <GaiaXButton

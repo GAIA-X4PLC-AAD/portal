@@ -1,5 +1,4 @@
 import classnames from 'classnames';
-import ModalBody from 'common/components/dialogs/Modal/ModalBody';
 import { t } from 'i18next';
 import React, { FC } from 'react';
 
@@ -9,6 +8,7 @@ import ModalFooter from '../../../common/components/dialogs/./Modal/ModalFooter'
 import ModalHeader from '../../../common/components/dialogs/./Modal/ModalHeader';
 import ModalXButton from '../../../common/components/dialogs/./Modal/ModalXButton';
 import Message from '../../../common/components/dialogs/Message/Message';
+import ModalBody from '../../../common/components/dialogs/Modal/ModalBody';
 import Title from '../../Title/Title';
 import { ResourceBuyingAction, ResourceBuyingState } from '../helpers/resourceBuyingStateMachine';
 
@@ -41,7 +41,7 @@ const DataTransferInitiationProgress: FC<ResourceBuyingModalProps> = ({
 
       <ModalBody className={styles.modalBody}>
         <Message className={styles.message}>{getDataTransferProgressMessage(state)}</Message>
-        <progress value={getDataTransferProgress(state)} max={14} className={styles.progress}/>
+        <progress value={getDataTransferProgress(state)} max={13} className={styles.progress}/>
       </ModalBody>
 
       <ModalFooter>
@@ -91,7 +91,7 @@ const getDataTransferProgress = (state: ResourceBuyingState) => {
     return 3 + state.nrOfRetries;
 
   case 'DATA_TRANSFER_INITIATION':
-    return 14
+    return 13
 
   default:
     return 0

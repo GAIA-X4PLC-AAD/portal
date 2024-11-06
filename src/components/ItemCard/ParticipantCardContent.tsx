@@ -3,9 +3,9 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import GaiaXButton from '../../common/components/buttons/GaiaXButton';
 import { Participant } from '../../types/participants.model';
 import Title from '../Title/Title';
-import GaiaXButton from '../buttons/GaiaXButton';
 
 import styles from './ItemCard.module.css';
 

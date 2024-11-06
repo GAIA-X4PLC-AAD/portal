@@ -17,7 +17,7 @@ const ServiceCardContent: FC<IServiceCardContent> = ({ service }) => {
   const navigate = useNavigate();
 
   const handleNavigationToDetailsPage = () => {
-    navigate(`/shapes/details/${service.claimsGraphUri}`);
+    navigate(`/services/details/${service.uri}`);
   }
 
   return (

@@ -1,5 +1,6 @@
 import process from 'process';
 
+import axios from 'axios';
 import { v4 as randomUUID } from 'uuid';
 
 import {
@@ -14,24 +15,11 @@ import {
   RetrieveContractInfoInput,
   TransferStatusInfo
 } from '../types/edc.model';
-import { delay } from '../utils/timers';
 
 // -----------------------------------------------------------------------------
 // Retrieve contract information
 // -----------------------------------------------------------------------------
 export const retrieveContractInformation = async (input: RetrieveContractInfoInput): Promise<ContractInfo> => {
-  // mock axios call
-  const axios = {
-    get: (endpoint: string, headers: object) => delay(1000).then(() => ({
-      data: {
-        '@id': '123456789',
-        'edc:assetsSelector': {
-          'edc:operandRight': 'HadMap (testing transfer)'
-        }
-      }
-    }))
-  }
-
   const headers = {
     'Accept': 'application/json',
     'x-api-key': process.env.REACT_APP_API_KEY,
@@ -60,13 +48,6 @@ export const retrieveContractInformation = async (input: RetrieveContractInfoInp
 // Contract negotiation
 // -----------------------------------------------------------------------------
 export const negotiateContract = async (input: ContractNegotiationInput) => {
-  // mock axios call
-  const axios = {
-    post: (endpoint: string, payload: object, headers: object) => delay(1000).then(() => ({
-      data: { '@id': '987654321' }
-    }))
-  }
-
   const headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -111,32 +92,8 @@ export const negotiateContract = async (input: ContractNegotiationInput) => {
 // -----------------------------------------------------------------------------
 // Retrieve agreement
 // -----------------------------------------------------------------------------
-let nrOfRetries = 0;
+const nrOfRetries = 0;
 export const retrieveAgreement = async (input: RetrieveAgreementInput) => {
-  // mock axios call
-  const axios = {
-    get: (endpoint: string, headers: object) => delay(100).then(() => {
-      let retVal = {
-        data: {
-          'edc:contractAgreementId': '23479-hjk124-h3k1h4-1344114',
-          'edc:state': 'INITIATED'
-        }
-      }
-      if (nrOfRetries === 3) {
-        retVal = {
-          data: {
-            'edc:contractAgreementId': '23479-hjk124-h3k1h4-1344114',
-            'edc:state': 'FINALIZED'
-          }
-        }
-        nrOfRetries = 0;
-      } else {
-        nrOfRetries += 1;
-      }
-      return retVal;
-    })
-  }
-
   const headers = {
     'Accept': 'application/json',
     'x-api-key': process.env.REACT_APP_API_KEY,
@@ -160,13 +117,6 @@ export const retrieveAgreement = async (input: RetrieveAgreementInput) => {
 // Initiate data transfer
 // -----------------------------------------------------------------------------
 export const initiateDataTransfer = async (input: DataTransferInput) => {
-  // mock axios call
-  const axios = {
-    post: (endpoint: string, payload: object, headers: object) => delay(1000).then(() => ({
-      data: { '@id': '12983791-fda-2342-423423423' }
-    }))
-  }
-
   const headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
@@ -207,29 +157,10 @@ export const initiateDataTransfer = async (input: DataTransferInput) => {
 // -----------------------------------------------------------------------------
 // Check transfer status
 // -----------------------------------------------------------------------------
-let nrOfRetriesStatusCheck = 0;
+const nrOfRetriesStatusCheck = 0;
 export const checkTransferStatus = async (
   input: DataTransferStatusCheckInput,
 ) => {
-  // mock axios call
-  const axios = {
-    get: (endpoint: string, headers: object) => delay(100).then(() => {
-      let status = ''
-      if (nrOfRetriesStatusCheck === 5) {
-        status = 'COMPLETED'
-        nrOfRetriesStatusCheck = 0
-      } else {
-        status = 'STARTED'
-        nrOfRetriesStatusCheck += 1
-      }
-      return {
-        data: {
-          'edc:state': status
-        }
-      }
-    })
-  }
-
   const headers = {
     'Accept': 'application/json',
     'x-api-key': process.env.REACT_APP_API_KEY,
