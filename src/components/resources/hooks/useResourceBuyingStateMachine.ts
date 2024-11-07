@@ -113,32 +113,32 @@ const retrieveAgreementInformationActionHandler = (
   dispatch: React.Dispatch<ResourceBuyingAction>
 ) => {
   if (state.name === 'RETRIEVE_AGREEMENT_INFORMATION') {
-    retrieveAgreement(state)
-      .then((agreementInfo) => {
-        if (agreementInfo.state !== 'FINALIZED') {
-          delay(state.nrOfRetries * 1000).then(() => {
+    delay(state.nrOfRetries * 1000).then(() => {
+      retrieveAgreement(state)
+        .then((agreementInfo) => {
+          if (agreementInfo.state !== 'FINALIZED') {
             dispatch({
               type: 'RETRIEVE_AGREEMENT_INFORMATION',
               payload: { contractNegotiationUID: state.contractNegotiationUID }
             })
-          })
-        } else {
-          dispatch({
-            type: 'INITIATE_DATA_TRANSFER',
-            payload: {
-              edcConsumerBaseUrl: state.edcConsumerBaseUrl,
-              edcProducerBaseUrl: state.edcProducerBaseUrl,
-              dataDestinationAccount: state.dataDestinationAccount,
-              dataDestinationContainer: state.dataDestinationContainer,
-              contractAgreementUID: agreementInfo.contractAgreementUID || '',
-              assetNameFull: state.assetNameFull,
-            }
-          })
-        }
-      })
-      .catch((error) => {
-        dispatch({ type: 'ERROR', payload: `${t('buy-dialog.failed-to-retrieve-agreement-info')} ${error}` })
-      })
+          } else {
+            dispatch({
+              type: 'INITIATE_DATA_TRANSFER',
+              payload: {
+                edcConsumerBaseUrl: state.edcConsumerBaseUrl,
+                edcProducerBaseUrl: state.edcProducerBaseUrl,
+                dataDestinationAccount: state.dataDestinationAccount,
+                dataDestinationContainer: state.dataDestinationContainer,
+                contractAgreementUID: agreementInfo.contractAgreementUID || '',
+                assetNameFull: state.assetNameFull,
+              }
+            })
+          }
+        })
+        .catch((error) => {
+          dispatch({ type: 'ERROR', payload: `${t('buy-dialog.failed-to-retrieve-agreement-info')} ${error}` })
+        })
+    })
   }
 }
 
