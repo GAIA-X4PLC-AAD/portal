@@ -47,4 +47,47 @@ describe('ItemCard', () => {
 
     expect(mockedUsedNavigate).toHaveBeenCalledWith('/default');
   });
+
+  it('should display compliance message when isGaiaXCompliant is true', () => {
+    render(
+      <ComponentUnderTest />
+    );
+
+    expect(screen.getByText('common.is-gaia-x-compliant')).not.toBeNull();
+  });
+
+  it('should display non-compliance message when isGaiaXCompliant is false', () => {
+    render(
+      <MemoryRouter>
+        <ItemCard itemCardData={{
+          label: 'testLabel',
+          isGaiaXCompliant: false,
+          title: 'testTitle',
+          description: 'testDescription',
+          navigationUrl: '/test',
+          testId: 'testId'
+        }} />
+      </MemoryRouter>
+    );
+
+    expect(screen.getByText('common.not-gaia-x-compliant')).not.toBeNull();
+  });
+
+  it('should not display compliance message when isGaiaXCompliant is undefined', () => {
+    render(
+      <MemoryRouter>
+        <ItemCard itemCardData={{
+          label: 'testLabel',
+          isGaiaXCompliant: undefined,
+          title: 'testTitle',
+          description: 'testDescription',
+          navigationUrl: '/test',
+          testId: 'testId'
+        }} />
+      </MemoryRouter>
+    );
+
+    expect(screen.queryByText('common.is-gaia-x-compliant')).toBeNull();
+    expect(screen.queryByText('common.not-gaia-x-compliant')).toBeNull();
+  });
 });
