@@ -92,7 +92,6 @@ export const negotiateContract = async (input: ContractNegotiationInput) => {
 // -----------------------------------------------------------------------------
 // Retrieve agreement
 // -----------------------------------------------------------------------------
-const nrOfRetries = 0;
 export const retrieveAgreement = async (input: RetrieveAgreementInput) => {
   const headers = {
     'Accept': 'application/json',
@@ -157,7 +156,6 @@ export const initiateDataTransfer = async (input: DataTransferInput) => {
 // -----------------------------------------------------------------------------
 // Check transfer status
 // -----------------------------------------------------------------------------
-const nrOfRetriesStatusCheck = 0;
 export const checkTransferStatus = async (
   input: DataTransferStatusCheckInput,
 ) => {
@@ -173,8 +171,7 @@ export const checkTransferStatus = async (
     .then(response => response.data)
     .then(response => (
       {
-        status:
-          'edc:state' in response ? response['edc:state'] : null,
+        status: 'edc:state' in response ? response['edc:state'] : null,
       } as TransferStatusInfo
     ))
 }

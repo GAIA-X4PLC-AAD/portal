@@ -57,12 +57,14 @@ export type DataTransferStatuses =
   | 'INITIATED'
   | 'PROVISIONED'
   | 'REQUESTED'
+  | null
 
 export type DataTransferStatusCheckInput = {
   edcConsumerBaseUrl: string;
   transferProcessId: string;
   status: DataTransferStatuses;
 }
+
 export type TransferStatusInfo = {
-  status: string | null
+  status: DataTransferStatuses
 }
