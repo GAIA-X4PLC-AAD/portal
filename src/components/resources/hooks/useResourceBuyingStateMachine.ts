@@ -3,6 +3,7 @@ import React, { useEffect, useReducer } from 'react';
 
 import {
   checkTransferStatus,
+  DataTransferError,
   initiateDataTransfer,
   negotiateContract,
   retrieveAgreement,
@@ -84,8 +85,8 @@ const retrieveContractInformationActionHandler = (
       .then((contractInfo) => {
         dispatch({ type: 'NEGOTIATE_CONTRACT', payload: contractInfo })
       })
-      .catch((error) => {
-        dispatch({ type: 'ERROR', payload: `${t('buy-dialog.failed-to-retrieve-contract-info')} ${error}` })
+      .catch((error: DataTransferError) => {
+        dispatch({ type: 'ERROR', payload: `${t('buy-dialog.failed-to-retrieve-contract-info')} ${error.message}` })
       })
   }
 }
@@ -102,8 +103,8 @@ const negotiateContractActionHandler = (
           payload: negotiatedContractInfo
         })
       })
-      .catch((error) => {
-        dispatch({ type: 'ERROR', payload: `${t('buy-dialog.contract-negotiation-failed')} ${error}` })
+      .catch((error: DataTransferError) => {
+        dispatch({ type: 'ERROR', payload: `${t('buy-dialog.contract-negotiation-failed')} ${error.message}` })
       })
   }
 }
@@ -135,8 +136,8 @@ const retrieveAgreementInformationActionHandler = (
             })
           }
         })
-        .catch((error) => {
-          dispatch({ type: 'ERROR', payload: `${t('buy-dialog.failed-to-retrieve-agreement-info')} ${error}` })
+        .catch((error: DataTransferError) => {
+          dispatch({ type: 'ERROR', payload: `${t('buy-dialog.failed-to-retrieve-agreement-info')} ${error.message}` })
         })
     })
   }
@@ -158,8 +159,8 @@ const initiateDataTransferActionHandler = (
           }
         })
       })
-      .catch((error) => {
-        dispatch({ type: 'ERROR', payload: `${t('buy-dialog.data-transfer-initiation-failed')} ${error}` })
+      .catch((error: DataTransferError) => {
+        dispatch({ type: 'ERROR', payload: `${t('buy-dialog.data-transfer-initiation-failed')} ${error.message}` })
       })
   }
 }
@@ -182,8 +183,11 @@ const checkDataTransferStatusActionHandler = (
             }
           })
         })
-        .catch((error) => {
-          dispatch({ type: 'ERROR', payload: `${t('buy-dialog.check-data-transfer-status-failed')} ${error}` })
+        .catch((error: DataTransferError) => {
+          dispatch({
+            type: 'ERROR',
+            payload: `${t('buy-dialog.check-data-transfer-status-failed')} ${error.message}`
+          })
         })
     })
   }

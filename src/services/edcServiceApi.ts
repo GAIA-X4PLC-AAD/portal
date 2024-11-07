@@ -1,6 +1,6 @@
 import process from 'process';
 
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { v4 as randomUUID } from 'uuid';
 
 import {
@@ -15,6 +15,37 @@ import {
   RetrieveContractInfoInput,
   TransferStatusInfo
 } from '../types/edc.model';
+
+// -----------------------------------------------------------------------------
+// Retrieve contract information
+// -----------------------------------------------------------------------------
+export class DataTransferError extends Error {
+  constructor(error: any) {
+    if (typeof error === 'string') {
+      super(error)
+    } else if (typeof error === 'object') {
+      if (error instanceof AxiosError) {
+        super(
+          'response' in error
+            ? error.response && 'data' in error.response
+              ? Array.isArray(error.response.data) && error.response.data.length
+                ? 'message' in error.response.data[0]
+                  ? error.response.data[0].message
+                  : error.message
+                : error.message
+              : error.message
+            : error.message)
+      } else {
+        super(error.message)
+      }
+    } else {
+      super(String(error));
+    }
+    this.name = 'DataTransferError';
+
+    Object.setPrototypeOf(this, DataTransferError.prototype);
+  }
+}
 
 // -----------------------------------------------------------------------------
 // Retrieve contract information
@@ -42,6 +73,7 @@ export const retrieveContractInformation = async (input: RetrieveContractInfoInp
             : null,
       } as ContractInfo
     ))
+    .catch((error) => Promise.reject(new DataTransferError(error)))
 }
 
 // -----------------------------------------------------------------------------
@@ -87,6 +119,7 @@ export const negotiateContract = async (input: ContractNegotiationInput) => {
           '@id' in response ? response['@id'] : null,
       } as NegotiatedContractInfo
     ))
+    .catch((error) => Promise.reject(new DataTransferError(error)))
 }
 
 // -----------------------------------------------------------------------------
@@ -110,6 +143,7 @@ export const retrieveAgreement = async (input: RetrieveAgreementInput) => {
           'edc:state' in response ? response['edc:state'] : null
       } as AgreementInfo
     ))
+    .catch((error) => Promise.reject(new DataTransferError(error)))
 }
 
 // -----------------------------------------------------------------------------
@@ -151,6 +185,7 @@ export const initiateDataTransfer = async (input: DataTransferInput) => {
         transferProcessId: '@id' in response ? response['@id'] : null,
       } as DataTransferProcessInfo
     ))
+    .catch((error) => Promise.reject(new DataTransferError(error)))
 }
 
 // -----------------------------------------------------------------------------
@@ -174,4 +209,5 @@ export const checkTransferStatus = async (
         status: 'edc:state' in response ? response['edc:state'] : null,
       } as TransferStatusInfo
     ))
+    .catch((error) => Promise.reject(new DataTransferError(error)))
 }
