@@ -1,12 +1,13 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
+import { v4 } from 'uuid';
 
 import { BusinessException } from '../../common/exceptions/BusinessException';
 
 // Define the shape of the context
 interface ErrorContextType {
-    messages: BusinessException[];
+    errorMessages: ErrorMessage[];
     publish: (exception: BusinessException) => void;
-    removeMessage: (exception: BusinessException) => void;
+    removeMessage: (messageId: string) => void;
 }
 
 // Create context with a default value of `undefined`
@@ -26,20 +27,29 @@ interface ErrorProviderProps {
     children: ReactNode;
 }
 
+type ErrorMessage = {
+    messageId: string,
+    exception: BusinessException,
+}
+
 // ErrorProvider component
 export const ErrorProvider: React.FC<ErrorProviderProps> = ({ children }) => {
-  const [messages, setMessages] = useState<BusinessException[]>([]);
+  const [errorMessages, setErrorMessages] = useState<ErrorMessage[]>([]);
 
   const publish = (exception: BusinessException) => {
-    setMessages((prevList) => [...prevList, exception]);
+    const messageWithId = {
+      messageId: v4(),
+      exception: exception,
+    };
+    setErrorMessages((prevList) => [...prevList, messageWithId]);
   };
 
-  const removeMessage = (exception: BusinessException) => {
-    setMessages((prevList) => prevList.filter((msg) => msg.message !== exception.message));
+  const removeMessage = (messageId: string) => {
+    setErrorMessages((prevList) => prevList.filter((msg) => msg.messageId !== messageId));
   };
 
   return (
-    <ErrorContext.Provider value={{ messages, publish, removeMessage }}>
+    <ErrorContext.Provider value={{ errorMessages, publish, removeMessage }}>
       {children}
     </ErrorContext.Provider>
   );
