@@ -2,6 +2,7 @@ import { useEffect, useMemo, useReducer } from 'react';
 
 import { useSchemas } from '../../../hooks/useSchemas';
 import { getResourceTypes } from '../../../services/ontologyService.utils';
+import { unique } from '../../../utils/utils';
 import { loadResources } from '../helpers/resourceDataFlow';
 import { removeNonResourceTypeLabels } from '../helpers/resourcesHelper';
 import {
@@ -41,6 +42,7 @@ export const useResources = () => {
       if (!schemas.hasError) {
         const resourceTypes = Array.from(getResourceTypes(schemas.ontologies));
         loadResources(resourceTypes)
+          .then(resources => unique(resources, (item) => item.uri + item.name))
           .then(resources => dispatch(resourcesLoadedAction(resources)))
           .catch(error => dispatch(resourcesLoadingErrorAction(error)))
       } else {
