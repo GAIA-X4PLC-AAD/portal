@@ -5,9 +5,10 @@ export type NotificationMessageType =
     | 'ERROR'
     | 'WARNING'
     | 'INFO'
+    | 'DEFAULT'
 
 export interface Notification {
-    messageType?: NotificationMessageType,
-    message?: ToastContent;
+    messageType: NotificationMessageType,
+    message: ToastContent;
     options?: ToastOptions;
 }

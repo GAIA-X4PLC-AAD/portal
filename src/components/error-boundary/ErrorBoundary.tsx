@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { GaiaXException } from '../../common/exceptions/GaiaXException';
+import { BusinessException } from '../../common/exceptions/BusinessException';
 import { notify } from '../notification/Notification';
 
 import { useErrorContext } from './ErrorContext';
@@ -10,24 +10,22 @@ type ErrorBoundaryProps = {
 };
 
 const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
-  const { addException } = useErrorContext(); // Use the error context
+  const { publish } = useErrorContext(); // Use the error context
 
   const handleGlobalError = (event: ErrorEvent) => {
     event.preventDefault();
-    console.log('Handle global error', event);
     handleException(event.error);
   };
 
   const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
     event.preventDefault();
-    console.log('Handle unhandled rejection', event);
     handleException(event.reason);
   };
 
   const handleException = (error: Error | string) => {
-    if (error instanceof GaiaXException) {
+    if (error instanceof BusinessException) {
       error.handleNotification(() => {
-        addException(error); // Add the error to the context
+        publish(error); // Add the error to the context
       });
     } else {
       const errorMessage = getErrorMessage(error);
@@ -55,7 +53,6 @@ const ErrorBoundary: React.FC<ErrorBoundaryProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log('Register listeners');
     window.addEventListener('error', handleGlobalError);
     window.addEventListener('unhandledrejection', handleUnhandledRejection);
 

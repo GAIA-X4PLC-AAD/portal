@@ -1,24 +1,12 @@
-import { notify } from '../../components/notification/Notification';
-import { GaiaXExceptionType } from '../../types/gaiaXException.model';
+import { BusinessException } from './BusinessException';
 
-import { GaiaXException } from './GaiaXException';
-
-class BusinessObjectNotFound extends GaiaXException {
+class BusinessObjectNotFound extends BusinessException {
   uri: string;
-  type: GaiaXExceptionType;
 
   constructor(message: string, uri: string) {
     super(message);
     this.uri = uri;
     this.name = 'BusinessObjectNotFound';
-    this.type = 'BusinessException';
-  }
-
-  handleNotification() {
-    notify({
-      messageType: 'ERROR',
-      message: this.message,
-    })
   }
 }
 

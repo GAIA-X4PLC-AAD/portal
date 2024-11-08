@@ -1,11 +1,12 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
-import { GaiaXException } from '../../common/exceptions/GaiaXException';
+import { BusinessException } from '../../common/exceptions/BusinessException';
 
 // Define the shape of the context
 interface ErrorContextType {
-    gaiaXExceptionList: GaiaXException[];
-    addException: (exception: GaiaXException) => void;
+    messages: BusinessException[];
+    publish: (exception: BusinessException) => void;
+    removeMessage: (exception: BusinessException) => void;
 }
 
 // Create context with a default value of `undefined`
@@ -27,14 +28,18 @@ interface ErrorProviderProps {
 
 // ErrorProvider component
 export const ErrorProvider: React.FC<ErrorProviderProps> = ({ children }) => {
-  const [gaiaXExceptionList, setGaiaXExceptionList] = useState<GaiaXException[]>([]);
+  const [messages, setMessages] = useState<BusinessException[]>([]);
 
-  const addException = (exception: GaiaXException) => {
-    setGaiaXExceptionList((prevList) => [...prevList, exception]);
+  const publish = (exception: BusinessException) => {
+    setMessages((prevList) => [...prevList, exception]);
+  };
+
+  const removeMessage = (exception: BusinessException) => {
+    setMessages((prevList) => prevList.filter((msg) => msg.message !== exception.message));
   };
 
   return (
-    <ErrorContext.Provider value={{ gaiaXExceptionList, addException }}>
+    <ErrorContext.Provider value={{ messages, publish, removeMessage }}>
       {children}
     </ErrorContext.Provider>
   );
