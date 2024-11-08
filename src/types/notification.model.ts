@@ -5,7 +5,6 @@ export type NotificationMessageType =
     | 'ERROR'
     | 'WARNING'
     | 'INFO'
-    | 'DEFAULT'
 
 export interface Notification {
     messageType: NotificationMessageType,

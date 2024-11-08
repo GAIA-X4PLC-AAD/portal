@@ -13,6 +13,7 @@ import { ResourceContextProvider } from './context/ResourceContext';
 
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
+import './components/notification/Notification.css'
 
 const saveToLocalStorage = (state) => {
   try {

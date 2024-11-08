@@ -14,6 +14,5 @@ export abstract class BusinessException extends Error {
       messageType: this.messageType,
       message: this.message,
     })
-    publish && publish();
   }
 }
