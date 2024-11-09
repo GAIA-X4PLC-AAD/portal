@@ -286,7 +286,8 @@
     "data-transfer-initiation-failed": "An error occurred during the data transfer initiation!",
     "check-data-transfer-status": "Checking data transfer status ...",
     "check-data-transfer-status-failed": "An error occurred during the data transfer status check!",
-    "data-transfer-failed": "Data Transfer Failed"
+    "data-transfer-failed": "Data Transfer Failed",
+    "contract-with-multiple-assets-not-supported": "Currently contract with multiple assets is not supported!"
   },
   "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
   "footer_slogan_cap": " ",

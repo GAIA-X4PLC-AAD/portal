@@ -284,7 +284,8 @@
     "data-transfer-initiation-failed": "Ein Fehler ist beim Starten der Datenübertragung aufgetreten!",
     "check-data-transfer-status": "Datenübertragungsstatus wird überprüft ...",
     "check-data-transfer-status-failed": "Ein Fehler ist bei der Überprüfung des Datenübertragungsstatus aufgetreten!",
-    "data-transfer-failed": "Datenübertragungsfehler"
+    "data-transfer-failed": "Datenübertragungsfehler",
+    "contract-with-multiple-assets-not-supported": "Aktuell wird der Vertrag mit mehreren Assets nicht unterstützt!"
   },
   "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
   "footer_slogan_cap": " powered by",
