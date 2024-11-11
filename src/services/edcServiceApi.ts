@@ -121,6 +121,7 @@ export const retrieveAgreement = async (input: RetrieveAgreementInput) => {
   }
   const endpoint = `${input.edcConsumerBaseUrl}/management/v2/contractnegotiations/${input.contractNegotiationUID}`
 
+  console.debug('retrieve agreement', input)
   return axios
     .get(endpoint, { headers })
     .then(response => response.data)

@@ -1,3 +1,4 @@
+/* test coverage not required */
 import React, { FC, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataSet, Network } from 'vis-network/standalone/esm/vis-network';

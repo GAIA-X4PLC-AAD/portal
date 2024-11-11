@@ -1,8 +1,8 @@
-import Horizontal from 'common/components/layouts/Horizontal';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import NoContent from '../../common/components/././NoContent/NoContent';
+import Horizontal from '../../common/components/layouts/Horizontal';
 import Main from '../../common/components/layouts/Main';
 import Vertical from '../../common/components/layouts/Vertical';
 import ItemCard from '../ItemCard/ItemCard';

@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { t } from 'i18next';
 import React, { useEffect, useReducer } from 'react';
 

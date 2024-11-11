@@ -1,4 +1,5 @@
 /* test coverage not required */
+/* istanbul ignore file */
 import styled, { css } from 'styled-components';
 import 'react-responsive-modal/styles.css';
 

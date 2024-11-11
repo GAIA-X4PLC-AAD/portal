@@ -16,6 +16,8 @@ jest.mock('axios', () => ({
 console.debug = jest.fn()
 
 describe('edcServiceApi', () => {
+  beforeEach(() => jest.resetAllMocks())
+
   it('retrieve contract information - current response', () => {
     get.mockResolvedValueOnce({
       data: {
@@ -94,7 +96,7 @@ describe('edcServiceApi', () => {
     })
   })
 
-  it('retrieve agreement - correct response', () => {
+  it('retrieve agreement - correct response', async () => {
     get.mockResolvedValueOnce({
       data: {
         'edc:contractAgreementId': '23479-hjk124-h3k1h4-1344114',
@@ -102,20 +104,20 @@ describe('edcServiceApi', () => {
       }
     })
 
-    expect(retrieveAgreement(expect.any(Object))).resolves.toEqual({
+    expect(await retrieveAgreement(expect.any(Object))).toEqual({
       contractAgreementUID: '23479-hjk124-h3k1h4-1344114',
       state: 'FINALIZED'
     })
   })
 
-  it('retrieve agreement - missing contractAgreementId', () => {
+  it('retrieve agreement - missing contractAgreementId', async () => {
     get.mockResolvedValueOnce({
       data: {
         'edc:state': 'FINALIZED'
       }
     })
 
-    expect(retrieveAgreement(expect.any(Object))).resolves.toEqual({
+    expect(await retrieveAgreement(expect.any(Object))).toEqual({
       contractAgreementUID: null,
       state: 'FINALIZED'
     })
