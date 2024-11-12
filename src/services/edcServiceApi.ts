@@ -16,27 +16,11 @@ import {
   RetrieveContractInfoInput,
   TransferStatusInfo
 } from '../types/edc.model';
-import { delay } from '../utils/timers';
 
 // -----------------------------------------------------------------------------
 // Retrieve contract information
 // -----------------------------------------------------------------------------
 export const retrieveContractInformation = async (input: RetrieveContractInfoInput): Promise<ContractInfo> => {
-  // mock axios call
-  const axios = {
-    get: (endpoint: string, headers: object) => delay(1000).then(() => ({
-      data: {
-        '@id': '123456789',
-        'edc:assetsSelector': [{
-          'edc:operandRight': 'HadMap (testing transfer)'
-        },
-        {
-          'edc:operandRight': 'HadMap (testing transfer)'
-        }]
-      }
-    }))
-  }
-
   const headers = {
     'Accept': 'application/json',
     'x-api-key': process.env.REACT_APP_API_KEY,
