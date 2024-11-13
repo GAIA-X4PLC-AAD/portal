@@ -7,7 +7,7 @@ import ErrorBoundary from '../../../src/components/error-boundary/ErrorBoundary'
 import { notify } from '../../../src/components/notification/Notification';
 
 // Mock the notify function
-jest.mock('../../../src/components/notification/notification', () => ({
+jest.mock('../../../src/components/notification/Notification', () => ({
   notify: jest.fn(),
 }));
 
