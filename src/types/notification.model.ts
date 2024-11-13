@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { ToastContent, ToastOptions } from 'react-toastify/dist/types';
 
 export type NotificationMessageType =
