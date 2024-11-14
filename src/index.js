@@ -1,14 +1,20 @@
+/* test coverage not required */
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 
 import './i18n';
 import App from './App';
+import ErrorBoundary from './components/error-boundary/ErrorBoundary';
+import { ErrorProvider } from './components/error-boundary/ErrorContext';
 import { configureStore } from './configureStore';
 import AuthContextProvider from './context/AuthContextProvider';
 import { ResourceContextProvider } from './context/ResourceContext';
 
 import './index.css';
+import 'react-toastify/dist/ReactToastify.css';
+import './components/notification/Notification.css'
 
 const saveToLocalStorage = (state) => {
   try {
@@ -43,7 +49,12 @@ root.render(
   <Provider store={store}>
     <AuthContextProvider>
       <ResourceContextProvider>
-        <App/>
+        <ErrorProvider>
+          <ErrorBoundary>
+            <App/>
+          </ErrorBoundary>
+        </ErrorProvider>
+        <ToastContainer/>
       </ResourceContextProvider>
     </AuthContextProvider>
   </Provider>

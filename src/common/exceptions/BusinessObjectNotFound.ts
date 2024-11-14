@@ -1,10 +1,12 @@
-class BusinessObjectNotFound extends Error {
+import { BusinessException } from './BusinessException';
+
+class BusinessObjectNotFound extends BusinessException {
   uri: string;
 
-  constructor(massage: string, uri: string) {
-    super(massage);
+  constructor(message: string, uri: string) {
+    super(message);
     this.uri = uri;
-    this.name = 'BusinessObjectNotFound'
+    this.name = 'BusinessObjectNotFound';
   }
 }
 
