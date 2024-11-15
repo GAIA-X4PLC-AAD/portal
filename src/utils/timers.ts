@@ -12,8 +12,6 @@ export const delay = <T>(timeout: number, asyncFunction?: () => Promise<T>): Pro
       asyncFunction()
         .then(result => resolve(result))
         .catch(error => reject(error))
-    } else {
-      resolve()
     }
   }, timeout))
 }

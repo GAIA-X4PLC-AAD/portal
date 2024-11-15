@@ -19,7 +19,7 @@ type AllSchemas = {
     shapes: Shape[];
 }
 
-type AllSchemasError = {
+export type AllSchemasError = {
   error: string | Error;
 }
 

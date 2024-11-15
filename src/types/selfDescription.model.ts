@@ -1,4 +1,4 @@
-import { Participants } from './participants.model';
+import { Participant } from './participants.model';
 import { ServiceOfferings } from './serviceOfferings.model';
 
 export type SelfDescription = {
@@ -11,4 +11,4 @@ export type SelfDescription = {
 type SubjectClaims = {
   id: string,
   claimsGraphUri: [],
-} & Participants | ServiceOfferings
+} & Participant | ServiceOfferings

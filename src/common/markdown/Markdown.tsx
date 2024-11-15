@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import './Markdown.css'
 
 type MarkdownProps = {
-    children: React.ReactNode;
+  children: string;
 };
 
 const Markdown: React.FC<MarkdownProps> = ({ children }) => {

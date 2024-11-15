@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { withTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 
 import { updateFilterCriteria, updateSearchFromHome } from '../../../actions';
 import { Circle, Column, Row } from '../../../common/styles';

@@ -6,14 +6,14 @@ import DataField from 'data-field/DataField';
 import React from 'react';
 
 import Markdown from '../../../../common/markdown/Markdown';
-import { ISelfDescription } from '../../utils/dataMapper';
+import { ISelfDescription } from '../../../../utils/dataMapper';
 
 import styles from './ResourceMainContent.module.css';
 
 export interface IDetailsCard extends ISelfDescription {
 }
 
-interface IDetailsCardProps {
+export interface IDetailsCardProps {
     cardData: IDetailsCard;
 }
 

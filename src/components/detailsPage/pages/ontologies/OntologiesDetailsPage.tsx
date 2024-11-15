@@ -31,7 +31,7 @@ const OntologiesDetailsPage: FC = () => {
       try {
         const schemas = await fetchAllSchemas();
         const shapes = await fetchAllShapesFromSchemas(schemas);
-        const ontology = await fetchOntologyById(shapes, id);
+        const ontology = await fetchOntologyById(shapes, id || '');
         setOntology(ontology);
       } catch (error) {
         console.error('Error getting ontology:', error);

@@ -22,7 +22,7 @@ export default function ResourceDetailsPage() {
   useEffect(() => {
     const fetchAndSetSelfDescriptions = async () => {
       try {
-        const response = await loadResourceDetails(decodeURI(resourceId));
+        const response = await loadResourceDetails(decodeURI(resourceId || ''));
         console.log('Fetched resource details: ', response);
         if (response) {
           setSelfDescriptionData(response);
@@ -46,7 +46,7 @@ export default function ResourceDetailsPage() {
           {selfDescriptionData && (
             <>
               <div>
-                <ResourceMainContent cardData={{ cardData: [] }}/>
+                <ResourceMainContent cardData={{ name: '', description: '', items: [] }}/>
               </div>
               <div>
                 <MapCard/>

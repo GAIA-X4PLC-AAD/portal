@@ -19,7 +19,7 @@ interface ISidebarCard {
   title: string;
   subtitle: string;
   text: string;
-  resource: ResourceDetails;
+  resource?: ResourceDetails;
 }
 
 export default function SidebarCard({
@@ -30,8 +30,8 @@ export default function SidebarCard({
 }: Readonly<ISidebarCard>) {
   const { t } = useTranslation();
   const { state, dispatch } = useResourceBuyingStateMachine({
-    contractId: resource.contractId,
-    serviceAccessPoint: resource.serviceAccessPoint,
+    contractId: resource?.contractId,
+    serviceAccessPoint: resource?.serviceAccessPoint,
   });
 
   const handleClickBuyButton = () => {
@@ -49,7 +49,7 @@ export default function SidebarCard({
       <ResourceBuyingModal
         state={state}
         dispatch={dispatch}
-        title={resource.name}
+        title={resource?.name || t('service-offerings.no-title')}
       />
       <DataTransferInitiationProgress
         state={state}

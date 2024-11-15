@@ -5,6 +5,6 @@ module.exports = {
     'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization'
   },
   resolve: {
-    fallback: { 'url': require.resolve('url/') }
+    fallback: { url: require.resolve('url/') }
   },
 };

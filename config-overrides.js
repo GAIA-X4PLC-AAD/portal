@@ -1,11 +1,8 @@
 const path = require('path');
 
-const { useBabelRc, override } = require('customize-cra');
+const { override } = require('customize-cra');
 
 module.exports = override(
-  // Use Babel config from .babelrc
-  useBabelRc(),
-
   // Add Webpack alias for Keycloak configuration based on the environment
   (config) => {
     const isProduction = process.env.NODE_ENV === 'production';

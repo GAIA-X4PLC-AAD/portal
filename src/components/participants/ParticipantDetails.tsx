@@ -28,18 +28,16 @@ const ParticipantDetails: FC = () => {
         visible={viewContentType === 'SHOW_NO_RESULT'}/>
       {viewContentType === 'SHOW_PARTICIPANT' && (
         <div className='main-content-container'>
-          <p><b>Uri:</b> {participant.uri}</p>
-          <p><b>Hash:</b> {participant.gaiaxTermsAndConditions}</p>
+          <p><b>Uri:</b> {participant?.uri || ''}</p>
+          <p><b>Hash:</b> {participant?.gaiaxTermsAndConditions || ''}</p>
           <b>List of service offerings:</b>
           <ul>
-            {participant.claimsGraphUri.map((cgu) => (
+            {(participant?.claimsGraphUri || []).map((cgu) => (
               <li key={cgu}>
                 {cgu.includes('service-offering') ? (
                   <Link component={RouterLink} to={`/shapes/details/${encodeURIComponent(cgu)}`}
-                    variant="contained"
                     color="primary">{cgu}</Link>
-                ) : (<></>
-                )}
+                ) : (<></>)}
               </li>
             ))}
           </ul>

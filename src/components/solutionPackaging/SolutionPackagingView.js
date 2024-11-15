@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Carousel from 'react-multi-carousel';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 
 import { VR_ROLE } from '../../common/auth';
 import * as S from '../../common/styles';
