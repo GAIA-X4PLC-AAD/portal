@@ -15,3 +15,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* TODO
+   Remove this workaround once a solution is found.
+   This workaround prevents the error overlay from showing in React.
+*/
+body > iframe {
+  display: none;
+}

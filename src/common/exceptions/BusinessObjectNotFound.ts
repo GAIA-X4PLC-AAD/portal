@@ -1,14 +1,13 @@
-class BusinessObjectNotFound extends Error {
+import { BusinessException } from './BusinessException';
+
+class BusinessObjectNotFound extends BusinessException {
   uri: string;
 
   constructor(message: string, uri: string) {
     super(message);
     this.uri = uri;
     this.name = 'BusinessObjectNotFound';
-
-    // In TypeScript, when extending Error, you need to manually set the prototype.
-    Object.setPrototypeOf(this, BusinessObjectNotFound.prototype);
   }
 }
 
-export default BusinessObjectNotFound
+export default BusinessObjectNotFound;

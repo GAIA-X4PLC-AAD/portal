@@ -1,0 +1,10 @@
+:root {
+    --toastify-color-progressbar: #ddd;
+
+    --toastify-color-progress-info: var(--toastify-color-progressbar);
+    --toastify-color-progress-success: var(--toastify-color-progressbar);
+    --toastify-color-progress-warning: var(--toastify-color-progressbar);
+    --toastify-color-progress-error: var(--toastify-color-progressbar);
+    --toastify-color-progress-light: var(--toastify-color-progressbar);
+    --toastify-color-progress-dark: var(--toastify-color-progressbar);
+}
