@@ -1,11 +1,12 @@
+/* test coverage not required */
 import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import Text from '../../../../common/components/fields/Text/Text';
 import Markdown from '../../../../common/markdown/Markdown';
 import { OntologyContext } from '../../../../context/OntologyContext';
 import { Shape } from '../../../../types/shapes.model';
-import Text from '../../../Text/Text';
 import Title from '../../../Title/Title';
 
 import styles from './OntologyMainContent.module.css';

@@ -1,3 +1,4 @@
+/* test coverage not required */
 import Title from 'components/Title/Title';
 import Divider from 'components/divider/Divider';
 import Subtitle from 'components/subtitle/Subtitle';
@@ -17,14 +18,11 @@ interface IDetailsCardProps {
 }
 
 export default function ResourceMainContent({ cardData }: Readonly<IDetailsCardProps>) {
-  console.log('What to work with: ', cardData);
-
   // Ensure cardData.items is an array and has data
   const propertiesList =
         cardData && cardData.items
           ? cardData.items.map((item) => item['properties(n)'])
           : [];
-  console.log('Property list: ', propertiesList);
 
   // Temporary solution to extract name and description for our Card. Will be refactored once we have a better paylaod structure
   let name, description;

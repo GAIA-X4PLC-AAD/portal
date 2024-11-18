@@ -1,27 +1,29 @@
+/* test coverage not required */
 import MapCard from 'components/cards/MapCard';
 import SidebarCard from 'components/cards/SidebarCard';
 import { AuthContext } from 'context/AuthContextProvider';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiService';
 
+import NoContent from '../../../../common/components/././NoContent/NoContent';
+import { ResourceDetails } from '../../../../types/resources.model';
 import LoadingIndicator from '../../../loading_view/LoadingIndicator';
-import NoContent from '../../../nocontent/NoContent';
+import { loadResourceDetails } from '../../../resources/helpers/resourceDataFlow';
 
 import styles from './ResourceDatails.module.css';
 import ResourceMainContent from './ResourceMainContent';
 
 export default function ResourceDetailsPage() {
   const authContext = useContext(AuthContext);
-  const [selfDescriptionData, setSelfDescriptionData] = useState(null);
+  const [selfDescriptionData, setSelfDescriptionData] = useState<ResourceDetails | null>(null);
   const { resourceId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchAndSetSelfDescriptions = async () => {
       try {
-        const response = await cypherQuery.getOneSelfDescriptions(resourceId);
-        console.log('Fetched data: ', response);
+        const response = await loadResourceDetails(decodeURI(resourceId));
+        console.log('Fetched resource details: ', response);
         if (response) {
           setSelfDescriptionData(response);
         }
@@ -44,7 +46,7 @@ export default function ResourceDetailsPage() {
           {selfDescriptionData && (
             <>
               <div>
-                <ResourceMainContent cardData={selfDescriptionData}/>
+                <ResourceMainContent cardData={{ cardData: [] }}/>
               </div>
               <div>
                 <MapCard/>
@@ -52,6 +54,7 @@ export default function ResourceDetailsPage() {
                   title="Offered by"
                   subtitle="3D Mapping Solutions GmbH"
                   text="We offer high-precision 3D map data of roads and urban environments for applications in autonomous driving, robotics, urban planning and navigation systems."
+                  resource={selfDescriptionData}
                 />
               </div>
             </>)}

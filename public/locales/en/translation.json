@@ -264,6 +264,31 @@
     "submit": "Submit",
     "lAddress": "Address"
   },
+  "buy-dialog": {
+    "edc-address": "EDC management-endpoint",
+    "enter-edc-address": "Please enter the management endpoint of your EDC",
+    "edc-destination-account": "Destination account",
+    "enter-edc-destination-account": "Please enter the destination account for data transfer",
+    "edc-destination-container": "Destination container",
+    "enter-edc-destination-container": "Please enter the destination container for data transfer",
+    "transfer-state": "Transfer state",
+    "transfer-button": "Transfer",
+    "cancel-button": "Cancel",
+    "data-transfer-initiation-progress": "Data Transfer Initiation Progress",
+    "retrieve-contract-info": "Retrieving contract information ...",
+    "failed-to-retrieve-contract-info": "Failed to retrieve contract information!",
+    "negotiate-contract": "Negotiating contract ...",
+    "contract-negotiation-failed": "An error occurred during the contract negotiation!",
+    "retrieve-agreement-info": "Retrieving agreement information ... ",
+    "failed-to-retrieve-agreement-info": "Failed to retrieve agreement information!",
+    "failed-to-retrieve-agreement-info-after-10-attempts": "Failed to retrieve agreement information after 10 retry attempts!",
+    "initiate-data-transfer": "Initiating data transfer ...",
+    "data-transfer-initiation-failed": "An error occurred during the data transfer initiation!",
+    "check-data-transfer-status": "Checking data transfer status ...",
+    "check-data-transfer-status-failed": "An error occurred during the data transfer status check!",
+    "data-transfer-failed": "Data Transfer Failed",
+    "contract-with-multiple-assets-not-supported": "Currently contract with multiple assets is not supported!"
+  },
   "filler": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Tortor posuere nec id purus turpis enim ornare dapibus vitae. Sit arcu sodales dui lectus varius magna turpis imperdiet. Bibendum amet enim aenean tincidunt diam faucibus. Tortor libero quis est feugiat mattis lorem. Dignissim aliquam amet eget etiam auctor facilisi nisl.",
   "footer_slogan_cap": " ",
   "footer_bmwk_eu": "Logo: Finanziert von der Europäischen Union, Gefördert durch Bundesministerium fpr Wirtschaft und Klimaschutz",
@@ -500,7 +525,7 @@
   },
   "details": {
     "title": "Details",
-    "sidebar-button-label": "Contact or buy",
+    "sidebar-buy-button": "Buy",
     "contact-or-buy-button-notification": "Data was transferred",
     "more-details": "More details",
     "view-graph": "View graph",
@@ -548,6 +573,7 @@
     "not-gaia-x-compliant": "Not Gaia-X compliant",
     "not-authenticated": "You are not authenticated!",
     "results": "results",
-    "is-loading": "loading..."
+    "is-loading": "loading...",
+    "close": "Close"
   }
 }

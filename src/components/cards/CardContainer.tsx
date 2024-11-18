@@ -1,6 +1,6 @@
 import React, { FC, ReactNode } from 'react';
 
-import Vertical from '../layout/Vertical';
+import Vertical from '../../common/components/./layouts/Vertical';
 
 interface IResultContainer {
     children: ReactNode;

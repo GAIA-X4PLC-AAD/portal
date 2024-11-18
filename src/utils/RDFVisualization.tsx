@@ -1,3 +1,4 @@
+/* test coverage not required */
 import React, { FC, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DataSet, Network } from 'vis-network/standalone/esm/vis-network';
@@ -93,7 +94,7 @@ const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links, visible }) => {
           // Schneide die URL bis zum letzten '/' oder '#', einschließlich des Zeichens
           const baseUrl = nodeId.substring(0, lastIndex + 1);
           const encodedUri = encodeURIComponent(baseUrl);
-          navigate(`${detailRoutes.shapesAndOntologies}${encodedUri}`);
+          navigate(`${DetailRoutes.shapesAndOntologies}${encodedUri}`);
         }
       });
 

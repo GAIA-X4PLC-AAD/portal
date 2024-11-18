@@ -3,10 +3,10 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 
+import NoContent from '../../common/components/././NoContent/NoContent';
 import { ARROW_RIGHT } from '../../utils/symbols';
 import Header from '../header/Header';
 import LoadingIndicator from '../loading_view/LoadingIndicator';
-import NoContent from '../nocontent/NoContent';
 
 import { useParticipantDetails } from './hooks/useParticipantDetails';
 

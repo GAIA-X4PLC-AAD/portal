@@ -1,5 +1,17 @@
+/* test coverage not required */
+/* istanbul ignore file */
 import styled, { css } from 'styled-components';
 import 'react-responsive-modal/styles.css';
+
+export const AlertIcon = styled.img`
+    display: inline-block;
+    margin: 0;
+    content: url('/images/icons/alert.svg');
+    width: 50px;
+    height: 50px;
+    background: transparent;
+    object-fit: fill;
+`;
 
 export const CancelButton = styled.button`
     border: 2px solid #e8e8e8;

@@ -1,0 +1,16 @@
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ccc; /* Add border at the bottom of the header */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.modalHeader h2 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 48px;
+    font-weight: bold;
+}
+

@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import GaiaXButton from '../../common/components/buttons/GaiaXButton';
 import { ServiceOffering } from '../../types/serviceOfferings.model';
 import Title from '../Title/Title';
-import GaiaXButton from '../buttons/GaiaXButton';
 
 import styles from './ItemCard.module.css';
 
@@ -17,7 +17,7 @@ const ServiceCardContent: FC<IServiceCardContent> = ({ service }) => {
   const navigate = useNavigate();
 
   const handleNavigationToDetailsPage = () => {
-    navigate(`/shapes/details/${service.claimsGraphUri}`);
+    navigate(`/services/details/${service.uri}`);
   }
 
   return (

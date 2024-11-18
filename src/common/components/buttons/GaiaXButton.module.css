@@ -1,0 +1,29 @@
+.button {
+    color: white;
+    background-color: #A01441;
+    border-radius: 10px;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+    font-weight: normal;
+    margin: 20px;
+    padding: 8px 16px 8px 16px;
+}
+
+.button:hover {
+    transition: all 0.4s ease 0s;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.button.buttonDisabled {
+    color: lightgray;
+    background-color: dimgray;
+}
+
+.buttonDisabled:hover {
+    transform: none;
+}
+
