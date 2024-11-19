@@ -1,8 +1,7 @@
 import { render } from '@testing-library/react';
-
-import '@testing-library/jest-dom';
 import React from 'react';
 
+import '@testing-library/jest-dom';
 import ResourceCardContent from '../../../src/components/ItemCard/ResourceCardContent';
 import { Resource } from '../../../src/types/resources.model';
 import { withRouter } from '../../common/testHelper';

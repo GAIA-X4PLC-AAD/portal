@@ -14,7 +14,7 @@ import { ResourceBuyingAction, ResourceBuyingState } from '../helpers/resourceBu
 import styles from './ResourceBuyingModal.module.css';
 
 interface ResourceBuyingModalProps {
-  state: ResourceBuyingState,
+  state: Partial<ResourceBuyingState>,
   dispatch: React.Dispatch<ResourceBuyingAction>,
   title: string,
 }
@@ -33,8 +33,8 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
   useEffect(() => {
     if (state.name === 'TRANSFER_DIALOG') {
       setConsumerBaseUrl(state.edcConsumerBaseUrl);
-      setAccount(state.dataDestinationAccount);
-      setContainer(state.dataDestinationContainer);
+      setAccount(state.dataDestinationAccount || '');
+      setContainer(state.dataDestinationContainer || '');
     }
   }, [state.name]);
 

@@ -80,7 +80,7 @@ describe('DataTransferInitiationProgress', () => {
   it('is visible and contains the following status text: buy-dialog.initiate-data-transfer if state equals to' +
     ' DATA_TRANSFER_INITIATION', () => {
     const state = { name: 'DATA_TRANSFER_INITIATION' } as ResourceBuyingState
-    const { container, getByText, getByRole } = render(
+    const { getByText, getByRole } = render(
       <DataTransferInitiationProgress
         state={state}
         dispatch={dispatch}
@@ -92,7 +92,7 @@ describe('DataTransferInitiationProgress', () => {
 
   it('can be cancelled', () => {
     const state = { name: 'RETRIEVE_CONTRACT_INFORMATION' } as ResourceBuyingState
-    const { queryByText, getByRole } = render(
+    const { getByRole } = render(
       <DataTransferInitiationProgress
         state={state}
         dispatch={dispatch}
@@ -105,7 +105,7 @@ describe('DataTransferInitiationProgress', () => {
 
   it('can be cancelled', () => {
     const state = { name: 'RETRIEVE_CONTRACT_INFORMATION' } as ResourceBuyingState
-    const { queryByText, getByRole } = render(
+    const { getByRole } = render(
       <DataTransferInitiationProgress
         state={state}
         dispatch={dispatch}
