@@ -20,7 +20,7 @@ const initOptions = keycloakConfig.initOptions as Keycloak.KeycloakInitOptions;
 export interface AuthContextType {
   isAuthenticated: boolean;
   token: string;
-  login: () => Keycloak.KeycloakPromise<void, void>;
+  login: () => Promise<void>;
   logout: () => Promise<void>;
   hasRole: (role: string) => boolean;
   redirectPath: string | null;
@@ -30,12 +30,7 @@ export interface AuthContextType {
 const defaultAuthContextValues: AuthContextType = {
   isAuthenticated: false,
   token: '',
-  login: () => ({
-    success: (callback: Keycloak.KeycloakPromiseCallback<void>) => {
-    },
-    error: (callback: Keycloak.KeycloakPromiseCallback<void>) => {
-    },
-  } as Keycloak.KeycloakPromise<void, void>),
+  login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
   hasRole: (_role: string) => false,
   redirectPath: null,
@@ -61,7 +56,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   useEffect(() => {
     keycloak
       .init(initOptions)
-      .success((authenticated: boolean) => {
+      .then((authenticated: boolean) => {
         setIsAuthenticated(authenticated);
         if (authenticated) {
           axios.defaults.headers.common.Authorization = `Bearer ${keycloak.token ? keycloak.token : ''}`
@@ -69,7 +64,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
           scheduleTokenRenewal();
         }
       })
-      .error((error: any) => {
+      .catch((error: any) => {
         console.error('Error during Keycloak initialization:', error);
       });
   }, []);
@@ -78,12 +73,12 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     const interval = setInterval(() => {
       keycloak
         .updateToken(70)
-        .success((refreshed: boolean) => {
+        .then((refreshed: boolean) => {
           if (refreshed) {
             setToken(keycloak.token ? keycloak.token : '');
           }
         })
-        .error(() => {
+        .catch(() => {
           console.warn('Failed to refresh token. Logging out...');
           handleLogout();
         });
