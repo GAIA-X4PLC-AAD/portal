@@ -10,9 +10,9 @@ const getDotEnvKeycloakApiUrl = (): string => {
   return process.env.REACT_APP_KEYCLOAK_API_URL;
 }
 
-const keycloak = Keycloak({
+const keycloak = new Keycloak({
   ...keycloakConfig.config,
-  authServerUrl: getDotEnvKeycloakApiUrl()
+  url: getDotEnvKeycloakApiUrl()
 });
 
 const initOptions = keycloakConfig.initOptions as Keycloak.KeycloakInitOptions;
@@ -69,7 +69,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
           scheduleTokenRenewal();
         }
       })
-      .error((error) => {
+      .error((error: any) => {
         console.error('Error during Keycloak initialization:', error);
       });
   }, []);
