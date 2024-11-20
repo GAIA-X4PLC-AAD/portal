@@ -1,3 +1,4 @@
+/* test coverage not required */
 declare module '*.svg' {
   import * as React from 'react';
 

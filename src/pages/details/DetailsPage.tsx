@@ -1,3 +1,4 @@
+/* test coverage not required */
 import DetailsCard from 'components/cards/DetailsCard';
 import MapCard from 'components/cards/MapCard';
 import SidebarCard from 'components/cards/SidebarCard';

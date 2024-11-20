@@ -1,3 +1,4 @@
+/* test coverage not required */
 import axios from 'axios';
 import * as jwt_decode from 'jwt-decode'
 

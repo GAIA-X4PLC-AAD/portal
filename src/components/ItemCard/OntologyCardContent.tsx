@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
-import Markdown from '../../common/markdown/Markdown';
+import Markdown from '../../common/components/markdown/Markdown';
 import { Ontology } from '../../types/ontologies.model';
 import Title from '../Title/Title';
 

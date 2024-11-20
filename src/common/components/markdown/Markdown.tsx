@@ -8,13 +8,11 @@ type MarkdownProps = {
 
 const Markdown: React.FC<MarkdownProps> = ({ children }) => {
   const [isTruncated, setIsTruncated] = useState(false);
-  const contentRef = useRef<HTMLDivElement | null>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkTruncation = () => {
-      if (contentRef.current) {
-        setIsTruncated(contentRef.current.scrollHeight > contentRef.current.clientHeight + 1);
-      }
+      setIsTruncated(contentRef.current!.scrollHeight > contentRef.current!.clientHeight + 1);
     }
 
     checkTruncation();
@@ -26,7 +24,7 @@ const Markdown: React.FC<MarkdownProps> = ({ children }) => {
       <div ref={contentRef} className='markdown'>
         <MarkdownToJSX>{children}</MarkdownToJSX>
       </div>
-      {isTruncated && <div className='ellipsis'>...</div>}
+      {isTruncated && <div className="ellipsis">...</div>}
     </>
   );
 };

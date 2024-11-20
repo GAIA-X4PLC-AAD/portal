@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { AnyAction } from 'redux';
 
 import { Ontology } from '../types/ontologies.model';

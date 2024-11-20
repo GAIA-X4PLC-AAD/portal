@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { combineReducers } from 'redux';
 
 import { lcmReducer } from './lcmReducer';

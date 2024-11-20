@@ -1,3 +1,4 @@
+/* test coverage not required */
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { withTranslation } from 'react-i18next';

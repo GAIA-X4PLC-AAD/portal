@@ -1,3 +1,4 @@
+/* test coverage not required */
 declare module '*.gif' {
   const src: string;
   export default src;

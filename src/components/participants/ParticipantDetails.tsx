@@ -35,8 +35,12 @@ const ParticipantDetails: FC = () => {
             {(participant?.claimsGraphUri || []).map((cgu) => (
               <li key={cgu}>
                 {cgu.includes('service-offering') ? (
-                  <Link component={RouterLink} to={`/shapes/details/${encodeURIComponent(cgu)}`}
-                    color="primary">{cgu}</Link>
+                  <Link
+                    component={RouterLink}
+                    to={`/shapes/details/${encodeURIComponent(cgu)}`}
+                  >
+                    {cgu}
+                  </Link>
                 ) : (<></>)}
               </li>
             ))}

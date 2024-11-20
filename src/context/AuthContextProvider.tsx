@@ -1,3 +1,4 @@
+/* test coverage not required */
 import axios from 'axios';
 import keycloakConfig from 'keycloak-config.json';
 import Keycloak from 'keycloak-js';

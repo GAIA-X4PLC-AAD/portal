@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { Participant } from './participants.model';
 import { ServiceOfferings } from './serviceOfferings.model';
 

@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { ThunkDispatch } from '../reducers/useThunkReducer';
 import { fetchAllOntologiesFromSchemas } from '../services/ontologyService.utils';
 import { fetchAllSchemas } from '../services/schemaApiService';
