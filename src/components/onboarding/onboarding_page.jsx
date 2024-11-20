@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { useResource } from '@axios-use/react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -249,7 +250,7 @@ const OnboardingPage = () => {
 
   const [activeStage, setActiveStage] = useState(initialPage)
   // const [activeStage, setActiveStage] = useState(4)
-  const [customerOrOrganization, setCustomerOrOrganization] = useState(userType == ORGANIZATION ? ORGANIZATION : CUSTOMER)
+  const [customerOrOrganization, setCustomerOrOrganization] = useState(userType === ORGANIZATION ? ORGANIZATION : CUSTOMER)
 
   const userFillDetailsFormRef = React.createRef()
   const nextButtonRef = React.createRef()
@@ -265,9 +266,9 @@ const OnboardingPage = () => {
 
   const nextStage = () => {
     // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
-    if (activeStage == 1) {
+    if (activeStage === 1) {
       setActiveStage(2)
-    } else if (activeStage == 2) {
+    } else if (activeStage === 2) {
       if (validateUserFillDetailsForm()) {
         // const _result = await registerUserApi()
         // console.log(`nextStage, _result: ${_result}`)
@@ -275,53 +276,64 @@ const OnboardingPage = () => {
         setActiveStage(3)
       }
 
-    } else if (activeStage == 3) {
+    } else if (activeStage === 3) {
       setActiveStage(4)
 
-    } else if (activeStage == 4) {
+    } else if (activeStage === 4) {
       setActiveStage(5)
-    } else if (activeStage == 5) {
+    } else if (activeStage === 5) {
       dontHaveDidModal()
     }
   }
 
   const previousStage = () => {
     // will not use setActiveStage(activeStage + 1), because I might do validation to the existing stage before moving to the next
-    if (activeStage == 2) {
+    if (activeStage === 2) {
       setActiveStage(1)
-    } else if (activeStage == 3) {
+    } else if (activeStage === 3) {
       setActiveStage(2)
-    } else if (activeStage == 4) {
+    } else if (activeStage === 4) {
       setActiveStage(3)
-    } else if (activeStage == 5) {
+    } else if (activeStage === 5) {
       setActiveStage(4)
     }
   }
 
   // CURRENT STAGE VIEW
   const CurrentStageView = () => {
-    if (activeStage == 1) {
+    if (activeStage === 1) {
       return customerOrProviderView()
-    } else if (activeStage == 2) {
-      if (customerOrOrganization == ORGANIZATION) {return <OrganizationDetailsView nextStage={() => { setActiveStage(3) }} didStage={() => { setActiveStage(5) }} />;} else {
+    } else if (activeStage === 2) {
+      if (customerOrOrganization === ORGANIZATION) {
+        return <OrganizationDetailsView nextStage={() => {
+          setActiveStage(3)
+        }} didStage={() => {
+          setActiveStage(5)
+        }}/>;
+      } else {
         return UserFillDetailsView()
       }
-    } else if (activeStage == 3) {
+    } else if (activeStage === 3) {
       return confirmationEmailView()
-    } else if (activeStage == 4) {
+    } else if (activeStage === 4) {
       if (confirmationCode !== undefined) {
         return EmailConfirmedView({ type: customerOrOrganization, confirmationCode: confirmationCode })
       } else {
         return EmailAlreadyConfirmedView();
       }
-    }
-    else if (activeStage == 5) {
+    } else if (activeStage === 5) {
       return <DidOnboardingView userType={customerOrOrganization} nextStage={() => { setActiveStage(6) }} />
-    } else if (activeStage == 6) {
-      if (customerOrOrganization == ORGANIZATION) {return <VCProvider nextStage={() => { setActiveStage(7) }} />;}
+    } else if (activeStage === 6) {
+      if (customerOrOrganization === ORGANIZATION) {
+        return <VCProvider nextStage={() => {
+          setActiveStage(7)
+        }}/>;
+      }
       else { return <VCCustomer nextStage={() => { setActiveStage(7) }} />; }
     } else if (activeStage === 7) {
-      if (customerOrOrganization == ORGANIZATION) {return <FinishProvider />;}
+      if (customerOrOrganization === ORGANIZATION) {
+        return <FinishProvider/>;
+      }
       else { return <FinishCustomer />; }
 
     }
@@ -378,8 +390,10 @@ const OnboardingPage = () => {
             <Padding horizontal='24px'>
               <Padding vertical='40px'>
                 <Column>
-                  <RadioButton name='step1' onClick={() => setCustomerOrOrganization(CUSTOMER)} defaultChecked={CUSTOMER == customerOrOrganization}><BodyText>{t('onboarding.customer')}</BodyText></RadioButton>
-                  <RadioButton name='step1' onClick={() => setCustomerOrOrganization(ORGANIZATION)} defaultChecked={ORGANIZATION == customerOrOrganization}><BodyText>{t('onboarding.organization')}</BodyText></RadioButton>
+                  <RadioButton name="step1" onClick={() => setCustomerOrOrganization(CUSTOMER)}
+                    defaultChecked={CUSTOMER === customerOrOrganization}><BodyText>{t('onboarding.customer')}</BodyText></RadioButton>
+                  <RadioButton name="step1" onClick={() => setCustomerOrOrganization(ORGANIZATION)}
+                    defaultChecked={ORGANIZATION === customerOrOrganization}><BodyText>{t('onboarding.organization')}</BodyText></RadioButton>
                 </Column>
               </Padding>
             </Padding>
@@ -516,7 +530,7 @@ const OnboardingPage = () => {
 
   const disableNextButton = () => {
     if (activeStage === 1) {
-      return customerOrOrganization == null
+      return customerOrOrganization === null
     }
     return true
   }

@@ -1,19 +1,22 @@
 import classnames from 'classnames';
-import React, { FC } from 'react';
+import React, { FC, ReactElement } from 'react';
 
 import styles from './Text.module.css';
 
 interface IText {
   className?: string;
   visible?: boolean;
-  children?: string;
+  children?: ReactElement | string;
 }
 
 const Text: FC<IText> = ({ className, visible = true, children }) => {
-  if (!visible) {
+  if (!visible || !children) {
     return <></>
   }
-  return <p className={classnames([className, styles.text])}>{children}</p>;
+  if (typeof children === 'string') {
+    return <p className={classnames([className, styles.text])}>{children}</p>;
+  }
+  return <>{children}</>
 };
 
 export default Text;

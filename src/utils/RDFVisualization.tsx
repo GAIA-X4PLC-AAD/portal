@@ -1,7 +1,7 @@
 /* test coverage not required */
 import React, { FC, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DataSet, Network } from 'vis-network/standalone/esm/vis-network';
+import { Data, DataSet, Network } from 'vis-network/standalone/esm/vis-network';
 
 import { Link, Node } from '../types/ontologies.model';
 
@@ -37,13 +37,13 @@ const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links, visible }) => {
       );
 
       const visEdges = new DataSet(
-        links.map(link => ({ from: link.source, to: link.target }))
+        links.map((link, index) => ({ id: index, from: link.source, to: link.target }))
       );
 
       const data = {
         nodes: visNodes,
         edges: visEdges,
-      };
+      } as Data;
 
       const options = {
         nodes: {
@@ -94,7 +94,7 @@ const RDFVisualization: FC<IRDFVisualization> = ({ nodes, links, visible }) => {
           // Schneide die URL bis zum letzten '/' oder '#', einschließlich des Zeichens
           const baseUrl = nodeId.substring(0, lastIndex + 1);
           const encodedUri = encodeURIComponent(baseUrl);
-          navigate(`${DetailRoutes.shapesAndOntologies}${encodedUri}`);
+          navigate(`${detailRoutes.shapesAndOntologies}${encodedUri}`);
         }
       });
 

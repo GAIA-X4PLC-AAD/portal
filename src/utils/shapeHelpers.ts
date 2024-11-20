@@ -1,5 +1,3 @@
-import { Shape } from '../types/shapes.model';
-
 export const trimShapes = (shape: string) =>{
   let trimmedShape = '';
   if (shape.includes('#')) {
@@ -12,17 +10,3 @@ export const trimShapes = (shape: string) =>{
   }
   return trimmedShape;
 };
-
-export const getShapeProperties = (shape: Shape) => {
-  const propertyList: string[] = [];
-  if (shape.properties) {
-    shape.properties.forEach((property) => {
-      if (property.name && !propertyList.includes(property.name)) {
-        propertyList.push(property.name);
-      } else if (property.path && !propertyList.includes(property.path)) {
-        propertyList.push(property.path);
-      }
-    });
-  }
-  return propertyList;
-}

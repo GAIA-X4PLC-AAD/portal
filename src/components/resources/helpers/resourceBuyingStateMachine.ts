@@ -179,9 +179,9 @@ const transitionsOfTransferEnabledState = (state: ResourceBuyingState, action: R
       const host = state.serviceAccessPoint ? state.serviceAccessPoint.host.replace(/\/$/, '') : '';
 
       const edcProducerBaseUrl = `${protocol}://${host}`;
-      const edcConsumerBaseUrl = process.env.REACT_APP_DEFAULT_EDC_CONSUMER.replace(/\/$/, '');
-      const dataDestinationAccount = process.env.REACT_APP_DEFAULT_EDC_DESTINATION_ACCOUNT;
-      const dataDestinationContainer = process.env.REACT_APP_DEFAULT_EDC_DESTINATION_CONTAINER;
+      const edcConsumerBaseUrl = (process.env.REACT_APP_DEFAULT_EDC_CONSUMER || '').replace(/\/$/, '');
+      const dataDestinationAccount = (process.env.REACT_APP_DEFAULT_EDC_DESTINATION_ACCOUNT || '');
+      const dataDestinationContainer = (process.env.REACT_APP_DEFAULT_EDC_DESTINATION_CONTAINER || '');
 
       return {
         name: 'TRANSFER_DIALOG',
@@ -430,9 +430,9 @@ const transitionsOfFinishedState = (state: ResourceBuyingState, action: Resource
       const host = state.serviceAccessPoint ? state.serviceAccessPoint.host.replace(/\/$/, '') : '';
 
       const edcProducerBaseUrl = `${protocol}://${host}`;
-      const edcConsumerBaseUrl = process.env.REACT_APP_DEFAULT_EDC_CONSUMER.replace(/\/$/, '');
-      const dataDestinationAccount = process.env.REACT_APP_DEFAULT_EDC_DESTINATION_ACCOUNT;
-      const dataDestinationContainer = process.env.REACT_APP_DEFAULT_EDC_DESTINATION_CONTAINER;
+      const edcConsumerBaseUrl = (process.env.REACT_APP_DEFAULT_EDC_CONSUMER || '').replace(/\/$/, '');
+      const dataDestinationAccount = process.env.REACT_APP_DEFAULT_EDC_DESTINATION_ACCOUNT || '';
+      const dataDestinationContainer = process.env.REACT_APP_DEFAULT_EDC_DESTINATION_CONTAINER || '';
 
       return {
         name: 'TRANSFER_DIALOG',

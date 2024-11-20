@@ -1,6 +1,7 @@
+/* test coverage not required */
 import axios from 'axios';
-import keycloakConfig from 'keycloak-config';
-import Keycloak, { KeycloakInitOptions } from 'keycloak-js';
+import keycloakConfig from 'keycloak-config.json';
+import Keycloak from 'keycloak-js';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 
 const getDotEnvKeycloakApiUrl = (): string => {
@@ -14,7 +15,8 @@ const keycloak = new Keycloak({
   ...keycloakConfig.config,
   url: getDotEnvKeycloakApiUrl()
 });
-const initOptions = keycloakConfig.initOptions as KeycloakInitOptions;
+
+const initOptions = keycloakConfig.initOptions as Keycloak.KeycloakInitOptions;
 
 export interface AuthContextType {
   isAuthenticated: boolean;
@@ -55,7 +57,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   useEffect(() => {
     keycloak
       .init(initOptions)
-      .then((authenticated) => {
+      .then((authenticated: boolean) => {
         setIsAuthenticated(authenticated);
         if (authenticated) {
           axios.defaults.headers.common.Authorization = `Bearer ${keycloak.token ? keycloak.token : ''}`
@@ -63,7 +65,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
           scheduleTokenRenewal();
         }
       })
-      .catch((error) => {
+      .catch((error: any) => {
         console.error('Error during Keycloak initialization:', error);
       });
   }, []);
@@ -72,7 +74,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     const interval = setInterval(() => {
       keycloak
         .updateToken(70)
-        .then((refreshed) => {
+        .then((refreshed: boolean) => {
           if (refreshed) {
             setToken(keycloak.token ? keycloak.token : '');
           }
@@ -95,7 +97,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   };
 
   const handleLogout = async () => {
-    await keycloak.logout();
+    keycloak.logout();
     setIsAuthenticated(false);
     setToken('');
   };

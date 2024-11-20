@@ -4,9 +4,9 @@ import React, { FC } from 'react';
 import styles from './GaiaXButton.module.css';
 
 interface IGaiaXButton {
-  label: string;
+  label?: string;
   disabled?: boolean;
-  type?: string;
+  type?: 'button' | 'submit' | 'reset' | undefined;
   children?: React.ReactNode;
   className?: string;
   handleOnClick?: () => void;
@@ -18,7 +18,7 @@ const GaiaXButton: FC<Readonly<IGaiaXButton>> = ({
   className,
   disabled = false,
   children,
-  type
+  type = 'button'
 }) => {
   const disabledStyle = disabled ? [styles.buttonDisabled] : []
 

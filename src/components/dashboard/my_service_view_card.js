@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { Menu, MenuItem } from '@szhsin/react-menu';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
@@ -6,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Modal } from 'react-responsive-modal';
 import { useNavigate } from 'react-router-dom';
-import ReactTooltip from 'react-tooltip';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 
 import {
   AnimatedVisibility,

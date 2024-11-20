@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import React from 'react';
+import '@testing-library/jest-dom';
 
 import ResourceBuyingModal from '../../../../src/components/resources/components/ResourceBuyingModal';
 
@@ -32,9 +32,6 @@ describe('ResourceBuyingModal', () => {
       <ResourceBuyingModal
         state={{
           name: 'INIT',
-          edcConsumerBaseUrl: 'http://localhost:3000/',
-          dataDestinationAccount: 'account',
-          dataDestinationContainer: 'container',
         }}
         dispatch={dispatch}
         title={'Resource Buying Modal'}
@@ -112,7 +109,7 @@ describe('ResourceBuyingModal', () => {
   })
 
   it('empty edc consumer base url field is invalid', () => {
-    const { getByRole, getByTestId } = render(
+    const { getByTestId } = render(
       <ResourceBuyingModal
         state={{
           name: 'TRANSFER_DIALOG',
@@ -133,7 +130,7 @@ describe('ResourceBuyingModal', () => {
   })
 
   it('empty destination account field is invalid', () => {
-    const { getByRole, getByTestId } = render(
+    const { getByTestId } = render(
       <ResourceBuyingModal
         state={{
           name: 'TRANSFER_DIALOG',
@@ -153,7 +150,7 @@ describe('ResourceBuyingModal', () => {
   })
 
   it('empty destination container field is invalid', () => {
-    const { getByRole, getByTestId } = render(
+    const { getByTestId } = render(
       <ResourceBuyingModal
         state={{
           name: 'TRANSFER_DIALOG',

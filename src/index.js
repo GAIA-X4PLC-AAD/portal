@@ -1,4 +1,5 @@
 /* test coverage not required */
+import { configureStore } from '@reduxjs/toolkit';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -8,9 +9,9 @@ import './i18n';
 import App from './App';
 import ErrorBoundary from './components/error-boundary/ErrorBoundary';
 import { ErrorProvider } from './components/error-boundary/ErrorContext';
-import { configureStore } from './configureStore';
 import AuthContextProvider from './context/AuthContextProvider';
 import { ResourceContextProvider } from './context/ResourceContext';
+import reducers from './reducers';
 
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -35,7 +36,10 @@ const loadFromLocalStorage = () => {
 };
 
 const persistedStore = loadFromLocalStorage();
-const store = configureStore(persistedStore);
+const store = configureStore({
+  reducer: reducers,
+  preloadedState: persistedStore,
+});
 
 // TODO: May be not the entire store should be saved into cookies. It has to be refactored.
 store.subscribe(() => {

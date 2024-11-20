@@ -6,8 +6,8 @@
  * @returns the promise returned by the asyncFunction passed in as parameter.
  * @throws the error thrown by the asyncFunction passed in as parameter.
  */
-export const delay = <T>(timeout: number, asyncFunction?: () => Promise<T>): Promise<T> => {
-  return new Promise<T>((resolve, reject) => setTimeout(() => {
+export const delay = <T>(timeout: number, asyncFunction?: () => Promise<T>): Promise<T | void> => {
+  return new Promise<T | void>((resolve, reject) => setTimeout(() => {
     if (asyncFunction) {
       asyncFunction()
         .then(result => resolve(result))

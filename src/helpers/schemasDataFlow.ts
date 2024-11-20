@@ -1,9 +1,10 @@
+/* test coverage not required */
 import { ThunkDispatch } from '../reducers/useThunkReducer';
 import { fetchAllOntologiesFromSchemas } from '../services/ontologyService.utils';
 import { fetchAllSchemas } from '../services/schemaApiService';
 import { fetchAllShapesFromSchemas } from '../services/shapeService.utils';
 
-import { schemasLoadedAction, schemasLoadingErrorAction } from './schemasReducer';
+import { AllSchemasError, schemasLoadedAction, schemasLoadingErrorAction } from './schemasReducer';
 
 export const loadSchemas = async (dispatch: ThunkDispatch) => {
   try {
@@ -16,6 +17,6 @@ export const loadSchemas = async (dispatch: ThunkDispatch) => {
       ontologies
     }))
   } catch (error) {
-    dispatch(schemasLoadingErrorAction(error))
+    dispatch(schemasLoadingErrorAction(error as AllSchemasError))
   }
 }

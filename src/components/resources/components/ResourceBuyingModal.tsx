@@ -14,7 +14,7 @@ import { ResourceBuyingAction, ResourceBuyingState } from '../helpers/resourceBu
 import styles from './ResourceBuyingModal.module.css';
 
 interface ResourceBuyingModalProps {
-  state: ResourceBuyingState,
+  state: Partial<ResourceBuyingState>,
   dispatch: React.Dispatch<ResourceBuyingAction>,
   title: string,
 }
@@ -26,30 +26,32 @@ const ResourceBuyingModal: FC<ResourceBuyingModalProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const [consumerBaseUrl, setConsumerBaseUrl] = useState();
+  const [consumerBaseUrl, setConsumerBaseUrl] = useState<string>();
   const [account, setAccount] = useState(`${process.env.REACT_APP_DEFAULT_EDC_DESTINATION_ACCOUNT}`);
   const [container, setContainer] = useState(`${process.env.REACT_APP_DEFAULT_EDC_DESTINATION_CONTAINER}`);
 
   useEffect(() => {
     if (state.name === 'TRANSFER_DIALOG') {
       setConsumerBaseUrl(state.edcConsumerBaseUrl);
-      setAccount(state.dataDestinationAccount);
-      setContainer(state.dataDestinationContainer);
+      setAccount(state.dataDestinationAccount || '');
+      setContainer(state.dataDestinationContainer || '');
     }
   }, [state.name]);
 
-  const submit = (event) => {
+  const submit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    if (event.target.checkValidity()) {
+
+    const form = event.target as HTMLFormElement; // target is HTMLFormElement
+    if (form.checkValidity()) {
       dispatch({
         type: 'RETRIEVE_CONTRACT_INFORMATION', payload: {
-          edcConsumerBaseUrl: consumerBaseUrl,
+          edcConsumerBaseUrl: consumerBaseUrl || '',
           dataDestinationAccount: account,
           dataDestinationContainer: container
         }
       })
     } else {
-      event.target.reportValidity();
+      form.reportValidity();
     }
   }
 
