@@ -15,6 +15,12 @@ module.exports = override(
         : 'src/keycloak-config.json'        // Development environment
     );
 
+    if (config.devServer) {
+      config.devServer.setupMiddlewares = (middlewares, devServer) => {
+        return middlewares;
+      }
+    }
+
     // Return the modified Webpack config
     return config;
   }
