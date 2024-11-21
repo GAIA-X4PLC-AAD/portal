@@ -16,7 +16,7 @@ describe('Modal', () => {
     )
 
     const child = getByText(childComponentText)
-    expect(child).toBeInTheDocument
+    expect(child).toBeInTheDocument();
   })
 
   it('does not render content if it is not open', () => {
@@ -29,7 +29,7 @@ describe('Modal', () => {
     )
 
     const child = findByText(childComponentText)
-    expect(child).not.toBeInTheDocument
+    expect(child).not.toBeInTheDocument();
   })
 
   it('stops click propagation', () => {

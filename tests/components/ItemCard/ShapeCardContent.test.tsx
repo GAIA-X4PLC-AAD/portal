@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react'
+import '@testing-library/jest-dom';
 import React from 'react';
 
 import ShapeCardContent from '../../../src/components/ItemCard/ShapeCardContent';
@@ -22,7 +23,7 @@ describe('ShapeCardContent', () => {
         }
       />))
 
-    expect(getByText('shacl shape name')).toBeInTheDocument
+    expect(getByText('shacl shape name')).toBeInTheDocument();
   })
 
   it('handles detail button click', () => {

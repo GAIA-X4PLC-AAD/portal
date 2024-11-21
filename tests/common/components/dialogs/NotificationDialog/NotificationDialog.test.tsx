@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react'
+import '@testing-library/jest-dom';
 import React from 'react'
 
 import NotificationDialog from '../../../../../src/common/components/dialogs/NotificationDialog/NotificationDialog';
@@ -15,8 +16,8 @@ describe('NotificationDialog', () => {
         message={'dialog message'}
       />
     )
-    expect(queryByText('dialog title')).toBeInTheDocument
-    expect(queryByText('dialog message')).toBeInTheDocument
+    expect(queryByText('dialog title')).toBeInTheDocument();
+    expect(queryByText('dialog message')).toBeInTheDocument();
   })
 
   it('if isOpen is false then dialog is not visible', () => {
@@ -28,8 +29,8 @@ describe('NotificationDialog', () => {
         message={'dialog message'}
       />
     )
-    expect(queryByText('dialog title')).not.toBeInTheDocument
-    expect(queryByText('dialog message')).not.toBeInTheDocument
+    expect(queryByText('dialog title')).not.toBeInTheDocument();
+    expect(queryByText('dialog message')).not.toBeInTheDocument();
   })
 
   it('close button is clicked the close event handler is called', () => {

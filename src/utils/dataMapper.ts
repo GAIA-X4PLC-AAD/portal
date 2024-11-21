@@ -4,6 +4,7 @@
 // Interfaces and Mappers for Service Offerings
 import { ServiceOffering } from '../types/serviceOfferings.model';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CypherQueryResult<T = any> = { items: T[] }
 
 // TODO: Refactor. See ResourceInput.

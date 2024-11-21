@@ -1,14 +1,15 @@
 import { Dispatch, Reducer, useCallback, useReducer } from 'react';
-import { AnyAction } from 'redux';
+import { Action } from 'redux';
 
 /**
  * Thunk dispatch type definition
  */
-export type ThunkDispatch = Dispatch<AnyAction>;
+export type ThunkDispatch = Dispatch<Action>;
 
 /**
  * Thunk function type definition
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ThunkAction = ((dispatch: ThunkDispatch) => any) | ((dispatch: ThunkDispatch) => Promise<any>);
 
 /**
@@ -18,13 +19,13 @@ export type ThunkAction = ((dispatch: ThunkDispatch) => any) | ((dispatch: Thunk
  * @param initialState is the initial state from which the reducer starts to generate the followup states.
  */
 export const useThunkReducer = <State>(
-  reducer: Reducer<State, AnyAction>,
+  reducer: Reducer<State, Action>,
   initialState: State
-): [State, Dispatch<AnyAction | ThunkAction>] => {
+): [State, Dispatch<Action | ThunkAction>] => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const enhancedDispatch = useCallback(
-    (action: AnyAction | ThunkAction) => {
+    (action: Action | ThunkAction) => {
       if (typeof action === 'function') {
         action(dispatch); // If the action is a thunk (function), invoke it
       } else {

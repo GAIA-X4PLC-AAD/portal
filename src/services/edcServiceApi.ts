@@ -190,7 +190,7 @@ export const checkTransferStatus = async (
 // DataTransferError
 // -----------------------------------------------------------------------------
 export class DataTransferError extends Error {
-  constructor(error: any) {
+  constructor(error: string | AxiosError | Error | { message: string }) {
     if (typeof error === 'string') {
       super(error)
     } else if (typeof error === 'object') {

@@ -15,6 +15,6 @@ describe('ModalBody', () => {
     )
 
     const child = getByText(childComponentText)
-    expect(child).toBeInTheDocument
+    expect(child).toBeInTheDocument();
   })
 })

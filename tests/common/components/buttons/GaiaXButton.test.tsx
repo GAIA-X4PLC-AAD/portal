@@ -17,10 +17,10 @@ describe('GaiaXButton', () => {
     )
 
     const label = getByText(labelText)
-    expect(label).toBeInTheDocument
+    expect(label).toBeInTheDocument();
 
     const childComponent = getByText(childComponentText)
-    expect(childComponent).toBeInTheDocument
+    expect(childComponent).toBeInTheDocument();
   })
 
   it('calls the handleOnClick if it is clicked', () => {
@@ -32,7 +32,7 @@ describe('GaiaXButton', () => {
     )
 
     const button = getByText(labelText)
-    expect(button).toBeInTheDocument
+    expect(button).toBeInTheDocument();
 
     fireEvent.click(button)
     expect(handleClick).toHaveBeenCalledTimes(1)
@@ -47,7 +47,7 @@ describe('GaiaXButton', () => {
     )
 
     const button = getByText(labelText)
-    expect(button).toBeInTheDocument
+    expect(button).toBeInTheDocument();
 
     fireEvent.click(button)
     expect(handleClick).toHaveBeenCalledTimes(0)

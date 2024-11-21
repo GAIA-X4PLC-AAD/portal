@@ -19,57 +19,57 @@ describe('ResourcesSearchPage', () => {
 
     // Text in the top header bar
     const { getByRole, getByTestId, } = render(withRouter(<ResourceSearchPage/>));
-    expect(getByRole('heading', { name: /left-menu.resources \(2 dashboard.results\)/i })).toBeInTheDocument;
+    expect(getByRole('heading', { name: /left-menu.resources \(2 dashboard.results\)/i })).toBeInTheDocument();
 
     // HdMap Card
     const hdMapCard = getByTestId(/Card:.*:HdMap/);
 
     const hdMapCardLabel = within(hdMapCard).getByRole('heading', { name: /^HdMap$/i });
-    expect(hdMapCardLabel).toBeInTheDocument
+    expect(hdMapCardLabel).toBeInTheDocument();
     expect(hdMapCardLabel.textContent).toEqual('HdMap');
 
     const hdMapCardDetailButton = within(hdMapCard).getByRole('button', { name: /details.more-details/i });
-    expect(hdMapCardDetailButton).toBeInTheDocument;
+    expect(hdMapCardDetailButton).toBeInTheDocument();
 
     // EnvironmentModel Card
     const environmentModelCard = getByTestId(/Card:.*:EnvironmentModel/);
 
     const environmentModelCardLabel = within(environmentModelCard).getByRole('heading', { name: /^EnvironmentModel$/i });
-    expect(environmentModelCardLabel).toBeInTheDocument
+    expect(environmentModelCardLabel).toBeInTheDocument();
     expect(environmentModelCardLabel.textContent).toEqual('EnvironmentModel');
 
     const environmentModelCardDetailButton = within(environmentModelCard).getByRole('button', { name: /details.more-details/i });
-    expect(environmentModelCardDetailButton).toBeInTheDocument;
+    expect(environmentModelCardDetailButton).toBeInTheDocument();
 
     // Type filter section
     const typeFilterSection = getByRole('heading', { name: /Type/i });
-    expect(typeFilterSection).toBeInTheDocument;
+    expect(typeFilterSection).toBeInTheDocument();
 
     const hdMapTypeFilterCheckbox = within(typeFilterSection.parentElement).getByRole('checkbox', { name: /HdMap/i });
-    expect(hdMapTypeFilterCheckbox).toBeInTheDocument
+    expect(hdMapTypeFilterCheckbox).toBeInTheDocument();
     expect(hdMapTypeFilterCheckbox).toHaveAttribute('checked')
     expect(hdMapTypeFilterCheckbox).not.toHaveAttribute('disabled')
 
     const environmentModelTypeFilterCheckbox = within(typeFilterSection.parentElement).getByRole('checkbox', { name: /EnvironmentModel/i });
-    expect(environmentModelTypeFilterCheckbox).toBeInTheDocument
+    expect(environmentModelTypeFilterCheckbox).toBeInTheDocument();
     expect(environmentModelTypeFilterCheckbox).not.toHaveAttribute('checked')
     expect(environmentModelTypeFilterCheckbox).toHaveAttribute('disabled')
 
     // Format filter section
     const formatFilterSection = getByRole('heading', { name: /Format/i });
-    expect(formatFilterSection).toBeInTheDocument;
+    expect(formatFilterSection).toBeInTheDocument();
 
     const asamOpenDriveFormatFilterCheckbox = within(formatFilterSection.parentElement).getByRole('checkbox', { name: /ASAM OpenDRIVE/i });
-    expect(asamOpenDriveFormatFilterCheckbox).toBeInTheDocument
+    expect(asamOpenDriveFormatFilterCheckbox).toBeInTheDocument();
     expect(asamOpenDriveFormatFilterCheckbox).toHaveAttribute('checked')
     expect(asamOpenDriveFormatFilterCheckbox).not.toHaveAttribute('disabled')
 
     // Vendor filter section
     const vendorFilterSection = getByRole('heading', { name: /Vendor/i });
-    expect(vendorFilterSection).toBeInTheDocument;
+    expect(vendorFilterSection).toBeInTheDocument();
 
     const msgSystemsAgVendorFilterCheckbox = within(vendorFilterSection.parentElement).getByRole('checkbox', { name: /msg systems ag/i });
-    expect(msgSystemsAgVendorFilterCheckbox).toBeInTheDocument
+    expect(msgSystemsAgVendorFilterCheckbox).toBeInTheDocument()
     expect(msgSystemsAgVendorFilterCheckbox).not.toHaveAttribute('checked')
     expect(msgSystemsAgVendorFilterCheckbox).not.toHaveAttribute('disabled')
   })

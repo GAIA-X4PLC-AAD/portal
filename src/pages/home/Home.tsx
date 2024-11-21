@@ -1,8 +1,8 @@
 /* test coverage not required */
-import Text from 'common/components/fields/Text/Text';
-import HeaderWithImage from 'components/HeaderWithImage/HeaderWithImage';
-import Title from 'components/Title/Title';
-import { AuthContext } from 'context/AuthContextProvider';
+import Text from '../../common/components/fields/Text/Text';
+import HeaderWithImage from '../../components/HeaderWithImage/HeaderWithImage';
+import Title from '../../components/Title/Title';
+import { AuthContext } from '../../context/AuthContextProvider';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 

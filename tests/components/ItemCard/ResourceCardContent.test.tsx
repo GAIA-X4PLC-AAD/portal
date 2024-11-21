@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import React from 'react';
 
-import '@testing-library/jest-dom';
 import ResourceCardContent from '../../../src/components/ItemCard/ResourceCardContent';
 import { Resource } from '../../../src/types/resources.model';
 import { withRouter } from '../../common/testHelper';
@@ -19,8 +19,8 @@ describe('ResourceCardContent', () => {
     ))
 
     const name = getByText(resource.name)
-    expect(name).toBeInTheDocument
+    expect(name).toBeInTheDocument();
     const description = getByText(resource.description)
-    expect(description).toBeInTheDocument
+    expect(description).toBeInTheDocument();
   })
 })

@@ -2,6 +2,8 @@
   "name": "gaiax-portal",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "homepage": "public/index.html",
   "dependencies": {
     "@axios-use/react": "^6.6.0",
     "@emotion/react": "^11.13.3",
@@ -28,7 +30,6 @@
     "mem": "^10.0.0",
     "moment": "^2.30.1",
     "n3": "^1.23.0",
-    "npm": "^10.9.0",
     "plotly.js": "^2.35.2",
     "prop-types": "^15.8.1",
     "rdflib": "^2.2.35",
@@ -44,12 +45,11 @@
     "react-responsive-carousel": "^3.2.23",
     "react-responsive-modal": "^6.4.2",
     "react-router-dom": "^6.28.0",
-    "react-scripts": "5.0.1",
     "react-toastify": "^10.0.6",
     "react-tooltip": "^5.28.0",
     "redux-thunk": "^3.1.0",
     "styled-components": "^6.1.13",
-    "typescript": "^4.9.5",
+    "typescript": "^5.6.3",
     "url": "^0.11.4",
     "util": "^0.12.5",
     "uuid": "^9.0.0",
@@ -57,20 +57,14 @@
     "web-vitals": "^4.2.4"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "preview": "vite preview",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "eject": "react-scripts eject",
-    "lint": "eslint src tests",
-    "lint:fix": "eslint --fix src tests"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "test:coverage": "jest --coverage"
   },
   "browserslist": {
     "production": [
@@ -103,11 +97,21 @@
     "@swc/core": "^1.9.2",
     "@swc/jest": "^0.2.37",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "react-app-rewired": "^2.2.1",
+    "@babel/plugin-transform-react-jsx": "^7.25.9",
     "eslint-plugin-import": "^2.31.0",
+    "@eslint/js": "^9.15.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
     "eslint-plugin-react": "^7.37.2",
-    "customize-cra": "^1.0.0",
+    "@babel/eslint-parser": "^7.25.9",
     "@formatjs/fast-memoize": "^2.2.3",
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "globals": "^15.12.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.15.0",
+    "vite": "^5.4.10",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-tsconfig-paths": "^5.1.2",
+    "@vitejs/plugin-react": "^4.3.3"
   }
 }

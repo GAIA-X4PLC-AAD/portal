@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react'
+import '@testing-library/jest-dom';
 import React from 'react';
 
 import ServiceCardContent from '../../../src/components/ItemCard/ServiceCardContent';
@@ -23,8 +24,8 @@ describe('ServiceCardContent', () => {
         }
       />))
 
-    expect(getByText('service name')).toBeInTheDocument
-    expect(getByText('service description')).toBeInTheDocument
+    expect(getByText('service name')).toBeInTheDocument();
+    expect(getByText('service description')).toBeInTheDocument();
   })
 
   it('renders service without name and description', () => {
@@ -38,8 +39,8 @@ describe('ServiceCardContent', () => {
         }
       />))
 
-    expect(getByText('service-offerings.no-title')).toBeInTheDocument
-    expect(getByText('service-offerings.no-description')).toBeInTheDocument
+    expect(getByText('service-offerings.no-title')).toBeInTheDocument();
+    expect(getByText('service-offerings.no-description')).toBeInTheDocument();
   })
 
   it('handles detail button click', () => {

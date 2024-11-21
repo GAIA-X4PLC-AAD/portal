@@ -1,8 +1,8 @@
 /* test coverage not required */
-import GaiaXButton from 'common/components/buttons/GaiaXButton';
-import LanguageModal from 'components/modals/LanguageModal';
-import { AuthContext } from 'context/AuthContextProvider';
-import { useNavbar } from 'hooks/useNavbar';
+import GaiaXButton from '../../common/components/buttons/GaiaXButton';
+import LanguageModal from '../../components/modals/LanguageModal';
+import { AuthContext } from '../../context/AuthContextProvider';
+import { useNavbar } from '../../hooks/useNavbar';
 import i18n from 'i18n';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';

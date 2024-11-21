@@ -3,22 +3,14 @@ import { toast } from 'react-toastify';
 import { notify } from '../../../src/components/notification/Notification';
 import { Notification } from '../../../src/types/notification.model';
 
-jest.mock('react-toastify', () => {
-    type MockToastType = any | {
-        success: any,
-        error: any,
-        warn: any,
-        info: any
-    }
-    const toast = jest.fn() as MockToastType;
-    toast.success = jest.fn();
-    toast.error = jest.fn();
-    toast.warn = jest.fn();
-    toast.info = jest.fn();
-    return {
-      toast: toast,
-    }
-});
+jest.mock('react-toastify', () => ({
+  toast: {
+    success: () => jest.fn(),
+    error: () => jest.fn(),
+    warn: () => jest.fn(),
+    info: () => jest.fn()
+  }
+}))
 
 describe('notify', () => {
   const message = 'Test notification message';
@@ -89,7 +81,7 @@ describe('notify', () => {
 
   it('should call default toast function for undefined messageType', () => {
     const notification: Notification = {
-      messageType: 'UNDEFINED_TYPE' as any,
+      messageType: undefined,
       message,
       options: { autoClose: 1500 },
     };

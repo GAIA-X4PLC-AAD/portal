@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react'
+import '@testing-library/jest-dom';
 import React from 'react';
 
 import OntologyCardContent from '../../../src/components/ItemCard/OntologyCardContent';
@@ -23,8 +24,8 @@ describe('OntologyCardContent', () => {
         }
       />))
 
-    expect(getByText('ontology subject')).toBeInTheDocument
-    expect(getByText('ontology description')).toBeInTheDocument
+    expect(getByText('ontology subject')).toBeInTheDocument();
+    expect(getByText('ontology description')).toBeInTheDocument();
   })
 
   it('Handles detail button click', () => {

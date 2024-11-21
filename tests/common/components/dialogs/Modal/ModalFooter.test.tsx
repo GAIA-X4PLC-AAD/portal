@@ -15,6 +15,6 @@ describe('ModalFooter', () => {
     )
 
     const child = getByText(childComponentText)
-    expect(child).toBeInTheDocument
+    expect(child).toBeInTheDocument();
   })
 })

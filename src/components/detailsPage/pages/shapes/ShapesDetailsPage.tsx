@@ -1,4 +1,4 @@
-import { ShapeContext } from 'context/ShapeContext';
+import { ShapeContext } from '../../../../context/ShapeContext';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';

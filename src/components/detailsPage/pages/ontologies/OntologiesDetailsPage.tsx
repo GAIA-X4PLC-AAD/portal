@@ -1,5 +1,5 @@
 /* test coverage not required */
-import { OntologyContext } from 'context/OntologyContext';
+import { OntologyContext } from '../../../../context/OntologyContext';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';

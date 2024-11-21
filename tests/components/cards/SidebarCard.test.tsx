@@ -1,4 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import React from 'react';
 
 import SidebarCard from '../../../src/components/cards/SidebarCard';
@@ -40,7 +41,7 @@ describe('SidebarCard', () => {
     expect(queryByDisplayValue('edc consumer base url')).toBeNull()
     expect(queryByDisplayValue('account')).toBeNull()
     expect(queryByDisplayValue('container')).toBeNull()
-    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).toBeDisabled
+    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).toBeDisabled();
   })
 
   it('displays notification dialog if state is ERROR_NOTIFICATION_DIALOG', () => {
@@ -59,7 +60,7 @@ describe('SidebarCard', () => {
         resource={resource}
       />
     )
-    expect(getByText('some error message')).toBeInTheDocument
+    expect(getByText('some error message')).toBeInTheDocument();
   })
 
   it('displays notification dialog if state is ERROR_NOTIFICATION_DIALOG', () => {
@@ -200,7 +201,7 @@ describe('SidebarCard', () => {
         resource={resource}
       />
     )
-    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).not.toBeDisable
+    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).not.toBeDisabled();
   })
 
   it('enables buy button if state is FINISHED', () => {
@@ -218,7 +219,7 @@ describe('SidebarCard', () => {
         resource={resource}
       />
     )
-    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).not.toBeDisable
+    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).not.toBeDisabled();
   })
 
   it('dispatches BUY action if buy button is clicked', () => {
