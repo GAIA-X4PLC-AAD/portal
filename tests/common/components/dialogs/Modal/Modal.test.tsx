@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import React from 'react';
 
 import Modal from '../../../../../src/common/components/dialogs/Modal/Modal';
-import Text from '../../../../../src/common/components/fields/Text/Text';
+import Text from '../../../../../src/common/components/fields/././text/Text';
 
 describe('Modal', () => {
   it('renders content if it is open', () => {

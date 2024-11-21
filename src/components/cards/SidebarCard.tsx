@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
 import NotificationDialog from '../../common/components/dialogs/NotificationDialog/NotificationDialog';
-import Text from '../../common/components/fields/Text/Text';
+import Text from '../../common/components/fields/././text/Text';
 import { ResourceDetails } from '../../types/resources.model';
 import Title from '../Title/Title';
 import DataTransferInitiationProgress from '../resources/components/DataTransferInitiationProgress';

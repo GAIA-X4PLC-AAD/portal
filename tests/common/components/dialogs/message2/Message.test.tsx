@@ -1,7 +1,7 @@
 import { render, within } from '@testing-library/react'
 import React, { FC } from 'react';
 
-import Message from '../../../../../src/common/components/dialogs/Message/Message';
+import Message from '../../../../../src/common/components/fields/message/Message';
 
 describe('Message', () => {
   it('renders its children', () => {

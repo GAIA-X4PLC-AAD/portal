@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 
-import Text from '../../../../../src/common/components/fields/Text/Text';
+import Text from '../../../../../src/common/components/fields/././text/Text';
 
 describe('Text', () => {
   it('it renders its children', () => {

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import Title from '../../../../components/Title/Title';
 import { AlertIcon } from '../../../styles';
 import GaiaXButton from '../../buttons/GaiaXButton';
-import Message from '../Message/Message';
+import Message from '../../fields/message/Message';
 import Modal from '../Modal/Modal';
 import ModalBody from '../Modal/ModalBody';
 import ModalFooter from '../Modal/ModalFooter';

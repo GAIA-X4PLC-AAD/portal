@@ -3,7 +3,7 @@ import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import Text from '../../../../common/components/fields/Text/Text';
+import Text from '../../../../common/components/fields/././text/Text';
 import Markdown from '../../../../common/components/markdown/Markdown';
 import { OntologyContext } from '../../../../context/OntologyContext';
 import { Shape } from '../../../../types/shapes.model';

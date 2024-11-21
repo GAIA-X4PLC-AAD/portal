@@ -1,5 +1,5 @@
 /* test coverage not required */
-import Text from 'common/components/fields/Text/Text';
+import Text from 'common/components/fields/text/Text';
 import Title from 'components/Title/Title';
 import Divider from 'components/divider/Divider';
 import Subtitle from 'components/subtitle/Subtitle';
