@@ -1,0 +1,22 @@
+.navigationItem {
+    min-width: fit-content;
+    font-weight: 600;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.navigationItem a {
+    text-decoration: none;
+    color: black;
+}
+
+.navigationItem:hover {
+    color: #A01441;
+    transition: all 0.4s ease 0s;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.navigationItem:hover, .navigationItem.active {
+    color: #A01441;
+}

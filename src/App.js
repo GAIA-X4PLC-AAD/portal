@@ -1,9 +1,9 @@
 import React from 'react';
 import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 
+import Navbar from './common/components/navbar/Navbar';
 import history from './common/history'
 import { Footer } from './components/footer/Footer';
-import Navbar from './components/navbar/Navbar';
 import Routes from './components/routes/Routes';
 
 import './App.css';
