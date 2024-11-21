@@ -33,7 +33,6 @@ import Shapes from './shapes/Shapes';
 import SolutionPackagingView from './solutionPackaging/SolutionPackagingView';
 
 const ViewContainer = (view: ReactNode) => {
-  // @ts-ignore
   return <div className='body-container'>{view}</div>
 }
 

@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import React, { FC } from 'react';
 
 import CardContainer from '../../../src/components/cards/CardContainer';
@@ -12,8 +13,8 @@ describe('CardContainer', () => {
         <ChildComponent/>
       </CardContainer>
     )
-    expect(getByTestId('child-component')).toBeInTheDocument
-    expect(getByText('child component')).toBeInTheDocument
+    expect(getByTestId('child-component')).toBeInTheDocument();
+    expect(getByText('child component')).toBeInTheDocument();
   })
 
   it('does not render child components if it is not visible', () => {
@@ -24,7 +25,7 @@ describe('CardContainer', () => {
         <ChildComponent/>
       </CardContainer>
     )
-    expect(queryByTestId('child-component')).not.toBeInTheDocument
-    expect(queryByText('child component')).not.toBeInTheDocument
+    expect(queryByTestId('child-component')).not.toBeInTheDocument();
+    expect(queryByText('child component')).not.toBeInTheDocument();
   })
 });

@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import React from 'react';
 
 import HeaderImage from '../../../src/assets/images/header_image.svg';
@@ -16,7 +17,7 @@ describe('render header with image', () => {
       />
     );
 
-    expect(getByText('title text')).toBeInTheDocument
-    expect(getByText('content text')).toBeInTheDocument
+    expect(getByText('title text')).toBeInTheDocument();
+    expect(getByText('content text')).toBeInTheDocument();
   })
 });

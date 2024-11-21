@@ -11,9 +11,9 @@ interface IRDFVisualization {
   visible: boolean;
 }
 
-// eslint-disable-next-line no-unused-vars
+ 
 enum detailRoutes {
-  // eslint-disable-next-line no-unused-vars
+   
   shapesAndOntologies = '/shapesAndOntologies/details/',
 }
 

@@ -1,4 +1,4 @@
-import { useFooter } from 'hooks/useFooter';
+import { useFooter } from '../../hooks/useFooter';
 import React from 'react';
 
 import { ReactComponent as MyIcon } from '../../assets/logos/msg_white.svg';

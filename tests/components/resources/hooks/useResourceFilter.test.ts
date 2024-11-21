@@ -21,6 +21,7 @@ describe('useResourceFilter', () => {
     ));
 
     // Remove the searchText from the "initiallyLoaded_ResourceFilterState"
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { searchText, ...initiallyLoadedState } = initiallyLoaded_ResourceFilterState;
 
     // Wait for the useEffect to be executed
@@ -88,6 +89,7 @@ describe('useResourceFilter', () => {
 
 const removeSearchText = (resourceFilterState: ResourceFilterState) => {
   // Remove the "searchText" property from the "resourceFilterState"
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { searchText, ...returnValue } = resourceFilterState;
   return returnValue;
 }

@@ -1,11 +1,11 @@
 /* test coverage not required */
-import DetailsCard from 'components/cards/DetailsCard';
-import MapCard from 'components/cards/MapCard';
-import SidebarCard from 'components/cards/SidebarCard';
-import { AuthContext } from 'context/AuthContextProvider';
+import DetailsCard from '../../components/cards/DetailsCard';
+import MapCard from '../../components/cards/MapCard';
+import SidebarCard from '../../components/cards/SidebarCard';
+import { AuthContext } from '../../context/AuthContextProvider';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiService';
+import { CypherQueryApiService as cypherQuery } from '../../services/cypherQueryApiService';
 
 import car from '../../assets/car.gif';
 
@@ -13,6 +13,7 @@ import styles from './DetailsPage.module.css';
 
 export default function DetailsPage() {
   const authContext = useContext(AuthContext);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selfDescriptionData, setSelfDescriptionData] = useState<any>(null);
   const { resourceId } = useParams();
   const [isLoading, setIsLoading] = useState(true);

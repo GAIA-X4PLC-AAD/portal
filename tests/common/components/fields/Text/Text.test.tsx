@@ -10,6 +10,6 @@ describe('Text', () => {
     const { getByText } = render(<Text>{childComponentText}</Text>)
 
     const child = getByText(childComponentText)
-    expect(child).toBeInTheDocument
+    expect(child).toBeInTheDocument();
   })
 })

@@ -84,7 +84,6 @@ describe('ErrorBoundary', () => {
 
     // Mock the BusinessException class to have a handleNotification method
     const mockBusinessException = new BusinessObjectNotFound(errorMessage, uri);
-    // @ts-ignore
     mockBusinessException.handleNotification = jest.fn((callback) => callback());
 
     // Render the ErrorBoundary

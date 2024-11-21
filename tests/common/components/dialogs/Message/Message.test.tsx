@@ -1,4 +1,5 @@
 import { render, within } from '@testing-library/react'
+import '@testing-library/jest-dom';
 import React, { FC } from 'react';
 
 import Message from '../../../../../src/common/components/dialogs/Message/Message';
@@ -13,9 +14,9 @@ describe('Message', () => {
       </Message>
     )
     const childComponent = getByTestId('child');
-    expect(childComponent).toBeInTheDocument
+    expect(childComponent).toBeInTheDocument();
 
     const text = within(childComponent).findByText('child');
-    expect(text).toBeInTheDocument
+    expect(text).toBeInTheDocument();
   })
 });

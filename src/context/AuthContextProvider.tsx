@@ -33,6 +33,7 @@ const defaultAuthContextValues: AuthContextType = {
   token: '',
   login: () => Promise.resolve(),
   logout: () => Promise.resolve(),
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   hasRole: (_role: string) => false,
   redirectPath: null,
   setRedirectPath: () => {},
@@ -97,7 +98,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   };
 
   const handleLogout = async () => {
-    keycloak.logout();
+    await keycloak.logout();
     setIsAuthenticated(false);
     setToken('');
   };
