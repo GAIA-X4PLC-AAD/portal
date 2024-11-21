@@ -1,14 +1,13 @@
-class MultipleBusinessObjectsFound extends Error {
+import { BusinessException } from './BusinessException';
+
+class MultipleBusinessObjectsFound extends BusinessException {
   uri: string;
 
-  constructor(message: string, uri: string) {
-    super(message);
+  constructor(massage: string, uri: string) {
+    super(massage);
     this.uri = uri;
     this.name = 'MultipleBusinessObjectsFound';
-
-    // In TypeScript, when extending Error, you need to manually set the prototype.
-    Object.setPrototypeOf(this, MultipleBusinessObjectsFound.prototype);
   }
 }
 
-export default MultipleBusinessObjectsFound
+export default MultipleBusinessObjectsFound;
