@@ -1,17 +1,17 @@
-import { AuthContext } from 'context/AuthContextProvider';
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import LoginButton from '../buttons/LoginButton';
 
+import styles from './Navbar.module.css';
 import GaiaXLogo from './components/GaiaXLogo';
+import MenuIcon from './components/MenuIcon';
 import NavbarContainer from './components/NavbarContainer';
 import NavigationItemContainer from './components/NavigationItemContainer';
 import { NavbarAsset } from './helpers/types';
 
 export default function Navbar() {
   const { t } = useTranslation();
-  const authContext = useContext(AuthContext);
   const navbarAssets = [
     {
       path: '/service-offerings',
@@ -42,12 +42,17 @@ export default function Navbar() {
       name: t('left-menu.support'),
     },
   ] as NavbarAsset[]
+  const [dropdownMenuVisible, setDropdownMenuVisible] = useState(false);
 
   return (
     <NavbarContainer>
       <GaiaXLogo/>
-      <NavigationItemContainer visible={authContext.isAuthenticated} navbarAssets={navbarAssets}/>
-      <LoginButton authContext={authContext}/>
+      <MenuIcon onClick={() => setDropdownMenuVisible(!dropdownMenuVisible)}/>
+      <NavigationItemContainer
+        visible={dropdownMenuVisible}
+        onHide={() => setDropdownMenuVisible(!dropdownMenuVisible)}
+        navbarAssets={navbarAssets}/>
+      <LoginButton className={styles.login}/>
     </NavbarContainer>
   );
 }

@@ -1,6 +1,9 @@
-import React, { FC, useState } from 'react';
+import classnames from 'classnames';
+import React, { FC, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import { AuthContext } from '../../../../context/AuthContextProvider';
+import LoginButton from '../../buttons/LoginButton';
 import LanguageSelectionModal from '../../dialogs/LanguageSelectionDialog/LanguageSelectionDialog';
 import { NavbarAsset } from '../helpers/types';
 
@@ -10,30 +13,42 @@ import styles from './NavigationItemContainer.module.css'
 interface NavbarItemListProps {
   navbarAssets: NavbarAsset[];
   visible: boolean;
+  onHide: () => void;
 }
 
-const NavigationItemContainer: FC<NavbarItemListProps> = ({ navbarAssets, visible }) => {
+const NavigationItemContainer: FC<NavbarItemListProps> = ({ navbarAssets, visible, onHide }) => {
   const { t } = useTranslation();
+  const authContext = useContext(AuthContext);
   const [isLanguageModalOpen, setIsLanguageModalOpen] = useState(false);
 
-  if (!visible) {
+  if (!authContext.isAuthenticated) {
     return <></>
   }
 
   return (
     <>
-      <ul className={styles.navigationItems}>
+      <ul className={classnames([styles.navigationItemContainer, visible ? '' : styles.hidden])}>
         {
           navbarAssets.map((asset) => (
-            <NavbarItem key={asset.name} name={asset.name} path={asset.path}/>
+            <NavbarItem
+              key={asset.name}
+              name={asset.name}
+              path={asset.path}
+              onClick={onHide}
+            />
           ))
         }
 
         <NavbarItem
           key={'left-menu.choose-language'}
           name={t('left-menu.choose-language')}
-          onClick={() => setIsLanguageModalOpen(true)}
+          onClick={() => {
+            onHide();
+            setIsLanguageModalOpen(true);
+          }}
         />
+
+        <LoginButton className={styles.login}/>
       </ul>
 
       <LanguageSelectionModal

@@ -1,38 +1,42 @@
 import React, { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import styles from './NavbarItem.module.css';
 
-type NavbarItemProps = |
-  {
-    name: string
-    path: string;
-  } |
-  {
-    name: string
-    onClick: () => void;
-  }
+interface NavbarItemProps {
+  name: string,
+  onClick: () => void,
+  path?: string,
+}
 
-const NavbarItem: FC<NavbarItemProps> = (props) => {
-  if ('onClick' in props) {
+const NavbarItem: FC<NavbarItemProps> = ({ name, path, onClick }) => {
+  const navigate = useNavigate();
+
+  if (!path) {
     return (
-      <li className={styles.navigationItem} onClick={props.onClick}>
-        {props.name}
+      <li onClick={onClick}>
+        <div className={styles.navigationItem}>
+          {name}
+        </div>
       </li>
     )
   }
 
   return (
-    <li className={styles.navigationItem}>
+    <li onClick={() => {
+      onClick();
+      navigate(path);
+    }}>
       <NavLink
-        to={props.path}
+        to={path}
+        onClick={onClick}
         className={({ isActive }) =>
           isActive
             ? `${styles.navigationItem} ${styles.active}`
             : styles.navigationItem
         }
       >
-        {props.name}
+        {name}
       </NavLink>
     </li>
   )

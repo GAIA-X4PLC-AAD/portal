@@ -1,6 +1,47 @@
-.navigationItems {
+.navigationItemContainer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
+    column-gap: 20px;
+}
+
+.login {
+    display: none;
+    width: 95%;
+}
+
+@media (max-width: 1600px) {
+    .navigationItemContainer {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 1200px) {
+    .navigationItemContainer {
+        column-gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .login {
+        display: inline;
+        margin: 10px 10px 10px 20px;
+    }
+
+    .login:hover {
+        transition: all 0.4s ease 0s;
+        transform: scale(1.05);
+        margin-left: 15px;
+    }
+
+    .navigationItemContainer {
+        flex-direction: column;
+        column-gap: 5px;
+        width: 100%;
+    }
+
+    .navigationItemContainer.hidden {
+        display: none;
+    }
 }

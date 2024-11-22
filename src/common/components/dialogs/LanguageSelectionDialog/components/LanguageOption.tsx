@@ -11,13 +11,17 @@ const changeLanguage = (languageCode: string) => {
 
 interface LanguageOptionProps {
   languageCode: string;
+  onClick: () => void;
 }
 
-const LanguageOption: FC<LanguageOptionProps> = ({ languageCode }) => {
+const LanguageOption: FC<LanguageOptionProps> = ({ languageCode, onClick }) => {
   const { t } = useTranslation();
 
   return (
-    <li onClick={() => changeLanguage(languageCode)} className={styles.languageItem}>
+    <li onClick={() => {
+      onClick();
+      changeLanguage(languageCode);
+    }} className={styles.languageItem}>
       {t(`left-menu.${languageCode}`)}
     </li>
   )

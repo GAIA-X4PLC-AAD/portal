@@ -1,0 +1,18 @@
+.menuIcon {
+    display: none;
+    padding: 5px 5px 0;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+}
+
+.menuIcon:hover {
+    transition: all 0.4s ease 0s;
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menuIcon {
+        display: block;
+    }
+}
