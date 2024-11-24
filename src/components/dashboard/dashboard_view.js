@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Carousel from 'react-multi-carousel';
 
+import LoadingViewDeprecated from '../../common/components/loadingIndicator/LoadingViewDeprecated';
 import { H4Text } from '../../common/styles';
 import NextPrevButtons from '../../common/vertical_steps/next_prev_buttons';
-import LoadingView from '../loading_view/LoadingView';
 
 import MyServiceViewCard from './my_service_view_card';
 import PlotLoadingView from './plot_view';
@@ -107,7 +107,7 @@ const ServicesLoadingListView = ({ url, title, type }) => {
 
   return (
     <>
-      <LoadingView
+      <LoadingViewDeprecated
         url={url}
         successView={ServicesListView}
         params={{ title: title, type: type }}

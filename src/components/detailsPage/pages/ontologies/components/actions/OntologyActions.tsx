@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import GaiaXButton from '../../../../../../common/components/buttons/GaiaXButton';
-import { OntologyContext } from '../../../../../../context/OntologyContext';
+import Title from '../../../../../../common/components/fields/title/Title';
 import { downloadTurtleFile } from '../../../../../../services/schemaService.utils';
-import Title from '../../../../../Title/Title';
+import { OntologyContext } from '../../../../../index/context/OntologyContext';
 
 import styles from './OntologyActions.module.css';
 

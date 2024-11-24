@@ -3,10 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { updateFilterCriteria } from '../../../actions';
+import LoadingViewDeprecated from '../../../common/components/loadingIndicator/LoadingViewDeprecated';
 import AdminLocationFilterView from '../../admin/AdminLocationFilterView';
 import AdminTypeFilterView from '../../admin/AdminTypeFilterView';
 import ParticipantManagementSelector from '../../admin/ParticipantManagementSelector';
-import LoadingView from '../../loading_view/LoadingView';
 
 const AdminManagementSearchFilter = ({ type }) => {
 
@@ -47,8 +47,8 @@ const AdminManagementSearchFilter = ({ type }) => {
   return (
     <>
       <ParticipantManagementSelector type={type}/>
-      <LoadingView url={REQUEST_URL} successView={showRequestType}/>
-      <LoadingView url={LOCATION_URL} successView={showLocation}/>
+      <LoadingViewDeprecated url={REQUEST_URL} successView={showRequestType}/>
+      <LoadingViewDeprecated url={LOCATION_URL} successView={showLocation}/>
     </>)
 
 }

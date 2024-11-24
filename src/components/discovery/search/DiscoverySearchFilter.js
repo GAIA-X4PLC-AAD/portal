@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import LoadingView from '../../loading_view/LoadingView';
+import LoadingViewDeprecated from '../../../common/components/loadingIndicator/LoadingViewDeprecated';
 
 import SearchFilterView from './SearchFilterView';
 
@@ -12,7 +12,7 @@ const DiscoverySearchFilter = ({ type, serviceId, slot }) => {
   const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/${type}${addParams}/filter-criterias`;
 
   return (
-    <LoadingView
+    <LoadingViewDeprecated
       url={URL}
       successView={SearchFilterView} key={type}/>
   );

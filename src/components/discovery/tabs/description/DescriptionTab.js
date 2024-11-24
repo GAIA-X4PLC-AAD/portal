@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import LoadingView from '../../../loading_view/LoadingView';
+import LoadingViewDeprecated from '../../../../common/components/loadingIndicator/LoadingViewDeprecated';
 
 import DescriptionCompositeView from './DescriptionCompositeView';
 import DescriptionDataView from './DescriptionDataView';
@@ -25,7 +25,7 @@ const DescriptionTab = ({ id, type }) => {
   }
 
   return (
-    <LoadingView
+    <LoadingViewDeprecated
       url={URL}
       params={{ type: type }}
       successView={getSuccessView(type)}

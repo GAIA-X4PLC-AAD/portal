@@ -6,11 +6,11 @@ import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import './i18n';
-import App from './App';
-import ErrorBoundary from './components/error-boundary/ErrorBoundary';
-import { ErrorProvider } from './components/error-boundary/ErrorContext';
-import AuthContextProvider from './context/AuthContextProvider';
-import { ResourceContextProvider } from './context/ResourceContext';
+import AuthContextProvider from './components/index/context/AuthContextProvider';
+import { ResourceContextProvider } from './components/index/context/ResourceContext';
+import ErrorBoundary from './components/index/errorBoundary/ErrorBoundary';
+import { ErrorProvider } from './components/index/errorBoundary/ErrorContext';
+import App from './components/main/App';
 import reducers from './reducers';
 
 import './index.css';

@@ -3,12 +3,12 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import Title from '../../common/components/fields/title/Title';
 import { Ontology } from '../../types/ontologies.model';
 import { Participant } from '../../types/participants.model';
 import { Resource } from '../../types/resources.model';
 import { ServiceOffering } from '../../types/serviceOfferings.model';
 import { Shape } from '../../types/shapes.model';
-import Title from '../Title/Title';
 
 import styles from './ItemCard.module.css';
 import OntologyCardContent from './OntologyCardContent';

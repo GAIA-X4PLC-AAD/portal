@@ -2,7 +2,7 @@ import { act, render, screen } from '@testing-library/react';
 import React from 'react';
 
 import BusinessObjectNotFound from '../../../src/common/exceptions/BusinessObjectNotFound';
-import { ErrorProvider, useErrorContext } from '../../../src/components/error-boundary/ErrorContext';
+import { ErrorProvider, useErrorContext } from '../../../src/components/index/errorBoundary/ErrorContext';
 
 // Mock the BusinessException
 jest.mock('../../../src/common/exceptions/BusinessException', () => ({

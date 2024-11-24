@@ -3,7 +3,7 @@ import GaiaXButton from 'common/components/buttons/GaiaXButton';
 import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { AuthContext } from '../../../context/AuthContextProvider';
+import { AuthContext } from '../../../components/index/context/AuthContextProvider';
 
 import styles from './LoginButton.module.css'
 

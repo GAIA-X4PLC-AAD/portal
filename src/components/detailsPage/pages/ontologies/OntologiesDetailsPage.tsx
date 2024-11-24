@@ -1,16 +1,16 @@
 /* test coverage not required */
-import { OntologyContext } from 'context/OntologyContext';
+import { OntologyContext } from 'components/index/context/OntologyContext';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import car from '../../../../assets/car.gif';
+import Header from '../../../../common/components/header/Header';
 import { fetchOntologyById } from '../../../../services/ontologyService.utils';
 import { fetchAllSchemas } from '../../../../services/schemaApiService';
 import { fetchAllShapesFromSchemas } from '../../../../services/shapeService.utils';
 import { Ontology } from '../../../../types/ontologies.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
-import Header from '../../../header/Header';
 import DetailsContent from '../../layout/content/DetailsContent';
 import DetailsMainContent from '../../layout/mainContent/DetailsMainContent';
 import DetailsPage from '../../layout/mainPage/DetailsPage';

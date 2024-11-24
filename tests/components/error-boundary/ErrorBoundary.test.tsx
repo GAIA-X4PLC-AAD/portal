@@ -15,7 +15,7 @@ const useErrorContext = {
   publish: jest.fn(),
 }
 // Mock the useErrorContext hook
-jest.mock('../../../src/components/error-boundary/ErrorContext', () => ({
+jest.mock('../../../src/components/index/errorBoundary/ErrorContext', () => ({
   useErrorContext: () => useErrorContext,
 }));
 

@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
+import Title from '../../common/components/fields/title/Title';
 import Markdown from '../../common/components/markdown/Markdown';
 import { Resource } from '../../types/resources.model';
-import Title from '../Title/Title';
 
 import styles from './ItemCard.module.css';
 

@@ -1,14 +1,14 @@
-import { ShapeContext } from 'context/ShapeContext';
+import { ShapeContext } from 'components/index/context/ShapeContext';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 // @ts-ignore
 import car from '../../../../assets/car.gif';
+import Header from '../../../../common/components/header/Header';
 import { getShapeByName } from '../../../../services/shapeService.utils';
 import { Shape } from '../../../../types/shapes.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
-import Header from '../../../header/Header';
 import DetailsContent from '../../layout/content/DetailsContent';
 import DetailsMainContent from '../../layout/mainContent/DetailsMainContent';
 import DetailsPage from '../../layout/mainPage/DetailsPage';

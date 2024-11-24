@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import Carousel from 'react-multi-carousel';
 import { useSelector } from 'react-redux';
 
+import LoadingViewDeprecated from '../../../common/components/loadingIndicator/LoadingViewDeprecated';
 import { Column, HeaderTitle, Padding, Row } from '../../../common/styles';
 import NP from '../../../common/vertical_steps/next_prev_buttons';
-import LoadingView from '../../loading_view/LoadingView';
 import ServicePreview from '../../solutionPackaging/ServicePreview';
 import TileFactory from '../TileFactory';
 
@@ -143,8 +143,8 @@ const SearchContent = ({ type, onSelect, serviceId, slot }) => {
     }
   }
 
-  return (<LoadingView url={`${getURL(type)}`}
-    successView={loadData} key={URL + refresh} />);
+  return (<LoadingViewDeprecated url={`${getURL(type)}`}
+    successView={loadData} key={URL + refresh}/>);
 }
 
 SearchContent.propTypes = {

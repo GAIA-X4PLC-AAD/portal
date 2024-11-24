@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import Title from '../Title/Title';
+import Title from '../../common/components/fields/title/Title';
 import { Asset } from '../resources/helpers/resourceFilterHelper';
 
 import styles from './Filter.module.css';

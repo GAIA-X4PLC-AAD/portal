@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Title from '../../../../components/Title/Title';
+import Title from '../../fields/title/Title';
 import Modal from '../Modal/Modal';
 import ModalBody from '../Modal/ModalBody';
 import ModalHeader from '../Modal/ModalHeader';
