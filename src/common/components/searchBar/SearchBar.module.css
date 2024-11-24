@@ -19,3 +19,13 @@
     border-radius: 1rem;
     outline-color: var(--input-focus-color);
 }
+
+@media (max-width: 960px) {
+    .searchBar.visible {
+    }
+
+    .searchBar.hidden {
+        display: none;
+    }
+
+}

@@ -1,4 +1,4 @@
-import HamburgerIcon from '@mui/icons-material/Menu';
+import Icon from '@mui/icons-material/Menu';
 import React, { FC, useContext } from 'react'
 
 import { AuthContext } from '../../../../index/context/AuthContextProvider';
@@ -21,7 +21,7 @@ const MenuIcon: FC<MenuIconProps> = ({ onClick }) => {
       className={styles.menuIcon}
       onClick={onClick}
     >
-      <HamburgerIcon style={{ fill: 'gainsboro' }}/>
+      <Icon style={{ fill: 'gainsboro' }}/>
     </div>
   )
 }

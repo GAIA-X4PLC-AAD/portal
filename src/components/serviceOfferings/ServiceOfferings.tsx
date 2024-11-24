@@ -7,9 +7,9 @@ import Main from '../../common/components/./layouts/Main';
 import Vertical from '../../common/components/./layouts/Vertical';
 import Header from '../../common/components/header/Header';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
+import SearchBar from '../../common/components/searchBar/SearchBar';
 import ItemCard from '../ItemCard/ItemCard';
 import CardContainer from '../cards/CardContainer';
-import SearchBar from '../searchBar/SearchBar';
 
 import { useServiceOfferings } from './useServiceOfferings';
 

@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import React, { ChangeEvent, FC, useState } from 'react';
 
 import styles from './SearchBar.module.css';
@@ -5,9 +6,10 @@ import styles from './SearchBar.module.css';
 interface ISearchBar {
     placeholder: string;
     onSearch: (query: string) => void;
+    visible?: boolean;
 }
 
-const SearchBar: FC<ISearchBar> = ({ placeholder, onSearch }) => {
+const SearchBar: FC<ISearchBar> = ({ placeholder, onSearch, visible }) => {
   const [query, setQuery] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +19,7 @@ const SearchBar: FC<ISearchBar> = ({ placeholder, onSearch }) => {
   };
 
   return (
-    <div className={styles.searchBar}>
+    <div className={classnames([visible ? styles.visible : styles.hidden, styles.searchBar])}>
       <input
         className={styles.input}
         type="search"

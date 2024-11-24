@@ -9,10 +9,10 @@ import Vertical from '../../common/components/./layouts/Vertical';
 import ShowMapButton from '../../common/components/buttons/ShowMapButton';
 import Header from '../../common/components/header/Header';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
+import SearchBar from '../../common/components/searchBar/SearchBar';
 import RDFVisualization from '../../utils/RDFVisualization';
 import ItemCard from '../ItemCard/ItemCard';
 import CardContainer from '../cards/CardContainer';
-import SearchBar from '../searchBar/SearchBar';
 
 import useOntologies from './useOntologies';
 
