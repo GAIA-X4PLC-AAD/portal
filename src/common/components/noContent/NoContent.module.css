@@ -6,4 +6,5 @@
 
 .text {
     font-size: 2rem;
+    user-select: none;
 }
