@@ -13,13 +13,15 @@ interface IHeaderWithImage {
 
 const  HeaderWithImage: FC<IHeaderWithImage> = ({ title, content, Image }: Readonly<IHeaderWithImage>) => {
   return (
-    <div className={styles['header-container']}>
-      <div className={styles['header-image']}>
-        <Image />
-      </div>
-      <div className={styles['header-content']}>
-        <Title>{title}</Title>
-        <Text>{content}</Text>
+    <div className={styles.headerContainerBackground}>
+      <div className={styles['header-container']}>
+        <div className={styles['header-image']}>
+          <Image/>
+        </div>
+        <div className={styles['header-content']}>
+          <Title>{title}</Title>
+          <Text>{content}</Text>
+        </div>
       </div>
     </div>
   );

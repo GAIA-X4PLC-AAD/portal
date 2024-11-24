@@ -4,6 +4,7 @@
     align-items: center;
 
     height: 9rem;
+    min-width: 36rem;
     padding: 1.5rem;
     background-image: linear-gradient(to right, #060190, #A01441);
 
