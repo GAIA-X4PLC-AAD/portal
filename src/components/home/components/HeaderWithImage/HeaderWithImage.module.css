@@ -1,15 +1,30 @@
 .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100vw;
-    min-height: 30vh;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 2rem;
+    place-items: center;
+    justify-items: center;
+
+    width: 100%;
+    min-height: 5rem;
+    margin-top: 9rem; /* This makes content start at the bottom of the navbar, because this is the height of the navbar */
+    padding: 5rem;
+
     background-image: linear-gradient(to right, #060190, #A01441);
 }
 
 .header-image {
-    flex: 1;
-    padding: 30px;
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.header-image svg {
+    width: 100%;
+    height: auto;
 }
 
 .header-content {
@@ -17,12 +32,33 @@
     flex-direction: column;
     align-items: flex-start;
     flex: 1;
+    width: 100%;
     color: white;
-    padding-right: 20%;
+}
+
+@media (max-width: 960px) {
+    .header-container {
+        grid-template-columns: 1fr;
+        justify-items: start;
+    }
+
+    .header-image {
+        justify-content: flex-start;
+    }
+
+    .header-image svg {
+        width: 54rem;
+        height: auto;
+    }
 }
 
 @media (max-width: 768px) {
     .header-container {
-        margin-top: 5.4rem;
+        margin-top: 5.4rem; /* This makes content start at the bottom of the navbar, because this is the height of the navbar */
+    }
+
+    .header-image svg {
+        width: 80%;
+        height: auto;
     }
 }

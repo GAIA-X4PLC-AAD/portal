@@ -6,21 +6,3 @@
     word-wrap: break-word;
     word-break: break-all;
 }
-
-@media (max-width: 1600px) {
-    .title {
-      font-size: x-large;
-    }
-  }
-
-@media (max-width: 1200px) {
-    .title {
-      font-size: 20px;
-    }
-  }
-
-@media (max-width: 960px) {
-    .title {
-      font-size: small;
-    }
-  }
