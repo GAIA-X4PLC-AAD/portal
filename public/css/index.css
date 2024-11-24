@@ -11,6 +11,8 @@ html {
     font-family: 'Titillium Web', Helvetica, Arial, sans-serif;
     font-weight: 400;
     font-size: 10px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -55,4 +57,13 @@ span {
 p,
 span {
     margin-top: 2rem;
+}
+
+/**
+* TODO: Remove this workaround.
+*   If an exception is thrown then an error overlay is displayed on the top of the application.
+*   This workaround prevents the error overlay to be shown.
+*/
+body > iframe {
+    display: none;
 }

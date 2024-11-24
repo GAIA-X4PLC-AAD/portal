@@ -13,7 +13,6 @@ import { ErrorProvider } from './components/index/errorBoundary/ErrorContext';
 import App from './components/main/App';
 import reducers from './reducers';
 
-import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './components/notification/Notification.css'
 
