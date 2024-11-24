@@ -1,51 +1,51 @@
 .footer-container {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    height: 9rem;
+    padding: 1.5rem;
     background-image: linear-gradient(to right, #060190, #A01441);
-    padding: 10px;
-    min-height: 7vh;
+
 }
 
-.footer-container p {
-    font-weight: 600;
-    color: white;
-    padding-right: 10px;
-}
-
-.logo {
+.logoContainer {
     display: flex;
-    flex-direction: row;
+    column-gap: 1rem;
     align-items: center;
     justify-content: space-between;
-    padding-left: 20px;
+}
+
+.logoText {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--gray-0);
+    font-weight: 600;
 }
 
 .copyright {
-    font-size: 15px;
+    margin: 0;
+    color: var(--gray-0);
+    font-weight: 600;
 }
 
-.navigation-items {
+.navigationItems {
     display: flex;
     flex-direction: row;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    width: 7%;
+    column-gap: 2rem;
 }
 
-.navigation-item {
+.navigationItem {
     min-width: fit-content;
-    font-weight: 600;
-    font-size: 15px;
-    padding: 10px;
-    color: white;
 }
 
-.navigation-item a {
+.navigationItem a {
+    font-weight: 600;
     text-decoration: none;
-    color: white;
+    color: var(--gray-0);
 }
 
 .navigation-item:hover {
@@ -54,3 +54,22 @@
     cursor: pointer;
     transform: scale(1.2);
 }
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        row-gap: 1.5rem;
+        height: 13rem;
+    }
+
+    .msgIcon {
+        height: 2.5rem
+    }
+
+    .logoText,
+    .copyright,
+    .navigationItem a {
+        font-size: 1.5rem;
+    }
+}
+

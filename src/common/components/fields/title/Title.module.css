@@ -2,14 +2,9 @@
     font-size: xx-large;
     text-align: left;
 
-    /* Ensure the text wraps inside the container */
-    overflow-wrap: break-word; /* Modern, preferred */
-    word-wrap: break-word; /* Deprecated but still supported */
-    word-break: break-all; /* Aggressively breaks at any point */
-}
-
-.title div {
-    padding-bottom: 10px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 @media (max-width: 1600px) {

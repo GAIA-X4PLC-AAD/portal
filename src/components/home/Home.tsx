@@ -14,7 +14,6 @@ export default function Home() {
   const { t } = useTranslation();
   const authContext = useContext(AuthContext);
 
-  // Guidelines for logged in Users
   const guidelines = t('article.how-to-start-guidelines');
 
   return (
@@ -26,17 +25,22 @@ export default function Home() {
       />
       {authContext.isAuthenticated ? (
         <div className={styles['home-content']}>
-          <Title>{t('article.how-to-start')}</Title>
+          <Title className={styles.homeTitle}>{t('article.how-to-start')}</Title>
           {Object.values(guidelines).map((guideline, index) => {
-            return <Text key={index}>{`→ ${guideline}`}</Text>;
+            return <Text
+              key={index}
+              className={styles.homeText}
+            >
+              {`→ ${guideline}`}
+            </Text>;
           })}
         </div>
       ) : (
         <div className={styles['home-content']}>
-          <Title>{t('article.what-is-gaiax')}</Title>
-          <Text>{t('article.what-is-gaiax-message-introduction-section')}</Text>
-          <Text>{t('article.what-is-gaiax-message-main-section')}</Text>
-          <Text>{t('article.what-is-gaiax-message-ending-section')}</Text>
+          <Title className={styles.homeTitle}>{t('article.what-is-gaiax')}</Title>
+          <Text className={styles.homeText}>{t('article.what-is-gaiax-message-introduction-section')}</Text>
+          <Text className={styles.homeText}>{t('article.what-is-gaiax-message-main-section')}</Text>
+          <Text className={styles.homeText}>{t('article.what-is-gaiax-message-ending-section')}</Text>
         </div>
       )}
     </div>
