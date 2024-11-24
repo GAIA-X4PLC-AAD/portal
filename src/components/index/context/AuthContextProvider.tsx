@@ -1,4 +1,5 @@
 /* test coverage not required */
+import axios from 'axios';
 import keycloakConfig from 'keycloak-config.json';
 import Keycloak from 'keycloak-js';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
@@ -15,7 +16,7 @@ const keycloak = new Keycloak({
   url: getDotEnvKeycloakApiUrl()
 });
 
-// const initOptions = keycloakConfig.initOptions as Keycloak.KeycloakInitOptions;
+const initOptions = keycloakConfig.initOptions as Keycloak.KeycloakInitOptions;
 
 export interface AuthContextType {
   isAuthenticated: boolean;
@@ -48,52 +49,52 @@ interface AuthContextProviderProps {
 const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   children,
 }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [token, setToken] = useState('');
   const [redirectPath, setRedirectPath] = useState<string | null>(null);
 
   // Initialise Keycloak
   useEffect(() => {
-    // keycloak
-    //   .init(initOptions)
-    //   .then((authenticated: boolean) => {
-    //     setIsAuthenticated(authenticated);
-    //     if (authenticated) {
-    //       axios.defaults.headers.common.Authorization = `Bearer ${keycloak.token ? keycloak.token : ''}`
-    //       setToken(keycloak.token ? keycloak.token : '');
-    //       scheduleTokenRenewal();
-    //     }
-    //   })
-    //   .catch((error: any) => {
-    //     console.error('Error during Keycloak initialization:', error);
-    //   });
+    keycloak
+      .init(initOptions)
+      .then((authenticated: boolean) => {
+        setIsAuthenticated(authenticated);
+        if (authenticated) {
+          axios.defaults.headers.common.Authorization = `Bearer ${keycloak.token ? keycloak.token : ''}`
+          setToken(keycloak.token ? keycloak.token : '');
+          scheduleTokenRenewal();
+        }
+      })
+      .catch((error: any) => {
+        console.error('Error during Keycloak initialization:', error);
+      });
   }, []);
 
-  // const scheduleTokenRenewal = () => {
-  //   const interval = setInterval(() => {
-  //     keycloak
-  //       .updateToken(70)
-  //       .then((refreshed: boolean) => {
-  //         if (refreshed) {
-  //           setToken(keycloak.token ? keycloak.token : '');
-  //         }
-  //       })
-  //       .catch(() => {
-  //         console.warn('Failed to refresh token. Logging out...');
-  //         handleLogout();
-  //       });
-  //   }, 60000);
-  //
-  //   if (keycloak.tokenParsed && keycloak.tokenParsed.exp) {
-  //     const expirationTime = keycloak.tokenParsed.exp * 1000 - Date.now();
-  //     const timeout = setTimeout(handleLogout, expirationTime);
-  //
-  //     return () => {
-  //       clearInterval(interval);
-  //       clearTimeout(timeout);
-  //     };
-  //   }
-  // };
+  const scheduleTokenRenewal = () => {
+    const interval = setInterval(() => {
+      keycloak
+        .updateToken(70)
+        .then((refreshed: boolean) => {
+          if (refreshed) {
+            setToken(keycloak.token ? keycloak.token : '');
+          }
+        })
+        .catch(() => {
+          console.warn('Failed to refresh token. Logging out...');
+          handleLogout();
+        });
+    }, 60000);
+
+    if (keycloak.tokenParsed && keycloak.tokenParsed.exp) {
+      const expirationTime = keycloak.tokenParsed.exp * 1000 - Date.now();
+      const timeout = setTimeout(handleLogout, expirationTime);
+
+      return () => {
+        clearInterval(interval);
+        clearTimeout(timeout);
+      };
+    }
+  };
 
   const handleLogout = async () => {
     keycloak.logout();
@@ -105,7 +106,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     () => ({
       isAuthenticated,
       token,
-      login: () => Promise.resolve(),
+      login: keycloak.login,
       logout: handleLogout,
       hasRole: keycloak.hasRealmRole,
       redirectPath,
