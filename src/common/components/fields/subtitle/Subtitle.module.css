@@ -1,6 +1,6 @@
 .subtitle {
-    font-size: large;
-    font-weight: lighter;
-    color: black;
-    padding: 0;
+    color: var(--gray-8);
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }

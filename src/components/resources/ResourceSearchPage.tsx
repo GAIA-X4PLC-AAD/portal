@@ -12,6 +12,7 @@ import CardContainer from '../cards/CardContainer';
 import Filter from '../filter/Filter';
 import SearchBar from '../searchBar/SearchBar';
 
+import styles from './ResourceSearchPage.module.css'
 import { useResources } from './hooks/useResources';
 
 const ResourceSearchPage = () => {
@@ -38,8 +39,10 @@ const ResourceSearchPage = () => {
             vendorAssets={vendorAssets}
             updateAssetFilter={updateFilterAsset}
           />
-          <Vertical>
-            <Horizontal visible={['SHOW_RESOURCES', 'SHOW_NO_RESULTS'].includes(viewContentType)}>
+          <Vertical className={styles.mainConainer}>
+            <Horizontal
+              className={styles.searchBarContainer}
+              visible={['SHOW_RESOURCES', 'SHOW_NO_RESULTS'].includes(viewContentType)}>
               <SearchBar placeholder={t('resources.search-bar-text')} onSearch={updateSearchText}/>
             </Horizontal>
             <LoadingIndicator visible={viewContentType === 'LOADING'}/>

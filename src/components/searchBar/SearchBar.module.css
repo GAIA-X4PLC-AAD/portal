@@ -1,16 +1,21 @@
 .searchBar {
     display: flex;
+
     width: 100%;
-    min-height: 5vh;
     box-sizing: border-box;
 
     border-radius: 10px;
-    box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--shadow--normal)
 }
 
 .input {
-    border: none;
     width: 100%;
-    padding: 0 25px;
-    border-radius: 10px;
+    padding: 2rem;
+
+    font-size: 1.8rem;
+    color: var(--gray-8);
+    background-color: var(--white);
+    border: 1px solid var(--gray-0);
+    border-radius: 1rem;
+    outline-color: var(--input-focus-color);
 }

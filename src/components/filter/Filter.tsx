@@ -15,12 +15,12 @@ interface IFilter {
 
 const Filter: FC<IFilter> = ({ typeAssets, formatAssets, vendorAssets, updateAssetFilter }) => {
   return (
-    <div className={styles.filterContainer}>
-      <Title>Filter</Title>
+    <aside className={styles.filterContainer}>
+      <Title className={styles.filterTitle}>Filter</Title>
       <FilterSection subtitle="Type" assets={typeAssets} updateAssetFilter={updateAssetFilter}/>
       <FilterSection subtitle="Format" assets={formatAssets} updateAssetFilter={updateAssetFilter}/>
       <FilterSection subtitle="Vendor" assets={vendorAssets} updateAssetFilter={updateAssetFilter}/>
-    </div>
+    </aside>
   );
 }
 

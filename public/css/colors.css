@@ -1,14 +1,16 @@
 :root {
-    --gray-0: #f2f2f2;
-    --gray-1: #e6e6e6;
-    --gray-2: gainsboro;
-    --gray-3: lightgray;
-    --gray-4: silver;
-    --gray-5: darkgray;
-    --gray-6: gray;
-    --gray-7: dimgray;
-    --gray-8: #3d3a38;
-    --gray-9: #040404;
+    --white: #fdfdfd; /* input field background */
+    --gray-0: #f4f4f4;
+    --gray-1: #f0f0f0; /* background color */
+    --gray-2: #e6e6e6;
+    --gray-3: gainsboro;
+    --gray-4: lightgray;
+    --gray-5: silver;
+    --gray-6: darkgray;
+    --gray-7: gray;
+    --gray-8: dimgray;
+    --gray-9: #3d3a38;
+    --black: #040404;
 
     --primary-color: #a01441;
 
