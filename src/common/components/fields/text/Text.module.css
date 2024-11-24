@@ -1,5 +1,4 @@
 .text {
-    font-size: large;
-    font-weight: lighter;
-    text-align: justify;
+    font-weight: 500;
+    text-align: left;
 }
