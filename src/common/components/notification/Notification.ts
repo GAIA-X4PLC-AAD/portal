@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { ToastOptions } from 'react-toastify/dist/types';
 
-import { Notification } from '../../types/notification.model';
+import { Notification } from '../../../types/notification.model';
 
 export const notify = (notification: Notification) => {
 
