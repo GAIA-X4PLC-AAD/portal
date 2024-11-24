@@ -15,8 +15,8 @@ const Header: FC<IHeader> = ({ title, visible = true }) => {
   }
   return (
     <header className={styles['header-container']}>
-      <div className={styles['header-title']}>
-        <Title>{title}</Title>
+      <div className={styles['header-content']}>
+        <Title className={styles['header-breadcrumb']}>{title}</Title>
       </div>
     </header>
   );
