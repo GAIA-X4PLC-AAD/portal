@@ -1,6 +1,6 @@
 import { BusinessException } from './BusinessException';
 
-class BusinessObjectNotFound extends BusinessException {
+class BusinessObjectsNotFound extends BusinessException {
   uri: string;
 
   constructor(message: string, uri: string) {
@@ -10,4 +10,4 @@ class BusinessObjectNotFound extends BusinessException {
   }
 }
 
-export default BusinessObjectNotFound;
+export default BusinessObjectsNotFound;

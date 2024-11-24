@@ -1,11 +1,11 @@
 import { act, render, screen } from '@testing-library/react';
 import React from 'react';
 
-import BusinessObjectNotFound from '../../../src/common/exceptions/BusinessObjectNotFound';
-import { ErrorProvider, useErrorContext } from '../../../src/components/index/errorBoundary/ErrorContext';
+import { ErrorProvider, useErrorContext } from '../../../src/common/errorHandling/ErrorContext';
+import BusinessObjectsNotFound from '../../../src/common/errorHandling/exceptions/BusinessObjectsNotFound';
 
 // Mock the BusinessException
-jest.mock('../../../src/common/exceptions/BusinessException', () => ({
+jest.mock('../../../src/common/errorHandling/exceptions/BusinessException', () => ({
   BusinessException: jest.fn().mockImplementation((message) => ({
     message,
     handleNotification: jest.fn(),
@@ -23,7 +23,7 @@ describe('ErrorContext', () => {
       return (
         <div>
           <button
-            onClick={() => publish(new BusinessObjectNotFound('Test error', 'http://some.dummy.uri'))}
+            onClick={() => publish(new BusinessObjectsNotFound('Test error', 'http://some.dummy.uri'))}
           >
                         Publish Error
           </button>
@@ -55,7 +55,7 @@ describe('ErrorContext', () => {
   it('should remove a specific error message from the context', () => {
     const TestComponent = () => {
       const { errorMessages, publish, removeMessage } = useErrorContext();
-      const error = new BusinessObjectNotFound('Test error', 'uri');
+      const error = new BusinessObjectsNotFound('Test error', 'uri');
 
       return (
         <div>

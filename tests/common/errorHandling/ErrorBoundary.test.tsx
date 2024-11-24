@@ -2,20 +2,21 @@ import '@testing-library/jest-dom';
 import { act, render } from '@testing-library/react';
 import React from 'react';
 
-import BusinessObjectNotFound from '../../../src/common/exceptions/BusinessObjectNotFound';
-import ErrorBoundary from '../../../src/components/error-boundary/ErrorBoundary';
-import { notify } from '../../../src/components/notification/Notification';
+import ErrorBoundary from '../../../src/common/errorHandling/ErrorBoundary';
+import BusinessObjectsNotFound from '../../../src/common/errorHandling/exceptions/BusinessObjectsNotFound';
+
+const notify = jest.fn()
 
 // Mock the notify function
-jest.mock('../../../src/components/notification/Notification', () => ({
-  notify: jest.fn(),
+jest.mock('../../../src/common/components/notification/Notification', () => ({
+  notify: (notification: Notification) => notify(notification),
 }));
 
 const useErrorContext = {
   publish: jest.fn(),
 }
 // Mock the useErrorContext hook
-jest.mock('../../../src/components/index/errorBoundary/ErrorContext', () => ({
+jest.mock('../../../src/common/errorHandling/ErrorContext', () => ({
   useErrorContext: () => useErrorContext,
 }));
 
@@ -83,7 +84,7 @@ describe('ErrorBoundary', () => {
     const uri = 'http://some.dummy.uri';
 
     // Mock the BusinessException class to have a handleNotification method
-    const mockBusinessException = new BusinessObjectNotFound(errorMessage, uri);
+    const mockBusinessException = new BusinessObjectsNotFound(errorMessage, uri);
     // @ts-ignore
     mockBusinessException.handleNotification = jest.fn((callback) => callback());
 

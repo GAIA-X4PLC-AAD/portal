@@ -1,10 +1,10 @@
 import '@testing-library/jest-dom';
-import { BusinessException } from '../../../src/common/exceptions/BusinessException';
-import { notify } from '../../../src/components/notification/Notification';
-import { NotificationMessageType } from '../../../src/types/notification.model';
+import { notify } from '../../../../src/common/components/notification/Notification';
+import { BusinessException } from '../../../../src/common/errorHandling/exceptions/BusinessException';
+import { NotificationMessageType } from '../../../../src/types/notification.model';
 
 // Mock the `notify` function
-jest.mock('../../../src/components/notification/Notification', () => ({
+jest.mock('../../../../src/common/components/notification/Notification', () => ({
   notify: jest.fn(),
 }));
 

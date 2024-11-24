@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 
-import { notify } from '../../../src/components/notification/Notification';
-import { Notification } from '../../../src/types/notification.model';
+import { notify } from '../../../../src/common/components/notification/Notification';
+import { Notification } from '../../../../src/types/notification.model';
 
 jest.mock('react-toastify', () => {
     type MockToastType = any | {

@@ -1,7 +1,7 @@
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { BusinessException } from '../../../common/exceptions/BusinessException';
+import { BusinessException } from './exceptions/BusinessException';
 
 // Define the shape of the context
 interface ErrorContextType {

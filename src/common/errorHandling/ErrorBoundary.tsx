@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 
-import { BusinessException } from '../../../common/exceptions/BusinessException';
-import { notify } from '../../notification/Notification';
+import { notify } from '../components/notification/Notification';
 
 import { useErrorContext } from './ErrorContext';
+import { BusinessException } from './exceptions/BusinessException';
 
 type ErrorBoundaryProps = {
   children: React.ReactNode;

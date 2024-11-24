@@ -1,5 +1,5 @@
+import { NotificationMessageType } from '../../../types/notification.model';
 import { notify } from '../../components/notification/Notification';
-import { NotificationMessageType } from '../../types/notification.model';
 
 export abstract class BusinessException extends Error {
   messageType: NotificationMessageType;
