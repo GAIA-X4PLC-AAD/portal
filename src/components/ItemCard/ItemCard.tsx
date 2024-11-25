@@ -3,7 +3,8 @@ import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Title from '../../common/components/fields/title/Title';
+import Subtitle from '../../common/components/fields/subtitle/Subtitle';
+import Text from '../../common/components/fields/text/Text';
 import { Ontology } from '../../types/ontologies.model';
 import { Participant } from '../../types/participants.model';
 import { Resource } from '../../types/resources.model';
@@ -41,15 +42,15 @@ const ItemCard: FC<IItemCard> = ({
   return (
     <div data-testid={getTestId({ ontology, shape, service, resource, participant })}
       className={classNames(styles.card, 'item-card')}>
-      <div className={styles.label}>
-        <Title>{label}</Title>
+      <section className={styles.cardHeader}>
+        <Subtitle className={styles.label}>{label}</Subtitle>
         {
           isGaiaXCompliant
-            ? <p>{t('common.is-gaia-x-compliant')}</p>
-            : <p>{t('common.not-gaia-x-compliant')}</p>
+            ? <Text className={styles.labelGaiaXCompliant}>{t('common.is-gaia-x-compliant')}</Text>
+            : <Text className={styles.labelGaiaXCompliant}>{t('common.not-gaia-x-compliant')}</Text>
         }
-      </div>
-      <div className={styles.content}>
+      </section>
+      <>
         {ontology ? (
           <OntologyCardContent ontology={ontology}/>
         ) : shape ? (
@@ -63,7 +64,7 @@ const ItemCard: FC<IItemCard> = ({
         ) : (
           <></>
         )}
-      </div>
+      </>
     </div>
   );
 }

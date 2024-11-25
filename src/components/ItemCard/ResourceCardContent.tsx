@@ -23,13 +23,14 @@ const ResourceCardContent: FC<IResourceCardContent> = ({ resource }) => {
   };
 
   return (
-    <section className={styles.content}>
-      <Title>{resource.name}</Title>
+    <section className={styles.cardContent}>
+      <Title className={styles.cardName}>{resource.name}</Title>
       {
         resource.description && <Markdown>{resource.description}</Markdown>
       }
-      <div className={styles.button}>
+      <div className={styles.buttonContainer}>
         <GaiaXButton
+          className={styles.detailsButton}
           label={t('details.more-details')}
           handleOnClick={handleNavigationToDetailsPage}
         />
