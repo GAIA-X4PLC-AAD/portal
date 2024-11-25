@@ -9,6 +9,7 @@ import Vertical from '../../common/components/./layouts/Vertical';
 import ShowMapButton from '../../common/components/buttons/ShowMapButton';
 import RDFVisualization from '../../utils/RDFVisualization';
 import ItemCard from '../ItemCard/ItemCard';
+import { ontologyToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 import Header from '../header/Header';
 import LoadingIndicator from '../loading_view/LoadingIndicator';
@@ -47,11 +48,7 @@ const Ontologies = () => {
             {
               ontologies
                 .map((ontology, index) => (
-                  <ItemCard
-                    key={index}
-                    label={t('ontologies.title')}
-                    ontology={ontology}
-                  />
+                  <ItemCard key={index} itemCardData={ontologyToItemCardData(ontology)}/>
                 ))
             }
           </CardContainer>

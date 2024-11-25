@@ -6,6 +6,7 @@ import Horizontal from '../../common/components/./layouts/Horizontal';
 import Main from '../../common/components/./layouts/Main';
 import Vertical from '../../common/components/./layouts/Vertical';
 import ItemCard from '../ItemCard/ItemCard';
+import { resourceToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 import Filter from '../filter/Filter';
 import Header from '../header/Header';
@@ -46,12 +47,7 @@ const ResourceSearchPage = () => {
             <CardContainer visible={viewContentType === 'SHOW_RESOURCES'}>
               {
                 resources.map((resource) => (
-                  <ItemCard
-                    key={resource.uri + resource.name}
-                    label={resource.labels.join(', ')}
-                    isGaiaXCompliant={true}
-                    resource={resource}
-                  />
+                  <ItemCard key={resource.uri + resource.name} itemCardData={resourceToItemCardData(resource)}/>
                 ))
               }
             </CardContainer>

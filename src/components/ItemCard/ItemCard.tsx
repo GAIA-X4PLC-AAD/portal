@@ -1,46 +1,30 @@
-/* test coverage not required */
-import classNames from 'classnames';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
-import { Ontology } from '../../types/ontologies.model';
-import { Participant } from '../../types/participants.model';
-import { Resource } from '../../types/resources.model';
-import { ServiceOffering } from '../../types/serviceOfferings.model';
-import { Shape } from '../../types/shapes.model';
+import GaiaXButton from '../../common/components/buttons/GaiaXButton';
+import Markdown from '../../common/components/markdown/Markdown';
 import Title from '../Title/Title';
 
 import styles from './ItemCard.module.css';
-import OntologyCardContent from './OntologyCardContent';
-import ParticipantCardContent from './ParticipantCardContent';
-import ResourceCardContent from './ResourceCardContent';
-import ServiceCardContent from './ServiceCardContent';
-import ShapeCardContent from './ShapeCardContent';
+import { ItemCardData } from './itemCardHelper';
 
-interface IItemCard {
-    label: string;
-    isGaiaXCompliant?: boolean;
-    ontology?: Ontology;
-    shape?: Shape;
-    service?: ServiceOffering
-    resource?: Resource,
-    participant?: Participant
+export interface IItemCard {
+    itemCardData: ItemCardData;
 }
 
-const ItemCard: FC<IItemCard> = ({
-  label,
-  isGaiaXCompliant,
-  ontology,
-  shape,
-  service,
-  resource,
-  participant
-}) => {
+const ItemCard: FC<IItemCard> = ({ itemCardData }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const { label, isGaiaXCompliant, title, description, navigationUrl, testId } = itemCardData;
+
+  const handleNavigationToDetailsPage = () => {
+    navigate(navigationUrl);
+  }
 
   return (
-    <div data-testid={getTestId({ ontology, shape, service, resource, participant })}
-      className={classNames(styles.card, 'item-card')}>
+    <div data-testid={testId} className={styles.card}>
       <div className={styles.label}>
         <Title>{label}</Title>
         {
@@ -50,43 +34,21 @@ const ItemCard: FC<IItemCard> = ({
         }
       </div>
       <div className={styles.content}>
-        {ontology ? (
-          <OntologyCardContent ontology={ontology}/>
-        ) : shape ? (
-          <ShapeCardContent shape={shape}/>
-        ) : service ? (
-          <ServiceCardContent service={service}/>
-        ) : resource ? (
-          <ResourceCardContent resource={resource}/>
-        ) : participant ? (
-          <ParticipantCardContent participant={participant}/>
-        ) : (
-          <></>
-        )}
+        <section className={styles.content}>
+          <Title>{title}</Title>
+          {
+            description && <Markdown>{description}</Markdown>
+          }
+          <div className={styles.button}>
+            <GaiaXButton
+              label={t('details.more-details')}
+              handleOnClick={handleNavigationToDetailsPage}
+            />
+          </div>
+        </section>
       </div>
     </div>
   );
 }
 
 export default ItemCard;
-
-const getTestId = ({ ontology, shape, service, resource, participant }:
-                       {
-                           ontology?: Ontology,
-                           shape?: Shape,
-                           service?: ServiceOffering,
-                           resource?: Resource,
-                           participant?: Participant
-                       }) => (
-  ontology
-    ? 'Card:' + ontology.subject
-    : shape
-      ? 'Card:' + shape.shaclShapeName
-      : service
-        ? 'Card:' + service.uri + ':' + service.name
-        : resource
-          ? 'Card:' + resource.uri + ':' + resource.name
-          : participant
-            ? 'Card:' + participant.legalName
-            : ''
-)
