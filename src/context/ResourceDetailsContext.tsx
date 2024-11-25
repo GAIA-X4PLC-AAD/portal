@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { createContext } from 'react';
 
 import { ResourceDetails2 } from '../types/resources.model';

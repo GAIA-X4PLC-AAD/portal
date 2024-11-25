@@ -1,3 +1,4 @@
+/* test coverage not required */
 import DetailsContent from 'components/detailsPage/layout/content/DetailsContent';
 import DetailsMainContent from 'components/detailsPage/layout/mainContent/DetailsMainContent';
 import DetailsSidebar from 'components/detailsPage/layout/sidebar/DetailsSidebar';

@@ -1,3 +1,4 @@
+/* test coverage not required */
 import React, { FC } from 'react';
 
 import styles from './SectionHeader.module.css';

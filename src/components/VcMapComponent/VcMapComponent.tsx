@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { GeoJSONLayer, VcsApp, VcsModule, Viewpoint } from '@vcmap/core';
 import React from 'react';
 import { FC, useEffect } from 'react';

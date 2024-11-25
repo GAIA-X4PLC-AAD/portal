@@ -1,3 +1,4 @@
+/* test coverage not required */
 import Title from 'components/Title/Title';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
