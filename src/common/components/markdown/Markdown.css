@@ -53,6 +53,11 @@
   color: inherit;
 }
 
+.markdown span {
+  display: block;
+  text-align: left;
+}
+
 .item-card .markdown {
   max-height: 200px;
   overflow: hidden;
