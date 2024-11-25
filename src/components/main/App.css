@@ -1,11 +1,9 @@
 
 .App {
-    text-align: center;
-    font: 700 14px/1.33 "Titillium Web", Helvetica, Arial, serif;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-    margin: 0px;
+    min-height: 36rem;
+    margin: 0;
 }
 
 .main-content {

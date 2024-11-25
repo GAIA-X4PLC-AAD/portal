@@ -50,7 +50,7 @@ export default function Navbar() {
       <MenuIcon onClick={() => setDropdownMenuVisible(!dropdownMenuVisible)}/>
       <NavigationItemContainer
         visible={dropdownMenuVisible}
-        onHide={() => setDropdownMenuVisible(!dropdownMenuVisible)}
+        onHide={() => setDropdownMenuVisible(false)}
         navbarAssets={navbarAssets}/>
       <LoginButton className={styles.login}/>
     </NavbarContainer>
