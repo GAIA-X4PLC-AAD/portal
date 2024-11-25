@@ -1,21 +1,26 @@
-.details-card-container {
-    box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.25);
+.container {
     display: flex;
+    justify-content: flex-start;
     flex-direction: column;
-    flex: 1;
     align-items: flex-start;
-    padding: 30px;
-    width: 90%;
-    background-color: white;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
+    width: 100%;
+    height: 100%;
 }
 
-.details-grid-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Creates two columns of equal width */
-    margin-top: 20px; /* Optional: Adds some space above the grid */
-    justify-items: stretch;
-    align-items: start;
+.link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cell {
+    display: table-cell;
+    width: 50%;
+    text-align: left;
+    vertical-align: top;
 }

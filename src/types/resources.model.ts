@@ -18,3 +18,20 @@ export interface ResourceDetails {
         host: string,
     }
 }
+
+export interface ResourceDetails2 {
+    uri: string,
+    name: string,
+    description: string,
+    claimsGraphUri: string[],
+    license: string,
+    copyrightOwnedBy: string,
+    expirationDateTime: string,
+    roadTypes: string,
+    containsPII: boolean,
+    levelOfDetail: string,
+    trafficDirection: string,
+    obsoleteDateTime: string,
+    laneTypes: string[],
+    legalName: string,
+}

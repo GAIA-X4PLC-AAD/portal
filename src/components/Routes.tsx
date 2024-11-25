@@ -6,6 +6,7 @@ import WorkInProgress from '../WorkInProgress';
 import { Column } from '../common/styles';
 import Home from '../pages/home/Home';
 
+import VcMapComponent from './VcMapComponent/VcMapComponent';
 import AccountHome from './account/AccountHome';
 import Provider from './account/Provider';
 import DashboardPage from './dashboard/dashboard_page';
@@ -40,6 +41,7 @@ const ViewContainer = (view: ReactNode) => {
 const Routes: FC = () => (
   <Column>
     <ReactRoutes>
+      <Route path="/vcmap" element={ViewContainer(<VcMapComponent />)} />
       <Route path="/" element={<Column><Home /></Column>} />
       <Route path="/home" element={ViewContainer(<Home />)} />
       <Route path="/service-offerings" element={ViewContainer(<ProtectedRoute><ServiceOfferings/></ProtectedRoute>)}/>
@@ -47,7 +49,7 @@ const Routes: FC = () => (
       <Route path="/participants/:participantId"
         element={ViewContainer(<ProtectedRoute><ParticipantDetails/></ProtectedRoute>)}/>
       <Route path="/resources" element={ViewContainer(<ProtectedRoute><ResourceSearchPage/></ProtectedRoute>)}/>
-      <Route path="/resources/:resourceId"
+      <Route path="/resources/*"
         element={ViewContainer(<ProtectedRoute><ResourceDetailsPage/></ProtectedRoute>)}/>
       <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
       <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />

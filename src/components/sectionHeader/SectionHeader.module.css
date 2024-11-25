@@ -1,0 +1,31 @@
+.title {
+    font-size: x-large;
+    text-align: left;
+
+    /* Ensure the text wraps inside the container */
+    overflow-wrap: break-word; /* Modern, preferred */
+    word-wrap: break-word; /* Deprecated but still supported */
+    word-break: break-all; /* Aggressively breaks at any point */
+}
+
+.title div {
+    padding-bottom: 10px;
+}
+
+@media (max-width: 1700px) {
+    .title {
+        font-size: large;
+    }
+}
+
+@media (max-width: 1300px) {
+    .title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .title {
+        font-size: x-small;
+    }
+}

@@ -1,99 +1,121 @@
-/* test coverage not required */
 import Title from 'components/Title/Title';
-import Divider from 'components/divider/Divider';
-import Subtitle from 'components/subtitle/Subtitle';
-import DataField from 'data-field/DataField';
-import React from 'react';
+import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
+import Text from '../../../../common/components/fields/Text/Text';
 import Markdown from '../../../../common/components/markdown/Markdown';
-import { ISelfDescription } from '../../../../utils/dataMapper';
+import { ResourceDetailsContext } from '../../../../context/ResourceDetailsContext';
+import SectionHeader from '../../../sectionHeader/Sectionheader';
 
 import styles from './ResourceMainContent.module.css';
 
-export interface IDetailsCard extends ISelfDescription {
-}
+const ResourceMainContent = () => {
+  const { t } = useTranslation();
+  const resourceDetails = useContext(ResourceDetailsContext);
 
-export interface IDetailsCardProps {
-    cardData: IDetailsCard;
-}
-
-export default function ResourceMainContent({ cardData }: Readonly<IDetailsCardProps>) {
-  // Ensure cardData.items is an array and has data
-  const propertiesList =
-        cardData && cardData.items
-          ? cardData.items.map((item) => item['properties(n)'])
-          : [];
-
-  // Temporary solution to extract name and description for our Card. Will be refactored once we have a better paylaod structure
-  let name, description;
-  if (cardData && cardData.items && cardData.items.length > 0) {
-    const propertiesN = cardData.items[0]['properties(n)'];
-    name = propertiesN.name;
-    description = propertiesN.description;
+  if (!resourceDetails) {
+    return <>{t('resources.not-found')}</>;
   }
 
-  // Extracting the general properties from our propertiesList for Details part of our Card
-  const generalPropertiesList = propertiesList.flatMap((properties) =>
-    Object.entries(properties)
-      .filter(([key, _]) => /general/i.test(key))
-      .map(([key, value]) => ({ [key]: value }))
-  );
-
-  // Extracting the Related Offerings properties for lower part of our Card
-  const otherPropertiesList = propertiesList.flatMap((properties) =>
-    Object.entries(properties)
-      .filter(([key, _]) => !/general/i.test(key))
-      .map(([key, value]) => ({ [key]: value }))
-  );
-
   return (
-    <div className={styles['details-card-container']}>
-      <Title>{name as string}</Title>
-      <Markdown>{description as string}</Markdown>
-      <Divider/>
-      <Subtitle>General Information:</Subtitle>
-      <div className={styles['details-grid-container']}>
-        {generalPropertiesList &&
-                    generalPropertiesList.map((properties, index) =>
-                      Object.entries(properties).map(([label, content]) => {
-                        if (content !== 'Unknown') {
-                          return (
-                            <DataField
-                              key={`${label}-${index}`}
-                              label={label}
-                              content={String(content)}
-                            />
-                          );
-                        }
-                        return <></>
-                      })
-                    )}
-      </div>
-      <Divider/>
-      <Subtitle>Details:</Subtitle>
-      <div className={styles['details-grid-container']}>
-        {otherPropertiesList &&
-                    otherPropertiesList.map((properties, index) =>
-                      Object
-                        .entries(properties)
-                        .map(([label, content]) => {
-                          if (
-                            label !== 'name' &&
-                                label !== 'description' &&
-                                content !== 'Unknown'
-                          ) {
-                            return (
-                              <DataField
-                                key={`${label}-${index}`}
-                                label={label}
-                                content={String(content)}
-                              />
-                            );
-                          }
-                          return <></>;
-                        })
-                    )}
-      </div>
+    <div className={styles['container']}>
+      <Title>{resourceDetails.name}</Title>
+      <Markdown>{resourceDetails.description}</Markdown>
+      <Text>
+        <span style={{ fontWeight: 'bold' }}>{t('resources.provided-by')}:</span> {resourceDetails.legalName}
+      </Text>
+
+      <SectionHeader>{t('common.general-details')}</SectionHeader>
+
+      <table className={styles['table']}>
+        <tbody>
+          <tr>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.copyright-owned-by')}:</span> {resourceDetails.legalName}
+              </Text>
+            </td>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.expiration-date-time')}:</span> {resourceDetails.expirationDateTime}
+              </Text>
+            </td>
+          </tr>
+
+          <tr>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.license')}:</span> {resourceDetails.license}
+              </Text>
+            </td>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.obsolete-date-time')}:</span> {resourceDetails.obsoleteDateTime}
+              </Text>
+            </td>
+          </tr>
+
+          <tr>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.containsPII')}:</span> {resourceDetails.containsPII ? t('common.yes') : t('common.no')}
+              </Text>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <SectionHeader>{t('common.content-details')}</SectionHeader>
+
+      <table className={styles['table']}>
+        <tbody>
+          <tr>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.road-types')}:</span> {resourceDetails.roadTypes || t('common.not-specified')}
+              </Text>
+            </td>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.level-of-detail')}:</span> {resourceDetails.levelOfDetail || t('common.not-specified')}
+              </Text>
+            </td>
+          </tr>
+
+          <tr>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.lane-types')}:</span> {resourceDetails.laneTypes || t('common.not-specified')}
+              </Text>
+            </td>
+            <td className={styles['cell']}>
+              <Text>
+                <span style={{ fontWeight: 'bold' }}>{t('resources.traffic-direction')}:</span> {resourceDetails.trafficDirection || t('common.not-specified')}
+              </Text>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table className={styles['table']}>
+        <tbody>
+          <tr>
+            <td className={styles['cell']}>
+              <SectionHeader>{t('common.compatible-offerings')}</SectionHeader>
+            </td>
+            <td className={styles['cell']}>
+              <SectionHeader>{t('common.directly-related-offerings')}</SectionHeader>
+              {resourceDetails.claimsGraphUri.map((uri, index) => (
+                <div key={index} className={styles['cell']}>
+                  <Text key={index}>{uri}</Text>
+                </div>
+              ))}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
+
+export default ResourceMainContent;

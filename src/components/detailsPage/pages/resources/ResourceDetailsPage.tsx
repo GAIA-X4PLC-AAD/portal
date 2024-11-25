@@ -1,65 +1,72 @@
-/* test coverage not required */
-import MapCard from 'components/cards/MapCard';
-import SidebarCard from 'components/cards/SidebarCard';
-import { AuthContext } from 'context/AuthContextProvider';
-import React, { useContext, useEffect, useState } from 'react';
+import DetailsContent from 'components/detailsPage/layout/content/DetailsContent';
+import DetailsMainContent from 'components/detailsPage/layout/mainContent/DetailsMainContent';
+import DetailsSidebar from 'components/detailsPage/layout/sidebar/DetailsSidebar';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiService';
 
-import NoContent from '../../../../common/components/././NoContent/NoContent';
-import { ResourceDetails } from '../../../../types/resources.model';
+import NoContent from '../../../../common/components/NoContent/NoContent';
+import { ResourceDetailsContext } from '../../../../context/ResourceDetailsContext';
+import { ResourceDetails2 } from '../../../../types/resources.model';
+import { ARROW_RIGHT } from '../../../../utils/symbols';
+import Header from '../../../header/Header';
 import LoadingIndicator from '../../../loading_view/LoadingIndicator';
-import { loadResourceDetails } from '../../../resources/helpers/resourceDataFlow';
+import DetailsPage from '../../layout/mainPage/DetailsPage';
 
-import styles from './ResourceDatails.module.css';
 import ResourceMainContent from './ResourceMainContent';
+import ResourceActions from './components/actions/ResourceActions';
+import ResourceMap from './components/map/ResourceMap';
 
-export default function ResourceDetailsPage() {
-  const authContext = useContext(AuthContext);
-  const [selfDescriptionData, setSelfDescriptionData] = useState<ResourceDetails | null>(null);
-  const { resourceId } = useParams();
+const ResourceDetailsPage = () => {
+  const { t } = useTranslation();
+  const [resourceDetails, setResourceDetails] = useState<ResourceDetails2>();
+  const { '*': resourceId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchAndSetSelfDescriptions = async () => {
+    const fetchAndSetResourceDetails = async () => {
       try {
-        const response = await loadResourceDetails(decodeURI(resourceId || ''));
-        console.log('Fetched resource details: ', response);
+        const response = await cypherQuery.getOneResourceWithDetails(resourceId);
+        console.log('Fetched data: ',  response);
         if (response) {
-          setSelfDescriptionData(response);
+          setResourceDetails(response);
         }
       } finally {
         setIsLoading(false);
       }
     };
 
-    if (resourceId && authContext.isAuthenticated) {
-      fetchAndSetSelfDescriptions();
-    }
-  }, [resourceId, authContext.isAuthenticated]);
+    fetchAndSetResourceDetails();
+
+  }, [resourceId]);
 
   return (
-    <div className={styles['details-page-container']}>
+    <>
       <LoadingIndicator visible={isLoading}/>
       {!isLoading && (
         <>
-          <NoContent message={'No data available.'} visible={!selfDescriptionData}/>
-          {selfDescriptionData && (
-            <>
-              <div>
-                <ResourceMainContent cardData={{ name: '', description: '', items: [] }}/>
-              </div>
-              <div>
-                <MapCard/>
-                <SidebarCard
-                  title="Offered by"
-                  subtitle="3D Mapping Solutions GmbH"
-                  text="We offer high-precision 3D map data of roads and urban environments for applications in autonomous driving, robotics, urban planning and navigation systems."
-                  resource={selfDescriptionData}
-                />
-              </div>
-            </>)}
+          <NoContent message={'No data available.'} visible={!resourceDetails}/>
+          {resourceDetails && (
+            <DetailsPage>
+              <Header title={`${t('left-menu.resources')} ${ARROW_RIGHT} ${resourceDetails.name}`} />
+              <ResourceDetailsContext.Provider value={resourceDetails}>
+                <DetailsContent>
+                  <DetailsMainContent>
+                    <ResourceMainContent />
+                  </DetailsMainContent>
+                  <DetailsSidebar>
+                    <ResourceMap />
+                    <ResourceActions />
+                  </DetailsSidebar>
+                </DetailsContent>
+              </ResourceDetailsContext.Provider>
+            </DetailsPage>
+          )}
         </>
       )}
-    </div>
+    </>
   );
 }
+
+export default ResourceDetailsPage;
