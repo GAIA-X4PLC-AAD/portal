@@ -17,7 +17,6 @@ section.cardHeader {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    min-width: 34rem;
     padding: 2rem;
 
     overflow-wrap: break-word;
@@ -50,6 +49,11 @@ section.cardContent {
 
 .cardName {
     margin-top: 0;
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+
 }
 
 .buttonContainer {
@@ -79,3 +83,21 @@ section.cardContent {
     }
 }
 
+
+@media (max-width: 768px) {
+    .card {
+        min-width: 30rem;
+    }
+
+    .label {
+        font-size: 2rem;
+    }
+
+    .labelGaiaXCompliant {
+        font-size: 1.2rem;
+    }
+
+    .cardName {
+        font-size: 2.2rem;
+    }
+}
