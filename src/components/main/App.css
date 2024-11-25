@@ -2,7 +2,7 @@
 .App {
     display: flex;
     flex-direction: column;
-    min-height: 36rem;
+    min-height: 100vh;
     margin: 0;
 }
 
