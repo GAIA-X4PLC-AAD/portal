@@ -2,36 +2,36 @@
 import React, { FC, ReactNode } from 'react';
 import { Route, Routes as ReactRoutes } from 'react-router-dom';
 
-import WorkInProgress from '../WorkInProgress';
-import { Column } from '../common/styles';
-import Home from '../pages/home/Home';
+import WorkInProgress from '../../../../WorkInProgress';
+import { Column } from '../../../../common/styles';
+import Home from '../../../../pages/home/Home';
 
-import VcMapComponent from './VcMapComponent/VcMapComponent';
-import AccountHome from './account/AccountHome';
-import Provider from './account/Provider';
-import DashboardPage from './dashboard/dashboard_page';
-import LcmFinal from './dashboard/lcm/LcmFinal';
-import LcmServices from './dashboard/lcm/LcmServices';
-import OntologiesDetailsPage from './detailsPage/pages/ontologies/OntologiesDetailsPage';
-import ResourceDetailsPage from './detailsPage/pages/resources/ResourceDetailsPage';
-import ShapesDetailsPage from './detailsPage/pages/shapes/ShapesDetailsPage';
-import DiscoveryItem from './discovery/DiscoveryItem';
-import SearchView from './discovery/search/SearchView';
-import AboutPage from './help/AboutPage'
-import SupportPage from './help/SupportPage'
-import LoginFail from './login/LoginFail';
-import OnboardingPage from './onboarding/onboarding_page';
-import Ontologies from './ontologies/Ontologies';
-import ParticipantDetails from './participants/ParticipantDetails';
-import ParticipantSearchPage from './participants/ParticipantSearchPage';
-import ProtectedRoute from './protectedRoute/ProtectedRoute';
-import ProvideAttributes from './provide/ProvideAttributes';
-import ProvideOverview from './provide/ProvideOverview';
-import ProvideSelection from './provide/ProvideSelection';
-import ResourceSearchPage from './resources/ResourceSearchPage';
-import ServiceOfferings from './serviceOfferings/ServiceOfferings';
-import Shapes from './shapes/Shapes';
-import SolutionPackagingView from './solutionPackaging/SolutionPackagingView';
+import VcMapComponent from '../../../VcMapComponent/VcMapComponent';
+import AccountHome from '../../../account/AccountHome';
+import Provider from '../../../account/Provider';
+import DashboardPage from '../../../dashboard/dashboard_page';
+import LcmFinal from '../../../dashboard/lcm/LcmFinal';
+import LcmServices from '../../../dashboard/lcm/LcmServices';
+import OntologiesDetailsPage from '../../../detailsPage/pages/ontologies/OntologiesDetailsPage';
+import ResourceDetailsPage from '../../../detailsPage/pages/resources/ResourceDetailsPage';
+import ShapesDetailsPage from '../../../detailsPage/pages/shapes/ShapesDetailsPage';
+import DiscoveryItem from '../../../discovery/DiscoveryItem';
+import SearchView from '../../../discovery/search/SearchView';
+import AboutPage from '../../../help/AboutPage'
+import SupportPage from '../../../help/SupportPage'
+import LoginFail from '../../../login/LoginFail';
+import OnboardingPage from '../../../onboarding/onboarding_page';
+import Ontologies from '../../../ontologies/Ontologies';
+import ParticipantDetails from '../../../participants/ParticipantDetails';
+import ParticipantSearchPage from '../../../participants/ParticipantSearchPage';
+import ProtectedRoute from '../../../protectedRoute/ProtectedRoute';
+import ProvideAttributes from '../../../provide/ProvideAttributes';
+import ProvideOverview from '../../../provide/ProvideOverview';
+import ProvideSelection from '../../../provide/ProvideSelection';
+import ResourceSearchPage from '../../../resources/ResourceSearchPage';
+import ServiceOfferings from '../../../serviceOfferings/ServiceOfferings';
+import Shapes from '../../../shapes/Shapes';
+import SolutionPackagingView from '../../../solutionPackaging/SolutionPackagingView';
 
 const ViewContainer = (view: ReactNode) => {
   // @ts-ignore
