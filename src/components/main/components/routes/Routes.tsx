@@ -4,7 +4,6 @@ import { Route, Routes as ReactRoutes } from 'react-router-dom';
 
 import WorkInProgress from '../../../../WorkInProgress';
 import Vertical from '../../../../common/components/layouts/Vertical';
-import { Column } from '../../../../common/styles';
 import AccountHome from '../../../account/AccountHome';
 import Provider from '../../../account/Provider';
 import DashboardPage from '../../../dashboard/dashboard_page';
@@ -54,7 +53,7 @@ const Wrappers = (view: ReactNode, isAuthenticationRequired: boolean = true) => 
 const Routes: FC = () => (
   <Vertical className={styles.scrollable}>
     <ReactRoutes>
-      <Route path="/" element={Wrappers(<Column><Home/></Column>, NO_AUTHENTICATION_REQUIRED)}/>
+      <Route path="/" element={Wrappers(<Home/>, NO_AUTHENTICATION_REQUIRED)}/>
       <Route path="/home" element={Wrappers(<Home/>)}/>
       <Route path="/service-offerings" element={Wrappers(<ServiceOfferings/>)}/>
       <Route path="/participants" element={Wrappers(<ParticipantSearchPage/>)}/>
