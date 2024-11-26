@@ -1,7 +1,7 @@
 /* test coverage not required */
 import MapCard from 'components/cards/MapCard';
 import SidebarCard from 'components/cards/SidebarCard';
-import { AuthContext } from 'components/index/context/AuthContextProvider';
+import { AuthContext } from 'components/context/AuthContextProvider';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 

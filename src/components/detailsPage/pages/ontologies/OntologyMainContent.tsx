@@ -7,7 +7,7 @@ import Text from '../../../../common/components/fields/././text/Text';
 import Title from '../../../../common/components/fields/title/Title';
 import Markdown from '../../../../common/components/markdown/Markdown';
 import { Shape } from '../../../../types/shapes.model';
-import { OntologyContext } from '../../../index/context/OntologyContext';
+import { OntologyContext } from '../../../context/OntologyContext';
 
 import styles from './OntologyMainContent.module.css';
 

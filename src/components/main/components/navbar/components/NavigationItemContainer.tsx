@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import LoginButton from '../../../../../common/components/buttons/LoginButton';
 import LanguageSelectionModal
   from '../../../../../common/components/dialogs/LanguageSelectionDialog/LanguageSelectionDialog';
-import { AuthContext } from '../../../../index/context/AuthContextProvider';
+import { AuthContext } from '../../../../context/AuthContextProvider';
 import { NavbarAsset } from '../helpers/types';
 
 import NavbarItem from './NavbarItem';

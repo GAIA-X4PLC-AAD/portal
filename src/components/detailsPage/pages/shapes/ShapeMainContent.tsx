@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import Title from '../../../../common/components/fields/title/Title';
 import { getShapeByName } from '../../../../services/shapeService.utils';
-import { ShapeContext } from '../../../index/context/ShapeContext';
+import { ShapeContext } from '../../../context/ShapeContext';
 
 import styles from './ShapeMainContent.module.css';
 

@@ -8,8 +8,8 @@ import { ToastContainer } from 'react-toastify';
 import './i18n';
 import ErrorBoundary from './common/./errorHandling/ErrorBoundary';
 import { ErrorProvider } from './common/./errorHandling/ErrorContext';
-import AuthContextProvider from './components/index/context/AuthContextProvider';
-import { ResourceContextProvider } from './components/index/context/ResourceContext';
+import AuthContextProvider from './components/context/AuthContextProvider';
+import { ResourceContextProvider } from './components/context/ResourceContext';
 import App from './components/main/App';
 import reducers from './reducers';
 

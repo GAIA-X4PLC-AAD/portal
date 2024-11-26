@@ -1,9 +1,9 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
+import { OntologyContext } from '../../../../../../../src/components/context/OntologyContext';
 import OntologyActions
   from '../../../../../../../src/components/detailsPage/pages/ontologies/components/actions/OntologyActions';
-import { OntologyContext } from '../../../../../../../src/components/index/context/OntologyContext';
 import { Ontology } from '../../../../../../../src/types/ontologies.model';
 import { withRouter } from '../../../../../../common/testHelper';
 
