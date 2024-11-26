@@ -40,3 +40,5 @@ src/components/main/components/routes/components/ProtectedRoute.tsx
 src/components/onboarding/onboarding_did.js
 src/components/onboarding/vc_customer.js
 src/components/onboarding/vc_provider.js
+src/common/components/buttons/ShowMapToggleButton.tsx
+src/common/components/fields/link/Link.tsx
