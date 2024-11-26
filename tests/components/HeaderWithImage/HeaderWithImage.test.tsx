@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 import HeaderImage from '../../../src/assets/images/header_image.svg';
-import HeaderWithImage from '../../../src/components/HeaderWithImage/HeaderWithImage';
+import HeaderWithImage from '../../../src/components/home/components/HeaderWithImage/HeaderWithImage';
 
 console.error = jest.fn()
 

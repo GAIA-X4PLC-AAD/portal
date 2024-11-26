@@ -4,14 +4,14 @@ import { useTranslation } from 'react-i18next';
 
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
 import NotificationDialog from '../../common/components/dialogs/NotificationDialog/NotificationDialog';
-import Text from '../../common/components/fields/Text/Text';
+import Text from '../../common/components/fields/././text/Text';
+import Subtitle from '../../common/components/fields/subtitle/Subtitle';
+import Title from '../../common/components/fields/title/Title';
 import { ResourceDetails } from '../../types/resources.model';
-import Title from '../Title/Title';
 import DataTransferInitiationProgress from '../resources/components/DataTransferInitiationProgress';
 import DataTransferStatus from '../resources/components/DataTransferStatus';
 import ResourceBuyingModal from '../resources/components/ResourceBuyingModal';
 import { useResourceBuyingStateMachine } from '../resources/hooks/useResourceBuyingStateMachine';
-import Subtitle from '../subtitle/Subtitle';
 
 import styles from './SidebarCard.module.css';
 

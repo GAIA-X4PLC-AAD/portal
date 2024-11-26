@@ -1,4 +1,4 @@
-import Title from 'components/Title/Title';
+import Title from 'common/components/fields/title/Title';
 import React from 'react';
 
 import styles from './MapCard.module.css';

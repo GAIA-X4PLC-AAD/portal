@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer } from 'react';
+import { useEffect, useMemo, useReducer, useState } from 'react';
 
 import { useSchemas } from '../../../hooks/useSchemas';
 import { getResourceTypes } from '../../../services/ontologyService.utils';
@@ -27,6 +27,7 @@ export const useResources = () => {
     isLoading: state.isLoading,
     resources: !state.isLoading && !state.hasError ? state.resources : []
   }), [state]);
+  const [assetFilterVisible, toggleAssetFilterVisibility] = useState(false);
 
   const {
     filteredResources,
@@ -70,6 +71,8 @@ export const useResources = () => {
     formatAssets,
     vendorAssets,
     viewContentType,
+    assetFilterVisible,
+    toggleAssetFilterVisibility: () => toggleAssetFilterVisibility(!assetFilterVisible),
     updateSearchText,
     updateFilterAsset,
   }

@@ -1,5 +1,5 @@
-import BusinessObjectNotFound from '../../../common/exceptions/BusinessObjectNotFound';
-import MultipleBusinessObjectsFound from '../../../common/exceptions/MultipleBusinessObjectsFound';
+import BusinessObjectsNotFound from '../../../common/errorHandling/exceptions/BusinessObjectsNotFound';
+import MultipleBusinessObjectsFound from '../../../common/errorHandling/exceptions/MultipleBusinessObjectsFound';
 import { CypherQueryApiService as cypherQuery } from '../../../services/cypherQueryApiService';
 import { Resource, ResourceDetails } from '../../../types/resources.model';
 
@@ -31,7 +31,7 @@ export const loadResources = async (resourceTypes: string[]): Promise<Resource[]
  * @param resourceUri identifies the resource for which the details have to be loaded.
  *
  * @return the details of the resource
- * @throws BusinessObjectNotFound if the resource with the give uri was not found.
+ * @throws BusinessObjectsNotFound if the resource with the give uri was not found.
  * @throws MultipleBusinessObjectsFound it more than one result with the same uri was found.
  */
 export const loadResourceDetails = async (resourceUri: string): Promise<ResourceDetails> =>
@@ -40,7 +40,7 @@ export const loadResourceDetails = async (resourceUri: string): Promise<Resource
     .then(queryResult => {
       if (queryResult.items.length === 0) {
         console.error(`Data resource with the given uri '${resourceUri}' does not exists!`);
-        throw new BusinessObjectNotFound(
+        throw new BusinessObjectsNotFound(
           `Data resource with the given uri '${resourceUri}' does not exists!`, resourceUri
         )
       }

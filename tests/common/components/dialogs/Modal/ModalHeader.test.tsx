@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import React from 'react';
 
 import ModalHeader from '../../../../../src/common/components/dialogs/Modal/ModalHeader';
-import Text from '../../../../../src/common/components/fields/Text/Text';
+import Text from '../../../../../src/common/components/fields/././text/Text';
 
 describe('ModalHeader', () => {
   it('it renders its children', () => {

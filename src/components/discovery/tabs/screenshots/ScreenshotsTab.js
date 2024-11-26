@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import '../../../../common/styles';
 
-import LoadingView from '../../../loading_view/LoadingView';
+import LoadingViewDeprecated from '../../../../common/components/loadingIndicator/LoadingViewDeprecated';
 
 import ScreenshotsTabView from './ScreenshotsTabView';
 
@@ -11,7 +11,7 @@ const ScreenshotsTab = ({ serviceId },) => {
   const URL = process.env.REACT_APP_EDGE_API_URI + `/discovery/services/${serviceId}/screenshots/`;
 
   return (
-    <LoadingView
+    <LoadingViewDeprecated
       url={URL}
       successView={ScreenshotsTabView}
     />

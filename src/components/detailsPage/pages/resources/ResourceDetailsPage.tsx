@@ -1,13 +1,13 @@
 /* test coverage not required */
 import MapCard from 'components/cards/MapCard';
 import SidebarCard from 'components/cards/SidebarCard';
-import { AuthContext } from 'context/AuthContextProvider';
+import { AuthContext } from 'components/context/AuthContextProvider';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import NoContent from '../../../../common/components/././NoContent/NoContent';
+import NoContent from '../../../../common/components/./././noContent/NoContent';
+import LoadingIndicator from '../../../../common/components/loadingIndicator/LoadingIndicator';
 import { ResourceDetails } from '../../../../types/resources.model';
-import LoadingIndicator from '../../../loading_view/LoadingIndicator';
 import { loadResourceDetails } from '../../../resources/helpers/resourceDataFlow';
 
 import styles from './ResourceDatails.module.css';

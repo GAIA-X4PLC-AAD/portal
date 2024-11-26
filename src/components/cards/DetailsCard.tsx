@@ -1,8 +1,8 @@
 /* test coverage not required */
-import Text from 'common/components/fields/Text/Text';
-import Title from 'components/Title/Title';
+import Subtitle from 'common/components/fields/subtitle/Subtitle';
+import Text from 'common/components/fields/text/Text';
+import Title from 'common/components/fields/title/Title';
 import Divider from 'components/divider/Divider';
-import Subtitle from 'components/subtitle/Subtitle';
 import DataField from 'data-field/DataField';
 import React from 'react';
 

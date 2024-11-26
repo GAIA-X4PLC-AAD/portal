@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
+import Subtitle from '../../common/components/fields/subtitle/Subtitle';
 import { Asset } from '../resources/helpers/resourceFilterHelper';
-import Subtitle from '../subtitle/Subtitle';
 
 import styles from './Filter.module.css';
 
@@ -13,8 +13,8 @@ interface IFilterSection {
 
 export const FilterSection: FC<IFilterSection> = ({ subtitle, assets, updateAssetFilter }) => {
   return (
-    <>
-      <Subtitle>{subtitle}</Subtitle>
+    <section>
+      <Subtitle className={styles.filterGroup}>{subtitle}</Subtitle>
       {assets.map((item) => (
         <div className={styles.checkboxContainer} key={`${item.type} ${item.id}`}>
           <label className={styles.label}>
@@ -34,6 +34,6 @@ export const FilterSection: FC<IFilterSection> = ({ subtitle, assets, updateAsse
           </label>
         </div>
       ))}
-    </>
+    </section>
   );
 }

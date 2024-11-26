@@ -1,0 +1,16 @@
+.loginButton {
+    margin: 0;
+    white-space: nowrap;
+}
+
+@media (max-width: 1200px) {
+    .loginButton {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 960px) {
+    .loginButton {
+        font-size: 14px;
+    }
+}

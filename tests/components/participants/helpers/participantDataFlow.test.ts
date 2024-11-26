@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
-import BusinessObjectNotFound from '../../../../src/common/exceptions/BusinessObjectNotFound';
-import MultipleBusinessObjectFound from '../../../../src/common/exceptions/MultipleBusinessObjectFound';
+import BusinessObjectsNotFound from '../../../../src/common/errorHandling/exceptions/BusinessObjectsNotFound';
+import MultipleBusinessObjectsFound from '../../../../src/common/errorHandling/exceptions/MultipleBusinessObjectsFound';
 import {
   loadParticipantDetails,
   loadParticipants
@@ -76,7 +76,7 @@ describe('Participant Data Flow', () => {
       getParticipantDetails.mockResolvedValue(mockResponse);
 
       // Assert that BusinessObjectNotFound is thrown
-      await expect(loadParticipantDetails('Non-existent Participant')).rejects.toThrow(BusinessObjectNotFound);
+      await expect(loadParticipantDetails('Non-existent Participant')).rejects.toThrow(BusinessObjectsNotFound);
     });
 
     it('should throw MultipleBusinessObjectFound when more than one participant is found', async () => {
@@ -89,7 +89,7 @@ describe('Participant Data Flow', () => {
       getParticipantDetails.mockResolvedValue(mockResponse);
 
       // Assert that MultipleBusinessObjectFound is thrown
-      await expect(loadParticipantDetails('Duplicate Participant')).rejects.toThrow(MultipleBusinessObjectFound);
+      await expect(loadParticipantDetails('Duplicate Participant')).rejects.toThrow(MultipleBusinessObjectsFound);
     });
 
     it('should throw an error when fetching participant details fails', async () => {

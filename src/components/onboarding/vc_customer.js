@@ -4,9 +4,20 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { retrieveAndRemoveOnboardingJWT } from '../../common/auth';
-import { Column, BodyText, CaptionTeleNeoText, Card, H4LightText, HorizontalLine, Padding, Style, TextInput, BlueButton } from '../../common/styles';
+import LoadingViewDeprecated from '../../common/components/loadingIndicator/LoadingViewDeprecated';
+import {
+  BlueButton,
+  BodyText,
+  CaptionTeleNeoText,
+  Card,
+  Column,
+  H4LightText,
+  HorizontalLine,
+  Padding,
+  Style,
+  TextInput
+} from '../../common/styles';
 import { Row } from '../admin/style';
-import LoadingView from '../loading_view/LoadingView';
 
 const VCCustomer = ({ nextStage }) => {
 
@@ -115,7 +126,7 @@ const VCCustomer = ({ nextStage }) => {
     Authorization: 'Bearer ' + retrieveAndRemoveOnboardingJWT()
   }
 
-  return <LoadingView url={URL} successView={vcShow} headers={headerAuth}/>
+  return <LoadingViewDeprecated url={URL} successView={vcShow} headers={headerAuth}/>
 }
 
 VCCustomer.propTypes = {

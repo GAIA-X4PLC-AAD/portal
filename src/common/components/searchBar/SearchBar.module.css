@@ -1,0 +1,31 @@
+.searchBar {
+    display: flex;
+
+    width: 100%;
+    box-sizing: border-box;
+
+    border-radius: 10px;
+    box-shadow: var(--shadow--normal)
+}
+
+.input {
+    width: 100%;
+    padding: 2rem;
+
+    font-size: 1.8rem;
+    color: var(--gray-8);
+    background-color: var(--white);
+    border: 1px solid var(--gray-0);
+    border-radius: 1rem;
+    outline-color: var(--input-focus-color);
+}
+
+@media (max-width: 960px) {
+    .searchBar.visible {
+    }
+
+    .searchBar.hidden {
+        display: none;
+    }
+
+}

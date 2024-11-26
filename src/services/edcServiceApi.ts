@@ -2,7 +2,7 @@ import process from 'process';
 
 import axios, { AxiosError } from 'axios';
 import { t } from 'i18next';
-import { v4 as randomUUID } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
 import {
   AgreementInfo,
@@ -71,7 +71,7 @@ export const negotiateContract = async (input: ContractNegotiationInput) => {
     'providerId': 'edc_pr',
     'protocol': 'dataspace-protocol-http',
     'offer': {
-      offerId: `${input.contractDefinitionId}:${input.assetNameFull}:${randomUUID()}`,
+      offerId: `${input.contractDefinitionId}:${input.assetNameFull}:${uuid()}`,
       assetId: `${input.assetNameFull}`,
       policy: {
         '@type': 'Set',

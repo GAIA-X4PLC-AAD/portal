@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Text from '../../../common/components/fields/Text/Text';
+import Text from '../../../common/components/fields/././text/Text';
 import { ResourceBuyingState } from '../helpers/resourceBuyingStateMachine';
 
 import styles from './DataTransferStatus.module.css';

@@ -2,9 +2,9 @@ import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { ShapeContext } from '../../../../context/ShapeContext';
+import Title from '../../../../common/components/fields/title/Title';
 import { getShapeByName } from '../../../../services/shapeService.utils';
-import Title from '../../../Title/Title';
+import { ShapeContext } from '../../../context/ShapeContext';
 
 import styles from './ShapeMainContent.module.css';
 

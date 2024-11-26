@@ -2,17 +2,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import NoContent from '../../common/components/././NoContent/NoContent';
+import NoContent from '../../common/components/./././noContent/NoContent';
 import Horizontal from '../../common/components/./layouts/Horizontal';
 import Main from '../../common/components/./layouts/Main';
 import Vertical from '../../common/components/./layouts/Vertical';
-import ShowMapButton from '../../common/components/buttons/ShowMapButton';
+import ShowMapToggleButton from '../../common/components/buttons/ShowMapToggleButton';
+import Header from '../../common/components/header/Header';
+import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
+import SearchBar from '../../common/components/searchBar/SearchBar';
 import RDFVisualization from '../../utils/RDFVisualization';
 import ItemCard from '../ItemCard/ItemCard';
 import CardContainer from '../cards/CardContainer';
-import Header from '../header/Header';
-import LoadingIndicator from '../loading_view/LoadingIndicator';
-import SearchBar from '../searchBar/SearchBar';
 
 import useOntologies from './useOntologies';
 
@@ -40,7 +40,7 @@ const Ontologies = () => {
         <Vertical>
           <Horizontal visible={['SHOW_ONTOLOGIES', 'SHOW_MAP', 'SHOW_NO_RESULTS'].includes(state)}>
             <SearchBar placeholder={t('ontologies.search-bar-text')} onSearch={search}/>
-            <ShowMapButton selected={state === 'SHOW_MAP'} onToggle={toggleShowMap}/>
+            <ShowMapToggleButton selected={state === 'SHOW_MAP'} onToggle={toggleShowMap}/>
           </Horizontal>
           <LoadingIndicator visible={state === 'LOADING'}/>
           <CardContainer visible={state === 'SHOW_ONTOLOGIES'}>

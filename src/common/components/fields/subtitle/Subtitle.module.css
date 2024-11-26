@@ -1,0 +1,6 @@
+.subtitle {
+    color: var(--gray-8);
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}

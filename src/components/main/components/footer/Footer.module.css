@@ -1,0 +1,80 @@
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 9rem;
+    min-width: 36rem;
+    padding: 1.5rem;
+    background-image: linear-gradient(to right, #060190, #A01441);
+
+}
+
+.logoContainer {
+    display: flex;
+    column-gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.logoText {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--gray-0);
+    user-select: none;
+}
+
+.copyright {
+    margin: 0;
+    font-weight: 600;
+    color: var(--gray-0);
+    user-select: none;
+}
+
+.navigationItems {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 2rem;
+}
+
+.navigationItem {
+    min-width: fit-content;
+}
+
+.navigationItem a {
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--gray-0);
+    user-select: none;
+}
+
+.navigation-item:hover {
+    color: #A01441;
+    transition: all 0.4s ease 0s;
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        row-gap: 1.5rem;
+        height: 13rem;
+    }
+
+    .msgIcon {
+        height: 2.5rem
+    }
+
+    .logoText,
+    .copyright,
+    .navigationItem a {
+        font-size: 1.5rem;
+    }
+}
+

@@ -1,5 +1,5 @@
-import BusinessObjectNotFound from '../../../common/exceptions/BusinessObjectNotFound';
-import MultipleBusinessObjectFound from '../../../common/exceptions/MultipleBusinessObjectFound';
+import BusinessObjectsNotFound from '../../../common/errorHandling/exceptions/BusinessObjectsNotFound';
+import MultipleBusinessObjectsFound from '../../../common/errorHandling/exceptions/MultipleBusinessObjectsFound';
 import { CypherQueryApiService as cypherQuery } from '../../../services/cypherQueryApiService';
 import { Participant, ParticipantDetail } from '../../../types/participants.model';
 
@@ -18,11 +18,11 @@ export const loadParticipantDetails = async (legalName: string): Promise<Partici
     const cypherQueryResult = await cypherQuery.getParticipantDetails(legalName);
 
     if (cypherQueryResult.items.length === 0) {
-      throw new BusinessObjectNotFound(`Participant with the given LegalName: '${legalName}' does not exist!`, legalName);
+      throw new BusinessObjectsNotFound(`Participant with the given LegalName: '${legalName}' does not exist!`, legalName);
     }
 
     if (cypherQueryResult.items.length > 1) {
-      throw new MultipleBusinessObjectFound(`Multiple participant exist with the given LegalName: '${legalName}'`, legalName);
+      throw new MultipleBusinessObjectsFound(`Multiple participant exist with the given LegalName: '${legalName}'`, legalName);
     }
 
     return cypherQueryResult.items[0];

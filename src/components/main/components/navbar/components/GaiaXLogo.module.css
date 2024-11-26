@@ -1,0 +1,22 @@
+.logo {
+    height: auto;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    margin: 5px 0 0;
+}
+
+.logo img {
+    width: 200px;
+    height: auto;
+    margin: auto;
+}
+
+@media (max-width: 1200px) {
+    .logo img {
+        width: 150px;
+        height: auto;
+    }
+}

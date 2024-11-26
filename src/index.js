@@ -6,16 +6,15 @@ import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 import './i18n';
-import App from './App';
-import ErrorBoundary from './components/error-boundary/ErrorBoundary';
-import { ErrorProvider } from './components/error-boundary/ErrorContext';
-import AuthContextProvider from './context/AuthContextProvider';
-import { ResourceContextProvider } from './context/ResourceContext';
+import ErrorBoundary from './common/./errorHandling/ErrorBoundary';
+import { ErrorProvider } from './common/./errorHandling/ErrorContext';
+import AuthContextProvider from './components/context/AuthContextProvider';
+import { ResourceContextProvider } from './components/context/ResourceContext';
+import App from './components/main/App';
 import reducers from './reducers';
 
-import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
-import './components/notification/Notification.css'
+import './common/components/notification/Notification.css'
 
 const saveToLocalStorage = (state) => {
   try {

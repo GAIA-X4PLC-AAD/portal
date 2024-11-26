@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Carousel from 'react-multi-carousel';
 
+import LoadingViewDeprecated from '../../common/components/loadingIndicator/LoadingViewDeprecated';
 import { BodySmallBoldText, CaptionText, Column, Row, Style } from '../../common/styles';
 import NextPrevButtons from '../../common/vertical_steps/next_prev_buttons';
 import { Padding } from '../discovery/tabs/style';
 import { Block } from '../expandable/style';
-import LoadingView from '../loading_view/LoadingView';
 import 'react-multi-carousel/lib/styles.css';
 
 const responsive = {
@@ -112,12 +112,12 @@ const SideSectionsView = () => {
 
   return (
     <>
-      <LoadingView
+      <LoadingViewDeprecated
         url={_transactionsUrl}
         successView={SectionView}
         params={{ title: t('dashboard.my_transactions') }}
       />
-      <LoadingView
+      <LoadingViewDeprecated
         url={_newsUrl}
         successView={SectionView}
         params={{ title: t('dashboard.news') }}

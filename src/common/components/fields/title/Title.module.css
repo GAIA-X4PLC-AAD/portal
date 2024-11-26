@@ -1,0 +1,7 @@
+.title {
+    text-align: left;
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    /*word-break: break-all;*/
+}

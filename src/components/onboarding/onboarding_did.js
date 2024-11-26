@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Modal } from 'react-responsive-modal';
 
 import { storeOnboardingJWT } from '../../common/auth'
+import LoadingViewDeprecated from '../../common/components/loadingIndicator/LoadingViewDeprecated';
 import history from '../../common/history';
 import {
   BlueButton,
@@ -21,7 +22,6 @@ import {
   Style
 } from '../../common/styles';
 import { Padding } from '../discovery/tabs/style';
-import LoadingView from '../loading_view/LoadingView';
 import AuthPolling from '../login/AuthPolling';
 
 const DidOnboardingView = ({ userType, nextStage }) => {
@@ -131,7 +131,7 @@ const DidOnboardingView = ({ userType, nextStage }) => {
       <div>
         <CancelButton onClick={toggleModal}>{t('onboarding.not_did_button')}</CancelButton>
         <Modal open={isOpen} onClose={onCloseModal} center showCloseIcon={false}>
-          <LoadingView
+          <LoadingViewDeprecated
             url={URL}
             successView={dontHaveDidView} />
         </Modal>
@@ -194,7 +194,7 @@ const DidOnboardingView = ({ userType, nextStage }) => {
     }
   }
 
-  return <LoadingView url={URL} successView={verifyQrView} />
+  return <LoadingViewDeprecated url={URL} successView={verifyQrView}/>
 }
 DidOnboardingView.propTypes = {
   userType: PropTypes.string,

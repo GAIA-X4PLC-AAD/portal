@@ -1,0 +1,28 @@
+:root {
+    --white: #fdfdfd; /* input field background */
+    --gray-0: #f4f4f4;
+    --gray-1: #f0f0f0; /* background color */
+    --gray-2: #e6e6e6;
+    --gray-3: gainsboro;
+    --gray-4: lightgray;
+    --gray-5: silver;
+    --gray-6: darkgray;
+    --gray-7: gray;
+    --gray-8: dimgray;
+    --gray-9: #3d3a38;
+    --black: #040404;
+
+    --primary-color: #a01441;
+
+    --secondary-color: #073A5E;
+    --secondary-color-light: #427599A0;
+
+    --secondary-button-bg-color: var(--primary-color);
+    --primary-button-bg-color: var(--secondary-color);
+
+    --navigation-item-hover-bg-color: #0A0A0A0A;
+
+    --input-focus-color: var(--secondary-color-light);
+    --input-label-color: var(--gray-7);
+}
+

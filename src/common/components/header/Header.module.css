@@ -1,0 +1,30 @@
+.header-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    height: 10rem;
+    margin-top: 9rem; /* This makes content start at the bottom of the navbar, because this is the height of the navbar */
+    padding: 1.5rem;
+
+    color: white;
+    background-image: linear-gradient(to right, #060190, #A01441);
+}
+
+.header-content {
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header-breadcrumb {
+    margin: 0;
+    user-select: none;
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        margin-top: 5.4rem; /* This makes content start at the bottom of the navbar, because this is the height of the navbar */
+    }
+}
