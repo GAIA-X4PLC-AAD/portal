@@ -36,29 +36,28 @@ const ResourceSearchPage = () => {
     <>
       <Header title={`${t('left-menu.resources')} (${resources.length} ${t('dashboard.results')})`}/>
       <Main>
-        <Horizontal>
-          <Filter
-            visible={assetFilterVisible}
-            typeAssets={typeAssets}
-            formatAssets={formatAssets}
-            vendorAssets={vendorAssets}
-            updateAssetFilter={updateFilterAsset}
-          />
-          <Vertical className={styles.mainConainer}>
-            <Horizontal
-              className={styles.searchBarContainer}
-              visible={['SHOW_RESOURCES', 'SHOW_NO_RESULTS'].includes(viewContentType)}
-            >
-              <Svg
-                className={styles.icon}
-                Icon={FilterIcon}
-                onClick={toggleAssetFilterVisibility}/>
-              <SearchBar
-                visible={!assetFilterVisible}
-                placeholder={t('resources.search-bar-text')}
-                onSearch={updateSearchText}
-              />
-            </Horizontal>
+        <Vertical className={styles.mainConainer}>
+          <Horizontal
+            className={styles.searchBarContainer}
+            visible={['SHOW_RESOURCES', 'SHOW_NO_RESULTS'].includes(viewContentType)}
+          >
+            <Svg
+              className={styles.icon}
+              Icon={FilterIcon}
+              onClick={toggleAssetFilterVisibility}/>
+            <SearchBar
+              placeholder={t('resources.search-bar-text')}
+              onSearch={updateSearchText}
+            />
+          </Horizontal>
+          <Horizontal className={styles.contentContainer}>
+            <Filter
+              visible={assetFilterVisible}
+              typeAssets={typeAssets}
+              formatAssets={formatAssets}
+              vendorAssets={vendorAssets}
+              updateAssetFilter={updateFilterAsset}
+            />
             <LoadingIndicator visible={viewContentType === 'LOADING'}/>
             <CardContainer visible={viewContentType === 'SHOW_RESOURCES'}>
               {
@@ -75,8 +74,8 @@ const ResourceSearchPage = () => {
             <NoContent
               message={t('resources.no-resources-available')}
               visible={viewContentType === 'SHOW_NO_RESULTS'}/>
-          </Vertical>
-        </Horizontal>
+          </Horizontal>
+        </Vertical>
       </Main>
     </>
   );

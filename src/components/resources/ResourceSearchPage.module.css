@@ -6,6 +6,10 @@
     gap: 3rem;
 }
 
+.contentContainer {
+    align-items: flex-start;
+}
+
 .icon {
     display: none;
 }

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
-import Title from '../../common/components/fields/title/Title';
+import Link from '../../common/components/fields/link/Link';
 import Markdown from '../../common/components/markdown/Markdown';
 import { Ontology } from '../../types/ontologies.model';
 
@@ -23,18 +23,19 @@ const OntologyCardContent: FC<IOntologyCardContent> = ({ ontology } ) => {
   }
 
   return (
-    <div className={styles.content}>
-      <div style={{ textAlign: 'left' }}>
-        <Title>{ontology.subject}</Title>
-      </div>
-      <Markdown>{ontology.description}</Markdown>
-      <div className={styles.button}>
+    <section className={styles.cardContent}>
+      <Link className={styles.cardName} url={ontology.subject}/>
+      {
+        ontology.description && <Markdown>{ontology.description}</Markdown>
+      }
+      <div className={styles.buttonContainer}>
         <GaiaXButton
+          className={styles.detailsButton}
           label={t('details.more-details')}
           handleOnClick={handleNavigationToDetailsPage}
         />
       </div>
-    </div>
+    </section>
   );
 }
 

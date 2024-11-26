@@ -10,19 +10,21 @@ interface MenuIconProps {
     Icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>
     className?: string;
     visible?: boolean
+    children?: React.ReactNode | string;
 }
 
-const Svg: FC<MenuIconProps> = ({ onClick, Icon, className, visible = true }) => {
+const Svg: FC<MenuIconProps> = ({ children, onClick, Icon, className, visible = true }) => {
   if (!visible) {
     return <></>
   }
 
   return (
     <div
-      className={classnames([className, styles.icon])}
+      className={classnames([className, styles.iconContainer])}
       onClick={onClick}
     >
-      <Icon style={{ fill: 'var(--normal-button--bg-color)' }}/>
+      <Icon/>
+      {children && <div className={styles.iconChildContainer}>{children}</div>}
     </div>
   )
 }

@@ -17,8 +17,10 @@
     --secondary-color: #073A5E;
     --secondary-color-light: #427599A0;
 
-    --normal-button--bg-color: var(--primary-color);
+    --secondary-button-bg-color: var(--primary-color);
     --primary-button-bg-color: var(--secondary-color);
+
+    --navigation-item-hover-bg-color: #0A0A0A0A;
 
     --input-focus-color: var(--secondary-color-light);
     --input-label-color: var(--gray-7);

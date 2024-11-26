@@ -9,7 +9,7 @@
 }
 
 .navigationItem.active {
-    color: #A01441;
+    color: var(--primary-color);
 }
 
 li:has(.navigationItem) {
@@ -23,8 +23,8 @@ li .navigationItem {
     color: black;
 }
 
-li:hover {
-    background-color: #0A0A0A0A;
+li:has(.navigationItem):hover {
+    background-color: var(--navigation-item-hover-bg-color);
     transition: all 0.4s ease 0s;
     transform: scale(1.2);
     cursor: pointer;

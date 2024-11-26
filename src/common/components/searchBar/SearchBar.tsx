@@ -9,7 +9,7 @@ interface ISearchBar {
     visible?: boolean;
 }
 
-const SearchBar: FC<ISearchBar> = ({ placeholder, onSearch, visible }) => {
+const SearchBar: FC<ISearchBar> = ({ placeholder, onSearch, visible = true }) => {
   const [query, setQuery] = useState('');
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

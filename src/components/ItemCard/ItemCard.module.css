@@ -53,7 +53,11 @@ section.cardContent {
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-all;
+}
 
+a.cardName {
+    font-size: 2.4rem;
+    font-weight: bold;
 }
 
 .buttonContainer {
@@ -109,5 +113,10 @@ section.cardContent {
 
     .cardName {
         font-size: 2.2rem;
+    }
+
+    a.cardName {
+        font-size: 2.2rem;
+        font-weight: bold;
     }
 }

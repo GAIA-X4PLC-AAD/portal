@@ -1,0 +1,5 @@
+a.link {
+    color: var(--secondary-color);
+    font-weight: normal;
+    text-decoration: none;
+}
