@@ -62,7 +62,7 @@ aside > section {
 
     aside.visible {
         display: flex;
-        width: 100%;
+        width: 25rem;
     }
 
     aside.hidden {
