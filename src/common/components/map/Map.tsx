@@ -1,11 +1,10 @@
 /* test coverage not required */
 import { GeoJSONLayer, VcsApp, VcsModule, Viewpoint } from '@vcmap/core';
-import React from 'react';
-import { FC, useEffect } from 'react';
-import './VcMapComponent.css';
+import React, { FC, useEffect } from 'react';
+import './Map.module.css';
 import { v4 as uuidv4 } from 'uuid';
 
-const VcMapComponent: FC = () => {
+const Map: FC = () => {
   const mapId = uuidv4();
   const loadModule = async (app: VcsApp, url: string) => {
     const config = await fetch(url).then(response => response.json());
@@ -53,4 +52,4 @@ const VcMapComponent: FC = () => {
   );
 };
 
-export default VcMapComponent;
+export default Map;
