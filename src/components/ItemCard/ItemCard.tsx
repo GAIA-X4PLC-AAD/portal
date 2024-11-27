@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
 import Markdown from '../../common/components/markdown/Markdown';
 import Title from '../Title/Title';
+import Subtitle from '../subtitle/Subtitle';
 
 import styles from './ItemCard.module.css';
 import { ItemCardData } from './itemCardHelper';
@@ -25,28 +26,28 @@ const ItemCard: FC<IItemCard> = ({ itemCardData }) => {
 
   return (
     <div data-testid={testId} className={styles.card}>
-      <div className={styles.label}>
-        <Title>{label}</Title>
+      <section className={styles.cardHeader}>
+        <Subtitle className={styles.label}>{label}</Subtitle>
         {
           isGaiaXCompliant
-            ? <p>{t('common.is-gaia-x-compliant')}</p>
-            : <p>{t('common.not-gaia-x-compliant')}</p>
+            ? <Text className={styles.labelGaiaXCompliant}>{t('common.is-gaia-x-compliant')}</Text>
+            : <Text className={styles.labelGaiaXCompliant}>{t('common.not-gaia-x-compliant')}</Text>
         }
-      </div>
-      <div className={styles.content}>
-        <section className={styles.content}>
-          <Title>{title}</Title>
-          {
-            description && <Markdown>{description}</Markdown>
-          }
-          <div className={styles.button}>
-            <GaiaXButton
-              label={t('details.more-details')}
-              handleOnClick={handleNavigationToDetailsPage}
-            />
-          </div>
-        </section>
-      </div>
+      </section>
+
+      <section className={styles.cardContent}>
+        <Title className={styles.cardName}>{title}</Title>
+        {
+          description && <Markdown>{description}</Markdown>
+        }
+        <div className={styles.buttonContainer}>
+          <GaiaXButton
+            className={styles.detailsButton}
+            label={t('details.more-details')}
+            handleOnClick={handleNavigationToDetailsPage}
+          />
+        </div>
+      </section>
     </div>
   );
 }
