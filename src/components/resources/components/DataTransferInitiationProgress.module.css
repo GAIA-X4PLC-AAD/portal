@@ -36,6 +36,6 @@ progress::-moz-progress-bar {
 }
 
 .cancelButton {
-    background-color: var(--normal-button--bg-color);
+    background-color: var(--secondary-button-bg-color);
     color: white;
 }

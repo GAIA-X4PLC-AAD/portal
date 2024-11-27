@@ -1,11 +1,11 @@
 /* test coverage not required */
-import Title from 'components/Title/Title';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Text from '../../../../common/components/fields/Text/Text';
+import Title from '../../../../common/components/fields/title/Title';
 import Subtitle from '../../../../common/components/fields/subtitle/Subtitle';
 import Markdown from '../../../../common/components/markdown/Markdown';
+import Text from '../../../../common/components/fields/Text/Text';
 import { ResourceDetailsContext } from '../../../../context/ResourceDetailsContext';
 
 import styles from './ResourceMainContent.module.css';

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Collapse } from 'react-collapse';
 
 import { Style } from '../../common/styles';
+import './ExpandableView.css';
 
 import Down from './down';
 import * as S from './style';

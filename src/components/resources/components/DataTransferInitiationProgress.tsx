@@ -7,9 +7,9 @@ import Modal from '../../../common/components/dialogs/./Modal/Modal';
 import ModalFooter from '../../../common/components/dialogs/./Modal/ModalFooter';
 import ModalHeader from '../../../common/components/dialogs/./Modal/ModalHeader';
 import ModalXButton from '../../../common/components/dialogs/./Modal/ModalXButton';
-import Message from '../../../common/components/dialogs/Message/Message';
 import ModalBody from '../../../common/components/dialogs/Modal/ModalBody';
-import Title from '../../Title/Title';
+import Message from '../../../common/components/fields/message/Message';
+import Title from '../../../common/components/fields/title/Title';
 import { ResourceBuyingAction, ResourceBuyingState } from '../helpers/resourceBuyingStateMachine';
 
 import styles from './DataTransferInitiationProgress.module.css';

@@ -1,16 +1,16 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import NoContent from '../../common/components/././NoContent/NoContent';
+import NoContent from '../../common/components/./././noContent/NoContent';
 import Horizontal from '../../common/components/./layouts/Horizontal';
 import Main from '../../common/components/./layouts/Main';
 import Vertical from '../../common/components/./layouts/Vertical';
+import Header from '../../common/components/header/Header';
+import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
+import SearchBar from '../../common/components/searchBar/SearchBar';
 import ItemCard from '../ItemCard/ItemCard';
 import { serviceToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
-import Header from '../header/Header';
-import LoadingIndicator from '../loading_view/LoadingIndicator';
-import SearchBar from '../searchBar/SearchBar';
 
 import { useServiceOfferings } from './useServiceOfferings';
 

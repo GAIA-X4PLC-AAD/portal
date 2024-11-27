@@ -1,0 +1,15 @@
+.modal {
+    width: 250px;
+    height: auto;
+}
+
+.modalBody {
+    overflow: hidden;
+}
+
+.modalFooter {
+    justify-content: center;
+}
+
+.languageList {
+}

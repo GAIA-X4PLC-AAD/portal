@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import { retrieveOnboardingJWT } from '../../common/auth';
+import LoadingViewDeprecated from '../../common/components/loadingIndicator/LoadingViewDeprecated';
 import {
   BlueButton,
   BodyText,
@@ -16,7 +17,6 @@ import {
   Style,
   TextInput
 } from '../../common/styles';
-import LoadingView from '../loading_view/LoadingView';
 
 const VCProvider = ({ nextStage }) => {
 
@@ -111,7 +111,7 @@ const VCProvider = ({ nextStage }) => {
     Authorization: 'Bearer ' + retrieveOnboardingJWT()
   }
 
-  return <LoadingView url={URL} successView={vcShow} headers={headerAuth}/>
+  return <LoadingViewDeprecated url={URL} successView={vcShow} headers={headerAuth}/>
 }
 VCProvider.propTypes = {
   nextStage: PropTypes.func.isRequired

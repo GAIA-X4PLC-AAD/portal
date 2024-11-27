@@ -9,10 +9,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 
 import { VR_ROLE } from '../../common/auth';
+import LoadingViewDeprecated from '../../common/components/loadingIndicator/LoadingViewDeprecated';
 import * as S from '../../common/styles';
 import NP from '../../common/vertical_steps/next_prev_buttons';
 import SearchView from '../discovery/search/SearchView';
-import LoadingView from '../loading_view/LoadingView';
 
 import SaveBookModal from './SaveBookModal';
 import SlotDetails from './SlotDetails';
@@ -281,7 +281,7 @@ const SolutionPackagingView = () => {
           <S.H2Text>{t('solution_pkg.solutionPackaging')}</S.H2Text>
           <S.BodyText>{t('solution_pkg.solutionPackagingSubtitle')}</S.BodyText>
         </S.Style>
-        <LoadingView url={URL} successView={successView}/>
+        <LoadingViewDeprecated url={URL} successView={successView}/>
         {addItem>=0?<SearchView type="solution_pkg" onSelect={onSelect} serviceId={id} slot={addItem} key={`${id}-${addItem}`}/>:null}
         {action? <SaveBookModal action={action} closeModal={()=>{setAction(null)}} onSaveBook={onSaveBookAction}/>:null}
       </S.Column>

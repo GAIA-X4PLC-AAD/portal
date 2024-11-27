@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
+import LoadingViewDeprecated from '../../../common/components/loadingIndicator/LoadingViewDeprecated';
 import { BodySmallText, CaptionTeleNeoText, Column, Style, TagLink, WrapRow } from '../../../common/styles';
-import LoadingView from '../../loading_view/LoadingView';
 import { CaptionText, DetailsContainer, ElementGroup, Row } from '../style';
 
 import ApproveButton from './buttons/ApproveButton';
@@ -100,7 +100,7 @@ const KeyValueDetails = ({ id, url_prefix, searchRefresh }) => {
   }
 
   return (
-    <LoadingView url={URL} successView={successView} />);
+    <LoadingViewDeprecated url={URL} successView={successView}/>);
 
 }
 

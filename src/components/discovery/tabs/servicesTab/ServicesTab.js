@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import LoadingView from '../../../loading_view/LoadingView';
+import LoadingViewDeprecated from '../../../../common/components/loadingIndicator/LoadingViewDeprecated';
 import DataPreview from '../dataPreview/DataPreview';
 
 import * as S from './style';
@@ -34,7 +34,7 @@ const ServicesTab = ({ id }) => {
   };
 
   return  (
-    <LoadingView
+    <LoadingViewDeprecated
       url={URL}
       successView={showParsedServices}/>
   );

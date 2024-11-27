@@ -7,12 +7,12 @@ import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiService';
 
-import NoContent from '../../../../common/components/NoContent/NoContent';
+import NoContent from '../../../../common/components/noContent/NoContent';
 import { ResourceDetailsContext } from '../../../../context/ResourceDetailsContext';
-import { ResourceDetails2 } from '../../../../types/resources.model';
+import { ResourceDetails } from '../../../../types/resources.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
 import Header from '../../../header/Header';
-import LoadingIndicator from '../../../loading_view/LoadingIndicator';
+import LoadingIndicator from '../../../../common/components/loadingIndicator/LoadingIndicator';
 import DetailsPage from '../../layout/mainPage/DetailsPage';
 
 import ResourceMainContent from './ResourceMainContent';

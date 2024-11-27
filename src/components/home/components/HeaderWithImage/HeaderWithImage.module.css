@@ -1,0 +1,88 @@
+.headerContainerBackground {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-width: 36rem;
+    background-image: linear-gradient(to right, #060190, #A01441);
+}
+
+.header-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 15%;
+    place-items: center;
+    justify-items: center;
+
+    width: 80%;
+    min-height: 5rem;
+    margin-top: 9rem; /* This makes content start at the bottom of the navbar, because this is the height of the navbar */
+    padding: 5rem;
+}
+
+.header-image {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.header-image svg {
+    width: 100%;
+    height: auto;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    width: 100%;
+    color: white;
+}
+
+@media (max-width: 1600px) {
+    .header-container {
+        width: 100%;
+    }
+
+    .headerContainerBackground {
+        display: block;
+    }
+}
+
+@media (max-width: 960px) {
+    .header-container {
+        grid-template-columns: 1fr;
+        grid-gap: 0;
+        justify-items: start;
+    }
+
+    .header-image {
+        justify-content: flex-start;
+    }
+
+    .header-image svg {
+        width: 54rem;
+        height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-container {
+        margin-top: 5.4rem; /* This makes content start at the bottom of the navbar, because this is the height of the navbar */
+    }
+
+    .header-image svg {
+        width: 80%;
+        height: auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .header-image svg {
+        width: 100%;
+        height: auto;
+    }
+}

@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import React from 'react';
 
 import GaiaXButton from '../../../../src/common/components/buttons/GaiaXButton';
-import Text from '../../../../src/common/components/fields/Text/Text';
+import Text from '../../../../src/common/components/fields/././text/Text';
 
 describe('GaiaXButton', () => {
   it('render the label and children', () => {

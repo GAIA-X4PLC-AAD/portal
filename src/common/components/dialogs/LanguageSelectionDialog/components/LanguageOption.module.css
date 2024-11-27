@@ -1,0 +1,14 @@
+.languageItem {
+    cursor: pointer;
+    padding: 10px 0;
+    width: 90%;
+    font-size: 20px;
+}
+
+.languageItem:hover {
+    color: #A01441;
+    background-color: #0a0a0a0a;
+    cursor: pointer;
+    transition: all 0.4s ease 0s;
+    transform: scale(1.2);
+}

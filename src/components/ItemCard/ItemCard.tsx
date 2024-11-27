@@ -2,10 +2,16 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { Ontology } from '../../types/ontologies.model';
+import { Participant } from '../../types/participants.model';
+import { Resource } from '../../types/resources.model';
+import { ServiceOffering } from '../../types/serviceOfferings.model';
+import { Shape } from '../../types/shapes.model';
+import Subtitle from '../../common/components/fields/subtitle/Subtitle';
+import Title from '../../common/components/fields/title/Title';
+import Text from '../../common/components/fields/text/Text';
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
 import Markdown from '../../common/components/markdown/Markdown';
-import Title from '../Title/Title';
-import Subtitle from '../subtitle/Subtitle';
 
 import styles from './ItemCard.module.css';
 import { ItemCardData } from './itemCardHelper';

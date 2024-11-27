@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import React from 'react';
 
 import ModalFooter from '../../../../../src/common/components/dialogs/Modal/ModalFooter';
-import Text from '../../../../../src/common/components/fields/Text/Text';
+import Text from '../../../../../src/common/components/fields/././text/Text';
 
 describe('ModalFooter', () => {
   it('it renders its children', () => {

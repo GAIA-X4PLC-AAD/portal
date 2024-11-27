@@ -1,15 +1,17 @@
+import classnames from 'classnames';
 import React, { FC, ReactNode } from 'react';
 
 import style from './Layout.module.css'
 
 interface IContainer {
-    children: ReactNode;
-    visible?: boolean;
+  children: ReactNode;
+  className?: string;
+  visible?: boolean;
 }
 
-const Vertical: FC<IContainer> = ({ children, visible = true }) => {
+const Vertical: FC<IContainer> = ({ children, className = '', visible = true }) => {
   return (
-    <div className={style.vertical}>
+    <div className={classnames([className, style.vertical])}>
       {visible && children}
     </div>
   )

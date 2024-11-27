@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
 
+import LoadingViewDeprecated from '../../common/components/loadingIndicator/LoadingViewDeprecated';
 import { H4Text, Style } from '../../common/styles';
-import LoadingView from '../loading_view/LoadingView';
 import 'react-multi-carousel/lib/styles.css';
 
 const PlotView = ({ plots }) => {
@@ -58,7 +58,7 @@ PlotSuccessView.propTypes = {
 
 const PlotLoadingView = ({ url, title, }) => {
 
-  return <LoadingView
+  return <LoadingViewDeprecated
     url={url}
     successView={PlotSuccessView}
     params={{ title: title }}

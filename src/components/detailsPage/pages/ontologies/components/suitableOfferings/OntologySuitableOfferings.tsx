@@ -2,8 +2,8 @@
 import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { OntologyContext } from '../../../../../../context/OntologyContext';
-import Title from '../../../../../Title/Title';
+import Title from '../../../../../../common/components/fields/title/Title';
+import { OntologyContext } from '../../../../../context/OntologyContext';
 
 import styles from './OntologySuitableOfferings.module.css';
 
