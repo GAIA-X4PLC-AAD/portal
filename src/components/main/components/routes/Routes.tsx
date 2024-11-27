@@ -3,10 +3,8 @@ import React, { FC, ReactNode } from 'react';
 import { Route, Routes as ReactRoutes } from 'react-router-dom';
 
 import WorkInProgress from '../../../../WorkInProgress';
-import { Column } from '../../../../common/styles';
-import Home from '../../../../pages/home/Home';
-
-import VcMapComponent from '../../../VcMapComponent/VcMapComponent';
+import Vertical from '../../../../common/components/layouts/Vertical';
+import Map from '../../../../common/components/map/Map';
 import AccountHome from '../../../account/AccountHome';
 import Provider from '../../../account/Provider';
 import DashboardPage from '../../../dashboard/dashboard_page';
@@ -19,12 +17,12 @@ import DiscoveryItem from '../../../discovery/DiscoveryItem';
 import SearchView from '../../../discovery/search/SearchView';
 import AboutPage from '../../../help/AboutPage'
 import SupportPage from '../../../help/SupportPage'
+import Home from '../../../home/Home';
 import LoginFail from '../../../login/LoginFail';
 import OnboardingPage from '../../../onboarding/onboarding_page';
 import Ontologies from '../../../ontologies/Ontologies';
 import ParticipantDetails from '../../../participants/ParticipantDetails';
 import ParticipantSearchPage from '../../../participants/ParticipantSearchPage';
-import ProtectedRoute from '../../../protectedRoute/ProtectedRoute';
 import ProvideAttributes from '../../../provide/ProvideAttributes';
 import ProvideOverview from '../../../provide/ProvideOverview';
 import ProvideSelection from '../../../provide/ProvideSelection';
@@ -33,57 +31,70 @@ import ServiceOfferings from '../../../serviceOfferings/ServiceOfferings';
 import Shapes from '../../../shapes/Shapes';
 import SolutionPackagingView from '../../../solutionPackaging/SolutionPackagingView';
 
-const ViewContainer = (view: ReactNode) => {
-  // @ts-ignore
-  return <div className='body-container'>{view}</div>
+import styles from './Routes.module.css';
+import ProtectedRoute from './components/ProtectedRoute';
+
+const NO_AUTHENTICATION_REQUIRED = false;
+
+/**
+ * Wraps the component with all kinds of global configurations.
+ *
+ * @param view the component which will be wrapped.
+ * @param isAuthenticationRequired if it is true, then the page can not be visited if no user is authenticated. Otherwise,
+ * the page can be visited without authentication.
+ */
+const Wrappers = (view: ReactNode, isAuthenticationRequired: boolean = true) => {
+  return (
+    <ProtectedRoute isAuthenticationRequired={isAuthenticationRequired}>
+      {view}
+    </ProtectedRoute>
+  )
 }
 
 const Routes: FC = () => (
-  <Column>
+  <Vertical className={styles.scrollable}>
     <ReactRoutes>
-      <Route path="/vcmap" element={ViewContainer(<VcMapComponent />)} />
-      <Route path="/" element={<Column><Home /></Column>} />
-      <Route path="/home" element={ViewContainer(<Home />)} />
-      <Route path="/service-offerings" element={ViewContainer(<ProtectedRoute><ServiceOfferings/></ProtectedRoute>)}/>
-      <Route path="/participants" element={ViewContainer(<ProtectedRoute><ParticipantSearchPage/></ProtectedRoute>)}/>
-      <Route path="/participants/:participantId"
-        element={ViewContainer(<ProtectedRoute><ParticipantDetails/></ProtectedRoute>)}/>
-      <Route path="/resources" element={ViewContainer(<ProtectedRoute><ResourceSearchPage/></ProtectedRoute>)}/>
-      <Route path="/resources/*"
-        element={ViewContainer(<ProtectedRoute><ResourceDetailsPage/></ProtectedRoute>)}/>
-      <Route path="/services" element={ViewContainer(<SearchView type="services" />)} />
-      <Route path="/help" element={ViewContainer(<WorkInProgress component="Help" />)} />
-      <Route path="/loginfail" element={ViewContainer(<LoginFail />)} />
-      <Route path="/account/user/:tab" element={ViewContainer(<AccountHome />)} />
-      <Route path="/account/provider/:tab" element={ViewContainer(<Provider />)} />
-      <Route path="/servicetile/:id" element={ViewContainer(<DiscoveryItem type="service" />)} />
-      <Route path="/pprtile/:idd" element={ViewContainer(<DiscoveryItem type="ppr" />)} />
-      <Route path="/datatile/:id" element={ViewContainer(<DiscoveryItem type="data" />)} />
-      <Route path="/admin/participant" element={ViewContainer(<SearchView type="participant" />)} />
-      <Route path="/admin/management" element={ViewContainer(<SearchView type="management" />)} />
-      <Route path="/dashboard" element={ViewContainer(<DashboardPage />)} />
-      <Route path="/onboarding" element={ViewContainer(<OnboardingPage />)} />
-      <Route path="/confirmation/:userType/email_already_confirmed" element={ViewContainer(<OnboardingPage />)} />
-      <Route path="/confirmation/:userType/:confirmationCode" element={ViewContainer(<OnboardingPage />)} />
-      <Route path="/onboarding/:userType/proof" element={ViewContainer(<OnboardingPage />)} />
-      <Route path="/sp/:id" element={ViewContainer(<SolutionPackagingView />)} />
-      <Route path="/provide/start" element={ViewContainer(<ProvideSelection />)} />
-      <Route path="/provide/:type/upload" element={ViewContainer(<ProvideOverview />)} />
-      <Route path="/provide/:type/upload/:id" element={ViewContainer(<ProvideOverview />)} />
-      <Route path="/provide/:type/upload/:id/:mode" element={ViewContainer(<ProvideOverview />)} />
-      <Route path="/provide/:type/confirm/:index" element={ViewContainer(<ProvideAttributes />)} />
-      <Route path="/provide/:type/confirm/:id/:index" element={ViewContainer(<ProvideAttributes />)} />
-      <Route path="/lcm/:id" element={ViewContainer(<LcmServices />)} />
-      <Route path="/lcm/:id/final" element={ViewContainer(<LcmFinal />)} />
-      <Route path="/lcm/:id/:index" element={ViewContainer(<LcmServices />)} />
-      <Route path="/about" element={ViewContainer(<ProtectedRoute><AboutPage /></ProtectedRoute>)} />
-      <Route path="/support" element={ViewContainer(<ProtectedRoute><SupportPage /></ProtectedRoute>)} />
-      <Route path="/ontologies" element={ViewContainer(<Ontologies />)} />
-      <Route path="/ontologies/details/*" element={ViewContainer(<OntologiesDetailsPage />)} />
-      <Route path="/shapes" element={ViewContainer(<Shapes />)} />
-      <Route path="/shapes/details/*" element={ViewContainer(<ShapesDetailsPage />)} />
+      <Route path="/" element={Wrappers(<Home/>, NO_AUTHENTICATION_REQUIRED)}/>
+      <Route path="/home" element={Wrappers(<Home/>, NO_AUTHENTICATION_REQUIRED)}/>
+      <Route path="/vcmap" element={Wrappers(<Map/>)}/>
+      <Route path="/service-offerings" element={Wrappers(<ServiceOfferings/>)}/>
+      <Route path="/participants" element={Wrappers(<ParticipantSearchPage/>)}/>
+      <Route path="/participants/:participantId" element={Wrappers(<ParticipantDetails/>)}/>
+      <Route path="/resources" element={Wrappers(<ResourceSearchPage/>)}/>
+      <Route path="/resources/:resourceId" element={Wrappers(<ResourceDetailsPage/>)}/>
+      <Route path="/services" element={Wrappers(<SearchView type="services"/>)}/>
+      <Route path="/help" element={Wrappers(<WorkInProgress component="Help"/>)}/>
+      <Route path="/loginfail" element={Wrappers(<LoginFail/>)}/>
+      <Route path="/account/user/:tab" element={Wrappers(<AccountHome/>)}/>
+      <Route path="/account/provider/:tab" element={Wrappers(<Provider/>)}/>
+      <Route path="/servicetile/:id" element={Wrappers(<DiscoveryItem type="service"/>)}/>
+      <Route path="/pprtile/:idd" element={Wrappers(<DiscoveryItem type="ppr"/>)}/>
+      <Route path="/datatile/:id" element={Wrappers(<DiscoveryItem type="data"/>)}/>
+      <Route path="/admin/participant" element={Wrappers(<SearchView type="participant"/>)}/>
+      <Route path="/admin/management" element={Wrappers(<SearchView type="management"/>)}/>
+      <Route path="/dashboard" element={Wrappers(<DashboardPage/>)}/>
+      <Route path="/onboarding" element={Wrappers(<OnboardingPage/>)}/>
+      <Route path="/confirmation/:userType/email_already_confirmed" element={Wrappers(<OnboardingPage/>)}/>
+      <Route path="/confirmation/:userType/:confirmationCode" element={Wrappers(<OnboardingPage/>)}/>
+      <Route path="/onboarding/:userType/proof" element={Wrappers(<OnboardingPage/>)}/>
+      <Route path="/sp/:id" element={Wrappers(<SolutionPackagingView/>)}/>
+      <Route path="/provide/start" element={Wrappers(<ProvideSelection/>)}/>
+      <Route path="/provide/:type/upload" element={Wrappers(<ProvideOverview/>)}/>
+      <Route path="/provide/:type/upload/:id" element={Wrappers(<ProvideOverview/>)}/>
+      <Route path="/provide/:type/upload/:id/:mode" element={Wrappers(<ProvideOverview/>)}/>
+      <Route path="/provide/:type/confirm/:index" element={Wrappers(<ProvideAttributes/>)}/>
+      <Route path="/provide/:type/confirm/:id/:index" element={Wrappers(<ProvideAttributes/>)}/>
+      <Route path="/lcm/:id" element={Wrappers(<LcmServices/>)}/>
+      <Route path="/lcm/:id/final" element={Wrappers(<LcmFinal/>)}/>
+      <Route path="/lcm/:id/:index" element={Wrappers(<LcmServices/>)}/>
+      <Route path="/about" element={Wrappers(<AboutPage/>)}/>
+      <Route path="/support" element={Wrappers(<SupportPage/>)}/>
+      <Route path="/ontologies" element={Wrappers(<Ontologies/>)}/>
+      <Route path="/ontologies/details/*" element={Wrappers(<OntologiesDetailsPage/>)}/>
+      <Route path="/shapes" element={Wrappers(<Shapes/>)}/>
+      <Route path="/shapes/details/*" element={Wrappers(<ShapesDetailsPage/>)}/>
     </ReactRoutes>
-  </Column>
+  </Vertical>
 );
 
 export default Routes;
