@@ -1,18 +1,18 @@
 /* test coverage not required */
+import Header from 'common/components/header/Header';
+import { ResourceDetailsContext } from 'components/context/ResourceDetailsContext';
 import DetailsContent from 'components/detailsPage/layout/content/DetailsContent';
 import DetailsMainContent from 'components/detailsPage/layout/mainContent/DetailsMainContent';
 import DetailsSidebar from 'components/detailsPage/layout/sidebar/DetailsSidebar';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
-import { CypherQueryApiService as cypherQuery } from 'services/cypherQueryApiService';
 
+import LoadingIndicator from '../../../../common/components/loadingIndicator/LoadingIndicator';
 import NoContent from '../../../../common/components/noContent/NoContent';
-import { ResourceDetailsContext } from '../../../../context/ResourceDetailsContext';
 import { ResourceDetails } from '../../../../types/resources.model';
 import { ARROW_RIGHT } from '../../../../utils/symbols';
-import Header from '../../../header/Header';
-import LoadingIndicator from '../../../../common/components/loadingIndicator/LoadingIndicator';
+import { loadResourceDetails } from '../../../resources/helpers/resourceDataFlow';
 import DetailsPage from '../../layout/mainPage/DetailsPage';
 
 import ResourceMainContent from './ResourceMainContent';
@@ -21,25 +21,14 @@ import ResourceMap from './components/map/ResourceMap';
 
 const ResourceDetailsPage = () => {
   const { t } = useTranslation();
-  const [resourceDetails, setResourceDetails] = useState<ResourceDetails2>();
-  const { '*': resourceId } = useParams();
+  const [resourceDetails, setResourceDetails] = useState<ResourceDetails>();
+  const { resourceId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchAndSetResourceDetails = async () => {
-      try {
-        const response = await cypherQuery.getOneResourceWithDetails(resourceId);
-        console.log('Fetched data: ',  response);
-        if (response) {
-          setResourceDetails(response);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchAndSetResourceDetails();
-
+    loadResourceDetails(resourceId)
+      .then((response) => setResourceDetails(response))
+      .finally(() => setIsLoading(false))
   }, [resourceId]);
 
   return (

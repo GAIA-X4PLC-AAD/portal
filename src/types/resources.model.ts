@@ -12,16 +12,6 @@ export interface Resource {
 export interface ResourceDetails {
     name: string,
     uri: string,
-    contractId?: string,
-    serviceAccessPoint?: {
-        protocol: string,
-        host: string,
-    }
-}
-
-export interface ResourceDetails2 {
-    uri: string,
-    name: string,
     description: string,
     claimsGraphUri: string[],
     license: string,
@@ -34,4 +24,10 @@ export interface ResourceDetails2 {
     obsoleteDateTime: string,
     laneTypes: string[],
     legalName: string,
+
+    contractId?: string,
+    serviceAccessPoint?: {
+        protocol: string,
+        host: string,
+    }
 }

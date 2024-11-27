@@ -1,7 +1,6 @@
 /* test coverage not required */
 import axios from 'axios';
 
-import { ResourceDetails2 } from '../types/resources.model';
 import { CypherQueryResult, ServiceOfferingInput } from '../utils/dataMapper';
 
 const getHeaders = () => {
@@ -53,44 +52,6 @@ export const CypherQueryApiService = {
   },
 
   /**
-   * Returns details about a resource
-   *
-   * @param uri the id of the resource to be queried
-   */
-  async getOneResourceWithDetails(uri: string): Promise<ResourceDetails2> {
-    return cypherQuery({
-      statement: `
-      MATCH (dataResource) 
-      
-      WHERE '${uri}' IN dataResource.uri 
-      OPTIONAL MATCH (dataResource)-[:format]-(format) 
-      OPTIONAL MATCH (dataResource)-[:content]-(content) 
-      OPTIONAL MATCH (dataResource)-[:producedBy]-(producedBy) 
-      
-      RETURN 
-        properties(dataResource).uri as uri, 
-        properties(dataResource).name as name, 
-        properties(dataResource).description as description, 
-        properties(dataResource).license as license, 
-        properties(dataResource).copyrightOwnedBy as copyrightOwnedBy, 
-        properties(dataResource).claimsGraphUri as claimsGraphUri,
-        CASE properties(dataResource).containsPII
-          WHEN 'true' THEN true
-          WHEN 'false' THEN false
-          ELSE null
-        END as containsPII,
-        properties(dataResource).obsoleteDateTime as obsoleteDateTime, 
-        properties(dataResource).expirationDateTime as expirationDateTime, 
-        properties(content).levelOfDetail as levelOfDetail, 
-        properties(content).trafficDirection as trafficDirection, 
-        properties(content).roadTypes as roadTypes, 
-        properties(content).laneTypes as laneTypes, 
-        properties(producedBy).legalName as legalName
-      `,
-    }).then(queryResult => queryResult.items[0]);
-  },
-
-  /**
    * Returns all resources of type included in the type asset list passed in as parameter.
    *
    * @param types the list of requested resource types
@@ -125,31 +86,51 @@ export const CypherQueryApiService = {
     return cypherQuery({
       statement: `
       MATCH (dataResource:DataResource)
-      WHERE properties(dataResource).uri='${uri}'
+      WHERE dataResource.uri = '${uri}'
 
-      OPTIONAL MATCH (dataResource)-[:instanceOf]-(instantiatedVirtualResource:InstantiatedVirtualResource)
-      OPTIONAL MATCH (instantiatedVirtualResource)-[:serviceAccessPoint]-(serviceAccessPoint:ServiceAccessPoint)
+      OPTIONAL MATCH (dataResource)-[:instanceOf]-(instantiatedVirtualResource)
+      OPTIONAL MATCH (instantiatedVirtualResource)-[:serviceAccessPoint]-(serviceAccessPoint)
+      
+      OPTIONAL MATCH (dataResource)-[:general]-(general)
+      OPTIONAL MATCH (general)-[:data]-(data)
+      
+      OPTIONAL MATCH (dataResource)-[:format]-(format) 
+      OPTIONAL MATCH (dataResource)-[:content]-(content) 
+      OPTIONAL MATCH (dataResource)-[:producedBy]-(producedBy) 
 
-      OPTIONAL MATCH (dataResource)-[:general]-(general:General)
-      OPTIONAL MATCH (general)-[:data]-(data:Data)
-
-      WITH COUNT(*) AS totalCount,
-           properties(dataResource).name AS name,
-           properties(dataResource).uri AS uri,
-           labels(dataResource) AS labels,
-           CASE
-             WHEN serviceAccessPoint IS NOT NULL THEN {
-             name:     properties(serviceAccessPoint).name,
-             protocol: properties(serviceAccessPoint).protocol,
-             host:     properties(serviceAccessPoint).host,
-             port:     properties(serviceAccessPoint).port,
-             version:  properties(serviceAccessPoint).version
-           }
-             ELSE null
-             END AS serviceAccessPoint,
-           properties(data).contractId AS contractId
-
-      RETURN name, uri, contractId, serviceAccessPoint, labels
+      RETURN {
+           name: dataResource.name,
+           description: dataResource.description, 
+           uri: dataResource.uri,
+           serviceAccessPoint: 
+              CASE
+                 WHEN serviceAccessPoint IS NOT NULL THEN {
+                     name:     properties(serviceAccessPoint).name,
+                     protocol: properties(serviceAccessPoint).protocol,
+                     host:     properties(serviceAccessPoint).host,
+                     port:     properties(serviceAccessPoint).port,
+                     version:  properties(serviceAccessPoint).version
+                 } ELSE null
+               END,
+           contractId: data.contractId,
+           license: dataResource.license,
+           copyrightOwnedBy: dataResource.copyrightOwnedBy,
+           claimsGraphUri: dataResource.claimsGraphUri,
+           containsPII: 
+              CASE dataResource.containsPII
+                 WHEN 'true' THEN true
+                    WHEN 'false' THEN false
+                    ELSE null
+              END,
+           obsoleteDateTime: dataResource.obsoleteDateTime, 
+           expirationDateTime: dataResource.expirationDateTime, 
+           levelOfDetail: content.levelOfDetail, 
+           trafficDirection: content.trafficDirection, 
+           roadTypes: content.roadTypes, 
+           laneTypes: content.laneTypes, 
+           legalName: producedBy.legalName,
+           labels: labels(dataResource)
+      } as dataResourceDetails
       `
     })
   },
