@@ -77,6 +77,11 @@ describe('loadResources', () => {
         protocol: 'https',
         version: '0.2.1'
       },
+      labels: [
+        'Resource',
+        'DataResource',
+        'HdMap'
+      ],
       uri
     })
   })

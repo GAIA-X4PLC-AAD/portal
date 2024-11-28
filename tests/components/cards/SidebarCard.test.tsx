@@ -1,7 +1,8 @@
 import { fireEvent, render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import React from 'react';
 
-import SidebarCard from '../../../src/components/cards/SidebarCard';
+import ResourceActions from '../../../src/components/detailsPage/pages/resources/components/actions/ResourceActions';
 
 const dispatch = jest.fn();
 const useResourceBuyingStateMachine = jest.fn();
@@ -14,13 +15,6 @@ jest.mock('i18next', () => ({
 
 console.error = jest.fn()
 describe('SidebarCard', () => {
-  const resource = {
-    name: 'resource name',
-    uri: 'resource uri',
-    serviceAccessPoint: { protocol: 'https', host: 'host' },
-    contractId: '12345678'
-  };
-
   beforeEach(() => {
     jest.resetAllMocks()
   })
@@ -28,19 +22,12 @@ describe('SidebarCard', () => {
   it('does not render dialogs in init state', () => {
     useResourceBuyingStateMachine.mockReturnValue({ state: { name: 'INIT', } });
 
-    const { queryByText, queryByDisplayValue, getByRole } = render(
-      <SidebarCard
-        title={'SideBarCard title'}
-        subtitle={'SideBardCard subtitle'}
-        text={'SideBarCard text'}
-        resource={resource}
-      />
-    )
-    expect(queryByText('some error message')).toBeNull()
-    expect(queryByDisplayValue('edc consumer base url')).toBeNull()
-    expect(queryByDisplayValue('account')).toBeNull()
-    expect(queryByDisplayValue('container')).toBeNull()
-    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).toBeDisabled
+    const { queryByText, queryByDisplayValue, getByRole } = render(<ResourceActions/>)
+    expect(queryByText('some error message')).not.toBeInTheDocument()
+    expect(queryByDisplayValue('edc consumer base url')).not.toBeInTheDocument()
+    expect(queryByDisplayValue('account')).not.toBeInTheDocument()
+    expect(queryByDisplayValue('container')).not.toBeInTheDocument()
+    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).toBeDisabled()
   })
 
   it('displays notification dialog if state is ERROR_NOTIFICATION_DIALOG', () => {
@@ -51,15 +38,8 @@ describe('SidebarCard', () => {
       }
     });
 
-    const { getByText } = render(
-      <SidebarCard
-        title={'SideBarCard title'}
-        subtitle={'SideBardCard subtitle'}
-        text={'SideBarCard text'}
-        resource={resource}
-      />
-    )
-    expect(getByText('some error message')).toBeInTheDocument
+    const { getByText } = render(<ResourceActions/>)
+    expect(getByText('some error message')).toBeInTheDocument()
   })
 
   it('displays notification dialog if state is ERROR_NOTIFICATION_DIALOG', () => {
@@ -71,14 +51,7 @@ describe('SidebarCard', () => {
       dispatch
     });
 
-    const { getByRole } = render(
-      <SidebarCard
-        title={'SideBarCard title'}
-        subtitle={'SideBardCard subtitle'}
-        text={'SideBarCard text'}
-        resource={resource}
-      />
-    )
+    const { getByRole } = render(<ResourceActions/>)
 
     const buyButton = getByRole('button', { name: 'common.close' })
     fireEvent.click(buyButton)
@@ -95,18 +68,11 @@ describe('SidebarCard', () => {
       }
     });
 
-    const { getByDisplayValue } = render(
-      <SidebarCard
-        title={'SideBarCard title'}
-        subtitle={'SideBardCard subtitle'}
-        text={'SideBarCard text'}
-        resource={resource}
-      />
-    )
+    const { getByDisplayValue } = render(<ResourceActions/>)
 
-    expect(getByDisplayValue('edc consumer base url')).not.toBeNull()
-    expect(getByDisplayValue('account')).not.toBeNull()
-    expect(getByDisplayValue('container')).not.toBeNull()
+    expect(getByDisplayValue('edc consumer base url')).toBeInTheDocument()
+    expect(getByDisplayValue('account')).toBeInTheDocument()
+    expect(getByDisplayValue('container')).toBeInTheDocument()
   })
 
   it('displays data transfer initiation progress dialog if state is RETRIEVE_CONTRACT_INFORMATION', () => {
@@ -116,16 +82,9 @@ describe('SidebarCard', () => {
       }
     });
 
-    const { getByText } = render(
-      <SidebarCard
-        title={'SideBarCard title'}
-        subtitle={'SideBardCard subtitle'}
-        text={'SideBarCard text'}
-        resource={resource}
-      />
-    )
+    const { getByText } = render(<ResourceActions/>)
 
-    expect(getByText('buy-dialog.retrieve-contract-info')).not.toBeNull()
+    expect(getByText('buy-dialog.retrieve-contract-info')).toBeInTheDocument()
   })
 
   it('displays data transfer initiation progress dialog if state is CONTRACT_NEGOTIATION', () => {
@@ -135,16 +94,9 @@ describe('SidebarCard', () => {
       }
     });
 
-    const { getByText } = render(
-      <SidebarCard
-        title={'SideBarCard title'}
-        subtitle={'SideBardCard subtitle'}
-        text={'SideBarCard text'}
-        resource={resource}
-      />
-    )
+    const { getByText } = render(<ResourceActions/>)
 
-    expect(getByText('buy-dialog.negotiate-contract')).not.toBeNull()
+    expect(getByText('buy-dialog.negotiate-contract')).toBeInTheDocument()
   })
 
   it('displays data transfer initiation progress dialog if state is RETRIEVE_AGREEMENT_INFORMATION', () => {
@@ -154,16 +106,9 @@ describe('SidebarCard', () => {
       }
     });
 
-    const { getByText } = render(
-      <SidebarCard
-        title={'SideBarCard title'}
-        subtitle={'SideBardCard subtitle'}
-        text={'SideBarCard text'}
-        resource={resource}
-      />
-    )
+    const { getByText } = render(<ResourceActions/>)
 
-    expect(getByText('buy-dialog.retrieve-agreement-info')).not.toBeNull()
+    expect(getByText('buy-dialog.retrieve-agreement-info')).toBeInTheDocument()
   })
 
   it('displays data transfer initiation progress dialog if state is DATA_TRANSFER_INITIATION', () => {
@@ -173,16 +118,9 @@ describe('SidebarCard', () => {
       }
     });
 
-    const { getByText } = render(
-      <SidebarCard
-        title={'SideBarCard title'}
-        subtitle={'SideBardCard subtitle'}
-        text={'SideBarCard text'}
-        resource={resource}
-      />
-    )
+    const { getByText } = render(<ResourceActions/>)
 
-    expect(getByText('buy-dialog.initiate-data-transfer')).not.toBeNull()
+    expect(getByText('buy-dialog.initiate-data-transfer')).toBeInTheDocument()
   })
 
   it('enables buy button if state is TRANSfER_ENABLED', () => {
@@ -192,15 +130,8 @@ describe('SidebarCard', () => {
       }
     });
 
-    const { getByRole } = render(
-      <SidebarCard
-        title={'SideBarCard title'}
-        subtitle={'SideBardCard subtitle'}
-        text={'SideBarCard text'}
-        resource={resource}
-      />
-    )
-    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).not.toBeDisable
+    const { getByRole } = render(<ResourceActions/>)
+    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).not.toBeDisabled()
   })
 
   it('enables buy button if state is FINISHED', () => {
@@ -210,15 +141,8 @@ describe('SidebarCard', () => {
       }
     });
 
-    const { getByRole } = render(
-      <SidebarCard
-        title={'SideBarCard title'}
-        subtitle={'SideBardCard subtitle'}
-        text={'SideBarCard text'}
-        resource={resource}
-      />
-    )
-    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).not.toBeDisable
+    const { getByRole } = render(<ResourceActions/>)
+    expect(getByRole('button', { name: 'details.sidebar-buy-button' })).not.toBeDisabled()
   })
 
   it('dispatches BUY action if buy button is clicked', () => {
@@ -229,14 +153,7 @@ describe('SidebarCard', () => {
       dispatch
     });
 
-    const { getByRole } = render(
-      <SidebarCard
-        title={'SideBarCard title'}
-        subtitle={'SideBardCard subtitle'}
-        text={'SideBarCard text'}
-        resource={resource}
-      />
-    )
+    const { getByRole } = render(<ResourceActions/>)
 
     const buyButton = getByRole('button', { name: 'details.sidebar-buy-button' })
     fireEvent.click(buyButton)
