@@ -1,8 +1,0 @@
-src/common/components/fields/entry/TextEntry.tsx
-src/components/detailsPage/layout/content/DetailsContent.tsx
-src/components/detailsPage/layout/mainContent/DetailsMainContent.tsx
-src/components/detailsPage/layout/mainPage/DetailsPage.tsx
-src/components/detailsPage/pages/resources/components/map/ResourceMap.tsx
-src/components/home/Home.tsx
-src/components/main/App.js
-src/common/components/buttons/ShowMapToggleButton.tsx
