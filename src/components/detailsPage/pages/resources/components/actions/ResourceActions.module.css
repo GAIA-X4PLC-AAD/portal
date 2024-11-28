@@ -13,5 +13,6 @@
 
 .sideBarCardButton {
     margin: 0;
-    width: 100%;
+    width: 85%;
+    align-self: center;
 }
