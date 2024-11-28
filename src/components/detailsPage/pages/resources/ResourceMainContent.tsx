@@ -1,7 +1,9 @@
 /* test coverage not required */
+import TextEntry from 'common/components/fields/entry/TextEntry';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
+import Link from '../../../../common/components/fields/link/Link';
 import Subtitle from '../../../../common/components/fields/subtitle/Subtitle';
 import Text from '../../../../common/components/fields/text/Text';
 import Title from '../../../../common/components/fields/title/Title';
@@ -20,101 +22,37 @@ const ResourceMainContent = () => {
 
   return (
     <article className={styles['container']}>
-      <Title>{resourceDetails.name}</Title>
+      <Title className={styles.title}>{resourceDetails.name}</Title>
       <Markdown>{resourceDetails.description}</Markdown>
-      <div>
-        <span style={{ fontWeight: 'bold' }}>{t('resources.provided-by')}:</span> {resourceDetails.legalName}
-      </div>
+      <TextEntry name={t('resources.provided-by') + ':'} value={resourceDetails.legalName}/>
 
       <Subtitle>{t('common.general-details')}</Subtitle>
-      <table className={styles['table']}>
-        <tbody>
-          <tr>
-            <td className={styles['cell']}>
-              <div>
-                <span style={{ fontWeight: 'bold' }}>{t('resources.copyright-owned-by')}:</span> {resourceDetails.legalName}
-              </div>
-            </td>
-            <td className={styles['cell']}>
-              <div>
-                <span style={{ fontWeight: 'bold' }}>{t('resources.expiration-date-time')}:</span> {resourceDetails.expirationDateTime}
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td className={styles['cell']}>
-              <div>
-                <span style={{ fontWeight: 'bold' }}>{t('resources.license')}:</span> {resourceDetails.license}
-              </div>
-            </td>
-            <td className={styles['cell']}>
-              <div>
-                <span style={{ fontWeight: 'bold' }}>{t('resources.obsolete-date-time')}:</span> {resourceDetails.obsoleteDateTime}
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td className={styles['cell']}>
-              <div>
-                <span style={{ fontWeight: 'bold' }}>{t('resources.containsPII')}:</span> {resourceDetails.containsPII ? t('common.yes') : t('common.no')}
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <div className={styles.detailContainer}>
+        <TextEntry name={t('resources.copyright-owned-by') + ':'} value={resourceDetails.legalName}/>
+        <TextEntry name={t('resources.expiration-date-time') + ':'} value={resourceDetails.expirationDateTime}/>
+        <TextEntry name={t('resources.license') + ':'} value={resourceDetails.license}/>
+        <TextEntry name={t('resources.obsolete-date-time') + ':'} value={resourceDetails.obsoleteDateTime}/>
+        <TextEntry name={t('resources.containsPII') + ':'}
+          value={resourceDetails.containsPII ? t('common.yes') : t('common.no')}/>
+      </div>
 
       <Subtitle>{t('common.content-details')}</Subtitle>
-      <table className={styles['table']}>
-        <tbody>
-          <tr>
-            <td className={styles['cell']}>
-              <div>
-                <span style={{ fontWeight: 'bold' }}>{t('resources.road-types')}:</span> {resourceDetails.roadTypes || t('common.not-specified')}
-              </div>
-            </td>
-            <td className={styles['cell']}>
-              <div>
-                <span style={{ fontWeight: 'bold' }}>{t('resources.level-of-detail')}:</span> {resourceDetails.levelOfDetail || t('common.not-specified')}
-              </div>
-            </td>
-          </tr>
+      <div className={styles.detailContainer}>
+        <TextEntry name={t('resources.road-types') + ':'} value={resourceDetails.roadTypes}/>
+        <TextEntry name={t('resources.level-of-detail') + ':'} value={resourceDetails.levelOfDetail}/>
+        <TextEntry name={t('resources.lane-types') + ':'} value={String(resourceDetails.laneTypes || [])}/>
+        <TextEntry name={t('resources.traffic-direction') + ':'} value={resourceDetails.trafficDirection}/>
+      </div>
 
-          <tr>
-            <td className={styles['cell']}>
-              <div>
-                <span style={{ fontWeight: 'bold' }}>{t('resources.lane-types')}:</span> {resourceDetails.laneTypes || t('common.not-specified')}
-              </div>
-            </td>
-            <td className={styles['cell']}>
-              <div>
-                <span style={{ fontWeight: 'bold' }}>{t('resources.traffic-direction')}:</span> {resourceDetails.trafficDirection || t('common.not-specified')}
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <Subtitle>{t('common.compatible-offerings')}</Subtitle>
+      <Text>{t('common.not-specified')}</Text>
 
-      <table className={styles['table']}>
-        <tbody>
-          <tr>
-            <td className={styles['cell']}>
-              <Subtitle>{t('common.compatible-offerings')}</Subtitle>
-            </td>
-            <td className={styles['cell']}>
-              <Subtitle>{t('common.directly-related-offerings')}</Subtitle>
-              {
-                resourceDetails.claimsGraphUri.map((uri, index) => (
-                  <div key={index} className={styles['cell']}>
-                    <Text key={index}>{uri}</Text>
-                  </div>
-                ))
-              }
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <Subtitle>{t('common.directly-related-offerings')}</Subtitle>
+      {
+        resourceDetails.claimsGraphUri.map((uri, index) => (
+          <Link key={index} url={uri}/>
+        ))
+      }
     </article>
   );
 }

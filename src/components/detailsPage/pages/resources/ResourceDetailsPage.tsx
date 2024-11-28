@@ -41,7 +41,7 @@ const ResourceDetailsPage = () => {
         <LoadingIndicator visible={isLoading}/>
         <NoContent message={t('resources.resource-detail-not-available')} visible={!isLoading && !resourceDetails}/>
 
-        <Horizontal visible={!isLoading && !!resourceDetails}>
+        <Horizontal className={styles.mainContentContainer} visible={!isLoading && !!resourceDetails}>
           <ResourceMainContent/>
 
           <Vertical className={styles.sidebarContainer}>

@@ -1,4 +1,16 @@
+.mainContentContainer {
+    align-items: flex-start;
+}
+
 .sidebarContainer {
+    align-items: flex-start;
     width: 40rem;
     min-width: 40rem;
+    height: 100%;
 }
+
+@media (max-width: 1600px) {
+    .mainContentContainer {
+    }
+}
+
