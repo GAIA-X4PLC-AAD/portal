@@ -9,6 +9,7 @@ import Vertical from '../../common/components/layouts/Vertical';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import SearchBar from '../../common/components/searchBar/SearchBar';
 import ItemCard from '../ItemCard/ItemCard';
+import { participantToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 
 import { useParticipants } from './hooks/useParticipants';
@@ -35,13 +36,10 @@ const ParticipantSearchPage = () => {
           <CardContainer visible={viewContentType === 'SHOW_PARTICIPANTS'}>
             {
               participants.map((participant) => (
-                <ItemCard key={participant.legalName}
-                  label={participant.labels.filter((label: string) => ['LegalParticipant'].includes(label)).join(', ')}
-                  isGaiaXCompliant={true}
-                  participant={participant}/>)
-              )}
+                <ItemCard key={participant.legalName} itemCardData={participantToItemCardData(participant)} />
+              ))}
           </CardContainer>
-          <NoContent message={`${t('no-participants-available')}`} visible={viewContentType === 'SHOW_NO_RESULTS'}/>
+          <NoContent message={`${t('participants.no-participants-available')}`} visible={viewContentType === 'SHOW_NO_RESULTS'}/>
         </Vertical>
       </Main>
     </>

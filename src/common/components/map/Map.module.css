@@ -1,0 +1,29 @@
+.myMapContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: var(--secondary-color-light);
+}
+.mapElement {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+.cesium-widget,
+.cesium-widget canvas {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+.map-overlay {
+    position: absolute;
+    z-index: 1;
+}
+.controls {
+    position: absolute;
+    bottom: 20px;
+    left: 15px;
+}

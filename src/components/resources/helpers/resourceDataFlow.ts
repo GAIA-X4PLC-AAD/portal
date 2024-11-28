@@ -34,7 +34,7 @@ export const loadResources = async (resourceTypes: string[]): Promise<Resource[]
  * @throws BusinessObjectsNotFound if the resource with the give uri was not found.
  * @throws MultipleBusinessObjectsFound it more than one result with the same uri was found.
  */
-export const loadResourceDetails = async (resourceUri: string): Promise<ResourceDetails> =>
+export const loadResourceDetails = async (resourceUri: string = ''): Promise<ResourceDetails> =>
   cypherQuery
     .getResourceDetails(resourceUri)
     .then(queryResult => {
@@ -50,10 +50,10 @@ export const loadResourceDetails = async (resourceUri: string): Promise<Resource
           `Multiple resources exists with the given uri '${resourceUri}'`, resourceUri
         )
       }
-      const { name, uri, contractId, serviceAccessPoint } = queryResult.items[0];
+      const { contractId, serviceAccessPoint, ...otherProps } = queryResult.items[0];
       return {
-        name, uri,
         ...(!contractId ? {} : { contractId }),
-        ...(!serviceAccessPoint ? {} : { serviceAccessPoint })
+        ...(!serviceAccessPoint ? {} : { serviceAccessPoint }),
+        ...otherProps
       }
     })

@@ -1,0 +1,18 @@
+.mapCardContainer {
+    align-items: flex-start;
+    height: 40rem;
+    padding: 2rem;
+
+    border-radius: 1rem;
+    background-color: var(--white);
+    box-shadow: var(--shadow--normal)
+}
+
+.headerContainer {
+    width: 100%;
+    justify-Content: space-between;
+}
+
+.title {
+    margin-top: 0;
+}

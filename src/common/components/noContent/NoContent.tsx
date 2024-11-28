@@ -6,10 +6,10 @@ import styles from './NoContent.module.css'
 
 interface INoContent {
     message: string;
-    visible: boolean;
+    visible?: boolean;
 }
 
-const NoContent = ({ message, visible }: INoContent) => {
+const NoContent = ({ message, visible = true }: INoContent) => {
   if (!visible) {
     return <></>
   }

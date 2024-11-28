@@ -1,4 +1,3 @@
-/* test coverage not required */
 import Text from 'common/components/fields/text/Text';
 import Title from 'common/components/fields/title/Title';
 import { AuthContext } from 'components/context/AuthContextProvider';

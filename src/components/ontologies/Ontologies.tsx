@@ -1,4 +1,3 @@
-/* test coverage not required */
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -12,6 +11,7 @@ import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIn
 import SearchBar from '../../common/components/searchBar/SearchBar';
 import RDFVisualization from '../../utils/RDFVisualization';
 import ItemCard from '../ItemCard/ItemCard';
+import { ontologyToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 
 import useOntologies from './useOntologies';
@@ -47,11 +47,7 @@ const Ontologies = () => {
             {
               ontologies
                 .map((ontology, index) => (
-                  <ItemCard
-                    key={index}
-                    label={t('ontologies.title')}
-                    ontology={ontology}
-                  />
+                  <ItemCard key={index} itemCardData={ontologyToItemCardData(ontology)}/>
                 ))
             }
           </CardContainer>

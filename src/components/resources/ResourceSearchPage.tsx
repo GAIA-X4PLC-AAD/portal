@@ -11,6 +11,7 @@ import Svg from '../../common/components/icon/Svg';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import SearchBar from '../../common/components/searchBar/SearchBar';
 import ItemCard from '../ItemCard/ItemCard';
+import { resourceToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 import Filter from '../filter/Filter';
 
@@ -62,12 +63,7 @@ const ResourceSearchPage = () => {
             <CardContainer visible={viewContentType === 'SHOW_RESOURCES'}>
               {
                 resources.map((resource) => (
-                  <ItemCard
-                    key={resource.uri + resource.name}
-                    label={resource.labels.join(', ')}
-                    isGaiaXCompliant={true}
-                    resource={resource}
-                  />
+                  <ItemCard key={resource.uri + resource.name} itemCardData={resourceToItemCardData(resource)}/>
                 ))
               }
             </CardContainer>

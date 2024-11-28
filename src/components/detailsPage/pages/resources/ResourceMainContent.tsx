@@ -1,99 +1,60 @@
 /* test coverage not required */
-import Subtitle from 'common/components/fields/subtitle/Subtitle';
-import Title from 'common/components/fields/title/Title';
-import Divider from 'components/divider/Divider';
-import DataField from 'data-field/DataField';
-import React from 'react';
+import TextEntry from 'common/components/fields/entry/TextEntry';
+import React, { useContext } from 'react';
+import { useTranslation } from 'react-i18next';
 
+import Link from '../../../../common/components/fields/link/Link';
+import Subtitle from '../../../../common/components/fields/subtitle/Subtitle';
+import Text from '../../../../common/components/fields/text/Text';
+import Title from '../../../../common/components/fields/title/Title';
 import Markdown from '../../../../common/components/markdown/Markdown';
-import { ISelfDescription } from '../../../../utils/dataMapper';
+import { ResourceDetailsContext } from '../../../context/ResourceDetailsContext';
 
 import styles from './ResourceMainContent.module.css';
 
-export interface IDetailsCard extends ISelfDescription {
-}
+const ResourceMainContent = () => {
+  const { t } = useTranslation();
+  const resourceDetails = useContext(ResourceDetailsContext);
 
-export interface IDetailsCardProps {
-    cardData: IDetailsCard;
-}
-
-export default function ResourceMainContent({ cardData }: Readonly<IDetailsCardProps>) {
-  // Ensure cardData.items is an array and has data
-  const propertiesList =
-        cardData && cardData.items
-          ? cardData.items.map((item) => item['properties(n)'])
-          : [];
-
-  // Temporary solution to extract name and description for our Card. Will be refactored once we have a better paylaod structure
-  let name, description;
-  if (cardData && cardData.items && cardData.items.length > 0) {
-    const propertiesN = cardData.items[0]['properties(n)'];
-    name = propertiesN.name;
-    description = propertiesN.description;
+  if (!resourceDetails) {
+    return <></>;
   }
 
-  // Extracting the general properties from our propertiesList for Details part of our Card
-  const generalPropertiesList = propertiesList.flatMap((properties) =>
-    Object.entries(properties)
-      .filter(([key, _]) => /general/i.test(key))
-      .map(([key, value]) => ({ [key]: value }))
-  );
-
-  // Extracting the Related Offerings properties for lower part of our Card
-  const otherPropertiesList = propertiesList.flatMap((properties) =>
-    Object.entries(properties)
-      .filter(([key, _]) => !/general/i.test(key))
-      .map(([key, value]) => ({ [key]: value }))
-  );
-
   return (
-    <div className={styles['details-card-container']}>
-      <Title>{name as string}</Title>
-      <Markdown>{description as string}</Markdown>
-      <Divider/>
-      <Subtitle>General Information:</Subtitle>
-      <div className={styles['details-grid-container']}>
-        {generalPropertiesList &&
-                    generalPropertiesList.map((properties, index) =>
-                      Object.entries(properties).map(([label, content]) => {
-                        if (content !== 'Unknown') {
-                          return (
-                            <DataField
-                              key={`${label}-${index}`}
-                              label={label}
-                              content={String(content)}
-                            />
-                          );
-                        }
-                        return <></>
-                      })
-                    )}
+    <article className={styles['container']}>
+      <Title className={styles.title}>{resourceDetails.name}</Title>
+      <Markdown>{resourceDetails.description}</Markdown>
+      <TextEntry name={t('resources.provided-by') + ':'} value={resourceDetails.legalName}/>
+
+      <Subtitle>{t('common.general-details')}</Subtitle>
+      <div className={styles.detailContainer}>
+        <TextEntry name={t('resources.copyright-owned-by') + ':'} value={resourceDetails.legalName}/>
+        <TextEntry name={t('resources.expiration-date-time') + ':'} value={resourceDetails.expirationDateTime}/>
+        <TextEntry name={t('resources.license') + ':'} value={resourceDetails.license}/>
+        <TextEntry name={t('resources.obsolete-date-time') + ':'} value={resourceDetails.obsoleteDateTime}/>
+        <TextEntry name={t('resources.containsPII') + ':'}
+          value={resourceDetails.containsPII ? t('common.yes') : t('common.no')}/>
       </div>
-      <Divider/>
-      <Subtitle>Details:</Subtitle>
-      <div className={styles['details-grid-container']}>
-        {otherPropertiesList &&
-                    otherPropertiesList.map((properties, index) =>
-                      Object
-                        .entries(properties)
-                        .map(([label, content]) => {
-                          if (
-                            label !== 'name' &&
-                                label !== 'description' &&
-                                content !== 'Unknown'
-                          ) {
-                            return (
-                              <DataField
-                                key={`${label}-${index}`}
-                                label={label}
-                                content={String(content)}
-                              />
-                            );
-                          }
-                          return <></>;
-                        })
-                    )}
+
+      <Subtitle>{t('common.content-details')}</Subtitle>
+      <div className={styles.detailContainer}>
+        <TextEntry name={t('resources.road-types') + ':'} value={resourceDetails.roadTypes}/>
+        <TextEntry name={t('resources.level-of-detail') + ':'} value={resourceDetails.levelOfDetail}/>
+        <TextEntry name={t('resources.lane-types') + ':'} value={String(resourceDetails.laneTypes || [])}/>
+        <TextEntry name={t('resources.traffic-direction') + ':'} value={resourceDetails.trafficDirection}/>
       </div>
-    </div>
+
+      <Subtitle>{t('common.compatible-offerings')}</Subtitle>
+      <Text>{t('common.not-specified')}</Text>
+
+      <Subtitle>{t('common.directly-related-offerings')}</Subtitle>
+      {
+        resourceDetails.claimsGraphUri.map((uri, index) => (
+          <Link key={index} url={uri}/>
+        ))
+      }
+    </article>
   );
 }
+
+export default ResourceMainContent;

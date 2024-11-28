@@ -9,6 +9,7 @@ import Header from '../../common/components/header/Header';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import SearchBar from '../../common/components/searchBar/SearchBar';
 import ItemCard from '../ItemCard/ItemCard';
+import { serviceToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 
 import { useServiceOfferings } from './useServiceOfferings';
@@ -33,12 +34,7 @@ const ServiceOfferings = () => {
           <CardContainer visible={state === 'SHOW_OFFERINGS'}>
             {
               serviceOfferings.map((serviceOffering) => (
-                <ItemCard
-                  key={serviceOffering.name}
-                  label={serviceOffering.label}
-                  isGaiaXCompliant={true}
-                  service={serviceOffering}
-                />
+                <ItemCard key={serviceOffering.name} itemCardData={serviceToItemCardData(serviceOffering)} />
               ))
             }
           </CardContainer>

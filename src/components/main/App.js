@@ -6,7 +6,6 @@ import history from '../../common/history'
 import { Footer } from './components/footer/Footer';
 import Navbar from './components/navbar/Navbar';
 import Routes from './components/routes/Routes';
-
 import './App.css';
 
 const App = () => {

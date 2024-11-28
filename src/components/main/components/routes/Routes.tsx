@@ -4,6 +4,7 @@ import { Route, Routes as ReactRoutes } from 'react-router-dom';
 
 import WorkInProgress from '../../../../WorkInProgress';
 import Vertical from '../../../../common/components/layouts/Vertical';
+import Map from '../../../../common/components/map/Map';
 import AccountHome from '../../../account/AccountHome';
 import Provider from '../../../account/Provider';
 import DashboardPage from '../../../dashboard/dashboard_page';
@@ -54,7 +55,8 @@ const Routes: FC = () => (
   <Vertical className={styles.scrollable}>
     <ReactRoutes>
       <Route path="/" element={Wrappers(<Home/>, NO_AUTHENTICATION_REQUIRED)}/>
-      <Route path="/home" element={Wrappers(<Home/>)}/>
+      <Route path="/home" element={Wrappers(<Home/>, NO_AUTHENTICATION_REQUIRED)}/>
+      <Route path="/vcmap" element={Wrappers(<Map/>)}/>
       <Route path="/service-offerings" element={Wrappers(<ServiceOfferings/>)}/>
       <Route path="/participants" element={Wrappers(<ParticipantSearchPage/>)}/>
       <Route path="/participants/:participantId" element={Wrappers(<ParticipantDetails/>)}/>

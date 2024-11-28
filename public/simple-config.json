@@ -1,0 +1,26 @@
+{
+  "properties": {},
+  "name": "Module",
+  "startingMapName": "CesiumMap",
+  "maps": [
+    {
+      "type": "CesiumMap",
+      "name": "CesiumMap"
+    }
+  ],
+  "layers": [
+    {
+      "type": "OpenStreetMapLayer",
+      "name": "OpenStreetMapLayer(1)",
+      "properties": {
+        "attributions": {
+          "provider": "OpenStreetMap contributors",
+          "url": "http://www.openstreetmap.org/",
+          "year": "2024"
+        }
+      },
+      "activeOnStartup": true,
+      "zIndex": 0
+    }
+  ]
+}

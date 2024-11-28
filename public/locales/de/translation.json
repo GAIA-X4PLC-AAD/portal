@@ -546,7 +546,21 @@
   },
   "resources": {
     "search-bar-text": "Suchen Sie nach speziellen Ressourcen",
-    "no-resources-available": "Keine Resourcen verfügbar!"
+    "no-resources-available": "Keine Resourcen verfügbar!",
+    "resource-detail-not-available": "Ressourcendetails sind nicht verfügbar",
+    "provided-by": "Bereitgestellt von",
+    "copyright-owned-by": "Urheberrechtlich geschützt von",
+    "license": "Lizenz",
+    "containsPII": "Enthält personenbezogene Daten",
+    "expiration-date-time": "Ablaufdatum",
+    "obsolete-date-time": "Veraltetes Datum",
+    "road-types": "Straßentypen",
+    "lane-types": "Fahrbahntypen",
+    "level-of-detail": "Detailgrad",
+    "traffic-direction": "Verkehrsrichtung",
+    "download-description": "Beschreibung herunterladen",
+    "contact-provider": "Anbieter kontaktieren",
+    "not-found": "Ressource nicht gefunden"
   },
   "ontologies": {
     "title": "Ontologie",
@@ -571,6 +585,15 @@
     "not-authenticated": "Nicht berechtigt",
     "results": "Ergebnisse",
     "is-loading": "es wird geladen...",
-    "close": "Schließen"
+    "close": "Schließen",
+    "no-title": "Kein Titel vorhanden",
+    "no-description": "Keine Beschreibung vorhanden",
+    "general-details": "Allgemeine Details",
+    "content-details": "Inhaltsdetails",
+    "compatible-offerings": "Kompatible Angebote",
+    "directly-related-offerings": "Direkt verwandte Angebote",
+    "not-specified": "Nicht spezifiziert",
+    "yes": "Ja",
+    "no": "Nein"
   }
 }

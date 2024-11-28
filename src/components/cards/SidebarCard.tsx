@@ -3,15 +3,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
-import NotificationDialog from '../../common/components/dialogs/NotificationDialog/NotificationDialog';
 import Text from '../../common/components/fields/././text/Text';
 import Subtitle from '../../common/components/fields/subtitle/Subtitle';
 import Title from '../../common/components/fields/title/Title';
 import { ResourceDetails } from '../../types/resources.model';
-import DataTransferInitiationProgress from '../resources/components/DataTransferInitiationProgress';
-import DataTransferStatus from '../resources/components/DataTransferStatus';
-import ResourceBuyingModal from '../resources/components/ResourceBuyingModal';
-import { useResourceBuyingStateMachine } from '../resources/hooks/useResourceBuyingStateMachine';
 
 import styles from './SidebarCard.module.css';
 
@@ -29,44 +24,19 @@ export default function SidebarCard({
   resource
 }: Readonly<ISidebarCard>) {
   const { t } = useTranslation();
-  const { state, dispatch } = useResourceBuyingStateMachine({
-    contractId: resource?.contractId,
-    serviceAccessPoint: resource?.serviceAccessPoint,
-  });
-
   const handleClickBuyButton = () => {
-    dispatch({ type: 'BUY' })
   };
 
   return (
-    <>
-      <NotificationDialog
-        isOpen={state.name === 'ERROR_NOTIFICATION_DIALOG'}
-        close={() => dispatch({ type: 'CLOSE' })}
-        title={t('buy-dialog.data-transfer-failed')}
-        message={state.name === 'ERROR_NOTIFICATION_DIALOG' ? state.message : ''}
+    <div className={styles['sidebar-card-container']}>
+      <Title>{title}</Title>
+      <Subtitle>{subtitle}</Subtitle>
+      <Text>{text}</Text>
+      <GaiaXButton
+        className={classnames([styles.buyButton])}
+        label={t('details.sidebar-buy-button')}
+        handleOnClick={handleClickBuyButton}
       />
-      <ResourceBuyingModal
-        state={state}
-        dispatch={dispatch}
-        title={resource?.name || t('service-offerings.no-title')}
-      />
-      <DataTransferInitiationProgress
-        state={state}
-        dispatch={dispatch}
-      />
-      <div className={styles['sidebar-card-container']}>
-        <Title>{title}</Title>
-        <Subtitle>{subtitle}</Subtitle>
-        <Text>{text}</Text>
-        <DataTransferStatus state={state}/>
-        <GaiaXButton
-          className={classnames([styles.buyButton])}
-          label={t('details.sidebar-buy-button')}
-          handleOnClick={handleClickBuyButton}
-          disabled={!['TRANSFER_ENABLED', 'FINISHED'].includes(state.name)}
-        />
-      </div>
-    </>
+    </div>
   );
 }

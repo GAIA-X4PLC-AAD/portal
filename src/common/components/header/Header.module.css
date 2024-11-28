@@ -21,10 +21,21 @@
 .header-breadcrumb {
     margin: 0;
     user-select: none;
+    word-break: break-all;
+}
+
+@media (max-width: 960px) {
+    .header-breadcrumb {
+        font-size: 2.8rem;
+    }
 }
 
 @media (max-width: 768px) {
     .header-container {
         margin-top: 5.4rem; /* This makes content start at the bottom of the navbar, because this is the height of the navbar */
+    }
+
+    .header-breadcrumb {
+        font-size: 2.4rem;
     }
 }
