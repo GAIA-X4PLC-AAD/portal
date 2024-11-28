@@ -15,7 +15,7 @@ const ResourceMainContent = () => {
   const resourceDetails = useContext(ResourceDetailsContext);
 
   if (!resourceDetails) {
-    return <>{t('resources.not-found')}</>;
+    return <></>;
   }
 
   return (
@@ -104,11 +104,13 @@ const ResourceMainContent = () => {
             </td>
             <td className={styles['cell']}>
               <Subtitle>{t('common.directly-related-offerings')}</Subtitle>
-              {resourceDetails.claimsGraphUri.map((uri, index) => (
-                <div key={index} className={styles['cell']}>
-                  <Text key={index}>{uri}</Text>
-                </div>
-              ))}
+              {
+                resourceDetails.claimsGraphUri.map((uri, index) => (
+                  <div key={index} className={styles['cell']}>
+                    <Text key={index}>{uri}</Text>
+                  </div>
+                ))
+              }
             </td>
           </tr>
         </tbody>

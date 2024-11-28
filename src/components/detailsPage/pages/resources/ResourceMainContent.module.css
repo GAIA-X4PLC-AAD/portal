@@ -7,11 +7,6 @@ article.container {
     height: 100%;
 }
 
-.link {
-    cursor: pointer;
-    text-decoration: underline;
-}
-
 .table {
     display: table;
     width: 100%;

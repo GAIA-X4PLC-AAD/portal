@@ -98,39 +98,37 @@ export const CypherQueryApiService = {
       OPTIONAL MATCH (dataResource)-[:content]-(content) 
       OPTIONAL MATCH (dataResource)-[:producedBy]-(producedBy) 
 
-      RETURN {
-           name: dataResource.name,
-           description: dataResource.description, 
-           uri: dataResource.uri,
-           serviceAccessPoint: 
-              CASE
-                 WHEN serviceAccessPoint IS NOT NULL THEN {
-                     name:     properties(serviceAccessPoint).name,
-                     protocol: properties(serviceAccessPoint).protocol,
-                     host:     properties(serviceAccessPoint).host,
-                     port:     properties(serviceAccessPoint).port,
-                     version:  properties(serviceAccessPoint).version
-                 } ELSE null
-               END,
-           contractId: data.contractId,
-           license: dataResource.license,
-           copyrightOwnedBy: dataResource.copyrightOwnedBy,
-           claimsGraphUri: dataResource.claimsGraphUri,
-           containsPII: 
-              CASE dataResource.containsPII
-                 WHEN 'true' THEN true
-                    WHEN 'false' THEN false
-                    ELSE null
-              END,
-           obsoleteDateTime: dataResource.obsoleteDateTime, 
-           expirationDateTime: dataResource.expirationDateTime, 
-           levelOfDetail: content.levelOfDetail, 
-           trafficDirection: content.trafficDirection, 
-           roadTypes: content.roadTypes, 
-           laneTypes: content.laneTypes, 
-           legalName: producedBy.legalName,
-           labels: labels(dataResource)
-      } as dataResourceDetails
+      RETURN 
+           dataResource.name as name,
+           dataResource.description as description, 
+           dataResource.uri as uri,
+           CASE
+              WHEN serviceAccessPoint IS NOT NULL THEN {
+                name:     properties(serviceAccessPoint).name,
+                protocol: properties(serviceAccessPoint).protocol,
+                host:     properties(serviceAccessPoint).host,
+                port:     properties(serviceAccessPoint).port,
+                version:  properties(serviceAccessPoint).version
+              } 
+              ELSE null
+              END as serviceAccessPoint,
+           data.contractId as contractId,
+           dataResource.license as license,
+           dataResource.copyrightOwnedBy as copyrightOwnedBy,
+           dataResource.claimsGraphUri as claimsGraphUri,
+           CASE dataResource.containsPII
+              WHEN 'true' THEN true
+                 WHEN 'false' THEN false
+              ELSE null
+              END as containsPII,
+           dataResource.obsoleteDateTime as obsoleteDateTime, 
+           dataResource.expirationDateTime as expirationDateTime, 
+           content.levelOfDetail as levelOfDetail, 
+           content.trafficDirection as trafficDirection, 
+           content.roadTypes as roadTypes, 
+           content.laneTypes as laneTypes, 
+           producedBy.legalName as legalName,
+           labels(dataResource) as labels
       `
     })
   },

@@ -1,55 +1,17 @@
-.sidebar-card-container {
-    display: flex;
-    flex-direction: column;
+.sidebarCardContainer {
     align-items: flex-start;
-    width: 400px;
-    min-height: 30vh;
-    border-radius: 10px;
-    background-color: white;
-    padding: 0 20px 20px 20px;
-    box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+
+    border-radius: 1rem;
+    background-color: var(--white);
+    box-shadow: var(--shadow--normal);
 }
-.sidebar-card-container button {
-    margin-left: 0;
+
+.title {
+    margin-top: 0;
+}
+
+.sideBarCardButton {
+    margin: 0;
     width: 100%;
-}
-.sidebar-card-container button:hover {
-    transform: none;
-}
-/* Keyframes for fadeIn */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateX(50%);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-/* Keyframes for fadeOut */
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        transform: translateX(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateX(50%);
-    }
-}
-.notification {
-    position: fixed;
-    top: 5%;
-    right: 3%;
-    background-color: #A334ED;
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    z-index: 1000;
-    font-size: xx-large;
-    animation: fadeIn 0.5s ease forwards;
-}
-.notification.fadeOut {
-    animation: fadeOut 0.5s ease forwards;
 }

@@ -1,6 +1,5 @@
 .main {
     margin: 0 3rem 3rem;
-    box-sizing: border-box;
 }
 
 .horizontal {
@@ -9,7 +8,6 @@
     justify-content: flex-start;
     align-items: center;
     gap: 30px;
-    box-sizing: border-box;
 }
 
 .vertical {
@@ -18,5 +16,4 @@
     align-items: stretch;
     width: 100%;
     gap: 30px;
-    box-sizing: border-box;
 }

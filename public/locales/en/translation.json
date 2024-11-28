@@ -549,6 +549,7 @@
   "resources": {
     "search-bar-text": "Search for special resources",
     "no-resources-available": "No resources available",
+    "resource-detail-not-available": "Resource details is not available",
     "provided-by": "Provided by",
     "copyright-owned-by": "Copyright owned by",
     "license": "License",
