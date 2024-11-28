@@ -6,11 +6,24 @@
     align-items: flex-start;
     width: 40rem;
     min-width: 40rem;
-    height: 100%;
 }
 
-@media (max-width: 1600px) {
+@media (max-width: 1200px) {
     .mainContentContainer {
+        flex-direction: column;
+    }
+
+    .sidebarContainer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: stretch;
+        width: 100%;
+        min-width: unset;
     }
 }
 
+@media (max-width: 960px) {
+    .sidebarContainer {
+        flex-direction: column;
+    }
+}

@@ -6,10 +6,17 @@
     margin-top: 0;
     margin-right: 1rem;
     font-weight: bold;
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }
 
 .valueTextField {
     margin-top: 0;
     display: inline-block;
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 

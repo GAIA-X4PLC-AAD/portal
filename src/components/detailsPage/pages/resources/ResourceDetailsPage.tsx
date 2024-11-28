@@ -48,7 +48,6 @@ const ResourceDetailsPage = () => {
             <ResourceMap/>
             <ResourceActions/>
           </Vertical>
-
         </Horizontal>
       </Main>
     </ResourceDetailsContext.Provider>

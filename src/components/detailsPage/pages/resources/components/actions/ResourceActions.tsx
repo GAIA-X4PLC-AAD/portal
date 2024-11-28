@@ -24,48 +24,48 @@ const ResourceActions = () => {
   const title='Actions'
 
   return (
-    <>
-      <Vertical className={styles.sidebarCardContainer}>
-        <Title className={styles.title}>{title}</Title>
-        <GaiaXButton
-          className={styles.sideBarCardButton}
-          label={t('resources.download-description')}
-          handleOnClick={() => {
-          }}
-        />
-        <GaiaXButton
-          className={styles.sideBarCardButton}
-          label={t('details.view-graph')}
-          handleOnClick={() => {
-          }}
-        />
-        <DataTransferStatus state={state}/>
-        <GaiaXButton
-          className={styles.sideBarCardButton}
-          label={t('details.sidebar-buy-button')}
-          disabled={!['TRANSFER_ENABLED', 'FINISHED'].includes(state.name)}
-          handleOnClick={() => {
-            dispatch({ type: 'BUY' })
-          }}
-        />
-      </Vertical>
+    <Vertical className={styles.sidebarCardContainer}>
+      <Title className={styles.title}>{title}</Title>
+      <GaiaXButton
+        className={styles.sideBarCardButton}
+        label={t('resources.download-description')}
+        handleOnClick={() => {
+        }}
+      />
+      <GaiaXButton
+        className={styles.sideBarCardButton}
+        label={t('details.view-graph')}
+        handleOnClick={() => {
+        }}
+      />
+      <DataTransferStatus state={state}/>
+      <GaiaXButton
+        className={styles.sideBarCardButton}
+        label={t('details.sidebar-buy-button')}
+        disabled={!['TRANSFER_ENABLED', 'FINISHED'].includes(state.name)}
+        handleOnClick={() => {
+          dispatch({ type: 'BUY' })
+        }}
+      />
 
-      <NotificationDialog
-        isOpen={state.name === 'ERROR_NOTIFICATION_DIALOG'}
-        close={() => dispatch({ type: 'CLOSE' })}
-        title={t('buy-dialog.data-transfer-failed')}
-        message={state.name === 'ERROR_NOTIFICATION_DIALOG' ? state.message : ''}
-      />
-      <ResourceBuyingModal
-        state={state}
-        dispatch={dispatch}
-        title={resourceDetails?.name || t('service-offerings.no-title')}
-      />
-      <DataTransferInitiationProgress
-        state={state}
-        dispatch={dispatch}
-      />
-    </>
+      <>
+        <NotificationDialog
+          isOpen={state.name === 'ERROR_NOTIFICATION_DIALOG'}
+          close={() => dispatch({ type: 'CLOSE' })}
+          title={t('buy-dialog.data-transfer-failed')}
+          message={state.name === 'ERROR_NOTIFICATION_DIALOG' ? state.message : ''}
+        />
+        <ResourceBuyingModal
+          state={state}
+          dispatch={dispatch}
+          title={resourceDetails?.name || t('service-offerings.no-title')}
+        />
+        <DataTransferInitiationProgress
+          state={state}
+          dispatch={dispatch}
+        />
+      </>
+    </Vertical>
   );
 }
 export default ResourceActions;
