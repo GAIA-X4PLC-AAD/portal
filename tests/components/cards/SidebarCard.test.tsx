@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import React from 'react';
 
-import ResourceActions from '../../../src/components/detailsPage/pages/resources/components/actions/ResourceActions';
+import ResourceActions from '../../../src/components/resources/components/ResourceActions';
 
 const dispatch = jest.fn();
 const useResourceBuyingStateMachine = jest.fn();

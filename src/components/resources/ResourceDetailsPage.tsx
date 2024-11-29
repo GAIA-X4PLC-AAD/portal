@@ -6,18 +6,18 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import Header from '../../../../common/components/header/Header';
-import Horizontal from '../../../../common/components/layouts/Horizontal';
-import LoadingIndicator from '../../../../common/components/loadingIndicator/LoadingIndicator';
-import NoContent from '../../../../common/components/noContent/NoContent';
-import { ResourceDetails } from '../../../../types/resources.model';
-import { ARROW_RIGHT } from '../../../../utils/symbols';
-import { loadResourceDetails } from '../../../resources/helpers/resourceDataFlow';
+import Header from '../../common/components/header/Header';
+import Horizontal from '../../common/components/layouts/Horizontal';
+import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
+import NoContent from '../../common/components/noContent/NoContent';
+import { ResourceDetails } from '../../types/resources.model';
+import { ARROW_RIGHT } from '../../utils/symbols';
 
 import styles from './ResourceDetailsPage.module.css'
-import ResourceMainContent from './ResourceMainContent';
-import ResourceActions from './components/actions/ResourceActions';
-import ResourceMap from './components/map/ResourceMap';
+import ResourceActions from './components/ResourceActions';
+import ResourceDetailMainContent from './components/ResourceDetailMainContent';
+import ResourceMap from './components/ResourceMap';
+import { loadResourceDetails } from './helpers/resourceDataFlow';
 
 const ResourceDetailsPage = () => {
   const { t } = useTranslation();
@@ -42,7 +42,7 @@ const ResourceDetailsPage = () => {
         <NoContent message={t('resources.resource-detail-not-available')} visible={!isLoading && !resourceDetails}/>
 
         <Horizontal className={styles.mainContentContainer} visible={!isLoading && !!resourceDetails}>
-          <ResourceMainContent/>
+          <ResourceDetailMainContent/>
 
           <Vertical className={styles.sidebarContainer}>
             <ResourceMap/>

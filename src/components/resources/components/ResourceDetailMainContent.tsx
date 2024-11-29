@@ -3,16 +3,16 @@ import TextEntry from 'common/components/fields/entry/TextEntry';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Link from '../../../../common/components/fields/link/Link';
-import Subtitle from '../../../../common/components/fields/subtitle/Subtitle';
-import Text from '../../../../common/components/fields/text/Text';
-import Title from '../../../../common/components/fields/title/Title';
-import Markdown from '../../../../common/components/markdown/Markdown';
-import { ResourceDetailsContext } from '../../../context/ResourceDetailsContext';
+import Link from '../../../common/components/fields/link/Link';
+import Subtitle from '../../../common/components/fields/subtitle/Subtitle';
+import Text from '../../../common/components/fields/text/Text';
+import Title from '../../../common/components/fields/title/Title';
+import Markdown from '../../../common/components/markdown/Markdown';
+import { ResourceDetailsContext } from '../../context/ResourceDetailsContext';
 
-import styles from './ResourceMainContent.module.css';
+import styles from './ResourceDetailMainContent.module.css';
 
-const ResourceMainContent = () => {
+const ResourceDetailMainContent = () => {
   const { t } = useTranslation();
   const resourceDetails = useContext(ResourceDetailsContext);
 
@@ -57,4 +57,4 @@ const ResourceMainContent = () => {
   );
 }
 
-export default ResourceMainContent;
+export default ResourceDetailMainContent;

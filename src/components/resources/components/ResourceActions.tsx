@@ -2,17 +2,17 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import GaiaXButton from '../../../../../../common/components/buttons/GaiaXButton';
-import NotificationDialog from '../../../../../../common/components/dialogs/NotificationDialog/NotificationDialog';
-import Title from '../../../../../../common/components/fields/title/Title';
-import Vertical from '../../../../../../common/components/layouts/Vertical';
-import { ResourceDetailsContext } from '../../../../../context/ResourceDetailsContext';
-import DataTransferInitiationProgress from '../../../../../resources/components/DataTransferInitiationProgress';
-import DataTransferStatus from '../../../../../resources/components/DataTransferStatus';
-import ResourceBuyingModal from '../../../../../resources/components/ResourceBuyingModal';
-import { useResourceBuyingStateMachine } from '../../../../../resources/hooks/useResourceBuyingStateMachine';
+import GaiaXButton from '../../../common/components/buttons/GaiaXButton';
+import NotificationDialog from '../../../common/components/dialogs/NotificationDialog/NotificationDialog';
+import Title from '../../../common/components/fields/title/Title';
+import Vertical from '../../../common/components/layouts/Vertical';
+import { ResourceDetailsContext } from '../../context/ResourceDetailsContext';
+import { useResourceBuyingStateMachine } from '../hooks/useResourceBuyingStateMachine';
 
+import DataTransferInitiationProgress from './DataTransferInitiationProgress';
+import DataTransferStatus from './DataTransferStatus';
 import styles from './ResourceActions.module.css';
+import ResourceBuyingModal from './ResourceBuyingModal';
 
 const ResourceActions = () => {
   const { t } = useTranslation();
