@@ -1,13 +1,15 @@
-import { Link } from '@mui/material';
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import NoContent from '../../common/components/./././noContent/NoContent';
 import Header from '../../common/components/header/Header';
+import Main from '../../common/components/layouts/Main';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import { ARROW_RIGHT } from '../../utils/symbols';
+import { ResourceContextProvider } from '../context/ParticipantDetailsContext';
 
+import ParticipantDetailMainContent from './components/ParticipantDetailMainContent';
 import { useParticipantDetails } from './hooks/useParticipantDetails';
 
 import './ParticipantDetials.css';
@@ -20,34 +22,18 @@ const ParticipantDetails: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <div className='container'>
-      <LoadingIndicator visible={viewContentType === 'LOADING'}/>
-      <Header title={`${t('participants.title')} ${ARROW_RIGHT} ${participant && participant.legalName}`}
-        visible={viewContentType === 'SHOW_PARTICIPANT'}/>
-      <NoContent message={`${t('participants.no-participant-available')}`}
-        visible={viewContentType === 'SHOW_NO_RESULT'}/>
-      {viewContentType === 'SHOW_PARTICIPANT' && (
-        <div className='main-content-container'>
-          <p><b>Uri:</b> {participant?.uri || ''}</p>
-          <p><b>Hash:</b> {participant?.gaiaxTermsAndConditions || ''}</p>
-          <b>List of service offerings:</b>
-          <ul>
-            {(participant?.claimsGraphUri || []).map((cgu) => (
-              <li key={cgu}>
-                {cgu.includes('service-offering') ? (
-                  <Link
-                    component={RouterLink}
-                    to={`/shapes/details/${encodeURIComponent(cgu)}`}
-                  >
-                    {cgu}
-                  </Link>
-                ) : (<></>)}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
+    <ResourceContextProvider value={{ participant, viewContentType }}>
+      <Header
+        title={`${t('participants.title')} ${viewContentType === 'SHOW_PARTICIPANT' ? ARROW_RIGHT : ''} ${viewContentType === 'SHOW_PARTICIPANT' ? participant?.legalName || '' : ''}`}/>
+
+      <Main>
+        <LoadingIndicator visible={viewContentType === 'LOADING'}/>
+        <NoContent message={`${t('participants.no-participant-available')}`}
+          visible={viewContentType === 'SHOW_NO_RESULT'}/>
+
+        <ParticipantDetailMainContent/>
+      </Main>
+    </ResourceContextProvider>
   )
 }
 

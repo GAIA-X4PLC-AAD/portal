@@ -1,33 +1,4 @@
-article.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    align-self: stretch;
-
-    width: 100%;
-    padding: 2rem;
-
-    background-color: var(--white);
-    border-radius: 1rem;
-    box-shadow: var(--shadow--normal);
-}
-
 .title {
     margin-top: 0;
     word-break: break-all;
-}
-
-.detailContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 4rem;
-    grid-row-gap: 1rem;
-    max-width: 120rem;
-}
-
-@media (max-width: 1200px) {
-    .detailContainer {
-        grid-template-columns: 1fr;
-    }
 }

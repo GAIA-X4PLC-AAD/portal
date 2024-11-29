@@ -1,0 +1,13 @@
+.detailsPropertyContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 4rem;
+    grid-row-gap: 1rem;
+    max-width: 120rem;
+}
+
+@media (max-width: 1200px) {
+    .detailsPropertyContainer {
+        grid-template-columns: 1fr;
+    }
+}

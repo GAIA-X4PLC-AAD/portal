@@ -1,3 +1,4 @@
+import DetailsMainContent from 'common/components/layouts/DetailsMainContent';
 import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -29,7 +30,7 @@ const ShapesDetailMainContent: FC = () => {
   ));
 
   return (
-    <div className={styles['container']}>
+    <DetailsMainContent>
       <Title>{shape.shaclShapeName}</Title>
 
       <table className={styles['table']}>
@@ -56,7 +57,7 @@ const ShapesDetailMainContent: FC = () => {
         </tbody>
       </table>
 
-    </div>
+    </DetailsMainContent>
   );
 };
 

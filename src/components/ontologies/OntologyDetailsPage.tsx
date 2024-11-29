@@ -6,9 +6,9 @@ import { useParams } from 'react-router-dom';
 
 import car from '../../assets/car.gif';
 import Header from '../../common/components/header/Header';
-import Horizontal from '../../common/components/layouts/Horizontal';
+import DetailsContent from '../../common/components/layouts/DetailsContent';
+import DetailsSidebar from '../../common/components/layouts/DetailsSidebar';
 import Main from '../../common/components/layouts/Main';
-import Vertical from '../../common/components/layouts/Vertical';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import NoContent from '../../common/components/noContent/NoContent';
 import { fetchOntologyById } from '../../services/ontologyService.utils';
@@ -17,7 +17,6 @@ import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
 import { Ontology } from '../../types/ontologies.model';
 import { ARROW_RIGHT } from '../../utils/symbols';
 
-import styles from './OntologyDetailsPage.module.css';
 import OntologyActions from './components/OntologyActions';
 import OntologyDetailMainContent from './components/OntologyDetailMainContent';
 import OntologySuitableOfferings from './components/OntologySuitableOfferings';
@@ -66,14 +65,14 @@ const OntologyDetailsPage: FC = () => {
         <LoadingIndicator visible={isLoading}/>
         <NoContent message={t('ontologies.ontology-detail-not-available')} visible={!isLoading && !ontology}/>
 
-        <Horizontal className={styles.mainContentContainer} visible={!isLoading && !!ontology}>
+        <DetailsContent visible={!isLoading && !!ontology}>
           <OntologyDetailMainContent/>
 
-          <Vertical className={styles.sidebarContainer}>
+          <DetailsSidebar>
             <OntologySuitableOfferings/>
             <OntologyActions/>
-          </Vertical>
-        </Horizontal>
+          </DetailsSidebar>
+        </DetailsContent>
       </Main>
     </OntologyContext.Provider>
   );

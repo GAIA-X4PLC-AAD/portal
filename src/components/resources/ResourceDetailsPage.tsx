@@ -1,19 +1,17 @@
-/* test coverage not required */
 import Main from 'common/components/layouts/Main';
-import Vertical from 'common/components/layouts/Vertical';
 import { ResourceDetailsContext } from 'components/context/ResourceDetailsContext';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
 import Header from '../../common/components/header/Header';
-import Horizontal from '../../common/components/layouts/Horizontal';
+import DetailsContent from '../../common/components/layouts/DetailsContent';
+import DetailsSidebar from '../../common/components/layouts/DetailsSidebar';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import NoContent from '../../common/components/noContent/NoContent';
 import { ResourceDetails } from '../../types/resources.model';
 import { ARROW_RIGHT } from '../../utils/symbols';
 
-import styles from './ResourceDetailsPage.module.css'
 import ResourceActions from './components/ResourceActions';
 import ResourceDetailMainContent from './components/ResourceDetailMainContent';
 import ResourceMap from './components/ResourceMap';
@@ -41,14 +39,14 @@ const ResourceDetailsPage = () => {
         <LoadingIndicator visible={isLoading}/>
         <NoContent message={t('resources.resource-detail-not-available')} visible={!isLoading && !resourceDetails}/>
 
-        <Horizontal className={styles.mainContentContainer} visible={!isLoading && !!resourceDetails}>
+        <DetailsContent visible={!isLoading && !!resourceDetails}>
           <ResourceDetailMainContent/>
 
-          <Vertical className={styles.sidebarContainer}>
+          <DetailsSidebar>
             <ResourceMap/>
             <ResourceActions/>
-          </Vertical>
-        </Horizontal>
+          </DetailsSidebar>
+        </DetailsContent>
       </Main>
     </ResourceDetailsContext.Provider>
   );

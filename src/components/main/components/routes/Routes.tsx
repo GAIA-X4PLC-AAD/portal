@@ -27,7 +27,7 @@ import ProvideSelection from '../../../provide/ProvideSelection';
 import ResourceDetailsPage from '../../../resources/ResourceDetailsPage';
 import ResourceSearchPage from '../../../resources/ResourceSearchPage';
 import ServiceOfferings from '../../../serviceOfferings/ServiceOfferings';
-import ShapesDetailsPage from '../../../shapes/ShapesDetailsPage';
+import ShapeDetailsPage from '../../../shapes/ShapeDetailsPage';
 import ShapesSearchPage from '../../../shapes/ShapesSearchPage';
 import SolutionPackagingView from '../../../solutionPackaging/SolutionPackagingView';
 
@@ -92,7 +92,7 @@ const Routes: FC = () => (
       <Route path="/ontologies" element={Wrappers(<OntologiesSearchPage/>)}/>
       <Route path="/ontologies/details/*" element={Wrappers(<OntologyDetailsPage/>)}/>
       <Route path="/shapes" element={Wrappers(<ShapesSearchPage/>)}/>
-      <Route path="/shapes/details/*" element={Wrappers(<ShapesDetailsPage/>)}/>
+      <Route path="/shapes/details/*" element={Wrappers(<ShapeDetailsPage/>)}/>
     </ReactRoutes>
   </Vertical>
 );

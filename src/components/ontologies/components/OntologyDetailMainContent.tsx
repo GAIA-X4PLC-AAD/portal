@@ -3,8 +3,9 @@ import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import Text from '../../../common/components/fields/text/Text';
+import Subtitle from '../../../common/components/fields/subtitle/Subtitle';
 import Title from '../../../common/components/fields/title/Title';
+import DetailsMainContent from '../../../common/components/layouts/DetailsMainContent';
 import Markdown from '../../../common/components/markdown/Markdown';
 import { Shape } from '../../../types/shapes.model';
 import { OntologyContext } from '../../context/OntologyContext';
@@ -25,22 +26,22 @@ const OntologyDetailMainContent: FC = () => {
   }
 
   return (
-    <div className={styles['container']}>
+    <DetailsMainContent>
       <Title>{t('ontologies.title')}</Title>
-      <Markdown>
-        {ontology.description}
-      </Markdown>
+      <Markdown>{ontology.description}</Markdown>
+
       {ontology.relatedShapes.length > 0 && (
-        <div style={{ textAlign: 'left' }}>
-          <Text>{t('ontologies.classes')}</Text>
+        <>
+          <Subtitle>{t('ontologies.classes')}</Subtitle>
           {ontology.relatedShapes.map((shape, index) => (
-            <div className={styles['link']} key={index} onClick={() => handleNavigationToShapeDetailsPage(shape)}>
+            <div className={styles['link']} key={index}
+              onClick={() => handleNavigationToShapeDetailsPage(shape)}>
               {shape.shaclShapeName}
             </div>
           ))}
-        </div>
+        </>
       )}
-    </div>
+    </DetailsMainContent>
   );
 };
 

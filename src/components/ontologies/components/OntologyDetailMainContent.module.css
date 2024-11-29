@@ -8,6 +8,15 @@
 }
 
 .link {
+    color: var(--secondary-color);
+    font-size: 2rem;
+    font-weight: normal;
+    text-decoration: none;
+
+    user-select: none;
     cursor: pointer;
-    text-decoration: underline;
+
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
 }
