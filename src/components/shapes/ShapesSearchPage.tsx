@@ -1,20 +1,20 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import NoContent from '../../common/components/./././noContent/NoContent';
-import Horizontal from '../../common/components/./layouts/Horizontal';
-import Main from '../../common/components/./layouts/Main';
-import Vertical from '../../common/components/./layouts/Vertical';
 import Header from '../../common/components/header/Header';
+import Horizontal from '../../common/components/layouts/Horizontal';
+import Main from '../../common/components/layouts/Main';
+import Vertical from '../../common/components/layouts/Vertical';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
+import NoContent from '../../common/components/noContent/NoContent';
 import SearchBar from '../../common/components/searchBar/SearchBar';
 import ItemCard from '../ItemCard/ItemCard';
 import { shapeToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 
-import { useShapes } from './useShapes';
+import { useShapes } from './hooks/useShapes';
 
-const Shapes = () => {
+const ShapesSearchPage = () => {
   const { t } = useTranslation();
   const {
     state,
@@ -47,4 +47,4 @@ const Shapes = () => {
   );
 };
 
-export default Shapes;
+export default ShapesSearchPage;

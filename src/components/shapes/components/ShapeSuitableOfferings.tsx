@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Title from '../../../../../../common/components/fields/title/Title';
+import Title from '../../../common/components/fields/title/Title';
 
 import styles from './ShapeSuitableOfferings.module.css';
 

@@ -1,12 +1,12 @@
 import { render } from '@testing-library/react';
 import React from 'react'
 
-import Shapes from '../../../src/components/shapes/Shapes';
+import ShapesSearchPage from '../../../src/components/shapes/ShapesSearchPage';
 import { Shape } from '../../../src/types/shapes.model';
 import { withRouter } from '../../common/testHelper';
 
 const useShapes = jest.fn()
-jest.mock('../../../src/components/shapes/useShapes', () => ({
+jest.mock('../../../src/components/shapes/hooks/useShapes', () => ({
   useShapes: () => useShapes(),
 }))
 jest.mock('i18next', () => ({
@@ -30,7 +30,7 @@ describe('Shapes', () => {
         }
       ] as Shape[],
     })
-    const { getByText } = render(withRouter(<Shapes/>));
+    const { getByText } = render(withRouter(<ShapesSearchPage/>));
     expect(getByText('Shape 1')).not.toBeNull();
     expect(getByText('Shape 2')).not.toBeNull();
   })
@@ -40,7 +40,7 @@ describe('Shapes', () => {
       state: 'LOADING',
       shapes: [] as Shape[],
     })
-    const { queryByAltText } = render(withRouter(<Shapes/>));
+    const { queryByAltText } = render(withRouter(<ShapesSearchPage/>));
     expect(queryByAltText('common.is-loading')).not.toBeNull();
   })
 
@@ -49,7 +49,7 @@ describe('Shapes', () => {
       state: 'SHOW_NO_RESULTS',
       shapes: [] as Shape[],
     })
-    const { queryByText } = render(withRouter(<Shapes/>));
+    const { queryByText } = render(withRouter(<ShapesSearchPage/>));
     expect(queryByText('shapes.no-shapes-available')).not.toBeNull();
   })
 });

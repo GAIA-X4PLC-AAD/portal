@@ -4,19 +4,19 @@ import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
 // @ts-ignore
-import car from '../../../../assets/car.gif';
-import Header from '../../../../common/components/header/Header';
-import { getShapeByName } from '../../../../services/shapeService.utils';
-import { Shape } from '../../../../types/shapes.model';
-import { ARROW_RIGHT } from '../../../../utils/symbols';
-import DetailsContent from '../../layout/content/DetailsContent';
-import DetailsMainContent from '../../layout/mainContent/DetailsMainContent';
-import DetailsPage from '../../layout/mainPage/DetailsPage';
-import DetailsSidebar from '../../layout/sidebar/DetailsSidebar';
+import car from '../../assets/car.gif';
+import Header from '../../common/components/header/Header';
+import { getShapeByName } from '../../services/shapeService.utils';
+import { Shape } from '../../types/shapes.model';
+import { ARROW_RIGHT } from '../../utils/symbols';
+import DetailsContent from '../detailsPage/layout/content/DetailsContent';
+import DetailsMainContent from '../detailsPage/layout/mainContent/DetailsMainContent';
+import DetailsPage from '../detailsPage/layout/mainPage/DetailsPage';
+import DetailsSidebar from '../detailsPage/layout/sidebar/DetailsSidebar';
 
-import ShapeMainContent from './ShapeMainContent';
-import ShapeActions from './components/actions/ShapeActions';
-import ShapeSuitableOfferings from './components/suitableOfferings/ShapeSuitableOfferings';
+import ShapeActions from './components/ShapeActions';
+import ShapeSuitableOfferings from './components/ShapeSuitableOfferings';
+import ShapesDetailMainContent from './components/ShapesDetailMainContent';
 
 const ShapesDetailsPage: FC = () => {
   const { t } = useTranslation();
@@ -59,7 +59,7 @@ const ShapesDetailsPage: FC = () => {
       <ShapeContext.Provider value={shape}>
         <DetailsContent>
           <DetailsMainContent>
-            <ShapeMainContent />
+            <ShapesDetailMainContent/>
           </DetailsMainContent>
           <DetailsSidebar>
             <ShapeSuitableOfferings />

@@ -10,7 +10,6 @@ import Provider from '../../../account/Provider';
 import DashboardPage from '../../../dashboard/dashboard_page';
 import LcmFinal from '../../../dashboard/lcm/LcmFinal';
 import LcmServices from '../../../dashboard/lcm/LcmServices';
-import ShapesDetailsPage from '../../../detailsPage/pages/shapes/ShapesDetailsPage';
 import DiscoveryItem from '../../../discovery/DiscoveryItem';
 import SearchView from '../../../discovery/search/SearchView';
 import AboutPage from '../../../help/AboutPage'
@@ -28,7 +27,8 @@ import ProvideSelection from '../../../provide/ProvideSelection';
 import ResourceDetailsPage from '../../../resources/ResourceDetailsPage';
 import ResourceSearchPage from '../../../resources/ResourceSearchPage';
 import ServiceOfferings from '../../../serviceOfferings/ServiceOfferings';
-import Shapes from '../../../shapes/Shapes';
+import ShapesDetailsPage from '../../../shapes/ShapesDetailsPage';
+import ShapesSearchPage from '../../../shapes/ShapesSearchPage';
 import SolutionPackagingView from '../../../solutionPackaging/SolutionPackagingView';
 
 import styles from './Routes.module.css';
@@ -91,7 +91,7 @@ const Routes: FC = () => (
       <Route path="/support" element={Wrappers(<SupportPage/>)}/>
       <Route path="/ontologies" element={Wrappers(<OntologiesSearchPage/>)}/>
       <Route path="/ontologies/details/*" element={Wrappers(<OntologiesDetailsPage/>)}/>
-      <Route path="/shapes" element={Wrappers(<Shapes/>)}/>
+      <Route path="/shapes" element={Wrappers(<ShapesSearchPage/>)}/>
       <Route path="/shapes/details/*" element={Wrappers(<ShapesDetailsPage/>)}/>
     </ReactRoutes>
   </Vertical>

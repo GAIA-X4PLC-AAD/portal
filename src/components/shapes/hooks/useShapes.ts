@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { fetchAllSchemas } from '../../services/schemaApiService';
-import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
-import { Shape } from '../../types/shapes.model';
+import { fetchAllSchemas } from '../../../services/schemaApiService';
+import { fetchAllShapesFromSchemas } from '../../../services/shapeService.utils';
+import { Shape } from '../../../types/shapes.model';
 
 export type ShapesViewState = 'LOADING' | 'SHOW_SHAPES' | 'SHOW_NO_RESULTS'
 
