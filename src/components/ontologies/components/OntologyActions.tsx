@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import GaiaXButton from '../../../common/components/buttons/GaiaXButton';
 import Title from '../../../common/components/fields/title/Title';
+import Vertical from '../../../common/components/layouts/Vertical';
 import { downloadTurtleFile } from '../../../services/schemaService.utils';
 import { OntologyContext } from '../../context/OntologyContext';
 
@@ -30,15 +31,20 @@ const OntologyActions: FC = () => {
   }
 
   return (
-    <div className={styles['container']}>
-      <div className={styles['title']}>
-        <Title>{t('dashboard.actions')}</Title>
-      </div>
-      <div className={styles['buttons']}>
-        <GaiaXButton label={t('details.view-graph')} handleOnClick={() => handleNavigationToGraphPage()}/>
-        <GaiaXButton label={t('details.download-file')} handleOnClick={() => downloadTurtleFile(ontology.subject)}/>
-      </div>
-    </div>
+    <Vertical className={styles.sidebarCardContainer}>
+      <Title className={styles.title}>{t('dashboard.actions')}</Title>
+
+      <GaiaXButton
+        className={styles.sideBarCardButton}
+        label={t('details.view-graph')}
+        handleOnClick={() => handleNavigationToGraphPage()}
+      />
+      <GaiaXButton
+        className={styles.sideBarCardButton}
+        label={t('details.download-file')}
+        handleOnClick={() => downloadTurtleFile(ontology.subject)}
+      />
+    </Vertical>
   );
 };
 

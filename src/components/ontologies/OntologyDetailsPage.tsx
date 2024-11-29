@@ -6,21 +6,23 @@ import { useParams } from 'react-router-dom';
 
 import car from '../../assets/car.gif';
 import Header from '../../common/components/header/Header';
+import Horizontal from '../../common/components/layouts/Horizontal';
+import Main from '../../common/components/layouts/Main';
+import Vertical from '../../common/components/layouts/Vertical';
+import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
+import NoContent from '../../common/components/noContent/NoContent';
 import { fetchOntologyById } from '../../services/ontologyService.utils';
 import { fetchAllSchemas } from '../../services/schemaApiService';
 import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
 import { Ontology } from '../../types/ontologies.model';
 import { ARROW_RIGHT } from '../../utils/symbols';
-import DetailsContent from '../detailsPage/layout/content/DetailsContent';
-import DetailsMainContent from '../detailsPage/layout/mainContent/DetailsMainContent';
-import DetailsPage from '../detailsPage/layout/mainPage/DetailsPage';
-import DetailsSidebar from '../detailsPage/layout/sidebar/DetailsSidebar';
 
+import styles from './OntologyDetailsPage.module.css';
 import OntologyActions from './components/OntologyActions';
 import OntologyDetailMainContent from './components/OntologyDetailMainContent';
 import OntologySuitableOfferings from './components/OntologySuitableOfferings';
 
-const OntologiesDetailsPage: FC = () => {
+const OntologyDetailsPage: FC = () => {
   const { t } = useTranslation();
   const { '*': id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
@@ -57,21 +59,24 @@ const OntologiesDetailsPage: FC = () => {
   }
 
   return (
-    <DetailsPage>
-      <Header title={`${t('left-menu.shapesAndOntologies')} ${ARROW_RIGHT} ${ontology.subject}`} />
-      <OntologyContext.Provider value={ontology}>
-        <DetailsContent>
-          <DetailsMainContent>
-            <OntologyDetailMainContent/>
-          </DetailsMainContent>
-          <DetailsSidebar>
-            <OntologySuitableOfferings />
-            <OntologyActions />
-          </DetailsSidebar>
-        </DetailsContent>
-      </OntologyContext.Provider>
-    </DetailsPage>
+    <OntologyContext.Provider value={ontology}>
+      <Header
+        title={`${t('left-menu.shapesAndOntologies')} ${ontology ? ARROW_RIGHT : ''} ${ontology?.subject || ''}`}/>
+      <Main>
+        <LoadingIndicator visible={isLoading}/>
+        <NoContent message={t('ontologies.ontology-detail-not-available')} visible={!isLoading && !ontology}/>
+
+        <Horizontal className={styles.mainContentContainer} visible={!isLoading && !!ontology}>
+          <OntologyDetailMainContent/>
+
+          <Vertical className={styles.sidebarContainer}>
+            <OntologySuitableOfferings/>
+            <OntologyActions/>
+          </Vertical>
+        </Horizontal>
+      </Main>
+    </OntologyContext.Provider>
   );
 }
 
-export default OntologiesDetailsPage;
+export default OntologyDetailsPage;

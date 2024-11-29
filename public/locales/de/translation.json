@@ -566,6 +566,7 @@
     "title": "Ontologie",
     "titles": "Ontologien",
     "no-ontologies-available": "Keine Ontologien gefunden",
+    "ontology-detail-not-available": "Ontologiendetails sind nicht verfügbar",
     "search-bar-text": "Suchen Sie nach speziellen Ontologien",
     "related-ontologies": "Verwandte Ontologien",
     "not-found": "Ontologie nicht gefunden",

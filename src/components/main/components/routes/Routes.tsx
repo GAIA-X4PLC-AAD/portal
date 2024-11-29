@@ -17,8 +17,8 @@ import SupportPage from '../../../help/SupportPage'
 import Home from '../../../home/Home';
 import LoginFail from '../../../login/LoginFail';
 import OnboardingPage from '../../../onboarding/onboarding_page';
-import OntologiesDetailsPage from '../../../ontologies/OntologiesDetailsPage';
 import OntologiesSearchPage from '../../../ontologies/OntologiesSearchPage';
+import OntologyDetailsPage from '../../../ontologies/OntologyDetailsPage';
 import ParticipantDetails from '../../../participants/ParticipantDetails';
 import ParticipantSearchPage from '../../../participants/ParticipantSearchPage';
 import ProvideAttributes from '../../../provide/ProvideAttributes';
@@ -90,7 +90,7 @@ const Routes: FC = () => (
       <Route path="/about" element={Wrappers(<AboutPage/>)}/>
       <Route path="/support" element={Wrappers(<SupportPage/>)}/>
       <Route path="/ontologies" element={Wrappers(<OntologiesSearchPage/>)}/>
-      <Route path="/ontologies/details/*" element={Wrappers(<OntologiesDetailsPage/>)}/>
+      <Route path="/ontologies/details/*" element={Wrappers(<OntologyDetailsPage/>)}/>
       <Route path="/shapes" element={Wrappers(<ShapesSearchPage/>)}/>
       <Route path="/shapes/details/*" element={Wrappers(<ShapesDetailsPage/>)}/>
     </ReactRoutes>

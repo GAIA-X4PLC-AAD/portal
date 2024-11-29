@@ -6,14 +6,16 @@ import { useLocation } from 'react-router-dom';
 // @ts-ignore
 import car from '../../assets/car.gif';
 import Header from '../../common/components/header/Header';
+import Horizontal from '../../common/components/layouts/Horizontal';
+import Main from '../../common/components/layouts/Main';
+import Vertical from '../../common/components/layouts/Vertical';
+import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
+import NoContent from '../../common/components/noContent/NoContent';
 import { getShapeByName } from '../../services/shapeService.utils';
 import { Shape } from '../../types/shapes.model';
 import { ARROW_RIGHT } from '../../utils/symbols';
-import DetailsContent from '../detailsPage/layout/content/DetailsContent';
-import DetailsMainContent from '../detailsPage/layout/mainContent/DetailsMainContent';
-import DetailsPage from '../detailsPage/layout/mainPage/DetailsPage';
-import DetailsSidebar from '../detailsPage/layout/sidebar/DetailsSidebar';
 
+import styles from './ShapeDetailsPage.module.css';
 import ShapeActions from './components/ShapeActions';
 import ShapeSuitableOfferings from './components/ShapeSuitableOfferings';
 import ShapesDetailMainContent from './components/ShapesDetailMainContent';
@@ -54,20 +56,22 @@ const ShapesDetailsPage: FC = () => {
   }
 
   return (
-    <DetailsPage>
+    <ShapeContext.Provider value={shape}>
       <Header title={`${t('shapes.titles')} ${ARROW_RIGHT} ${shape.shaclShapeName}`}/>
-      <ShapeContext.Provider value={shape}>
-        <DetailsContent>
-          <DetailsMainContent>
-            <ShapesDetailMainContent/>
-          </DetailsMainContent>
-          <DetailsSidebar>
-            <ShapeSuitableOfferings />
-            <ShapeActions />
-          </DetailsSidebar>
-        </DetailsContent>
-      </ShapeContext.Provider>
-    </DetailsPage>
+      <Main>
+        <LoadingIndicator visible={isLoading}/>
+        <NoContent message={t('ontologies.ontology-detail-not-available')} visible={!isLoading && !ontology}/>
+
+        <Horizontal className={styles.mainContentContainer} visible={!isLoading && !!ontology}>
+          <ShapesDetailMainContent/>
+
+          <Vertical className={styles.sidebarContainer}>
+            <ShapeSuitableOfferings/>
+            <ShapeActions/>
+          </Vertical>
+        </Horizontal>
+      </Main>
+    </ShapeContext.Provider>
   );
 }
 

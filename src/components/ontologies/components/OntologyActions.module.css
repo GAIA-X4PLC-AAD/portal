@@ -1,26 +1,19 @@
-.container {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    min-height: 30vh;
-    border-radius: 10px;
-    background-color: white;
-    padding: 0 20px 20px 20px;
-    box-shadow: 10px 15px 20px rgba(0, 0, 0, 0.25);
+.sidebarCardContainer {
+    align-items: flex-start;
+    padding: 2rem;
+    width: 100%;
+
+    border-radius: 1rem;
+    background-color: var(--white);
+    box-shadow: var(--shadow--normal);
 }
 
 .title {
-    align-items: flex-start;
-    text-align: left;
+    margin-top: 0;
 }
 
-.buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-.buttons button {
-    width: 100%;
+.sideBarCardButton {
+    margin: 0;
+    width: 85%;
+    align-self: center;
 }
