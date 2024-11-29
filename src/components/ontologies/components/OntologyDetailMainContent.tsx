@@ -3,15 +3,15 @@ import React, { FC, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import Text from '../../../../common/components/fields/././text/Text';
-import Title from '../../../../common/components/fields/title/Title';
-import Markdown from '../../../../common/components/markdown/Markdown';
-import { Shape } from '../../../../types/shapes.model';
-import { OntologyContext } from '../../../context/OntologyContext';
+import Text from '../../../common/components/fields/text/Text';
+import Title from '../../../common/components/fields/title/Title';
+import Markdown from '../../../common/components/markdown/Markdown';
+import { Shape } from '../../../types/shapes.model';
+import { OntologyContext } from '../../context/OntologyContext';
 
-import styles from './OntologyMainContent.module.css';
+import styles from './OntologyDetailMainContent.module.css';
 
-const OntologyMainContent: FC = () => {
+const OntologyDetailMainContent: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const ontology = useContext(OntologyContext);
@@ -44,4 +44,4 @@ const OntologyMainContent: FC = () => {
   );
 };
 
-export default OntologyMainContent;
+export default OntologyDetailMainContent;

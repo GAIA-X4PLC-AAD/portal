@@ -3,7 +3,7 @@ import React, { FC, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Data, DataSet, Network } from 'vis-network/standalone/esm/vis-network';
 
-import { Link, Node } from '../types/ontologies.model';
+import { Link, Node } from '../../../types/ontologies.model';
 
 interface IRDFVisualization {
   nodes: Node[];

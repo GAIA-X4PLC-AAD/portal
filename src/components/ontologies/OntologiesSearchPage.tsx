@@ -9,12 +9,12 @@ import ShowMapToggleButton from '../../common/components/buttons/ShowMapToggleBu
 import Header from '../../common/components/header/Header';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import SearchBar from '../../common/components/searchBar/SearchBar';
-import RDFVisualization from '../../utils/RDFVisualization';
 import ItemCard from '../ItemCard/ItemCard';
 import { ontologyToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 
-import useOntologies from './useOntologies';
+import RDFVisualization from './components/RDFVisualization';
+import useOntologies from './hooks/useOntologies';
 
 const CLASS_OR_OBJECT_PROPERTY_NODE_TYPES = [
   'http://www.w3.org/2000/01/rdf-schema#Class',
@@ -22,7 +22,7 @@ const CLASS_OR_OBJECT_PROPERTY_NODE_TYPES = [
   'http://www.w3.org/2002/07/owl#ObjectProperty'
 ]
 
-const Ontologies = () => {
+const OntologiesSearchPage = () => {
   const { t } = useTranslation();
   const {
     ontologies,
@@ -64,4 +64,4 @@ const Ontologies = () => {
   );
 };
 
-export default Ontologies;
+export default OntologiesSearchPage;

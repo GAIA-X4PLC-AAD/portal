@@ -10,7 +10,6 @@ import Provider from '../../../account/Provider';
 import DashboardPage from '../../../dashboard/dashboard_page';
 import LcmFinal from '../../../dashboard/lcm/LcmFinal';
 import LcmServices from '../../../dashboard/lcm/LcmServices';
-import OntologiesDetailsPage from '../../../detailsPage/pages/ontologies/OntologiesDetailsPage';
 import ShapesDetailsPage from '../../../detailsPage/pages/shapes/ShapesDetailsPage';
 import DiscoveryItem from '../../../discovery/DiscoveryItem';
 import SearchView from '../../../discovery/search/SearchView';
@@ -19,7 +18,8 @@ import SupportPage from '../../../help/SupportPage'
 import Home from '../../../home/Home';
 import LoginFail from '../../../login/LoginFail';
 import OnboardingPage from '../../../onboarding/onboarding_page';
-import Ontologies from '../../../ontologies/Ontologies';
+import OntologiesDetailsPage from '../../../ontologies/OntologiesDetailsPage';
+import OntologiesSearchPage from '../../../ontologies/OntologiesSearchPage';
 import ParticipantDetails from '../../../participants/ParticipantDetails';
 import ParticipantSearchPage from '../../../participants/ParticipantSearchPage';
 import ProvideAttributes from '../../../provide/ProvideAttributes';
@@ -89,7 +89,7 @@ const Routes: FC = () => (
       <Route path="/lcm/:id/:index" element={Wrappers(<LcmServices/>)}/>
       <Route path="/about" element={Wrappers(<AboutPage/>)}/>
       <Route path="/support" element={Wrappers(<SupportPage/>)}/>
-      <Route path="/ontologies" element={Wrappers(<Ontologies/>)}/>
+      <Route path="/ontologies" element={Wrappers(<OntologiesSearchPage/>)}/>
       <Route path="/ontologies/details/*" element={Wrappers(<OntologiesDetailsPage/>)}/>
       <Route path="/shapes" element={Wrappers(<Shapes/>)}/>
       <Route path="/shapes/details/*" element={Wrappers(<ShapesDetailsPage/>)}/>

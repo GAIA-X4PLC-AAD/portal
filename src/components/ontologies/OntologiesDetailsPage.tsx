@@ -4,21 +4,21 @@ import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import car from '../../../../assets/car.gif';
-import Header from '../../../../common/components/header/Header';
-import { fetchOntologyById } from '../../../../services/ontologyService.utils';
-import { fetchAllSchemas } from '../../../../services/schemaApiService';
-import { fetchAllShapesFromSchemas } from '../../../../services/shapeService.utils';
-import { Ontology } from '../../../../types/ontologies.model';
-import { ARROW_RIGHT } from '../../../../utils/symbols';
-import DetailsContent from '../../layout/content/DetailsContent';
-import DetailsMainContent from '../../layout/mainContent/DetailsMainContent';
-import DetailsPage from '../../layout/mainPage/DetailsPage';
-import DetailsSidebar from '../../layout/sidebar/DetailsSidebar';
+import car from '../../assets/car.gif';
+import Header from '../../common/components/header/Header';
+import { fetchOntologyById } from '../../services/ontologyService.utils';
+import { fetchAllSchemas } from '../../services/schemaApiService';
+import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
+import { Ontology } from '../../types/ontologies.model';
+import { ARROW_RIGHT } from '../../utils/symbols';
+import DetailsContent from '../detailsPage/layout/content/DetailsContent';
+import DetailsMainContent from '../detailsPage/layout/mainContent/DetailsMainContent';
+import DetailsPage from '../detailsPage/layout/mainPage/DetailsPage';
+import DetailsSidebar from '../detailsPage/layout/sidebar/DetailsSidebar';
 
-import OntologyMainContent from './OntologyMainContent';
-import OntologyActions from './components/actions/OntologyActions';
-import OntologySuitableOfferings from './components/suitableOfferings/OntologySuitableOfferings';
+import OntologyActions from './components/OntologyActions';
+import OntologyDetailMainContent from './components/OntologyDetailMainContent';
+import OntologySuitableOfferings from './components/OntologySuitableOfferings';
 
 const OntologiesDetailsPage: FC = () => {
   const { t } = useTranslation();
@@ -62,7 +62,7 @@ const OntologiesDetailsPage: FC = () => {
       <OntologyContext.Provider value={ontology}>
         <DetailsContent>
           <DetailsMainContent>
-            <OntologyMainContent />
+            <OntologyDetailMainContent/>
           </DetailsMainContent>
           <DetailsSidebar>
             <OntologySuitableOfferings />

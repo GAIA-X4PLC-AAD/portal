@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { fetchAllOntologiesFromSchemas, getUniqueLinks, getUniqueNodes } from '../../services/ontologyService.utils';
-import { fetchAllSchemas } from '../../services/schemaApiService';
-import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
-import { Node, Ontology, ShapesAndOntologiesInput } from '../../types/ontologies.model';
-import { Shape } from '../../types/shapes.model';
+import { fetchAllOntologiesFromSchemas, getUniqueLinks, getUniqueNodes } from '../../../services/ontologyService.utils';
+import { fetchAllSchemas } from '../../../services/schemaApiService';
+import { fetchAllShapesFromSchemas } from '../../../services/shapeService.utils';
+import { Node, Ontology, ShapesAndOntologiesInput } from '../../../types/ontologies.model';
+import { Shape } from '../../../types/shapes.model';
 
 export type OntologiesViewState = 'LOADING' | 'SHOW_ONTOLOGIES' | 'SHOW_NO_RESULTS' | 'SHOW_MAP'
 
