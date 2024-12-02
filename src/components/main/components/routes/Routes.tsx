@@ -10,9 +10,6 @@ import Provider from '../../../account/Provider';
 import DashboardPage from '../../../dashboard/dashboard_page';
 import LcmFinal from '../../../dashboard/lcm/LcmFinal';
 import LcmServices from '../../../dashboard/lcm/LcmServices';
-import OntologiesDetailsPage from '../../../detailsPage/pages/ontologies/OntologiesDetailsPage';
-import ResourceDetailsPage from '../../../detailsPage/pages/resources/ResourceDetailsPage';
-import ShapesDetailsPage from '../../../detailsPage/pages/shapes/ShapesDetailsPage';
 import DiscoveryItem from '../../../discovery/DiscoveryItem';
 import SearchView from '../../../discovery/search/SearchView';
 import AboutPage from '../../../help/AboutPage'
@@ -20,15 +17,18 @@ import SupportPage from '../../../help/SupportPage'
 import Home from '../../../home/Home';
 import LoginFail from '../../../login/LoginFail';
 import OnboardingPage from '../../../onboarding/onboarding_page';
-import Ontologies from '../../../ontologies/Ontologies';
+import OntologiesSearchPage from '../../../ontologies/OntologiesSearchPage';
+import OntologyDetailsPage from '../../../ontologies/OntologyDetailsPage';
 import ParticipantDetails from '../../../participants/ParticipantDetails';
 import ParticipantSearchPage from '../../../participants/ParticipantSearchPage';
 import ProvideAttributes from '../../../provide/ProvideAttributes';
 import ProvideOverview from '../../../provide/ProvideOverview';
 import ProvideSelection from '../../../provide/ProvideSelection';
+import ResourceDetailsPage from '../../../resources/ResourceDetailsPage';
 import ResourceSearchPage from '../../../resources/ResourceSearchPage';
 import ServiceOfferings from '../../../serviceOfferings/ServiceOfferings';
-import Shapes from '../../../shapes/Shapes';
+import ShapeDetailsPage from '../../../shapes/ShapeDetailsPage';
+import ShapesSearchPage from '../../../shapes/ShapesSearchPage';
 import SolutionPackagingView from '../../../solutionPackaging/SolutionPackagingView';
 
 import styles from './Routes.module.css';
@@ -89,10 +89,10 @@ const Routes: FC = () => (
       <Route path="/lcm/:id/:index" element={Wrappers(<LcmServices/>)}/>
       <Route path="/about" element={Wrappers(<AboutPage/>)}/>
       <Route path="/support" element={Wrappers(<SupportPage/>)}/>
-      <Route path="/ontologies" element={Wrappers(<Ontologies/>)}/>
-      <Route path="/ontologies/details/*" element={Wrappers(<OntologiesDetailsPage/>)}/>
-      <Route path="/shapes" element={Wrappers(<Shapes/>)}/>
-      <Route path="/shapes/details/*" element={Wrappers(<ShapesDetailsPage/>)}/>
+      <Route path="/ontologies" element={Wrappers(<OntologiesSearchPage/>)}/>
+      <Route path="/ontologies/details/*" element={Wrappers(<OntologyDetailsPage/>)}/>
+      <Route path="/shapes" element={Wrappers(<ShapesSearchPage/>)}/>
+      <Route path="/shapes/details/*" element={Wrappers(<ShapeDetailsPage/>)}/>
     </ReactRoutes>
   </Vertical>
 );

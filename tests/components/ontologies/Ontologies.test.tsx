@@ -2,22 +2,22 @@ import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router';
 
-import Ontologies from '../../../src/components/ontologies/Ontologies';
+import OntologiesSearchPage from '../../../src/components/ontologies/OntologiesSearchPage';
 
-jest.mock('../../../src/components/ontologies/useOntologies', () => ({
+jest.mock('../../../src/components/ontologies/hooks/useOntologies', () => ({
   __esModule: true,
   default: jest.fn(),
 }));
 
 const ComponentUnderTest = () => (
   <MemoryRouter>
-    <Ontologies />
+    <OntologiesSearchPage/>
   </MemoryRouter>
 )
 
 describe('Ontologies', () => {
   it('should render ontologies', () => {
-    require('../../../src/components/ontologies/useOntologies').default.mockReturnValue({
+    require('../../../src/components/ontologies/hooks/useOntologies').default.mockReturnValue({
       ontologies: [
         { subject: 'Ontology 1' },
         { subject: 'Ontology 2' }
@@ -32,7 +32,7 @@ describe('Ontologies', () => {
   });
 
   it('should render the header with the correct title', () => {
-    require('../../../src/components/ontologies/useOntologies').default.mockReturnValue({
+    require('../../../src/components/ontologies/hooks/useOntologies').default.mockReturnValue({
       ontologies: [
         { subject: 'Ontology 1' },
         { subject: 'Ontology 2' }
@@ -46,7 +46,7 @@ describe('Ontologies', () => {
   });
 
   it('should render the search bar', () => {
-    require('../../../src/components/ontologies/useOntologies').default.mockReturnValue({
+    require('../../../src/components/ontologies/hooks/useOntologies').default.mockReturnValue({
       ontologies: [
         { subject: 'Ontology 1' },
         { subject: 'Ontology 2' }
@@ -60,7 +60,7 @@ describe('Ontologies', () => {
   });
 
   it('should render the loading indicator when state is LOADING', () => {
-    require('../../../src/components/ontologies/useOntologies').default.mockReturnValue({
+    require('../../../src/components/ontologies/hooks/useOntologies').default.mockReturnValue({
       ontologies: [],
       state: 'LOADING',
     });
@@ -71,7 +71,7 @@ describe('Ontologies', () => {
   });
 
   it('should render the no content message when state is SHOW_NO_RESULTS', () => {
-    require('../../../src/components/ontologies/useOntologies').default.mockReturnValue({
+    require('../../../src/components/ontologies/hooks/useOntologies').default.mockReturnValue({
       ontologies: [],
       state: 'SHOW_NO_RESULTS',
     });

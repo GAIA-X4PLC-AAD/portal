@@ -1,0 +1,11 @@
+.detailsMainContent {
+    justify-content: flex-start;
+    align-self: stretch;
+    gap: 1rem;
+    padding: 2rem;
+
+    background-color: var(--white);
+    border-radius: 1rem;
+    box-shadow: var(--shadow--normal);
+}
+

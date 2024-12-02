@@ -542,6 +542,8 @@
   "participants": {
     "title": "Participant",
     "titles": "Participants",
+    "uri": "URI",
+    "terms-and-conditions": "Allgemeine Geschäftsbedingungen",
     "search-bar-text": "Search for specific participants",
     "no-participants-available": "No participants available",
     "no-participant-available": "No participant available"
@@ -568,6 +570,7 @@
     "title": "Ontology",
     "titles": "Ontologies",
     "no-ontologies-available": "No ontologies available",
+    "ontology-detail-not-available": "Ontology details is not available",
     "search-bar-text": "Search for special ontologies",
     "related-ontologies": "Related ontologies",
     "not-found": "Ontology not found",
@@ -578,6 +581,7 @@
     "titles": "Shapes",
     "search-bar-text": "Search for special shapes",
     "no-shapes-available": "No shapes available",
+    "shape-detail-not-available": "Shape details is not available",
     "related-shapes": "Related shapes",
     "not-found": "Shape not found"
   },
