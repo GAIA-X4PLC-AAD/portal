@@ -1,8 +1,1 @@
-src/common/components/layouts/DetailsContent.tsx
-src/common/components/layouts/DetailsMainContent.tsx
-src/common/components/layouts/DetailsPropertyContainer.tsx
-src/common/components/layouts/DetailsSidebar.tsx
-src/components/context/ParticipantDetailsContext.tsx
-src/components/ontologies/components/OntologyActions.tsx
-src/components/participants/components/ParticipantDetailMainContent.tsx
-src/components/shapes/ShapeDetailsPage.tsx
+
