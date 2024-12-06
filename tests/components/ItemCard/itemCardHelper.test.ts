@@ -1,4 +1,10 @@
-import { createItemCardData, ontologyToItemCardData, shapeToItemCardData, serviceToItemCardData, resourceToItemCardData } from '../../../src/components/ItemCard/itemCardHelper';
+import {
+  createItemCardData,
+  ontologyToItemCardData,
+  resourceToItemCardData,
+  serviceToItemCardData,
+  shapeToItemCardData
+} from '../../../src/components/ItemCard/itemCardHelper';
 import { Ontology } from '../../../src/types/ontologies.model';
 import { Resource } from '../../../src/types/resources.model';
 import { ServiceOffering } from '../../../src/types/serviceOfferings.model';
@@ -15,6 +21,10 @@ jest.mock('i18next', () => ({
     return translations[key] || key;
   },
 }));
+
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
 
 describe('itemCardHelper', () => {
   describe('createItemCardData', () => {
@@ -75,13 +85,18 @@ describe('itemCardHelper', () => {
 
   describe('serviceToItemCardData', () => {
     it('should convert ServiceOffering to ItemCardData', () => {
-      const service: ServiceOffering = { label: 'ServiceLabel', name: 'ServiceName', description: 'ServiceDescription', claimsGraphUri: 'ServiceUri', uri: 'ServiceUri' };
+      const service: ServiceOffering = {
+        labels: ['SoftwareResource'],
+        name: 'ServiceName',
+        description: 'ServiceDescription',
+        uri: 'ServiceUri'
+      };
       const data = serviceToItemCardData(service);
       expect(data).toEqual({
-        label: 'ServiceLabel',
+        label: 'SoftwareResource',
         title: 'ServiceName',
         description: 'ServiceDescription',
-        navigationUrl: '/services/details/ServiceUri',
+        navigationUrl: '/service-offerings/ServiceUri',
         isGaiaXCompliant: false,
         testId: 'Card:ServiceUri:ServiceName',
       });

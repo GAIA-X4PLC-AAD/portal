@@ -1,7 +1,7 @@
 /* test coverage not required */
 import axios from 'axios';
 
-import { CypherQueryResult, ServiceOfferingInput } from '../utils/dataMapper';
+import { CypherQueryResult } from '../utils/dataMapper';
 
 const getHeaders = () => {
   return {
@@ -41,16 +41,6 @@ const cypherQuery = async (requestBody: { statement: string }): Promise<CypherQu
 }
 
 export const CypherQueryApiService = {
-
-  /**
-   * Returns every Service Offering available
-   */
-  async getAllSelfDescriptions(): Promise<ServiceOfferingInput> {
-    return cypherQuery({
-      statement: 'MATCH (n:ServiceOffering) RETURN properties(n), labels(n) LIMIT 100',
-    })
-  },
-
   /**
    * Returns all resources of type included in the type asset list passed in as parameter.
    *
@@ -165,6 +155,66 @@ export const CypherQueryApiService = {
         properties(participant).uri AS uri,
         properties(participant).gaiaxTermsAndConditions AS gaiaxTermsAndConditions,
         labels(participant) AS labels
+      `
+    });
+  },
+
+  async getServiceOfferings(): Promise<CypherQueryResult> {
+    return cypherQuery({
+      statement: `
+        MATCH (softwareResource:SoftwareResource)
+    
+        OPTIONAL MATCH (softwareResource) - [:general] - (general)
+        OPTIONAL MATCH (general) - [:data] - (data)
+        OPTIONAL MATCH (general) - [:description] - (description)
+        
+        RETURN
+            labels(softwareResource) as labels,
+            softwareResource.uri as uri,
+            description.name AS name,
+            description.description AS description
+            `
+    })
+  },
+
+  async getServiceOfferingDetails(uri: string): Promise<CypherQueryResult> {
+    return cypherQuery({
+      statement: `
+      MATCH (softwareResource:SoftwareResource)
+        WHERE softwareResource.uri CONTAINS '${uri}'
+        
+        OPTIONAL MATCH (softwareResource) - [:requiredFile] - (requiredFiles)
+        OPTIONAL MATCH (softwareResource) - [:resultingFile] - (resultingFile)
+        OPTIONAL MATCH (softwareResource) - [:general] - (general)
+        OPTIONAL MATCH (general) - [:data] - (data)
+        OPTIONAL MATCH (general) - [:description] - (description)
+        OPTIONAL MATCH (softwareResource) - [:instanceOf] - (instanceOf) 
+        OPTIONAL MATCH (instanceOf) - [:serviceAccessPoint] - (serviceAccessPoint)
+        OPTIONAL MATCH (instanceOf) - [:hostedOn] - (hostedOn)
+        OPTIONAL MATCH (softwareResource) - [:exposedThrough] - (exposedThrough)
+        OPTIONAL MATCH (exposedThrough) - [:providedBy] - (providedBy)
+        
+        RETURN 
+            description.name AS name,
+            description.description AS description,
+            collect({
+                description: requiredFiles.description, 
+                specification: requiredFiles.specification
+            }) AS requiredFilesList,
+            resultingFile.description AS resultingFileDescription,
+            resultingFile.specification AS resultingFileSpecification,
+            data.contractId AS contractId,
+            data.recordingTime AS recordingTime,
+            serviceAccessPoint.host as serviceAccessPointHost,     
+            serviceAccessPoint.name as serviceAccessPointName,
+            serviceAccessPoint.openAPI as serviceAccessPointOpenAPI,
+            serviceAccessPoint.protocol as serviceAccessPointProtocol,
+            serviceAccessPoint.port as serviceAccessPointPort,
+            hostedOn.location as hostedOnLocation,
+            hostedOn.description as hostedOnDescription,
+            hostedOn.name as hostedOnName,
+            providedBy.legalName as providedBy,
+            softwareResource.claimsGraphUri as claimsGraphUri
       `
     });
   },

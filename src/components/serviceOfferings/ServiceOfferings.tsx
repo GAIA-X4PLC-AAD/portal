@@ -12,7 +12,7 @@ import ItemCard from '../ItemCard/ItemCard';
 import { serviceToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 
-import { useServiceOfferings } from './useServiceOfferings';
+import { useServiceOfferings } from './hooks/useServiceOfferings';
 
 const ServiceOfferings = () => {
   const { t } = useTranslation()

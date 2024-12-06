@@ -24,6 +24,10 @@ const ComponentUnderTest: FC<Partial<IItemCard>> = () => (
   </MemoryRouter>
 )
 
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
+
 describe('ItemCard', () => {
   it('should render ItemCard with provided data', () => {
     render(
