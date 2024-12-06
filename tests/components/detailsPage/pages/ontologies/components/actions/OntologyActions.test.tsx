@@ -17,6 +17,10 @@ jest.mock('../../../../../../../src/services/schemaService.utils', () => ({
   downloadTurtleFile: (subject) => downloadTurtleFile(subject)
 }))
 
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
+
 describe('OntologyActions', () => {
   it('renders not found text if ontology is not present', () => {
     const { findByText } = render(withRouter(

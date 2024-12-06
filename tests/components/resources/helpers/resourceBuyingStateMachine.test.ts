@@ -21,6 +21,10 @@ jest.mock('i18next', () => ({
   t: (translationId) => translationId
 }))
 
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
+
 describe('INIT', () => {
   it('remains in the same state if unknown action happens', () => {
     const state = { name: 'INIT' } as ResourceBuyingState

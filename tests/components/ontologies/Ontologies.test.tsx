@@ -15,6 +15,10 @@ const ComponentUnderTest = () => (
   </MemoryRouter>
 )
 
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
+
 describe('Ontologies', () => {
   it('should render ontologies', () => {
     require('../../../src/components/ontologies/hooks/useOntologies').default.mockReturnValue({

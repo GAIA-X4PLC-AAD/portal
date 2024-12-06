@@ -13,6 +13,10 @@ jest.mock('../../../src/components/participants/hooks/useParticipantDetails', ()
   useParticipantDetails: () => useParticipantDetails(),
 }));
 
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
+
 describe('ParticipantDetails', () => {
   beforeAll(() => {
     useParticipantDetails.mockReturnValue(normal_render); // Mock the useParticipants hook

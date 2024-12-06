@@ -1,20 +1,31 @@
-export type ServiceOfferings = {
-  survey_close_time?: string,
-  survey_creation_time?: string,
-  survey_description?: string,
-  survey_end_time?: string,
-  survey_id?: string,
-  survey_start_time?: string,
-  survey_state?: string,
-  survey_title?: string,
-  survey_url?: string,
-}
-
 export interface ServiceOffering {
-  label: string,
+  labels: string[],
   name: string,
-  policy: string,
   uri: string,
   description: string,
-  claimsGraphUri: string,
+}
+
+export interface ServiceOfferingRequiredFile {
+  description: string,
+  specification: string,
+}
+
+export interface ServiceOfferingDetails {
+  name: string;
+  description: string;
+  requiredFilesList: ServiceOfferingRequiredFile[];
+  resultingFileDescription: string,
+  resultingFileSpecification: string,
+  contractId: string,
+  recordingTime: string,
+  serviceAccessPointHost: string,
+  serviceAccessPointName: string,
+  serviceAccessPointOpenAPI: string,
+  serviceAccessPointProtocol: string,
+  serviceAccessPointPort: string,
+  hostedOnLocation: string,
+  hostedOnDescription: string,
+  hostedOnName: string,
+  providedBy: string,
+  claimsGraphUri: string[]
 }

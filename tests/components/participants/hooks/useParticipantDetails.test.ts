@@ -8,6 +8,10 @@ jest.mock('../../../../src/components/participants/helpers/participantDataFlow',
   loadParticipantDetails: () => loadParticipantDetails(),
 }));
 
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
+
 describe('useParticipant', () => {
   const mockLegalName = 'msg systems ag'; // Example legal name for testing
 

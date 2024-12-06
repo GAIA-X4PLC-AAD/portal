@@ -13,7 +13,10 @@ jest.mock('i18next', () => ({
   t: (translationId) => translationId,
 }))
 
-console.error = jest.fn()
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
+
 describe('Shapes', () => {
   it('renders content if state is SHOW_SHAPES', () => {
     useShapes.mockReturnValue({
