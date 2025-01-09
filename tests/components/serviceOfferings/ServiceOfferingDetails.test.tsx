@@ -26,6 +26,6 @@ describe('ServiceOfferingDetails', () => {
     const { getByRole } = render(withRouter(<ServiceOfferingDetails/>));
 
     //Check the heading
-    expect(getByRole('heading', { name: /service-offering.title → TT Data Processing Service/i })).toBeInTheDocument();
+    expect(getByRole('heading', { name: /service-offerings.detail-title → TT Data Processing Service/i })).toBeInTheDocument();
   })
 })
