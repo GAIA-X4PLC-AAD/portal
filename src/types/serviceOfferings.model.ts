@@ -1,3 +1,4 @@
+/* test coverage not required */
 export interface ServiceOffering {
   labels: string[],
   name: string,
