@@ -5,37 +5,9 @@ import '@testing-library/jest-dom';
 import { ServiceOfferingDetailsContext } from '../../../../src/components/context/ServiceOfferingDetailsContext';
 import ServiceOfferingDetailMainContent
   from '../../../../src/components/serviceOfferings/components/ServiceOfferingDetailMainContent';
-
-// Mock translations
-jest.mock('react-i18next', () => ({
-  useTranslation: jest.fn(() => ({
-    t: (key: string) => key, // Return the translation key as the value
-  })),
-}));
+import { mockServiceOfferingDetails } from '../__fixtures__/mockServiceOfferingDetails';
 
 describe('ServiceOfferingDetailMainContent', () => {
-  const mockServiceOfferingDetails = {
-    name: 'Sample Service',
-    description: 'This is a sample service description.',
-    resultingFileDescription: 'File Description',
-    resultingFileSpecification: 'File Specification',
-    contractId: '12345',
-    recordingTime: '2025-01-09T12:34:56Z',
-    providedBy: 'Sample Provider',
-    requiredFilesList: [
-      { specification: 'Spec 1', description: 'Desc 1' },
-      { specification: 'Spec 2', description: 'Desc 2' },
-    ],
-    serviceAccessPointHost: 'localhost',
-    serviceAccessPointName: 'API',
-    serviceAccessPointOpenAPI: '/openapi.json',
-    serviceAccessPointProtocol: 'HTTP',
-    serviceAccessPointPort: '8080',
-    hostedOnLocation: 'Datacenter A',
-    hostedOnDescription: 'Hosting Description',
-    hostedOnName: 'Host A',
-    claimsGraphUri: ['https://example.com/uri1', 'https://example.com/uri2'],
-  };
 
   const renderComponent = (contextValue: any) => {
     return render(
