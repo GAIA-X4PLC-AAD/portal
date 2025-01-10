@@ -4,10 +4,6 @@ import '@testing-library/jest-dom';
 
 import ServiceOfferingActions from '../../../../src/components/serviceOfferings/components/ServiceOfferingActions';
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({ t: (key) => key }),
-}));
-
 describe('ServiceOfferingActions', () => {
   it('renders correctly with all buttons', () => {
     const { getByText } = render(<ServiceOfferingActions/>);

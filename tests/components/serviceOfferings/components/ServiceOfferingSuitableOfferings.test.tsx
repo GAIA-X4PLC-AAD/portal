@@ -4,13 +4,6 @@ import React from 'react';
 import ServiceOfferingSuitableOfferings
   from '../../../../src/components/serviceOfferings/components/ServiceOfferingSuitableOfferings';
 
-// Mock the translation function
-jest.mock('react-i18next', () => ({
-  useTranslation: jest.fn(() => ({
-    t: (key: string) => key, // Return the translation key as the value
-  })),
-}));
-
 describe('ServiceOfferingSuitableOfferings', () => {
   it('renders the container', () => {
     const { container } = render(<ServiceOfferingSuitableOfferings/>);

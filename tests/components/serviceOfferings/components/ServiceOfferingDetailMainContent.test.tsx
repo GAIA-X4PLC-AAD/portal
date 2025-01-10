@@ -34,7 +34,7 @@ describe('ServiceOfferingDetailMainContent', () => {
     hostedOnLocation: 'Datacenter A',
     hostedOnDescription: 'Hosting Description',
     hostedOnName: 'Host A',
-    claimsGraphUri: ['http://example.com/uri1', 'http://example.com/uri2'],
+    claimsGraphUri: ['https://example.com/uri1', 'https://example.com/uri2'],
   };
 
   const renderComponent = (contextValue: any) => {
