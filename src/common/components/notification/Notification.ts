@@ -3,44 +3,50 @@ import { ToastOptions } from 'react-toastify/dist/types';
 
 import { Notification } from '../../../types/notification.model';
 
-export const notify = (notification: Notification) => {
+export const notify = (notification: Notification): number | string => {
+  let toastId: string | number;
 
   function getAutoCloseOption(toastOptions?: ToastOptions): number | false {
-    return toastOptions && toastOptions.autoClose ? toastOptions.autoClose : 15000;
+    return toastOptions?.autoClose === undefined ? 15000 : toastOptions.autoClose;
   }
 
   const toastOptions = {
     ...notification.options,
     autoClose: getAutoCloseOption(notification.options),
-  }
+  };
 
   switch (notification.messageType) {
   case 'SUCCESS':
-    toast.success(notification.message, {
+    toastId = toast.success(notification.message, {
       ...toastOptions,
     });
     break;
   case 'ERROR':
-    toast.error(notification.message, {
+    toastId = toast.error(notification.message, {
       ...toastOptions,
-      autoClose: false
+      autoClose: false,
     });
     break;
   case 'WARNING':
-    toast.warn(notification.message, {
+    toastId = toast.warn(notification.message, {
       ...toastOptions,
     });
     break;
   case 'INFO':
-    toast.info(notification.message, {
+    toastId = toast.info(notification.message, {
       ...toastOptions,
     });
     break;
   default:
-    toast(notification.message, {
+    toastId = toast(notification.message, {
       ...toastOptions,
     });
-    break
+    break;
   }
+
+  return toastId;
 };
 
+export const closeNotification = (toastId: number | string) => {
+  toast.dismiss(toastId);
+}
