@@ -1,10 +1,14 @@
 /* test coverage not required */
 import axios from 'axios';
+import { t } from 'i18next';
 import keycloakConfig from 'keycloak-config.json';
 import Keycloak from 'keycloak-js';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 
+import GaiaXButton from '../../common/components/buttons/GaiaXButton';
 import { closeNotification, notify } from '../../common/components/notification/Notification';
+
+import styles from './AuthContextProvider.module.css';
 
 const getDotEnvKeycloakApiUrl = (): string => {
   if (!process.env.REACT_APP_KEYCLOAK_API_URL) {
@@ -79,10 +83,18 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
         const expirationTime = keycloak.tokenParsed.exp * 1000; // Convert to milliseconds
 
         //const timeToExpiry = expirationTime - Date.now(); // 15 minutes now
-        const timeToExpiry = expirationTime - Date.now() - 800000;
+        //const timeToExpiry = (expirationTime - Date.now());
+        let timeToExpiry = expirationTime - Date.now();
+        if (timeToExpiry > 860000) {
+          timeToExpiry = expirationTime - Date.now() - 860000;
+        }
+        // if (timeToExpiry > 500000) {
+        //   timeToExpiry = expirationTime - Date.now() - 500000;
+        // }
+        console.log(timeToExpiry);
         // alert(timeToExpiry);
 
-        if (timeToExpiry <= 60000 && timeToExpiry > 0 && !notificationShown) { // 1 minute before expiry
+        if (timeToExpiry <= 30000 && timeToExpiry > 0 && !notificationShown) { // 1 minute before expiry
           setNotificationShown(true);
         }
 
@@ -103,31 +115,38 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     if (notificationShown) {
       showExpirationNotification();
     }
+    if (!notificationShown) {
+      closeNotification();
+    }
   }, [notificationShown]);
 
   const showExpirationNotification = () => {
     const toasterId = notify({
       messageType: 'WARNING',
       message: (
-        <div>
-          <p>Your session is about to expire in 10 seconds!</p>
-          <button
-            onClick={() => {
-              keycloak.updateToken(900)   //900 second = 15 minutes
-                .then((refreshed: boolean) => {
-                  if (refreshed) {
-                    setToken(keycloak.token ? keycloak.token : '');
-                    setNotificationShown(false);
-                    closeNotification(toasterId);
-                  }
-                })
-                .catch(() => {
-                  console.warn('Failed to refresh token.');
-                });
-            }}
-          >
-              Renew Session
-          </button>
+        <div className={styles.notificationContainer}>
+          <p>{t('session.willExpire')}</p>
+          <p>{t('session.confirmRenew')}</p>
+          <div className={styles.buttonContainer}>
+            <GaiaXButton
+              className={styles.notificationButton}
+              label={t('common.yes')}
+              handleOnClick={() => {
+                keycloak.updateToken(600)   //900 second = 15 minutes
+                  .then((refreshed: boolean) => {
+                    if (refreshed) {
+                      setToken(keycloak.token ? keycloak.token : '');
+                      setNotificationShown(false);
+                      closeNotification(toasterId);
+                    }
+                  })
+                  .catch(() => {
+                    console.warn('Failed to refresh token.');
+                    alert('Failed to refresh token.');
+                  });
+              }}
+            />
+          </div>
         </div>
       ),
       options: {

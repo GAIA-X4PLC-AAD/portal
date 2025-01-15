@@ -601,5 +601,10 @@
     "not-specified": "Not specified",
     "yes": "Yes",
     "no": "No"
+  },
+  "session": {
+    "willExpire": "Your session will expire in 30 seconds!",
+    "confirmRenew": "Do you want to renew your session?",
+    "failedRefreshToken": "Failed to refresh token"
   }
 }
