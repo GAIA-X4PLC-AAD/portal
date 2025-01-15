@@ -16,8 +16,34 @@ aside {
 }
 
 aside > section {
+    width: 100%;
     padding-bottom: 2rem;
     border-bottom: 1px solid var(--gray-2);
+}
+
+.filterContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filterCollapseToggleArraow {
+    margin-top: 2.8rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.selectedFilterCounter {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 1rem;
+    color: white;
+    background-color: var(--primary-color);
 }
 
 .filterTitle {
@@ -34,6 +60,10 @@ aside > section {
 .checkboxContainer {
     display: flex;
     align-items: center;
+}
+
+.specificFiltersContainer {
+    width: 100%;
 }
 
 .label {
