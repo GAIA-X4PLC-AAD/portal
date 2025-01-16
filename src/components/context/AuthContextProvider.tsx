@@ -82,25 +82,16 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
       if (keycloak.tokenParsed && keycloak.tokenParsed.exp) {
         const expirationTime = keycloak.tokenParsed.exp * 1000; // Convert to milliseconds
 
-        //const timeToExpiry = expirationTime - Date.now(); // 15 minutes now
-        //const timeToExpiry = (expirationTime - Date.now());
-        let timeToExpiry = expirationTime - Date.now();
-        if (timeToExpiry > 860000) {
-          timeToExpiry = expirationTime - Date.now() - 860000;
-        }
-        // if (timeToExpiry > 500000) {
-        //   timeToExpiry = expirationTime - Date.now() - 500000;
-        // }
-        console.log(timeToExpiry);
-        // alert(timeToExpiry);
+        const timeToExpiry = expirationTime - Date.now();
 
-        if (timeToExpiry <= 30000 && timeToExpiry > 0 && !notificationShown) { // 1 minute before expiry
+        if (timeToExpiry <= 30000 && timeToExpiry > 0 && !notificationShown) { // 30 seconds before expiry
           setNotificationShown(true);
         }
 
         if (timeToExpiry <= 0) {
           handleLogout();
         }
+
       }
     };
 
@@ -114,9 +105,6 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   useEffect(() => {
     if (notificationShown) {
       showExpirationNotification();
-    }
-    if (!notificationShown) {
-      closeNotification();
     }
   }, [notificationShown]);
 
@@ -132,17 +120,16 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
               className={styles.notificationButton}
               label={t('common.yes')}
               handleOnClick={() => {
-                keycloak.updateToken(600)   //900 second = 15 minutes
+                setNotificationShown(false);
+                closeNotification(toasterId);
+                keycloak.updateToken(-1)
                   .then((refreshed: boolean) => {
                     if (refreshed) {
                       setToken(keycloak.token ? keycloak.token : '');
-                      setNotificationShown(false);
-                      closeNotification(toasterId);
                     }
                   })
                   .catch(() => {
                     console.warn('Failed to refresh token.');
-                    alert('Failed to refresh token.');
                   });
               }}
             />

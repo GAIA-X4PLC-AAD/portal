@@ -599,5 +599,10 @@
     "not-specified": "Nicht spezifiziert",
     "yes": "Ja",
     "no": "Nein"
+  },
+  "session": {
+    "willExpire": "Ihre Sitzung läuft in 30 Sekunden ab!",
+    "confirmRenew": "Möchten Sie Ihre Sitzung verlängern?",
+    "failedRefreshToken": "Token-Aktualisierung fehlgeschlagen"
   }
 }
