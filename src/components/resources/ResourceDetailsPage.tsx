@@ -43,7 +43,7 @@ const ResourceDetailsPage = () => {
           <ResourceDetailMainContent/>
 
           <DetailsSidebar>
-            <ResourceMap/>
+            <ResourceMap mediaUrl={''}/>
             <ResourceActions/>
           </DetailsSidebar>
         </DetailsContent>

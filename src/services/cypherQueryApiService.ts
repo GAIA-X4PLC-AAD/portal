@@ -97,6 +97,7 @@ export const CypherQueryApiService = {
       OPTIONAL MATCH (dataResource)-[:format]-(format) 
       OPTIONAL MATCH (dataResource)-[:content]-(content) 
       OPTIONAL MATCH (dataResource)-[:producedBy]-(producedBy) 
+      OPTIONAL MATCH (dataResource)-[:general]-(general)-[:links]-(links)-[:media]-(media) 
 
       RETURN 
            dataResource.name as name,
@@ -128,7 +129,8 @@ export const CypherQueryApiService = {
            content.roadTypes as roadTypes, 
            content.laneTypes as laneTypes, 
            producedBy.legalName as legalName,
-           labels(dataResource) as labels
+           labels(dataResource) as labels,
+           media.url as mediaUrl
       `
     })
   },

@@ -8,6 +8,12 @@
     box-shadow: var(--shadow--normal)
 }
 
+.emptyContainer {
+    align-items: flex-start;
+    height: 40rem;
+    padding: 2rem;
+}
+
 .headerContainer {
     width: 100%;
     justify-Content: space-between;
