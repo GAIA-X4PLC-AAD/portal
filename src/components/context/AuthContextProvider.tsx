@@ -59,6 +59,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   const [token, setToken] = useState('');
   const [redirectPath, setRedirectPath] = useState<string | null>(null);
   const [notificationShown, setNotificationShown] = useState(false);
+  const THIRTY_SECONDS = 30000;
 
   // Initialise Keycloak
   useEffect(() => {
@@ -84,7 +85,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
 
         const timeToExpiry = expirationTime - Date.now();
 
-        if (timeToExpiry <= 30000 && timeToExpiry > 0 && !notificationShown) { // 30 seconds before expiry
+        if (timeToExpiry <= THIRTY_SECONDS && timeToExpiry > 0 && !notificationShown) { // 30 seconds before expiry
           setNotificationShown(true);
         }
 
