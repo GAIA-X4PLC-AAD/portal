@@ -5,9 +5,10 @@ import { Notification } from '../../../types/notification.model';
 
 export const notify = (notification: Notification): number | string => {
   let toastId: string | number;
+  const FIFTEEN_SECONDS = 15000;
 
   function getAutoCloseOption(toastOptions?: ToastOptions): number | false {
-    return toastOptions?.autoClose === undefined ? 15000 : toastOptions.autoClose;
+    return toastOptions?.autoClose ?? FIFTEEN_SECONDS;
   }
 
   const toastOptions = {
@@ -17,9 +18,7 @@ export const notify = (notification: Notification): number | string => {
 
   switch (notification.messageType) {
   case 'SUCCESS':
-    toastId = toast.success(notification.message, {
-      ...toastOptions,
-    });
+    toastId = toast.success(notification.message, toastOptions);
     break;
   case 'ERROR':
     toastId = toast.error(notification.message, {
@@ -28,19 +27,13 @@ export const notify = (notification: Notification): number | string => {
     });
     break;
   case 'WARNING':
-    toastId = toast.warn(notification.message, {
-      ...toastOptions,
-    });
+    toastId = toast.warn(notification.message, toastOptions);
     break;
   case 'INFO':
-    toastId = toast.info(notification.message, {
-      ...toastOptions,
-    });
+    toastId = toast.info(notification.message, toastOptions);
     break;
   default:
-    toastId = toast(notification.message, {
-      ...toastOptions,
-    });
+    toastId = toast(notification.message, toastOptions);
     break;
   }
 
