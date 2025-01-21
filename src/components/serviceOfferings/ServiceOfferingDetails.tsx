@@ -26,11 +26,11 @@ const ServiceOfferingDetails: FC = () => {
   return (
     <ServiceOfferingDetailsContextProvider value={{ serviceOfferingDetails, viewContentType }}>
       <Header
-        title={`${t('service-offerings.detail-title')} ${viewContentType === 'SHOW_SERVICE_OFFERING' ? ARROW_RIGHT : ''} ${viewContentType === 'SHOW_SERVICE_OFFERING' ? serviceOfferingDetails?.name || '' : ''}`}></Header>
+        title={`${t('service-offerings.detail-title')} ${viewContentType === 'SHOW_SERVICE_OFFERING' ? ` ${ARROW_RIGHT} ${serviceOfferingDetails?.name || ''}` : ''}`}></Header>
 
       <Main>
         <LoadingIndicator visible={viewContentType === 'LOADING'}/>
-        <NoContent message={`${t('serviceOffering.no-serviceOffering-available')}`}
+        <NoContent message={`${t('serviceOffering.no-offerings-available')}`}
           visible={viewContentType === 'SHOW_NO_RESULT'}/>
         <DetailsContent>
           <ServiceOfferingDetailMainContent/>
