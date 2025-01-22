@@ -55,10 +55,10 @@ export const shapeToItemCardData = (shape: Shape): ItemCardData => {
 
 export const serviceToItemCardData = (service: ServiceOffering): ItemCardData => {
   return createItemCardData(
-    service.label,
+    service.labels.filter((label: string) => ['SoftwareResource'].includes(label)).join(', '),
     service.name,
     service.description,
-    `/services/details/${service.claimsGraphUri}`,
+    `/service-offerings/${encodeURIComponent(service.uri)}`,
     false,
     'Card:' + service.uri + ':' + service.name
   );
