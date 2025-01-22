@@ -1,8 +1,14 @@
 /* test coverage not required */
 import axios from 'axios';
+import { t } from 'i18next';
 import keycloakConfig from 'keycloak-config.json';
 import Keycloak from 'keycloak-js';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
+
+import GaiaXButton from '../../common/components/buttons/GaiaXButton';
+import { closeNotification, notify } from '../../common/components/notification/Notification';
+
+import styles from './AuthContextProvider.module.css';
 
 const getDotEnvKeycloakApiUrl = (): string => {
   if (!process.env.REACT_APP_KEYCLOAK_API_URL) {
@@ -52,6 +58,8 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [token, setToken] = useState('');
   const [redirectPath, setRedirectPath] = useState<string | null>(null);
+  const [notificationShown, setNotificationShown] = useState(false);
+  const NOTIFY_BEFORE_TIME = 30000;
 
   // Initialise Keycloak
   useEffect(() => {
@@ -62,7 +70,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
         if (authenticated) {
           axios.defaults.headers.common.Authorization = `Bearer ${keycloak.token ? keycloak.token : ''}`
           setToken(keycloak.token ? keycloak.token : '');
-          scheduleTokenRenewal();
+          setupTokenExpiryCheck();
         }
       })
       .catch((error: any) => {
@@ -70,30 +78,69 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
       });
   }, []);
 
-  const scheduleTokenRenewal = () => {
-    const interval = setInterval(() => {
-      keycloak
-        .updateToken(70)
-        .then((refreshed: boolean) => {
-          if (refreshed) {
-            setToken(keycloak.token ? keycloak.token : '');
-          }
-        })
-        .catch(() => {
-          console.warn('Failed to refresh token. Logging out...');
+  const setupTokenExpiryCheck = () => {
+    const checkTokenExpiry = () => {
+      if (keycloak.tokenParsed && keycloak.tokenParsed.exp) {
+        const expirationTime = keycloak.tokenParsed.exp * 1000; // Convert to milliseconds
+
+        const timeToExpiry = expirationTime - Date.now();
+
+        if (timeToExpiry <= NOTIFY_BEFORE_TIME && timeToExpiry > 0 && !notificationShown) { // 30 seconds before expiry
+          setNotificationShown(true);
+        }
+
+        if (timeToExpiry <= 0) {
           handleLogout();
-        });
-    }, 60000);
+        }
 
-    if (keycloak.tokenParsed && keycloak.tokenParsed.exp) {
-      const expirationTime = keycloak.tokenParsed.exp * 1000 - Date.now();
-      const timeout = setTimeout(handleLogout, expirationTime);
+      }
+    };
 
-      return () => {
-        clearInterval(interval);
-        clearTimeout(timeout);
-      };
+    // Check token expiration every second
+    const intervalId = setInterval(checkTokenExpiry, 1000);
+
+    // Cleanup on component unmount
+    return () => clearInterval(intervalId);
+  };
+
+  useEffect(() => {
+    if (notificationShown) {
+      showExpirationNotification();
     }
+  }, [notificationShown]);
+
+  const showExpirationNotification = () => {
+    const toasterId = notify({
+      messageType: 'WARNING',
+      message: (
+        <div className={styles.notificationContainer}>
+          <p>{t('session.willExpire')}</p>
+          <p>{t('session.confirmRenew')}</p>
+          <div className={styles.buttonContainer}>
+            <GaiaXButton
+              className={styles.notificationButton}
+              label={t('common.yes')}
+              handleOnClick={() => {
+                setNotificationShown(false);
+                closeNotification(toasterId);
+                keycloak.updateToken(-1)
+                  .then((refreshed: boolean) => {
+                    if (refreshed) {
+                      setToken(keycloak.token ? keycloak.token : '');
+                    }
+                  })
+                  .catch(() => {
+                    console.warn('Failed to refresh token.');
+                  });
+              }}
+            />
+          </div>
+        </div>
+      ),
+      options: {
+        autoClose: false,
+      },
+    });
   };
 
   const handleLogout = async () => {
