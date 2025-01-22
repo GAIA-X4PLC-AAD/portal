@@ -1,0 +1,39 @@
+.sidebarCardContainer {
+    align-items: flex-start;
+    padding: 2rem;
+    width: 100%;
+
+    border-radius: 1rem;
+    background-color: var(--white);
+    box-shadow: var(--shadow--normal);
+}
+
+.title {
+    margin-top: 0;
+}
+
+.sideBarCardButton {
+    margin: 0;
+    width: 85%;
+    align-self: center;
+}
+
+.offeringCardContainer {
+    align-items: flex-start;
+    height: 40rem;
+    padding: 2rem;
+
+    border-radius: 1rem;
+    background-color: var(--white);
+    box-shadow: var(--shadow--normal)
+}
+
+.headerContainer {
+    width: 100%;
+    justify-Content: space-between;
+}
+
+.title {
+    margin-top: 0;
+}
+
