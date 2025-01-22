@@ -5,10 +5,10 @@ import { Notification } from '../../../types/notification.model';
 
 export const notify = (notification: Notification): number | string => {
   let toastId: string | number;
-  const FIFTEEN_SECONDS = 15000;
+  const AUTOCLOSE_TIME = 15000;
 
   function getAutoCloseOption(toastOptions?: ToastOptions): number | false {
-    return toastOptions?.autoClose ?? FIFTEEN_SECONDS;
+    return toastOptions?.autoClose ?? AUTOCLOSE_TIME;
   }
 
   const toastOptions = {
