@@ -1,3 +1,4 @@
+/* test coverage not required */
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import React, { FC } from 'react';
 
