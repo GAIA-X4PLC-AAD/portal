@@ -12,7 +12,6 @@ import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIn
 import NoContent from '../../common/components/noContent/NoContent';
 import { getShapeByName } from '../../services/shapeService.utils';
 import { Shape } from '../../types/shapes.model';
-import { ARROW_RIGHT } from '../../utils/symbols';
 
 import ShapeActions from './components/ShapeActions';
 import ShapeSuitableOfferings from './components/ShapeSuitableOfferings';
@@ -55,7 +54,17 @@ const ShapeDetailsPage: FC = () => {
 
   return (
     <ShapeContext.Provider value={shape}>
-      <Header title={`${t('shapes.titles')} ${ARROW_RIGHT} ${shape.shaclShapeName}`}/>
+      <Header
+        breadcrumbs={[
+          {
+            label: t('shapes.titles'),
+            to: '/shapes'
+          },
+          {
+            label: shape?.shaclShapeName ?? '',
+            to: `/shapes/details/${id}`
+          }]}
+      />
       <Main>
         <LoadingIndicator visible={isLoading}/>
         <NoContent message={t('shapes.shape-detail-not-available')} visible={!isLoading && !shape}/>
