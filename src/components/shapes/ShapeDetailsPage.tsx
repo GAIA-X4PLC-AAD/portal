@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { ShapeContext } from 'components/context/ShapeContext';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';

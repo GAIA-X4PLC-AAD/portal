@@ -1,3 +1,4 @@
+/* test coverage not required */
 import Main from 'common/components/layouts/Main';
 import { ResourceDetailsContext } from 'components/context/ResourceDetailsContext';
 import React, { useEffect, useState } from 'react';
