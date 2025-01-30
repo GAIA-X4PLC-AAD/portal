@@ -1,5 +1,6 @@
 import { t } from 'i18next';
 
+import { menuItem } from '../../../common/components/buttons/SortListButton';
 import { Resource } from '../../../types/resources.model';
 
 /**
@@ -24,12 +25,12 @@ export const removeNonResourceTypeLabels = (resources: Resource[], resourceTypes
   }));
 }
 
-export const getResourceSortMenuItems = () => {
+export const getResourceSortMenuItems = (): menuItem[] => {
   return [
-    t('resources.sort-menu.a-z'),
-    t('resources.sort-menu.z-a'),
-    // todo activate following after finding creation date in Ressources
-    // t('resources.sort-menu.new'),
-    // t('resources.sort-menu.old')
+    { label: t('resources.sort-menu.a-z'), alias: 'ASC_NAME' },
+    { label: t('resources.sort-menu.z-a'), alias: 'DESC_NAME' },
+    // todo activate following after finding creation date in resources
+    // { label: t('resources.sort-menu.new'), alias: 'ASC_DATE' },
+    // { label: t('resources.sort-menu.old'), alias: 'DESC_DATE' },
   ];
 }

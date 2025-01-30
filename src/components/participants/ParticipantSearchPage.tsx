@@ -22,6 +22,7 @@ const ParticipantSearchPage = () => {
     participants,
     viewContentType,
     search,
+    updateSortOrder,
   } = useParticipants()
 
   return (
@@ -32,7 +33,10 @@ const ParticipantSearchPage = () => {
           <Vertical>
             <Horizontal>
               <SearchBar placeholder={t('participants.search-bar-text')} onSearch={search}/>
-              <SortListButton menuItems={getParticipantsMenuItems()}/>
+              <SortListButton
+                menuItems={getParticipantsMenuItems()}
+                updateSortOrder={updateSortOrder}
+              />
             </Horizontal>
           </Vertical>
           <LoadingIndicator visible={viewContentType === 'LOADING'}/>

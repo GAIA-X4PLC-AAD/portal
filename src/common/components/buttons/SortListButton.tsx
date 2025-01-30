@@ -5,17 +5,22 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import React, { FC, useState } from 'react';
 
-import { SortOrder } from '../../../components/resources/helpers/resourceFilterReducer';
 import Svg from '../icon/Svg';
 
+export type SortOrder = 'ASC_NAME' | 'DESC_NAME' | 'ASC_DATE' | 'DESC_DATE';
+export interface menuItem {
+  label: string,
+  alias: string
+}
+
 interface ISortListButton {
-    menuItems: string[];
+    menuItems: menuItem[];
     updateSortOrder: (sortOrder: SortOrder) => void;
 }
 
 const SortListButton: FC<ISortListButton> = ({ menuItems, updateSortOrder }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState<null | number>(null);
   const [sortOrder, setSortOrder] = useState(0);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -26,21 +31,8 @@ const SortListButton: FC<ISortListButton> = ({ menuItems, updateSortOrder }) => 
     setAnchorEl(null);
   };
 
-  const handleMenuItemClick = (index: number) => {
-    switch (index) {
-    case 0:
-      updateSortOrder('ASC_NAME');
-      break;
-    case 1:
-      updateSortOrder('DESC_NAME');
-      break;
-    case 2:
-      updateSortOrder('ASC_DATE');
-      break;
-    case 3:
-      updateSortOrder('DESC_DATE');
-      break;
-    }
+  const handleMenuItemClick = (alias: string, index: number) => {
+    updateSortOrder(alias as SortOrder);
     setSortOrder(index);
     setSelectedIndex(index);
     handleClose();
@@ -54,18 +46,18 @@ const SortListButton: FC<ISortListButton> = ({ menuItems, updateSortOrder }) => 
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {menuItems.map((item: string, index: number) => (
+        {menuItems.map((item: menuItem, index: number) => (
           <MenuItem
-            key={item}
+            key={item.label}
             selected={index === selectedIndex}
-            onClick={() => handleMenuItemClick(index)}
+            onClick={() => handleMenuItemClick(item.alias, index)}
             onMouseEnter={() => setSelectedIndex(index)}
             onMouseLeave={() => setSelectedIndex(null)}
           >
             <ListItemIcon>
               {index === sortOrder && <CheckIcon fontSize="small" />}
             </ListItemIcon>
-            {item}
+            {item.label}
           </MenuItem>
         ))}
       </Menu>

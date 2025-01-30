@@ -1,5 +1,6 @@
 import { t } from 'i18next';
 
+import { menuItem } from '../../../common/components/buttons/SortListButton';
 import { Participant } from '../../../types/participants.model';
 
 export const applyFilters = (participants: Participant[], searchText: string): Participant[] => (
@@ -13,9 +14,11 @@ export const applyFilters = (participants: Participant[], searchText: string): P
     )
 )
 
-export const getParticipantsMenuItems = () => {
+export const getParticipantsMenuItems = (): menuItem[] => {
   return [
-    t('participants.sort-menu.a-z'),
-    t('participants.sort-menu.z-a')
+    { label: t('participants.sort-menu.a-z'), alias: 'ASC_NAME' },
+    { label: t('participants.sort-menu.z-a'), alias: 'DESC_NAME' },
   ];
 }
+
+export type ParticipantsSortOrder = 'ASC_NAME' | 'DESC_NAME';

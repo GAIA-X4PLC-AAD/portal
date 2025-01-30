@@ -13,7 +13,7 @@ export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
 export const UPDATE_FILTER_ASSET = 'UPDATE_FILTER_ASSET';
 export const SET_SORT_ORDER = 'SET_SORT_ORDER';
 
-export type SortOrder = 'ASC_NAME' | 'DESC_NAME' | 'ASC_DATE' | 'DESC_DATE';
+export type ResourceSortOrder = 'ASC_NAME' | 'DESC_NAME' | 'ASC_DATE' | 'DESC_DATE';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Type definitions
@@ -27,7 +27,7 @@ type ResourceFilterAssetState = {
 
 export type ResourceFilterState = ResourceFilterAssetState & {
     searchText: string;
-    sortOrder: SortOrder;
+    sortOrder: ResourceSortOrder;
 }
 
 type ResourceFilterAction =
@@ -54,7 +54,7 @@ type ResourceFilterAction =
     {
         type: 'SET_SORT_ORDER';
         payload: {
-            sortOrder: SortOrder;
+            sortOrder: ResourceSortOrder;
             ontologies: Ontology[];
             resources: Resource[];
         };
@@ -154,7 +154,7 @@ export const updateFilterAssetAction = (
   })
 
 export const setSortOrderAction = (
-  sortOrder: SortOrder,
+  sortOrder: ResourceSortOrder,
   ontologies: Ontology[],
   resources: Resource[]
 ): ResourceFilterAction => ({
