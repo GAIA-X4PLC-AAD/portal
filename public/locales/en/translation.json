@@ -558,7 +558,13 @@
     "location": "Location",
     "description": "Description",
     "suitable-offerings": "Suitable offerings",
-    "detail-title": "Software Resource"
+    "detail-title": "Software Resource",
+    "sort-menu": {
+      "new": "Newest Service Offering first",
+      "old": "Oldest Service Offering first",
+      "a-z": "A to Z",
+      "z-a": "Z to A"
+    }
   },
   "participants": {
     "title": "Participant",
@@ -567,7 +573,13 @@
     "terms-and-conditions": "Allgemeine Geschäftsbedingungen",
     "search-bar-text": "Search for specific participants",
     "no-participants-available": "No participants available",
-    "no-participant-available": "No participant available"
+    "no-participant-available": "No participant available",
+    "sort-menu": {
+      "new": "Newest participant first",
+      "old": "Oldest participant first",
+      "a-z": "A to Z",
+      "z-a": "Z to A"
+    }
   },
   "resources": {
     "search-bar-text": "Search for special resources",
@@ -585,7 +597,13 @@
     "traffic-direction": "Traffic direction",
     "download-description": "Download description",
     "contact-provider": "Contact provider",
-    "not-found": "Resource not found"
+    "not-found": "Resource not found",
+    "sort-menu": {
+      "new": "Newest offering first",
+      "old": "Oldest offering first",
+      "a-z": "A to Z",
+      "z-a": "Z to A"
+    }
   },
   "ontologies": {
     "title": "Ontology",

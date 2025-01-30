@@ -556,7 +556,13 @@
     "location": "Standort",
     "description": "Beschreibung",
     "suitable-offerings": "Geeignete Angebote",
-    "detail-title": "Software Resource"
+    "detail-title": "Software Resource",
+    "sort-menu": {
+      "new": "Neuestes Dienstleistungsangebot zuerst",
+      "old": "Ältestes Dienstleistungsangebot zuerst",
+      "a-z": "A bis Z",
+      "z-a": "Z bis A"
+    }
   },
   "participants": {
     "title": "Teilnehmer",
@@ -565,7 +571,13 @@
     "terms-and-conditions": "Terms and conditions",
     "search-bar-text": "Suchen Sie nach speziellen Teilnehmern",
     "no-participants-available": "Keine Teilnehmer verfügbar",
-    "no-participant-available": "Kein Teilnehmer verfügbar"
+    "no-participant-available": "Kein Teilnehmer verfügbar",
+    "sort-menu": {
+      "new": "Neueste Teilnehmer zuerst",
+      "old": "Älteste Teilnehmer zuerst",
+      "a-z": "A bis Z",
+      "z-a": "Z bis A"
+    }
   },
   "resources": {
     "search-bar-text": "Suchen Sie nach speziellen Ressourcen",
@@ -583,7 +595,13 @@
     "traffic-direction": "Verkehrsrichtung",
     "download-description": "Beschreibung herunterladen",
     "contact-provider": "Anbieter kontaktieren",
-    "not-found": "Ressource nicht gefunden"
+    "not-found": "Ressource nicht gefunden",
+    "sort-menu": {
+      "new": "Neuestes Angebot zuerst",
+      "old": "Ältestes Angebot zuerst",
+      "a-z": "A bis Z",
+      "z-a": "Z bis A"
+    }
   },
   "ontologies": {
     "title": "Ontologie",

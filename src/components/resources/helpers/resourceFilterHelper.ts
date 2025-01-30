@@ -205,10 +205,42 @@ export const calculateResourceFiltersAssetState = (
                 .includes(filters.searchText.toLowerCase()))
     );
 
+  const sortedResources = [...resourcesWithSearchTextFilterApplied];
+  switch (filters.sortOrder) {
+  case 'ASC_NAME':
+    sortedResources.sort((a, b) => {
+      if (!a.name) { return -1; }
+      if (!b.name) { return 1; }
+      return a.name.localeCompare(b.name);
+    });
+    break;
+  case 'DESC_NAME':
+    sortedResources.sort((a, b) => {
+      if (!a.name) { return 1; }
+      if (!b.name) { return -1; }
+      return b.name.localeCompare(a.name);
+    });
+    break;
+  case 'ASC_DATE':
+    sortedResources.sort((a, b) => {
+      if (!a.name) { return -1; }
+      if (!b.name) { return 1; }
+      return a.name.localeCompare(b.name);
+    });
+    break;
+  case 'DESC_DATE':
+    sortedResources.sort((a, b) => {
+      if (!a.name) { return 1; }
+      if (!b.name) { return -1; }
+      return b.name.localeCompare(a.name);
+    });
+    break;
+  }
+
   return {
     typeAssets,
     formatAssets,
     vendorAssets,
-    filteredResources: resourcesWithSearchTextFilterApplied
+    filteredResources: sortedResources
   };
 }

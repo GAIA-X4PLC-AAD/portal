@@ -1,3 +1,5 @@
+import { t } from 'i18next';
+
 import { Resource } from '../../../types/resources.model';
 
 /**
@@ -22,3 +24,12 @@ export const removeNonResourceTypeLabels = (resources: Resource[], resourceTypes
   }));
 }
 
+export const getResourceSortMenuItems = () => {
+  return [
+    t('resources.sort-menu.a-z'),
+    t('resources.sort-menu.z-a'),
+    // todo activate following after finding creation date in Ressources
+    // t('resources.sort-menu.new'),
+    // t('resources.sort-menu.old')
+  ];
+}

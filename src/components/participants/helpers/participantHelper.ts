@@ -1,3 +1,5 @@
+import { t } from 'i18next';
+
 import { Participant } from '../../../types/participants.model';
 
 export const applyFilters = (participants: Participant[], searchText: string): Participant[] => (
@@ -10,3 +12,10 @@ export const applyFilters = (participants: Participant[], searchText: string): P
       )
     )
 )
+
+export const getParticipantsMenuItems = () => {
+  return [
+    t('participants.sort-menu.a-z'),
+    t('participants.sort-menu.z-a')
+  ];
+}

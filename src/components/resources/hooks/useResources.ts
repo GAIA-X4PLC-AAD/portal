@@ -36,6 +36,7 @@ export const useResources = () => {
     vendorAssets,
     updateSearchText,
     updateFilterAsset,
+    updateSortOrder,
   } = useResourceFilter(ontologies, resources);
 
   useEffect(() => {
@@ -75,6 +76,7 @@ export const useResources = () => {
     toggleAssetFilterVisibility: () => toggleAssetFilterVisibility(!assetFilterVisible),
     updateSearchText,
     updateFilterAsset,
+    updateSortOrder,
   }
 }
 

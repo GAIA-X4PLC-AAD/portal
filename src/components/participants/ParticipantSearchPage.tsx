@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import NoContent from '../../common/components/./././noContent/NoContent';
+import SortListButton from '../../common/components/buttons/SortListButton';
 import Header from '../../common/components/header/Header';
 import Horizontal from '../../common/components/layouts/Horizontal';
 import Main from '../../common/components/layouts/Main';
@@ -12,6 +13,7 @@ import ItemCard from '../ItemCard/ItemCard';
 import { participantToItemCardData } from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 
+import { getParticipantsMenuItems } from './helpers/participantHelper';
 import { useParticipants } from './hooks/useParticipants';
 
 const ParticipantSearchPage = () => {
@@ -27,11 +29,12 @@ const ParticipantSearchPage = () => {
       <Header title={`${t('participants.titles')} (${participants.length} ${t('common.results')})`}/>
       <Main>
         <Vertical>
-          <Horizontal>
-            <Vertical>
+          <Vertical>
+            <Horizontal>
               <SearchBar placeholder={t('participants.search-bar-text')} onSearch={search}/>
-            </Vertical>
-          </Horizontal>
+              <SortListButton menuItems={getParticipantsMenuItems()}/>
+            </Horizontal>
+          </Vertical>
           <LoadingIndicator visible={viewContentType === 'LOADING'}/>
           <CardContainer visible={viewContentType === 'SHOW_PARTICIPANTS'}>
             {

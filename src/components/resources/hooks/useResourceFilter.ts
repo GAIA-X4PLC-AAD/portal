@@ -7,7 +7,7 @@ import {
   initialResourceFilterState,
   resourceFilterReducer,
   setResourceFilterAssetsAction,
-  setSearchTextAction,
+  setSearchTextAction, setSortOrderAction, SortOrder,
   updateFilterAssetAction
 } from '../helpers/resourceFilterReducer';
 
@@ -23,7 +23,7 @@ export const useResourceFilter = (ontologies: Ontology[], resources: Resource[])
   return {
     ...resourceFilterAssetSate,
     updateSearchText: (searchText: string) => dispatch(setSearchTextAction(searchText, ontologies, resources)),
-    updateFilterAsset: (asset: Asset) => dispatch(updateFilterAssetAction(asset, ontologies, resources))
+    updateFilterAsset: (asset: Asset) => dispatch(updateFilterAssetAction(asset, ontologies, resources)),
+    updateSortOrder: (newSortOrder: SortOrder) => dispatch(setSortOrderAction(newSortOrder, ontologies, resources)),
   }
 }
-
