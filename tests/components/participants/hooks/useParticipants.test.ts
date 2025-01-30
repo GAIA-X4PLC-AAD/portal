@@ -20,8 +20,6 @@ describe('useParticipants', () => {
     const { result } = renderHook(() => useParticipants());
 
     await waitFor(() => expect(result.current.viewContentType).toBe('SHOW_PARTICIPANTS'));
-    console.log('RESULT:', result.current.participants);
-    console.log('EXPECT:', mockParticipants);
     expect(result.current.participants).toEqual(mockParticipants);
   });
 
