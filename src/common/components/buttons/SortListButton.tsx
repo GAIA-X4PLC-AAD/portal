@@ -13,7 +13,7 @@ export interface menuItem {
   alias: string
 }
 
-interface ISortListButton {
+export interface ISortListButton {
     menuItems: menuItem[];
     updateSortOrder: (sortOrder: SortOrder) => void;
 }
