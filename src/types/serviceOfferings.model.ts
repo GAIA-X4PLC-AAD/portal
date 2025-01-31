@@ -1,3 +1,4 @@
+/* test coverage not required */
 export type ServiceOfferings = {
   survey_close_time?: string,
   survey_creation_time?: string,

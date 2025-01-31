@@ -1,8 +1,8 @@
-import { act, render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router';
 
-import ResourceDetailsPage from '../../../../src/components/resources/ResourceDetailsPage';
+import ResourceDetailsPage from '../../../src/components/resources/ResourceDetailsPage';
 
 jest.mock('@vcmap/core', () => ({
   VcsApp: jest.fn().mockImplementation(() => ({
@@ -28,7 +28,7 @@ jest.mock('@vcmap/core', () => ({
   },
 }));
 
-jest.mock('../../../../src/components/resources/helpers/resourceDataFlow', () => ({
+jest.mock('../../../src/components/resources/helpers/resourceDataFlow', () => ({
   __esModule: true,
   loadResourceDetails: jest.fn(),
 }));
@@ -48,7 +48,7 @@ describe('ResourceDetailsPage', () => {
   it('should render a resource detail page', async () => {
     const { useParams } = require('react-router-dom');
     const { loadResourceDetails } = require(
-      '../../../../src/components/resources/helpers/resourceDataFlow'
+      '../../../src/components/resources/helpers/resourceDataFlow'
     );
 
     useParams.mockReturnValue({ resourceId: '123' });
@@ -65,7 +65,8 @@ describe('ResourceDetailsPage', () => {
     );
 
     render(<ComponentUnderTest />);
-    act(() => {
+
+    await waitFor(() => {
       expect(screen.queryByText('Resource 1')).not.toBeNull();
     });
 

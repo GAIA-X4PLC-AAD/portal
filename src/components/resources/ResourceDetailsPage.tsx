@@ -31,8 +31,6 @@ const ResourceDetailsPage = () => {
     }
   }, [resourceId]);
 
-  console.log(resourceId, resourceDetails)
-
   return (
     <ResourceDetailsContext.Provider value={resourceDetails}>
       <Header
