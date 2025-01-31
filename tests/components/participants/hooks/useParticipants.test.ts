@@ -51,4 +51,53 @@ describe('useParticipants', () => {
       expect(result.current.participants.length).toBe(2);
     });
   });
+
+  it('should sort participants by name in ascending order', async () => {
+    loadParticipants.mockResolvedValue(mockParticipants);
+
+    const { result } = renderHook(() => useParticipants());
+
+    await waitFor(() => expect(result.current.viewContentType).toBe('SHOW_PARTICIPANTS'));
+
+    act(() => {
+      result.current.updateSortOrder('ASC_NAME');
+    });
+
+    const expectedSortedParticipants = [
+      mockParticipants[0],
+      mockParticipants[1],
+      mockParticipants[2],
+      mockParticipants[3],
+      mockParticipants[4]
+    ];
+
+    await waitFor(() => {
+      expect(result.current.participants).toEqual(expectedSortedParticipants);
+    });
+  });
+
+  it('should sort participants by name in descending order', async () => {
+    loadParticipants.mockResolvedValue(mockParticipants);
+
+    const { result } = renderHook(() => useParticipants());
+
+    await waitFor(() => expect(result.current.viewContentType).toBe('SHOW_PARTICIPANTS'));
+
+    act(() => {
+      result.current.updateSortOrder('DESC_NAME');
+    });
+
+    const expectedSortedParticipants = [
+      mockParticipants[4],
+      mockParticipants[3],
+      mockParticipants[2],
+      mockParticipants[1],
+      mockParticipants[0]
+    ];
+
+    await waitFor(() => {
+      expect(result.current.participants).toEqual(expectedSortedParticipants);
+    });
+  });
+
 });
