@@ -535,7 +535,28 @@
     "search-bar-text": "Suchen Sie nach speziellen Diestleistungen",
     "no-offerings-available": "Keine Angebote verfügbar",
     "no-description": "Keine Beschreibung verfügbar!",
-    "no-title": "Kein Titel verfügbar!"
+    "no-title": "Kein Titel verfügbar",
+    "resulting-file-description": "Beschreibung der resultierenden Datei",
+    "resulting-file-specification": "Spezifikation der resultierenden Datei",
+    "contract-id": "Vertrags-ID",
+    "recording-time": "Aufnahmezeit",
+    "required-file": "Erforderliche Datei",
+    "required-files-list": "Liste der erforderlichen Dateien",
+    "required-files-specification": "Spezifikation",
+    "required-files-description": "Beschreibung",
+    "provided-by": "Bereitgestellt von",
+    "host": "Host",
+    "open-api": "OpenAPI",
+    "name": "Name",
+    "protocol": "Protokoll",
+    "port": "Port",
+    "hosted-on": "Gehostet auf",
+    "services-access-point": "Zugriffspunkt für Dienste",
+    "related-offerings": "Verwandte Angebote",
+    "location": "Standort",
+    "description": "Beschreibung",
+    "suitable-offerings": "Geeignete Angebote",
+    "detail-title": "Software Resource"
   },
   "participants": {
     "title": "Teilnehmer",
@@ -599,5 +620,10 @@
     "not-specified": "Nicht spezifiziert",
     "yes": "Ja",
     "no": "Nein"
+  },
+  "session": {
+    "willExpire": "Ihre Sitzung läuft in 30 Sekunden ab!",
+    "confirmRenew": "Möchten Sie Ihre Sitzung verlängern?",
+    "failedRefreshToken": "Token-Aktualisierung fehlgeschlagen"
   }
 }

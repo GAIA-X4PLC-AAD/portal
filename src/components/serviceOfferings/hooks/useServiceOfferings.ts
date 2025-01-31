@@ -1,8 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 
-import { CypherQueryApiService as cypherQuery } from '../../services/cypherQueryApiService';
-import { ServiceOffering } from '../../types/serviceOfferings.model';
-import { mapServiceOfferings } from '../../utils/dataMapper';
+import { ServiceOffering } from '../../../types/serviceOfferings.model';
+import { loadServiceOfferings } from '../helpers/serviceOfferingDataFlow';
 
 export type ServiceOfferingsViewState = 'LOADING' | 'SHOW_OFFERINGS' | 'SHOW_NO_RESULTS'
 
@@ -12,12 +11,10 @@ export const useServiceOfferings = () => {
   const [searchText, setSearchText] = useState('')
 
   useEffect(() => {
-    cypherQuery.getAllSelfDescriptions()
-      .then((selfDescriptions) => {
-        setServiceOfferings(mapServiceOfferings(selfDescriptions));
-      })
-      .catch(error => console.error('Error fetching self descriptions:', error))
-      .finally(() => setIsLoading(false))
+    loadServiceOfferings().then((fetchedServiceOfferings) => {
+      setServiceOfferings(fetchedServiceOfferings)
+    })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const filteredServiceOfferings = useMemo(() => serviceOfferings

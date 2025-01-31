@@ -13,6 +13,10 @@ jest.mock('../../../src/components/resources/hooks/useResources', () => ({
   useResources: () => useResources()
 }))
 
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
+
 describe('ResourcesSearchPage', () => {
   it('renders all resources and filter assets correctly', () => {
     useResources.mockReturnValue(normal_render);
