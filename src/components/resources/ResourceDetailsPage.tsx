@@ -1,16 +1,19 @@
+import React, { useEffect, useState } from 'react';
 /* test coverage not required */
 import Main from 'common/components/layouts/Main';
 import { ResourceDetailsContext } from 'components/context/ResourceDetailsContext';
-import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useParams } from 'react-router-dom';
 
 import Header from '../../common/components/header/Header';
 import DetailsContent from '../../common/components/layouts/DetailsContent';
 import DetailsSidebar from '../../common/components/layouts/DetailsSidebar';
+import Main from '../../common/components/layouts/Main';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import NoContent from '../../common/components/noContent/NoContent';
 import { ResourceDetails } from '../../types/resources.model';
+import { ARROW_RIGHT } from '../../utils/symbols';
+import { ResourceDetailsContext } from '../context/ResourceDetailsContext';
 
 import ResourceActions from './components/ResourceActions';
 import ResourceDetailMainContent from './components/ResourceDetailMainContent';
@@ -54,7 +57,7 @@ const ResourceDetailsPage = () => {
           <ResourceDetailMainContent/>
 
           <DetailsSidebar>
-            <ResourceMap/>
+            <ResourceMap mediaUrl={resourceDetails?.mediaUrl}/>
             <ResourceActions/>
           </DetailsSidebar>
         </DetailsContent>
