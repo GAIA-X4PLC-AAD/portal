@@ -1,6 +1,10 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
+
+import '@testing-library/jest-dom';
+
 import { MemoryRouter } from 'react-router';
+import { Route, Routes } from 'react-router-dom';
 
 import ResourceDetailsPage from '../../../src/components/resources/ResourceDetailsPage';
 
@@ -28,31 +32,17 @@ jest.mock('@vcmap/core', () => ({
   },
 }));
 
+const loadResourceDetails = jest.fn();
 jest.mock('../../../src/components/resources/helpers/resourceDataFlow', () => ({
-  __esModule: true,
-  loadResourceDetails: jest.fn(),
+  loadResourceDetails: () => loadResourceDetails(),
 }));
 
-jest.mock('react-router-dom', () => ({
-  __esModule: true,
-  useParams: jest.fn(),
-}));
-
-const ComponentUnderTest = () => (
-  <MemoryRouter>
-    <ResourceDetailsPage />
-  </MemoryRouter>
-);
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
 
 describe('ResourceDetailsPage', () => {
-  it('should render a resource detail page', async () => {
-    const { useParams } = require('react-router-dom');
-    const { loadResourceDetails } = require(
-      '../../../src/components/resources/helpers/resourceDataFlow'
-    );
-
-    useParams.mockReturnValue({ resourceId: '123' });
-
+  beforeAll(() => {
     loadResourceDetails.mockReturnValue(
       Promise.resolve({
         name: 'Resource 1',
@@ -63,12 +53,28 @@ describe('ResourceDetailsPage', () => {
         isGaiaXCompliant: true,
       }),
     );
+  });
 
-    render(<ComponentUnderTest />);
+  it('should render a resource detail page', async () => {
+
+    render(
+      <MemoryRouter initialEntries={['/resources/123']}>
+        <Routes>
+          <Route path="/resources/:resourceId" element={<ResourceDetailsPage/>}/>
+        </Routes>
+      </MemoryRouter>
+    );
 
     await waitFor(() => {
-      expect(screen.queryByText('Resource 1')).not.toBeNull();
+      expect(screen.getByRole('heading', { name: /Resource 1/i })).toBeInTheDocument();
     });
 
+    await screen.findByRole('link', { name: /left-menu.resources/i });
+    const link_shapes = screen.getByRole('link', { name: /left-menu.resources/i });
+    expect(link_shapes).toBeInTheDocument();
+    expect(link_shapes).toHaveAttribute('href', '/resources');
+    const allLinks = screen.getAllByRole('link');
+    const resourceLink = allLinks.find(link => link.getAttribute('href') === '/resources/123');
+    expect(resourceLink).toBeInTheDocument();
   });
 });

@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-/* test coverage not required */
-import Main from 'common/components/layouts/Main';
-import { ResourceDetailsContext } from 'components/context/ResourceDetailsContext';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useParams } from 'react-router-dom';
 
@@ -12,7 +9,6 @@ import Main from '../../common/components/layouts/Main';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import NoContent from '../../common/components/noContent/NoContent';
 import { ResourceDetails } from '../../types/resources.model';
-import { ARROW_RIGHT } from '../../utils/symbols';
 import { ResourceDetailsContext } from '../context/ResourceDetailsContext';
 
 import ResourceActions from './components/ResourceActions';
@@ -38,16 +34,16 @@ const ResourceDetailsPage = () => {
 
   return (
     <ResourceDetailsContext.Provider value={resourceDetails}>
-      <Header
-        breadcrumbs={[
-          {
-            label: t('left-menu.resources'),
-            to: '/resources'
-          },
-          {
-            label: resourceDetails?.legalName ?? '',
-            to: `/resources/${id}`
-          }]}
+      <Header breadcrumbs={[
+        {
+          label: t('left-menu.resources'),
+          to: '/resources'
+        },
+        {
+          label: resourceDetails?.legalName ?? '',
+          to: `/resources/${id}`
+        }
+      ]}
       />
       <Main>
         <LoadingIndicator visible={isLoading}/>
