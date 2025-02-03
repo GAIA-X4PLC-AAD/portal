@@ -1,10 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
-
 import '@testing-library/jest-dom';
-
-import { MemoryRouter } from 'react-router';
-import { Route, Routes } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import ResourceDetailsPage from '../../../src/components/resources/ResourceDetailsPage';
 
