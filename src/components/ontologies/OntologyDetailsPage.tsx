@@ -1,9 +1,8 @@
-/* test coverage not required */
-import { OntologyContext } from 'components/context/OntologyContext';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
+import { OntologyContext } from '../../../src/components/context/OntologyContext';
 import car from '../../assets/car.gif';
 import Header from '../../common/components/header/Header';
 import DetailsContent from '../../common/components/layouts/DetailsContent';
