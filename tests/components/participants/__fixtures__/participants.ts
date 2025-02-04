@@ -102,9 +102,9 @@ export const mockParticipant_Infineon_Technologies_AG: ParticipantDetail = {
 }
 
 export const mockParticipants = [
-  mockParticipant_msg_systems_AG,
-  mockParticipant_tracetronic_GmbH,
-  mockParticipant_msg_systems_ag,
   mockParticipant_bmw_ag,
-  mockParticipant_Infineon_Technologies_AG
+  mockParticipant_Infineon_Technologies_AG,
+  mockParticipant_msg_systems_ag,
+  mockParticipant_msg_systems_AG,
+  mockParticipant_tracetronic_GmbH
 ] as Participant[]

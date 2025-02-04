@@ -1,3 +1,6 @@
+import { Ontology } from 'types/ontologies.model';
+import { Resource } from 'types/resources.model';
+
 import {
   Asset,
   calculateResourceFiltersAssetState,
@@ -29,6 +32,22 @@ import {
   initiallyLoaded_ResourceFilterState
 } from './__fixtures__/resourceFilterState_HdMap_EnvironmentModel_x2';
 import { resources_HdMap_EnvironmentModel_x2 } from './__fixtures__/resources_HdMap_EnvironmentModel_x2';
+
+const ontologies: Ontology[] = [];
+const resources: Resource[] = [
+  { name: 'Resource B', labels: [], format: '', vendor: '' },
+  { name: 'Resource A', labels: [], format: '', vendor: '' },
+  { name: 'Resource C', labels: [], format: '', vendor: '' }
+];
+
+const filters: ResourceFilterState = {
+  filteredResources: [],
+  typeAssets: [],
+  formatAssets: [],
+  vendorAssets: [],
+  searchText: '',
+  sortOrder: 'ASC_NAME'
+};
 
 describe('Reducer', () => {
   it('generates the "initiallyLoadedResourceFilterState" when "setResourceFilterAssetsAction" created from ' +
@@ -727,5 +746,16 @@ describe('calculateResourceFiltersAssetState', () => {
       expect.objectContaining({ id: 'msg systems ag', disabled: false })
     ]);
   })
+
+  it('should sort resources by name in ascending order', () => {
+    const result = calculateResourceFiltersAssetState(ontologies, resources, { ...filters, sortOrder: 'ASC_NAME' });
+    expect(result.filteredResources.map(resource => resource.name)).toEqual(['Resource A', 'Resource B', 'Resource C']);
+  });
+  it('should sort resources by name in descending order', () => {
+    const result = calculateResourceFiltersAssetState(ontologies, resources, { ...filters, sortOrder: 'DESC_NAME' });
+    expect(result.filteredResources.map(resource => resource.name)).toEqual(['Resource C', 'Resource B', 'Resource A']);
+  });
+
+  //todo add tests for sorting by date after implementing
 
 })

@@ -6,6 +6,7 @@ import NoContent from '../../common/components/./././noContent/NoContent';
 import Horizontal from '../../common/components/./layouts/Horizontal';
 import Main from '../../common/components/./layouts/Main';
 import Vertical from '../../common/components/./layouts/Vertical';
+import SortListButton from '../../common/components/buttons/SortListButton';
 import Header from '../../common/components/header/Header';
 import Svg from '../../common/components/icon/Svg';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
@@ -16,6 +17,7 @@ import CardContainer from '../cards/CardContainer';
 import Filter from '../filter/Filter';
 
 import styles from './ResourceSearchPage.module.css'
+import { getResourceSortMenuItems } from './helpers/resourcesHelper';
 import { useResources } from './hooks/useResources';
 
 const ResourceSearchPage = () => {
@@ -31,6 +33,7 @@ const ResourceSearchPage = () => {
     toggleAssetFilterVisibility,
     updateSearchText,
     updateFilterAsset,
+    updateSortOrder,
   } = useResources();
 
   return (
@@ -49,6 +52,10 @@ const ResourceSearchPage = () => {
             <SearchBar
               placeholder={t('resources.search-bar-text')}
               onSearch={updateSearchText}
+            />
+            <SortListButton
+              menuItems={getResourceSortMenuItems()}
+              updateSortOrder={updateSortOrder}
             />
           </Horizontal>
           <Horizontal className={styles.contentContainer}>
@@ -76,4 +83,5 @@ const ResourceSearchPage = () => {
     </>
   );
 };
+
 export default ResourceSearchPage;

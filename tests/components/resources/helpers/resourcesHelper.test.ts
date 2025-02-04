@@ -1,6 +1,6 @@
 import { getAllLabels } from '../../../../src/components/resources/helpers/resourceFilterHelper';
 import {
-  getPropertyValue,
+  getPropertyValue, getResourceSortMenuItems,
   removeNonResourceTypeLabels
 } from '../../../../src/components/resources/helpers/resourcesHelper';
 
@@ -23,5 +23,27 @@ describe('removeNonResourceTypeLabels', () => {
 
     expect(getAllLabels(resources_HdMap_EnvironmentModel_x2).size).toBeGreaterThan(resourceTypes.length);
     expect(getAllLabels(result)).toEqual(new Set(resourceTypes));
+  })
+})
+
+jest.mock('i18next', () => ({
+  t: (key: string) => {
+    const translations = {
+      'resources.sort-menu.a-z': 'A to Z',
+      'resources.sort-menu.z-a': 'Z to A',
+    };
+    return translations[key] || key;
+  },
+}));
+
+describe('getResourceSortMenuItems', () => {
+  it('returns the correct menu items', () => {
+    const menuItems = getResourceSortMenuItems();
+    console.log(menuItems);
+    expect(menuItems).toEqual([
+      { label: 'A to Z', alias: 'ASC_NAME' },
+      { label: 'Z to A', alias: 'DESC_NAME' },
+      // todo add date sorting
+    ]);
   })
 })

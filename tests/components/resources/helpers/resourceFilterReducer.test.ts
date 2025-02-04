@@ -1,9 +1,9 @@
 import { Asset } from '../../../../src/components/resources/helpers/resourceFilterHelper';
 import {
   SET_RESOURCE_FILTER_ASSETS,
-  SET_SEARCH_TEXT,
+  SET_SEARCH_TEXT, SET_SORT_ORDER,
   setResourceFilterAssetsAction,
-  setSearchTextAction,
+  setSearchTextAction, setSortOrderAction,
   UPDATE_FILTER_ASSET,
   updateFilterAssetAction
 } from '../../../../src/components/resources/helpers/resourceFilterReducer';
@@ -55,6 +55,17 @@ describe('Actions', () => {
     expect(result).toEqual({
       type: UPDATE_FILTER_ASSET,
       payload: { asset, ontologies, resources }
+    })
+  })
+
+  test('setSortOrderAction', () => {
+    const sortOrder = 'ASC_NAME';
+
+    const result = setSortOrderAction(sortOrder, ontologies, resources);
+
+    expect(result).toEqual({
+      type: SET_SORT_ORDER,
+      payload: { sortOrder, ontologies, resources }
     })
   })
 })

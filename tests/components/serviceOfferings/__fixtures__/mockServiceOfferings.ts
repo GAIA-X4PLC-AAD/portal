@@ -12,4 +12,10 @@ export const mockServiceOfferings: ServiceOffering[] = [
         labels: ['ServiceOffering 2 label'],
         uri: 'uri2',
         description: 'description 2'
+    },
+    {
+        name: 'ZServiceOffering 3',
+        labels: ['ZServiceOffering 3 label'],
+        uri: 'uri3',
+        description: 'description 3'
     }];

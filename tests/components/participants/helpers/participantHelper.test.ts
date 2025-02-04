@@ -1,5 +1,8 @@
 import '@testing-library/jest-dom';
-import { applyFilters } from '../../../../src/components/participants/helpers/participantHelper';
+import {
+  applyFilters,
+  getParticipantsMenuItems
+} from '../../../../src/components/participants/helpers/participantHelper';
 import { mockParticipants } from '../__fixtures__/participants';
 
 describe('ParticipantHelper_ApplyFilters', () => {
@@ -17,3 +20,24 @@ describe('ParticipantHelper_ApplyFilters', () => {
     expect(filteredParticipants.map(p => p.legalName)).toContain('msg systems AG');
   });
 });
+
+jest.mock('i18next', () => ({
+  t: (key: string) => {
+    const translations = {
+      'participants.sort-menu.a-z': 'A to Z',
+      'participants.sort-menu.z-a': 'Z to A',
+    };
+    return translations[key] || key;
+  },
+}));
+
+describe('getParticipantsSortMenuItems', () => {
+  it('returns the correct menu items', () => {
+    const menuItems = getParticipantsMenuItems();
+    console.log(menuItems);
+    expect(menuItems).toEqual([
+      { label: 'A to Z', alias: 'ASC_NAME' },
+      { label: 'Z to A', alias: 'DESC_NAME' },
+    ]);
+  })
+})
