@@ -1,9 +1,9 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import '@testing-library/jest-dom';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import ResourceDetailsPage from '../../../src/components/resources/ResourceDetailsPage';
+import { withRouter } from '../../common/testHelper';
 
 jest.mock('@vcmap/core', () => ({
   VcsApp: jest.fn().mockImplementation(() => ({
@@ -54,13 +54,7 @@ describe('ResourceDetailsPage', () => {
 
   it('should render a resource detail page', async () => {
 
-    render(
-      <MemoryRouter initialEntries={['/resources/123']}>
-        <Routes>
-          <Route path="/resources/:resourceId" element={<ResourceDetailsPage/>}/>
-        </Routes>
-      </MemoryRouter>
-    );
+    render(withRouter(<ResourceDetailsPage/>, '/resources/123', '/resources/:resourceId'));
 
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: /Resource 1/i })).toBeInTheDocument();
