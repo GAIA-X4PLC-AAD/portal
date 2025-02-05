@@ -1,9 +1,8 @@
-/* test coverage not required */
-import { OntologyContext } from 'components/context/OntologyContext';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
+import { OntologyContext } from '../../../src/components/context/OntologyContext';
 import car from '../../assets/car.gif';
 import Header from '../../common/components/header/Header';
 import DetailsContent from '../../common/components/layouts/DetailsContent';
@@ -15,7 +14,6 @@ import { fetchOntologyById } from '../../services/ontologyService.utils';
 import { fetchAllSchemas } from '../../services/schemaApiService';
 import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
 import { Ontology } from '../../types/ontologies.model';
-import { ARROW_RIGHT } from '../../utils/symbols';
 
 import OntologyActions from './components/OntologyActions';
 import OntologyDetailMainContent from './components/OntologyDetailMainContent';
@@ -60,7 +58,16 @@ const OntologyDetailsPage: FC = () => {
   return (
     <OntologyContext.Provider value={ontology}>
       <Header
-        title={`${t('left-menu.shapesAndOntologies')} ${ontology ? ARROW_RIGHT : ''} ${ontology?.subject || ''}`}/>
+        breadcrumbs={[
+          {
+            label: t('left-menu.shapesAndOntologies'),
+            to: '/ontologies'
+          },
+          {
+            label: ontology?.subject ?? '',
+            to: `/ontologies/details/${id}`
+          }]}
+      />
       <Main>
         <LoadingIndicator visible={isLoading}/>
         <NoContent message={t('ontologies.ontology-detail-not-available')} visible={!isLoading && !ontology}/>

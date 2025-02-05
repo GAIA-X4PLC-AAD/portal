@@ -26,6 +26,10 @@ describe('ServiceOfferingDetails', () => {
     const { getByRole } = render(withRouter(<ServiceOfferingDetails/>));
 
     //Check the heading
-    expect(getByRole('heading', { name: /service-offerings.detail-title → TT Data Processing Service/i })).toBeInTheDocument();
+    const link_service_offerings = getByRole('link', { name: /service-offerings.detail-title/i });
+    expect(link_service_offerings).toBeInTheDocument();
+    expect(link_service_offerings).toHaveAttribute('href', '/service-offerings');
+
+    expect(getByRole('link', { name: /TT Data Processing Service/i })).toBeInTheDocument();
   })
 })

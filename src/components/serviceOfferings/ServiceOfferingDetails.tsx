@@ -8,7 +8,6 @@ import DetailsSidebar from '../../common/components/layouts/DetailsSidebar';
 import Main from '../../common/components/layouts/Main';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import NoContent from '../../common/components/noContent/NoContent';
-import { ARROW_RIGHT } from '../../utils/symbols';
 import { ServiceOfferingDetailsContextProvider } from '../context/ServiceOfferingDetailsContext';
 
 import ServiceOfferingActions from './components/ServiceOfferingActions';
@@ -26,7 +25,16 @@ const ServiceOfferingDetails: FC = () => {
   return (
     <ServiceOfferingDetailsContextProvider value={{ serviceOfferingDetails, viewContentType }}>
       <Header
-        title={`${t('service-offerings.detail-title')} ${viewContentType === 'SHOW_SERVICE_OFFERING' ? ` ${ARROW_RIGHT} ${serviceOfferingDetails?.name || ''}` : ''}`}></Header>
+        breadcrumbs={[
+          {
+            label: t('service-offerings.detail-title'),
+            to: '/service-offerings'
+          },
+          {
+            label: viewContentType === 'SHOW_SERVICE_OFFERING' ? serviceOfferingDetails?.name || '' : '',
+            to: `/service-offerings/${uri}`
+          }]}
+      ></Header>
 
       <Main>
         <LoadingIndicator visible={viewContentType === 'LOADING'}/>
