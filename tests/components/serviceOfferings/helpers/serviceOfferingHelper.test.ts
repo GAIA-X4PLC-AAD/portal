@@ -1,6 +1,8 @@
+import { SortOrder } from '../../../../src/common/components/buttons/SortListButton';
 import {
-  getServiceOfferingSortMenuItems
+  getServiceOfferingSortMenuItems, getSortedServiceOfferings
 } from '../../../../src/components/serviceOfferings/helpers/serviceOfferingHelper';
+import { mockServiceOfferings } from '../__fixtures__/mockServiceOfferings';
 
 jest.mock('i18next', () => ({
   t: (key: string) => {
@@ -13,13 +15,35 @@ jest.mock('i18next', () => ({
 }));
 
 describe('getServiceOfferingSortMenuItems', () => {
-  it('returns the correct menu items', () => {
+  it('should return the correct menu items', () => {
     const menuItems = getServiceOfferingSortMenuItems();
-    console.log(menuItems);
     expect(menuItems).toEqual([
-      { label: 'A to Z', alias: 'ASC_NAME' },
-      { label: 'Z to A', alias: 'DESC_NAME' },
+      { label: 'A to Z', sortOrder: 'ASC_NAME' },
+      { label: 'Z to A', sortOrder: 'DESC_NAME' },
       // todo add date sorting
     ]);
   })
 })
+
+describe('getSortedServiceOfferings', () => {
+  it('should sort service offerings in ascending order by name', () => {
+    const expectedSortedServiceOfferings = [
+      mockServiceOfferings[0],
+      mockServiceOfferings[1],
+      mockServiceOfferings[2]
+    ];
+    const sorted = getSortedServiceOfferings(mockServiceOfferings, SortOrder.ASC_NAME);
+    expect(sorted).toEqual(expectedSortedServiceOfferings);
+  });
+
+  it('should sort service offerings in descending order by name', () => {
+    const expectedSortedServiceOfferings = [
+      mockServiceOfferings[2],
+      mockServiceOfferings[1],
+      mockServiceOfferings[0],
+    ];
+    const sorted = getSortedServiceOfferings(mockServiceOfferings, SortOrder.DESC_NAME);
+    expect(sorted).toEqual(expectedSortedServiceOfferings);
+  });
+
+});

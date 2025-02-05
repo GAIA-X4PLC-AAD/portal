@@ -18,7 +18,7 @@ const ComponentUnderTest = () => {
   return render(
     <MemoryRouter>
       <SortListButton
-        menuItems={menuItems}
+        menuItemsObjects={menuItems}
         updateSortOrder={updateSortOrder}
       />
     </MemoryRouter>

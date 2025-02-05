@@ -47,48 +47,4 @@ describe('useServiceOfferings', () => {
     });
   });
 
-  it('should sort service offerings by name in ascending order', async () => {
-    loadServiceOfferings.mockResolvedValue(mockServiceOfferings);
-
-    const { result } = renderHook(() => useServiceOfferings());
-
-    await waitFor(() => expect(result.current.state).toBe('SHOW_OFFERINGS'));
-
-    act(() => {
-      result.current.updateSortOrder('ASC_NAME');
-    });
-
-    const expectedSortedServiceOfferings = [
-      mockServiceOfferings[0],
-      mockServiceOfferings[1],
-      mockServiceOfferings[2]
-    ];
-
-    await waitFor(() => {
-      expect(result.current.serviceOfferings).toEqual(expectedSortedServiceOfferings);
-    });
-  });
-
-  it('should sort service offerings by name in descending order', async () => {
-    loadServiceOfferings.mockResolvedValue(mockServiceOfferings);
-
-    const { result } = renderHook(() => useServiceOfferings());
-
-    await waitFor(() => expect(result.current.state).toBe('SHOW_OFFERINGS'));
-
-    act(() => {
-      result.current.updateSortOrder('DESC_NAME');
-    });
-
-    const expectedSortedServiceOfferings = [
-      mockServiceOfferings[2],
-      mockServiceOfferings[1],
-      mockServiceOfferings[0]
-    ];
-
-    await waitFor(() => {
-      expect(result.current.serviceOfferings).toEqual(expectedSortedServiceOfferings);
-    });
-  });
-
 });
