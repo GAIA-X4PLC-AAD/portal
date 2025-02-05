@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom';
+import { SortOrder } from '../../../../src/common/components/buttons/SortListButton';
 import {
   applyFilters,
-  getParticipantsMenuItems
+  getParticipantsMenuItems, getSortedParticipants
 } from '../../../../src/components/participants/helpers/participantHelper';
 import { mockParticipants } from '../__fixtures__/participants';
 
@@ -36,8 +37,35 @@ describe('getParticipantsSortMenuItems', () => {
     const menuItems = getParticipantsMenuItems();
     console.log(menuItems);
     expect(menuItems).toEqual([
-      { label: 'A to Z', alias: 'ASC_NAME' },
-      { label: 'Z to A', alias: 'DESC_NAME' },
+      { label: 'A to Z', sortOrder: 'ASC_NAME' },
+      { label: 'Z to A', sortOrder: 'DESC_NAME' },
     ]);
   })
 })
+
+describe('getSortedParticipants', () => {
+  it('should sort participants in ascending order by name', () => {
+    const expectedSortedParticipants = [
+      mockParticipants[0],
+      mockParticipants[1],
+      mockParticipants[2],
+      mockParticipants[3],
+      mockParticipants[4],
+    ];
+    const sorted = getSortedParticipants(mockParticipants, SortOrder.ASC_NAME);
+    expect(sorted).toEqual(expectedSortedParticipants);
+  });
+
+  it('should sort participants in descending order by name', () => {
+    const expectedSortedParticipants = [
+      mockParticipants[4],
+      mockParticipants[3],
+      mockParticipants[2],
+      mockParticipants[1],
+      mockParticipants[0],
+    ];
+    const sorted = getSortedParticipants(mockParticipants, SortOrder.DESC_NAME);
+    expect(sorted).toEqual(expectedSortedParticipants);
+  });
+
+});
