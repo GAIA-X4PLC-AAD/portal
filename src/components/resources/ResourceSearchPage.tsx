@@ -1,12 +1,12 @@
 import FilterIcon from '@mui/icons-material/FilterAlt';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import NoContent from '../../common/components/./././noContent/NoContent';
 import Horizontal from '../../common/components/./layouts/Horizontal';
 import Main from '../../common/components/./layouts/Main';
 import Vertical from '../../common/components/./layouts/Vertical';
-import SortListButton from '../../common/components/buttons/SortListButton';
+import SortListButton, { SortOrder } from '../../common/components/buttons/SortListButton';
 import Header from '../../common/components/header/Header';
 import Svg from '../../common/components/icon/Svg';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
@@ -17,12 +17,14 @@ import CardContainer from '../cards/CardContainer';
 import Filter from '../filter/Filter';
 
 import styles from './ResourceSearchPage.module.css'
-import { getResourceSortMenuItems } from './helpers/resourcesHelper';
+import { getResourceSortMenuItems, getSortedResources } from './helpers/resourcesHelper';
 import { useResources } from './hooks/useResources';
 
 const ResourceSearchPage = () => {
 
   const { t } = useTranslation();
+  const [sortOrder, setSortOrder] = useState<SortOrder>(SortOrder.ASC_NAME);
+
   const {
     resources,
     viewContentType,
@@ -33,7 +35,6 @@ const ResourceSearchPage = () => {
     toggleAssetFilterVisibility,
     updateSearchText,
     updateFilterAsset,
-    updateSortOrder,
   } = useResources();
 
   return (
@@ -54,8 +55,8 @@ const ResourceSearchPage = () => {
               onSearch={updateSearchText}
             />
             <SortListButton
-              menuItems={getResourceSortMenuItems()}
-              updateSortOrder={updateSortOrder}
+              menuItemsObjects={getResourceSortMenuItems()}
+              updateSortOrder={setSortOrder}
             />
           </Horizontal>
           <Horizontal className={styles.contentContainer}>
@@ -69,7 +70,7 @@ const ResourceSearchPage = () => {
             <LoadingIndicator visible={viewContentType === 'LOADING'}/>
             <CardContainer visible={viewContentType === 'SHOW_RESOURCES'}>
               {
-                resources.map((resource) => (
+                getSortedResources(resources, sortOrder).map((resource) => (
                   <ItemCard key={resource.uri + resource.name} itemCardData={resourceToItemCardData(resource)}/>
                 ))
               }

@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import { menuItem } from '../../../common/components/buttons/SortListButton';
+import { MenuItemObject, SortOrder } from '../../../common/components/buttons/SortListButton';
 import { Resource } from '../../../types/resources.model';
 
 /**
@@ -25,12 +25,22 @@ export const removeNonResourceTypeLabels = (resources: Resource[], resourceTypes
   }));
 }
 
-export const getResourceSortMenuItems = (): menuItem[] => {
+export const getResourceSortMenuItems = (): MenuItemObject[] => {
   return [
-    { label: i18next.t('resources.sort-menu.a-z'), alias: 'ASC_NAME' },
-    { label: i18next.t('resources.sort-menu.z-a'), alias: 'DESC_NAME' },
+    { label: i18next.t('resources.sort-menu.a-z'), sortOrder: SortOrder.ASC_NAME },
+    { label: i18next.t('resources.sort-menu.z-a'), sortOrder: SortOrder.DESC_NAME },
     // todo activate following after finding creation date in resources
     // { label: i18next.t('resources.sort-menu.new'), alias: 'ASC_DATE' },
     // { label: i18next.t('resources.sort-menu.old'), alias: 'DESC_DATE' },
   ];
+}
+
+export const getSortedResources = (resources: Resource[], sortOrder: SortOrder) => {
+  switch (sortOrder) {
+  case SortOrder.ASC_NAME:
+    return resources.sort((a, b) => (a.name ?? '').localeCompare(b.name ?? ''));
+  case SortOrder.DESC_NAME:
+    return resources.sort((a, b) => (b.name ?? '').localeCompare(a.name ?? ''));
+  default: return resources;
+  }
 }

@@ -7,18 +7,24 @@ import React, { FC, useState } from 'react';
 
 import Svg from '../icon/Svg';
 
-export type SortOrder = 'ASC_NAME' | 'DESC_NAME' | 'ASC_DATE' | 'DESC_DATE';
-export interface menuItem {
+export enum SortOrder {
+    ASC_NAME = 'ASC_NAME',
+    DESC_NAME = 'DESC_NAME',
+    ASC_DATE = 'ASC_DATE',
+    DESC_DATE = 'DESC_DATE'
+}
+
+export interface MenuItemObject {
   label: string,
-  alias: string
+  sortOrder: SortOrder
 }
 
 export interface ISortListButton {
-    menuItems: menuItem[];
+    menuItemsObjects: MenuItemObject[];
     updateSortOrder: (sortOrder: SortOrder) => void;
 }
 
-const SortListButton: FC<ISortListButton> = ({ menuItems, updateSortOrder }) => {
+const SortListButton: FC<ISortListButton> = ({ menuItemsObjects, updateSortOrder }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedIndex, setSelectedIndex] = useState<null | number>(null);
   const [sortOrder, setSortOrder] = useState(0);
@@ -31,8 +37,8 @@ const SortListButton: FC<ISortListButton> = ({ menuItems, updateSortOrder }) => 
     setAnchorEl(null);
   };
 
-  const handleMenuItemClick = (alias: string, index: number) => {
-    updateSortOrder(alias as SortOrder);
+  const handleMenuItemClick = (sortOrder: SortOrder, index: number) => {
+    updateSortOrder(sortOrder);
     setSortOrder(index);
     setSelectedIndex(index);
     handleClose();
@@ -46,11 +52,11 @@ const SortListButton: FC<ISortListButton> = ({ menuItems, updateSortOrder }) => 
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {menuItems.map((item: menuItem, index: number) => (
+        {menuItemsObjects.map((item: MenuItemObject, index: number) => (
           <MenuItem
             key={item.label}
             selected={index === selectedIndex}
-            onClick={() => handleMenuItemClick(item.alias, index)}
+            onClick={() => handleMenuItemClick(item.sortOrder, index)}
             onMouseEnter={() => setSelectedIndex(index)}
             onMouseLeave={() => setSelectedIndex(null)}
           >

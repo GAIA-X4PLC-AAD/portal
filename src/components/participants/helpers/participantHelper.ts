@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import { menuItem } from '../../../common/components/buttons/SortListButton';
+import { MenuItemObject, SortOrder } from '../../../common/components/buttons/SortListButton';
 import { Participant } from '../../../types/participants.model';
 
 export const applyFilters = (participants: Participant[], searchText: string): Participant[] => (
@@ -14,11 +14,19 @@ export const applyFilters = (participants: Participant[], searchText: string): P
     )
 )
 
-export const getParticipantsMenuItems = (): menuItem[] => {
+export const getParticipantsMenuItems = (): MenuItemObject[] => {
   return [
-    { label: i18next.t('participants.sort-menu.a-z'), alias: 'ASC_NAME' },
-    { label: i18next.t('participants.sort-menu.z-a'), alias: 'DESC_NAME' },
+    { label: i18next.t('participants.sort-menu.a-z'), sortOrder: SortOrder.ASC_NAME },
+    { label: i18next.t('participants.sort-menu.z-a'), sortOrder: SortOrder.DESC_NAME },
   ];
 }
 
-export type ParticipantsSortOrder = 'ASC_NAME' | 'DESC_NAME';
+export const getSortedParticipants = (participants: Participant[], sortOrder: SortOrder) => {
+  switch (sortOrder) {
+  case SortOrder.ASC_NAME:
+    return participants.sort((a, b) => (a.legalName ?? '').localeCompare(b.legalName ?? ''));
+  case SortOrder.DESC_NAME:
+    return participants.sort((a, b) => (b.legalName ?? '').localeCompare(a.legalName ?? ''));
+  default: return participants;
+  }
+}

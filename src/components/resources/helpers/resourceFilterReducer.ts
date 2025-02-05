@@ -11,9 +11,6 @@ import { Asset, calculateResourceFiltersAssetState } from './resourceFilterHelpe
 export const SET_RESOURCE_FILTER_ASSETS = 'SET_RESOURCE_FILTER_ASSETS';
 export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
 export const UPDATE_FILTER_ASSET = 'UPDATE_FILTER_ASSET';
-export const SET_SORT_ORDER = 'SET_SORT_ORDER';
-
-export type ResourceSortOrder = 'ASC_NAME' | 'DESC_NAME' | 'ASC_DATE' | 'DESC_DATE';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Type definitions
@@ -26,8 +23,7 @@ type ResourceFilterAssetState = {
 };
 
 export type ResourceFilterState = ResourceFilterAssetState & {
-    searchText: string;
-    sortOrder: ResourceSortOrder;
+    searchText: string
 }
 
 type ResourceFilterAction =
@@ -50,14 +46,6 @@ type ResourceFilterAction =
             ontologies: Ontology[],
             resources: Resource[],
         },
-    } |
-    {
-        type: 'SET_SORT_ORDER';
-        payload: {
-            sortOrder: ResourceSortOrder;
-            ontologies: Ontology[];
-            resources: Resource[];
-        };
     }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -68,8 +56,7 @@ export const initialResourceFilterState: ResourceFilterState = {
   typeAssets: [],
   formatAssets: [],
   vendorAssets: [],
-  searchText: '',
-  sortOrder: 'ASC_NAME',
+  searchText: ''
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -104,24 +91,8 @@ export const resourceFilterReducer = (state: ResourceFilterState, action: AnyAct
         vendorAssets: state.vendorAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item)
       })
     }
-
-  case SET_SORT_ORDER:
-    return {
-      ...state,
-      ...calculateResourceFiltersAssetState(
-        action.payload.ontologies,
-        action.payload.resources,
-        {
-          ...state,
-          sortOrder: action.payload.sortOrder,
-        }
-      ),
-      sortOrder: action.payload.sortOrder,
-    };
-
-  default:
-    return state;
   }
+  return state
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -152,12 +123,3 @@ export const updateFilterAssetAction = (
     type: UPDATE_FILTER_ASSET,
     payload: { asset, ontologies, resources }
   })
-
-export const setSortOrderAction = (
-  sortOrder: ResourceSortOrder,
-  ontologies: Ontology[],
-  resources: Resource[]
-): ResourceFilterAction => ({
-  type: SET_SORT_ORDER,
-  payload: { sortOrder, ontologies, resources },
-});
