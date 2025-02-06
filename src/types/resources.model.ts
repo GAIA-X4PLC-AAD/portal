@@ -24,6 +24,7 @@ export interface ResourceDetails {
     obsoleteDateTime: string,
     laneTypes: string[],
     legalName: string,
+    mediaUrl: string,
 
     contractId?: string,
     serviceAccessPoint?: {
