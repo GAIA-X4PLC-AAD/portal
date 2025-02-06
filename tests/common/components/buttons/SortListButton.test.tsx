@@ -3,13 +3,13 @@ import React from 'react';
 import { MemoryRouter } from 'react-router';
 
 import '@testing-library/jest-dom';
-import SortListButton from '../../../../src/common/components/buttons/SortListButton';
+import SortListButton, { SortOrder } from '../../../../src/common/components/buttons/SortListButton';
 
 const menuItems = [
-  { label: 'ASC_NAME', alias: 'ASC_NAME' },
-  { label: 'DESC_NAME', alias: 'DESC_NAME' },
-  { label: 'ASC_DATE', alias: 'ASC_DATE' },
-  { label: 'DESC_DATE', alias: 'DESC_DATE' }
+  { label: 'ASC_NAME', sortOrder: SortOrder.ASC_NAME },
+  { label: 'DESC_NAME', sortOrder: SortOrder.DESC_NAME },
+  { label: 'ASC_DATE', sortOrder: SortOrder.ASC_DATE },
+  { label: 'DESC_DATE', sortOrder: SortOrder.DESC_DATE }
 ];
 
 const updateSortOrder = jest.fn();
@@ -42,7 +42,7 @@ describe('SortListButton', () => {
     fireEvent.click(screen.getByTestId('SortIcon'));
     fireEvent.click(screen.getByText('ASC_NAME'));
 
-    expect(updateSortOrder).toHaveBeenCalledWith('ASC_NAME');
+    expect(updateSortOrder).toHaveBeenCalledWith(SortOrder.ASC_NAME);
   });
 
   it('should close the menu when a menu item is clicked', async () => {

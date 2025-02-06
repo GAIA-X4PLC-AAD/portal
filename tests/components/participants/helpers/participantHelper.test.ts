@@ -35,7 +35,6 @@ jest.mock('i18next', () => ({
 describe('getParticipantsSortMenuItems', () => {
   it('returns the correct menu items', () => {
     const menuItems = getParticipantsMenuItems();
-    console.log(menuItems);
     expect(menuItems).toEqual([
       { label: 'A to Z', sortOrder: 'ASC_NAME' },
       { label: 'Z to A', sortOrder: 'DESC_NAME' },

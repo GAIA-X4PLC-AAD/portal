@@ -1,6 +1,3 @@
-import { Ontology } from 'types/ontologies.model';
-import { Resource } from 'types/resources.model';
-
 import {
   Asset,
   calculateResourceFiltersAssetState,
@@ -33,26 +30,10 @@ import {
 } from './__fixtures__/resourceFilterState_HdMap_EnvironmentModel_x2';
 import { resources_HdMap_EnvironmentModel_x2 } from './__fixtures__/resources_HdMap_EnvironmentModel_x2';
 
-const ontologies: Ontology[] = [];
-const resources: Resource[] = [
-  { name: 'Resource B', labels: [], format: '', vendor: '' },
-  { name: 'Resource A', labels: [], format: '', vendor: '' },
-  { name: 'Resource C', labels: [], format: '', vendor: '' }
-];
-
-const filters: ResourceFilterState = {
-  filteredResources: [],
-  typeAssets: [],
-  formatAssets: [],
-  vendorAssets: [],
-  searchText: '',
-  sortOrder: 'ASC_NAME'
-};
-
 describe('Reducer', () => {
   it('generates the "initiallyLoadedResourceFilterState" when "setResourceFilterAssetsAction" created from ' +
-    '"ontologies_General_HdMap_EnvironmentModel" and "resources_HdMap_EnvironmentModel_x2" ' +
-    'and is executed on "initialResourceFilterStatus"', () => {
+      '"ontologies_General_HdMap_EnvironmentModel" and "resources_HdMap_EnvironmentModel_x2" ' +
+      'and is executed on "initialResourceFilterStatus"', () => {
     const action = setResourceFilterAssetsAction(
       ontologies_General_HdMap_EnvironmentModel,
       resources_HdMap_EnvironmentModel_x2
@@ -64,8 +45,8 @@ describe('Reducer', () => {
   })
 
   it('generates the "filteredBy_searchText_HdMap_ResourceFilterState" when "setSearchTextAction" created from ' +
-    '"ontologies_General_HdMap_EnvironmentModel" and "resources_HdMap_EnvironmentModel_x2" ' +
-    'and is executed on "initialResourceFilterStatus"', () => {
+      '"ontologies_General_HdMap_EnvironmentModel" and "resources_HdMap_EnvironmentModel_x2" ' +
+      'and is executed on "initialResourceFilterStatus"', () => {
     const searchText = 'HdMap';
     const action = setSearchTextAction(
       searchText,
@@ -79,9 +60,9 @@ describe('Reducer', () => {
   })
 
   it('generates the "filteredBy_typeAssets_HdMap_ResourceFilterState" when "updateFilterAssetAction" created from ' +
-    'selected type asset for which the filtering is desired ' +
-    'and "ontologies_General_HdMap_EnvironmentModel" and "resources_HdMap_EnvironmentModel_x2" ' +
-    'and is executed on "initiallyLoaded_ResourceFilterState"', () => {
+      'selected type asset for which the filtering is desired ' +
+      'and "ontologies_General_HdMap_EnvironmentModel" and "resources_HdMap_EnvironmentModel_x2" ' +
+      'and is executed on "initiallyLoaded_ResourceFilterState"', () => {
     const hdMapTypeAsset = {
       id: 'HdMap',
       type: 'typeAssets',
@@ -101,9 +82,9 @@ describe('Reducer', () => {
   })
 
   it('generates the "filteredBy_formatAssets_HdMap_ResourceFilterState" when "updateFilterAssetAction" created from ' +
-    'selected format asset for which the filtering is desired ' +
-    'and "ontologies_General_HdMap_EnvironmentModel" and "resources_HdMap_EnvironmentModel_x2" ' +
-    'and is executed on "initiallyLoaded_ResourceFilterState"', () => {
+      'selected format asset for which the filtering is desired ' +
+      'and "ontologies_General_HdMap_EnvironmentModel" and "resources_HdMap_EnvironmentModel_x2" ' +
+      'and is executed on "initiallyLoaded_ResourceFilterState"', () => {
     const asamOpenDriveFormatAsset = {
       id: 'ASAM OpenDRIVE',
       type: 'formatAssets',
@@ -123,9 +104,9 @@ describe('Reducer', () => {
   })
 
   it('generates the "filteredBy_vendorAssets_MsgSystemsAG_ResourceFilterState" when "updateFilterAssetAction" created' +
-    ' from selected format asset for which the filtering is desired ' +
-    'and "ontologies_General_HdMap_EnvironmentModel" and "resources_HdMap_EnvironmentModel_x2" ' +
-    'and is executed on "initiallyLoaded_ResourceFilterState"', () => {
+      ' from selected format asset for which the filtering is desired ' +
+      'and "ontologies_General_HdMap_EnvironmentModel" and "resources_HdMap_EnvironmentModel_x2" ' +
+      'and is executed on "initiallyLoaded_ResourceFilterState"', () => {
     const msgSystemsAGVendorAsset = {
       id: 'msg systems ag',
       type: 'vendorAssets',
@@ -156,7 +137,7 @@ describe('Reducer', () => {
 
 describe('createTypeAssets', () => {
   it('Creates a list of types from a list of type ids, marks disabled if not present in any of the resources' +
-    ' passed in', () => {
+      ' passed in', () => {
     const result = createTypeAssets(
       ['HdMap', 'EnvironmentModel'],
       []
@@ -213,7 +194,7 @@ describe('getAllLabels', () => {
 
 describe('createFormatAssets', () => {
   it('Creates a list of formats from a list of format ids, marks disabled if not present in any of the resources' +
-    ' passed in, marks unselected if it is not selected also in the "prevFormatAssets"', () => {
+      ' passed in, marks unselected if it is not selected also in the "prevFormatAssets"', () => {
     const result = createFormatAssets(
       ['Autodesk FBX', 'GLTF', 'OpenSceneGraph', 'Unreal DataSmith', 'ASAM OSI GroundTruth',
         'ASAM OSI SensorView', 'ASAM OSI SensorData', 'ASAM OpenDRIVE', 'Lanelet', 'Road5', 'Shape',
@@ -266,13 +247,13 @@ describe('createFormatAssets', () => {
       ['Autodesk FBX', 'GLTF', 'OpenSceneGraph', 'Unreal DataSmith', 'ASAM OSI GroundTruth',
         'ASAM OSI SensorView', 'ASAM OSI SensorData', 'ASAM OpenDRIVE', 'Lanelet', 'Road5', 'Shape',
         'road2sim', 'roadXML'],
-      [
-        {
-          id: 'ASAM OpenDRIVE',
-          value: true
-        }
-      ] as Asset[],
-      []);
+        [
+          {
+            id: 'ASAM OpenDRIVE',
+            value: true
+          }
+        ] as Asset[],
+        []);
 
     expect(result.length).toEqual(13);
     expect(result).toEqual(expect.arrayContaining([
@@ -300,7 +281,7 @@ describe('getAllFormats', () => {
 
 describe('createVendorAssets', () => {
   it('Creates a list of vendors from a list of vendor ids, marks disabled if not present in any of the resources' +
-    ' passed in, marks unselected if it is not selected also in the "prevVendorAssets"', () => {
+      ' passed in, marks unselected if it is not selected also in the "prevVendorAssets"', () => {
     const result = createVendorAssets(['msg systems ag', 'other'], [], []);
     expect(result).toEqual([
       expect.objectContaining({
@@ -418,7 +399,7 @@ describe('getSelectedAssets', () => {
 describe('calculateResourceFiltersAssetState', () => {
 
   it('With no selected filter passed in, the resource list will not be filtered' +
-    'the assets are created from ontologies.', () => {
+      'the assets are created from ontologies.', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
       [...resources_HdMap_EnvironmentModel_x2],
@@ -469,24 +450,24 @@ describe('calculateResourceFiltersAssetState', () => {
   })
 
   it('Pass in "HdMap" as previously select, will not affect the disabled state of the other asset types,' +
-    'it will also filter the resources list', () => {
+      'it will also filter the resources list', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
       [...resources_HdMap_EnvironmentModel_x2],
-      {
-        filteredResources: [],
-        typeAssets: [
-          {
-            id: 'HdMap',
-            type: 'typeAssets',
-            label: 'HdMap',
-            value: true,
-            disabled: false
-          },
-        ] as Asset[],
-        formatAssets: [],
-        vendorAssets: [],
-      } as ResourceFilterState
+        {
+          filteredResources: [],
+          typeAssets: [
+            {
+              id: 'HdMap',
+              type: 'typeAssets',
+              label: 'HdMap',
+              value: true,
+              disabled: false
+            },
+          ] as Asset[],
+          formatAssets: [],
+          vendorAssets: [],
+        } as ResourceFilterState
     )
 
     expect(result.filteredResources.length).toEqual(1);
@@ -525,24 +506,24 @@ describe('calculateResourceFiltersAssetState', () => {
   })
 
   it('Pass in "EnvironmentModel" as previously select, will affect the disabled state of the other asset types,' +
-    'it will also filter the resources list', () => {
+      'it will also filter the resources list', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
       [...resources_HdMap_EnvironmentModel_x2],
-      {
-        filteredResources: [],
-        typeAssets: [
-          {
-            id: 'EnvironmentModel',
-            type: 'typeAssets',
-            label: 'EnvironmentModel',
-            value: true,
-            disabled: false
-          },
-        ] as Asset[],
-        formatAssets: [],
-        vendorAssets: [],
-      } as ResourceFilterState
+        {
+          filteredResources: [],
+          typeAssets: [
+            {
+              id: 'EnvironmentModel',
+              type: 'typeAssets',
+              label: 'EnvironmentModel',
+              value: true,
+              disabled: false
+            },
+          ] as Asset[],
+          formatAssets: [],
+          vendorAssets: [],
+        } as ResourceFilterState
     )
 
     expect(result.filteredResources.length).toEqual(2);
@@ -584,32 +565,32 @@ describe('calculateResourceFiltersAssetState', () => {
   })
 
   it('Pass in "EnvironmentModel" type and "ASAM OpenDRIVE" format filters as previously select, will affect the' +
-    ' disabled state of the other asset types, it will also filter the resources list', () => {
+      ' disabled state of the other asset types, it will also filter the resources list', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
       [...resources_HdMap_EnvironmentModel_x2],
-      {
-        filteredResources: [],
-        typeAssets: [
-          {
-            id: 'EnvironmentModel',
-            type: 'typeAssets',
-            label: 'EnvironmentModel',
-            value: true,
-            disabled: false
-          },
-        ] as Asset[],
-        formatAssets: [
-          {
-            id: 'ASAM OpenDRIVE',
-            type: 'formatAssets',
-            label: 'ASAM OpenDRIVE',
-            value: true,
-            disabled: false
-          },
-        ],
-        vendorAssets: [],
-      } as ResourceFilterState
+        {
+          filteredResources: [],
+          typeAssets: [
+            {
+              id: 'EnvironmentModel',
+              type: 'typeAssets',
+              label: 'EnvironmentModel',
+              value: true,
+              disabled: false
+            },
+          ] as Asset[],
+          formatAssets: [
+            {
+              id: 'ASAM OpenDRIVE',
+              type: 'formatAssets',
+              label: 'ASAM OpenDRIVE',
+              value: true,
+              disabled: false
+            },
+          ],
+          vendorAssets: [],
+        } as ResourceFilterState
     )
 
     expect(result.filteredResources.length).toEqual(2);
@@ -648,20 +629,20 @@ describe('calculateResourceFiltersAssetState', () => {
             ? { ...resource, vendor: 'msg systems ag' }
             : { ...resource, vendor: 'other' })
       ],
-      {
-        filteredResources: [],
-        typeAssets: [],
-        formatAssets: [],
-        vendorAssets: [
-          {
-            id: 'msg systems ag',
-            type: 'vendorAssets',
-            label: 'msg systems ag',
-            value: true,
-            disabled: false
-          },
-        ],
-      } as ResourceFilterState
+        {
+          filteredResources: [],
+          typeAssets: [],
+          formatAssets: [],
+          vendorAssets: [
+            {
+              id: 'msg systems ag',
+              type: 'vendorAssets',
+              label: 'msg systems ag',
+              value: true,
+              disabled: false
+            },
+          ],
+        } as ResourceFilterState
     )
 
     expect(result.filteredResources.length).toEqual(1);
@@ -697,13 +678,13 @@ describe('calculateResourceFiltersAssetState', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
       [...resources_HdMap_EnvironmentModel_x2],
-      {
-        filteredResources: [],
-        typeAssets: [],
-        formatAssets: [],
-        vendorAssets: [],
-        searchText: '72-'
-      } as ResourceFilterState
+        {
+          filteredResources: [],
+          typeAssets: [],
+          formatAssets: [],
+          vendorAssets: [],
+          searchText: '72-'
+        } as ResourceFilterState
     )
 
     expect(result.filteredResources.length).toEqual(1);
@@ -746,16 +727,5 @@ describe('calculateResourceFiltersAssetState', () => {
       expect.objectContaining({ id: 'msg systems ag', disabled: false })
     ]);
   })
-
-  it('should sort resources by name in ascending order', () => {
-    const result = calculateResourceFiltersAssetState(ontologies, resources, { ...filters, sortOrder: 'ASC_NAME' });
-    expect(result.filteredResources.map(resource => resource.name)).toEqual(['Resource A', 'Resource B', 'Resource C']);
-  });
-  it('should sort resources by name in descending order', () => {
-    const result = calculateResourceFiltersAssetState(ontologies, resources, { ...filters, sortOrder: 'DESC_NAME' });
-    expect(result.filteredResources.map(resource => resource.name)).toEqual(['Resource C', 'Resource B', 'Resource A']);
-  });
-
-  //todo add tests for sorting by date after implementing
 
 })

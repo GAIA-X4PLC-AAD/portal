@@ -1,8 +1,10 @@
+import { SortOrder } from '../../../../src/common/components/buttons/SortListButton';
 import { getAllLabels } from '../../../../src/components/resources/helpers/resourceFilterHelper';
 import {
-  getPropertyValue, getResourceSortMenuItems,
+  getPropertyValue, getResourceSortMenuItems, getSortedResources,
   removeNonResourceTypeLabels
 } from '../../../../src/components/resources/helpers/resourcesHelper';
+import { mockResources } from '../__fixtures__/resources';
 
 import { resources_HdMap_EnvironmentModel_x2 } from './__fixtures__/resources_HdMap_EnvironmentModel_x2';
 
@@ -39,11 +41,33 @@ jest.mock('i18next', () => ({
 describe('getResourceSortMenuItems', () => {
   it('returns the correct menu items', () => {
     const menuItems = getResourceSortMenuItems();
-    console.log(menuItems);
     expect(menuItems).toEqual([
-      { label: 'A to Z', alias: 'ASC_NAME' },
-      { label: 'Z to A', alias: 'DESC_NAME' },
+      { label: 'A to Z', sortOrder: 'ASC_NAME' },
+      { label: 'Z to A', sortOrder: 'DESC_NAME' },
       // todo add date sorting
     ]);
   })
-})
+});
+
+describe('getSortedResources', () => {
+  it('should sort resources in ascending order by name', () => {
+    const expectedSortedResources = [
+      mockResources[0],
+      mockResources[1],
+      mockResources[2],
+    ];
+    const sorted = getSortedResources(mockResources, SortOrder.ASC_NAME);
+    expect(sorted).toEqual(expectedSortedResources);
+  });
+
+  it('should sort resources in descending order by name', () => {
+    const expectedSortedResources = [
+      mockResources[2],
+      mockResources[1],
+      mockResources[0],
+    ];
+    const sorted = getSortedResources(mockResources, SortOrder.DESC_NAME);
+    expect(sorted).toEqual(expectedSortedResources);
+  });
+
+});

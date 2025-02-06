@@ -126,7 +126,6 @@ export const initiallyLoaded_ResourceFilterState = {
     }
   ],
   searchText: '',
-  sortOrder: 'ASC_NAME',
   typeAssets: [
     {
       disabled: false,
@@ -246,7 +245,6 @@ export const filteredBy_searchText_HdMap_ResourceFilterState = {
     }
   ],
   searchText: 'HdMap',
-  sortOrder: 'ASC_NAME',
   typeAssets: [
     {
       disabled: false,
@@ -366,7 +364,6 @@ export const filteredBy_typeFilter_HdMap_ResourceFilterState = {
     }
   ],
   searchText: '',
-  sortOrder: 'ASC_NAME',
   typeAssets: [
     {
       disabled: false,
@@ -486,7 +483,6 @@ export const filteredBy_formatFilter_ASAMOpenDrive_ResourceFilterState = {
     }
   ],
   searchText: '',
-  sortOrder: 'ASC_NAME',
   typeAssets: [
     {
       disabled: false,
@@ -605,7 +601,6 @@ export const filteredBy_vendorFilter_MsgSystemsAG_ResourceFilterState = {
     }
   ],
   searchText: '',
-  sortOrder: 'ASC_NAME',
   typeAssets: [
     {
       disabled: false,
