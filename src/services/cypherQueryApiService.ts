@@ -174,7 +174,8 @@ export const CypherQueryApiService = {
             labels(softwareResource) as labels,
             softwareResource.uri as uri,
             description.name AS name,
-            description.description AS description
+            description.description AS description,
+            data.recordingTime AS recordingTime
             `
     })
   },

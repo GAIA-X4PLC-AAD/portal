@@ -4,6 +4,7 @@ export interface ServiceOffering {
   name: string,
   uri: string,
   description: string,
+  recordingTime: string,
 }
 
 export interface ServiceOfferingRequiredFile {

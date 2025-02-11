@@ -9,6 +9,8 @@ jest.mock('i18next', () => ({
     const translations = {
       'service-offerings.sort-menu.a-z': 'A to Z',
       'service-offerings.sort-menu.z-a': 'Z to A',
+      'service-offerings.sort-menu.new': 'Newest Service Offering first',
+      'service-offerings.sort-menu.old': 'Oldest Service Offering first',
     };
     return translations[key] || key;
   },
@@ -20,7 +22,8 @@ describe('getServiceOfferingSortMenuItems', () => {
     expect(menuItems).toEqual([
       { label: 'A to Z', sortOrder: 'ASC_NAME' },
       { label: 'Z to A', sortOrder: 'DESC_NAME' },
-      // todo add date sorting
+      { label: 'Newest Service Offering first', sortOrder: 'ASC_DATE' },
+      { label: 'Oldest Service Offering first', sortOrder: 'DESC_DATE' },
     ]);
   })
 })
@@ -43,6 +46,26 @@ describe('getSortedServiceOfferings', () => {
       mockServiceOfferings[0],
     ];
     const sorted = getSortedServiceOfferings(mockServiceOfferings, SortOrder.DESC_NAME);
+    expect(sorted).toEqual(expectedSortedServiceOfferings);
+  });
+
+  it('should sort service offerings in ascending order by recording time', () => {
+    const expectedSortedServiceOfferings = [
+      mockServiceOfferings[2],
+      mockServiceOfferings[0],
+      mockServiceOfferings[1],
+    ];
+    const sorted = getSortedServiceOfferings(mockServiceOfferings, SortOrder.ASC_DATE);
+    expect(sorted).toEqual(expectedSortedServiceOfferings);
+  });
+
+  it('should sort service offerings in descending order by recording time', () => {
+    const expectedSortedServiceOfferings = [
+      mockServiceOfferings[1],
+      mockServiceOfferings[0],
+      mockServiceOfferings[2],
+    ];
+    const sorted = getSortedServiceOfferings(mockServiceOfferings, SortOrder.DESC_DATE);
     expect(sorted).toEqual(expectedSortedServiceOfferings);
   });
 

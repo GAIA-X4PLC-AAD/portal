@@ -8,9 +8,13 @@ import React, { FC, useState } from 'react';
 import Svg from '../icon/Svg';
 
 export enum SortOrder {
+    // eslint-disable-next-line no-unused-vars
     ASC_NAME = 'ASC_NAME',
+    // eslint-disable-next-line no-unused-vars
     DESC_NAME = 'DESC_NAME',
+    // eslint-disable-next-line no-unused-vars
     ASC_DATE = 'ASC_DATE',
+    // eslint-disable-next-line no-unused-vars
     DESC_DATE = 'DESC_DATE'
 }
 
