@@ -20,5 +20,5 @@ export const mockServiceOfferings: ServiceOffering[] = [
         labels: ['ZServiceOffering 3 label'],
         uri: 'uri3',
         description: 'description 3',
-        recordingTime: '2024-08-19T17:05:00'
+        recordingTime: '2026-08-19T18:05:00'
     }];

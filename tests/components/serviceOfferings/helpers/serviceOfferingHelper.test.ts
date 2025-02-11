@@ -22,8 +22,8 @@ describe('getServiceOfferingSortMenuItems', () => {
     expect(menuItems).toEqual([
       { label: 'A to Z', sortOrder: 'ASC_NAME' },
       { label: 'Z to A', sortOrder: 'DESC_NAME' },
-      { label: 'Newest Service Offering first', sortOrder: 'ASC_DATE' },
-      { label: 'Oldest Service Offering first', sortOrder: 'DESC_DATE' },
+      { label: 'Newest Service Offering first', sortOrder: 'DESC_DATE' },
+      { label: 'Oldest Service Offering first', sortOrder: 'ASC_DATE' },
     ]);
   })
 })
@@ -51,9 +51,9 @@ describe('getSortedServiceOfferings', () => {
 
   it('should sort service offerings in ascending order by recording time', () => {
     const expectedSortedServiceOfferings = [
-      mockServiceOfferings[2],
       mockServiceOfferings[0],
       mockServiceOfferings[1],
+      mockServiceOfferings[2],
     ];
     const sorted = getSortedServiceOfferings(mockServiceOfferings, SortOrder.ASC_DATE);
     expect(sorted).toEqual(expectedSortedServiceOfferings);
@@ -61,9 +61,9 @@ describe('getSortedServiceOfferings', () => {
 
   it('should sort service offerings in descending order by recording time', () => {
     const expectedSortedServiceOfferings = [
+      mockServiceOfferings[2],
       mockServiceOfferings[1],
       mockServiceOfferings[0],
-      mockServiceOfferings[2],
     ];
     const sorted = getSortedServiceOfferings(mockServiceOfferings, SortOrder.DESC_DATE);
     expect(sorted).toEqual(expectedSortedServiceOfferings);
