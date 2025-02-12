@@ -7,6 +7,8 @@ import React, { FC, useState } from 'react';
 
 import Svg from '../icon/Svg';
 
+import styles from './SortListButton.module.css';
+
 export enum SortOrder {
     // eslint-disable-next-line no-unused-vars
     ASC_NAME = 'ASC_NAME',
@@ -55,6 +57,7 @@ const SortListButton: FC<ISortListButton> = ({ menuItemsObjects, updateSortOrder
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        classes={{ paper: styles.menu }}
       >
         {menuItemsObjects.map((item: MenuItemObject, index: number) => (
           <MenuItem
