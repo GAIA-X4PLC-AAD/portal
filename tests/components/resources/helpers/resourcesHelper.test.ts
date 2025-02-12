@@ -33,6 +33,8 @@ jest.mock('i18next', () => ({
     const translations = {
       'resources.sort-menu.a-z': 'A to Z',
       'resources.sort-menu.z-a': 'Z to A',
+      'resources.sort-menu.new': 'Newest offering first',
+      'resources.sort-menu.old': 'Oldest offering first',
     };
     return translations[key] || key;
   },
@@ -44,7 +46,8 @@ describe('getResourceSortMenuItems', () => {
     expect(menuItems).toEqual([
       { label: 'A to Z', sortOrder: 'ASC_NAME' },
       { label: 'Z to A', sortOrder: 'DESC_NAME' },
-      // todo add date sorting
+      { label: 'Newest offering first', sortOrder: 'DESC_DATE' },
+      { label: 'Oldest offering first', sortOrder: 'ASC_DATE' },
     ]);
   })
 });
@@ -67,6 +70,26 @@ describe('getSortedResources', () => {
       mockResources[0],
     ];
     const sorted = getSortedResources(mockResources, SortOrder.DESC_NAME);
+    expect(sorted).toEqual(expectedSortedResources);
+  });
+
+  it('should sort resources in ascending order by recording time', () => {
+    const expectedSortedResources = [
+      mockResources[0],
+      mockResources[1],
+      mockResources[2],
+    ];
+    const sorted = getSortedResources(mockResources, SortOrder.ASC_DATE);
+    expect(sorted).toEqual(expectedSortedResources);
+  });
+
+  it('should sort resources in descending order by recording time', () => {
+    const expectedSortedResources = [
+      mockResources[2],
+      mockResources[1],
+      mockResources[0],
+    ];
+    const sorted = getSortedResources(mockResources, SortOrder.DESC_DATE);
     expect(sorted).toEqual(expectedSortedResources);
   });
 
