@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import {FC} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useLocation} from 'react-router-dom';
 
 import Header from '../../common/components/header/Header';
 import DetailsContent from '../../common/components/layouts/DetailsContent';
@@ -8,12 +8,12 @@ import DetailsSidebar from '../../common/components/layouts/DetailsSidebar';
 import Main from '../../common/components/layouts/Main';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import NoContent from '../../common/components/noContent/NoContent';
-import { ServiceOfferingDetailsContextProvider } from '../context/ServiceOfferingDetailsContext';
+import {ServiceOfferingDetailsContextProvider} from '../context/ServiceOfferingDetailsContext';
 
 import ServiceOfferingActions from './components/ServiceOfferingActions';
 import ServiceOfferingDetailMainContent from './components/ServiceOfferingDetailMainContent';
 import ServiceOfferingSuitableOfferings from './components/ServiceOfferingSuitableOfferings';
-import { useServiceOfferingDetails } from './hooks/useServiceOfferingDetails';
+import {useServiceOfferingDetails} from './hooks/useServiceOfferingDetails';
 
 const ServiceOfferingDetails: FC = () => {
   const location = useLocation();

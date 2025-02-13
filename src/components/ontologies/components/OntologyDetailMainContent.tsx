@@ -1,14 +1,14 @@
 /* test coverage not required */
-import React, { FC, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import {FC, useContext} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useNavigate} from 'react-router-dom';
 
 import Subtitle from '../../../common/components/fields/subtitle/Subtitle';
 import Title from '../../../common/components/fields/title/Title';
 import DetailsMainContent from '../../../common/components/layouts/DetailsMainContent';
 import Markdown from '../../../common/components/markdown/Markdown';
-import { Shape } from '../../../types/shapes.model';
-import { OntologyContext } from '../../context/OntologyContext';
+import {Shape} from '../../../types/shapes.model';
+import {OntologyContext} from '../../context/OntologyContext';
 
 import styles from './OntologyDetailMainContent.module.css';
 

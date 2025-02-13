@@ -1,5 +1,5 @@
 /* test coverage not required */
-import { ToastContent, ToastOptions } from 'react-toastify/dist/types';
+import {ToastContent, ToastOptions} from 'react-toastify';
 
 export type NotificationMessageType =
     | 'SUCCESS'

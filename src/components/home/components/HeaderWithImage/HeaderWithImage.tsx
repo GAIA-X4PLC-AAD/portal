@@ -1,4 +1,4 @@
-import React, { FC, FunctionComponent } from 'react';
+import {FC, FunctionComponent} from 'react';
 
 import Text from '../../../../common/components/fields/././text/Text'
 import Title from '../../../../common/components/fields/title/Title';

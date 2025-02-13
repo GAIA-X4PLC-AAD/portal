@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import {FC} from 'react';
 
 import { Breadcrumb, IBreadcrumb } from '../breadcrumb/Breadcrumb';
 import Title from '../fields/title/Title';

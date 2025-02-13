@@ -1,5 +1,4 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 import NoContent from '../../common/components/./././noContent/NoContent';
 import Horizontal from '../../common/components/./layouts/Horizontal';
@@ -10,7 +9,7 @@ import Header from '../../common/components/header/Header';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import SearchBar from '../../common/components/searchBar/SearchBar';
 import ItemCard from '../ItemCard/ItemCard';
-import { ontologyToItemCardData } from '../ItemCard/itemCardHelper';
+import {ontologyToItemCardData} from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 
 import RDFVisualization from './components/RDFVisualization';

@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 
-import Modal from '../../Modal';
-import { ActionCancelModalHeader, ModalMessage } from '../../common/ActionCancelModalStyle';
-import { BlueButton, CancelButton, Column, Padding, Row } from '../../common/styles';
+import Modal from '../../Modal.js';
+import {ActionCancelModalHeader, ModalMessage} from '../../common/ActionCancelModalStyle';
+import {BlueButton, CancelButton, Column, Padding, Row} from '../../common/styles';
 
-import { BookSaveInput } from './style';
+import {BookSaveInput} from './style';
 
 const SaveBookModal = ({ action, closeModal, onSaveBook }) => {
 

@@ -1,12 +1,12 @@
 /* test coverage not required */
 import axios from 'axios';
-import { t } from 'i18next';
-import keycloakConfig from 'keycloak-config.json';
+import {t} from 'i18next';
 import Keycloak from 'keycloak-js';
-import React, { createContext, useEffect, useMemo, useState } from 'react';
+import React, {createContext, useEffect, useMemo, useState} from 'react';
 
+import keycloakConfig from 'keycloak-config.json';
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
-import { closeNotification, notify } from '../../common/components/notification/Notification';
+import {closeNotification, notify} from '../../common/components/notification/Notification';
 
 import styles from './AuthContextProvider.module.css';
 

@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { withTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import {withTranslation} from 'react-i18next';
+import {useNavigate} from 'react-router-dom';
 
-import Modal from '../../Modal';
+import Modal from '../../Modal.js';
 
 import './upload_completed.css';
 

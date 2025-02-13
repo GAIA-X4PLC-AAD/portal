@@ -1,8 +1,9 @@
 import classnames from 'classnames';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
-import { AlertIcon } from '../../../styles';
+// @ts-ignore
+import {AlertIcon} from '../../../styles';
 import GaiaXButton from '../../buttons/GaiaXButton';
 import Message from '../../fields/message/Message';
 import Title from '../../fields/title/Title';

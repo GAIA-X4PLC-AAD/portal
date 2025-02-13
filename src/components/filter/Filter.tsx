@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import {FC} from 'react';
 
 import Title from '../../common/components/fields/title/Title';
-import { Asset } from '../resources/helpers/resourceFilterHelper';
+import {Asset} from '../resources/helpers/resourceFilterHelper';
 
 import styles from './Filter.module.css';
-import { FilterSection } from './FilterSection';
+import {FilterSection} from './FilterSection';
 
 interface IFilter {
     typeAssets: Asset[];

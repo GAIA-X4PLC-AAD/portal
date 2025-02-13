@@ -1,7 +1,6 @@
 import ListIcon from '@mui/icons-material/List';
 import MapIcon from '@mui/icons-material/Map';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 import Text from '../fields/text/Text';
 import Svg from '../icon/Svg';

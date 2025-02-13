@@ -1,11 +1,11 @@
-import React, { FC, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import {FC, useContext} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useNavigate} from 'react-router-dom';
 
 import Title from '../../../common/components/fields/title/Title';
 import DetailsMainContent from '../../../common/components/layouts/DetailsMainContent';
-import { getShapeByName } from '../../../services/shapeService.utils';
-import { ShapeContext } from '../../context/ShapeContext';
+import {getShapeByName} from '../../../services/shapeService.utils';
+import {ShapeContext} from '../../context/ShapeContext';
 
 import styles from './ShapesDetailMainContent.module.css';
 

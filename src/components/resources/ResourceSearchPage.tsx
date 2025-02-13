@@ -1,6 +1,5 @@
 import FilterIcon from '@mui/icons-material/FilterAlt';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 import NoContent from '../../common/components/./././noContent/NoContent';
 import Horizontal from '../../common/components/./layouts/Horizontal';
@@ -11,12 +10,12 @@ import Svg from '../../common/components/icon/Svg';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import SearchBar from '../../common/components/searchBar/SearchBar';
 import ItemCard from '../ItemCard/ItemCard';
-import { resourceToItemCardData } from '../ItemCard/itemCardHelper';
+import {resourceToItemCardData} from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 import Filter from '../filter/Filter';
 
 import styles from './ResourceSearchPage.module.css'
-import { useResources } from './hooks/useResources';
+import {useResources} from './hooks/useResources';
 
 const ResourceSearchPage = () => {
 

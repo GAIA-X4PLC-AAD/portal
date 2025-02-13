@@ -1,9 +1,9 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 
-import Modal from '../../Modal';
+import Modal from '../../Modal.js';
 import Checkbox from '../../common/checkbox';
 import {
   BodySmallBoldText,
@@ -18,7 +18,7 @@ import {
   Style,
   TextInput
 } from '../../common/styles';
-import { Padding } from '../discovery/tabs/style';
+import {Padding} from '../discovery/tabs/style';
 
 const OrganizationDetailsView = ({ nextStage, didStage }) => {
 
@@ -52,7 +52,7 @@ const OrganizationDetailsView = ({ nextStage, didStage }) => {
       setEMessage(t('onboarding.missing_file'));
     }  else if (formRef.current.reportValidity())
     {
-      let formData = new FormData();
+      const formData = new FormData();
       formData.append('name', input.name);
       formData.append('email', input.email);
       formData.append('aisbl', input.aisbl||false);

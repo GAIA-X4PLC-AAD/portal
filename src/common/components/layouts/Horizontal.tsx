@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { FC, ReactNode } from 'react';
+import {FC, ReactNode} from 'react';
 
 import style from './Layout.module.css'
 

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import {FC, ReactNode} from 'react';
 
 import Vertical from '../../common/components/./layouts/Vertical';
 

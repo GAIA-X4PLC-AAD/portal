@@ -1,5 +1,5 @@
 import classnames from 'classnames';
-import React, { FC, ReactElement } from 'react';
+import {FC, ReactElement} from 'react';
 
 import styles from './Text.module.css';
 

@@ -1,8 +1,8 @@
 /* test coverage not required */
-import { GeoJSONLayer, VcsApp, VcsModule, Viewpoint } from '@vcmap/core';
-import React, { FC, useEffect } from 'react';
+import {GeoJSONLayer, VcsApp, VcsModule, Viewpoint} from '@vcmap/core';
+import {FC, useEffect} from 'react';
 import './Map.module.css';
-import { v4 as uuid } from 'uuid';
+import {v4 as uuid} from 'uuid';
 
 const Map: FC = () => {
   const mapId = uuid();
