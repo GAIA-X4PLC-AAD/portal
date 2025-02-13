@@ -1,16 +1,16 @@
 /* test coverage not required */
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { ToastContainer } from 'react-toastify';
+import {createRoot} from 'react-dom/client';
+import {Provider} from 'react-redux';
+import {ToastContainer} from 'react-toastify';
 
 import './i18n';
 import ErrorBoundary from './common/./errorHandling/ErrorBoundary';
-import { ErrorProvider } from './common/./errorHandling/ErrorContext';
+import {ErrorProvider} from './common/./errorHandling/ErrorContext';
 import AuthContextProvider from './components/context/AuthContextProvider';
-import { ResourceContextProvider } from './components/context/ResourceContext';
-import App from './components/main/App';
+import {ResourceContextProvider} from './components/context/ResourceContext';
+import App from './components/main/App.js';
 import reducers from './reducers';
 
 import 'react-toastify/dist/ReactToastify.css';
