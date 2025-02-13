@@ -1,7 +1,6 @@
-import { OverridableComponent } from '@mui/material/OverridableComponent';
-import { SvgIconTypeMap } from '@mui/material/SvgIcon';
+import {OverridableComponent, SvgIconTypeMap} from '@mui/material';
 import classnames from 'classnames'
-import React, { FC } from 'react'
+import React, {FC} from 'react'
 
 import styles from './Svg.module.css';
 

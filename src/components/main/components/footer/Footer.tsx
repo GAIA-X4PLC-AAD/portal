@@ -1,8 +1,8 @@
-import { useFooter } from 'hooks/useFooter';
 import React from 'react';
 
 import { ReactComponent as MyIcon } from '../../../../assets/logos/msg_white.svg';
 import Text from '../../../../common/components/fields/text/Text';
+import { useFooter } from '../../../../hooks/useFooter';
 
 import styles from './Footer.module.css';
 

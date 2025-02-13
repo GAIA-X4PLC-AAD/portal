@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
-import Modal from '../../Modal';
+import Modal from '../../Modal.js';
 import Checkbox from '../../common/checkbox';
-import { BlueButton, CancelButton, Column, Image, Row, Style } from '../../common/styles';
+import {BlueButton, CancelButton, Column, Image, Row, Style} from '../../common/styles';
 import * as S from '../discovery/style';
 import ContactTab from '../discovery/tabs/ContactTab/ContactTab';
 import DescriptionTab from '../discovery/tabs/description/DescriptionTab';

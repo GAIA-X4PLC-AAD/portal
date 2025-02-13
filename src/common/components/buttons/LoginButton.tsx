@@ -1,11 +1,12 @@
 import classnames from 'classnames';
-import GaiaXButton from 'common/components/buttons/GaiaXButton';
-import React, { FC, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { AuthContext } from '../../../components/context/AuthContextProvider';
+import React, {FC, useContext} from 'react';
+import {useTranslation} from 'react-i18next';
+
+import {AuthContext} from '../../../components/context/AuthContextProvider';
 
 import styles from './LoginButton.module.css'
+import GaiaXButton from './GaiaXButton';
 
 interface LoginButtonProps {
   className?: string;

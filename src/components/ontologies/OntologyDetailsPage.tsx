@@ -1,5 +1,4 @@
 /* test coverage not required */
-import { OntologyContext } from 'components/context/OntologyContext';
 import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
@@ -16,6 +15,7 @@ import { fetchAllSchemas } from '../../services/schemaApiService';
 import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
 import { Ontology } from '../../types/ontologies.model';
 import { ARROW_RIGHT } from '../../utils/symbols';
+import { OntologyContext } from '../context/OntologyContext';
 
 import OntologyActions from './components/OntologyActions';
 import OntologyDetailMainContent from './components/OntologyDetailMainContent';

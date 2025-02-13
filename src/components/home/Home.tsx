@@ -1,11 +1,11 @@
-import Text from 'common/components/fields/text/Text';
-import Title from 'common/components/fields/title/Title';
-import { AuthContext } from 'components/context/AuthContextProvider';
-import HeaderWithImage from 'components/home/components/HeaderWithImage/HeaderWithImage';
-import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
+import Text from '../../common/components/fields/text/Text';
+import Title from '../../common/components/fields/title/Title';
+import {AuthContext} from '../context/AuthContextProvider';
+import HeaderWithImage from './components/HeaderWithImage/HeaderWithImage';
+import React, {useContext} from 'react';
+import {useTranslation} from 'react-i18next';
 
-import { ReactComponent as HeaderImage } from '../../assets/images/header_image.svg';
+import {ReactComponent as HeaderImage} from '../../assets/images/header_image.svg';
 
 import styles from './Home.module.css';
 
