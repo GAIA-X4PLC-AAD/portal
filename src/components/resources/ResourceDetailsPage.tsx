@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLocation, useParams } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useLocation, useParams} from 'react-router-dom';
 
 import Header from '../../common/components/header/Header';
 import DetailsContent from '../../common/components/layouts/DetailsContent';
@@ -8,13 +8,13 @@ import DetailsSidebar from '../../common/components/layouts/DetailsSidebar';
 import Main from '../../common/components/layouts/Main';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import NoContent from '../../common/components/noContent/NoContent';
-import { ResourceDetails } from '../../types/resources.model';
-import { ResourceDetailsContext } from '../context/ResourceDetailsContext';
+import {ResourceDetails} from '../../types/resources.model';
+import {ResourceDetailsContext} from '../context/ResourceDetailsContext';
 
 import ResourceActions from './components/ResourceActions';
 import ResourceDetailMainContent from './components/ResourceDetailMainContent';
 import ResourceMap from './components/ResourceMap';
-import { loadResourceDetails } from './helpers/resourceDataFlow';
+import {loadResourceDetails} from './helpers/resourceDataFlow';
 
 const ResourceDetailsPage = () => {
   const { t } = useTranslation();

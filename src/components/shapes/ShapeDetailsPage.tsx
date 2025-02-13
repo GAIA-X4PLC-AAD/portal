@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import {FC, useEffect, useState} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useLocation} from 'react-router-dom';
 
 import car from '../../assets/car.gif';
 import Header from '../../common/components/header/Header';
@@ -9,9 +9,9 @@ import DetailsSidebar from '../../common/components/layouts/DetailsSidebar';
 import Main from '../../common/components/layouts/Main';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import NoContent from '../../common/components/noContent/NoContent';
-import { getShapeByName } from '../../services/shapeService.utils';
-import { Shape } from '../../types/shapes.model';
-import { ShapeContext } from '../context/ShapeContext';
+import {getShapeByName} from '../../services/shapeService.utils';
+import {Shape} from '../../types/shapes.model';
+import {ShapeContext} from '../context/ShapeContext';
 
 import ShapeActions from './components/ShapeActions';
 import ShapeSuitableOfferings from './components/ShapeSuitableOfferings';
