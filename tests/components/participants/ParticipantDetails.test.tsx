@@ -26,7 +26,10 @@ describe('ParticipantDetails', () => {
     const { getByRole } = render(withRouter(<ParticipantDetails/>));
 
     // Check the heading
-    expect(getByRole('heading', { name: /participants.title → msg systems ag/i })).toBeInTheDocument();
+    const link_participants = getByRole('link', { name: /participants.title/i })
+    expect(link_participants).toBeInTheDocument();
+    expect(link_participants).toHaveAttribute('href', '/participants');
 
+    expect(getByRole('link', { name: /msg systems ag/i })).toBeInTheDocument();
   });
 });

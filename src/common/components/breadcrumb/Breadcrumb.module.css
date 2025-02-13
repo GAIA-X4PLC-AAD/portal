@@ -1,0 +1,19 @@
+.breadcrumbs {
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.breadcrumbSeparator {
+    text-decoration: none;
+    margin: auto;
+}
+
+.breadcrumbLink {
+    text-decoration: none;
+}
+
+.breadcrumbLink:hover {
+    text-decoration: underline;
+}
