@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import {FC} from 'react';
+import {useTranslation} from 'react-i18next';
+import {useNavigate} from 'react-router-dom';
 
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
 import Subtitle from '../../common/components/fields/subtitle/Subtitle';
@@ -9,7 +9,7 @@ import Title from '../../common/components/fields/title/Title';
 import Markdown from '../../common/components/markdown/Markdown';
 
 import styles from './ItemCard.module.css';
-import { ItemCardData } from './itemCardHelper';
+import {ItemCardData} from './itemCardHelper';
 
 export interface IItemCard {
     itemCardData: ItemCardData;

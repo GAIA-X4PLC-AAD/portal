@@ -1,6 +1,6 @@
 /* test coverage not required */
-import React, { FC, ReactNode } from 'react';
-import { Route, Routes as ReactRoutes } from 'react-router-dom';
+import {FC, ReactNode} from 'react';
+import {Route, Routes as ReactRoutes} from 'react-router-dom';
 
 import WorkInProgress from '../../../../WorkInProgress';
 import Vertical from '../../../../common/components/layouts/Vertical';

@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import {FC} from 'react';
 
 import Subtitle from '../../common/components/fields/subtitle/Subtitle';
-import { Asset } from '../resources/helpers/resourceFilterHelper';
+import {Asset} from '../resources/helpers/resourceFilterHelper';
 
 import styles from './Filter.module.css';
 

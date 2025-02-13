@@ -1,5 +1,5 @@
-import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
+import {FC} from 'react';
+import {Link} from 'react-router-dom';
 
 import gaiaLogo from '../../../../../assets/images/PLC-AAD-Logo.png';
 

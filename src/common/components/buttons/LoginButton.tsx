@@ -1,6 +1,6 @@
 import classnames from 'classnames';
 
-import React, {FC, useContext} from 'react';
+import {FC, useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 
 import {AuthContext} from '../../../components/context/AuthContextProvider';

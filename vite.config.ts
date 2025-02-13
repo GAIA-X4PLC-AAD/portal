@@ -83,7 +83,7 @@ export default defineConfig({
     resolve: {
         alias: {
             // Add alias for Keycloak configuration
-            'keycloak-config.json': path.resolve(
+            'keycloak-config': path.resolve(
                 __dirname,
                 isProduction
                     ? 'src/keycloak-config.prod.json' // Production environment

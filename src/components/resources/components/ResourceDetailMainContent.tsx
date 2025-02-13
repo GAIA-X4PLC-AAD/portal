@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
+import {useContext} from 'react';
+import {useTranslation} from 'react-i18next';
 
 import TextEntry from '../../../common/components/fields/entry/TextEntry';
 import Link from '../../../common/components/fields/link/Link';
@@ -9,7 +9,7 @@ import Title from '../../../common/components/fields/title/Title';
 import DetailsMainContent from '../../../common/components/layouts/DetailsMainContent';
 import DetailsPropertyContainer from '../../../common/components/layouts/DetailsPropertyContainer';
 import Markdown from '../../../common/components/markdown/Markdown';
-import { ResourceDetailsContext } from '../../context/ResourceDetailsContext';
+import {ResourceDetailsContext} from '../../context/ResourceDetailsContext';
 
 import styles from './ResourceDetailMainContent.module.css';
 

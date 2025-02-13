@@ -1,11 +1,11 @@
-import React, { FC, useContext, useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+import {FC, useContext, useMemo} from 'react';
+import {useTranslation} from 'react-i18next';
 
 import TextEntry from '../../../common/components/fields/entry/TextEntry';
 import Link from '../../../common/components/fields/link/Link';
 import Subtitle from '../../../common/components/fields/subtitle/Subtitle';
 import DetailsMainContent from '../../../common/components/layouts/DetailsMainContent';
-import { ParticipantDetailsContext } from '../../context/ParticipantDetailsContext';
+import {ParticipantDetailsContext} from '../../context/ParticipantDetailsContext';
 
 const ParticipantDetailMainContent: FC = () => {
   const { t } = useTranslation();

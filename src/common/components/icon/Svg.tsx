@@ -1,8 +1,9 @@
-import {OverridableComponent, SvgIconTypeMap} from '@mui/material';
+import {SvgIconTypeMap} from '@mui/material';
 import classnames from 'classnames'
 import React, {FC} from 'react'
 
 import styles from './Svg.module.css';
+import {OverridableComponent} from '@mui/material/OverridableComponent';
 
 interface MenuIconProps {
     onClick: () => void;

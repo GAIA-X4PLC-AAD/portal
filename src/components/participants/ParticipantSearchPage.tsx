@@ -1,5 +1,4 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 import NoContent from '../../common/components/./././noContent/NoContent';
 import Header from '../../common/components/header/Header';
@@ -9,10 +8,10 @@ import Vertical from '../../common/components/layouts/Vertical';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import SearchBar from '../../common/components/searchBar/SearchBar';
 import ItemCard from '../ItemCard/ItemCard';
-import { participantToItemCardData } from '../ItemCard/itemCardHelper';
+import {participantToItemCardData} from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 
-import { useParticipants } from './hooks/useParticipants';
+import {useParticipants} from './hooks/useParticipants';
 
 const ParticipantSearchPage = () => {
   const { t } = useTranslation();

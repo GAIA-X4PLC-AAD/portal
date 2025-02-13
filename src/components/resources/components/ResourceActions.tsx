@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
-import { useTranslation } from 'react-i18next';
+import {useContext} from 'react';
+import {useTranslation} from 'react-i18next';
 
 import GaiaXButton from '../../../common/components/buttons/GaiaXButton';
 import NotificationDialog from '../../../common/components/dialogs/NotificationDialog/NotificationDialog';
 import Title from '../../../common/components/fields/title/Title';
 import Vertical from '../../../common/components/layouts/Vertical';
-import { ResourceDetailsContext } from '../../context/ResourceDetailsContext';
-import { useResourceBuyingStateMachine } from '../hooks/useResourceBuyingStateMachine';
+import {ResourceDetailsContext} from '../../context/ResourceDetailsContext';
+import {useResourceBuyingStateMachine} from '../hooks/useResourceBuyingStateMachine';
 
 import DataTransferInitiationProgress from './DataTransferInitiationProgress';
 import DataTransferStatus from './DataTransferStatus';

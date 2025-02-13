@@ -1,12 +1,12 @@
 import classnames from 'classnames';
-import React, { FC, useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import {FC, useContext, useState} from 'react';
+import {useTranslation} from 'react-i18next';
 
 import LoginButton from '../../../../../common/components/buttons/LoginButton';
 import LanguageSelectionModal
-  from '../../../../../common/components/dialogs/LanguageSelectionDialog/LanguageSelectionDialog';
-import { AuthContext } from '../../../../context/AuthContextProvider';
-import { NavbarAsset } from '../helpers/types';
+    from '../../../../../common/components/dialogs/LanguageSelectionDialog/LanguageSelectionDialog';
+import {AuthContext} from '../../../../context/AuthContextProvider';
+import {NavbarAsset} from '../helpers/types';
 
 import NavbarItem from './NavbarItem';
 import styles from './NavigationItemContainer.module.css'

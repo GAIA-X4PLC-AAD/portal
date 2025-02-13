@@ -1,12 +1,11 @@
 import classnames from 'classnames';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
 import Text from '../../common/components/fields/././text/Text';
 import Subtitle from '../../common/components/fields/subtitle/Subtitle';
 import Title from '../../common/components/fields/title/Title';
-import { ResourceDetails } from '../../types/resources.model';
+import {ResourceDetails} from '../../types/resources.model';
 
 import styles from './SidebarCard.module.css';
 
@@ -20,8 +19,7 @@ interface ISidebarCard {
 export default function SidebarCard({
   title,
   subtitle,
-  text,
-  resource
+                                        text
 }: Readonly<ISidebarCard>) {
   const { t } = useTranslation();
   const handleClickBuyButton = () => {

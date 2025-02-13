@@ -1,5 +1,5 @@
-import React, { FC, useContext } from 'react'
-import { useTranslation } from 'react-i18next';
+import {FC, useContext} from 'react'
+import {useTranslation} from 'react-i18next';
 
 import TextEntry from '../../../common/components/fields/entry/TextEntry';
 import Link from '../../../common/components/fields/link/Link';
@@ -9,7 +9,7 @@ import DetailsMainContent from '../../../common/components/layouts/DetailsMainCo
 import DetailsPropertyContainer from '../../../common/components/layouts/DetailsPropertyContainer';
 import Vertical from '../../../common/components/layouts/Vertical';
 import Markdown from '../../../common/components/markdown/Markdown';
-import { ServiceOfferingDetailsContext } from '../../context/ServiceOfferingDetailsContext';
+import {ServiceOfferingDetailsContext} from '../../context/ServiceOfferingDetailsContext';
 import styles from '../../resources/components/ResourceDetailMainContent.module.css';
 
 const ServiceOfferingDetailMainContent: FC = () => {

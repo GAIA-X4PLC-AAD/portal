@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Subtitle from '../fields/subtitle/Subtitle';
 
 import styles from './NoContent.module.css'

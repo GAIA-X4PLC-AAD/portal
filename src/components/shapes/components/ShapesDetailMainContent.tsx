@@ -1,5 +1,5 @@
 import DetailsMainContent from '../../../common/components/layouts/DetailsMainContent';
-import React, {FC, useContext} from 'react';
+import {FC, useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import {useNavigate} from 'react-router-dom';
 

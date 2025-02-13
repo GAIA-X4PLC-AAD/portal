@@ -1,6 +1,6 @@
 /* test coverage not required */
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
-import React, { FC } from 'react';
+import {FC} from 'react';
 
 import Title from '../../../common/components/fields/title/Title';
 import Horizontal from '../../../common/components/layouts/Horizontal';

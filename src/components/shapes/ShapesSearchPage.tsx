@@ -1,5 +1,4 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 
 import Header from '../../common/components/header/Header';
 import Horizontal from '../../common/components/layouts/Horizontal';
@@ -9,10 +8,10 @@ import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIn
 import NoContent from '../../common/components/noContent/NoContent';
 import SearchBar from '../../common/components/searchBar/SearchBar';
 import ItemCard from '../ItemCard/ItemCard';
-import { shapeToItemCardData } from '../ItemCard/itemCardHelper';
+import {shapeToItemCardData} from '../ItemCard/itemCardHelper';
 import CardContainer from '../cards/CardContainer';
 
-import { useShapes } from './hooks/useShapes';
+import {useShapes} from './hooks/useShapes';
 
 const ShapesSearchPage = () => {
   const { t } = useTranslation();

@@ -1,11 +1,11 @@
 /* test coverage not required */
-import React, { FC, useContext } from 'react';
-import { useTranslation } from 'react-i18next';
+import {FC, useContext} from 'react';
+import {useTranslation} from 'react-i18next';
 
 import Title from '../../../common/components/fields/title/Title';
 import Horizontal from '../../../common/components/layouts/Horizontal';
 import Vertical from '../../../common/components/layouts/Vertical';
-import { OntologyContext } from '../../context/OntologyContext';
+import {OntologyContext} from '../../context/OntologyContext';
 
 import styles from './OntologySuitableOfferings.module.css';
 

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 
 import LoginButton from '../../../../common/components/buttons/LoginButton';
 
@@ -8,7 +8,7 @@ import GaiaXLogo from './components/GaiaXLogo';
 import MenuIcon from './components/MenuIcon';
 import NavbarContainer from './components/NavbarContainer';
 import NavigationItemContainer from './components/NavigationItemContainer';
-import { NavbarAsset } from './helpers/types';
+import {NavbarAsset} from './helpers/types';
 
 export default function Navbar() {
   const { t } = useTranslation();
