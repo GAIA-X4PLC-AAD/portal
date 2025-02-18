@@ -1,0 +1,19 @@
+.notificationContainer {
+}
+
+.notificationContainer p {
+    font-weight: 400;
+    font-size: 16px;
+    margin: 10px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: right;
+}
+
+.notificationButton {
+    font-weight: 400;
+    font-size: 16px;
+    margin: 0;
+}

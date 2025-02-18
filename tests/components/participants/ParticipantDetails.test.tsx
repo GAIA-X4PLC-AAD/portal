@@ -13,6 +13,10 @@ jest.mock('../../../src/components/participants/hooks/useParticipantDetails', ()
   useParticipantDetails: () => useParticipantDetails(),
 }));
 
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
+
 describe('ParticipantDetails', () => {
   beforeAll(() => {
     useParticipantDetails.mockReturnValue(normal_render); // Mock the useParticipants hook
@@ -22,7 +26,10 @@ describe('ParticipantDetails', () => {
     const { getByRole } = render(withRouter(<ParticipantDetails/>));
 
     // Check the heading
-    expect(getByRole('heading', { name: /participants.title → msg systems ag/i })).toBeInTheDocument();
+    const link_participants = getByRole('link', { name: /participants.title/i })
+    expect(link_participants).toBeInTheDocument();
+    expect(link_participants).toHaveAttribute('href', '/participants');
 
+    expect(getByRole('link', { name: /msg systems ag/i })).toBeInTheDocument();
   });
 });

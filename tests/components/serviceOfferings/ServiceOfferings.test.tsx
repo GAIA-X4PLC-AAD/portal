@@ -5,37 +5,22 @@ import ServiceOfferings from '../../../src/components/serviceOfferings/ServiceOf
 import { ServiceOffering } from '../../../src/types/serviceOfferings.model';
 import { withRouter } from '../../common/testHelper';
 
+import { mockServiceOfferings } from './__fixtures__/mockServiceOfferings';
+
 const useServiceOfferings = jest.fn()
-jest.mock('../../../src/components/serviceOfferings/useServiceOfferings', () => ({
+jest.mock('../../../src/components/serviceOfferings/hooks/useServiceOfferings', () => ({
   useServiceOfferings: () => useServiceOfferings(),
 }))
-jest.mock('i18next', () => ({
-  t: (translationId) => translationId,
-}))
 
-console.error = jest.fn()
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
+
 describe('ServiceOffering', () => {
   it('renders content if state is SHOW_OFFERINGS', () => {
     useServiceOfferings.mockReturnValue({
       state: 'SHOW_OFFERINGS',
-      serviceOfferings: [
-        {
-          name: 'ServiceOffering 1',
-          label: 'ServiceOffering 1 label',
-          claimsGraphUri: 'claims-graph-uri 1',
-          uri: 'uri1',
-          description: 'description 1',
-          policy: 'policy 1'
-        },
-        {
-          name: 'ServiceOffering 2',
-          label: 'ServiceOffering 2 label',
-          claimsGraphUri: 'claims-graph-uri 2',
-          uri: 'uri2',
-          description: 'description 2',
-          policy: 'policy 2'
-        }
-      ] as ServiceOffering[],
+      serviceOfferings: mockServiceOfferings,
     })
     const { getByText } = render(withRouter(<ServiceOfferings/>));
     expect(getByText('ServiceOffering 1')).not.toBeNull();

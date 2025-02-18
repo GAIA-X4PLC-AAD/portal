@@ -537,7 +537,28 @@
     "search-bar-text": "Search for special service offerings",
     "no-offerings-available": "No offerings available",
     "no-description": "No description available!",
-    "no-title": "No title available"
+    "no-title": "No title available",
+    "resulting-file-description": "Resulting file description",
+    "resulting-file-specification": "Resulting file specification",
+    "contract-id": "Contract Id",
+    "recording-time": "Recording time",
+    "required-file": "Required file",
+    "required-files-list": "Required files list",
+    "required-files-specification": "Specification",
+    "required-files-description": "Description",
+    "provided-by": "Provided by",
+    "host": "Host",
+    "open-api": "OpenAPI",
+    "name": "Name",
+    "protocol": "Protocol",
+    "port": "Port",
+    "hosted-on": "Hosted on",
+    "services-access-point": "Service access point",
+    "related-offerings": "Related offerings",
+    "location": "Location",
+    "description": "Description",
+    "suitable-offerings": "Suitable offerings",
+    "detail-title": "Software Resource"
   },
   "participants": {
     "title": "Participant",
@@ -601,5 +622,10 @@
     "not-specified": "Not specified",
     "yes": "Yes",
     "no": "No"
+  },
+  "session": {
+    "willExpire": "Your session will expire in 30 seconds!",
+    "confirmRenew": "Do you want to renew your session?",
+    "failedRefreshToken": "Failed to refresh token"
   }
 }

@@ -1,5 +1,6 @@
+/* test coverage not required */
 import OpenInFullIcon from '@mui/icons-material/OpenInFull';
-import React from 'react';
+import React, { FC } from 'react';
 
 import Title from '../../../common/components/fields/title/Title';
 import Horizontal from '../../../common/components/layouts/Horizontal';
@@ -8,8 +9,17 @@ import Map from '../../../common/components/map/Map';
 
 import styles from './ResourceMap.module.css';
 
-const ResourceMap = () => {
+interface IResourceMap {
+    mediaUrl: string | undefined;
+}
+
+const ResourceMap: FC<IResourceMap> = ({ mediaUrl }) => {
   const handleEnlarge = () => {}
+
+  if (!mediaUrl) {
+    return null;
+  }
+
   return (
     <Vertical className={styles.mapCardContainer}>
       <Horizontal className={styles.headerContainer}>

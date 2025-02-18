@@ -1,8 +1,10 @@
 .sidebarContainer {
     align-items: flex-start;
+    justify-content: flex-end;
     width: 40rem;
     min-width: 40rem;
-}
+    min-height: 80rem;
+    }
 
 @media (max-width: 1200px) {
     .sidebarContainer {

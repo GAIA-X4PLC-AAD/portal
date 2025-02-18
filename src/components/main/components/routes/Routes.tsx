@@ -26,6 +26,7 @@ import ProvideOverview from '../../../provide/ProvideOverview';
 import ProvideSelection from '../../../provide/ProvideSelection';
 import ResourceDetailsPage from '../../../resources/ResourceDetailsPage';
 import ResourceSearchPage from '../../../resources/ResourceSearchPage';
+import ServiceOfferingDetails from '../../../serviceOfferings/ServiceOfferingDetails';
 import ServiceOfferings from '../../../serviceOfferings/ServiceOfferings';
 import ShapeDetailsPage from '../../../shapes/ShapeDetailsPage';
 import ShapesSearchPage from '../../../shapes/ShapesSearchPage';
@@ -58,6 +59,7 @@ const Routes: FC = () => (
       <Route path="/home" element={Wrappers(<Home/>, NO_AUTHENTICATION_REQUIRED)}/>
       <Route path="/vcmap" element={Wrappers(<Map/>)}/>
       <Route path="/service-offerings" element={Wrappers(<ServiceOfferings/>)}/>
+      <Route path="/service-offerings/:id" element={Wrappers(<ServiceOfferingDetails/>)}/>
       <Route path="/participants" element={Wrappers(<ParticipantSearchPage/>)}/>
       <Route path="/participants/:participantId" element={Wrappers(<ParticipantDetails/>)}/>
       <Route path="/resources" element={Wrappers(<ResourceSearchPage/>)}/>
