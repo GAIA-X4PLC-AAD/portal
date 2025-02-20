@@ -6,6 +6,7 @@ export interface Resource {
     name: string,
     description: string,
     uri: string,
+    recordingTime: string,
     claimsGraphUri: string[],
 }
 
@@ -25,6 +26,7 @@ export interface ResourceDetails {
     laneTypes: string[],
     legalName: string,
     mediaUrl: string,
+    recordingTime: string,
 
     contractId?: string,
     serviceAccessPoint?: {

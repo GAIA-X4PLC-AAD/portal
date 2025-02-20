@@ -11,11 +11,11 @@ export type AssetTypes = 'typeAssets' | 'formatAssets' | 'vendorAssets';
  * Interface type used to define all the props needed to manage the filter assets.
  */
 export interface Asset {
-    id: string;
-    type: AssetTypes;
-    label: string;
-    value: boolean;
-    disabled: boolean;
+  id: string;
+  type: AssetTypes;
+  label: string;
+  value: boolean;
+  disabled: boolean;
 }
 
 /**

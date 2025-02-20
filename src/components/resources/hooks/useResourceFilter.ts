@@ -26,4 +26,3 @@ export const useResourceFilter = (ontologies: Ontology[], resources: Resource[])
     updateFilterAsset: (asset: Asset) => dispatch(updateFilterAssetAction(asset, ontologies, resources))
   }
 }
-

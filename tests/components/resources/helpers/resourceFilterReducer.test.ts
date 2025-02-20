@@ -57,4 +57,5 @@ describe('Actions', () => {
       payload: { asset, ontologies, resources }
     })
   })
+
 })

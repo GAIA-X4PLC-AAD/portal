@@ -58,10 +58,12 @@ export const CypherQueryApiService = {
       OPTIONAL MATCH (dataResource)-[:producedBy]-(producedBy)
       OPTIONAL MATCH (dataResource)-[:general]-(general)
       OPTIONAL MATCH (general)-[:description]-(description)
+      OPTIONAL MATCH (general)-[:data]-(data)
 
       RETURN
         properties(description).name AS name,
         properties(description).description AS description,
+        properties(data).recordingTime AS recordingTime,
         properties(dataResource).uri AS uri,
         properties(dataResource).claimsGraphUri AS claimsGraphUri,
         coalesce(properties(format).type, properties(format).formatType) AS format,
@@ -104,6 +106,7 @@ export const CypherQueryApiService = {
               ELSE null
               END as serviceAccessPoint,
            data.contractId as contractId,
+           data.recordingTime as recordingTime,
            dataResource.license as license,
            dataResource.copyrightOwnedBy as copyrightOwnedBy,
            dataResource.claimsGraphUri as claimsGraphUri,
@@ -174,7 +177,8 @@ export const CypherQueryApiService = {
             labels(softwareResource) as labels,
             softwareResource.uri as uri,
             description.name AS name,
-            description.description AS description
+            description.description AS description,
+            data.recordingTime AS recordingTime
             `
     })
   },

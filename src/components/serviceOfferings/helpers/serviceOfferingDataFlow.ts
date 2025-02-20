@@ -6,7 +6,6 @@ import { ServiceOffering, ServiceOfferingDetails } from '../../../types/serviceO
 export const loadServiceOfferings = async (): Promise<ServiceOffering[]> => {
   try {
     const cypherQueryResult = await cypherQuery.getServiceOfferings();
-
     return cypherQueryResult.items;
   } catch (error) {
     console.error('Error fetching service-offerings:', error);
