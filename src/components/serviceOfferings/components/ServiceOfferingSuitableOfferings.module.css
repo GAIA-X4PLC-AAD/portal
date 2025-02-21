@@ -4,6 +4,8 @@
     align-items: flex-start;
     width: 400px;
     min-height: 30vh;
+    max-height: 40rem;
+    flex: 1;
     border-radius: 10px;
     background-color: white;
     padding: 0 20px 20px 20px;
