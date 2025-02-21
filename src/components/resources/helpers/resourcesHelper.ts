@@ -1,3 +1,6 @@
+import i18next from 'i18next';
+
+import { MenuItemObject, SortOrder } from '../../../common/components/buttons/SortListButton';
 import { Resource } from '../../../types/resources.model';
 
 /**
@@ -22,3 +25,42 @@ export const removeNonResourceTypeLabels = (resources: Resource[], resourceTypes
   }));
 }
 
+export const getResourceSortMenuItems = (): MenuItemObject[] => {
+  return [
+    { label: i18next.t('resources.sort-menu.a-z'), sortOrder: SortOrder.ASC_NAME },
+    { label: i18next.t('resources.sort-menu.z-a'), sortOrder: SortOrder.DESC_NAME },
+    { label: i18next.t('resources.sort-menu.new'), sortOrder: SortOrder.DESC_DATE },
+    { label: i18next.t('resources.sort-menu.old'), sortOrder: SortOrder.ASC_DATE },
+  ];
+}
+
+export const getSortedResources = (resources: Resource[], sortOrder: SortOrder) => {
+  const resourcesToSort = [...resources];
+  switch (sortOrder) {
+  case SortOrder.ASC_NAME:
+    return resourcesToSort.sort((a, b) => {
+      if (!a.name) {return 1;}
+      if (!b.name) {return -1;}
+      return a.name.localeCompare(b.name);
+    });
+  case SortOrder.DESC_NAME:
+    return resourcesToSort.sort((a, b) => {
+      if (!a.name) {return 1;}
+      if (!b.name) {return -1;}
+      return b.name.localeCompare(a.name);
+    });
+  case SortOrder.ASC_DATE:
+    return resourcesToSort.sort((a, b) => {
+      if (!a.recordingTime) {return 1;}
+      if (!b.recordingTime) {return -1;}
+      return new Date(a.recordingTime).getTime() - new Date(b.recordingTime).getTime();
+    });
+  case SortOrder.DESC_DATE:
+    return resourcesToSort.sort((a, b) => {
+      if (!a.recordingTime) {return 1;}
+      if (!b.recordingTime) {return -1;}
+      return new Date(b.recordingTime).getTime() - new Date(a.recordingTime).getTime();
+    });
+  default: return resourcesToSort;
+  }
+}
