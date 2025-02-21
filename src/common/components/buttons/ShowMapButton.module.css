@@ -4,3 +4,9 @@
     margin-bottom: 0.3rem;
     white-space: nowrap;
 }
+
+@media (max-width: 600px) {
+    .buttonLabel {
+        display: none;
+    }
+}

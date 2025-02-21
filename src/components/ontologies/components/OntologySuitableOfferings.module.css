@@ -2,7 +2,8 @@
     align-items: flex-start;
     height: 40rem;
     padding: 2rem;
-
+    flex: 1;
+    max-width: 40rem;
     border-radius: 1rem;
     background-color: var(--white);
     box-shadow: var(--shadow--normal)

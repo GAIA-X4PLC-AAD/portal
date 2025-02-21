@@ -1,8 +1,9 @@
 .sidebarCardContainer {
     align-items: flex-start;
     padding: 2rem;
-    width: 100%;
-
+    width: 40rem;
+    flex: 1;
+    max-height: 40rem;
     border-radius: 1rem;
     background-color: var(--white);
     box-shadow: var(--shadow--normal);

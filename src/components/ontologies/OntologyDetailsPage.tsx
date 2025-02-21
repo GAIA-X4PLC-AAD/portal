@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 
-import { OntologyContext } from '../../../src/components/context/OntologyContext';
 import car from '../../assets/car.gif';
 import Header from '../../common/components/header/Header';
 import DetailsContent from '../../common/components/layouts/DetailsContent';
@@ -14,6 +13,7 @@ import { fetchOntologyById } from '../../services/ontologyService.utils';
 import { fetchAllSchemas } from '../../services/schemaApiService';
 import { fetchAllShapesFromSchemas } from '../../services/shapeService.utils';
 import { Ontology } from '../../types/ontologies.model';
+import { OntologyContext } from '../context/OntologyContext';
 
 import OntologyActions from './components/OntologyActions';
 import OntologyDetailMainContent from './components/OntologyDetailMainContent';

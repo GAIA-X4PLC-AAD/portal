@@ -7,6 +7,11 @@
     height: 100%;
 }
 
+.tableContainer {
+    overflow-x: auto;
+    max-width: 100%;
+}
+
 .table {
     width: 100%;
     border-collapse: collapse;
