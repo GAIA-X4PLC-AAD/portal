@@ -6,7 +6,7 @@ import '@testing-library/jest-dom';
 import ResourceDetailMainContent from '../../../../src/components/resources/components/ResourceDetailMainContent';
 import { CombinedDetails } from '../../../../src/types/resources.model';
 
-const mockResourceDetails = {
+const mockResourceDetails: CombinedDetails = {
   details: {
     name: 'Resource 1',
     uri: 'http://example.com',
@@ -15,7 +15,7 @@ const mockResourceDetails = {
     contractId: '123',
   },
   items: [{
-    r: 'r 1',
+    resourceItemName: 'resourceItemName 1',
     other: {
       key1: 'value1',
       key2: 'value2',
@@ -41,7 +41,10 @@ describe('ResourceDetailMainContent', () => {
   it('renders correctly with resource details', () => {
     ComponentUnderTest(mockResourceDetails);
     expect(screen.queryAllByText('general')).not.toBeNull();
-
+    expect(screen.queryAllByText(mockResourceDetails.details.name)).not.toBeNull();
+    mockResourceDetails.items.forEach(item => {
+      expect(screen.queryAllByText(item.resourceItemName)).not.toBeNull();
+    })
   });
 
   it('renders empty component when no resource details are provided', () => {

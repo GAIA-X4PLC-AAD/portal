@@ -80,8 +80,8 @@ export const getSortedResources = (resources: Resource[], sortOrder: SortOrder) 
 export const sortDataResources = (dataResource: ResourceItem[]): ResourceItem[] => {
   const dataToSort = [...dataResource];
   return dataToSort.sort((a, b) => {
-    if (a.r === 'general') {return -1;}
-    if (b.r === 'general') {return 1;}
-    return a.r.localeCompare(b.r);
+    if (a.resourceItemName === 'general') {return -1;}
+    if (b.resourceItemName === 'general') {return 1;}
+    return a.resourceItemName.localeCompare(b.resourceItemName);
   });
 };

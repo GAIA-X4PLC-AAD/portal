@@ -24,7 +24,7 @@ export interface ResourceDetails {
 }
 
 export interface ResourceItem {
-    r: string;
+    resourceItemName: string;
     other: Record<string, any>;
     dataResource: Record<string, any>;
 }

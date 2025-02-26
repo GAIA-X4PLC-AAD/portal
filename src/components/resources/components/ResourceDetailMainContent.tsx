@@ -22,14 +22,14 @@ const ResourceDetailMainContent = () => {
       <Title className={styles.title}>{resourceDetails.details.name}</Title>
 
       {sortDataResources(resourceDetails.items).map((item, index) => (
-        <>
-          <Subtitle key={item.r}>{item.r}</Subtitle>
-          <DetailsPropertyContainer key={index}>
-            {Object.entries(item.dataResource).map(([key, value], index) => (
-              <TextEntry key={index} name={key} value={value} />
+        <React.Fragment key={`item_${index}`}>
+          <Subtitle>{item.resourceItemName}</Subtitle>
+          <DetailsPropertyContainer>
+            {Object.entries(item.dataResource).map(([key, value], subIndex) => (
+              <TextEntry key={`entry_${index}_${subIndex}`} name={key} value={value} />
             ))}
           </DetailsPropertyContainer>
-        </>
+        </React.Fragment>
       ))}
 
     </DetailsMainContent>

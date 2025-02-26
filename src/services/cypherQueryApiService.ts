@@ -82,7 +82,7 @@ export const CypherQueryApiService = {
     return cypherQuery({
       statement: `
       MATCH (dataResource:DataResource { uri: '${uri}' })-[r]->(other)
-      RETURN dataResource, r, other
+      RETURN dataResource, r as resourceItemName, other
       `,
     });
   },
