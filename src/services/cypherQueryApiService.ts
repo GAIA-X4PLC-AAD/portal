@@ -74,6 +74,23 @@ export const CypherQueryApiService = {
     });
   },
 
+  /**
+   * Returns all nodes and relationships for a given resource uri.
+   * @param uri the uri of the resource
+   */
+  async getAllResourceDetails(uri: string): Promise<CypherQueryResult> {
+    return cypherQuery({
+      statement: `
+      MATCH (dataResource:DataResource { uri: '${uri}' })-[r]->(other)
+      RETURN dataResource, r, other
+      `,
+    });
+  },
+
+  /**
+   * Returns the details of a resource by its uri.
+   * @param uri the uri of the resource
+   */
   async getResourceDetails(uri: string): Promise<CypherQueryResult> {
     return cypherQuery({
       statement: `
@@ -86,14 +103,11 @@ export const CypherQueryApiService = {
       OPTIONAL MATCH (dataResource)-[:general]-(general)
       OPTIONAL MATCH (general)-[:data]-(data)
       
-      OPTIONAL MATCH (dataResource)-[:format]-(format) 
-      OPTIONAL MATCH (dataResource)-[:content]-(content) 
       OPTIONAL MATCH (dataResource)-[:producedBy]-(producedBy) 
       OPTIONAL MATCH (dataResource)-[:general]-(general)-[:links]-(links)-[:media]-(media) 
 
       RETURN 
            dataResource.name as name,
-           dataResource.description as description, 
            dataResource.uri as uri,
            CASE
               WHEN serviceAccessPoint IS NOT NULL THEN {
@@ -106,23 +120,7 @@ export const CypherQueryApiService = {
               ELSE null
               END as serviceAccessPoint,
            data.contractId as contractId,
-           data.recordingTime as recordingTime,
-           dataResource.license as license,
-           dataResource.copyrightOwnedBy as copyrightOwnedBy,
-           dataResource.claimsGraphUri as claimsGraphUri,
-           CASE dataResource.containsPII
-              WHEN 'true' THEN true
-                 WHEN 'false' THEN false
-              ELSE null
-              END as containsPII,
-           dataResource.obsoleteDateTime as obsoleteDateTime, 
-           dataResource.expirationDateTime as expirationDateTime, 
-           content.levelOfDetail as levelOfDetail, 
-           content.trafficDirection as trafficDirection, 
-           content.roadTypes as roadTypes, 
-           content.laneTypes as laneTypes, 
            producedBy.legalName as legalName,
-           labels(dataResource) as labels,
            media.url as mediaUrl
       `
     })
