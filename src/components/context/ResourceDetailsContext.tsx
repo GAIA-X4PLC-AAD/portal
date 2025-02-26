@@ -1,6 +1,6 @@
 /* test coverage not required */
 import { createContext } from 'react';
 
-import { ResourceDetails } from '../../types/resources.model';
+import { RDetails } from '../../types/resources.model';
 
-export const ResourceDetailsContext = createContext<ResourceDetails | undefined>(undefined);
+export const ResourceDetailsContext = createContext<RDetails | undefined>(undefined);

@@ -17,8 +17,8 @@ const ResourceActions = () => {
   const { t } = useTranslation();
   const resourceDetails = useContext(ResourceDetailsContext)
   const { state, dispatch } = useResourceBuyingStateMachine({
-    contractId: resourceDetails?.contractId,
-    serviceAccessPoint: resourceDetails?.serviceAccessPoint,
+    contractId: resourceDetails?.details.contractId,
+    serviceAccessPoint: resourceDetails?.details.serviceAccessPoint,
   })
   const title='Actions'
 
@@ -57,7 +57,7 @@ const ResourceActions = () => {
         <ResourceBuyingModal
           state={state}
           dispatch={dispatch}
-          title={resourceDetails?.name || t('service-offerings.no-title')}
+          title={resourceDetails?.details.name || t('service-offerings.no-title')}
         />
         <DataTransferInitiationProgress
           state={state}
@@ -67,4 +67,5 @@ const ResourceActions = () => {
     </Vertical>
   );
 }
+
 export default ResourceActions;

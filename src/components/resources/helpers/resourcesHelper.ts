@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 
 import { MenuItemObject, SortOrder } from '../../../common/components/buttons/SortListButton';
-import { Resource } from '../../../types/resources.model';
+import { Resource, ResourceItem } from '../../../types/resources.model';
 
 /**
  * Returns the value of an object property represented as an object entry.
@@ -25,6 +25,9 @@ export const removeNonResourceTypeLabels = (resources: Resource[], resourceTypes
   }));
 }
 
+/**
+ * Returns the menu items for the sort menu.
+ */
 export const getResourceSortMenuItems = (): MenuItemObject[] => {
   return [
     { label: i18next.t('resources.sort-menu.a-z'), sortOrder: SortOrder.ASC_NAME },
@@ -34,6 +37,11 @@ export const getResourceSortMenuItems = (): MenuItemObject[] => {
   ];
 }
 
+/**
+ * Returns the resources sorted by the selected sort order.
+ * @param resources the resources to be sorted.
+ * @param sortOrder the sort order.
+ */
 export const getSortedResources = (resources: Resource[], sortOrder: SortOrder) => {
   const resourcesToSort = [...resources];
   switch (sortOrder) {
@@ -64,3 +72,16 @@ export const getSortedResources = (resources: Resource[], sortOrder: SortOrder) 
   default: return resourcesToSort;
   }
 }
+
+/**
+ * Sorts the data resources alphabetically and with general in the first place.
+ * @param dataResource the data resources to be sorted.
+ */
+export const sortDataResources = (dataResource: ResourceItem[]): ResourceItem[] => {
+  const dataToSort = [...dataResource];
+  return dataToSort.sort((a, b) => {
+    if (a.r === 'general') {return -1;}
+    if (b.r === 'general') {return 1;}
+    return a.r.localeCompare(b.r);
+  });
+};
