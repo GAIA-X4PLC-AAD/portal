@@ -4,27 +4,30 @@ import React from 'react';
 import { ResourceDetailsContext } from '../../../../src/components/context/ResourceDetailsContext';
 import '@testing-library/jest-dom';
 import ResourceDetailMainContent from '../../../../src/components/resources/components/ResourceDetailMainContent';
-import { ResourceDetails } from '../../../../src/types/resources.model';
+import { CombinedDetails } from '../../../../src/types/resources.model';
 
-const mockResourceDetails = {
-  name: 'name',
-  uri: 'uri',
-  description: 'description',
-  claimsGraphUri: ['claimsGraphUri'],
-  license: 'license',
-  copyrightOwnedBy: 'copyrightOwnedBy',
-  expirationDateTime: 'expirationDateTime',
-  roadTypes: 'roadTypes',
-  containsPII: true,
-  levelOfDetail: 'levelOfDetail',
-  trafficDirection: 'trafficDirection',
-  obsoleteDateTime: 'obsoleteDateTime',
-  laneTypes: ['laneTypes'],
-  legalName: 'legalName',
-  mediaUrl: 'mediaUrl',
+const mockResourceDetails: CombinedDetails = {
+  details: {
+    name: 'Resource 1',
+    uri: 'http://example.com',
+    legalName: 'Vendor 1',
+    mediaUrl: 'mediaUrl 1',
+    contractId: '123',
+  },
+  items: [{
+    resourceItemName: 'resourceItemName 1',
+    other: {
+      key1: 'value1',
+      key2: 'value2',
+    },
+    dataResource: {
+      key1: 'value1',
+      key2: 'value2',
+    }
+  }]
 };
 
-const ComponentUnderTest = (resourceDetails: ResourceDetails) => {
+const ComponentUnderTest = (resourceDetails: CombinedDetails) => {
   return render (
     <ResourceDetailsContext.Provider value={resourceDetails}>
       <ResourceDetailMainContent />
@@ -37,17 +40,11 @@ describe('ResourceDetailMainContent', () => {
 
   it('renders correctly with resource details', () => {
     ComponentUnderTest(mockResourceDetails);
-    expect(screen.queryByText('name')).not.toBeNull();
-    expect(screen.queryAllByText('legalName')).not.toBeNull();
-    expect(screen.queryByText('expirationDateTime')).not.toBeNull();
-    expect(screen.queryByText('obsoleteDateTime')).not.toBeNull();
-    expect(screen.queryByText('common.yes')).not.toBeNull();
-    expect(screen.queryByText('roadTypes')).not.toBeNull();
-    expect(screen.queryByText('levelOfDetail')).not.toBeNull();
-    expect(screen.queryByText('laneTypes')).not.toBeNull();
-    expect(screen.queryByText('trafficDirection')).not.toBeNull();
-    expect(screen.queryByText('claimsGraphUri')).not.toBeNull();
-
+    expect(screen.queryAllByText('general')).not.toBeNull();
+    expect(screen.queryAllByText(mockResourceDetails.details.name)).not.toBeNull();
+    mockResourceDetails.items.forEach(item => {
+      expect(screen.queryAllByText(item.resourceItemName)).not.toBeNull();
+    })
   });
 
   it('renders empty component when no resource details are provided', () => {
