@@ -28,7 +28,7 @@ export interface ResourceItem {
     other: Record<string, any>;
     dataResource: Record<string, any>;
 }
-export interface RDetails {
+export interface CombinedDetails {
     details: ResourceDetails;
     items: ResourceItem[];
 }

@@ -8,7 +8,7 @@ import DetailsSidebar from '../../common/components/layouts/DetailsSidebar';
 import Main from '../../common/components/layouts/Main';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import NoContent from '../../common/components/noContent/NoContent';
-import { RDetails } from '../../types/resources.model';
+import { CombinedDetails } from '../../types/resources.model';
 import { ResourceDetailsContext } from '../context/ResourceDetailsContext';
 
 import ResourceActions from './components/ResourceActions';
@@ -18,7 +18,7 @@ import { loadCombinedResourceDetails } from './helpers/resourceDataFlow';
 
 const ResourceDetailsPage = () => {
   const { t } = useTranslation();
-  const [resourceDetails, setResourceDetails] = useState<RDetails>();
+  const [resourceDetails, setResourceDetails] = useState<CombinedDetails>();
   const { resourceId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();

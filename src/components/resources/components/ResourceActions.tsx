@@ -1,3 +1,4 @@
+/* test coverage not required */
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
