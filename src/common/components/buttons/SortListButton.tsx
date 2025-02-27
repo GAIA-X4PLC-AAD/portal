@@ -52,7 +52,7 @@ const SortListButton: FC<ISortListButton> = ({ menuItemsObjects, updateSortOrder
 
   return (
     <>
-      <Svg Icon={SortIcon} onClick={handleClick} />
+      <Svg Icon={SortIcon} onClick={() => handleClick} />
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}

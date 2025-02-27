@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next';
 
 import GaiaXButton from '../../../common/components/buttons/GaiaXButton';
 import Title from '../../../common/components/fields/title/Title';
-import { downloadJsonFile, downloadTurtleFile } from '../../../services/schemaService.utils';
+import { getConvertedFile } from '../../../services/schemaApiService';
+import { downloadTurtleFile } from '../../../services/schemaService.utils';
+import { downloadFile } from '../../../utils/fileUtils';
 import { ShapeContext } from '../../context/ShapeContext';
 
 import styles from './ShapeActions.module.css';
 
-// todo test json download
 const ShapeActions: FC = () => {
   const { t } = useTranslation();
   const shape = useContext(ShapeContext);
@@ -18,14 +19,23 @@ const ShapeActions: FC = () => {
     return <div>{t('shapes.not-found')}</div>;
   }
 
+  const handleJsonDownload = async () => {
+    const data = await getConvertedFile(shape.shaclShapeId);
+    downloadFile(shape.shaclShapeId, data);
+  }
+
+  const handleTurtleDownload = async () => {
+    await downloadTurtleFile(shape.shaclShapeId);
+  }
+
   return (
     <div className={styles['container']}>
       <div className={styles['title']}>
         <Title>{t('dashboard.actions')}</Title>
       </div>
       <div className={styles['buttons']}>
-        <GaiaXButton label={t('details.download-json')} handleOnClick={() => downloadJsonFile(shape.shaclShapeId)}/>
-        <GaiaXButton label={t('details.download-file')} handleOnClick={() => downloadTurtleFile(shape.shaclShapeId)}/>
+        <GaiaXButton label={t('details.download-json')} handleOnClick={() => handleJsonDownload()}/>
+        <GaiaXButton label={t('details.download-file')} handleOnClick={() => handleTurtleDownload()}/>
       </div>
     </div>
   );
