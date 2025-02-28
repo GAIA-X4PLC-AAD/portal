@@ -12,39 +12,47 @@ jest.mock('../../../../src/utils/fileUtils', () => ({
   downloadFile: jest.fn(),
 }));
 
-const ComponentUnderTest = (mockDetails) => {
+const renderComponent = (mockDetails?) => {
   return render(
-    <ServiceOfferingDetailsContext.Provider value={mockDetails}>
+    mockDetails ? (
+      <ServiceOfferingDetailsContext.Provider value={mockDetails}>
+        <ServiceOfferingActions />
+      </ServiceOfferingDetailsContext.Provider>
+    ) : (
       <ServiceOfferingActions />
-    </ServiceOfferingDetailsContext.Provider>
+    )
   );
 }
 
 describe('ServiceOfferingActions', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();  // Clears mocks between tests to avoid interference
+  });
+
   it('shows download button when serviceOfferingDetails exist and response length is greater than 0', async () => {
     const mockDetails = { serviceOfferingDetails: { claimsGraphUri: 'test-uri' } };
     const mockResponse = [{ holder: 'holder1' }];
     (getAllSelfDescriptionDetails as jest.Mock).mockResolvedValue(mockResponse);
 
-    const { getByText } = ComponentUnderTest(mockDetails);
+    renderComponent (mockDetails);
 
     await waitFor(() => {
-      expect(getByText('resources.download-description')).toBeInTheDocument();
-      expect(getByText('Actions')).toBeInTheDocument();
-      expect(getByText('details.view-graph')).toBeInTheDocument();
-      expect(getByText('details.sidebar-buy-button')).toBeInTheDocument();
+      expect(screen.getByText('resources.download-description')).toBeInTheDocument();
+      expect(screen.getByText('Actions')).toBeInTheDocument();
+      expect(screen.getByText('details.view-graph')).toBeInTheDocument();
+      expect(screen.getByText('details.sidebar-buy-button')).toBeInTheDocument();
     });
   });
 
   it('does not show download button when serviceOfferingDetails do not exist', () => {
     const mockDetails = { serviceOfferingDetails: null };
 
-    const { queryByText } = ComponentUnderTest(mockDetails);
+    renderComponent (mockDetails);
 
-    expect(queryByText('resources.download-description')).not.toBeInTheDocument();
-    expect(queryByText('Actions')).toBeInTheDocument();
-    expect(queryByText('details.view-graph')).toBeInTheDocument();
-    expect(queryByText('details.sidebar-buy-button')).toBeInTheDocument();
+    expect(screen.queryByText('resources.download-description')).not.toBeInTheDocument();
+    expect(screen.queryByText('Actions')).toBeInTheDocument();
+    expect(screen.queryByText('details.view-graph')).toBeInTheDocument();
+    expect(screen.queryByText('details.sidebar-buy-button')).toBeInTheDocument();
   });
 
   it('does not show download button when response length is 0', async () => {
@@ -52,13 +60,13 @@ describe('ServiceOfferingActions', () => {
     const mockResponse = [];
     (getAllSelfDescriptionDetails as jest.Mock).mockResolvedValue(mockResponse);
 
-    const { queryByText } = ComponentUnderTest(mockDetails);
+    renderComponent (mockDetails);
 
     await waitFor(() => {
-      expect(queryByText('resources.download-description')).not.toBeInTheDocument();
-      expect(queryByText('Actions')).toBeInTheDocument();
-      expect(queryByText('details.view-graph')).toBeInTheDocument();
-      expect(queryByText('details.sidebar-buy-button')).toBeInTheDocument();
+      expect(screen.queryByText('resources.download-description')).not.toBeInTheDocument();
+      expect(screen.queryByText('Actions')).toBeInTheDocument();
+      expect(screen.queryByText('details.view-graph')).toBeInTheDocument();
+      expect(screen.queryByText('details.sidebar-buy-button')).toBeInTheDocument();
     });
   });
 
@@ -68,26 +76,26 @@ describe('ServiceOfferingActions', () => {
 
     (getAllSelfDescriptionDetails as jest.Mock).mockResolvedValue(mockResponse);
 
-    const { getByText } = ComponentUnderTest(mockDetails);
+    renderComponent (mockDetails);
 
     await waitFor(() => {
-      const button = getByText('resources.download-description');
+      const button = screen.getByText('resources.download-description');
       fireEvent.click(button);
     });
     expect(downloadFile).toHaveBeenCalledTimes(1)
   });
 
   it('calls appropriate function when view graph button is clicked', () => {
-    const { getByText } = render(<ServiceOfferingActions/>);
-    const button = getByText('details.view-graph');
+    renderComponent();
+    const button = screen.getByText('details.view-graph');
 
     fireEvent.click(button);
     // Add any expected behavior verification for the click here
   });
 
   it('calls appropriate function when buy button is clicked', () => {
-    const { getByText } = render(<ServiceOfferingActions/>);
-    const button = getByText('details.sidebar-buy-button');
+    renderComponent();
+    const button = screen.getByText('details.sidebar-buy-button');
 
     fireEvent.click(button);
     // Add any expected behavior verification for the click here
