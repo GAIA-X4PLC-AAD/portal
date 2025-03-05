@@ -1,10 +1,10 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import { OntologyContext } from '../../../../../../../src/components/context/OntologyContext';
-import OntologyActions from '../../../../../../../src/components/ontologies/components/OntologyActions';
-import { Ontology } from '../../../../../../../src/types/ontologies.model';
-import { withRouter } from '../../../../../../common/testHelper';
+import { OntologyContext } from '../../../../src/components/context/OntologyContext';
+import OntologyActions from '../../../../src/components/ontologies/components/OntologyActions';
+import { Ontology } from '../../../../src/types/ontologies.model';
+import { withRouter } from '../../../common/testHelper';
 
 const navigate = jest.fn();
 const useNavigate = jest.fn(() => navigate)
