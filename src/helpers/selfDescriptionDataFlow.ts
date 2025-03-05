@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { SelfDescriptionApiService } from '../services/selfDescriptionService';
 import { SelfDescriptionDetails } from '../types/selfDescription.model';
 

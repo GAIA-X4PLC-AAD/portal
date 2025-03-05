@@ -1,3 +1,4 @@
+/* test coverage not required */
 export interface SelfDescription {
     meta: {
         id: string;

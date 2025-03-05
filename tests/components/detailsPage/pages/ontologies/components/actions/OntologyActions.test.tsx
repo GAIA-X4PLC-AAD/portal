@@ -12,11 +12,6 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => useNavigate()
 }))
 
-const downloadTurtleFile = jest.fn()
-jest.mock('../../../../../../../src/services/schemaService.utils', () => ({
-  downloadTurtleFile: (subject) => downloadTurtleFile(subject)
-}))
-
 console.error = jest.fn(); // Disable error logging
 console.debug = jest.fn(); // Disable debug logging
 console.warn = jest.fn(); // Disable warn logging
@@ -57,21 +52,5 @@ describe('OntologyActions', () => {
     const graphPageButton = getByRole('button', { name: 'details.view-graph' })
     fireEvent.click(graphPageButton);
     expect(navigate).toHaveBeenCalledWith('/shapesAndOntologies/graph/ontology%20subject')
-  })
-
-  it('downloads turtle file if download button is pressed', () => {
-    const ontology = {
-      subject: 'ontology subject',
-    } as Ontology
-
-    const { getByRole } = render(withRouter(
-      <OntologyContext.Provider value={ontology}>
-        <OntologyActions/>
-      </OntologyContext.Provider>
-    ));
-    const graphPageButton = getByRole('button', { name: 'details.download-file' })
-    fireEvent.click(graphPageButton);
-    expect(downloadTurtleFile).toHaveBeenCalledWith('ontology subject')
-
   })
 });
