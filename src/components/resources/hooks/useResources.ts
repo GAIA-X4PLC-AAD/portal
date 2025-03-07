@@ -78,7 +78,7 @@ export const useResources = () => {
     for (const property of shape.properties) {
       if (property.propertyValues.some(value => value.type === 'http://www.w3.org/ns/shacl#node')) {
         const node: Shape | undefined = shapes.find(s => s.shaclShapeName === property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#node')?.value) || undefined
-        shapesPropertiesForFilter.push(...processShapeProperty(node, shapes, currentShapePath + removeShapeSuffix(getSegmentFromALinkFromBack(node?.shaclShapeName || '', 0)), visitedShapesCopy));
+        shapesPropertiesForFilter.push(...processShapeProperty(node, shapes, currentShapePath, visitedShapesCopy));
       } else {
         shapesPropertiesForFilter.push({
           path: currentShapePath,
@@ -95,10 +95,50 @@ export const useResources = () => {
     for (const resourceType of resourceTypes) {
       const shape = findShapeByResourceType(shapes, resourceType);
       if (shape) {
-        shapesPropertiesForFilter.push(...processShapeProperty(shape, shapes, resourceType, new Set<string>()));
+        shapesPropertiesForFilter.push(...processShapeProperty(shape, shapes, '', new Set<string>()));
       }
     }
     return shapesPropertiesForFilter;
+  }
+
+  // Function to get the first element from a path
+  function getFirstElement(path: string): string {
+    const segments = path.split('/').filter(segment => segment !== ''); // Split and remove empty segments
+    return segments[0] || ''; // Return first element or empty string if none
+  }
+
+  // Function to return the number of segments in a path
+  function getSegmentCount(path: string): number {
+    const segments = path.split('/').filter(segment => segment !== ''); // Split and remove empty segments
+    return segments.length;
+  }
+
+  // Function to remove the first segment from a path
+  function removeFirstSegment(path: string): string {
+    const segments = path.split('/').filter(segment => segment !== ''); // Split and remove empty segments
+    segments.shift(); // Remove first element
+    return segments.length > 0 ? '/' + segments.join('/') : ''; // Rejoin with leading slash if segments remain
+  }
+
+  function getCypherConditions(currentElement: string, remainingPath: string, conditions: Set<string>): Set<string> {
+    const firstElementFromRemainingPath = getFirstElement(remainingPath);
+    const currentCondition = `OPTIONAL MATCH (${currentElement})-[:${firstElementFromRemainingPath}]-(${firstElementFromRemainingPath})`;
+    conditions.add(currentCondition); // Fixed: was adding conditions to itself
+
+    if (getSegmentCount(remainingPath) > 1) {
+      // Fixed: Removed spread operator and corrected recursive call
+      getCypherConditions(firstElementFromRemainingPath, removeFirstSegment(remainingPath), conditions);
+    }
+
+    return conditions;
+  }
+
+  const getCypherQueryForProperties = (shapePropertiesForFilter: ShapePropertyForFilter[]): string => {
+    const cypherConditions: Set<string> = new Set<string>();
+    for (const shapePropertyForFilter of shapePropertiesForFilter) {
+      getCypherConditions('dataResource', shapePropertyForFilter.path, cypherConditions)
+    }
+    return `${Array.from(cypherConditions).join('\n')}`
   }
 
   useEffect(() => {
@@ -109,6 +149,10 @@ export const useResources = () => {
         console.log('shapeProperties') //TODO remove
         console.log(shapeProperties); //TODO remove
 
+        console.log(schemas.shapes);
+        console.log(shapeProperties);
+        const query = getCypherQueryForProperties(shapeProperties);
+        console.log(query)
         loadResources(resourceTypes)
           .then(resources => unique(resources, (item) => item.uri + item.name))
           .then(resources => dispatch(resourcesLoadedAction(resources)))
