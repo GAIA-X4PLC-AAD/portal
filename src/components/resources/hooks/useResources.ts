@@ -67,22 +67,33 @@ export const useResources = () => {
     ));
   }
 
-  function processShapeProperty(shape: Shape | undefined, shapes: Shape[], path: string, visitedShapes: Set<string>): ShapePropertyForFilter[] {
+  function pascalToCamel(str: string): string {
+    if (!str) {
+      return '';
+    }
+
+    const firstChar = str.charAt(0).toLowerCase();
+    return firstChar + str.slice(1);
+  }
+
+  function processShapeProperty(shape: Shape | undefined, shapes: Shape[], path: string, visitedShapes: Set<string>, nodeName: string): ShapePropertyForFilter[] {
     if (!shape || visitedShapes.has(shape.shaclShapeName)) {
       return [];
     }
     const shapesPropertiesForFilter: ShapePropertyForFilter[] = [];
     const visitedShapesCopy = new Set(visitedShapes);
     visitedShapesCopy.add(shape.shaclShapeName);
-    const currentShapePath = path + '/' + removeShapeSuffix(getSegmentFromALinkFromBack(shape.shaclShapeName, 0));
+    const newPathSegment = (nodeName !== '') ? nodeName : pascalToCamel(removeShapeSuffix(getSegmentFromALinkFromBack(shape.shaclShapeName, 0)));
+    const currentShapePath = path + '/' + newPathSegment;
     for (const property of shape.properties) {
       if (property.propertyValues.some(value => value.type === 'http://www.w3.org/ns/shacl#node')) {
         const node: Shape | undefined = shapes.find(s => s.shaclShapeName === property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#node')?.value) || undefined
-        shapesPropertiesForFilter.push(...processShapeProperty(node, shapes, currentShapePath, visitedShapesCopy));
+        const nodeName = property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#name')?.value || ''
+        shapesPropertiesForFilter.push(...processShapeProperty(node, shapes, currentShapePath, visitedShapesCopy, nodeName));
       } else {
         shapesPropertiesForFilter.push({
           path: currentShapePath,
-          name: getSegmentFromALinkFromBack(property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#name')?.value || '', 0, '#'),
+          name: property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#name')?.value || '',
           type: getSegmentFromALinkFromBack(property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#datatype')?.value || '', 0, '#')
         });
       }
@@ -95,7 +106,7 @@ export const useResources = () => {
     for (const resourceType of resourceTypes) {
       const shape = findShapeByResourceType(shapes, resourceType);
       if (shape) {
-        shapesPropertiesForFilter.push(...processShapeProperty(shape, shapes, '', new Set<string>()));
+        shapesPropertiesForFilter.push(...processShapeProperty(shape, shapes, '', new Set<string>(), ''));
       }
     }
     return shapesPropertiesForFilter;
