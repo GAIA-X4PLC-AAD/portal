@@ -29,9 +29,9 @@ jest.mock('@vcmap/core', () => ({
   },
 }));
 
-const loadResourceDetails = jest.fn();
+const loadCombinedResourceDetails = jest.fn();
 jest.mock('../../../src/components/resources/helpers/resourceDataFlow', () => ({
-  loadResourceDetails: () => loadResourceDetails(),
+  loadCombinedResourceDetails: () => loadCombinedResourceDetails(),
 }));
 
 console.error = jest.fn(); // Disable error logging
@@ -40,14 +40,26 @@ console.warn = jest.fn(); // Disable warn logging
 
 describe('ResourceDetailsPage', () => {
   beforeAll(() => {
-    loadResourceDetails.mockReturnValue(
+    loadCombinedResourceDetails.mockReturnValue(
       Promise.resolve({
-        name: 'Resource 1',
-        description: 'Resource Description',
-        uri: 'ResourceUri',
-        labels: ['Label1', 'Label2'],
-        claimsGraphUri: ['Uri1', 'Uri2'],
-        isGaiaXCompliant: true,
+        details: {
+          name: 'Resource 1',
+          uri: 'http://example.com',
+          legalName: 'Vendor 1',
+          mediaUrl: 'mediaUrl 1',
+          contractId: '123',
+        },
+        items: [{
+          r: 'r 1',
+          other: {
+            key1: 'value1',
+            key2: 'value2',
+          },
+          dataResource: {
+            key1: 'value1',
+            key2: 'value2',
+          }
+        }]
       }),
     );
   });

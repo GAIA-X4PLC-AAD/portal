@@ -8,17 +8,17 @@ import DetailsSidebar from '../../common/components/layouts/DetailsSidebar';
 import Main from '../../common/components/layouts/Main';
 import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import NoContent from '../../common/components/noContent/NoContent';
-import { ResourceDetails } from '../../types/resources.model';
+import { CombinedDetails } from '../../types/resources.model';
 import { ResourceDetailsContext } from '../context/ResourceDetailsContext';
 
 import ResourceActions from './components/ResourceActions';
 import ResourceDetailMainContent from './components/ResourceDetailMainContent';
 import ResourceMap from './components/ResourceMap';
-import { loadResourceDetails } from './helpers/resourceDataFlow';
+import { loadCombinedResourceDetails } from './helpers/resourceDataFlow';
 
 const ResourceDetailsPage = () => {
   const { t } = useTranslation();
-  const [resourceDetails, setResourceDetails] = useState<ResourceDetails>();
+  const [resourceDetails, setResourceDetails] = useState<CombinedDetails>();
   const { resourceId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
@@ -26,9 +26,9 @@ const ResourceDetailsPage = () => {
 
   useEffect(() => {
     if (resourceId) {
-      loadResourceDetails(resourceId)
+      loadCombinedResourceDetails(resourceId)
         .then((response) => setResourceDetails(response))
-        .finally(() => setIsLoading(false))
+        .finally(() => setIsLoading(false));
     }
   }, [resourceId]);
 
@@ -40,7 +40,7 @@ const ResourceDetailsPage = () => {
           to: '/resources'
         },
         {
-          label: resourceDetails?.legalName ?? '',
+          label: resourceDetails?.details.legalName ?? '',
           to: `/resources/${id}`
         }
       ]}
@@ -53,7 +53,7 @@ const ResourceDetailsPage = () => {
           <ResourceDetailMainContent/>
 
           <DetailsSidebar>
-            <ResourceMap mediaUrl={resourceDetails?.mediaUrl}/>
+            <ResourceMap mediaUrl={resourceDetails?.details.mediaUrl}/>
             <ResourceActions/>
           </DetailsSidebar>
         </DetailsContent>
