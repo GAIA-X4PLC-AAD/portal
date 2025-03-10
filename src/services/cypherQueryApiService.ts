@@ -109,6 +109,7 @@ export const CypherQueryApiService = {
       RETURN 
            dataResource.name as name,
            dataResource.uri as uri,
+           dataResource.claimsGraphUri as claimsGraphUri,
            CASE
               WHEN serviceAccessPoint IS NOT NULL THEN {
                 name:     properties(serviceAccessPoint).name,

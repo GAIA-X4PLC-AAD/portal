@@ -187,7 +187,7 @@ describe('ResourceActions', () => {
       }
     });
 
-    const mockDetails = { claimsGraphUri: 'test-uri' };
+    const mockDetails = { details: { claimsGraphUri: 'test-uri', contractId: 'test-contract-id' } };
     const mockResponse = [{ holder: 'holder1' }];
     (getAllSelfDescriptionDetails as jest.Mock).mockResolvedValue(mockResponse);
 
@@ -208,7 +208,7 @@ describe('ResourceActions', () => {
       }
     });
 
-    const mockDetails = {};
+    const mockDetails = { details: { contractId: 'test-contract-id' } };
 
     renderComponent (mockDetails);
 
@@ -225,7 +225,7 @@ describe('ResourceActions', () => {
       }
     });
 
-    const mockDetails = { claimsGraphUri: 'test-uri' };
+    const mockDetails = { details: { claimsGraphUri: 'test-uri', contractId: 'test-contract-id' } };
     const mockResponse = [];
     (getAllSelfDescriptionDetails as jest.Mock).mockResolvedValue(mockResponse);
 
@@ -246,7 +246,7 @@ describe('ResourceActions', () => {
       }
     });
 
-    const mockDetails = { claimsGraphUri: 'test-uri' };
+    const mockDetails = { details: { claimsGraphUri: 'test-uri', contractId: 'test-contract-id' } };
     const mockResponse = [{ holder: 'holder1' }];
 
     (getAllSelfDescriptionDetails as jest.Mock).mockResolvedValue(mockResponse);

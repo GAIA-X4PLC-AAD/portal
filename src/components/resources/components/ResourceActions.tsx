@@ -29,8 +29,8 @@ const ResourceActions = () => {
   const title='Actions';
 
   useEffect(() => {
-    if (resourceDetails?.claimsGraphUri) {
-      getAllSelfDescriptionDetails(resourceDetails?.claimsGraphUri)
+    if (resourceDetails?.details.claimsGraphUri) {
+      getAllSelfDescriptionDetails(resourceDetails?.details.claimsGraphUri)
         .then((response) => {
           setSelfDescriptions(response);
           if (response && response.length > 0) {
@@ -38,7 +38,7 @@ const ResourceActions = () => {
           }
         });
     }
-  }, [resourceDetails?.claimsGraphUri]);
+  }, [resourceDetails?.details.claimsGraphUri]);
 
   const handleDownload = () => {
     selfDescriptions?.forEach((selfDescription) => {
