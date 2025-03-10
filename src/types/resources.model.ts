@@ -15,6 +15,7 @@ export interface ResourceDetails {
     uri: string,
     legalName: string,
     mediaUrl: string,
+    claimsGraphUri: string[],
 
     contractId?: string,
     serviceAccessPoint?: {

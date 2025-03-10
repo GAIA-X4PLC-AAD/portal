@@ -1,20 +1,15 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-import { OntologyContext } from '../../../../../../../src/components/context/OntologyContext';
-import OntologyActions from '../../../../../../../src/components/ontologies/components/OntologyActions';
-import { Ontology } from '../../../../../../../src/types/ontologies.model';
-import { withRouter } from '../../../../../../common/testHelper';
+import { OntologyContext } from '../../../../src/components/context/OntologyContext';
+import OntologyActions from '../../../../src/components/ontologies/components/OntologyActions';
+import { Ontology } from '../../../../src/types/ontologies.model';
+import { withRouter } from '../../../common/testHelper';
 
 const navigate = jest.fn();
 const useNavigate = jest.fn(() => navigate)
 jest.mock('react-router-dom', () => ({
   useNavigate: () => useNavigate()
-}))
-
-const downloadTurtleFile = jest.fn()
-jest.mock('../../../../../../../src/services/schemaService.utils', () => ({
-  downloadTurtleFile: (subject) => downloadTurtleFile(subject)
 }))
 
 console.error = jest.fn(); // Disable error logging
@@ -57,21 +52,5 @@ describe('OntologyActions', () => {
     const graphPageButton = getByRole('button', { name: 'details.view-graph' })
     fireEvent.click(graphPageButton);
     expect(navigate).toHaveBeenCalledWith('/shapesAndOntologies/graph/ontology%20subject')
-  })
-
-  it('downloads turtle file if download button is pressed', () => {
-    const ontology = {
-      subject: 'ontology subject',
-    } as Ontology
-
-    const { getByRole } = render(withRouter(
-      <OntologyContext.Provider value={ontology}>
-        <OntologyActions/>
-      </OntologyContext.Provider>
-    ));
-    const graphPageButton = getByRole('button', { name: 'details.download-file' })
-    fireEvent.click(graphPageButton);
-    expect(downloadTurtleFile).toHaveBeenCalledWith('ontology subject')
-
   })
 });

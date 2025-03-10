@@ -5,7 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import GaiaXButton from '../../../common/components/buttons/GaiaXButton';
 import Title from '../../../common/components/fields/title/Title';
 import Vertical from '../../../common/components/layouts/Vertical';
-import { downloadTurtleFile } from '../../../services/schemaService.utils';
+import { getSchemaById } from '../../../services/schemaApiService';
+import { downloadFile } from '../../../utils/fileUtils';
 import { OntologyContext } from '../../context/OntologyContext';
 
 import styles from './OntologyActions.module.css';
@@ -21,6 +22,7 @@ const OntologyActions: FC = () => {
   const navigate = useNavigate();
 
   const ontology = useContext(OntologyContext);
+
   if (!ontology) {
     return <div>{t('ontologies.not-found')}</div>;
   }
@@ -28,6 +30,11 @@ const OntologyActions: FC = () => {
   const handleNavigationToGraphPage = () => {
     const encodedUri = encodeURIComponent(ontology.subject);
     navigate(`${graphRoutes.shapesAndOntologies}${encodedUri}`);
+  }
+
+  const handleTurtleDownload = async () => {
+    const response = await getSchemaById(ontology.subject);
+    downloadFile(ontology.subject, response);
   }
 
   return (
@@ -42,7 +49,7 @@ const OntologyActions: FC = () => {
       <GaiaXButton
         className={styles.sideBarCardButton}
         label={t('details.download-file')}
-        handleOnClick={() => downloadTurtleFile(ontology.subject)}
+        handleOnClick={handleTurtleDownload}
       />
     </Vertical>
   );
