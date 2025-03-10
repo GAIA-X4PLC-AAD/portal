@@ -1,3 +1,4 @@
+/* test coverage not required */
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -22,8 +23,8 @@ const ResourceActions = () => {
   const [downloadButtonVisible, setDownloadButtonVisible] = useState(false);
   const [selfDescriptions, setSelfDescriptions] = useState<SelfDescriptionDetails[] | undefined>(undefined);
   const { state, dispatch } = useResourceBuyingStateMachine({
-    contractId: resourceDetails?.contractId,
-    serviceAccessPoint: resourceDetails?.serviceAccessPoint,
+    contractId: resourceDetails?.details.contractId,
+    serviceAccessPoint: resourceDetails?.details.serviceAccessPoint,
   })
   const title='Actions';
 
@@ -81,7 +82,7 @@ const ResourceActions = () => {
         <ResourceBuyingModal
           state={state}
           dispatch={dispatch}
-          title={resourceDetails?.name || t('service-offerings.no-title')}
+          title={resourceDetails?.details.name || t('service-offerings.no-title')}
         />
         <DataTransferInitiationProgress
           state={state}

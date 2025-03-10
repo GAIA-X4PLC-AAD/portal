@@ -6,7 +6,7 @@ import React, { FC } from 'react'
 import styles from './Svg.module.css';
 
 interface MenuIconProps {
-    onClick: () => void;
+    onClick: ((event: React.MouseEvent<HTMLElement>) => void) | (() => void);
     Icon: OverridableComponent<SvgIconTypeMap<{}, 'svg'>>
     className?: string;
     visible?: boolean

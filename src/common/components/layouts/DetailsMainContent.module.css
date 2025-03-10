@@ -3,7 +3,8 @@
     align-self: stretch;
     gap: 1rem;
     padding: 2rem;
-
+    height: 80rem;
+    overflow-y: auto;
     background-color: var(--white);
     border-radius: 1rem;
     box-shadow: var(--shadow--normal);
