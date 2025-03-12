@@ -67,13 +67,23 @@ export const useResources = () => {
     ));
   }
 
-  function pascalToCamel(str: string): string {
+  function toCamelCase(str: string): string {
     if (!str) {
       return '';
     }
 
-    const firstChar = str.charAt(0).toLowerCase();
-    return firstChar + str.slice(1);
+    // Split the string by spaces
+    const words = str.split(' ');
+
+    // Convert the first word to lowercase
+    let result = words[0].toLowerCase();
+
+    // Capitalize the first letter of each subsequent word and concatenate
+    for (let i = 1; i < words.length; i++) {
+      result += words[i].charAt(0).toUpperCase() + words[i].slice(1).toLowerCase();
+    }
+
+    return result;
   }
 
   function processShapeProperty(shape: Shape | undefined, shapes: Shape[], path: string, visitedShapes: Set<string>, nodeName: string): ShapePropertyForFilter[] {
@@ -83,7 +93,7 @@ export const useResources = () => {
     const shapesPropertiesForFilter: ShapePropertyForFilter[] = [];
     const visitedShapesCopy = new Set(visitedShapes);
     visitedShapesCopy.add(shape.shaclShapeName);
-    const newPathSegment = (nodeName !== '') ? nodeName : pascalToCamel(removeShapeSuffix(getSegmentFromALinkFromBack(shape.shaclShapeName, 0)));
+    const newPathSegment = (nodeName !== '') ? nodeName : toCamelCase(removeShapeSuffix(getSegmentFromALinkFromBack(shape.shaclShapeName, 0)));
     const currentShapePath = path + '/' + newPathSegment;
     for (const property of shape.properties) {
       if (property.propertyValues.some(value => value.type === 'http://www.w3.org/ns/shacl#node')) {
@@ -144,12 +154,18 @@ export const useResources = () => {
     return conditions;
   }
 
+  function getCypherReturns(shapePropertyForFilter: ShapePropertyForFilter): string {
+    return `properties(${getSegmentFromALinkFromBack(shapePropertyForFilter.path, 0)}).${toCamelCase(shapePropertyForFilter.name)} AS \`${shapePropertyForFilter.path}/${shapePropertyForFilter.name}\`,`;
+  }
+
   const getCypherQueryForProperties = (shapePropertiesForFilter: ShapePropertyForFilter[]): string => {
     const cypherConditions: Set<string> = new Set<string>();
+    const cypherReturns: Set<string> = new Set<string>();
     for (const shapePropertyForFilter of shapePropertiesForFilter) {
       getCypherConditions('dataResource', shapePropertyForFilter.path, cypherConditions)
+      cypherReturns.add(getCypherReturns(shapePropertyForFilter));
     }
-    return `${Array.from(cypherConditions).join('\n')}`
+    return `${Array.from(cypherConditions).join('\n')} + ${Array.from(cypherReturns).join('\n')}`
   }
 
   useEffect(() => {
