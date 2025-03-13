@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 
-import car from '../../assets/car.gif';
 import Header from '../../common/components/header/Header';
 import DetailsContent from '../../common/components/layouts/DetailsContent';
 import DetailsSidebar from '../../common/components/layouts/DetailsSidebar';
@@ -31,18 +30,6 @@ const OntologyDetailsPage: FC = () => {
         .finally(() => setIsLoading(false));
     }
   }, [ontologyId]);
-
-  if (isLoading) {
-    return (
-      <div className="newCarLoader">
-        <img src={car} alt="loading..." className="car"/>
-      </div>
-    );
-  }
-
-  if (!ontology) {
-    return <div>{t('ontologies.not-found')}</div>;
-  }
 
   return (
     <OntologyContext.Provider value={ontology}>
