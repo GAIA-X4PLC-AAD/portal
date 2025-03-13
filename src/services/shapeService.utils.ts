@@ -25,9 +25,10 @@ const fetchShapeById = async (shapeId: string) => {
 
 // TODO: It is not optimal to fetch everything again.
 export const getShapeByName = async (name: string): Promise<Shape | undefined> => {
+  const decodedName = decodeURIComponent(name);
   const schemas = await fetchAllSchemas();
   const allShapes = await fetchAllShapesFromSchemas(schemas);
-  return allShapes ? allShapes.find(shape => shape.shaclShapeName === name) : undefined;
+  return allShapes ? allShapes.find(shape => shape.shaclShapeName === decodedName) : undefined;
 }
 
 // -----------------------------------------------------------------------------

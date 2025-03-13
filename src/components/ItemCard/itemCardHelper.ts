@@ -47,7 +47,7 @@ export const shapeToItemCardData = (shape: Shape): ItemCardData => {
     i18next.t('shapes.title'),
     shape.shaclShapeName,
     undefined,
-    `/shapes/details/${shape.shaclShapeName}`,
+    `/shapes/${encodeURIComponent(shape.shaclShapeName)}`,
     false,
     'Card:' + shape.shaclShapeName
   );

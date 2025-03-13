@@ -20,25 +20,18 @@ import ShapesDetailMainContent from './components/ShapesDetailMainContent';
 const ShapeDetailsPage: FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
-  const id = location.pathname.split('/shapes/details/')[1] + location.hash;
+  const shapeId = location.pathname.split('/shapes/')[1];
+
   const [isLoading, setIsLoading] = useState(true);
   const [shape, setShape] = useState<Shape>();
 
   useEffect(() => {
-    const loadShape = async () => {
-      try {
-        const shape = await getShapeByName(id);
-        setShape(shape);
-      } catch (error) {
-        console.error('Error getting shape:', error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadShape();
-
-  }, [id]);
+    if (shapeId) {
+      getShapeByName(shapeId)
+        .then((response) => setShape(response))
+        .finally(() => setIsLoading(false));
+    }
+  }, [shapeId]);
 
   if (isLoading) {
     return (
@@ -62,7 +55,7 @@ const ShapeDetailsPage: FC = () => {
           },
           {
             label: shape?.shaclShapeName ?? '',
-            to: `/shapes/details/${id}`
+            to: `/shapes/details/${shapeId}`
           }]}
       />
       <Main>
