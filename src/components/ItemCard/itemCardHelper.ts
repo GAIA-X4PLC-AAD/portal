@@ -36,7 +36,7 @@ export const ontologyToItemCardData = (ontology: Ontology): ItemCardData => {
     i18next.t('ontologies.title'),
     ontology.subject,
     ontology.description,
-    `/ontologies/details/${ontology.subject}`,
+    `/ontologies/${encodeURIComponent(ontology.subject)}`,
     false,
     'Card:' + ontology.subject
   );
@@ -73,7 +73,6 @@ export const resourceToItemCardData = (resource: Resource): ItemCardData => {
     true,
     'Card:' + resource.uri + ':' + resource.name
   );
-
 }
 
 export const participantToItemCardData = (participant: Participant): ItemCardData => {

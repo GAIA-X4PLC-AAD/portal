@@ -26,10 +26,6 @@ export default function Navbar() {
       name: t('left-menu.tooltip.resources'),
     },
     {
-      path: '/about',
-      name: t('left-menu.about'),
-    },
-    {
       path: '/ontologies',
       name: t('ontologies.titles'),
     },
@@ -40,6 +36,10 @@ export default function Navbar() {
     {
       path: '/support',
       name: t('left-menu.support'),
+    },
+    {
+      path: '/about',
+      name: t('left-menu.about'),
     },
   ] as NavbarAsset[]
   const [dropdownMenuVisible, setDropdownMenuVisible] = useState(false);
