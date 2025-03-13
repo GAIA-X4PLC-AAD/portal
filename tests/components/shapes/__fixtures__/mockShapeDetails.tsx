@@ -1,6 +1,6 @@
 export const mockShapeDetails = {
-    shaclShapeId: 'Shape id 1',
-    shaclShapeName: 'Shape 1',
+    shaclShapeId: 'ShapeId1',
+    shaclShapeName: 'Shape1',
     properties: [
         {
             propertyId: 'Property id 1',

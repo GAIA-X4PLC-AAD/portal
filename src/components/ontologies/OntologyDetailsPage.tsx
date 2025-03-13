@@ -54,7 +54,7 @@ const OntologyDetailsPage: FC = () => {
           },
           {
             label: ontology?.subject ?? '',
-            to: `/ontologies/details/${ontologyId}`
+            to: `/ontologies/${ontologyId}`
           }]}
       />
       <Main>

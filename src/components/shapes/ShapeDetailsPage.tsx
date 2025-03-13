@@ -55,7 +55,7 @@ const ShapeDetailsPage: FC = () => {
           },
           {
             label: shape?.shaclShapeName ?? '',
-            to: `/shapes/details/${shapeId}`
+            to: `/shapes/${shapeId}`
           }]}
       />
       <Main>
