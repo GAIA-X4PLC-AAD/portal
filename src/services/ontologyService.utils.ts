@@ -47,9 +47,10 @@ export const fetchOntologyById = async (shapes: Shape[], id: string) => {
  * @param ontologyId identifying the ontology to which a shape must relate to.
  */
 const findRelatedShapes = (shapes: Shape[], ontologyId: string): Shape[] => {
+  const decodedOntologyId = decodeURIComponent(ontologyId);
   return shapes.filter(
     shape => shape.targetClasses.some(
-      targetClasses => targetClasses.includes(ontologyId)));
+      targetClasses => targetClasses.includes(decodedOntologyId)));
 }
 
 /**

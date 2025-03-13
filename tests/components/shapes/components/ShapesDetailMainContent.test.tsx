@@ -20,7 +20,7 @@ describe('ShapesDetailMainContent', () => {
         </ShapeContext.Provider>
       )
     );
-    const shapeNameHeading = screen.getByRole('heading', { name: /Shape 1/i });
+    const shapeNameHeading = screen.getByRole('heading', { name: /Shape1/i });
     expect(shapeNameHeading).toBeInTheDocument();
     const shapeTable = screen.getByRole('table');
     expect(shapeTable).toBeInTheDocument();
