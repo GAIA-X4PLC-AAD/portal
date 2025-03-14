@@ -1,5 +1,5 @@
 import FilterIcon from '@mui/icons-material/FilterAlt';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import NoContent from '../../common/components/./././noContent/NoContent';
@@ -27,12 +27,18 @@ const ResourceSearchPage = () => {
     typeAssets,
     formatAssets,
     vendorAssets,
+    specialAssets,
+    resourceSpecialDetailsQuery,
     assetFilterVisible,
     toggleAssetFilterVisibility,
     updateSearchText,
     updateFilterAsset,
   } = useResources();
 
+  useEffect(() => {
+    console.log(specialAssets)
+    console.log(resourceSpecialDetailsQuery)
+  }, [resourceSpecialDetailsQuery, specialAssets]); //TODO
   return (
     <>
       <Header title={`${t('left-menu.resources')} (${resources.length} ${t('dashboard.results')})`}/>
@@ -57,6 +63,7 @@ const ResourceSearchPage = () => {
               typeAssets={typeAssets}
               formatAssets={formatAssets}
               vendorAssets={vendorAssets}
+              specialAssets={specialAssets}
               updateAssetFilter={updateFilterAsset}
             />
             <LoadingIndicator visible={viewContentType === 'LOADING'}/>

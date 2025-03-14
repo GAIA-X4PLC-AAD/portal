@@ -57,3 +57,12 @@ export const loadResourceDetails = async (resourceUri: string = ''): Promise<Res
         ...otherProps
       }
     })
+
+export const loadResourceSpecialDetails = async (customQuery: string): Promise<any[]> =>
+  cypherQuery
+    .getCustomQuery(customQuery)
+    .then(queryResults => queryResults.items)
+    .catch(error => {
+      console.error('Error fetching resources:', error);
+      throw error;
+    })

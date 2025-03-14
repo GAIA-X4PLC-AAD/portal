@@ -1,11 +1,14 @@
 import { getResourceFormats, getResourceTypes } from '../../../services/ontologyService.utils';
 import { Ontology } from '../../../types/ontologies.model';
 import { Resource } from '../../../types/resources.model';
+import { Shape } from '../../../types/shapes.model';
 
+import { ShapePropertyForFilter } from './ShapePropertyForFilter';
 import { ResourceFilterState } from './resourceFilterReducer';
 import { getPropertyValue } from './resourcesHelper';
+import { getCypherQueryForProperties, getShapePropertiesForFilter } from './specialFilterHelper';
 
-export type AssetTypes = 'typeAssets' | 'formatAssets' | 'vendorAssets';
+export type AssetTypes = 'typeAssets' | 'formatAssets' | 'vendorAssets' | 'specialAssets';
 
 /**
  * Interface type used to define all the props needed to manage the filter assets.
@@ -16,6 +19,8 @@ export interface Asset {
     label: string;
     value: boolean;
     disabled: boolean;
+  specialValueSelected?: any[];
+  specialPossibleValues?: any[]; /* TODO Special Type? */
 }
 
 /**
@@ -110,6 +115,18 @@ export const createVendorAssets = (
   } as Asset))
 }
 
+export const createSpecialAssets = (
+  shapesForFilter: ShapePropertyForFilter[]
+) => {
+  return shapesForFilter.map(shapeForFilter => ({
+    id: `${shapeForFilter.path}/${shapeForFilter.name}`,
+    type: 'specialAssets',
+    label: shapeForFilter.name,
+    value: false,
+    disabled: false
+  } as Asset))
+}
+
 /**
  * Returns a set of all available vendors in the list of resources.
  *
@@ -158,10 +175,12 @@ export const getSelectedAssets = (assets: Asset[]): SelectedAssets => {
  * @param ontologies list of ontologies from which the filter assets should be calculated.
  * @param resources list of resources from which the filter assets should be calculated.
  * @param filters previous filter assets state in order to preserve an existing selection during the update of an asset.
+ * @param shapes
  * @return the new state of the {@link useResourceFilter} hook.
  */
 export const calculateResourceFiltersAssetState = (
   ontologies: Ontology[],
+  shapes: Shape[],
   resources: Resource[],
   filters: ResourceFilterState
 ) => {
@@ -205,10 +224,18 @@ export const calculateResourceFiltersAssetState = (
                 .includes(filters.searchText.toLowerCase()))
     );
 
+  const shapesForFilter: ShapePropertyForFilter[] = getShapePropertiesForFilter(shapes, resourceTypes);
+  const resourceSpecialDetailsQuery: string = getCypherQueryForProperties(shapesForFilter);
+  //const specialDetails: any[] = await loadResourceSpecialDetails(resourceSpecialDetailsQuery);
+  //const specialDetails: any[] = [];
+  const specialAssets = createSpecialAssets(shapesForFilter);
+
   return {
     typeAssets,
     formatAssets,
     vendorAssets,
+    specialAssets,
+    resourceSpecialDetailsQuery,
     filteredResources: resourcesWithSearchTextFilterApplied
   };
 }

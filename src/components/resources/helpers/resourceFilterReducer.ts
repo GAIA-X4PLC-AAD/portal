@@ -2,6 +2,7 @@ import { AnyAction } from 'redux';
 
 import { Ontology } from '../../../types/ontologies.model';
 import { Resource } from '../../../types/resources.model';
+import { Shape } from '../../../types/shapes.model';
 
 import { Asset, calculateResourceFiltersAssetState } from './resourceFilterHelper';
 
@@ -20,24 +21,28 @@ type ResourceFilterAssetState = {
     typeAssets: Asset[],
     formatAssets: Asset[],
     vendorAssets: Asset[],
+    specialAssets: Asset[]
 };
 
 export type ResourceFilterState = ResourceFilterAssetState & {
-    searchText: string
+    searchText: string,
+    resourceSpecialDetailsQuery: string
 }
 
 type ResourceFilterAction =
     {
         type: 'SET_RESOURCE_FILTER_ASSETS', payload: {
             ontologies: Ontology[],
-            resources: Resource[]
+            resources: Resource[],
+            shapes: Shape[],
         }
     } |
     {
         type: 'SET_SEARCH_TEXT', payload: {
             searchText: string,
             ontologies: Ontology[],
-            resources: Resource[]
+            resources: Resource[],
+            shapes: Shape[],
         }
     } |
     {
@@ -45,6 +50,7 @@ type ResourceFilterAction =
             asset: Asset,
             ontologies: Ontology[],
             resources: Resource[],
+            shapes: Shape[],
         },
     }
 
@@ -56,7 +62,9 @@ export const initialResourceFilterState: ResourceFilterState = {
   typeAssets: [],
   formatAssets: [],
   vendorAssets: [],
-  searchText: ''
+  specialAssets: [],
+  searchText: '',
+  resourceSpecialDetailsQuery: ''
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -68,13 +76,13 @@ export const resourceFilterReducer = (state: ResourceFilterState, action: AnyAct
   case SET_RESOURCE_FILTER_ASSETS:
     return {
       ...state,
-      ...calculateResourceFiltersAssetState(action.payload.ontologies, action.payload.resources, initialResourceFilterState)
+      ...calculateResourceFiltersAssetState(action.payload.ontologies, action.payload.shapes, action.payload.resources, initialResourceFilterState)
     }
 
   case SET_SEARCH_TEXT:
     return {
       ...state,
-      ...calculateResourceFiltersAssetState(action.payload.ontologies, action.payload.resources, {
+      ...calculateResourceFiltersAssetState(action.payload.ontologies, action.payload.shapes, action.payload.resources, {
         ...state,
         searchText: action.payload.searchText
       }),
@@ -84,11 +92,12 @@ export const resourceFilterReducer = (state: ResourceFilterState, action: AnyAct
   case UPDATE_FILTER_ASSET:
     return {
       ...state,
-      ...calculateResourceFiltersAssetState(action.payload.ontologies, action.payload.resources, {
+      ...calculateResourceFiltersAssetState(action.payload.ontologies, action.payload.shapes, action.payload.resources, {
         ...state,
         typeAssets: state.typeAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item),
         formatAssets: state.formatAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item),
-        vendorAssets: state.vendorAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item)
+        vendorAssets: state.vendorAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item),
+        specialAssets: state.specialAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item)
       })
     }
   }
@@ -100,26 +109,29 @@ export const resourceFilterReducer = (state: ResourceFilterState, action: AnyAct
 ////////////////////////////////////////////////////////////////////////////////
 export const setResourceFilterAssetsAction = (
   ontologies: Ontology[],
+  shapes: Shape[],
   resources: Resource[]): ResourceFilterAction => (
   {
     type: SET_RESOURCE_FILTER_ASSETS,
-    payload: { ontologies, resources }
+    payload: { ontologies, resources, shapes }
   })
 
 export const setSearchTextAction = (
   searchText: string,
   ontologies: Ontology[],
+  shapes: Shape[],
   resources: Resource[]): ResourceFilterAction => (
   {
     type: SET_SEARCH_TEXT,
-    payload: { searchText, ontologies, resources }
+    payload: { searchText, ontologies, resources, shapes }
   })
 
 export const updateFilterAssetAction = (
   asset: Asset,
   ontologies: Ontology[],
+  shapes: Shape[],
   resources: Resource[]): ResourceFilterAction => (
   {
     type: UPDATE_FILTER_ASSET,
-    payload: { asset, ontologies, resources }
+    payload: { asset, ontologies, resources, shapes }
   })

@@ -72,6 +72,14 @@ export const CypherQueryApiService = {
     });
   },
 
+  /**
+   * TODO
+   * @param customQuery
+   */
+  async getCustomQuery(customQuery: string): Promise<CypherQueryResult> {
+    return cypherQuery({ statement: `${customQuery}` })
+  },
+
   async getResourceDetails(uri: string): Promise<CypherQueryResult> {
     return cypherQuery({
       statement: `
