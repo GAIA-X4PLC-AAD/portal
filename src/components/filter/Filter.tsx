@@ -6,6 +6,7 @@ import { Asset } from '../resources/helpers/resourceFilterHelper';
 import styles from './Filter.module.css';
 import { FilterSection } from './FilterSection';
 import { SpecificFilterSection } from './SpecificFilterSection';
+import { SpecificFilters } from './SpecificFilters';
 
 interface IFilter {
   typeAssets: Asset[];
@@ -41,6 +42,7 @@ const Filter: FC<IFilter> = ({
       assets={vendorAssets}
       updateAssetFilter={updateAssetFilter}
     />
+    <SpecificFilters assets={specialAssets} updateAssetFilter={updateAssetFilter}/>
     <Title className={styles.filterTitle}>Specific Filters</Title>
     <SpecificFilterSection subtitle="Specific Filter Subtitle" />
   </aside>

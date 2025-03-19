@@ -8,7 +8,7 @@ import { ResourceFilterState } from './resourceFilterReducer';
 import { getPropertyValue } from './resourcesHelper';
 import { getCypherQueryForProperties, getShapePropertiesForFilter } from './specialFilterHelper';
 
-export type AssetTypes = 'typeAssets' | 'formatAssets' | 'vendorAssets' | 'specialAssets';
+export type AssetTypes = 'typeAssets' | 'formatAssets' | 'vendorAssets' | 'specialAssets' | 'dummyAssets';
 
 /**
  * Interface type used to define all the props needed to manage the filter assets.
@@ -19,8 +19,10 @@ export interface Asset {
     label: string;
     value: boolean;
     disabled: boolean;
-  specialValueSelected?: any[];
-  specialPossibleValues?: any[]; /* TODO Special Type? */
+  specificFilterValueSelected?: any[];
+  specificFilterPossibleValues?: any[];
+  specificFilterSelected?: boolean;
+  specificFilterPath?: string;
 }
 
 /**
