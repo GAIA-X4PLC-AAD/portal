@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 
 import '@testing-library/jest-dom';
@@ -8,7 +8,6 @@ import { withRouter } from '../../common/testHelper';
 import { mockShapeDetails } from './__fixtures__/mockShapeDetails';
 
 const getShapeByName = jest.fn();
-
 jest.mock('../../../src/services/shapeService.utils', () => ({
   getShapeByName: () => getShapeByName(),
 }));
@@ -19,15 +18,17 @@ console.warn = jest.fn(); // Disable warn logging
 
 describe('ShapeDetailsPage', () => {
   beforeAll(() => {
-    getShapeByName.mockResolvedValue(mockShapeDetails);
+    getShapeByName.mockReturnValue(Promise.resolve( mockShapeDetails ));
   });
 
   it('renders a shape correctly', async () => {
-    render(withRouter(<ShapeDetailsPage/>));
-    await screen.findByRole('link', { name: /shapes.titles/i });
+
+    render(withRouter(<ShapeDetailsPage/>, '/shapes/ShapeId1', '/shapes/:shapeId'));
+    await waitFor(() => screen.findByRole('link', { name: /shapes.titles/i }));
     const link_shapes = screen.getByRole('link', { name: /shapes.titles/i });
     expect(link_shapes).toBeInTheDocument();
     expect(link_shapes).toHaveAttribute('href', '/shapes');
-    expect(screen.getByRole('link', { name: /Shape 1/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Shape1/i })).toBeInTheDocument();
+
   });
 });

@@ -92,9 +92,9 @@ const Routes: FC = () => (
       <Route path="/about" element={Wrappers(<AboutPage/>)}/>
       <Route path="/support" element={Wrappers(<SupportPage/>)}/>
       <Route path="/ontologies" element={Wrappers(<OntologiesSearchPage/>)}/>
-      <Route path="/ontologies/details/*" element={Wrappers(<OntologyDetailsPage/>)}/>
+      <Route path="/ontologies/:ontologyId" element={Wrappers(<OntologyDetailsPage/>)}/>
       <Route path="/shapes" element={Wrappers(<ShapesSearchPage/>)}/>
-      <Route path="/shapes/details/*" element={Wrappers(<ShapeDetailsPage/>)}/>
+      <Route path="/shapes/:shapeId" element={Wrappers(<ShapeDetailsPage/>)}/>
     </ReactRoutes>
   </Vertical>
 );

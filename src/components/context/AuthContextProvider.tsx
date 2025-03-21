@@ -6,6 +6,7 @@ import Keycloak from 'keycloak-js';
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 
 import GaiaXButton from '../../common/components/buttons/GaiaXButton';
+import LoadingIndicator from '../../common/components/loadingIndicator/LoadingIndicator';
 import { closeNotification, notify } from '../../common/components/notification/Notification';
 
 import styles from './AuthContextProvider.module.css';
@@ -59,6 +60,7 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
   const [token, setToken] = useState('');
   const [redirectPath, setRedirectPath] = useState<string | null>(null);
   const [notificationShown, setNotificationShown] = useState(false);
+  const [loading, setLoading] = useState(true);
   const NOTIFY_BEFORE_TIME = 30000;
 
   // Initialise Keycloak
@@ -72,9 +74,11 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
           setToken(keycloak.token ? keycloak.token : '');
           setupTokenExpiryCheck();
         }
+        setLoading(false);
       })
       .catch((error: any) => {
         console.error('Error during Keycloak initialization:', error);
+        setLoading(false);
       });
   }, []);
 
@@ -161,6 +165,12 @@ const AuthContextProvider: React.FC<AuthContextProviderProps> = ({
     }),
     [isAuthenticated, token, redirectPath]
   );
+
+  if (loading) {
+    return (
+      <LoadingIndicator visible={true}/>
+    );
+  }
 
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

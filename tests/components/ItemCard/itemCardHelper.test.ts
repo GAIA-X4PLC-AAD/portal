@@ -61,7 +61,7 @@ describe('itemCardHelper', () => {
         label: 'Ontology',
         title: 'Subject',
         description: 'Description',
-        navigationUrl: '/ontologies/details/Subject',
+        navigationUrl: '/ontologies/Subject',
         isGaiaXCompliant: false,
         testId: 'Card:Subject',
       });
@@ -76,7 +76,7 @@ describe('itemCardHelper', () => {
         label: 'Shape',
         title: 'ShapeName',
         description: '',
-        navigationUrl: '/shapes/details/ShapeName',
+        navigationUrl: '/shapes/ShapeName',
         isGaiaXCompliant: false,
         testId: 'Card:ShapeName',
       });
