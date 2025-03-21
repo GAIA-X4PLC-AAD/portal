@@ -36,7 +36,7 @@ export const ontologyToItemCardData = (ontology: Ontology): ItemCardData => {
     i18next.t('ontologies.title'),
     ontology.subject,
     ontology.description,
-    `/ontologies/details/${ontology.subject}`,
+    `/ontologies/${encodeURIComponent(ontology.subject)}`,
     false,
     'Card:' + ontology.subject
   );
@@ -47,7 +47,7 @@ export const shapeToItemCardData = (shape: Shape): ItemCardData => {
     i18next.t('shapes.title'),
     shape.shaclShapeName,
     undefined,
-    `/shapes/details/${shape.shaclShapeName}`,
+    `/shapes/${encodeURIComponent(shape.shaclShapeName)}`,
     false,
     'Card:' + shape.shaclShapeName
   );
@@ -73,7 +73,6 @@ export const resourceToItemCardData = (resource: Resource): ItemCardData => {
     true,
     'Card:' + resource.uri + ':' + resource.name
   );
-
 }
 
 export const participantToItemCardData = (participant: Participant): ItemCardData => {

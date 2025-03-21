@@ -29,15 +29,11 @@ jest.mock('../../../src/services/ontologyService.utils', () => ({
 
 describe('OntologyDetailsPage', () => {
   beforeAll(() => {
-    ontology.mockResolvedValue(mockOntologyDetails);
+    ontology.mockReturnValue(Promise.resolve(mockOntologyDetails));
   });
 
   it('renders an ontology correctly', async () => {
-    render(
-      withRouter(
-        <OntologyDetailsPage/>
-      )
-    );
+    render(withRouter(<OntologyDetailsPage/>, '/ontologies/ontologyId1', '/ontologies/:ontologyId'));
 
     const link_ontologies = await screen.findByRole('link', { name: /left-menu.shapesAndOntologies/i });
     expect(link_ontologies).toBeInTheDocument();

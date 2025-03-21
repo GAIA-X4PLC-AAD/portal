@@ -68,6 +68,7 @@ describe('ResourceDetailsPage', () => {
 
     render(withRouter(<ResourceDetailsPage/>, '/resources/123', '/resources/:resourceId'));
 
+    screen.debug()
     await waitFor(() => {
       expect(screen.getByRole('heading', { name: /Resource 1/i })).toBeInTheDocument();
     });
