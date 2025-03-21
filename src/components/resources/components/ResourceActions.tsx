@@ -56,12 +56,6 @@ const ResourceActions = () => {
           handleOnClick={handleDownload}
         />
       )}
-      <GaiaXButton
-        className={styles.sideBarCardButton}
-        label={t('details.view-graph')}
-        handleOnClick={() => {
-        }}
-      />
       <DataTransferStatus state={state}/>
       <GaiaXButton
         className={styles.sideBarCardButton}
