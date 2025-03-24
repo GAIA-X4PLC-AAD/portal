@@ -21,10 +21,8 @@ export const SpecificFilterItemProperty: React.FC<ISpecificFilterItemProperty> =
   assets,
   updateAssetFilter,
 }) => {
-  // Initialize local state with currentAsset (if defined).
   const [value, setValue] = React.useState<Asset | null>(currentAsset ?? null);
 
-  // Sync local state when currentAsset prop changes.
   React.useEffect(() => {
     setValue(currentAsset ?? null);
   }, [currentAsset]);
@@ -34,7 +32,6 @@ export const SpecificFilterItemProperty: React.FC<ISpecificFilterItemProperty> =
       value={value}
       onChange={(event, newValue) => {
         if (newValue === null) {
-          // Clear action (cancel filter)
           if (value) {
             value.specificFilterSelected = false;
           }
@@ -42,13 +39,11 @@ export const SpecificFilterItemProperty: React.FC<ISpecificFilterItemProperty> =
           setValue(null);
         } else {
           if (value === null) {
-            // First selection (add filter)
             newValue.specificFilterSelected = true;
             updateAssetFilter('add-filter', newValue);
           } else if (value.id !== newValue.id) {
-            // Changing selection (change filter)
-            value.specificFilterSelected = false; // Unselect previous asset
-            newValue.specificFilterSelected = true; // Select new asset
+            value.specificFilterSelected = false;
+            newValue.specificFilterSelected = true;
             updateAssetFilter('change-filter', value, newValue);
           }
           setValue(newValue);
@@ -58,6 +53,11 @@ export const SpecificFilterItemProperty: React.FC<ISpecificFilterItemProperty> =
       getOptionLabel={(option) => option.label}
       isOptionEqualToValue={(option, value) => option.id === value.id}
       clearOnEscape
+      disableClearable={false} // Ensures the 'X' is always present
+      slotProps={{
+        popupIndicator: { style: { display: 'none' } }, // Hides the dropdown arrow
+        clearIndicator: { style: { visibility: 'visible' } }, // Ensures 'X' is always visible
+      }}
       renderInput={(params) => (
         <TextField
           {...params}
@@ -65,7 +65,6 @@ export const SpecificFilterItemProperty: React.FC<ISpecificFilterItemProperty> =
           variant="outlined"
         />
       )}
-      sx={{ width: 300 }}
     />
   );
 };

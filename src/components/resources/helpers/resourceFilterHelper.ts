@@ -235,8 +235,8 @@ export const calculateResourceFiltersAssetState = (
   const resourceSpecialDetailsQuery: string = getCypherQueryForProperties(shapesForFilter);
   //const specialDetails: any[] = await loadResourceSpecialDetails(resourceSpecialDetailsQuery);
   //const specialDetails: any[] = [];
-  const a_asstes = filters.specificAssets.some(asset => asset.specificFilterSelected === true);
-  //alert('specific filters' + JSON.stringify(a_asstes)); //TODO REMOVE
+  const a_asstes = filters.specificAssets.filter(asset => asset.specificFilterSelected === true);
+  //alert('specific filters' + JSON.stringify(a_asstes) + ' length: ' + a_asstes.length); //TODO REMOVE
   const specificAssets = createSpecificAssets(shapesForFilter, filters.specificAssets);
 
   return {
