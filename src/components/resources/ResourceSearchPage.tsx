@@ -27,7 +27,7 @@ const ResourceSearchPage = () => {
     typeAssets,
     formatAssets,
     vendorAssets,
-    specialAssets,
+    specificAssets,
     resourceSpecialDetailsQuery,
     assetFilterVisible,
     toggleAssetFilterVisibility,
@@ -36,9 +36,9 @@ const ResourceSearchPage = () => {
   } = useResources();
 
   useEffect(() => {
-    console.log(specialAssets)
+    console.log(specificAssets)
     console.log(resourceSpecialDetailsQuery)
-  }, [resourceSpecialDetailsQuery, specialAssets]); //TODO
+  }, [resourceSpecialDetailsQuery, specificAssets, updateFilterAsset]); //TODO
   return (
     <>
       <Header title={`${t('left-menu.resources')} (${resources.length} ${t('dashboard.results')})`}/>
@@ -63,7 +63,7 @@ const ResourceSearchPage = () => {
               typeAssets={typeAssets}
               formatAssets={formatAssets}
               vendorAssets={vendorAssets}
-              specialAssets={specialAssets}
+              specificAssets={specificAssets}
               updateAssetFilter={updateFilterAsset}
             />
             <LoadingIndicator visible={viewContentType === 'LOADING'}/>

@@ -1,7 +1,7 @@
-import Subtitle from "common/components/fields/subtitle/Subtitle";
-import { useState } from "react";
+import Subtitle from 'common/components/fields/subtitle/Subtitle';
+import { useState } from 'react';
 
-import styles from "./Filter.module.css";
+import styles from './Filter.module.css';
 
 interface ISpecificFilterSection {
   subtitle: string;
@@ -10,7 +10,7 @@ interface ISpecificFilterSection {
 export const SpecificFilterSection: React.FC<ISpecificFilterSection> = ({
   subtitle,
 }) => {
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValue, setSelectedValue] = useState('');
 
   const handleOnChange = (event) => {
     setSelectedValue(event.target.value);

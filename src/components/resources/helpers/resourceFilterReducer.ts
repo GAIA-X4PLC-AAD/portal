@@ -21,7 +21,7 @@ type ResourceFilterAssetState = {
     typeAssets: Asset[],
     formatAssets: Asset[],
     vendorAssets: Asset[],
-    specialAssets: Asset[]
+    specificAssets: Asset[]
 };
 
 export type ResourceFilterState = ResourceFilterAssetState & {
@@ -62,7 +62,7 @@ export const initialResourceFilterState: ResourceFilterState = {
   typeAssets: [],
   formatAssets: [],
   vendorAssets: [],
-  specialAssets: [],
+  specificAssets: [],
   searchText: '',
   resourceSpecialDetailsQuery: ''
 }
@@ -97,7 +97,7 @@ export const resourceFilterReducer = (state: ResourceFilterState, action: AnyAct
         typeAssets: state.typeAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item),
         formatAssets: state.formatAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item),
         vendorAssets: state.vendorAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item),
-        specialAssets: state.specialAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item)
+        specificAssets: state.specificAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item)
       })
     }
   }

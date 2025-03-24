@@ -8,7 +8,7 @@ import { ResourceFilterState } from './resourceFilterReducer';
 import { getPropertyValue } from './resourcesHelper';
 import { getCypherQueryForProperties, getShapePropertiesForFilter } from './specialFilterHelper';
 
-export type AssetTypes = 'typeAssets' | 'formatAssets' | 'vendorAssets' | 'specialAssets' | 'dummyAssets';
+export type AssetTypes = 'typeAssets' | 'formatAssets' | 'vendorAssets' | 'specificAssets';
 
 /**
  * Interface type used to define all the props needed to manage the filter assets.
@@ -117,15 +117,20 @@ export const createVendorAssets = (
   } as Asset))
 }
 
-export const createSpecialAssets = (
-  shapesForFilter: ShapePropertyForFilter[]
+export const createSpecificAssets = (
+  shapesForFilter: ShapePropertyForFilter[],
+  prevSpecificAssets: Asset[],
 ) => {
   return shapesForFilter.map(shapeForFilter => ({
     id: `${shapeForFilter.path}/${shapeForFilter.name}`,
-    type: 'specialAssets',
+    type: 'specificAssets',
     label: shapeForFilter.name,
-    value: false,
-    disabled: false
+    value: prevSpecificAssets.some(asset => asset.value && asset.id === `${shapeForFilter.path}/${shapeForFilter.name}`),
+    disabled: false,
+    specificFilterValueSelected: prevSpecificAssets.filter(asset => asset.id === `${shapeForFilter.path}/${shapeForFilter.name}`).map(asset => asset.specificFilterValueSelected).flat(),
+    specificFilterPossibleValues: [],
+    specificFilterSelected: prevSpecificAssets.some(asset => asset.specificFilterSelected && asset.id === `${shapeForFilter.path}/${shapeForFilter.name}`),
+    specificFilterPath: shapeForFilter.path
   } as Asset))
 }
 
@@ -230,13 +235,15 @@ export const calculateResourceFiltersAssetState = (
   const resourceSpecialDetailsQuery: string = getCypherQueryForProperties(shapesForFilter);
   //const specialDetails: any[] = await loadResourceSpecialDetails(resourceSpecialDetailsQuery);
   //const specialDetails: any[] = [];
-  const specialAssets = createSpecialAssets(shapesForFilter);
+  const a_asstes = filters.specificAssets.some(asset => asset.specificFilterSelected === true);
+  //alert('specific filters' + JSON.stringify(a_asstes)); //TODO REMOVE
+  const specificAssets = createSpecificAssets(shapesForFilter, filters.specificAssets);
 
   return {
     typeAssets,
     formatAssets,
     vendorAssets,
-    specialAssets,
+    specificAssets,
     resourceSpecialDetailsQuery,
     filteredResources: resourcesWithSearchTextFilterApplied
   };

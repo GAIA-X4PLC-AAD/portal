@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Vertical from '../../common/components/layouts/Vertical';
 import { Asset } from '../resources/helpers/resourceFilterHelper';
 
-import { SpecificFilterItem } from './SpecificFilterItem';
+import { FilterItemOperation, SpecificFilterItem } from './SpecificFilterItem';
 
 export interface ISpecificFilters {
     assets: Asset[];
@@ -21,6 +21,27 @@ export const SpecificFilters: React.FC<ISpecificFilters> = ({ assets, updateAsse
     setAddNew(false); // Toggle to true to show the new filter item
   };
 
+  const handleChange = (opration: FilterItemOperation, asset?: Asset, newAsset?: Asset): void => {
+    switch (opration) {
+    case 'add-filter':
+      asset && updateAssetFilter(asset);
+      handleSelected();
+      break;
+    case 'remove-filter':
+      asset && updateAssetFilter(asset);
+      break;
+    case 'change-filter':
+      asset && updateAssetFilter(asset);
+      newAsset && updateAssetFilter(newAsset);
+      break;
+    case 'cancel-filter':
+      handleSelected();
+      break;
+    default:
+      console.warn(`Unsupported operation: ${opration}`);
+    }
+  }
+
   return (
     <>
       <div>Specific filters:</div>
@@ -28,19 +49,18 @@ export const SpecificFilters: React.FC<ISpecificFilters> = ({ assets, updateAsse
       <Vertical>
         {addNew && (
           <SpecificFilterItem
-            currentAsset={null}
             assets={assets}
-            updateAssetFilter={updateAssetFilter}
+            handleChange={handleChange}
             key="new-filter" // Added key for the new item
           />
         )}
         {assets.map((asset) =>
-          asset?.specificFilterValueSelected && (
+          asset?.specificFilterValueSelected && asset.specificFilterSelected === true && (
             <SpecificFilterItem
               key={asset.id}
               currentAsset={asset}
               assets={assets}
-              updateAssetFilter={updateAssetFilter}
+              handleChange={handleChange}
             />
           )
         )}

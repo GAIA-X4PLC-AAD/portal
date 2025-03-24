@@ -24,7 +24,10 @@ export const useResourceFilter = (ontologies: Ontology[], shapes: Shape[], resou
   return {
     ...resourceFilterAssetSate,
     updateSearchText: (searchText: string) => dispatch(setSearchTextAction(searchText, ontologies, shapes, resources)),
-    updateFilterAsset: (asset: Asset) => dispatch(updateFilterAssetAction(asset, ontologies, shapes, resources))
+    updateFilterAsset: (asset: Asset) => {
+      // alert('dispatching updateFilterAssetAction' + JSON.stringify(asset)); //TODO REMOVE
+      dispatch(updateFilterAssetAction(asset, ontologies, shapes, resources))
+    }
   }
 }
 

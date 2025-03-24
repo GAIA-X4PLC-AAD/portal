@@ -1,56 +1,50 @@
-import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
 import * as React from 'react';
 
 import { Asset } from '../resources/helpers/resourceFilterHelper';
 
-const filter = createFilterOptions<Asset>();
+import { SpecificFilterItemProperty, SpecificFilterItemPropertyOperation } from './SpecificFilterItemProperty';
 
 export interface ISpecificFilterItem {
-    currentAsset: Asset | null;
+  currentAsset?: Asset | undefined;
     assets: Asset[];
-    updateAssetFilter: (asset: Asset) => void;
+  handleChange: (operation: FilterItemOperation, asset?: Asset, newAsset?: Asset) => void;
 }
 
-export const SpecificFilterItem: React.FC<ISpecificFilterItem> = ({ currentAsset, assets, updateAssetFilter }) => {
+export type FilterItemOperation =
+    'add-filter'
+    | 'remove-filter'
+    | 'change-filter'
+    | 'cancel-filter'
+    | 'filter-value-changed';
+
+export const SpecificFilterItem: React.FC<ISpecificFilterItem> = ({ currentAsset, assets, handleChange }) => {
+
+  const updatePropertyValue = (operation: SpecificFilterItemPropertyOperation, asset?: Asset, newAsset?: Asset) => {
+    switch (operation) {
+    case 'add-filter':
+      asset && handleChange('add-filter', asset);
+      break;
+    case 'remove-filter':
+      asset && handleChange('remove-filter', asset);
+      break;
+    case 'change-filter':
+      asset && newAsset && handleChange('change-filter', asset, newAsset);
+      break;
+    case 'cancel-filter':
+      handleChange('cancel-filter');
+      break;
+    default:
+      console.warn(`Unsupported operation: ${operation}`);
+    }
+  };
+
   return (
-    <Autocomplete
-      value={currentAsset}
-      onChange={(event, newValue) => {
-        if (newValue) {
-          updateAssetFilter({ ...newValue, specificFilterSelected: true });
-        }
-      }}
-      filterOptions={(options, params) => {
-        const filtered = filter(options, params);
-        return filtered;
-      }}
-      options={assets.sort((a, b) => {
-        if (a.type === b.type) {
-          return a.label.localeCompare(b.label);
-        }
-        return a.type.localeCompare(b.type);
-      })}
-      getOptionLabel={(option) => `${option.label} - ${option.id}`}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label="Select Asset"
-          variant="outlined"
-          // Ensure the default arrow is not overridden
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: params.InputProps.endAdornment, // Preserve the dropdown arrow
-          }}
-        />
-      )}
-      renderGroup={(params) => (
-        <li key={params.key}>
-          <strong>{params.group}</strong>
-          <ul style={{ padding: 0, margin: 0 }}>{params.children}</ul>
-        </li>
-      )}
-      sx={{ width: 300 }}
-    />
-  );
+    <>
+      <SpecificFilterItemProperty currentAsset={currentAsset} assets={assets}
+        updateAssetFilter={updatePropertyValue}/>
+      {/*{(currentAsset &&*/}
+      {/*      <SpecificFilterItemValue currentAsset={currentAsset} assets={assets}*/}
+      {/*        updateAssetFilter={updateAssetFilter}/>)}*/}
+    </>
+  )
 };
