@@ -30,14 +30,20 @@ export const SpecificFilterItemProperty: React.FC<ISpecificFilterItemProperty> =
   return (
     <Autocomplete
       value={value}
-      onChange={(event, newValue) => {
-        if (newValue === null) {
+      onChange={(event, newValue, reason) => {
+
+        if (reason === 'clear') {
           if (value) {
             value.specificFilterSelected = false;
+            updateAssetFilter('remove-filter', value);
+            setValue(null);
+          } else {
+            updateAssetFilter('cancel-filter');
           }
-          updateAssetFilter('cancel-filter');
-          setValue(null);
-        } else {
+          return;
+        }
+
+        if (reason === 'selectOption' && newValue !== null) {
           if (value === null) {
             newValue.specificFilterSelected = true;
             updateAssetFilter('add-filter', newValue);

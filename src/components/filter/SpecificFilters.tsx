@@ -17,7 +17,7 @@ export const SpecificFilters: React.FC<ISpecificFilters> = ({ assets, updateAsse
     setAddNew(true); // Toggle to true to show the new filter item
   };
 
-  const handleSelected = () => {
+  const handleSelect = () => {
     setAddNew(false); // Toggle to true to show the new filter item
   };
 
@@ -25,17 +25,18 @@ export const SpecificFilters: React.FC<ISpecificFilters> = ({ assets, updateAsse
     switch (opration) {
     case 'add-filter':
       asset && updateAssetFilter(asset);
-      handleSelected();
+      handleSelect();
       break;
     case 'remove-filter':
       asset && updateAssetFilter(asset);
+      handleSelect();
       break;
     case 'change-filter':
       asset && updateAssetFilter(asset);
       newAsset && updateAssetFilter(newAsset);
       break;
     case 'cancel-filter':
-      handleSelected();
+      handleSelect();
       break;
     default:
       console.warn(`Unsupported operation: ${opration}`);
