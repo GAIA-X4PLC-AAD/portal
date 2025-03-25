@@ -234,6 +234,7 @@ export const calculateResourceFiltersAssetState = (
   const selectedTypeLabels: string[] = typeAssets
     .filter(asset => asset.value)
     .map(asset => asset.label);
+  console.log(shapes);
   const shapesForFilter: ShapePropertyForFilter[] = getShapePropertiesForFilter(shapes, selectedTypeLabels);
 
   //const specialDetails: any[] = await loadResourceSpecialDetails(resourceSpecialDetailsQuery);

@@ -21,6 +21,14 @@ function getSegmentFromALinkFromBack(link: string, countFromBack: number, separa
   return countFromBack >= segments.length ? '' : segments[segments.length - countFromBack - 1];
 }
 
+function getLastSegmentByMultipleDelimiters(input: string, delimiters: string[]): string {
+  let lastSegment = input;
+  for (const delimiter of delimiters) {
+    lastSegment = getSegmentFromALinkFromBack(lastSegment, 0, delimiter);
+  }
+  return lastSegment;
+}
+
 function findShapeByResourceType(shapes: Shape[], resourceType: string): Shape | undefined {
   const baseUrl = 'https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/'
   return shapes.find(shape => (
@@ -61,13 +69,13 @@ function processShapeProperty(shape: Shape | undefined, shapes: Shape[], path: s
   for (const property of shape.properties) {
     if (property.propertyValues.some(value => value.type === 'http://www.w3.org/ns/shacl#node')) {
       const node: Shape | undefined = shapes.find(s => s.shaclShapeName === property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#node')?.value) || undefined
-      const nodeName = property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#name')?.value || ''
+      const nodeName = getLastSegmentByMultipleDelimiters(property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#path')?.value || '', ['/', '#']);
       shapesPropertiesForFilter.push(...processShapeProperty(node, shapes, currentShapePath, visitedShapesCopy, nodeName));
     } else {
       shapesPropertiesForFilter.push({
         path: currentShapePath,
-        name: property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#name')?.value || '',
-        type: getSegmentFromALinkFromBack(property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#datatype')?.value || '', 0, '#')
+        name: getLastSegmentByMultipleDelimiters(property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#path')?.value || '', ['/', '#']),
+        type: getLastSegmentByMultipleDelimiters(property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#datatype')?.value || '', ['/', '#'])
       });
     }
   }
