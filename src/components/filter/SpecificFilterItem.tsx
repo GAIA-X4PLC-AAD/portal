@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { Asset } from '../resources/helpers/resourceFilterHelper';
 
+import styles from './SpecificFilterItem.module.css';
 import { SpecificFilterItemProperty, SpecificFilterItemPropertyOperation } from './SpecificFilterItemProperty';
 
 export interface ISpecificFilterItem {
@@ -39,12 +40,12 @@ export const SpecificFilterItem: React.FC<ISpecificFilterItem> = ({ currentAsset
   };
 
   return (
-    <>
+    <div className={styles.specificFilterItem}>
       <SpecificFilterItemProperty currentAsset={currentAsset} assets={assets}
         updateAssetFilter={updatePropertyValue}/>
       {/*{(currentAsset &&*/}
       {/*      <SpecificFilterItemValue currentAsset={currentAsset} assets={assets}*/}
       {/*        updateAssetFilter={updateAssetFilter}/>)}*/}
-    </>
+    </div>
   )
 };

@@ -1,9 +1,12 @@
+import AddIcon from '@mui/icons-material/Add';
+import { IconButton, Tooltip } from '@mui/material';
 import React, { useState } from 'react';
 
 import Vertical from '../../common/components/layouts/Vertical';
 import { Asset } from '../resources/helpers/resourceFilterHelper';
 
 import { FilterItemOperation, SpecificFilterItem } from './SpecificFilterItem';
+import styles from './SpecificFilters.module.css';
 
 export interface ISpecificFilters {
     assets: Asset[];
@@ -44,17 +47,9 @@ export const SpecificFilters: React.FC<ISpecificFilters> = ({ assets, updateAsse
   }
 
   return (
-    <>
-      <div>Specific filters:</div>
-      <button onClick={handleAddNew}>Add Filter</button>
-      <Vertical>
-        {addNew && (
-          <SpecificFilterItem
-            assets={assets}
-            handleChange={handleChange}
-            key="new-filter" // Added key for the new item
-          />
-        )}
+    <div className={styles.specificFiltersGroup}>
+      <div className={styles.specificFiltersTitle}>Specific filters</div>
+      <Vertical className={styles.specificFilters}>
         {assets.map((asset) =>
           asset?.specificFilterValueSelected && asset.specificFilterSelected === true && (
             <SpecificFilterItem
@@ -65,7 +60,24 @@ export const SpecificFilters: React.FC<ISpecificFilters> = ({ assets, updateAsse
             />
           )
         )}
+        {addNew && (
+          <SpecificFilterItem
+            assets={assets}
+            handleChange={handleChange}
+            key="new-filter" // Added key for the new item
+          />
+        )}
       </Vertical>
-    </>
+      <Tooltip title="Add specific filter" arrow>
+        <IconButton
+          aria-label="add"
+          size="small"
+          onClick={handleAddNew}
+          className={styles.iconButton} // Apply styles from module
+        >
+          <AddIcon/>
+        </IconButton>
+      </Tooltip>
+    </div>
   );
 };
