@@ -3,7 +3,7 @@ import { useEffect, useMemo, useReducer, useState } from 'react';
 import { useSchemas } from '../../../hooks/useSchemas';
 import { getResourceTypes } from '../../../services/ontologyService.utils';
 import { unique } from '../../../utils/utils';
-import { loadResources } from '../helpers/resourceDataFlow';
+import { loadResources, loadResourceSpecialDetails } from '../helpers/resourceDataFlow';
 import { removeNonResourceTypeLabels } from '../helpers/resourcesHelper';
 import {
   initialResourceState,
@@ -31,6 +31,7 @@ export const useResources = () => {
     resources: !state.isLoading && !state.hasError ? state.resources : []
   }), [state]);
   const [assetFilterVisible, toggleAssetFilterVisibility] = useState(false);
+  const [specialQuery, setSpecialQuery] = useState<string | null>(null);
 
   const {
     filteredResources,
@@ -42,6 +43,43 @@ export const useResources = () => {
     updateSearchText,
     updateFilterAsset,
   } = useResourceFilter(ontologies, shapes, resources);
+
+  useEffect(() => {
+    if (specialQuery !== resourceSpecialDetailsQuery) {
+      setSpecialQuery(resourceSpecialDetailsQuery);
+      console.log('loading special details');
+      loadResourceSpecialDetails(resourceSpecialDetailsQuery)
+        .then(specialDetails => console.log('Loaded special details:', specialDetails))
+        .catch(error => console.error('Error loading special details:', error));
+    }
+
+    // console.log('specific assets:', JSON.stringify(specificAssets));
+    // console.log('query:', resourceSpecialDetailsQuery);
+    //
+    // if (resourceSpecialDetailsQuery) {
+    //   console.log('loading special details');
+    //   loadResourceSpecialDetails(resourceSpecialDetailsQuery)
+    //     .then(specialDetails => console.log('Loaded special details:', specialDetails))
+    //     .catch(error => console.error('Error loading special details:', error));
+    // }
+  }, [resourceSpecialDetailsQuery, specificAssets]);
+
+  // useEffect(() => {
+  //   if (specialQuery !== resourceSpecialDetailsQuery) {
+  //     setSpecialQuery(resourceSpecialDetailsQuery);
+  //     console.log('loading special details');
+  //     console.log('loading special query updated');
+  //   }
+  //   console.log('specific assets:' + JSON.stringify(specificAssets));
+  //   console.log('query:' + resourceSpecialDetailsQuery)
+  //   if (resourceSpecialDetailsQuery) {
+  //     console.log('loading special details');
+  //     console.log('query: ' + resourceSpecialDetailsQuery);
+  //     loadResourceSpecialDetails(resourceSpecialDetailsQuery)
+  //       .then(specialDetails => console.log(specialDetails))
+  //       .catch(error => console.error('Error loading special details:', error));
+  //   }
+  // }, [resourceSpecialDetailsQuery, specificAssets, updateFilterAsset]); //TODO
 
   useEffect(() => {
     if (!schemas.isLoading) {
