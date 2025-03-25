@@ -1,5 +1,7 @@
 import { Shape } from '../../../types/shapes.model';
 
+import { Asset } from './resourceFilterHelper';
+
 interface ShapePropertyForFilter {
     path: string; // e.g., "/resourceType" or "/resourceType/nodeName"
     name: string;
@@ -119,12 +121,18 @@ function getCypherReturns(shapePropertyForFilter: ShapePropertyForFilter): strin
   return `properties(${getSegmentFromALinkFromBack(shapePropertyForFilter.path, 0)}).${toCamelCase(shapePropertyForFilter.name)} AS \`${shapePropertyForFilter.path}/${shapePropertyForFilter.name}\`,`;
 }
 
-export const getCypherQueryForProperties = (shapePropertiesForFilter: ShapePropertyForFilter[]): string => {
+export const getCypherQueryForProperties = (shapePropertiesForFilter: ShapePropertyForFilter[], specificAssets: Asset[]): string => {
   const cypherConditions: Set<string> = new Set<string>();
   const cypherReturns: Set<string> = new Set<string>();
   for (const shapePropertyForFilter of shapePropertiesForFilter) {
-    getCypherConditions('dataResource', shapePropertyForFilter.path, cypherConditions)
-    cypherReturns.add(getCypherReturns(shapePropertyForFilter));
+    if (specificAssets.some(asset =>
+      asset.specificFilterPath === shapePropertyForFilter.path &&
+        asset.label === shapePropertyForFilter.name &&
+        asset.specificFilterSelected)) {
+      getCypherConditions('dataResource', shapePropertyForFilter.path, cypherConditions)
+      cypherReturns.add(getCypherReturns(shapePropertyForFilter));
+    }
   }
+
   return `${Array.from(cypherConditions).join('\n')} + ${Array.from(cypherReturns).join('\n')}`
 }
