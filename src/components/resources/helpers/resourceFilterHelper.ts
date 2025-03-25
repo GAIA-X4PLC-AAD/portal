@@ -182,14 +182,16 @@ export const getSelectedAssets = (assets: Asset[]): SelectedAssets => {
  * @param ontologies list of ontologies from which the filter assets should be calculated.
  * @param resources list of resources from which the filter assets should be calculated.
  * @param filters previous filter assets state in order to preserve an existing selection during the update of an asset.
- * @param shapes
+ * @param shapes shapes for specific filters
+ * @param specialResourceDetails query for special resource details
  * @return the new state of the {@link useResourceFilter} hook.
  */
 export const calculateResourceFiltersAssetState = (
   ontologies: Ontology[],
   shapes: Shape[],
   resources: Resource[],
-  filters: ResourceFilterState
+  filters: ResourceFilterState,
+  specialResourceDetails?: any[]
 ) => {
   const resourceTypes = Array.from(getResourceTypes(ontologies));
   const typeAssets = createTypeAssets(resourceTypes, resources)

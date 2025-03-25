@@ -42,6 +42,7 @@ export const useResources = () => {
     resourceSpecialDetailsQuery,
     updateSearchText,
     updateFilterAsset,
+    updateSpecialDetails,
   } = useResourceFilter(ontologies, shapes, resources);
 
   useEffect(() => {
@@ -49,7 +50,10 @@ export const useResources = () => {
       setSpecialQuery(resourceSpecialDetailsQuery);
       console.log('loading special details');
       loadResourceSpecialDetails(resourceSpecialDetailsQuery)
-        .then(specialDetails => console.log('Loaded special details:', specialDetails))
+        .then(specialDetails => {
+          console.log('Loaded special details:', specialDetails)
+          updateSpecialDetails(specialDetails)
+        })
         .catch(error => console.error('Error loading special details:', error));
     }
 

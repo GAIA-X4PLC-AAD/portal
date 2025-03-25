@@ -12,6 +12,7 @@ import { Asset, calculateResourceFiltersAssetState } from './resourceFilterHelpe
 export const SET_RESOURCE_FILTER_ASSETS = 'SET_RESOURCE_FILTER_ASSETS';
 export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
 export const UPDATE_FILTER_ASSET = 'UPDATE_FILTER_ASSET';
+export const UPDATE_SPECIAL_DETAILS = 'UPDATE_SPECIAL_DETAILS';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Type definitions
@@ -51,6 +52,14 @@ type ResourceFilterAction =
             ontologies: Ontology[],
             resources: Resource[],
             shapes: Shape[],
+        },
+    } |
+    {
+        type: 'UPDATE_SPECIAL_DETAILS', payload: {
+            ontologies: Ontology[],
+            resources: Resource[],
+            shapes: Shape[],
+            specialDetails: any[],
         },
     }
 
@@ -100,6 +109,14 @@ export const resourceFilterReducer = (state: ResourceFilterState, action: AnyAct
         specificAssets: state.specificAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item)
       })
     }
+
+  case UPDATE_SPECIAL_DETAILS:
+    return {
+      ...state,
+      ...calculateResourceFiltersAssetState(action.payload.ontologies, action.payload.shapes, action.payload.resources, {
+        ...state
+      }, action.payload.specialDetails)
+    }
   }
   return state
 }
@@ -135,3 +152,27 @@ export const updateFilterAssetAction = (
     type: UPDATE_FILTER_ASSET,
     payload: { asset, ontologies, resources, shapes }
   })
+
+export const updateSpecialDetailsAction = (
+  ontologies: Ontology[],
+  shapes: Shape[],
+  resources: Resource[],
+  specialDetails: any[]): ResourceFilterAction => (
+  {
+    type: UPDATE_SPECIAL_DETAILS,
+    payload: { ontologies, resources, shapes, specialDetails }
+  })
+
+// export const updateSpecialDetailsAction = (
+//   ontologies: Ontology[],
+//   shapes: Shape[],
+//   resources: Resource[],
+//   specialDetails: any[]): {
+//     payload: { specialDetails: any[]; shapes: Shape[]; resources: Resource[]; ontologies: Ontology[] };
+//     type: string
+// } => (
+//   {
+//     type: UPDATE_SPECIAL_DETAILS,
+//     payload: { ontologies, resources, shapes, specialDetails }
+//   })
+

@@ -9,7 +9,8 @@ import {
   resourceFilterReducer,
   setResourceFilterAssetsAction,
   setSearchTextAction,
-  updateFilterAssetAction
+  updateFilterAssetAction,
+  updateSpecialDetailsAction
 } from '../helpers/resourceFilterReducer';
 
 export const useResourceFilter = (ontologies: Ontology[], shapes: Shape[], resources: Resource[]) => {
@@ -27,7 +28,8 @@ export const useResourceFilter = (ontologies: Ontology[], shapes: Shape[], resou
     updateFilterAsset: (asset: Asset) => {
       // alert('dispatching updateFilterAssetAction' + JSON.stringify(asset)); //TODO REMOVE
       dispatch(updateFilterAssetAction(asset, ontologies, shapes, resources))
-    }
+    },
+    updateSpecialDetails: (specialDetails: any[]) => dispatch(updateSpecialDetailsAction(ontologies, shapes, resources, specialDetails))
   }
 }
 
