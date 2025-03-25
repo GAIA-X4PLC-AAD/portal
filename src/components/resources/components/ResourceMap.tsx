@@ -22,10 +22,10 @@ const ResourceMap: FC<IResourceMap> = ({ mediaUrl }) => {
 
   return (
     <Vertical className={styles.mapCardContainer}>
-      {/*<Horizontal className={styles.headerContainer}>*/}
-      <Title className={styles.title}>Map</Title>
-      <OpenInFullIcon onClick={handleEnlarge}/>
-      {/*</Horizontal>*/}
+      <Horizontal className={styles.headerContainer}>
+        <Title className={styles.title}>Map</Title>
+        <OpenInFullIcon onClick={handleEnlarge}/>
+      </Horizontal>
       <Map/>
     </Vertical>
   );
