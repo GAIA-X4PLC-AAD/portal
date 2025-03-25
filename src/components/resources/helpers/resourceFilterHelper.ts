@@ -117,9 +117,20 @@ export const createVendorAssets = (
   } as Asset))
 }
 
+function getColumn<T extends Record<string, any>>(
+  data: T[],
+  columnId: string,
+  isArrayField: boolean = false
+): any[] {
+  return isArrayField
+    ? data.flatMap(row => row[columnId] ?? []) // Flatten only if `isArrayField` is true
+    : data.map(row => row[columnId]); // Otherwise, return as-is
+}
+
 export const createSpecificAssets = (
   shapesForFilter: ShapePropertyForFilter[],
   prevSpecificAssets: Asset[],
+  specialResourceDetails?: any[]
 ) => {
   return shapesForFilter.map(shapeForFilter => ({
     id: `${shapeForFilter.path}/${shapeForFilter.name}`,
@@ -128,7 +139,7 @@ export const createSpecificAssets = (
     value: prevSpecificAssets.some(asset => asset.value && asset.id === `${shapeForFilter.path}/${shapeForFilter.name}`),
     disabled: false,
     specificFilterValueSelected: prevSpecificAssets.filter(asset => asset.id === `${shapeForFilter.path}/${shapeForFilter.name}`).map(asset => asset.specificFilterValueSelected).flat(),
-    specificFilterPossibleValues: [],
+    specificFilterPossibleValues: specialResourceDetails && specialResourceDetails.length > 0 ? getColumn(specialResourceDetails, `${shapeForFilter.path}/${shapeForFilter.name}`, false) : [],
     specificFilterSelected: prevSpecificAssets.some(asset => asset.specificFilterSelected && asset.id === `${shapeForFilter.path}/${shapeForFilter.name}`),
     specificFilterPath: shapeForFilter.path
   } as Asset))
@@ -243,7 +254,8 @@ export const calculateResourceFiltersAssetState = (
   //const specialDetails: any[] = [];
   //const a_asstes = filters.specificAssets.filter(asset => asset.specificFilterSelected === true);
   //alert('specific filters' + JSON.stringify(a_asstes) + ' length: ' + a_asstes.length); //TODO REMOVE
-  const specificAssets = createSpecificAssets(shapesForFilter, filters.specificAssets);
+  const specificAssets = createSpecificAssets(shapesForFilter, filters.specificAssets, specialResourceDetails);
+  console.log('specific assets', specificAssets);
   const resourceSpecialDetailsQuery: string = getCypherQueryForProperties(shapesForFilter, filters.specificAssets, selectedTypeLabels);
 
   return {
