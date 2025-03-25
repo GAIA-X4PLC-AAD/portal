@@ -1,12 +1,7 @@
 import { Shape } from '../../../types/shapes.model';
 
+import { ShapePropertyForFilter } from './ShapePropertyForFilter';
 import { Asset } from './resourceFilterHelper';
-
-interface ShapePropertyForFilter {
-    path: string; // e.g., "/resourceType" or "/resourceType/nodeName"
-    name: string;
-    type: string;
-}
 
 function removeShapeSuffix(input: string): string {
   return input.replace(/Shape$/, '');
@@ -57,25 +52,27 @@ function toCamelCase(str: string): string {
   return result;
 }
 
-function processShapeProperty(shape: Shape | undefined, shapes: Shape[], path: string, visitedShapes: Set<string>, nodeName: string): ShapePropertyForFilter[] {
+function processShapeProperty(shape: Shape | undefined, shapes: Shape[], path: string, visitedShapes: Set<string>, nodeName: string, resourceType: string): ShapePropertyForFilter[] {
   if (!shape || visitedShapes.has(shape.shaclShapeName)) {
     return [];
   }
   const shapesPropertiesForFilter: ShapePropertyForFilter[] = [];
   const visitedShapesCopy = new Set(visitedShapes);
   visitedShapesCopy.add(shape.shaclShapeName);
-  const newPathSegment = (nodeName !== '') ? nodeName : toCamelCase(removeShapeSuffix(getSegmentFromALinkFromBack(shape.shaclShapeName, 0)));
+  const newPathSegment = (nodeName !== '') ? nodeName : resourceType;
+  //const newPathSegment = (nodeName !== '') ? nodeName : toCamelCase(removeShapeSuffix(getSegmentFromALinkFromBack(shape.shaclShapeName, 0))); //TODO remove before merge
   const currentShapePath = path + '/' + newPathSegment;
   for (const property of shape.properties) {
     if (property.propertyValues.some(value => value.type === 'http://www.w3.org/ns/shacl#node')) {
       const node: Shape | undefined = shapes.find(s => s.shaclShapeName === property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#node')?.value) || undefined
       const nodeName = getLastSegmentByMultipleDelimiters(property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#path')?.value || '', ['/', '#']);
-      shapesPropertiesForFilter.push(...processShapeProperty(node, shapes, currentShapePath, visitedShapesCopy, nodeName));
+      shapesPropertiesForFilter.push(...processShapeProperty(node, shapes, currentShapePath, visitedShapesCopy, nodeName, resourceType));
     } else {
       shapesPropertiesForFilter.push({
         path: currentShapePath,
         name: getLastSegmentByMultipleDelimiters(property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#path')?.value || '', ['/', '#']),
-        type: getLastSegmentByMultipleDelimiters(property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#datatype')?.value || '', ['/', '#'])
+        type: getLastSegmentByMultipleDelimiters(property.propertyValues.find(value => value.type === 'http://www.w3.org/ns/shacl#datatype')?.value || '', ['/', '#']),
+        resourceType: resourceType
       });
     }
   }
@@ -87,7 +84,7 @@ export const getShapePropertiesForFilter = (shapes: Shape[], resourceTypes: stri
   for (const resourceType of resourceTypes) {
     const shape = findShapeByResourceType(shapes, resourceType);
     if (shape) {
-      shapesPropertiesForFilter.push(...processShapeProperty(shape, shapes, '', new Set<string>(), ''));
+      shapesPropertiesForFilter.push(...processShapeProperty(shape, shapes, '', new Set<string>(), '', resourceType));
     }
   }
   return shapesPropertiesForFilter;

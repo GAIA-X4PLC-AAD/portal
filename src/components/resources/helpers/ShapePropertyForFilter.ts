@@ -1,5 +1,6 @@
 export interface ShapePropertyForFilter {
-    path: string; // e.g., "/resourceType" or "/resourceType/nodeName"
+    path: string;
     name: string;
     type: string;
+    resourceType: string;
 }
