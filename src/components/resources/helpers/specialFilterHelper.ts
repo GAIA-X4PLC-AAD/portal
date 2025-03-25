@@ -118,7 +118,7 @@ function getCypherConditions(currentElement: string, remainingPath: string, cond
 }
 
 function getCypherReturns(shapePropertyForFilter: ShapePropertyForFilter): string {
-  return `properties(${getSegmentFromALinkFromBack(shapePropertyForFilter.path, 0)}).${toCamelCase(shapePropertyForFilter.name)} AS \`${shapePropertyForFilter.path}/${shapePropertyForFilter.name}\`,`;
+  return `properties(${getSegmentFromALinkFromBack(shapePropertyForFilter.path, 0)}).${toCamelCase(shapePropertyForFilter.name)} AS \`${shapePropertyForFilter.path}/${shapePropertyForFilter.name}\``;
 }
 
 export const getCypherQueryForProperties = (shapePropertiesForFilter: ShapePropertyForFilter[], specificAssets: Asset[]): string => {
@@ -134,5 +134,15 @@ export const getCypherQueryForProperties = (shapePropertiesForFilter: ShapePrope
     }
   }
 
-  return `${Array.from(cypherConditions).join('\n')} + ${Array.from(cypherReturns).join('\n')}`
+  const typeLabels = 'test'
+
+  return `
+  MATCH (dataResource:DataResource)
+  WHERE ANY (label IN labels(dataResource) WHERE label IN ['${typeLabels}'])
+  ${Array.from(cypherConditions).join('\n')}
+  RETURN
+  properties(dataResource).uri AS specificFilterId,
+    ${Array.from(cypherReturns).map((returnStr, index, array) =>
+    index === array.length - 1 ? returnStr : returnStr + ','
+  ).join('\n')}`
 }
