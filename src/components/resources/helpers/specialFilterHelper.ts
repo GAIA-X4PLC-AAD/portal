@@ -148,13 +148,18 @@ export const getCypherQueryForProperties = (shapePropertiesForFilter: ShapePrope
     }
   }
 
-  return `
+  let returnStr = '';
+  if (typeLabels.length > 0 && cypherReturns.size > 0) {
+    returnStr = `
   MATCH (dataResource:DataResource)
   WHERE ANY (label IN labels(dataResource) WHERE label IN ['${typeLabels}'])
   ${Array.from(cypherConditions).join('\n')}
   RETURN
-  properties(dataResource).uri AS specificFilterId,
+  properties(dataResource).uri AS specificResourceUri,
     ${Array.from(cypherReturns).map((returnStr, index, array) =>
     index === array.length - 1 ? returnStr : returnStr + ','
   ).join('\n')}`
+  }
+
+  return returnStr;
 }
