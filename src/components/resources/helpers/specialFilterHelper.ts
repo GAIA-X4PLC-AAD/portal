@@ -104,10 +104,18 @@ function removeFirstSegment(path: string): string {
   return segments.length > 0 ? '/' + segments.join('/') : ''; // Rejoin with leading slash if segments remain
 }
 
+function replaceFirstSegment(path: string, replaceString: string): string {
+  const segments = path.split('/').filter(segment => segment !== ''); // Split and remove empty segments
+  segments[0] = replaceString; // Replace first element
+  return segments.length > 0 ? '/' + segments.join('/') : ''; // Rejoin with leading slash if segments remain
+}
+
 function getCypherConditions(currentElement: string, remainingPath: string, conditions: Set<string>): Set<string> {
   const firstElementFromRemainingPath = getFirstElement(remainingPath);
-  const currentCondition = `OPTIONAL MATCH (${currentElement})-[:${firstElementFromRemainingPath}]-(${firstElementFromRemainingPath})`;
-  conditions.add(currentCondition); // Fixed: was adding conditions to itself
+  if (currentElement !== firstElementFromRemainingPath) {
+    const currentCondition = `OPTIONAL MATCH (${currentElement})-[:${firstElementFromRemainingPath}]-(${firstElementFromRemainingPath})`;
+    conditions.add(currentCondition);
+  }
 
   if (getSegmentCount(remainingPath) > 1) {
     // Fixed: Removed spread operator and corrected recursive call
@@ -118,10 +126,11 @@ function getCypherConditions(currentElement: string, remainingPath: string, cond
 }
 
 function getCypherReturns(shapePropertyForFilter: ShapePropertyForFilter): string {
-  return `properties(${getSegmentFromALinkFromBack(shapePropertyForFilter.path, 0)}).${toCamelCase(shapePropertyForFilter.name)} AS \`${shapePropertyForFilter.path}/${shapePropertyForFilter.name}\``;
+  const path = replaceFirstSegment(shapePropertyForFilter.path, 'dataResource');
+  return `properties(${getSegmentFromALinkFromBack(path, 0)}).${toCamelCase(shapePropertyForFilter.name)} AS \`${shapePropertyForFilter.path}/${shapePropertyForFilter.name}\``;
 }
 
-export const getCypherQueryForProperties = (shapePropertiesForFilter: ShapePropertyForFilter[], specificAssets: Asset[]): string => {
+export const getCypherQueryForProperties = (shapePropertiesForFilter: ShapePropertyForFilter[], specificAssets: Asset[], typeLabels: string[]): string => {
   const cypherConditions: Set<string> = new Set<string>();
   const cypherReturns: Set<string> = new Set<string>();
   for (const shapePropertyForFilter of shapePropertiesForFilter) {
@@ -129,12 +138,10 @@ export const getCypherQueryForProperties = (shapePropertiesForFilter: ShapePrope
       asset.specificFilterPath === shapePropertyForFilter.path &&
         asset.label === shapePropertyForFilter.name &&
         asset.specificFilterSelected)) {
-      getCypherConditions('dataResource', shapePropertyForFilter.path, cypherConditions)
+      getCypherConditions('dataResource', replaceFirstSegment(shapePropertyForFilter.path, 'dataResource'), cypherConditions)
       cypherReturns.add(getCypherReturns(shapePropertyForFilter));
     }
   }
-
-  const typeLabels = 'test'
 
   return `
   MATCH (dataResource:DataResource)

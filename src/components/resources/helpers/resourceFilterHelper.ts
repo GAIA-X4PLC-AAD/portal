@@ -231,14 +231,17 @@ export const calculateResourceFiltersAssetState = (
                 .includes(filters.searchText.toLowerCase()))
     );
 
-  const shapesForFilter: ShapePropertyForFilter[] = getShapePropertiesForFilter(shapes, resourceTypes);
+  const selectedTypeLabels: string[] = typeAssets
+    .filter(asset => asset.value)
+    .map(asset => asset.label);
+  const shapesForFilter: ShapePropertyForFilter[] = getShapePropertiesForFilter(shapes, selectedTypeLabels);
 
   //const specialDetails: any[] = await loadResourceSpecialDetails(resourceSpecialDetailsQuery);
   //const specialDetails: any[] = [];
   //const a_asstes = filters.specificAssets.filter(asset => asset.specificFilterSelected === true);
   //alert('specific filters' + JSON.stringify(a_asstes) + ' length: ' + a_asstes.length); //TODO REMOVE
   const specificAssets = createSpecificAssets(shapesForFilter, filters.specificAssets);
-  const resourceSpecialDetailsQuery: string = getCypherQueryForProperties(shapesForFilter, filters.specificAssets);
+  const resourceSpecialDetailsQuery: string = getCypherQueryForProperties(shapesForFilter, filters.specificAssets, selectedTypeLabels);
 
   return {
     typeAssets,
