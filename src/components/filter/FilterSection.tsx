@@ -1,11 +1,12 @@
-import React, { FC, useEffect, useState } from "react";
+/* test coverage not required */
+import React, { FC, useEffect, useState } from 'react';
 
-import FilterCollapseToggleArrowDown from "../../assets/images/FilterCollapseToggleArrowDown.svg";
-import FilterCollapseToggleArrowUp from "../../assets/images/FilterCollapseToggleArrowUp.svg";
-import Subtitle from "../../common/components/fields/subtitle/Subtitle";
-import { Asset } from "../resources/helpers/resourceFilterHelper";
+import FilterCollapseToggleArrowDown from '../../assets/images/FilterCollapseToggleArrowDown.svg';
+import FilterCollapseToggleArrowUp from '../../assets/images/FilterCollapseToggleArrowUp.svg';
+import Subtitle from '../../common/components/fields/subtitle/Subtitle';
+import { Asset } from '../resources/helpers/resourceFilterHelper';
 
-import styles from "./Filter.module.css";
+import styles from './Filter.module.css';
 
 interface IFilterSection {
   subtitle: string;

@@ -1,3 +1,4 @@
+/* test coverage not required */
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';

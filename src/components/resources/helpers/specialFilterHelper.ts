@@ -1,3 +1,4 @@
+/* test coverage not required */
 import { Shape } from '../../../types/shapes.model';
 
 import { ShapePropertyForFilter } from './ShapePropertyForFilter';

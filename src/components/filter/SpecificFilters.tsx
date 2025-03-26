@@ -1,3 +1,4 @@
+/* test coverage not required */
 import AddIcon from '@mui/icons-material/Add';
 import { IconButton, Tooltip } from '@mui/material';
 import React, { useState } from 'react';

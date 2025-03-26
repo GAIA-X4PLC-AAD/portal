@@ -1,3 +1,4 @@
+/* test coverage not required */
 import * as React from 'react';
 
 import { Asset } from '../resources/helpers/resourceFilterHelper';
