@@ -117,11 +117,37 @@ export const createVendorAssets = (
   } as Asset))
 }
 
+export function getFilteredSpecificResourceUrls(specificResourceDetails: any[] | undefined, specificAssets: any[]): string[] {
+  const results: string[] = [];
+  const allPartialResults: string[][] = [];
+  if (specificResourceDetails) {
+    for (const asset of specificAssets) {
+      if (asset.specificFilterSelected && asset.specificFilterValueSelected) {
+        const partialResults = getRowIdsByColumnValue(specificResourceDetails, asset.id, asset.specificFilterValueSelected)
+        allPartialResults.push(partialResults)
+        console.log('partialResults', partialResults);
+      }
+    }
+  }
+
+  // If we have any partial results, find their intersection
+  if (allPartialResults.length > 0) {
+    // Start with the first array and reduce to find common elements
+    const commonResults = allPartialResults.reduce((common, current) => {
+      return common.filter(item => current.includes(item));
+    });
+    results.push(...commonResults);
+    console.log('final results', results);
+  }
+
+  return results;
+}
+
 function getRowIdsByColumnValue<T extends Record<string, any>>(
   data: T[],
   columnId: string,
   searchValues: any | any[]
-): (string | number)[] {
+): (string)[] {
   const values = Array.isArray(searchValues) ? searchValues : [searchValues]; // Ensure array
   return data
     .filter(row => values.includes(row[columnId])) // Check if any value matches
@@ -272,13 +298,14 @@ export const calculateResourceFiltersAssetState = (
   const specificAssets = createSpecificAssets(shapesForFilter, filters.specificAssets, specialResourceDetails);
   console.log('specific assets', specificAssets);
   const resourceSpecialDetailsQuery: string = getCypherQueryForProperties(shapesForFilter, filters.specificAssets, selectedTypeLabels);
-  const specialDetailsURIs = specialResourceDetails
-    ? specificAssets
-      .map(asset => asset.specificFilterSelected
-        ? getRowIdsByColumnValue(specialResourceDetails, asset.id, asset.specificFilterValueSelected)
-        : [])
-      .flat() // Flatten the array of arrays
-    : [];
+  // const specialDetailsURIs = specialResourceDetails
+  //   ? specificAssets
+  //     .map(asset => asset.specificFilterSelected
+  //       ? getRowIdsByColumnValue(specialResourceDetails, asset.id, asset.specificFilterValueSelected)
+  //       : [])
+  //     .flat() // Flatten the array of arrays
+  //   : [];
+  const specialDetailsURIs = getFilteredSpecificResourceUrls(specialResourceDetails, specificAssets);
 
   const specificAssetsWithFilterApplied = specialDetailsURIs.length > 0
     ? resourcesWithSearchTextFilterApplied.filter(resource =>
