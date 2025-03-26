@@ -56,7 +56,10 @@ export const SpecificFilterItemProperty: React.FC<ISpecificFilterItemProperty> =
         }
       }}
       options={assets}
-      getOptionLabel={(option) => option.label}
+      getOptionLabel={(option) => {
+        return String(option.label) || '';
+      }}
+      getOptionKey={(option) => String(option.id)}
       isOptionEqualToValue={(option, value) => option.id === value.id}
       clearOnEscape
       disableClearable={false} // Ensures the 'X' is always present

@@ -41,8 +41,12 @@ export const SpecificFilterItemValue: React.FC<ISpecificFilterItemProperty> = ({
           setValue(newValue);
         }}
         options={currentAsset.specificFilterPossibleValues || []}
-        getOptionLabel={(option) => option}
-        isOptionEqualToValue={(option, value) => option?.id === value?.id}
+        getOptionLabel={(option) => {
+          // Ensure option is converted to a string
+          return String(option) || '';
+        }}
+        getOptionKey={(option) => String(option)} // Convert to string for consistency
+        isOptionEqualToValue={(option, value) => String(option) === String(value)}
         clearOnEscape
         disableClearable={false}
         renderInput={(params) => (

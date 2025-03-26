@@ -166,16 +166,3 @@ export const updateSpecialDetailsAction = (
     payload: { ontologies, resources, shapes, specialDetails }
   })
 
-// export const updateSpecialDetailsAction = (
-//   ontologies: Ontology[],
-//   shapes: Shape[],
-//   resources: Resource[],
-//   specialDetails: any[]): {
-//     payload: { specialDetails: any[]; shapes: Shape[]; resources: Resource[]; ontologies: Ontology[] };
-//     type: string
-// } => (
-//   {
-//     type: UPDATE_SPECIAL_DETAILS,
-//     payload: { ontologies, resources, shapes, specialDetails }
-//   })
-

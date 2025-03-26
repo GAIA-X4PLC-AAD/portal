@@ -134,10 +134,12 @@ function getColumn<T extends Record<string, any>>(
   columnId: string,
   isArrayField: boolean = false
 ): any[] {
-  return (isArrayField
+  const result = (isArrayField
     ? data.flatMap(row => row[columnId] ?? [])
     : data.map(row => row[columnId])
   ).filter(value => value !== null && value !== '' && value !== 'unknown');
+
+  return [...new Set(result)]; // Convert the Set back to an array to return unique values
 }
 
 export const createSpecificAssets = (
@@ -283,12 +285,12 @@ export const calculateResourceFiltersAssetState = (
       specialDetailsURIs.some(uri => uri === resource.uri))
     : resourcesWithSearchTextFilterApplied;
 
-  console.log('--------------------------------------------------------------------------');
-  console.log('specific details' + JSON.stringify(specialResourceDetails));
-  console.log('specific assets' + JSON.stringify(specificAssets));
-  console.log('uris from specific details', JSON.stringify(specialDetailsURIs));
-  console.log('specific filters applied', JSON.stringify(specificAssetsWithFilterApplied));
-  console.log('--------------------------------------------------------------------------');
+  // console.log('--------------------------------------------------------------------------');
+  // console.log('specific details' + JSON.stringify(specialResourceDetails));
+  // console.log('specific assets' + JSON.stringify(specificAssets));
+  // console.log('uris from specific details', JSON.stringify(specialDetailsURIs));
+  // console.log('specific filters applied', JSON.stringify(specificAssetsWithFilterApplied));
+  // console.log('--------------------------------------------------------------------------');
 
   return {
     typeAssets,
