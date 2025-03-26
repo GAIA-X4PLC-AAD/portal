@@ -645,6 +645,8 @@
     "failedRefreshToken": "Token-Aktualisierung fehlgeschlagen"
   },
   "about": {
-    "description": "Dieses Projekt ist Teil der Gaia-X-Initiative, die darauf abzielt, eine föderierte und sichere Dateninfrastruktur für Europa zu schaffen. Gaia-X soll sicherstellen, dass Daten und Dienste in einer vertrauenswürdigen Umgebung gemeinsam genutzt werden können, um Innovation und digitale Souveränität zu fördern. Unsere Plattform bietet Werkzeuge und Funktionen zur Verwaltung und Visualisierung verschiedener Ressourcen und Dienste und erleichtert die Zusammenarbeit und den Datenaustausch zwischen den Teilnehmern. Das Projekt umfasst Funktionen wie die Ressourcensuche, detaillierte Dienstbeschreibungen und Benutzerunterstützung, die alle darauf abzielen, die Effizienz und Effektivität datengesteuerter Operationen zu verbessern."
+    "text-start": "Dieses Projekt ist Teil der Gaia-X-Initiative, die darauf abzielt, eine föderierte und sichere Dateninfrastruktur für Europa zu schaffen. Gaia-X soll sicherstellen, dass Daten und Dienste in einer vertrauenswürdigen Umgebung gemeinsam genutzt werden können, um Innovation und digitale Souveränität zu fördern.",
+    "text-mid": " Unsere Plattform bietet Werkzeuge und Funktionen zur Verwaltung und Visualisierung verschiedener Ressourcen und Dienste und erleichtert die Zusammenarbeit und den Datenaustausch zwischen den Teilnehmern.",
+    "text-end": "Das Projekt umfasst Funktionen wie die Ressourcensuche, detaillierte Dienstbeschreibungen und Benutzerunterstützung, die alle darauf abzielen, die Effizienz und Effektivität datengesteuerter Operationen zu verbessern."
   }
 }
