@@ -125,7 +125,6 @@ export function getFilteredSpecificResourceUrls(specificResourceDetails: any[] |
       if (asset.specificFilterSelected && asset.specificFilterValueSelected) {
         const partialResults = getRowIdsByColumnValue(specificResourceDetails, asset.id, asset.specificFilterValueSelected)
         allPartialResults.push(partialResults)
-        console.log('partialResults', partialResults);
       }
     }
   }
@@ -137,7 +136,6 @@ export function getFilteredSpecificResourceUrls(specificResourceDetails: any[] |
       return common.filter(item => current.includes(item));
     });
     results.push(...commonResults);
-    console.log('final results', results);
   }
 
   return results;
@@ -288,36 +286,19 @@ export const calculateResourceFiltersAssetState = (
   const selectedTypeLabels: string[] = typeAssets
     .filter(asset => asset.value)
     .map(asset => asset.label);
-  console.log(shapes);
+
   const shapesForFilter: ShapePropertyForFilter[] = getShapePropertiesForFilter(shapes, selectedTypeLabels);
 
-  //const specialDetails: any[] = await loadResourceSpecialDetails(resourceSpecialDetailsQuery);
-  //const specialDetails: any[] = [];
-  //const a_asstes = filters.specificAssets.filter(asset => asset.specificFilterSelected === true);
-  //alert('specific filters' + JSON.stringify(a_asstes) + ' length: ' + a_asstes.length); //TODO REMOVE
   const specificAssets = createSpecificAssets(shapesForFilter, filters.specificAssets, specialResourceDetails);
-  console.log('specific assets', specificAssets);
+
   const resourceSpecialDetailsQuery: string = getCypherQueryForProperties(shapesForFilter, filters.specificAssets, selectedTypeLabels);
-  // const specialDetailsURIs = specialResourceDetails
-  //   ? specificAssets
-  //     .map(asset => asset.specificFilterSelected
-  //       ? getRowIdsByColumnValue(specialResourceDetails, asset.id, asset.specificFilterValueSelected)
-  //       : [])
-  //     .flat() // Flatten the array of arrays
-  //   : [];
+
   const specialDetailsURIs = getFilteredSpecificResourceUrls(specialResourceDetails, specificAssets);
 
   const specificAssetsWithFilterApplied = specialDetailsURIs.length > 0
     ? resourcesWithSearchTextFilterApplied.filter(resource =>
       specialDetailsURIs.some(uri => uri === resource.uri))
     : resourcesWithSearchTextFilterApplied;
-
-  // console.log('--------------------------------------------------------------------------');
-  // console.log('specific details' + JSON.stringify(specialResourceDetails));
-  // console.log('specific assets' + JSON.stringify(specificAssets));
-  // console.log('uris from specific details', JSON.stringify(specialDetailsURIs));
-  // console.log('specific filters applied', JSON.stringify(specificAssetsWithFilterApplied));
-  // console.log('--------------------------------------------------------------------------');
 
   return {
     typeAssets,

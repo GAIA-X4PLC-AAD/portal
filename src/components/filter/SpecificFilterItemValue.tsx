@@ -21,8 +21,6 @@ export const SpecificFilterItemValue: React.FC<ISpecificFilterItemProperty> = ({
     setValue(currentAsset.specificFilterValueSelected ?? null);
   }, [currentAsset, currentAsset.specificFilterPossibleValues]);
 
-  console.log('Options:', currentAsset.specificFilterPossibleValues); // Debugging log
-
   return (
     <div className={styles.filterItemValue}>
       <Autocomplete
@@ -42,16 +40,15 @@ export const SpecificFilterItemValue: React.FC<ISpecificFilterItemProperty> = ({
         }}
         options={currentAsset.specificFilterPossibleValues || []}
         getOptionLabel={(option) => {
-          // Ensure option is converted to a string
           return String(option) || '';
         }}
-        getOptionKey={(option) => String(option)} // Convert to string for consistency
+        getOptionKey={(option) => String(option)}
         isOptionEqualToValue={(option, value) => String(option) === String(value)}
         clearOnEscape
         disableClearable={false}
         slotProps={{
-          popupIndicator: { style: { display: 'none' } }, // Hides the dropdown arrow
-          clearIndicator: { style: { visibility: 'visible' } }, // Ensures 'X' is always visible
+          popupIndicator: { style: { display: 'none' } },
+          clearIndicator: { style: { visibility: 'visible' } },
         }}
         renderInput={(params) => (
           <TextField

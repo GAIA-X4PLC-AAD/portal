@@ -46,58 +46,20 @@ export const useResources = () => {
   } = useResourceFilter(ontologies, shapes, resources);
 
   useEffect(() => {
-    if (specialQuery !== resourceSpecialDetailsQuery) {
+    if (specialQuery !== resourceSpecialDetailsQuery && resourceSpecialDetailsQuery !== '') {
       setSpecialQuery(resourceSpecialDetailsQuery);
-      console.log('loading special details');
       loadResourceSpecialDetails(resourceSpecialDetailsQuery)
         .then(specialDetails => {
-          console.log('Loaded special details:', specialDetails)
           updateSpecialDetails(specialDetails)
         })
         .catch(error => console.error('Error loading special details:', error));
     }
-
-    // console.log('specific assets:', JSON.stringify(specificAssets));
-    // console.log('query:', resourceSpecialDetailsQuery);
-    //
-    // if (resourceSpecialDetailsQuery) {
-    //   console.log('loading special details');
-    //   loadResourceSpecialDetails(resourceSpecialDetailsQuery)
-    //     .then(specialDetails => console.log('Loaded special details:', specialDetails))
-    //     .catch(error => console.error('Error loading special details:', error));
-    // }
   }, [resourceSpecialDetailsQuery, specificAssets]);
-
-  // useEffect(() => {
-  //   if (specialQuery !== resourceSpecialDetailsQuery) {
-  //     setSpecialQuery(resourceSpecialDetailsQuery);
-  //     console.log('loading special details');
-  //     console.log('loading special query updated');
-  //   }
-  //   console.log('specific assets:' + JSON.stringify(specificAssets));
-  //   console.log('query:' + resourceSpecialDetailsQuery)
-  //   if (resourceSpecialDetailsQuery) {
-  //     console.log('loading special details');
-  //     console.log('query: ' + resourceSpecialDetailsQuery);
-  //     loadResourceSpecialDetails(resourceSpecialDetailsQuery)
-  //       .then(specialDetails => console.log(specialDetails))
-  //       .catch(error => console.error('Error loading special details:', error));
-  //   }
-  // }, [resourceSpecialDetailsQuery, specificAssets, updateFilterAsset]); //TODO
 
   useEffect(() => {
     if (!schemas.isLoading) {
       if (!schemas.hasError) {
         const resourceTypes = Array.from(getResourceTypes(schemas.ontologies));
-        console.log(resourceSpecialDetailsQuery);
-        // const shapeProperties: ShapePropertyForFilter[] = getShapePropertiesForFilter(schemas.shapes, resourceTypes);
-        // console.log('shapeProperties') //TODO remove
-        // console.log(shapeProperties); //TODO remove
-        //
-        // console.log(schemas.shapes);
-        // console.log(shapeProperties);
-        // const query = getCypherQueryForProperties(shapeProperties);
-        // console.log(query)
         loadResources(resourceTypes)
           .then(resources => unique(resources, (item) => item.uri + item.name))
           .then(resources => dispatch(resourcesLoadedAction(resources)))
