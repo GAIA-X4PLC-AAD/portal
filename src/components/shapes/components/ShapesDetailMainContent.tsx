@@ -33,30 +33,31 @@ const ShapesDetailMainContent: FC = () => {
     <DetailsMainContent>
       <Title>{shape.shaclShapeName}</Title>
 
-      <table className={styles['table']}>
-        <thead>
-          <tr>
-            {uniqueTypes.map((type, index) => (
-              <th key={index}>{type.split('#').pop()}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {shape.properties.map((property, index) => (
-            <tr key={index}>
-              {uniqueTypes.map((type, index) => {
-                const value = property.propertyValues.find(value => value.type === type);
-                if (value && value.value && type === 'http://www.w3.org/ns/shacl#node') {
-                  return <td key={index} className={styles['link']} onClick={() => handleNavigationToDetailsPage(value.value)}>{value ? value.value : ''}</td>;
-                } else {
-                  return <td key={index}>{value ? value.value : ''}</td>;
-                }
-              })}
+      <div className={styles.tableContainer}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              {uniqueTypes.map((type, index) => (
+                <th key={index}>{type.split('#').pop()}</th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-
+          </thead>
+          <tbody>
+            {shape.properties.map((property, index) => (
+              <tr key={index}>
+                {uniqueTypes.map((type, index) => {
+                  const value = property.propertyValues.find(value => value.type === type);
+                  if (value && value.value && type === 'http://www.w3.org/ns/shacl#node') {
+                    return <td key={index} className={styles.link} onClick={() => handleNavigationToDetailsPage(value.value)}>{value ? value.value : ''}</td>;
+                  } else {
+                    return <td key={index}>{value ? value.value : ''}</td>;
+                  }
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </DetailsMainContent>
   );
 };

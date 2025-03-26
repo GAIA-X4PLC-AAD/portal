@@ -32,4 +32,3 @@ export const useResourceFilter = (ontologies: Ontology[], shapes: Shape[], resou
     updateSpecialDetails: (specialDetails: any[]) => dispatch(updateSpecialDetailsAction(ontologies, shapes, resources, specialDetails))
   }
 }
-

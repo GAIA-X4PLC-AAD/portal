@@ -58,10 +58,12 @@ export const CypherQueryApiService = {
       OPTIONAL MATCH (dataResource)-[:producedBy]-(producedBy)
       OPTIONAL MATCH (dataResource)-[:general]-(general)
       OPTIONAL MATCH (general)-[:description]-(description)
+      OPTIONAL MATCH (general)-[:data]-(data)
 
       RETURN
         properties(description).name AS name,
         properties(description).description AS description,
+        properties(data).recordingTime AS recordingTime,
         properties(dataResource).uri AS uri,
         properties(dataResource).claimsGraphUri AS claimsGraphUri,
         coalesce(properties(format).type, properties(format).formatType) AS format,
@@ -72,6 +74,23 @@ export const CypherQueryApiService = {
     });
   },
 
+  /**
+   * Returns all nodes and relationships for a given resource uri.
+   * @param uri the uri of the resource
+   */
+  async getAllResourceDetails(uri: string): Promise<CypherQueryResult> {
+    return cypherQuery({
+      statement: `
+      MATCH (dataResource:DataResource { uri: '${uri}' })-[r]->(other)
+      RETURN dataResource, r as resourceItemName, other
+      `,
+    });
+  },
+
+  /**
+   * Returns the details of a resource by its uri.
+   * @param uri the uri of the resource
+   */
   /**
    * TODO
    * @param customQuery
@@ -92,15 +111,13 @@ export const CypherQueryApiService = {
       OPTIONAL MATCH (dataResource)-[:general]-(general)
       OPTIONAL MATCH (general)-[:data]-(data)
       
-      OPTIONAL MATCH (dataResource)-[:format]-(format) 
-      OPTIONAL MATCH (dataResource)-[:content]-(content) 
       OPTIONAL MATCH (dataResource)-[:producedBy]-(producedBy) 
       OPTIONAL MATCH (dataResource)-[:general]-(general)-[:links]-(links)-[:media]-(media) 
 
       RETURN 
            dataResource.name as name,
-           dataResource.description as description, 
            dataResource.uri as uri,
+           dataResource.claimsGraphUri as claimsGraphUri,
            CASE
               WHEN serviceAccessPoint IS NOT NULL THEN {
                 name:     properties(serviceAccessPoint).name,
@@ -112,22 +129,7 @@ export const CypherQueryApiService = {
               ELSE null
               END as serviceAccessPoint,
            data.contractId as contractId,
-           dataResource.license as license,
-           dataResource.copyrightOwnedBy as copyrightOwnedBy,
-           dataResource.claimsGraphUri as claimsGraphUri,
-           CASE dataResource.containsPII
-              WHEN 'true' THEN true
-                 WHEN 'false' THEN false
-              ELSE null
-              END as containsPII,
-           dataResource.obsoleteDateTime as obsoleteDateTime, 
-           dataResource.expirationDateTime as expirationDateTime, 
-           content.levelOfDetail as levelOfDetail, 
-           content.trafficDirection as trafficDirection, 
-           content.roadTypes as roadTypes, 
-           content.laneTypes as laneTypes, 
            producedBy.legalName as legalName,
-           labels(dataResource) as labels,
            media.url as mediaUrl
       `
     })
@@ -182,7 +184,8 @@ export const CypherQueryApiService = {
             labels(softwareResource) as labels,
             softwareResource.uri as uri,
             description.name AS name,
-            description.description AS description
+            description.description AS description,
+            data.recordingTime AS recordingTime
             `
     })
   },

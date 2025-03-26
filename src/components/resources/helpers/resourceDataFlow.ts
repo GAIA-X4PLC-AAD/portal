@@ -1,7 +1,7 @@
 import BusinessObjectsNotFound from '../../../common/errorHandling/exceptions/BusinessObjectsNotFound';
 import MultipleBusinessObjectsFound from '../../../common/errorHandling/exceptions/MultipleBusinessObjectsFound';
 import { CypherQueryApiService as cypherQuery } from '../../../services/cypherQueryApiService';
-import { Resource, ResourceDetails } from '../../../types/resources.model';
+import { CombinedDetails, Resource, ResourceDetails } from '../../../types/resources.model';
 
 /**
  * Loads resources for which the following criteria are met:
@@ -66,3 +66,17 @@ export const loadResourceSpecialDetails = async (customQuery: string): Promise<a
       console.error('Error fetching resources:', error);
       throw error;
     })
+
+/**
+ * Loads all details for a given resource by its uri.
+ * @param resourceUri identifies the resource for which the details have to be loaded.
+ */
+export const loadCombinedResourceDetails = async (resourceUri: string): Promise<CombinedDetails> => {
+  const allDetails = await cypherQuery.getAllResourceDetails(resourceUri);
+  const specificDetails = await loadResourceDetails(resourceUri);
+
+  return {
+    details: specificDetails,
+    items: allDetails.items
+  };
+};
