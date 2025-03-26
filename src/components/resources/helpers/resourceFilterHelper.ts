@@ -145,10 +145,13 @@ function getRowIdsByColumnValue<T extends Record<string, any>>(
   data: T[],
   columnId: string,
   searchValues: any | any[]
-): (string)[] {
+): string[] {
   const values = Array.isArray(searchValues) ? searchValues : [searchValues]; // Ensure array
   return data
-    .filter(row => values.includes(row[columnId])) // Check if any value matches
+    .filter(row => {
+      const columnValue = row[columnId];
+      return values.some(value => value === columnValue); // Exact match comparison
+    })
     .map(row => row.id ?? row.specificResourceUri)
     .filter(value => value !== undefined && value !== null && value !== '' && value !== 'unknown');
 }
