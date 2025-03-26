@@ -42,7 +42,7 @@ const ResourceActions = () => {
 
   const handleDownload = () => {
     selfDescriptions?.forEach((selfDescription) => {
-      downloadFile(selfDescription.holder, selfDescription);
+      downloadFile(selfDescription.holder, '.json', selfDescription);
     });
   }
 

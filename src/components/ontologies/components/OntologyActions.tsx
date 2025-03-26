@@ -34,7 +34,7 @@ const OntologyActions: FC = () => {
 
   const handleTurtleDownload = async () => {
     const response = await getSchemaById(ontology.subject);
-    downloadFile(ontology.subject, response);
+    downloadFile(ontology.subject, '.ttl', response);
   }
 
   return (
