@@ -117,6 +117,18 @@ export const createVendorAssets = (
   } as Asset))
 }
 
+function getRowIdsByColumnValue<T extends Record<string, any>>(
+  data: T[],
+  columnId: string,
+  searchValues: any | any[]
+): (string | number)[] {
+  const values = Array.isArray(searchValues) ? searchValues : [searchValues]; // Ensure array
+  return data
+    .filter(row => values.includes(row[columnId])) // Check if any value matches
+    .map(row => row.id ?? row.specificResourceUri)
+    .filter(value => value !== undefined && value !== null && value !== '' && value !== 'unknown');
+}
+
 function getColumn<T extends Record<string, any>>(
   data: T[],
   columnId: string,
@@ -258,6 +270,25 @@ export const calculateResourceFiltersAssetState = (
   const specificAssets = createSpecificAssets(shapesForFilter, filters.specificAssets, specialResourceDetails);
   console.log('specific assets', specificAssets);
   const resourceSpecialDetailsQuery: string = getCypherQueryForProperties(shapesForFilter, filters.specificAssets, selectedTypeLabels);
+  const specialDetailsURIs = specialResourceDetails
+    ? specificAssets
+      .map(asset => asset.specificFilterSelected
+        ? getRowIdsByColumnValue(specialResourceDetails, asset.id, asset.specificFilterValueSelected)
+        : [])
+      .flat() // Flatten the array of arrays
+    : [];
+
+  const specificAssetsWithFilterApplied = specialDetailsURIs.length > 0
+    ? resourcesWithSearchTextFilterApplied.filter(resource =>
+      specialDetailsURIs.some(uri => uri === resource.uri))
+    : resourcesWithSearchTextFilterApplied;
+
+  console.log('--------------------------------------------------------------------------');
+  console.log('specific details' + JSON.stringify(specialResourceDetails));
+  console.log('specific assets' + JSON.stringify(specificAssets));
+  console.log('uris from specific details', JSON.stringify(specialDetailsURIs));
+  console.log('specific filters applied', JSON.stringify(specificAssetsWithFilterApplied));
+  console.log('--------------------------------------------------------------------------');
 
   return {
     typeAssets,
@@ -265,6 +296,6 @@ export const calculateResourceFiltersAssetState = (
     vendorAssets,
     specificAssets,
     resourceSpecialDetailsQuery,
-    filteredResources: resourcesWithSearchTextFilterApplied
+    filteredResources: specificAssetsWithFilterApplied
   };
 }

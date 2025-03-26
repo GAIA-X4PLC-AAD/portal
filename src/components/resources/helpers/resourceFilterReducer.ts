@@ -27,7 +27,8 @@ type ResourceFilterAssetState = {
 
 export type ResourceFilterState = ResourceFilterAssetState & {
     searchText: string,
-    resourceSpecialDetailsQuery: string
+    resourceSpecialDetailsQuery: string,
+    resourceSpecialDetails: any[]
 }
 
 type ResourceFilterAction =
@@ -73,7 +74,8 @@ export const initialResourceFilterState: ResourceFilterState = {
   vendorAssets: [],
   specificAssets: [],
   searchText: '',
-  resourceSpecialDetailsQuery: ''
+  resourceSpecialDetailsQuery: '',
+  resourceSpecialDetails: []
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -107,7 +109,7 @@ export const resourceFilterReducer = (state: ResourceFilterState, action: AnyAct
         formatAssets: state.formatAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item),
         vendorAssets: state.vendorAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item),
         specificAssets: state.specificAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item)
-      })
+      }, state.resourceSpecialDetails),
     }
 
   case UPDATE_SPECIAL_DETAILS:
@@ -115,7 +117,8 @@ export const resourceFilterReducer = (state: ResourceFilterState, action: AnyAct
       ...state,
       ...calculateResourceFiltersAssetState(action.payload.ontologies, action.payload.shapes, action.payload.resources, {
         ...state
-      }, action.payload.specialDetails)
+      }, action.payload.specialDetails),
+      resourceSpecialDetails: action.payload.specialDetails,
     }
   }
   return state
