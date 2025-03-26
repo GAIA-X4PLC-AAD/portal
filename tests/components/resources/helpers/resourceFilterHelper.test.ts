@@ -585,6 +585,7 @@ describe('calculateResourceFiltersAssetState', () => {
       ' disabled state of the other asset types, it will also filter the resources list', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [...resources_HdMap_EnvironmentModel_x2],
         {
           filteredResources: [],
@@ -699,6 +700,7 @@ describe('calculateResourceFiltersAssetState', () => {
   it('returns a filtered resource list if searchText is set, but does not effect the filter type assets', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [...resources_HdMap_EnvironmentModel_x2],
         {
           filteredResources: [],
