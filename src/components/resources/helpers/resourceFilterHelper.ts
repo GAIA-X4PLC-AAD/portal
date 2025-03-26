@@ -122,9 +122,10 @@ function getColumn<T extends Record<string, any>>(
   columnId: string,
   isArrayField: boolean = false
 ): any[] {
-  return isArrayField
-    ? data.flatMap(row => row[columnId] ?? []) // Flatten only if `isArrayField` is true
-    : data.map(row => row[columnId]); // Otherwise, return as-is
+  return (isArrayField
+    ? data.flatMap(row => row[columnId] ?? [])
+    : data.map(row => row[columnId])
+  ).filter(value => value !== null && value !== '' && value !== 'unknown');
 }
 
 export const createSpecificAssets = (

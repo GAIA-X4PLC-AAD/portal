@@ -65,7 +65,8 @@ export const SpecificFilters: React.FC<ISpecificFilters> = ({ assets, updateAsse
         )}
         {addNew && (
           <SpecificFilterItem
-            assets={assets}
+            assets={assets.filter((asset) => !asset.specificFilterSelected && asset?.specificFilterPossibleValues
+            )}
             handleChange={handleChange}
             key="new-filter" // Added key for the new item
           />
