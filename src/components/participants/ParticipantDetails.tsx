@@ -11,7 +11,7 @@ import { ResourceContextProvider } from '../context/ParticipantDetailsContext';
 import ParticipantDetailMainContent from './components/ParticipantDetailMainContent';
 import { useParticipantDetails } from './hooks/useParticipantDetails';
 
-import './ParticipantDetials.css';
+import './ParticipantDetails.css';
 
 const ParticipantDetails: FC = () => {
   const location = useLocation();

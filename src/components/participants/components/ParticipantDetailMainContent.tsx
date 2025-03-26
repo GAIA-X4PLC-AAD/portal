@@ -31,7 +31,7 @@ const ParticipantDetailMainContent: FC = () => {
                   serviceOfferingsUri.map((serviceOfferingUri) => (
                     <Link
                       key={serviceOfferingUri}
-                      url={`/shapes/details/${encodeURIComponent(serviceOfferingUri)}`}/>
+                      url={`/shapes/${encodeURIComponent(serviceOfferingUri)}`}/>
                   ))
                 }
               </>
