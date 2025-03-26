@@ -4,7 +4,7 @@
     "clientId": "portal"
   },
   "initOptions": {
-    "onLoad": "login-required",
+    "onLoad": "check-sso",
     "checkLoginIframe": false,
     "pkceMethod": "S256"
   }
