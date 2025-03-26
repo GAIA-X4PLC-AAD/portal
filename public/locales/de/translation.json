@@ -648,5 +648,10 @@
     "text-start": "Dieses Projekt ist Teil der Gaia-X-Initiative, die darauf abzielt, eine föderierte und sichere Dateninfrastruktur für Europa zu schaffen. Gaia-X soll sicherstellen, dass Daten und Dienste in einer vertrauenswürdigen Umgebung gemeinsam genutzt werden können, um Innovation und digitale Souveränität zu fördern.",
     "text-mid": " Unsere Plattform bietet Werkzeuge und Funktionen zur Verwaltung und Visualisierung verschiedener Ressourcen und Dienste und erleichtert die Zusammenarbeit und den Datenaustausch zwischen den Teilnehmern.",
     "text-end": "Das Projekt umfasst Funktionen wie die Ressourcensuche, detaillierte Dienstbeschreibungen und Benutzerunterstützung, die alle darauf abzielen, die Effizienz und Effektivität datengesteuerter Operationen zu verbessern."
+  },
+  "support": {
+    "text-start": "Diese Support-Seite befindet sich derzeit im Aufbau.",
+    "text-mid": "In Zukunft finden Sie hier hilfreiche Informationen, häufig gestellte Fragen (FAQ), sowie Kontaktmöglichkeiten für technische und inhaltliche Unterstützung. Unser Ziel ist es, Ihnen eine bestmögliche Nutzererfahrung zu bieten und Sie bei allen Fragen rund um die Plattform zu unterstützen.",
+    "text-end": "Wir danken Ihnen für Ihr Verständnis und freuen uns darauf, Ihnen in Zukunft zur Verfügung zu stehen."
   }
 }
