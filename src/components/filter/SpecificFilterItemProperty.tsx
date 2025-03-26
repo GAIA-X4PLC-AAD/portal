@@ -70,8 +70,14 @@ export const SpecificFilterItemProperty: React.FC<ISpecificFilterItemProperty> =
       renderInput={(params) => (
         <TextField
           {...params}
-          label={value ? '' : 'Please select one'}
+          label={'Property'}
           variant="outlined"
+          slotProps={{
+            inputLabel: {
+              shrink: true,
+              sx: { fontWeight: 'bold' },
+            },
+          }}
         />
       )}
     />

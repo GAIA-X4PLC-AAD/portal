@@ -49,11 +49,21 @@ export const SpecificFilterItemValue: React.FC<ISpecificFilterItemProperty> = ({
         isOptionEqualToValue={(option, value) => String(option) === String(value)}
         clearOnEscape
         disableClearable={false}
+        slotProps={{
+          popupIndicator: { style: { display: 'none' } }, // Hides the dropdown arrow
+          clearIndicator: { style: { visibility: 'visible' } }, // Ensures 'X' is always visible
+        }}
         renderInput={(params) => (
           <TextField
             {...params}
-            label={!value ? 'Please select one' : ''}
+            label={'Value'}
             variant="outlined"
+            slotProps={{
+              inputLabel: {
+                shrink: true,
+                sx: { fontWeight: 'bold' },
+              },
+            }}
           />
         )}
       />
