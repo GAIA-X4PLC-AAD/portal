@@ -24,8 +24,8 @@ export const SpecificFilters: React.FC<ISpecificFilters> = ({ assets, updateAsse
     setAddNew(false); // Toggle to true to show the new filter item
   };
 
-  const handleChange = (opration: FilterItemOperation, asset?: Asset, newAsset?: Asset): void => {
-    switch (opration) {
+  const handleChange = (operation: FilterItemOperation, asset?: Asset, newAsset?: Asset): void => {
+    switch (operation) {
     case 'add-filter':
       asset && updateAssetFilter(asset);
       handleSelect();
@@ -41,8 +41,11 @@ export const SpecificFilters: React.FC<ISpecificFilters> = ({ assets, updateAsse
     case 'cancel-filter':
       handleSelect();
       break;
+    case 'filter-value-changed':
+      asset && updateAssetFilter(asset);
+      break;
     default:
-      console.warn(`Unsupported operation: ${opration}`);
+      console.warn(`Unsupported operation: ${operation}`);
     }
   }
 

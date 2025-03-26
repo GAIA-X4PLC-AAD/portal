@@ -4,6 +4,7 @@ import { Asset } from '../resources/helpers/resourceFilterHelper';
 
 import styles from './SpecificFilterItem.module.css';
 import { SpecificFilterItemProperty, SpecificFilterItemPropertyOperation } from './SpecificFilterItemProperty';
+import { SpecificFilterItemValue } from './SpecificFilterItemValue';
 
 export interface ISpecificFilterItem {
   currentAsset?: Asset | undefined;
@@ -20,7 +21,7 @@ export type FilterItemOperation =
 
 export const SpecificFilterItem: React.FC<ISpecificFilterItem> = ({ currentAsset, assets, handleChange }) => {
 
-  const updatePropertyValue = (operation: SpecificFilterItemPropertyOperation, asset?: Asset, newAsset?: Asset) => {
+  const updateProperty = (operation: SpecificFilterItemPropertyOperation, asset?: Asset, newAsset?: Asset) => {
     switch (operation) {
     case 'add-filter':
       asset && handleChange('add-filter', asset);
@@ -39,13 +40,17 @@ export const SpecificFilterItem: React.FC<ISpecificFilterItem> = ({ currentAsset
     }
   };
 
+  const updateValue = (asset: Asset) => {
+    handleChange('filter-value-changed', asset);
+  };
+
   return (
     <div className={styles.specificFilterItem}>
       <SpecificFilterItemProperty currentAsset={currentAsset} assets={assets}
-        updateAssetFilter={updatePropertyValue}/>
-      {/*{(currentAsset &&*/}
-      {/*      <SpecificFilterItemValue currentAsset={currentAsset} assets={assets}*/}
-      {/*        updateAssetFilter={updateAssetFilter}/>)}*/}
+        updateAssetFilter={updateProperty}/>
+      {(currentAsset &&
+          <SpecificFilterItemValue currentAsset={currentAsset}
+            updateAssetFilter={updateValue}/>)}
     </div>
   )
 };

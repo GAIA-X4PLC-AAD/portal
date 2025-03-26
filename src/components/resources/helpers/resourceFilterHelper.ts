@@ -19,7 +19,7 @@ export interface Asset {
     label: string;
     value: boolean;
     disabled: boolean;
-  specificFilterValueSelected?: any[];
+  specificFilterValueSelected?: any;
   specificFilterPossibleValues?: any[];
   specificFilterSelected?: boolean;
   specificFilterPath?: string;
