@@ -93,7 +93,7 @@ export const initiallyLoaded_ResourcesState = {
         'https://www.gaia-x4plcaad.info/claims/physical-resource/fe9f0d7f-3a80-48ef-9630-a7c9c3c1e78f'
       ],
       description: 'Generated description.',
-      format: null,
+      format: '',
       labels: [
         'EnvironmentModel'
       ],

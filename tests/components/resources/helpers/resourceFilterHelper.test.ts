@@ -20,6 +20,7 @@ import {
 import {
   ontologies_General_HdMap_EnvironmentModel
 } from '../../../__fixtures__/ontologies_General_HdMap_EnvironmentModel';
+import { mockShapeDetails } from '../../shapes/__fixtures__/mockShapeDetails';
 
 import {
   filteredBy_formatFilter_ASAMOpenDrive_ResourceFilterState,
@@ -36,6 +37,7 @@ describe('Reducer', () => {
       'and is executed on "initialResourceFilterStatus"', () => {
     const action = setResourceFilterAssetsAction(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_HdMap_EnvironmentModel_x2
     );
     const nextState = resourceFilterReducer(initialResourceFilterState, action);
@@ -51,6 +53,7 @@ describe('Reducer', () => {
     const action = setSearchTextAction(
       searchText,
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_HdMap_EnvironmentModel_x2
     );
     const nextState = resourceFilterReducer(initialResourceFilterState, action);
@@ -73,6 +76,7 @@ describe('Reducer', () => {
     const action = updateFilterAssetAction(
       hdMapTypeAsset,
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_HdMap_EnvironmentModel_x2
     );
     const nextState = resourceFilterReducer(initiallyLoaded_ResourceFilterState, action);
@@ -95,6 +99,7 @@ describe('Reducer', () => {
     const action = updateFilterAssetAction(
       asamOpenDriveFormatAsset,
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_HdMap_EnvironmentModel_x2
     );
     const nextState = resourceFilterReducer(initiallyLoaded_ResourceFilterState, action);
@@ -119,6 +124,7 @@ describe('Reducer', () => {
     const action = updateFilterAssetAction(
       msgSystemsAGVendorAsset,
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_msgSystemsAG_x1_vendor
     );
     const nextState = resourceFilterReducer(initiallyLoaded_ResourceFilterState, action);
@@ -402,6 +408,7 @@ describe('calculateResourceFiltersAssetState', () => {
       'the assets are created from ontologies.', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [...resources_HdMap_EnvironmentModel_x2],
       initialResourceFilterState
     )
@@ -453,6 +460,7 @@ describe('calculateResourceFiltersAssetState', () => {
       'it will also filter the resources list', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [...resources_HdMap_EnvironmentModel_x2],
         {
           filteredResources: [],
@@ -467,6 +475,10 @@ describe('calculateResourceFiltersAssetState', () => {
           ] as Asset[],
           formatAssets: [],
           vendorAssets: [],
+          specificAssets: [],
+          searchText: '',
+          resourceSpecialDetailsQuery: '',
+          resourceSpecialDetails: []
         } as ResourceFilterState
     )
 
@@ -509,6 +521,7 @@ describe('calculateResourceFiltersAssetState', () => {
       'it will also filter the resources list', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [...resources_HdMap_EnvironmentModel_x2],
         {
           filteredResources: [],
@@ -523,6 +536,10 @@ describe('calculateResourceFiltersAssetState', () => {
           ] as Asset[],
           formatAssets: [],
           vendorAssets: [],
+          specificAssets: [],
+          searchText: '',
+          resourceSpecialDetailsQuery: '',
+          resourceSpecialDetails: []
         } as ResourceFilterState
     )
 
@@ -623,6 +640,7 @@ describe('calculateResourceFiltersAssetState', () => {
   it('Pass in "vendor filter" as previously selected it will filter the resources list', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [
         ...resources_HdMap_EnvironmentModel_x2
           .map((resource, index) => index === 0
@@ -642,6 +660,10 @@ describe('calculateResourceFiltersAssetState', () => {
               disabled: false
             },
           ],
+          specificAssets: [],
+          searchText: '',
+          resourceSpecialDetailsQuery: '',
+          resourceSpecialDetails: []
         } as ResourceFilterState
     )
 
