@@ -1,7 +1,10 @@
+/* test coverage not required */
 import { SortOrder } from '../../../../src/common/components/buttons/SortListButton';
 import { getAllLabels } from '../../../../src/components/resources/helpers/resourceFilterHelper';
 import {
-  getPropertyValue, getResourceSortMenuItems, getSortedResources,
+  getPropertyValue,
+  getResourceSortMenuItems,
+  getSortedResources,
   removeNonResourceTypeLabels
 } from '../../../../src/components/resources/helpers/resourcesHelper';
 import { mockResources } from '../__fixtures__/resources';
