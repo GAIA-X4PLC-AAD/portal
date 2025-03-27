@@ -1,7 +1,9 @@
 import { SortOrder } from '../../../../src/common/components/buttons/SortListButton';
 import {
-  getServiceOfferingSortMenuItems, getSortedServiceOfferings
+  getServiceOfferingSortMenuItems,
+  getSortedServiceOfferings
 } from '../../../../src/components/serviceOfferings/helpers/serviceOfferingHelper';
+import { ServiceOffering } from '../../../../src/types/serviceOfferings.model';
 import { mockServiceOfferings } from '../__fixtures__/mockServiceOfferings';
 
 jest.mock('i18next', () => ({
@@ -69,4 +71,44 @@ describe('getSortedServiceOfferings', () => {
     expect(sorted).toEqual(expectedSortedServiceOfferings);
   });
 
+  it('should handle service offerings with missing names', () => {
+    const serviceOfferingsWithMissingNames: ServiceOffering[] = [
+      { ...mockServiceOfferings[0], name: undefined },
+      mockServiceOfferings[1],
+      { ...mockServiceOfferings[2], name: undefined },
+    ];
+
+    const sortedAsc = getSortedServiceOfferings(serviceOfferingsWithMissingNames, SortOrder.ASC_NAME);
+    expect(sortedAsc[0].name).toEqual(mockServiceOfferings[1].name);
+    expect(sortedAsc[1].name).toBeUndefined();
+    expect(sortedAsc[2].name).toBeUndefined();
+
+    const sortedDesc = getSortedServiceOfferings(serviceOfferingsWithMissingNames, SortOrder.DESC_NAME);
+    expect(sortedDesc[0].name).toEqual(mockServiceOfferings[1].name);
+    expect(sortedDesc[1].name).toBeUndefined();
+    expect(sortedDesc[2].name).toBeUndefined();
+  });
+
+  it('should handle service offerings with missing recording times', () => {
+    const serviceOfferingsWithMissingTimes: ServiceOffering[] = [
+      { ...mockServiceOfferings[0], recordingTime: undefined },
+      mockServiceOfferings[1],
+      { ...mockServiceOfferings[2], recordingTime: undefined },
+    ];
+
+    const sortedAsc = getSortedServiceOfferings(serviceOfferingsWithMissingTimes, SortOrder.ASC_DATE);
+    expect(sortedAsc[0].recordingTime).toEqual(mockServiceOfferings[1].recordingTime);
+    expect(sortedAsc[1].recordingTime).toBeUndefined();
+    expect(sortedAsc[2].recordingTime).toBeUndefined();
+
+    const sortedDesc = getSortedServiceOfferings(serviceOfferingsWithMissingTimes, SortOrder.DESC_DATE);
+    expect(sortedDesc[0].recordingTime).toEqual(mockServiceOfferings[1].recordingTime);
+    expect(sortedDesc[1].recordingTime).toBeUndefined();
+    expect(sortedDesc[2].recordingTime).toBeUndefined();
+  });
+
+  it('should return the original array for an unknown sort order', () => {
+    const sorted = getSortedServiceOfferings(mockServiceOfferings, 'UNKNOWN' as SortOrder);
+    expect(sorted).toEqual(mockServiceOfferings);
+  });
 });
