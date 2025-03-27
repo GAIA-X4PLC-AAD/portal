@@ -1,4 +1,3 @@
-/* test coverage not required */
 import React, { FC } from 'react';
 
 import Title from '../../common/components/fields/title/Title';
