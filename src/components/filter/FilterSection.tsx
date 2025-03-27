@@ -1,4 +1,3 @@
-/* test coverage not required */
 import React, { FC, useEffect, useState } from 'react';
 
 import FilterCollapseToggleArrowDown from '../../assets/images/FilterCollapseToggleArrowDown.svg';
