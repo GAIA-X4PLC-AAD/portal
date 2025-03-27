@@ -6,7 +6,7 @@ import { Shape } from '../../../types/shapes.model';
 import { ShapePropertyForFilter } from './ShapePropertyForFilter';
 import { ResourceFilterState } from './resourceFilterReducer';
 import { getPropertyValue } from './resourcesHelper';
-import { getCypherQueryForProperties, getShapePropertiesForFilter } from './specialFilterHelper';
+import { getCypherQueryForProperties, getShapePropertiesForFilter } from './specificFilterHelper';
 
 export type AssetTypes = 'typeAssets' | 'formatAssets' | 'vendorAssets' | 'specificAssets';
 

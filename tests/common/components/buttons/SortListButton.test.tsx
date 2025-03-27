@@ -25,6 +25,10 @@ const ComponentUnderTest = () => {
   );
 };
 
+console.error = jest.fn(); // Disable error logging
+console.debug = jest.fn(); // Disable debug logging
+console.warn = jest.fn(); // Disable warn logging
+
 describe('SortListButton', () => {
   it('should render menu items after clicking the button', () => {
     ComponentUnderTest();
