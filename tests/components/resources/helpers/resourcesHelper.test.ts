@@ -205,7 +205,7 @@ describe('getSortedResources', () => {
     expect(sorted).toEqual(expectedSortedResources);
   });
 
-  it('handles resources with missing names', () => {
+  it('handles resources with missing names ASC', () => {
     const resourcesWithMissingNames = [
       { name: 'Resource A', recordingTime: '2023-01-01' },
       { recordingTime: '2023-01-02' },
@@ -219,7 +219,21 @@ describe('getSortedResources', () => {
     ]);
   });
 
-  it('handles resources with missing recording times', () => {
+  it('handles resources with missing names DESC', () => {
+    const resourcesWithMissingNames = [
+      { name: 'Resource A', recordingTime: '2023-01-01' },
+      { recordingTime: '2023-01-02' },
+      { name: 'Resource C', recordingTime: '2023-01-03' },
+    ];
+    const sorted = getSortedResources(resourcesWithMissingNames, SortOrder.DESC_NAME);
+    expect(sorted).toEqual([
+      { name: 'Resource C', recordingTime: '2023-01-03' },
+      { name: 'Resource A', recordingTime: '2023-01-01' },
+      { recordingTime: '2023-01-02' },
+    ]);
+  });
+
+  it('handles resources with missing recording times ASC', () => {
     const resourcesWithMissingTimes = [
       { name: 'Resource A', recordingTime: '2023-01-01' },
       { name: 'Resource B' },
@@ -229,6 +243,20 @@ describe('getSortedResources', () => {
     expect(sorted).toEqual([
       { name: 'Resource A', recordingTime: '2023-01-01' },
       { name: 'Resource C', recordingTime: '2023-01-03' },
+      { name: 'Resource B' },
+    ]);
+  });
+
+  it('handles resources with missing recording times DESC', () => {
+    const resourcesWithMissingTimes = [
+      { name: 'Resource A', recordingTime: '2023-01-01' },
+      { name: 'Resource B' },
+      { name: 'Resource C', recordingTime: '2023-01-03' },
+    ];
+    const sorted = getSortedResources(resourcesWithMissingTimes, SortOrder.DESC_DATE);
+    expect(sorted).toEqual([
+      { name: 'Resource C', recordingTime: '2023-01-03' },
+      { name: 'Resource A', recordingTime: '2023-01-01' },
       { name: 'Resource B' },
     ]);
   });
