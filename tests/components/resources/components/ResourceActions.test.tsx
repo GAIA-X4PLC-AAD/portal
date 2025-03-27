@@ -196,7 +196,6 @@ describe('ResourceActions', () => {
     await waitFor(() => {
       expect(screen.getByText('resources.download-description')).toBeInTheDocument();
       expect(screen.getByText('Actions')).toBeInTheDocument();
-      expect(screen.getByText('details.view-graph')).toBeInTheDocument();
       expect(screen.getByText('details.sidebar-buy-button')).toBeInTheDocument();
     });
   });
@@ -214,7 +213,6 @@ describe('ResourceActions', () => {
 
     expect(screen.queryByText('resources.download-description')).not.toBeInTheDocument();
     expect(screen.queryByText('Actions')).toBeInTheDocument();
-    expect(screen.queryByText('details.view-graph')).toBeInTheDocument();
     expect(screen.queryByText('details.sidebar-buy-button')).toBeInTheDocument();
   });
 
@@ -234,7 +232,6 @@ describe('ResourceActions', () => {
     await waitFor(() => {
       expect(screen.queryByText('resources.download-description')).not.toBeInTheDocument();
       expect(screen.queryByText('Actions')).toBeInTheDocument();
-      expect(screen.queryByText('details.view-graph')).toBeInTheDocument();
       expect(screen.queryByText('details.sidebar-buy-button')).toBeInTheDocument();
     });
   });

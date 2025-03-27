@@ -1,11 +1,12 @@
 .mapCardContainer {
     align-items: flex-start;
-    height: 40rem;
+    max-height: 40rem;
     padding: 2rem;
-
+    height: 37rem;
     border-radius: 1rem;
     background-color: var(--white);
-    box-shadow: var(--shadow--normal)
+    box-shadow: var(--shadow--normal);
+    max-width: 40rem;
 }
 
 .headerContainer {

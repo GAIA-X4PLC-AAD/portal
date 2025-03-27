@@ -645,5 +645,15 @@
     "willExpire": "Your session will expire in 30 seconds!",
     "confirmRenew": "Do you want to renew your session?",
     "failedRefreshToken": "Failed to refresh token"
+  },
+  "about": {
+    "text-start": "This project is part of the Gaia-X initiative, which aims to create a federated and secure data infrastructure for Europe. Gaia-X is designed to ensure that data and services can be shared in a trustworthy environment, promoting innovation and digital sovereignty.",
+    "text-mid": "Our platform provides tools and features to manage and visualize various resources and services, facilitating collaboration and data exchange among participants.",
+    "text-end": "The project includes functionalities such as resource search, detailed service descriptions, and user support, all aimed at enhancing the efficiency and effectiveness of data-driven operations."
+  },
+  "support": {
+    "text-start": "This support page is currently under construction.",
+    "text-mid": "In the future, you will find helpful information, frequently asked questions (FAQ), and contact options for technical and content-related support. Our goal is to provide the best possible user experience and assist you with any questions regarding the platform.",
+    "text-end": "Thank you for your understanding."
   }
 }

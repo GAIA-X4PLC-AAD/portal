@@ -20,12 +20,12 @@ const ShapeActions: FC = () => {
 
   const handleJsonDownload = async () => {
     const data = await getConvertedFile(shape.shaclShapeId);
-    downloadFile(shape.shaclShapeId, data);
+    downloadFile(shape.shaclShapeId, '.json', data);
   }
 
   const handleTurtleDownload = async () => {
     const response = await getSchemaById(shape.shaclShapeId);
-    downloadFile(shape.shaclShapeId, response);
+    downloadFile(shape.shaclShapeId, '.json', response);
   }
 
   return (
