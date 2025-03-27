@@ -5,6 +5,7 @@ import { Route, Routes as ReactRoutes } from 'react-router-dom';
 import WorkInProgress from '../../../../WorkInProgress';
 import Vertical from '../../../../common/components/layouts/Vertical';
 import Map from '../../../../common/components/map/Map';
+import AboutPage from '../../../about/AboutPage';
 import AccountHome from '../../../account/AccountHome';
 import Provider from '../../../account/Provider';
 import DashboardPage from '../../../dashboard/dashboard_page';
@@ -12,8 +13,6 @@ import LcmFinal from '../../../dashboard/lcm/LcmFinal';
 import LcmServices from '../../../dashboard/lcm/LcmServices';
 import DiscoveryItem from '../../../discovery/DiscoveryItem';
 import SearchView from '../../../discovery/search/SearchView';
-import AboutPage from '../../../help/AboutPage'
-import SupportPage from '../../../help/SupportPage'
 import Home from '../../../home/Home';
 import LoginFail from '../../../login/LoginFail';
 import OnboardingPage from '../../../onboarding/onboarding_page';
@@ -31,6 +30,7 @@ import ServiceOfferings from '../../../serviceOfferings/ServiceOfferings';
 import ShapeDetailsPage from '../../../shapes/ShapeDetailsPage';
 import ShapesSearchPage from '../../../shapes/ShapesSearchPage';
 import SolutionPackagingView from '../../../solutionPackaging/SolutionPackagingView';
+import SupportPage from '../../../support/SupportPage';
 
 import styles from './Routes.module.css';
 import ProtectedRoute from './components/ProtectedRoute';

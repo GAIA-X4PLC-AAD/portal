@@ -40,7 +40,7 @@ const ResourceDetailsPage = () => {
           to: '/resources'
         },
         {
-          label: resourceDetails?.details.legalName ?? '',
+          label: resourceDetails?.details.name ?? '',
           to: `/resources/${id}`
         }
       ]}

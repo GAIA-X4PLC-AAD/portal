@@ -18,7 +18,8 @@ const OntologyDetailMainContent: FC = () => {
   const ontology = useContext(OntologyContext);
 
   const handleNavigationToShapeDetailsPage = (shape: Shape) => {
-    navigate(`/shapes/details/${shape.shaclShapeName}`);
+    const encodedUri = encodeURIComponent(shape.shaclShapeName)
+    navigate(`/shapes/${encodedUri}`);
   }
 
   if (!ontology) {

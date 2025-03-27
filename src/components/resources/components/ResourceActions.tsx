@@ -42,7 +42,7 @@ const ResourceActions = () => {
 
   const handleDownload = () => {
     selfDescriptions?.forEach((selfDescription) => {
-      downloadFile(selfDescription.holder, selfDescription);
+      downloadFile(selfDescription.holder, '.json', selfDescription);
     });
   }
 
@@ -56,12 +56,6 @@ const ResourceActions = () => {
           handleOnClick={handleDownload}
         />
       )}
-      <GaiaXButton
-        className={styles.sideBarCardButton}
-        label={t('details.view-graph')}
-        handleOnClick={() => {
-        }}
-      />
       <DataTransferStatus state={state}/>
       <GaiaXButton
         className={styles.sideBarCardButton}

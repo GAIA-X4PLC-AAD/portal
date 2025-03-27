@@ -18,9 +18,10 @@ describe('downloadFile', () => {
 
   it('should create a download link and trigger a download', () => {
     const fileName = 'testFile';
+    const fileExtension = '.json';
     const data = { key: 'value' };
 
-    downloadFile(fileName, data);
+    downloadFile(fileName, fileExtension, data);
 
     expect(document.createElement).toHaveBeenCalledWith('a');
     expect(document.body.appendChild).toHaveBeenCalled();
@@ -36,13 +37,14 @@ describe('downloadFile', () => {
     console.error = jest.fn();
 
     const fileName = 'testFile';
+    const fileExtension = '.json';
     const data = { key: 'value' };
 
     document.createElement = jest.fn(() => {
       throw new Error('Test error');
     });
 
-    downloadFile(fileName, data);
+    downloadFile(fileName, fileExtension, data);
 
     expect(console.error).toHaveBeenCalledWith('Error:', new Error('Test error'));
   });
