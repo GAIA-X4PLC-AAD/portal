@@ -260,6 +260,20 @@ describe('getSortedResources', () => {
       { name: 'Resource B' },
     ]);
   });
+
+  it('Default branch', () => {
+    const resourcesWithMissingTimes = [
+      { name: 'Resource A', recordingTime: '2023-01-01' },
+      { name: 'Resource B' },
+      { name: 'Resource C', recordingTime: '2023-01-03' },
+    ];
+    const sorted = getSortedResources(resourcesWithMissingTimes, 'default');
+    expect(sorted).toEqual([
+      { name: 'Resource A', recordingTime: '2023-01-01' },
+      { name: 'Resource B' },
+      { name: 'Resource C', recordingTime: '2023-01-03' }
+    ]);
+  });
 });
 
 describe('sortDataResources', () => {
