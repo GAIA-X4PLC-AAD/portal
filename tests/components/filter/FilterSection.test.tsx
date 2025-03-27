@@ -13,7 +13,7 @@ describe('FilterSection', () => {
   const mockAssets: Asset[] = [
     {
       id: '1',
-      type: 'filterAssets',
+      type: 'formatAssets',
       label: 'Filter 1',
       value: true,
       disabled: false,
@@ -24,7 +24,7 @@ describe('FilterSection', () => {
     },
     {
       id: '2',
-      type: 'filterAssets',
+      type: 'vendorAssets',
       label: 'Filter 2',
       value: false,
       disabled: false,
@@ -77,7 +77,7 @@ describe('FilterSection', () => {
   it('disables the checkbox when the asset is disabled', () => {
     const disabledAsset: Asset = {
       id: '3',
-      type: 'filterAssets',
+      type: 'typeAssets',
       label: 'Disabled Filter',
       value: true,
       disabled: true,
