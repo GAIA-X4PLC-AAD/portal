@@ -24,11 +24,6 @@ const Filter: FC<IFilter> = ({
   updateAssetFilter,
   visible,
 }) => {
-  const md = (asset: Asset) => {
-    //  alert('Filter.tsx' + JSON.stringify(asset)); //TODO REMOVE
-    updateAssetFilter(asset);
-  }
-
   return (
     <aside className={visible ? styles.visible : styles.hidden}>
       <Title className={styles.filterTitle}>Filters</Title>
@@ -47,9 +42,7 @@ const Filter: FC<IFilter> = ({
         assets={vendorAssets}
         updateAssetFilter={updateAssetFilter}
       />
-      <SpecificFilters assets={specificAssets} updateAssetFilter={md}/>
-      {/*<Title className={styles.filterTitle}>Specific Filters</Title>*/}
-      {/*<SpecificFilterSection subtitle="Specific Filter Subtitle" />*/}
+      <SpecificFilters assets={specificAssets} updateAssetFilter={updateAssetFilter}/>
     </aside>
   )
 };
