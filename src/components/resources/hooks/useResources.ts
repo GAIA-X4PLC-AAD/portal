@@ -3,7 +3,7 @@ import { useEffect, useMemo, useReducer, useState } from 'react';
 import { useSchemas } from '../../../hooks/useSchemas';
 import { getResourceTypes } from '../../../services/ontologyService.utils';
 import { unique } from '../../../utils/utils';
-import { loadResources, loadresourceSpecificDetails } from '../helpers/resourceDataFlow';
+import { loadResources, loadResourceSpecificDetails } from '../helpers/resourceDataFlow';
 import { removeNonResourceTypeLabels } from '../helpers/resourcesHelper';
 import {
   initialResourceState,
@@ -48,7 +48,7 @@ export const useResources = () => {
   useEffect(() => {
     if (specialQuery !== resourceSpecificDetailsQuery && resourceSpecificDetailsQuery !== '') {
       setSpecialQuery(resourceSpecificDetailsQuery);
-      loadresourceSpecificDetails(resourceSpecificDetailsQuery)
+      loadResourceSpecificDetails(resourceSpecificDetailsQuery)
         .then(specificDetails => {
           updateSpecificDetails(specificDetails)
         })
