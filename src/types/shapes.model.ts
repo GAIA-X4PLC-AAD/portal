@@ -1,3 +1,4 @@
+/* test coverage not required */
 export interface Shape {
     shaclShapeId: string;
     shaclShapeName: string;
