@@ -54,7 +54,7 @@ export const useResources = () => {
         })
         .catch(error => console.error('Error loading special details:', error));
     }
-  }, [resourceSpecificDetailsQuery, specificAssets]);
+  }, [resourceSpecificDetailsQuery]);
 
   useEffect(() => {
     if (!schemas.isLoading) {

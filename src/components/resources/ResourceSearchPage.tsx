@@ -38,17 +38,6 @@ const ResourceSearchPage = () => {
     updateFilterAsset,
   } = useResources();
 
-  // useEffect(() => {
-  //   console.log('specific assets:' + JSON.stringify(specificAssets));
-  //   console.log('query:' + resourceSpecificDetailsQuery)
-  //   if (resourceSpecificDetailsQuery) {
-  //     console.log('loading special details');
-  //     console.log('query: ' + resourceSpecificDetailsQuery);
-  //     loadresourceSpecificDetails(resourceSpecificDetailsQuery)
-  //       .then(specificDetails => console.log(specificDetails))
-  //       .catch(error => console.error('Error loading special details:', error));
-  //   }
-  // }, [resourceSpecificDetailsQuery, specificAssets, updateFilterAsset]); //TODO
   return (
     <>
       <Header title={`${t('left-menu.resources')} (${resources.length} ${t('dashboard.results')})`}/>
