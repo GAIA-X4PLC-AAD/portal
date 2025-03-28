@@ -1,3 +1,5 @@
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
@@ -46,6 +48,15 @@ export const SpecificFilterItemValue: React.FC<ISpecificFilterItemProperty> = ({
         isOptionEqualToValue={(option, value) => String(option) === String(value)}
         clearOnEscape
         disableClearable={false}
+        clearIcon={
+          <IconButton
+            aria-label="clear"
+            size="small"
+            className={styles.iconButton}
+          >
+            <CloseIcon/>
+          </IconButton>
+        }
         slotProps={{
           popupIndicator: { style: { display: 'none' } },
           clearIndicator: { style: { visibility: 'visible' } },

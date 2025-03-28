@@ -1,8 +1,12 @@
+import CloseIcon from '@mui/icons-material/Close';
+import { IconButton } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
 
 import { Asset } from '../resources/helpers/resourceFilterHelper';
+
+import styles from './SpecificFilterItemProperty.module.css';
 
 export type SpecificFilterItemPropertyOperation =
     'add-filter' |
@@ -63,6 +67,15 @@ export const SpecificFilterItemProperty: React.FC<ISpecificFilterItemProperty> =
       isOptionEqualToValue={(option, value) => option.id === value.id}
       clearOnEscape
       disableClearable={false} // Ensures the 'X' is always present
+      clearIcon={
+        <IconButton
+          aria-label="clear"
+          size="small"
+          className={styles.iconButton}
+        >
+          <CloseIcon/>
+        </IconButton>
+      }
       slotProps={{
         popupIndicator: { style: { display: 'none' } }, // Hides the dropdown arrow
         clearIndicator: { style: { visibility: 'visible' } }, // Ensures 'X' is always visible
