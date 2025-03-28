@@ -25,3 +25,10 @@ export interface ShapeProperties {
     maxCount?: number;
     datatype?: string;
 }
+
+export interface ShapePropertyForFilter {
+    path: string;
+    name: string;
+    type: string;
+    resourceType: string;
+}

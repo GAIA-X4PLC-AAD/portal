@@ -1,6 +1,5 @@
-import { Shape } from '../../../types/shapes.model';
+import { Shape, ShapePropertyForFilter } from '../../../types/shapes.model';
 
-import { ShapePropertyForFilter } from './ShapePropertyForFilter';
 import { Asset } from './resourceFilterHelper';
 
 function removeShapeSuffix(input: string): string {
@@ -60,7 +59,6 @@ function processShapeProperty(shape: Shape | undefined, shapes: Shape[], path: s
   const visitedShapesCopy = new Set(visitedShapes);
   visitedShapesCopy.add(shape.shaclShapeName);
   const newPathSegment = (nodeName !== '') ? nodeName : resourceType;
-  //const newPathSegment = (nodeName !== '') ? nodeName : toCamelCase(removeShapeSuffix(getSegmentFromALinkFromBack(shape.shaclShapeName, 0))); //TODO remove before merge
   const currentShapePath = path + '/' + newPathSegment;
   for (const property of shape.properties) {
     if (property.propertyValues.some(value => value.type === 'http://www.w3.org/ns/shacl#node')) {

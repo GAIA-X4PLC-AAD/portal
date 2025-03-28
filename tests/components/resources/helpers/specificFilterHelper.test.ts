@@ -1,9 +1,9 @@
-import { ShapePropertyForFilter } from '../../../../src/components/resources/helpers/ShapePropertyForFilter';
 import { Asset } from '../../../../src/components/resources/helpers/resourceFilterHelper';
 import {
   getCypherQueryForProperties,
   getShapePropertiesForFilter
 } from '../../../../src/components/resources/helpers/specificFilterHelper';
+import { ShapePropertyForFilter } from '../../../../src/types/shapes.model';
 
 describe('getShapePropertiesForFilter', () => {
 

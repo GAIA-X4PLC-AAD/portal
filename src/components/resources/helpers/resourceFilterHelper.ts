@@ -1,9 +1,8 @@
 import { getResourceFormats, getResourceTypes } from '../../../services/ontologyService.utils';
 import { Ontology } from '../../../types/ontologies.model';
 import { Resource } from '../../../types/resources.model';
-import { Shape } from '../../../types/shapes.model';
+import { Shape, ShapePropertyForFilter } from '../../../types/shapes.model';
 
-import { ShapePropertyForFilter } from './ShapePropertyForFilter';
 import { ResourceFilterState } from './resourceFilterReducer';
 import { getPropertyValue } from './resourcesHelper';
 import { getCypherQueryForProperties, getShapePropertiesForFilter } from './specificFilterHelper';
