@@ -296,11 +296,11 @@ export const calculateResourceFiltersAssetState = (
 
   const resourceSpecificDetailsQuery: string = getCypherQueryForProperties(shapesForFilter, filters.specificAssets, selectedTypeLabels);
 
-  const specialDetailsURIs = getFilteredSpecificResourceUrls(specialResourceDetails, specificAssets);
+  const specificDetailsURIs = getFilteredSpecificResourceUrls(specialResourceDetails, specificAssets);
 
-  const specificAssetsWithFilterApplied = specialDetailsURIs.length > 0
+  const specificAssetsWithFilterApplied = specificDetailsURIs.length > 0
     ? resourcesWithSearchTextFilterApplied.filter(resource =>
-      specialDetailsURIs.some(uri => uri === resource.uri))
+      specificDetailsURIs.some(uri => uri === resource.uri))
     : resourcesWithSearchTextFilterApplied;
 
   return {

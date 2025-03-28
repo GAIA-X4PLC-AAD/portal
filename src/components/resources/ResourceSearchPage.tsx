@@ -45,7 +45,7 @@ const ResourceSearchPage = () => {
   //     console.log('loading special details');
   //     console.log('query: ' + resourceSpecificDetailsQuery);
   //     loadresourceSpecificDetails(resourceSpecificDetailsQuery)
-  //       .then(specialDetails => console.log(specialDetails))
+  //       .then(specificDetails => console.log(specificDetails))
   //       .catch(error => console.error('Error loading special details:', error));
   //   }
   // }, [resourceSpecificDetailsQuery, specificAssets, updateFilterAsset]); //TODO

@@ -42,15 +42,15 @@ export const useResources = () => {
     resourceSpecificDetailsQuery,
     updateSearchText,
     updateFilterAsset,
-    updateSpecialDetails,
+    updateSpecificDetails,
   } = useResourceFilter(ontologies, shapes, resources);
 
   useEffect(() => {
     if (specialQuery !== resourceSpecificDetailsQuery && resourceSpecificDetailsQuery !== '') {
       setSpecialQuery(resourceSpecificDetailsQuery);
       loadresourceSpecificDetails(resourceSpecificDetailsQuery)
-        .then(specialDetails => {
-          updateSpecialDetails(specialDetails)
+        .then(specificDetails => {
+          updateSpecificDetails(specificDetails)
         })
         .catch(error => console.error('Error loading special details:', error));
     }

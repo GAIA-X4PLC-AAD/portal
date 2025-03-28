@@ -60,7 +60,7 @@ type ResourceFilterAction =
             ontologies: Ontology[],
             resources: Resource[],
             shapes: Shape[],
-            specialDetails: any[],
+            specificDetails: any[],
         },
     }
 
@@ -117,8 +117,8 @@ export const resourceFilterReducer = (state: ResourceFilterState, action: AnyAct
       ...state,
       ...calculateResourceFiltersAssetState(action.payload.ontologies, action.payload.shapes, action.payload.resources, {
         ...state
-      }, action.payload.specialDetails),
-      resourceSpecificDetails: action.payload.specialDetails,
+      }, action.payload.specificDetails),
+      resourceSpecificDetails: action.payload.specificDetails,
     }
   }
   return state
@@ -156,13 +156,13 @@ export const updateFilterAssetAction = (
     payload: { asset, ontologies, resources, shapes }
   })
 
-export const updateSpecialDetailsAction = (
+export const updateSpecificDetailsAction = (
   ontologies: Ontology[],
   shapes: Shape[],
   resources: Resource[],
-  specialDetails: any[]): ResourceFilterAction => (
+  specificDetails: any[]): ResourceFilterAction => (
   {
     type: UPDATE_SPECIFIC_DETAILS,
-    payload: { ontologies, resources, shapes, specialDetails }
+    payload: { ontologies, resources, shapes, specificDetails }
   })
 
