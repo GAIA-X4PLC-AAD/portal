@@ -6,6 +6,7 @@ import {
   createVendorAssets,
   getAllFormats,
   getAllLabels,
+  getFilteredSpecificResourceUrls,
   getResourceVendors,
   getSelectedAssets
 } from '../../../../src/components/resources/helpers/resourceFilterHelper';
@@ -20,6 +21,7 @@ import {
 import {
   ontologies_General_HdMap_EnvironmentModel
 } from '../../../__fixtures__/ontologies_General_HdMap_EnvironmentModel';
+import { mockShapeDetails } from '../../shapes/__fixtures__/mockShapeDetails';
 
 import {
   filteredBy_formatFilter_ASAMOpenDrive_ResourceFilterState,
@@ -36,6 +38,7 @@ describe('Reducer', () => {
       'and is executed on "initialResourceFilterStatus"', () => {
     const action = setResourceFilterAssetsAction(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_HdMap_EnvironmentModel_x2
     );
     const nextState = resourceFilterReducer(initialResourceFilterState, action);
@@ -51,6 +54,7 @@ describe('Reducer', () => {
     const action = setSearchTextAction(
       searchText,
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_HdMap_EnvironmentModel_x2
     );
     const nextState = resourceFilterReducer(initialResourceFilterState, action);
@@ -73,6 +77,7 @@ describe('Reducer', () => {
     const action = updateFilterAssetAction(
       hdMapTypeAsset,
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_HdMap_EnvironmentModel_x2
     );
     const nextState = resourceFilterReducer(initiallyLoaded_ResourceFilterState, action);
@@ -95,6 +100,7 @@ describe('Reducer', () => {
     const action = updateFilterAssetAction(
       asamOpenDriveFormatAsset,
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_HdMap_EnvironmentModel_x2
     );
     const nextState = resourceFilterReducer(initiallyLoaded_ResourceFilterState, action);
@@ -119,6 +125,7 @@ describe('Reducer', () => {
     const action = updateFilterAssetAction(
       msgSystemsAGVendorAsset,
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_msgSystemsAG_x1_vendor
     );
     const nextState = resourceFilterReducer(initiallyLoaded_ResourceFilterState, action);
@@ -402,6 +409,7 @@ describe('calculateResourceFiltersAssetState', () => {
       'the assets are created from ontologies.', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [...resources_HdMap_EnvironmentModel_x2],
       initialResourceFilterState
     )
@@ -453,6 +461,7 @@ describe('calculateResourceFiltersAssetState', () => {
       'it will also filter the resources list', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [...resources_HdMap_EnvironmentModel_x2],
         {
           filteredResources: [],
@@ -467,6 +476,10 @@ describe('calculateResourceFiltersAssetState', () => {
           ] as Asset[],
           formatAssets: [],
           vendorAssets: [],
+          specificAssets: [],
+          searchText: '',
+          resourceSpecificDetailsQuery: '',
+          resourceSpecificDetails: []
         } as ResourceFilterState
     )
 
@@ -509,6 +522,7 @@ describe('calculateResourceFiltersAssetState', () => {
       'it will also filter the resources list', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [...resources_HdMap_EnvironmentModel_x2],
         {
           filteredResources: [],
@@ -523,6 +537,10 @@ describe('calculateResourceFiltersAssetState', () => {
           ] as Asset[],
           formatAssets: [],
           vendorAssets: [],
+          specificAssets: [],
+          searchText: '',
+          resourceSpecificDetailsQuery: '',
+          resourceSpecificDetails: []
         } as ResourceFilterState
     )
 
@@ -568,6 +586,7 @@ describe('calculateResourceFiltersAssetState', () => {
       ' disabled state of the other asset types, it will also filter the resources list', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [...resources_HdMap_EnvironmentModel_x2],
         {
           filteredResources: [],
@@ -623,6 +642,7 @@ describe('calculateResourceFiltersAssetState', () => {
   it('Pass in "vendor filter" as previously selected it will filter the resources list', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [
         ...resources_HdMap_EnvironmentModel_x2
           .map((resource, index) => index === 0
@@ -642,6 +662,10 @@ describe('calculateResourceFiltersAssetState', () => {
               disabled: false
             },
           ],
+          specificAssets: [],
+          searchText: '',
+          resourceSpecificDetailsQuery: '',
+          resourceSpecificDetails: []
         } as ResourceFilterState
     )
 
@@ -677,13 +701,17 @@ describe('calculateResourceFiltersAssetState', () => {
   it('returns a filtered resource list if searchText is set, but does not effect the filter type assets', () => {
     const result = calculateResourceFiltersAssetState(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       [...resources_HdMap_EnvironmentModel_x2],
         {
           filteredResources: [],
           typeAssets: [],
           formatAssets: [],
           vendorAssets: [],
-          searchText: '72-'
+          specificAssets: [],
+          searchText: '72-',
+          resourceSpecificDetailsQuery: '',
+          resourceSpecificDetails: []
         } as ResourceFilterState
     )
 
@@ -729,3 +757,259 @@ describe('calculateResourceFiltersAssetState', () => {
   })
 
 })
+
+describe('createTypeAssets', () => {
+  it('Creates a list of types from a list of type ids, marks disabled if not present in any of the resources passed in', () => {
+    const result = createTypeAssets(['HdMap', 'EnvironmentModel'], []);
+
+    expect(result.length).toEqual(2);
+    expect(result).toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: 'HdMap', value: false, disabled: true }),
+      expect.objectContaining({ id: 'EnvironmentModel', value: false, disabled: true }),
+    ]));
+  });
+
+  it('Marks enabled if it is present in the resources', () => {
+    const result = createTypeAssets(['HdMap', 'EnvironmentModel', 'Other'], resources_HdMap_EnvironmentModel_x2);
+
+    expect(result.length).toEqual(3);
+    expect(result).toEqual([
+      expect.objectContaining({ id: 'HdMap', value: false, disabled: false }),
+      expect.objectContaining({ id: 'EnvironmentModel', value: false, disabled: false }),
+      expect.objectContaining({ id: 'Other', value: false, disabled: true }),
+    ]);
+  });
+
+  it('Handles empty resourceTypes array', () => {
+    const result = createTypeAssets([], resources_HdMap_EnvironmentModel_x2);
+    expect(result).toEqual([]);
+  });
+
+  it('Handles empty resources array', () => {
+    const result = createTypeAssets(['HdMap', 'EnvironmentModel'], []);
+    expect(result).toEqual([
+      expect.objectContaining({ id: 'HdMap', value: false, disabled: true }),
+      expect.objectContaining({ id: 'EnvironmentModel', value: false, disabled: true }),
+    ]);
+  });
+});
+
+describe('createFormatAssets', () => {
+  it('Creates a list of formats from a list of format ids, marks disabled if not present in any of the resources passed in', () => {
+    const result = createFormatAssets(['Autodesk FBX', 'ASAM OpenDRIVE'], [], []);
+
+    expect(result.length).toEqual(2);
+    expect(result).toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: 'Autodesk FBX', value: false, disabled: true }),
+      expect.objectContaining({ id: 'ASAM OpenDRIVE', value: false, disabled: true }),
+    ]));
+  });
+
+  it('Marks enabled if it is present in the resources', () => {
+    const result = createFormatAssets(['Autodesk FBX', 'ASAM OpenDRIVE'], [], resources_HdMap_EnvironmentModel_x2);
+
+    expect(result.length).toEqual(2);
+    expect(result).toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: 'Autodesk FBX', value: false, disabled: true }),
+      expect.objectContaining({ id: 'ASAM OpenDRIVE', value: false, disabled: false }),
+    ]));
+  });
+
+  it('Marks selected if it was selected also in the "prevFormatAssets"', () => {
+    const result = createFormatAssets(['Autodesk FBX', 'ASAM OpenDRIVE'], [
+      { id: 'ASAM OpenDRIVE', value: true }
+    ] as Asset[], []);
+
+    expect(result.length).toEqual(2);
+    expect(result).toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: 'Autodesk FBX', value: false, disabled: true }),
+      expect.objectContaining({ id: 'ASAM OpenDRIVE', value: true, disabled: true }),
+    ]));
+  });
+
+  it('Handles empty resourceFormats array', () => {
+    const result = createFormatAssets([], [], resources_HdMap_EnvironmentModel_x2);
+    expect(result).toEqual([]);
+  });
+
+  it('Handles empty resources array', () => {
+    const result = createFormatAssets(['Autodesk FBX', 'ASAM OpenDRIVE'], [], []);
+    expect(result).toEqual([
+      expect.objectContaining({ id: 'Autodesk FBX', value: false, disabled: true }),
+      expect.objectContaining({ id: 'ASAM OpenDRIVE', value: false, disabled: true }),
+    ]);
+  });
+});
+
+describe('createVendorAssets', () => {
+  it('Creates a list of vendors from a list of vendor ids, marks disabled if not present in any of the resources passed in', () => {
+    const result = createVendorAssets(['msg systems ag', 'other'], [], []);
+    expect(result).toEqual([
+      expect.objectContaining({ id: 'msg systems ag', value: false, disabled: true }),
+      expect.objectContaining({ id: 'other', value: false, disabled: true }),
+    ]);
+  });
+
+  it('Marks enabled if it is present in the resources', () => {
+    const result = createVendorAssets(['msg systems ag', 'other'], [], resources_HdMap_EnvironmentModel_x2);
+    expect(result).toEqual([
+      expect.objectContaining({ id: 'msg systems ag', value: false, disabled: false }),
+      expect.objectContaining({ id: 'other', value: false, disabled: true }),
+    ]);
+  });
+
+  it('Marks selected if it was selected also in the "prevVendorAssets"', () => {
+    const result = createVendorAssets(['msg systems ag', 'other'], [
+      { id: 'msg systems ag', value: true }
+    ] as Asset[], []);
+
+    expect(result).toEqual([
+      expect.objectContaining({ id: 'msg systems ag', value: true, disabled: true }),
+      expect.objectContaining({ id: 'other', value: false, disabled: true }),
+    ]);
+  });
+
+  it('Handles empty resourceVendors array', () => {
+    const result = createVendorAssets([], [], resources_HdMap_EnvironmentModel_x2);
+    expect(result).toEqual([]);
+  });
+
+  it('Handles empty resources array', () => {
+    const result = createVendorAssets(['msg systems ag', 'other'], [], []);
+    expect(result).toEqual([
+      expect.objectContaining({ id: 'msg systems ag', value: false, disabled: true }),
+      expect.objectContaining({ id: 'other', value: false, disabled: true }),
+    ]);
+  });
+});
+
+describe('getFilteredSpecificResourceUrls', () => {
+  it('filters specific resource URLs based on specific assets', () => {
+    const specificResourceDetails = [
+      { id: '1', column1: 'value1' },
+      { id: '2', column1: 'value2' },
+    ];
+    const specificAssets = [
+      { id: 'column1', specificFilterSelected: true, specificFilterValueSelected: 'value1' },
+    ];
+    const result = getFilteredSpecificResourceUrls(specificResourceDetails, specificAssets);
+
+    expect(result).toEqual(['1']);
+  });
+
+  it('handles empty specificResourceDetails array', () => {
+    const specificResourceDetails = [];
+    const specificAssets = [
+      { id: 'column1', specificFilterSelected: true, specificFilterValueSelected: 'value1' },
+    ];
+    const result = getFilteredSpecificResourceUrls(specificResourceDetails, specificAssets);
+
+    expect(result).toEqual([]);
+  });
+
+  it('handles empty specificAssets array', () => {
+    const specificResourceDetails = [
+      { id: '1', column1: 'value1' },
+      { id: '2', column1: 'value2' },
+    ];
+    const specificAssets = [];
+    const result = getFilteredSpecificResourceUrls(specificResourceDetails, specificAssets);
+
+    expect(result).toEqual([]);
+  });
+});
+
+describe('calculateResourceFiltersAssetState', () => {
+  it('With no selected filter passed in, the resource list will not be filtered, the assets are created from ontologies.', () => {
+    const result = calculateResourceFiltersAssetState(
+      ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
+      [...resources_HdMap_EnvironmentModel_x2],
+      initialResourceFilterState
+    );
+
+    expect(result.filteredResources).toEqual(resources_HdMap_EnvironmentModel_x2);
+
+    expect(result.typeAssets).toEqual([
+      { id: 'HdMap', type: 'typeAssets', label: 'HdMap', value: false, disabled: false },
+      { id: 'EnvironmentModel', type: 'typeAssets', label: 'EnvironmentModel', value: false, disabled: false },
+    ]);
+
+    expect(result.formatAssets.filter(asset => !asset.disabled).length).toEqual(2);
+    expect(result.formatAssets).toEqual(expect.arrayContaining([
+      { id: 'ASAM OpenDRIVE', type: 'formatAssets', label: 'ASAM OpenDRIVE', value: false, disabled: false },
+      { id: 'Unreal DataSmith', type: 'formatAssets', label: 'Unreal DataSmith', value: false, disabled: false },
+    ]));
+
+    expect(result.vendorAssets.filter(asset => !asset.disabled).length).toEqual(1);
+    expect(result.vendorAssets).toEqual([
+      expect.objectContaining({ id: 'msg systems ag', disabled: false }),
+    ]);
+  });
+
+  it('Handles empty resources array', () => {
+    const result = calculateResourceFiltersAssetState(
+      ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
+      [],
+      initialResourceFilterState
+    );
+
+    expect(result.filteredResources).toEqual([]);
+  });
+
+  it('Handles empty filters state', () => {
+    const result = calculateResourceFiltersAssetState(
+      ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
+      [...resources_HdMap_EnvironmentModel_x2],
+        {
+          filteredResources: [],
+          typeAssets: [],
+          formatAssets: [],
+          vendorAssets: [],
+          specificAssets: [],
+          searchText: '',
+          resourceSpecificDetailsQuery: '',
+          resourceSpecificDetails: []
+        } as ResourceFilterState
+    );
+
+    expect(result.filteredResources).toEqual(resources_HdMap_EnvironmentModel_x2);
+  });
+});
+
+describe('getSelectedAssets', () => {
+  it('Only assets which are not disabled and with value equal true are selected', () => {
+    const assets = [
+      { id: 'General', disabled: false, value: false },
+      { id: 'EnvironmentModel', disabled: true, value: true },
+      { id: 'HdMap', disabled: false, value: true },
+    ] as Asset[];
+
+    const result = getSelectedAssets(assets);
+    expect(result).toEqual(['HdMap']);
+  });
+
+  it('returns "NOTHING" if nothing is selected and not empty list.', () => {
+    const assets = [
+      { id: 'General', disabled: false, value: false },
+      { id: 'EnvironmentModel', disabled: true, value: true },
+      { id: 'HdMap', disabled: true, value: true },
+    ] as Asset[];
+
+    const result = getSelectedAssets(assets);
+    expect(result).toEqual('NOTHING');
+  });
+
+  it('returns "NOTHING" if all assets are disabled', () => {
+    const assets = [
+      { id: 'General', disabled: true, value: false },
+      { id: 'EnvironmentModel', disabled: true, value: false },
+      { id: 'HdMap', disabled: true, value: false },
+    ] as Asset[];
+
+    const result = getSelectedAssets(assets);
+    expect(result).toEqual('NOTHING');
+  });
+});

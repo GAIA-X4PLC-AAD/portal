@@ -6,6 +6,7 @@ import { useResourceFilter } from '../../../../src/components/resources/hooks/us
 import {
   ontologies_General_HdMap_EnvironmentModel
 } from '../../../__fixtures__/ontologies_General_HdMap_EnvironmentModel';
+import { mockShapeDetails } from '../../shapes/__fixtures__/mockShapeDetails';
 import {
   filteredBy_searchText_HdMap_ResourceFilterState,
   filteredBy_typeFilter_HdMap_ResourceFilterState,
@@ -17,6 +18,7 @@ describe('useResourceFilter', () => {
   it('renders correctly the initial values', async () => {
     const { result } = renderHook(() => useResourceFilter(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_HdMap_EnvironmentModel_x2
     ));
 
@@ -33,6 +35,7 @@ describe('useResourceFilter', () => {
 
     const { result } = renderHook(() => useResourceFilter(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_HdMap_EnvironmentModel_x2
     ));
 
@@ -57,6 +60,7 @@ describe('useResourceFilter', () => {
 
     const { result } = renderHook(() => useResourceFilter(
       ontologies_General_HdMap_EnvironmentModel,
+      [mockShapeDetails],
       resources_HdMap_EnvironmentModel_x2
     ));
 

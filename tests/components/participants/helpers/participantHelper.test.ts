@@ -2,7 +2,8 @@ import '@testing-library/jest-dom';
 import { SortOrder } from '../../../../src/common/components/buttons/SortListButton';
 import {
   applyFilters,
-  getParticipantsMenuItems, getSortedParticipants
+  getParticipantsMenuItems,
+  getSortedParticipants
 } from '../../../../src/components/participants/helpers/participantHelper';
 import { mockParticipants } from '../__fixtures__/participants';
 
@@ -65,6 +66,11 @@ describe('getSortedParticipants', () => {
     ];
     const sorted = getSortedParticipants(mockParticipants, SortOrder.DESC_NAME);
     expect(sorted).toEqual(expectedSortedParticipants);
+  });
+
+  it('Default branch', () => {
+    const sorted = getSortedParticipants(mockParticipants, 'Default');
+    expect(sorted).toEqual(mockParticipants);
   });
 
 });

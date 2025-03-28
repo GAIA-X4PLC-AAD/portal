@@ -1,3 +1,4 @@
+/* test coverage not required */
 export interface Shape {
     shaclShapeId: string;
     shaclShapeName: string;
@@ -24,4 +25,11 @@ export interface ShapeProperties {
     minCount?: number;
     maxCount?: number;
     datatype?: string;
+}
+
+export interface ShapePropertyForFilter {
+    path: string;
+    name: string;
+    type: string;
+    resourceType: string;
 }

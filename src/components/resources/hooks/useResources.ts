@@ -3,7 +3,7 @@ import { useEffect, useMemo, useReducer, useState } from 'react';
 import { useSchemas } from '../../../hooks/useSchemas';
 import { getResourceTypes } from '../../../services/ontologyService.utils';
 import { unique } from '../../../utils/utils';
-import { loadResources } from '../helpers/resourceDataFlow';
+import { loadResources, loadResourceSpecificDetails } from '../helpers/resourceDataFlow';
 import { removeNonResourceTypeLabels } from '../helpers/resourcesHelper';
 import {
   initialResourceState,
@@ -21,6 +21,9 @@ export const useResources = () => {
   const ontologies = useMemo(() =>
     !schemas.isLoading && !schemas.hasError ? schemas.ontologies : [],
   [schemas.isLoading]);
+  const shapes = useMemo(() =>
+    !schemas.isLoading && !schemas.hasError ? schemas.shapes : [],
+  [schemas.isLoading]);
 
   const [state, dispatch] = useReducer(resourcesReducer, initialResourceState);
   const { isLoading, resources } = useMemo(() => ({
@@ -28,15 +31,30 @@ export const useResources = () => {
     resources: !state.isLoading && !state.hasError ? state.resources : []
   }), [state]);
   const [assetFilterVisible, toggleAssetFilterVisibility] = useState(false);
+  const [specialQuery, setSpecialQuery] = useState<string | null>(null);
 
   const {
     filteredResources,
     typeAssets,
     formatAssets,
     vendorAssets,
+    specificAssets,
+    resourceSpecificDetailsQuery,
     updateSearchText,
     updateFilterAsset,
-  } = useResourceFilter(ontologies, resources);
+    updateSpecificDetails,
+  } = useResourceFilter(ontologies, shapes, resources);
+
+  useEffect(() => {
+    if (specialQuery !== resourceSpecificDetailsQuery && resourceSpecificDetailsQuery !== '') {
+      setSpecialQuery(resourceSpecificDetailsQuery);
+      loadResourceSpecificDetails(resourceSpecificDetailsQuery)
+        .then(specificDetails => {
+          updateSpecificDetails(specificDetails)
+        })
+        .catch(error => console.error('Error loading special details:', error));
+    }
+  }, [resourceSpecificDetailsQuery]);
 
   useEffect(() => {
     if (!schemas.isLoading) {
@@ -70,6 +88,8 @@ export const useResources = () => {
     typeAssets,
     formatAssets,
     vendorAssets,
+    specificAssets,
+    resourceSpecificDetailsQuery,
     viewContentType,
     assetFilterVisible,
     toggleAssetFilterVisibility: () => toggleAssetFilterVisibility(!assetFilterVisible),

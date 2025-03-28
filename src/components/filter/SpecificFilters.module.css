@@ -1,0 +1,36 @@
+.specificFiltersGroup {
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.specificFiltersTitle {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem 0 1rem;
+}
+
+.specificFilters {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.iconButton {
+    width: 32px; /* Reduce button size */
+    height: 32px; /* Reduce button size */
+    border-radius: 50%;
+    border: 3px solid black !important; /* Force border to stay black */
+    background-color: transparent !important; /* Ensure background is transparent */
+    color: black !important; /* Force icon color to be black */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconButton:hover {
+    background-color: rgba(0, 0, 0, 0.1) !important; /* Subtle hover effect */
+}
+
+.iconButton svg {
+    font-size: 18px; /* Reduce icon size */
+    color: black !important; /* Force icon color */
+}

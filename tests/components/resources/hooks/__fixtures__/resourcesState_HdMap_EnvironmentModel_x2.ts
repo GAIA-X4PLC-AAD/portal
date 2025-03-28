@@ -83,7 +83,8 @@ export const initiallyLoaded_ResourcesState = {
       ],
       name: 'Generated Data Resource',
       uri: 'https://www.gaia-x4plcaad.info/claims/data-resource/57232ba1-7310-4f79-b64c-6793b378d76a',
-      vendor: 'msg systems ag'
+      vendor: 'msg systems ag',
+      recordingTime: ""
     },
     {
       claimsGraphUri: [
@@ -93,13 +94,14 @@ export const initiallyLoaded_ResourcesState = {
         'https://www.gaia-x4plcaad.info/claims/physical-resource/fe9f0d7f-3a80-48ef-9630-a7c9c3c1e78f'
       ],
       description: 'Generated description.',
-      format: null,
+      format: '',
       labels: [
         'EnvironmentModel'
       ],
       name: 'Generated Data Resource',
       uri: 'https://www.gaia-x4plcaad.info/claims/data-resource/fe9f0d7f-3a80-48ef-9630-a7c9c3c1e78f',
-      vendor: 'msg systems ag'
+      vendor: 'msg systems ag',
+      recordingTime: ""
     },
     {
       claimsGraphUri: [
@@ -113,7 +115,8 @@ export const initiallyLoaded_ResourcesState = {
       ],
       name: 'Generated Data Resource',
       uri: 'did:web:registry.gaia-x.eu:HdMap:wDgNY3gZAxMe3LjhdAZ9TbPiYnQ-yybNhCu8',
-      vendor: 'msg systems ag'
+      vendor: 'msg systems ag',
+      recordingTime: ""
     }
   ],
   typeAssets: [
@@ -230,7 +233,8 @@ export const filteredBy_searchText_HdMap_ResourcesState = {
       ],
       name: 'Generated Data Resource',
       uri: 'did:web:registry.gaia-x.eu:HdMap:wDgNY3gZAxMe3LjhdAZ9TbPiYnQ-yybNhCu8',
-      vendor: 'msg systems ag'
+      vendor: 'msg systems ag',
+      recordingTime: ""
     }
   ],
   typeAssets: [

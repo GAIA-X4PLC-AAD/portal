@@ -31,6 +31,7 @@ const ResourceSearchPage = () => {
     typeAssets,
     formatAssets,
     vendorAssets,
+    specificAssets,
     assetFilterVisible,
     toggleAssetFilterVisibility,
     updateSearchText,
@@ -65,6 +66,7 @@ const ResourceSearchPage = () => {
               typeAssets={typeAssets}
               formatAssets={formatAssets}
               vendorAssets={vendorAssets}
+              specificAssets={specificAssets}
               updateAssetFilter={updateFilterAsset}
             />
             <LoadingIndicator visible={viewContentType === 'LOADING'}/>

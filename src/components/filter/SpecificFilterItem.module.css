@@ -1,0 +1,5 @@
+.specificFilterItem {
+    width: 100%;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--gray-2);
+}

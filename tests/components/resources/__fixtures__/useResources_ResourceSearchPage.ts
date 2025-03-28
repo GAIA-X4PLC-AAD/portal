@@ -1,6 +1,6 @@
-import { Asset } from '../../../../src/components/resources/helpers/resourceFilterHelper';
-import { ResourcesSearchPageContentType } from '../../../../src/components/resources/hooks/useResources';
-import { Resource } from '../../../../src/types/resources.model';
+import {Asset} from '../../../../src/components/resources/helpers/resourceFilterHelper';
+import {ResourcesSearchPageContentType} from '../../../../src/components/resources/hooks/useResources';
+import {Resource} from '../../../../src/types/resources.model';
 
 export const normal_render = {
   resources: [
@@ -58,6 +58,7 @@ export const normal_render = {
       disabled: false
     }
   ] as Asset[],
+  specificAssets: [],
   updateSearchText: jest.fn(() => {
   }),
   updateFilterAsset: jest.fn(() => {
