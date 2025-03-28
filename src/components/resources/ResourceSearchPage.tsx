@@ -40,15 +40,15 @@ const ResourceSearchPage = () => {
 
   // useEffect(() => {
   //   console.log('specific assets:' + JSON.stringify(specificAssets));
-  //   console.log('query:' + resourceSpecialDetailsQuery)
-  //   if (resourceSpecialDetailsQuery) {
+  //   console.log('query:' + resourceSpecificDetailsQuery)
+  //   if (resourceSpecificDetailsQuery) {
   //     console.log('loading special details');
-  //     console.log('query: ' + resourceSpecialDetailsQuery);
-  //     loadResourceSpecialDetails(resourceSpecialDetailsQuery)
+  //     console.log('query: ' + resourceSpecificDetailsQuery);
+  //     loadresourceSpecificDetails(resourceSpecificDetailsQuery)
   //       .then(specialDetails => console.log(specialDetails))
   //       .catch(error => console.error('Error loading special details:', error));
   //   }
-  // }, [resourceSpecialDetailsQuery, specificAssets, updateFilterAsset]); //TODO
+  // }, [resourceSpecificDetailsQuery, specificAssets, updateFilterAsset]); //TODO
   return (
     <>
       <Header title={`${t('left-menu.resources')} (${resources.length} ${t('dashboard.results')})`}/>

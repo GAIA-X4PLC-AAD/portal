@@ -478,8 +478,8 @@ describe('calculateResourceFiltersAssetState', () => {
           vendorAssets: [],
           specificAssets: [],
           searchText: '',
-          resourceSpecialDetailsQuery: '',
-          resourceSpecialDetails: []
+          resourceSpecificDetailsQuery: '',
+          resourceSpecificDetails: []
         } as ResourceFilterState
     )
 
@@ -539,8 +539,8 @@ describe('calculateResourceFiltersAssetState', () => {
           vendorAssets: [],
           specificAssets: [],
           searchText: '',
-          resourceSpecialDetailsQuery: '',
-          resourceSpecialDetails: []
+          resourceSpecificDetailsQuery: '',
+          resourceSpecificDetails: []
         } as ResourceFilterState
     )
 
@@ -664,8 +664,8 @@ describe('calculateResourceFiltersAssetState', () => {
           ],
           specificAssets: [],
           searchText: '',
-          resourceSpecialDetailsQuery: '',
-          resourceSpecialDetails: []
+          resourceSpecificDetailsQuery: '',
+          resourceSpecificDetails: []
         } as ResourceFilterState
     )
 
@@ -710,8 +710,8 @@ describe('calculateResourceFiltersAssetState', () => {
           vendorAssets: [],
           specificAssets: [],
           searchText: '72-',
-          resourceSpecialDetailsQuery: '',
-          resourceSpecialDetails: []
+          resourceSpecificDetailsQuery: '',
+          resourceSpecificDetails: []
         } as ResourceFilterState
     )
 
@@ -970,8 +970,8 @@ describe('calculateResourceFiltersAssetState', () => {
           vendorAssets: [],
           specificAssets: [],
           searchText: '',
-          resourceSpecialDetailsQuery: '',
-          resourceSpecialDetails: []
+          resourceSpecificDetailsQuery: '',
+          resourceSpecificDetails: []
         } as ResourceFilterState
     );
 

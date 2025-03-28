@@ -58,7 +58,7 @@ export const loadResourceDetails = async (resourceUri: string = ''): Promise<Res
       }
     })
 
-export const loadResourceSpecialDetails = async (customQuery: string): Promise<any[]> =>
+export const loadresourceSpecificDetails = async (customQuery: string): Promise<any[]> =>
   cypherQuery
     .getCustomQuery(customQuery)
     .then(queryResults => queryResults.items)

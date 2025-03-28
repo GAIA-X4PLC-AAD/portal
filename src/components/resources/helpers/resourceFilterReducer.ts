@@ -12,7 +12,7 @@ import { Asset, calculateResourceFiltersAssetState } from './resourceFilterHelpe
 export const SET_RESOURCE_FILTER_ASSETS = 'SET_RESOURCE_FILTER_ASSETS';
 export const SET_SEARCH_TEXT = 'SET_SEARCH_TEXT';
 export const UPDATE_FILTER_ASSET = 'UPDATE_FILTER_ASSET';
-export const UPDATE_SPECIAL_DETAILS = 'UPDATE_SPECIAL_DETAILS';
+export const UPDATE_SPECIFIC_DETAILS = 'UPDATE_SPECIFIC_DETAILS';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Type definitions
@@ -27,8 +27,8 @@ type ResourceFilterAssetState = {
 
 export type ResourceFilterState = ResourceFilterAssetState & {
     searchText: string,
-    resourceSpecialDetailsQuery: string,
-    resourceSpecialDetails: any[]
+    resourceSpecificDetailsQuery: string,
+    resourceSpecificDetails: any[]
 }
 
 type ResourceFilterAction =
@@ -56,7 +56,7 @@ type ResourceFilterAction =
         },
     } |
     {
-        type: 'UPDATE_SPECIAL_DETAILS', payload: {
+        type: 'UPDATE_SPECIFIC_DETAILS', payload: {
             ontologies: Ontology[],
             resources: Resource[],
             shapes: Shape[],
@@ -74,8 +74,8 @@ export const initialResourceFilterState: ResourceFilterState = {
   vendorAssets: [],
   specificAssets: [],
   searchText: '',
-  resourceSpecialDetailsQuery: '',
-  resourceSpecialDetails: []
+  resourceSpecificDetailsQuery: '',
+  resourceSpecificDetails: []
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -109,16 +109,16 @@ export const resourceFilterReducer = (state: ResourceFilterState, action: AnyAct
         formatAssets: state.formatAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item),
         vendorAssets: state.vendorAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item),
         specificAssets: state.specificAssets.map(item => item.id === action.payload.asset.id ? action.payload.asset : item)
-      }, state.resourceSpecialDetails),
+      }, state.resourceSpecificDetails),
     }
 
-  case UPDATE_SPECIAL_DETAILS:
+  case UPDATE_SPECIFIC_DETAILS:
     return {
       ...state,
       ...calculateResourceFiltersAssetState(action.payload.ontologies, action.payload.shapes, action.payload.resources, {
         ...state
       }, action.payload.specialDetails),
-      resourceSpecialDetails: action.payload.specialDetails,
+      resourceSpecificDetails: action.payload.specialDetails,
     }
   }
   return state
@@ -162,7 +162,7 @@ export const updateSpecialDetailsAction = (
   resources: Resource[],
   specialDetails: any[]): ResourceFilterAction => (
   {
-    type: UPDATE_SPECIAL_DETAILS,
+    type: UPDATE_SPECIFIC_DETAILS,
     payload: { ontologies, resources, shapes, specialDetails }
   })
 

@@ -155,8 +155,8 @@ export const initiallyLoaded_ResourceFilterState = {
     }
   ],
   specificAssets: [],
-  resourceSpecialDetailsQuery: '',
-  resourceSpecialDetails: []
+  resourceSpecificDetailsQuery: '',
+  resourceSpecificDetails: []
 } as ResourceFilterState;
 
 export const filteredBy_searchText_HdMap_ResourceFilterState = {
@@ -278,8 +278,8 @@ export const filteredBy_searchText_HdMap_ResourceFilterState = {
     }
   ],
   specificAssets: [],
-  resourceSpecialDetailsQuery: '',
-  resourceSpecialDetails: []
+  resourceSpecificDetailsQuery: '',
+  resourceSpecificDetails: []
 } as ResourceFilterState;
 
 export const filteredBy_typeFilter_HdMap_ResourceFilterState = {
@@ -401,8 +401,8 @@ export const filteredBy_typeFilter_HdMap_ResourceFilterState = {
     }
   ],
   specificAssets: [],
-  resourceSpecialDetailsQuery: '',
-  resourceSpecialDetails: []
+  resourceSpecificDetailsQuery: '',
+  resourceSpecificDetails: []
 } as ResourceFilterState;
 
 export const filteredBy_formatFilter_ASAMOpenDrive_ResourceFilterState = {
@@ -524,8 +524,8 @@ export const filteredBy_formatFilter_ASAMOpenDrive_ResourceFilterState = {
     }
   ],
   specificAssets: [],
-  resourceSpecialDetailsQuery: '',
-  resourceSpecialDetails: []
+  resourceSpecificDetailsQuery: '',
+  resourceSpecificDetails: []
 } as ResourceFilterState;
 
 export const filteredBy_vendorFilter_MsgSystemsAG_ResourceFilterState = {
@@ -653,6 +653,6 @@ export const filteredBy_vendorFilter_MsgSystemsAG_ResourceFilterState = {
     }
   ],
   specificAssets: [],
-  resourceSpecialDetailsQuery: '',
-  resourceSpecialDetails: []
+  resourceSpecificDetailsQuery: '',
+  resourceSpecificDetails: []
 } as ResourceFilterState;

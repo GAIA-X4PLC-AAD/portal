@@ -294,7 +294,7 @@ export const calculateResourceFiltersAssetState = (
 
   const specificAssets = createSpecificAssets(shapesForFilter, filters.specificAssets, specialResourceDetails);
 
-  const resourceSpecialDetailsQuery: string = getCypherQueryForProperties(shapesForFilter, filters.specificAssets, selectedTypeLabels);
+  const resourceSpecificDetailsQuery: string = getCypherQueryForProperties(shapesForFilter, filters.specificAssets, selectedTypeLabels);
 
   const specialDetailsURIs = getFilteredSpecificResourceUrls(specialResourceDetails, specificAssets);
 
@@ -308,7 +308,7 @@ export const calculateResourceFiltersAssetState = (
     formatAssets,
     vendorAssets,
     specificAssets,
-    resourceSpecialDetailsQuery,
+    resourceSpecificDetailsQuery,
     filteredResources: specificAssetsWithFilterApplied
   };
 }

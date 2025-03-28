@@ -3,7 +3,7 @@ import { useEffect, useMemo, useReducer, useState } from 'react';
 import { useSchemas } from '../../../hooks/useSchemas';
 import { getResourceTypes } from '../../../services/ontologyService.utils';
 import { unique } from '../../../utils/utils';
-import { loadResources, loadResourceSpecialDetails } from '../helpers/resourceDataFlow';
+import { loadResources, loadresourceSpecificDetails } from '../helpers/resourceDataFlow';
 import { removeNonResourceTypeLabels } from '../helpers/resourcesHelper';
 import {
   initialResourceState,
@@ -39,22 +39,22 @@ export const useResources = () => {
     formatAssets,
     vendorAssets,
     specificAssets,
-    resourceSpecialDetailsQuery,
+    resourceSpecificDetailsQuery,
     updateSearchText,
     updateFilterAsset,
     updateSpecialDetails,
   } = useResourceFilter(ontologies, shapes, resources);
 
   useEffect(() => {
-    if (specialQuery !== resourceSpecialDetailsQuery && resourceSpecialDetailsQuery !== '') {
-      setSpecialQuery(resourceSpecialDetailsQuery);
-      loadResourceSpecialDetails(resourceSpecialDetailsQuery)
+    if (specialQuery !== resourceSpecificDetailsQuery && resourceSpecificDetailsQuery !== '') {
+      setSpecialQuery(resourceSpecificDetailsQuery);
+      loadresourceSpecificDetails(resourceSpecificDetailsQuery)
         .then(specialDetails => {
           updateSpecialDetails(specialDetails)
         })
         .catch(error => console.error('Error loading special details:', error));
     }
-  }, [resourceSpecialDetailsQuery, specificAssets]);
+  }, [resourceSpecificDetailsQuery, specificAssets]);
 
   useEffect(() => {
     if (!schemas.isLoading) {
@@ -89,7 +89,7 @@ export const useResources = () => {
     formatAssets,
     vendorAssets,
     specificAssets,
-    resourceSpecialDetailsQuery,
+    resourceSpecificDetailsQuery,
     viewContentType,
     assetFilterVisible,
     toggleAssetFilterVisibility: () => toggleAssetFilterVisibility(!assetFilterVisible),
