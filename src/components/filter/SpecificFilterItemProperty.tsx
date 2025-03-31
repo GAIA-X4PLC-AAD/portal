@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import * as React from 'react';
@@ -80,18 +80,25 @@ export const SpecificFilterItemProperty: React.FC<ISpecificFilterItemProperty> =
         popupIndicator: { style: { display: 'none' } }, // Hides the dropdown arrow
         clearIndicator: { style: { visibility: 'visible' } }, // Ensures 'X' is always visible
       }}
+      renderOption={(props, option) => (
+        <Tooltip title={`${option.id}`} arrow>
+          <li {...props}>{option.label}</li>
+        </Tooltip>
+      )}
       renderInput={(params) => (
-        <TextField
-          {...params}
-          label={'Property'}
-          variant="outlined"
-          slotProps={{
-            inputLabel: {
-              shrink: true,
-              sx: { fontWeight: 'bold' },
-            },
-          }}
-        />
+        <Tooltip title={value ? `${value.id}` : ''} arrow>
+          <TextField
+            {...params}
+            label={'Property'}
+            variant="outlined"
+            slotProps={{
+              inputLabel: {
+                shrink: true,
+                sx: { fontWeight: 'bold' },
+              },
+            }}
+          />
+        </Tooltip>
       )}
     />
   );
