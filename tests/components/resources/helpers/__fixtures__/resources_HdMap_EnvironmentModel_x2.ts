@@ -12,7 +12,8 @@ export const resources_HdMap_EnvironmentModel_x2 = [
       'Resource',
       'EnvironmentModel',
       'DataResource'
-    ]
+    ],
+    recordingTime: ''
   },
   {
     claimsGraphUri: [
@@ -22,7 +23,7 @@ export const resources_HdMap_EnvironmentModel_x2 = [
       'https://www.gaia-x4plcaad.info/claims/physical-resource/fe9f0d7f-3a80-48ef-9630-a7c9c3c1e78f'
     ],
     vendor: 'msg systems ag',
-    format: null,
+    format: '',
     name: 'Generated Data Resource',
     description: 'Generated description.',
     uri: 'https://www.gaia-x4plcaad.info/claims/data-resource/fe9f0d7f-3a80-48ef-9630-a7c9c3c1e78f',
@@ -31,7 +32,8 @@ export const resources_HdMap_EnvironmentModel_x2 = [
       'EnvironmentModel',
       'DataResource',
       'General'
-    ]
+    ],
+    recordingTime: ''
   },
   {
     claimsGraphUri: [
@@ -47,6 +49,7 @@ export const resources_HdMap_EnvironmentModel_x2 = [
       'Resource',
       'DataResource',
       'HdMap'
-    ]
+    ],
+    recordingTime: ''
   }
 ];

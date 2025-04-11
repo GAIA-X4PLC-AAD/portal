@@ -1,21 +1,27 @@
 import { getResourceFormats, getResourceTypes } from '../../../services/ontologyService.utils';
 import { Ontology } from '../../../types/ontologies.model';
 import { Resource } from '../../../types/resources.model';
+import { Shape, ShapePropertyForFilter } from '../../../types/shapes.model';
 
 import { ResourceFilterState } from './resourceFilterReducer';
 import { getPropertyValue } from './resourcesHelper';
+import { getCypherQueryForProperties, getShapePropertiesForFilter } from './specificFilterHelper';
 
-export type AssetTypes = 'typeAssets' | 'formatAssets' | 'vendorAssets';
+export type AssetTypes = 'typeAssets' | 'formatAssets' | 'vendorAssets' | 'specificAssets';
 
 /**
  * Interface type used to define all the props needed to manage the filter assets.
  */
 export interface Asset {
-  id: string;
-  type: AssetTypes;
-  label: string;
-  value: boolean;
-  disabled: boolean;
+    id: string;
+    type: AssetTypes;
+    label: string;
+    value: boolean;
+    disabled: boolean;
+  specificFilterValueSelected?: any;
+  specificFilterPossibleValues?: any[];
+  specificFilterSelected?: boolean;
+  specificFilterPath?: string;
 }
 
 /**
@@ -110,6 +116,76 @@ export const createVendorAssets = (
   } as Asset))
 }
 
+export function getFilteredSpecificResourceUrls(specificResourceDetails: any[] | undefined, specificAssets: any[]): string[] {
+  const results: string[] = [];
+  const allPartialResults: string[][] = [];
+  if (specificResourceDetails) {
+    for (const asset of specificAssets) {
+      if (asset.specificFilterSelected && asset.specificFilterValueSelected) {
+        const partialResults = getRowIdsByColumnValue(specificResourceDetails, asset.id, asset.specificFilterValueSelected)
+        allPartialResults.push(partialResults)
+      }
+    }
+  }
+
+  // If we have any partial results, find their intersection
+  if (allPartialResults.length > 0) {
+    // Start with the first array and reduce to find common elements
+    const commonResults = allPartialResults.reduce((common, current) => {
+      return common.filter(item => current.includes(item));
+    });
+    results.push(...commonResults);
+  }
+
+  return results;
+}
+
+function getRowIdsByColumnValue<T extends Record<string, any>>(
+  data: T[],
+  columnId: string,
+  searchValues: any | any[]
+): string[] {
+  const values = Array.isArray(searchValues) ? searchValues : [searchValues]; // Ensure array
+  return data
+    .filter(row => {
+      const columnValue = row[columnId];
+      return values.some(value => value === columnValue); // Exact match comparison
+    })
+    .map(row => row.id ?? row.specificResourceUri)
+    .filter(value => value !== undefined && value !== null && value !== '' && value !== 'unknown');
+}
+
+function getColumn<T extends Record<string, any>>(
+  data: T[],
+  columnId: string,
+  isArrayField: boolean = false
+): any[] {
+  const result = (isArrayField
+    ? data.flatMap(row => row[columnId] ?? [])
+    : data.map(row => row[columnId])
+  ).filter(value => value !== null && value !== '' && value !== 'unknown');
+
+  return [...new Set(result)]; // Convert the Set back to an array to return unique values
+}
+
+export const createSpecificAssets = (
+  shapesForFilter: ShapePropertyForFilter[],
+  prevSpecificAssets: Asset[],
+  specialResourceDetails?: any[]
+) => {
+  return shapesForFilter.map(shapeForFilter => ({
+    id: `${shapeForFilter.path}/${shapeForFilter.name}`,
+    type: 'specificAssets',
+    label: shapeForFilter.name,
+    value: prevSpecificAssets.some(asset => asset.value && asset.id === `${shapeForFilter.path}/${shapeForFilter.name}`),
+    disabled: false,
+    specificFilterValueSelected: prevSpecificAssets.filter(asset => asset.id === `${shapeForFilter.path}/${shapeForFilter.name}`).map(asset => asset.specificFilterValueSelected).flat(),
+    specificFilterPossibleValues: specialResourceDetails && specialResourceDetails.length > 0 ? getColumn(specialResourceDetails, `${shapeForFilter.path}/${shapeForFilter.name}`, false) : [],
+    specificFilterSelected: prevSpecificAssets.some(asset => asset.specificFilterSelected && asset.id === `${shapeForFilter.path}/${shapeForFilter.name}`),
+    specificFilterPath: shapeForFilter.path
+  } as Asset))
+}
+
 /**
  * Returns a set of all available vendors in the list of resources.
  *
@@ -158,12 +234,16 @@ export const getSelectedAssets = (assets: Asset[]): SelectedAssets => {
  * @param ontologies list of ontologies from which the filter assets should be calculated.
  * @param resources list of resources from which the filter assets should be calculated.
  * @param filters previous filter assets state in order to preserve an existing selection during the update of an asset.
+ * @param shapes shapes for specific filters
+ * @param specialResourceDetails query for special resource details
  * @return the new state of the {@link useResourceFilter} hook.
  */
 export const calculateResourceFiltersAssetState = (
   ontologies: Ontology[],
+  shapes: Shape[],
   resources: Resource[],
-  filters: ResourceFilterState
+  filters: ResourceFilterState,
+  specialResourceDetails?: any[]
 ) => {
   const resourceTypes = Array.from(getResourceTypes(ontologies));
   const typeAssets = createTypeAssets(resourceTypes, resources)
@@ -205,10 +285,29 @@ export const calculateResourceFiltersAssetState = (
                 .includes(filters.searchText.toLowerCase()))
     );
 
+  const selectedTypeLabels: string[] = typeAssets
+    .filter(asset => asset.value)
+    .map(asset => asset.label);
+
+  const shapesForFilter: ShapePropertyForFilter[] = getShapePropertiesForFilter(shapes, selectedTypeLabels);
+
+  const specificAssets = createSpecificAssets(shapesForFilter, filters.specificAssets, specialResourceDetails);
+
+  const resourceSpecificDetailsQuery: string = getCypherQueryForProperties(shapesForFilter, filters.specificAssets, selectedTypeLabels);
+
+  const specificDetailsURIs = getFilteredSpecificResourceUrls(specialResourceDetails, specificAssets);
+
+  const specificAssetsWithFilterApplied = specificDetailsURIs.length > 0
+    ? resourcesWithSearchTextFilterApplied.filter(resource =>
+      specificDetailsURIs.some(uri => uri === resource.uri))
+    : resourcesWithSearchTextFilterApplied;
+
   return {
     typeAssets,
     formatAssets,
     vendorAssets,
-    filteredResources: resourcesWithSearchTextFilterApplied
+    specificAssets,
+    resourceSpecificDetailsQuery,
+    filteredResources: specificAssetsWithFilterApplied
   };
 }

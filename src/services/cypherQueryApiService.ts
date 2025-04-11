@@ -91,6 +91,14 @@ export const CypherQueryApiService = {
    * Returns the details of a resource by its uri.
    * @param uri the uri of the resource
    */
+  /**
+   * TODO
+   * @param customQuery
+   */
+  async getCustomQuery(customQuery: string): Promise<CypherQueryResult> {
+    return cypherQuery({ statement: `${customQuery}` })
+  },
+
   async getResourceDetails(uri: string): Promise<CypherQueryResult> {
     return cypherQuery({
       statement: `

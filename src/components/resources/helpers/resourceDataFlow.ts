@@ -58,6 +58,15 @@ export const loadResourceDetails = async (resourceUri: string = ''): Promise<Res
       }
     })
 
+export const loadResourceSpecificDetails = async (customQuery: string): Promise<any[]> =>
+  cypherQuery
+    .getCustomQuery(customQuery)
+    .then(queryResults => queryResults.items)
+    .catch(error => {
+      console.error('Error fetching resources:', error);
+      throw error;
+    })
+
 /**
  * Loads all details for a given resource by its uri.
  * @param resourceUri identifies the resource for which the details have to be loaded.
