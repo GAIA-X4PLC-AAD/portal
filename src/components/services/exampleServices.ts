@@ -1,0 +1,61 @@
+import { Service } from '../../types/services.model';
+
+export const exampleServices: Service[] = [
+  {
+    serviceId: '1',
+    name: 'Asset Extractor',
+    descriptionShort: 'Extrahiert automatisiert Metadaten und Strukturelemente aus digitalen Assets und stellt sie standardisiert für die Weiterverarbeitung bereit.',
+    descriptionLong: 'Der Asset Extractor analysiert hochgeladene digitale Assets und erzeugt standardisierte Metadaten im JSON-Format. Die Ausgabe ist für den Einsatz in Gaia-X Self-Descriptions optimiert. Unterstützt verschiedene Lizenzmodelle.',
+    imageUrl: '/images/serviceLogo1.jpg',
+    price: '99 €',
+    navigationUrl: '/assetExtractor',
+    provider: 'msg systems ag',
+    licenseModel: 'Apache-2.0',
+    version: 'v1.2.1',
+    lastUpdated: '2025-06-01',
+    availability: '24/7',
+    certification: ['Gaia-X konform'],
+    requiredInputs: ['PDF-Datei', 'Lizenztyp', 'Lizenzdatei oder Lizenz-URL'],
+    outputDescription: 'JSON-Datei mit strukturierten Metadaten (z.B. Titel, Autor, Lizenzinformationen).',
+    useCases: ['Metadatenextraktion für den Gaia-X-Wizard', 'Dokumentenklassifikation'],
+    dataPrivacyNote: 'Dateien werden temporär verarbeitet und nicht dauerhaft gespeichert.'
+  },
+  {
+    serviceId: '2',
+    name: 'GeoMapper Service',
+    descriptionShort: 'Analysiert Geodaten und visualisiert sie in interaktiven Karten – ideal für Standortanalysen und räumliche Entscheidungsprozesse.',
+    descriptionLong: 'Der GeoMapper verarbeitet verschiedene Geodatenformate wie GeoJSON, Shapefiles oder CSV mit Koordinaten. Die Ergebnisse werden als interaktive Kartenansicht gerendert oder als Kartenbild exportiert.',
+    imageUrl: '/images/serviceLogo2.jpg',
+    price: '10 €',
+    navigationUrl: '/service2',
+    provider: 'GeoLogic GmbH',
+    licenseModel: 'CC-BY-4.0',
+    version: 'v0.9.7-beta',
+    lastUpdated: '2025-04-20',
+    availability: 'werktags 9–18 Uhr',
+    certification: ['DIN SPEC 91357'],
+    requiredInputs: ['GeoJSON oder CSV mit Koordinaten'],
+    outputDescription: 'Interaktive Kartenansicht + PNG-Export der Kartendarstellung.',
+    useCases: ['Standortanalyse', 'Visualisierung öffentlicher Infrastruktur', 'Heatmap-Erstellung'],
+    dataPrivacyNote: 'Geodaten werden im Speicher verarbeitet und nach 24 Stunden gelöscht.'
+  },
+  {
+    serviceId: '3',
+    name: 'Data Anonymizer',
+    descriptionShort: 'Pseudonymisiert und anonymisiert sensible Daten gemäß Datenschutzvorgaben und ermöglicht ihre sichere Nutzung in Datenökosystemen.',
+    descriptionLong: 'Der Data Anonymizer erkennt automatisch sensible personenbezogene Daten in CSV-, JSON- oder Excel-Dateien und wandelt sie DSGVO-konform um. Unterstützt verschiedene Anonymisierungstechniken wie Maskierung, Generalisierung und K-Anonymität.',
+    imageUrl: '/images/serviceLogo3.jpg',
+    price: 'free',
+    navigationUrl: '/service3',
+    provider: 'SecureData Lab',
+    licenseModel: 'Open Source (MIT)',
+    version: 'v2.0.0',
+    lastUpdated: '2025-03-11',
+    availability: '24/7',
+    certification: ['DSGVO-konform laut Art. 25'],
+    requiredInputs: ['CSV, JSON oder XLSX mit sensiblen Daten'],
+    outputDescription: 'Anonymisierte Datei im gleichen Format mit Bearbeitungsprotokoll.',
+    useCases: ['Bereitstellung von Trainingsdaten ohne personenbezogene Informationen', 'Datenschutzkonforme Weitergabe an Dritte'],
+    dataPrivacyNote: 'Daten werden direkt im RAM verarbeitet, keine Speicherung auf Datenträger.'
+  }
+];

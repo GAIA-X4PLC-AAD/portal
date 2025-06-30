@@ -35,6 +35,10 @@ export default function Navbar() {
       name: t('shapes.titles'),
     },
     {
+      path: '/services',
+      name: t('services.titles'),
+    },
+    {
       path: '/support',
       name: t('left-menu.support'),
     },

@@ -8,6 +8,7 @@ import Map from '../../../../common/components/map/Map';
 import AboutPage from '../../../about/AboutPage';
 import AccountHome from '../../../account/AccountHome';
 import Provider from '../../../account/Provider';
+import AssetExtractor from '../../../assetExtractor/AssetExtractor';
 import DashboardPage from '../../../dashboard/dashboard_page';
 import LcmFinal from '../../../dashboard/lcm/LcmFinal';
 import LcmServices from '../../../dashboard/lcm/LcmServices';
@@ -27,6 +28,8 @@ import ResourceDetailsPage from '../../../resources/ResourceDetailsPage';
 import ResourceSearchPage from '../../../resources/ResourceSearchPage';
 import ServiceOfferingDetails from '../../../serviceOfferings/ServiceOfferingDetails';
 import ServiceOfferings from '../../../serviceOfferings/ServiceOfferings';
+import ServiceDetails from '../../../services/ServiceDetails';
+import Services from '../../../services/Services';
 import ShapeDetailsPage from '../../../shapes/ShapeDetailsPage';
 import ShapesSearchPage from '../../../shapes/ShapesSearchPage';
 import SolutionPackagingView from '../../../solutionPackaging/SolutionPackagingView';
@@ -64,7 +67,6 @@ const Routes: FC = () => (
       <Route path="/participants/:participantId" element={Wrappers(<ParticipantDetails/>)}/>
       <Route path="/resources" element={Wrappers(<ResourceSearchPage/>)}/>
       <Route path="/resources/:resourceId" element={Wrappers(<ResourceDetailsPage/>)}/>
-      <Route path="/services" element={Wrappers(<SearchView type="services"/>)}/>
       <Route path="/help" element={Wrappers(<WorkInProgress component="Help"/>)}/>
       <Route path="/loginfail" element={Wrappers(<LoginFail/>)}/>
       <Route path="/account/user/:tab" element={Wrappers(<AccountHome/>)}/>
@@ -95,6 +97,9 @@ const Routes: FC = () => (
       <Route path="/ontologies/:ontologyId" element={Wrappers(<OntologyDetailsPage/>)}/>
       <Route path="/shapes" element={Wrappers(<ShapesSearchPage/>)}/>
       <Route path="/shapes/:shapeId" element={Wrappers(<ShapeDetailsPage/>)}/>
+      <Route path="/services" element={Wrappers(<Services/>)}/>
+      <Route path="/services/:serviceId" element={Wrappers(<ServiceDetails/>)}/>
+      <Route path="/assetExtractor" element={Wrappers(<AssetExtractor/>)}/>
     </ReactRoutes>
   </Vertical>
 );

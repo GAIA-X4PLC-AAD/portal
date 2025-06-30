@@ -22,6 +22,8 @@
     "choose-language": "Sprache",
     "shapesAndOntologies": "Shapes & Ontologien",
     "select-system-language": "Bitte wählen Sie eine Systemsprache",
+    "assetExtractor": "Asset Extractor",
+    "services": "Services",
     "tooltip": {
       "admin": "gehe zu admin",
       "dashboard": "Dashboard anzeigen",
@@ -653,5 +655,13 @@
     "text-start": "Diese Support-Seite befindet sich derzeit im Aufbau.",
     "text-mid": "In Zukunft finden Sie hier hilfreiche Informationen, häufig gestellte Fragen (FAQ), sowie Kontaktmöglichkeiten für technische und inhaltliche Unterstützung. Unser Ziel ist es, Ihnen eine bestmögliche Nutzererfahrung zu bieten und Sie bei allen Fragen rund um die Plattform zu unterstützen.",
     "text-end": "Wir danken Ihnen für Ihr Verständnis und freuen uns darauf, Ihnen in Zukunft zur Verfügung zu stehen."
+  },
+  "assetExtractor": {
+    "titles": "Asset Extractor"
+  },
+  "services": {
+    "titles": "Services",
+    "to-service": "Zum Service",
+    "search-bar-text": "Suchen Sie nach speziellen Services"
   }
 }

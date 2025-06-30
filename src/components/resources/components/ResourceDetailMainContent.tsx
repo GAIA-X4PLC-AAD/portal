@@ -20,7 +20,7 @@ const ResourceDetailMainContent = () => {
   return (
     <DetailsMainContent>
       <Title className={styles.title}>{resourceDetails.details.name}</Title>
-
+y
       <Subtitle>info</Subtitle>
       <DetailsPropertyContainer>
         {Object.entries(resourceDetails.items[0].dataResource).map(([key, value], index) => (

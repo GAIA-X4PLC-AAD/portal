@@ -24,6 +24,7 @@
     "choose-language": "Language",
     "shapesAndOntologies": "Shapes & Ontologies",
     "select-system-language": "Please select a system language",
+    "assetExtractor": "Asset Extractor",
     "tooltip": {
       "admin": "Go to admin",
       "dashboard": "View Dashboard",
@@ -655,5 +656,13 @@
     "text-start": "This support page is currently under construction.",
     "text-mid": "In the future, you will find helpful information, frequently asked questions (FAQ), and contact options for technical and content-related support. Our goal is to provide the best possible user experience and assist you with any questions regarding the platform.",
     "text-end": "Thank you for your understanding."
+  },
+  "assetExtractor": {
+    "titles": "Asset Extractor"
+  },
+  "services": {
+    "titles": "Services",
+    "to-service": "To the Service",
+    "search-bar-text": "Search for special services"
   }
 }
